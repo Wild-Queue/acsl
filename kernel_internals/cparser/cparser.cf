@@ -1,0 +1,699 @@
+--%token <Filepath.position * string> SPEC
+--%token <Logic_ptree.decl list> DECL
+--%token <Logic_ptree.code_annot * Cabs.cabsloc> CODE_ANNOT
+--%token <Logic_ptree.code_annot list * Cabs.cabsloc> LOOP_ANNOT
+--%token <string * Cabs.cabsloc> ATTRIBUTE_ANNOT
+
+--Hacked tokens
+token DECL ({"DECL"});
+token NAMEDTYPE ({"NAMEDTYPE"});
+token CST_WCHAR ({"CST_WCHAR"});
+token CST_WSTRING ({"CST_WSTRING"});
+token CODE_ANNOT ({"CODE_ANNOT"});
+token SPEC ({"SPEC"});
+token LOOP_ANNOT ({"LOOP_ANNOT"});
+token ATTRIBUTE_ANNOT ({"ATTRIBUTE_ANNOT"});
+
+--Correct tokens
+token LBRACE ({"<%"} | '{');
+token RBRACE ({"%>"} | '}');
+token LBRACKET ({"<:"} | '[');
+token RBRACKET ({":>"} | ']');
+
+token RGHOST ('/' | {"//"} | {"\n"});
+token ASM ({"__asm__"} | {"__asm"} | {"asm"});
+
+token ALIGNOF ({"__alignof__"} | {"__alignof"});
+token ATTRIBUTE ({"__attribute__"} | {"__attribute"});
+token BLOCKATTRIBUTE ({"__blockattribute__"} | {"__blockattribute"});
+token CONST ({"const"} | {"__const"} | {"__const__"});
+token FUNCTION__ ({"__FUNCTION__"} | {"__func__"});
+token INT ({"__int32"} | {"int"});
+token MSATTR ({"_cdecl"} | {"__cdecl"} | {"_stdcall"} | {"__stdcall"} | {"_fastcall"} | {"__fastcall"} | {"__w64"});
+token RESTRICT ({"__restrict"} | {"restrict"});
+token SIGNED ({"__signed__"} | {"signed"} | {"__signed"});
+token VOLATILE ({"volatile"} | {"__volatile"} | {"__volatile__"} | {"__volatile"});
+
+--(* !! we turn forceinline into inline *)
+token INLINE ({"__inline__"} | {"inline"} | {"__inline"} | {"_inline"} | {"__forceinline"});
+
+token TYPEOF ({"__typeof__"} | {"__typeof"} | {"typeof"});
+
+--file ::= globals EOF ;
+AProgram.  Program ::= Globals ; --eof ;
+
+NoGlobals.          Globals ::= ; --/* empty */ ;
+SimpleGlobals.      Globals ::= Global Globals ;
+AGhostGlobals.      Globals ::= "ghost" GhostGlobals Globals ;
+SemiColonGlobals.   Globals ::= ";" Globals ;
+
+
+--/* Rules for global ghosts: TODO keep the ghost status! */
+GhostGlobalsDeclataion.     GhostGlobals ::= Declaration GhostGlobals ;
+GhostGlobalsFunctionDef.    GhostGlobals ::= FunctionDef GhostGlobals ;
+GhostGlobalsRGhost.         GhostGlobals ::= RGHOST ;
+
+--/*** Global Definition ***/
+GlobalDecl.         Global ::= DECL ;
+GlobalsDeclataion.  Global ::= Declaration ;
+GlobalsFunctionDef. Global ::= FunctionDef ;
+
+--/*(* Some C header files are shared with the C++ compiler and have linkage specification *)*/
+ExternGlobalDeclataion.     Global ::= "extern" StringConstant Declaration ;
+ExternGlobalPar.            Global ::= "extern" StringConstant LBRACE Globals RBRACE ;
+AsmGlobal.                  Global ::= ASM "(" StringConstant ")" ";" ;
+PragmaGlobal.               Global ::= Pragma ;
+
+--/* (* Old-style function prototype. This should be somewhere else, like in "Declaration". For now we keep it at global scope only because in local scope it looks too much like a function call  *) */
+GlobalOldStyle.             Global ::= Ident "(" [Ident] ")" OldPardefList ";" ;
+GlobalEmptyOldStyle.        Global ::= Ident "(" ")" ";" ;
+
+Identifier.     IdOrTypenameAsId ::= Ident ;
+NamedType.      IdOrTypenameAsId ::= NAMEDTYPE ;
+
+IdTypename.     IdOrTypename ::= IdOrTypenameAsId ;
+
+NoComa.     MaybeComma ::= ; --/* empty */ ;
+Coma.       MaybeComma ::= "," ;
+
+--/* *** Expressions *** */
+
+--/*(* 6.5.1. *)*/
+IdentifierPrimaryExpression.        AssignExpr15 ::= Ident ;
+ConstantPrimaryExpressin.           AssignExpr15 ::= Constant ;
+CommaExpressionPrimaryExpressin.    AssignExpr15 ::= "(" [Expression] ")" ;
+BlockPrimaryExpressin.              AssignExpr15 ::= "(" Block ")" ;
+GenericAssociationPrimaryExpressin. AssignExpr15 ::= "_Generic" "(" AssignExpr "," [GenericAssociation] ")" ;
+GenericPrimaryExpressin.            AssignExpr15 ::= "_Generic" "(" AssignExpr ")" ;
+
+--/*(* 6.5.2 *)*/
+_.                                      AssignExpr14 ::= AssignExpr15 ;
+BracketsPostfixExpression.              AssignExpr14 ::= AssignExpr14 LBRACKET [Expression] RBRACKET ;
+ArgumentsPostfixExpression.             AssignExpr14 ::= AssignExpr14 "(" Arguments ")" GhostArgumentsOpt ;
+BuiltinVaArgPostfixExpression.          AssignExpr14 ::= "__builtin_va_arg" "(" Expression "," TypeName ")" ;
+BuiltinTypesCompatPostfixExpression.    AssignExpr14 ::= "__builtin_types_compatible_p" "(" TypeName "," TypeName ")" ;
+BuiltinOffsetOfPostfixExpression.       AssignExpr14 ::= "__builtin_offsetof" "(" TypeName "," OffsetofMemberDesignator ")" ;
+DotPostfixExpression.                   AssignExpr14 ::= AssignExpr14 "." IdOrTypename ;
+ArrowPostfixExpression.                 AssignExpr14 ::= AssignExpr14 "->" IdOrTypename ;
+PlusPlusPostfixExpression.              AssignExpr14 ::= AssignExpr14 "++" ;
+MinusMinusPostfixExpression.            AssignExpr14 ::= AssignExpr14 "--" ;
+--/* (* We handle GCC constructor expressions *) */
+ConstructorPostfixExpression.           AssignExpr14 ::= "(" TypeName ")" LBRACE InitializerListOpt RBRACE ;
+
+--/* GCC extension for __builtin_offsetof */
+IdTypenameOffsetMembetDesignator.   OffsetofMemberDesignator ::= IdOrTypename ;
+DotOffsetMembetDesignator.          OffsetofMemberDesignator ::= OffsetofMemberDesignator "." Ident ;
+BracketsOffsetMembetDesignator.     OffsetofMemberDesignator ::= OffsetofMemberDesignator LBRACKET [Expression] RBRACKET ;
+
+--/*(* 6.5.3 *)*/
+_.                          AssignExpr13 ::= AssignExpr14 ;
+UnaryExprPlusPlus.          AssignExpr13 ::= "++" AssignExpr13 ;
+UnaryExprMinusMinus.        AssignExpr13 ::= "--" AssignExpr13 ;
+UnaryExprSizeOf.            AssignExpr13 ::= "sizeof" AssignExpr13 ;
+UnaryExprSizeOfTypeName.    AssignExpr13 ::= "sizeof" "(" TypeName ")" ;
+UnaryExprAlignOfUnaryExpr.  AssignExpr13 ::= ALIGNOF AssignExpr13 ;
+UnaryExprAlignOfTypeName.   AssignExpr13 ::= ALIGNOF "(" TypeName ")" ;
+UnaryExprPlus.              AssignExpr13 ::= "+" AssignExpr12 ;
+UnaryExprMinus.             AssignExpr13 ::= "-" AssignExpr12 ;
+UnaryExprMult.              AssignExpr13 ::= "*" AssignExpr12 ;
+UnaryExprAmp.               AssignExpr13 ::= "&" AssignExpr12 ;
+UnaryExprNot.               AssignExpr13 ::= "!" AssignExpr12 ;
+UnaryExprTilde.             AssignExpr13 ::= "~" AssignExpr12 ;
+--/* (* GCC allows to take address of a label (see COMPGOTO Statement) *) */
+UnaryExprAddress.           AssignExpr13 ::= "&&" IdOrTypenameAsId ;
+
+--/*(* 6.5.4 *)*/
+_.                  AssignExpr12 ::= AssignExpr13 ;
+CastExpr.           AssignExpr12 ::= "(" TypeName ")" AssignExpr12 ;
+
+--/*(* 6.5.5 *)*/
+_.          AssignExpr11 ::= AssignExpr12 ;
+MulsExpr.   AssignExpr11 ::= AssignExpr11 "*" AssignExpr12 ;
+DivExpr.    AssignExpr11 ::= AssignExpr11 "/" AssignExpr12 ;
+ModExpr.    AssignExpr11 ::= AssignExpr11 "%" AssignExpr12 ;
+
+--/*(* 6.5.6 *)*/
+_.          AssignExpr10 ::= AssignExpr11 ;
+PlusExpr.   AssignExpr10 ::= AssignExpr10 "+" AssignExpr11 ;
+MinusExpr.  AssignExpr10 ::= AssignExpr10 "-" AssignExpr11 ;
+
+--/*(* 6.5.7 *)*/
+_.              AssignExpr9 ::= AssignExpr10 ;
+LeftShiftExpr.  AssignExpr9 ::= AssignExpr9  "<<" AssignExpr10 ;
+RightShiftExpr. AssignExpr9 ::= AssignExpr9  ">>" AssignExpr10 ;
+
+
+--/*(* 6.5.8 *)*/
+_.                  AssignExpr8 ::= AssignExpr9 ;
+LessExpr.           AssignExpr8 ::= AssignExpr8 "<" AssignExpr9 ;
+GreaterExpr.        AssignExpr8 ::= AssignExpr8 ">" AssignExpr9 ;
+LessEqualExpr.      AssignExpr8 ::= AssignExpr8 "<=" AssignExpr9 ;
+GreaterEqualExpr.   AssignExpr8 ::= AssignExpr8 ">=" AssignExpr9 ;
+
+--/*(* 6.5.9 *)*/
+_.          AssignExpr7 ::= AssignExpr8 ;
+EqExpr.     AssignExpr7 ::= AssignExpr7 "==" AssignExpr8 ;
+NotEqExpr.  AssignExpr7 ::= AssignExpr7 "!=" AssignExpr8 ;
+
+--/*(* 6.5.10 *)*/
+_.          AssignExpr6 ::= AssignExpr7 ;
+BitAndExpr. AssignExpr6 ::= AssignExpr6 "&" AssignExpr7 ;
+
+--/*(* 6.5.11 *)*/
+_.          AssignExpr5 ::= AssignExpr6 ;
+BitXorExpr. AssignExpr5 ::= AssignExpr5 "^" AssignExpr6 ;
+
+--/*(* 6.5.12 *)*/
+_.          AssignExpr4 ::= AssignExpr5 ;
+BitOrExpr.  AssignExpr4 ::= AssignExpr4 "|" AssignExpr5 ;
+
+--/*(* 6.5.13 *)*/
+_.          AssignExpr3 ::= AssignExpr4 ;
+AndExpr.    AssignExpr3 ::= AssignExpr3 "&&" AssignExpr4 ;
+
+--/*(* 6.5.14 *)*/   
+_.          AssignExpr2 ::= AssignExpr3 ;
+OrExpr.     AssignExpr2 ::= AssignExpr2 "||" AssignExpr3 ;
+
+--/*(* 6.5.15 *)*/
+_.                  AssignExpr1 ::= AssignExpr2 ;
+TernaryCondExpr.    AssignExpr1 ::= AssignExpr2 "?" OptExpression ":" AssignExpr1 ;
+
+--/*(* The C spec says that left-hand sides of assignment expressions are unary
+-- * expressions. GCC allows cast expressions in there ! *)*/
+
+--/*(* 6.5.16 *)*/     
+_.                          AssignExpr ::= AssignExpr1 ;
+EqAssignExpr.               AssignExpr ::= AssignExpr12 "=" AssignExpr ;
+PlusEqAssignExpr.           AssignExpr ::= AssignExpr12 "+=" AssignExpr ;
+MinusEqAssignExpr.          AssignExpr ::= AssignExpr12 "-=" AssignExpr ;
+MultEqAssignExpr.           AssignExpr ::= AssignExpr12 "*=" AssignExpr ;
+DivEqAssignExpr.            AssignExpr ::= AssignExpr12 "/=" AssignExpr ;
+ModEqAssignExpr.            AssignExpr ::= AssignExpr12 "%=" AssignExpr ;
+AndEqAssignExpr.            AssignExpr ::= AssignExpr12 "&=" AssignExpr ;
+OrEqAssignExpr.             AssignExpr ::= AssignExpr12 "|=" AssignExpr ;
+XorEqAssignExpr.            AssignExpr ::= AssignExpr12 "^=" AssignExpr ;
+LeftShiftEqAssignExpr.      AssignExpr ::= AssignExpr12 "<<=" AssignExpr ;
+RightShiftEqAssignExpr.     AssignExpr ::= AssignExpr12 ">>=" AssignExpr ;
+
+--/*(* 6.5.17 *)*/
+AssignmentExpr.     Expression ::= AssignExpr ;
+
+
+ConstantInt.        Constant ::= Integer ;
+ConstantFloat.      Constant ::= Double ;
+ConstantChar.       Constant ::= Char ;
+ConstantWChar.      Constant ::= CST_WCHAR ;
+ConstantString.     Constant ::= StringConstant ;
+ConstantWString.    Constant ::= WStringList ;
+
+--/* Now that we know this Constant isn't part of a wstring, convert it back to a string for easy viewing. */
+StringConst.    StringConstant ::= [OneString] ;
+
+LastConstantWString.    WStringList ::= CST_WSTRING ;
+OneStringWithList.      WStringList ::= OneString WStringList ;
+WStringWithList.        WStringList ::= CST_WSTRING WStringList ;
+LatersConstantWString.  WStringList ::= CST_WSTRING [OneString] ;
+--/* If a wstring is present anywhere in the list, the whole is a wstring */
+
+SimpleConstantString.           OneString ::= String ;
+FunctionConstantString.         OneString ::= FUNCTION__ ;
+PrettyFunctionConstantString.   OneString ::= "__PRETTY_FUNCTION__" ;
+separator nonempty OneString "" ;
+
+SimpleExpression.   InitExpression ::= Expression ;
+BracesExpression.   InitExpression ::= LBRACE InitializerListOpt RBRACE ;
+
+--/* ISO 6.7.8. Allow a trailing "," */
+--initializer_list ::= InitializerSingle ;
+--initializer_list ::= InitializerSingle "," InitializerListOpt ;
+
+EmptyInitializerList.   InitializerListOpt ::= ; --/* empty */ ;
+InitializerList.        InitializerListOpt ::= [InitializerSingle] ;
+InitializerListComma.   InitializerListOpt ::= [InitializerSingle] "," ;
+
+InitializerDesignator.      InitializerSingle ::= InitDesignators EqOpt InitExpression ;
+InitializerGCCDesignator.   InitializerSingle ::= IdOrTypename ":" InitExpression ;
+EmptyInitializer.           InitializerSingle ::= InitExpression ;
+separator nonempty InitializerSingle "," ;
+
+EquationSign.   EqOpt ::= "=" ;
+--   /*(* GCC allows missing = *)*/
+NoEquationSign. EqOpt ::= ; --/*(* empty *)*/ ;
+
+DotInitDesignator.              InitDesignators ::= "." IdOrTypename InitDesignatorsOpt ;
+BracketsInitDesignator.         InitDesignators ::= LBRACKET  Expression RBRACKET InitDesignatorsOpt ;
+BracketsSliceInitDesignator.    InitDesignators ::= LBRACKET  Expression "..." Expression RBRACKET ;
+
+NoInitDesignator.       InitDesignatorsOpt ::= ; --/* empty */ ;
+SomeInitDesignator.     InitDesignatorsOpt ::= InitDesignators ;
+
+--/*(* GCC supports these strange things *)*/
+--gcc_init_designators ::=  IdOrTypename ":" ;
+
+NoGhostArguments.   GhostArgumentsOpt ::= ; --/* empty */; 
+SomeGhostArguments. GhostArgumentsOpt ::= "ghost" "(" Arguments ")" RGHOST ;
+
+NoArguments.    Arguments ::= ; --/* empty */ ;
+SomeArguments.  Arguments ::= [Expression] ;
+
+NoExpression.   OptExpression ::= ; --/* empty */ ;
+SomeExpression. OptExpression ::= [Expression] ;
+
+--comma_expression ::= Expression ;
+--comma_expression ::= Expression "," comma_expression ;
+separator nonempty Expression "," ;
+
+NoCommaExpression.      CommaExpressionOpt ::= ; --/* empty */ ;
+SomeCommaExpression.    CommaExpressionOpt ::= [Expression] ;
+
+
+
+--/*** statements ***/
+--/* ISO 6.8.2 */
+ABlock.  Block ::= LBRACE [LocalLabel] BlockAttrs [BlockElement] [Annot] RBRACE ;
+
+NoBlockAttrs.   BlockAttrs ::= ; --/* empty */ ;
+SomeBlockAttrs. BlockAttrs ::= BLOCKATTRIBUTE "(" [Attr] ")" ;
+
+--/* statements and declarations in a Block, in any order (for C99 support) */
+
+DeclarationElement. BlockElement ::= [Annot] Declaration ;
+StatementElement.   BlockElement ::= [Annot] Statement ;
+PragmaElement.      BlockElement ::= [Annot] Pragma ;
+separator BlockElement "" ;
+
+CodeAnnot.  Annot ::= CODE_ANNOT ;
+GhostAnnot. Annot ::= "ghost" [BlockElement] [Annot] RGHOST ;
+separator Annot "" ;
+
+LocalLable.    LocalLabel ::= "__label__" [LocalLabelName] ";" ;
+separator LocalLabel "" ;
+
+ALocalLabelName.    LocalLabelName ::= IdOrTypenameAsId ;
+separator nonempty LocalLabelName "," ;
+
+AnnotatedStatement.     AnnotatedStmt ::= [Annot] Statement ;
+
+NoElsePart.             ElsePart ::= ; --/* empty */ ;                 --%prec if_no_else /* To attach the next else to the current if */
+SimpleElsePart.         ElsePart ::= "else" AnnotatedStmt ;
+SimpleGhostElsePart.    ElsePart ::= "ghost" AnnotatedStmt RGHOST ;      --%prec ghost_else_no_else /* To force the non ghost else to be attached to the current if */
+GhostElsePart.          ElsePart ::= "ghost" AnnotatedStmt RGHOST "else" AnnotatedStmt ;
+
+SemicolonStatement.         Statement ::= ";" ;
+SpecStatement.              Statement ::= SPEC AnnotatedStmt ;
+ExprsStatement.             Statement ::= [Expression] ";" ; 
+BlockStatement.             Statement ::= Block ;
+IfStatement.                Statement ::= "if" "(" [Expression] ")" AnnotatedStmt ElsePart ;
+SwitchStatement.            Statement ::= "switch" "(" [Expression] ")" AnnotatedStmt ;
+WhileStatement.             Statement ::= OptLoopAnnotations "while" "(" [Expression] ")" AnnotatedStmt ;
+DoWhileStatement.           Statement ::= OptLoopAnnotations "do" AnnotatedStmt "while" "(" [Expression] ")" ";" ;
+ForStatement.               Statement ::= OptLoopAnnotations "for" "(" ForClause OptExpression ";" OptExpression ")" AnnotatedStmt ;
+ColonStatement.             Statement ::= IdOrTypenameAsId ":" [AttributeNocv] AnnotatedStmt ;
+CaseStatement.              Statement ::= "case" Expression ":" AnnotatedStmt ;
+CaseSliceStatement.         Statement ::= "case" Expression "..." Expression ":" AnnotatedStmt ;
+DefaultStatement.           Statement ::= "default" ":" AnnotatedStmt ;
+EmptyReturnStatement.       Statement ::= "return" ";" ;
+ReturnStatement.            Statement ::= "return" [Expression] ";" ;
+BreakStatement.             Statement ::= "break" ";" ;
+ContinueStatement.          Statement ::= "continue" ";" ;
+GotoStatement.              Statement ::= "goto" IdOrTypenameAsId ";" ;
+StarGotoStatement.          Statement ::= "goto" "*" [Expression] ";" ;
+AsmGotoAsmattrStatement.    Statement ::= ASM "goto" [Asmattr] "(" [OneString] Asmoutputs ")" ";" ;
+AsmAsmattrStatement.        Statement ::= ASM [Asmattr] "(" [OneString] Asmoutputs ")" ";" ;
+AsmStatement.               Statement ::= ASM ;
+TryExceptStatement.         Statement ::= "__try" Block "__except" "(" [Expression] ")" Block ;
+TryFinallyStatement.        Statement ::= "__try" Block "__finally" Block ;
+
+--separator LOOP_ANNOT "" ;
+
+NoLoopAnnotations.      OptLoopAnnotations ::= ; --/* epsilon */ ;
+SomeLoopAnnotations.    OptLoopAnnotations ::= LOOP_ANNOT ;
+
+--LoopAnnotations ::= LOOP_ANNOT ;
+-- Not in ACSL Grammar 
+--LoopAnnotations ::= LOOP_ANNOT LoopAnnotations ;
+
+ForClauseExpression.    ForClause ::= OptExpression ";" ;
+ForClauseDeclaration.   ForClause ::= Declaration ;
+
+NoGhostParameter.       GhostParameterOpt ::= ; --/* empty */ ;
+SomeGhostParameter.     GhostParameterOpt ::= "ghost" "(" RestParList ")" RGHOST ;
+
+--/* ISO 6.7.*/
+DeclSpecInitDecl.               Declaration ::= DeclSpecList DeclAndInitDeclAttrList ";" ;
+DeclSpec.                       Declaration ::= DeclSpecList ";" ;
+SpecDeclSpecInitDecl.           Declaration ::= SPEC DeclSpecList DeclAndInitDeclAttrList ";" ;
+SpecDeclSpec.                   Declaration ::= SPEC DeclSpecList ";" ;
+StaticAssertDecl.               Declaration ::= "_Static_assert" "(" Expression ")" ;
+StaticAssertDeclStringConst.    Declaration ::= "_Static_assert" "(" Expression "," StringConstant ")" ;
+
+--/* ISO C11 6.5.1.1 */
+
+ColonGenericAssociation.    GenericAssociation ::= TypeName ":" AssignExpr ;
+DefaultGenericAssociation.  GenericAssociation ::= "default" ":" AssignExpr ;
+separator nonempty GenericAssociation "," ;
+
+InitDeclaration.            DeclAndInitDeclAttrList ::= InitDeclarator ;
+InitDeclarationWithAttr.    DeclAndInitDeclAttrList ::= InitDeclarator "," [InitDeclaratorAttr] ;
+
+InitDeclaratorAttribute.    InitDeclaratorAttr ::= [AttributeNocv] InitDeclarator ;
+separator nonempty InitDeclaratorAttr "," ;
+
+--/* ISO 6.7 */
+SimpleInitDeclarator.       InitDeclarator ::= Declarator ;
+InitDeclaratorExpression.   InitDeclarator ::= Declarator "=" InitExpression ;
+
+--/* ISO 6.7 */
+--/* ISO 6.7.1 */
+TypedefKeyWord.     DeclSpecWOType ::= "typedef" ;         
+ExternKeyWord.      DeclSpecWOType ::= "extern" ;
+StaticKeyWord.      DeclSpecWOType ::= "static" ;
+AutoKeyWord.        DeclSpecWOType ::= "auto" ;
+RegisterKeyWord.    DeclSpecWOType ::= "register" ;
+--/* ISO 6.7.4 */
+InlineKeyWord.      DeclSpecWOType ::= INLINE ;          
+NoReturnKeyWord.    DeclSpecWOType ::= "_Noreturn" ;
+DeclSpecCVSpec.     DeclSpecWOType ::= CVSpec ;
+DeclSpecAtribNOCV.  DeclSpecWOType ::= AttributeNocv ;
+
+DeclSpecWoType.         DeclSpecList ::= DeclSpecWOType ;
+DeclSpecWoTypeNext.     DeclSpecList ::= DeclSpecWOType DeclSpecList ;
+DeclSpecTypeSpec.       DeclSpecList ::= TypeSpec ;
+DeclSpecTypeSpecNext.   DeclSpecList ::= TypeSpec DeclSpecListNoNamed ;
+
+DeclSpecNoNamedWOType.         DeclSpecListNoNamed ::= DeclSpecWOType ;
+DeclSpecNoNamedWOTypeNext.     DeclSpecListNoNamed ::= DeclSpecWOType DeclSpecListNoNamed ;
+DeclSpecNoNamedTypeSpec.       DeclSpecListNoNamed ::= TypeSpec ;
+DeclSpecNoNamedTypeSpecNext.   DeclSpecListNoNamed ::= TypeSpec DeclSpecListNoNamed ;
+
+
+--/* ISO 6.7.2 */
+VoidKeyWord.                TypeSpec ::= "void" ;
+CharKeyWord.                TypeSpec ::= "char" ;
+BoolKeyWord.                TypeSpec ::= "_Bool" ;
+ShortKeyWord.               TypeSpec ::= "short" ;
+IntKeyWord.                 TypeSpec ::= INT ;
+LongKeyWord.                TypeSpec ::= "long" ;
+Int64KeyWord.               TypeSpec ::= "__int64" ;
+FloatKeyWord.               TypeSpec ::= "float" ;
+DoubleKeyWord.              TypeSpec ::= "double" ;
+SignedKeyWord.              TypeSpec ::= SIGNED ;
+UnsignedKeyWord.            TypeSpec ::= "unsigned" ;
+StructId.                   TypeSpec ::= "struct" IdOrTypename ;
+StructJustAttr.             TypeSpec ::= "struct" [JustAttribute] IdOrTypename ;
+StructIdBraces.             TypeSpec ::= "struct" IdOrTypename LBRACE StructDeclList RBRACE ;
+StructBraces.               TypeSpec ::= "struct" LBRACE StructDeclList RBRACE ;
+StructJustAttrIdBraces.     TypeSpec ::= "struct" [JustAttribute] IdOrTypename LBRACE StructDeclList RBRACE ;
+StructJustAttrBraces.       TypeSpec ::= "struct" [JustAttribute] LBRACE StructDeclList RBRACE ;
+UnionId.                    TypeSpec ::= "union" IdOrTypename ;
+UnionIdBraces.              TypeSpec ::= "union" IdOrTypename LBRACE StructDeclList RBRACE ;
+UnionBraces.                TypeSpec ::= "union" LBRACE StructDeclList RBRACE ;
+UnionJustAttrIdBraces.      TypeSpec ::= "union" [JustAttribute] IdOrTypename LBRACE StructDeclList RBRACE ;
+UnionJustAttrBraces.        TypeSpec ::= "union" [JustAttribute] LBRACE StructDeclList RBRACE ;
+EnumId.                     TypeSpec ::= "enum" IdOrTypename ;
+EnumIdBraces.               TypeSpec ::= "enum" IdOrTypename LBRACE [Enumerator] MaybeComma RBRACE ;
+EnumBraces.                 TypeSpec ::= "enum" LBRACE [Enumerator] MaybeComma RBRACE ;
+EnumJustAttrIdBraces.       TypeSpec ::= "enum" [JustAttribute] IdOrTypename LBRACE [Enumerator] MaybeComma RBRACE ;
+EnumJustAttrBraces.         TypeSpec ::= "enum" [JustAttribute] LBRACE [Enumerator] MaybeComma RBRACE ;
+NamedTypeTypeSpec.          TypeSpec ::= NAMEDTYPE ;
+TypeOfExpression.           TypeSpec ::= TYPEOF "(" Expression ")" ;
+TypeOfTypeName.             TypeSpec ::= TYPEOF "(" TypeName ")" ;
+
+
+--/* (* ISO 6.7.2. Except that we allow empty structs. We also allow missing field names. *) */
+EmptyStructDecl.            StructDeclList ::= ; --/* empty */ ;
+DeclSpecStructDecl.         StructDeclList ::= DeclSpecList ";" StructDeclList ;
+SemicolonStructDecl.        StructDeclList ::= ";" StructDeclList ;                                 --/*(* GCC allows extra semicolons *)*/
+SpecFieldDeclStructDecl.    StructDeclList ::= DeclSpecList [FieldDecl] ";" StructDeclList ;
+PragmaStructDecl.           StructDeclList ::= Pragma StructDeclList ;                              --/*(* MSVC allows pragmas in strange places *)*/
+StaticAssertStructDecl.     StructDeclList ::= StaticAssertDeclaration ;                            --/*(* C11 allows static_assert-declaration *)*/
+StaticAssertStructDeclNext. StructDeclList ::= StaticAssertDeclaration ";" StructDeclList ;
+
+StaticAssert.               StaticAssertDeclaration ::= "_Static_assert" "(" Expression ")" ;
+StaticAssertStringConst.    StaticAssertDeclaration ::= "_Static_assert" "(" Expression "," StringConstant ")" ;
+
+--/* (* ISO 6.7.2 *) */
+
+--/* (* ISO 6.7.2. Except that we allow unnamed fields. *) */
+FieldDeclDeclarator.        FieldDecl ::= Declarator ;
+FieldDeclDeclaratorColon.   FieldDecl ::= Declarator ":" Expression [Attribute] ;
+FieldDeclColonExpression.   FieldDecl ::= ":" Expression ;
+separator nonempty FieldDecl "," ;
+
+--/* (* ISO 6.7.2.2 *) */
+
+IdentEnumerator.    Enumerator ::= Ident ;
+IdentAssignExpr.    Enumerator ::= Ident "=" Expression ;
+separator nonempty Enumerator "," ;
+
+-- /* (* ISO 6.7.5. Plus Microsoft declarators.*) */
+ADeclarator.        Declarator ::= PointerOpt DirectDecl AttributesWithAsm ;
+separator nonempty Declarator "," ; 
+
+--/* 6.7.5.2/3 */
+AttributesCommaExpression.  AttributesOrStatic ::= [Attribute] CommaExpressionOpt ;
+AttributesStaticExpression. AttributesOrStatic ::= Attribute [Attribute] "static" [Expression] ;
+StaticAttributesExpression. AttributesOrStatic ::= "static" [Attribute] [Expression] ;
+
+--/* (* ISO 6.7.5 *) */
+DirectDeclIdTypename.           DirectDecl ::= IdOrTypename ;                                        --/* (* We want to be able to redefine named types as variable names *) */
+DirectDeclAttrDecl.             DirectDecl ::= "(" [Attribute] Declarator ")" ;
+DirectDeclAttrStatic.           DirectDecl ::= DirectDecl LBRACKET AttributesOrStatic  RBRACKET ;
+DirectDeclGhostParam.           DirectDecl ::= DirectDecl "(" ")" GhostParameterOpt ;
+DirectDeclGhostRestParParam.    DirectDecl ::= DirectDecl "(" RestParList ")" GhostParameterOpt ;
+
+
+SimpleParameterDecl.    RestParList ::= [ParameterDecl] ;
+DotDotDotParameterDecl. RestParList ::= [ParameterDecl] "," "..." ;
+
+
+--/* (* ISO 6.7.5 *) */
+ParameterDeclSpecDeclarator.    ParameterDecl ::= DeclSpecList Declarator ;
+ParameterDeclSpecAbstract.      ParameterDecl ::= DeclSpecList AbstractDecl ;
+ParameterDeclSpec.              ParameterDecl ::= DeclSpecList ;
+ParameterDeclPar.               ParameterDecl ::= "(" ParameterDecl ")" ;
+separator nonempty ParameterDecl "," ;
+
+--/* (* Old style prototypes. Like a Declarator *) */
+--old_proto_decl ::= PointerOpt DirectOldProtoDecl ;
+
+OldDirectProtoDecl.     DirectOldProtoDecl ::= DirectDecl "(" [Ident] ")" OldPardefList ;
+--(* appears sometimesm but generates a shift-reduce conflict. *) ::= "(" "*" DirectDecl "(" [Ident] ")" ")" "(" ")" OldPardefList ;
+
+separator nonempty Ident "," ;
+
+EmptyOldPardefList.     OldPardefList ::= ; --/* empty */ ;
+DotDotDotOldPardefList. OldPardefList ::= [OldPardef] "..." ;
+SimpleOldPardefList.    OldPardefList ::= [OldPardef] ;
+
+OldParDef.      OldPardef ::= DeclSpecList [Declarator] ;
+separator nonempty OldPardef ";" ;
+
+--/* (* ISO 6.7.5 *) */
+NoPointer.      PointerOpt ::= ; --/**/ ;
+SomePointer.    PointerOpt ::= "*" [Attribute] PointerOpt ;
+
+--/* (* ISO 6.7.6 *) */
+TypeNameAbstractDecl.   TypeName ::= DeclSpecList AbstractDecl ;
+TypeNameDeclSpecList.   TypeName ::= DeclSpecList ;
+
+--/* (* ISO 6.7.6. *) */
+AbstractDeclAttr.       AbstractDecl ::= PointerOpt AbsDirectDecl [Attribute] ;
+AbstractDeclPointer.    AbstractDecl ::= "*" [Attribute] PointerOpt ;
+
+
+--/* (* ISO 6.7.6. We do not support optional Declarator for functions. Plus Microsoft attributes. See the discussion for Declarator. *) */
+AbsDirectDeclPar.       AbsDirectDecl ::= "(" [Attribute] AbstractDecl ")" ;
+AbsDirectDeclBreckets.  AbsDirectDecl ::= AbsDirectDeclOpt LBRACKET CommaExpressionOpt RBRACKET ;
+--/*(* The next should be AbsDirectDeclOpt but we get conflicts *)*/
+AbsDirectDeclRestPar.   AbsDirectDecl ::= AbsDirectDecl  "(" RestParList ")" ;
+AbsDirectDeclNoRestPar. AbsDirectDecl ::= AbsDirectDecl "(" ")" ;
+
+SomeAbsDirectDecl.  AbsDirectDeclOpt ::= AbsDirectDecl ;
+NoAbsDirectDecl.    AbsDirectDeclOpt ::= ; --/* empty */ ;
+
+--/* (* ISO 6.9.1 *) */
+FunctionDefSpec.    FunctionDef ::= SPEC FunctionDefStart Block ;
+SimpleFunctionDef.  FunctionDef ::= FunctionDefStart Block ;
+
+--/* (* ISO 6.9.1 *) */
+FunctionDefStartDeclarator.             FunctionDefStart ::= DeclSpecList Declarator ;
+FunctionDefStartOldProtoDecl.           FunctionDefStart ::= DeclSpecList PointerOpt DirectOldProtoDecl ;                              --/* (* Old-style function prototype *) */
+FunctionDefStartReatParGhostParameter.  FunctionDefStart ::= Ident "(" RestParList ")" GhostParameterOpt ;            --/* (* New-style function that does not have a return type *) */
+FunctionDefStartOldPardef.              FunctionDefStart ::= Ident "(" [Ident] ")" OldPardefList ;                      --/* (* No return type and old-style parameter list *) */
+FunctionDefStartGhostParameter.         FunctionDefStart ::= Ident "(" ")" GhostParameterOpt ;
+
+--/* const/volatile as type specifier elements */
+ConstKeyWord.               CVSpec ::= CONST ;
+VolatileKeyWord.            CVSpec ::= VOLATILE ;
+RestrictKeyWord.            CVSpec ::= RESTRICT ;
+GhostKeyWord.               CVSpec ::= "\\ghost" ;
+Attribute_annotKeyWord.     CVSpec ::= ATTRIBUTE_ANNOT ;
+
+--/* (* In some contexts we can have an inline assembly to specify the name to be used for a global. We treat this as a name Attribute *) */
+EmptyAttrWithASM.       AttributesWithAsm ::= ; --/* empty */ ;
+ListAttrWithASM.        AttributesWithAsm ::= Attribute [Attribute] ;
+ListASMAttrWithASM.     AttributesWithAsm ::= Attribute [Attribute] ASM "(" StringConstant ")" [Attribute] ;
+ASMAttrWithASM.         AttributesWithAsm ::= ASM "(" StringConstant ")" [Attribute] ;
+
+--/* things like __attribute__, but no const/volatile */
+AttributeAttrNocv.      AttributeNocv ::= ATTRIBUTE "(" "(" AttrList ")" ")" ;
+DeclspecAttrNocv.       AttributeNocv ::= "__declspec" "(" [Attr] ")" ;
+MsattrAttrNocv.         AttributeNocv ::= MSATTR ;
+--/* ISO 6.7.3 */
+ThreadAttrNocv.         AttributeNocv ::= "__thread" ;
+ThreadLocalAttrNocv.    AttributeNocv ::= "_Thread_local" ;
+separator AttributeNocv "" ;
+
+--/* __attribute__ plus const/volatile */
+AttributeNoCV.              Attribute ::= AttributeNocv ;
+AttributeConst.             Attribute ::= CONST ;
+AttributeRestrict.          Attribute ::= RESTRICT ;
+AttributeVolatile.          Attribute ::= VOLATILE ;
+AttributeGhost.             Attribute ::= "\\ghost" ;
+AttributeAttributeAnnot.    Attribute ::= ATTRIBUTE_ANNOT ;
+separator Attribute "" ;
+
+--/* (* sm: I need something that just includes __attribute__ and nothing more, to support them appearing between the 'struct' keyword and the type name. Actually, a declspec can appear there as well (on MSVC) *)  */
+AttributeJustAttribute.     JustAttribute ::= ATTRIBUTE "(" "(" AttrList ")" ")" ;
+DeclspecJustAttribute.      JustAttribute ::= "__declspec" "(" [Attr] ")" ;
+--/* this can't be empty, b/c I folded that possibility into the calling productions to avoid some S/R conflicts */
+separator nonempty JustAttribute "" ;
+
+
+--/** (* PRAGMAS and ATTRIBUTES *) ***/
+SimplePragma.           Pragma ::= "pragma" "\n" ;
+AttrPragma.             Pragma ::= "pragma" Attr "\n" ;
+AttrPragmaSeparated.    Pragma ::= "pragma" Attr ";" "\n" ;
+PragmaKeyrod.           Pragma ::= "pragma" ;
+
+--/* (* We want to allow certain strange things that occur in pragmas, so we cannot use directly the language of expressions *) */
+IdentifierVarAttr.  VarAttr ::= Ident ;
+NamedTypeVarAttr.   VarAttr ::= NAMEDTYPE ;
+DefaultVarAttr.     VarAttr ::= "default" ":" Integer ;
+ConstVarAttr.       VarAttr ::= CONST ;                        --/* Const when it appears in Attribute lists, is translated to aconst */
+VolatileVarAttr.    VarAttr ::= VOLATILE ;                     --/*(** GCC allows this as an Attribute for functions, synonym for noreturn **)*/
+ContIntVarAttr.     VarAttr ::= Integer ":" Integer ;
+
+BasicAttrConsInt.   BasicAttribute ::= Integer ;
+BasicAttrConsFloat. BasicAttribute ::= Double ;
+BasicAttrVar.       BasicAttribute ::= VarAttr ;
+separator nonempty BasicAttribute "" ;
+
+ParameterBasicAttr.                 ParameterAttrListNE ::= [BasicAttribute] ;
+ParameterBasicAttrStringConst.      ParameterAttrListNE ::= [BasicAttribute] StringConstant ;
+ParameterBasicAttrStringConstNext.  ParameterAttrListNE ::= [BasicAttribute] StringConstant ParameterAttrListNE ;
+
+ParamAttrList.          ParamAttrListNE ::= ParameterAttrListNE ;
+ParamStringConstant.    ParamAttrListNE ::= StringConstant ;
+
+BasicAttr.          Attr14 ::= BasicAttribute ;
+_.                  Attr14 ::= "(" Attr ")" ;
+AttrStringConstant. Attr14 ::= StringConstant ;
+
+_.              Attr13 ::= Attr14 ;
+FuncationCall.  Attr13 ::= IdOrTypenameAsId "(" [Attr] ")" ;
+ProcedureCall.  Attr13 ::= IdOrTypenameAsId "("  ")" ;
+BasicPostfix.   Attr13 ::= BasicAttribute ParamAttrListNE ;
+ArrowAttr.      Attr13 ::= Attr13 "->" IdOrTypename ;
+DotAttr.        Attr13 ::= Attr13 "." IdOrTypename ;
+ArrayAttr.      Attr13 ::= Attr13 LBRACKET Attr RBRACKET ;
+
+--/*(* Since in attributes we use both Ident and NAMEDTYPE as indentifiers, that leads to conflicts for "sizeof" and ALIGNOF. In those cases we require that their Arguments be expressions, not attributes *)*/
+_.                      Attr12 ::= Attr13 ;
+SizeOfAttrUnary.        Attr12 ::= "sizeof" AssignExpr13 ;
+SizeOfAttrTypeName.     Attr12 ::= "sizeof" "(" TypeName ")" ;
+AlignOfAttrUnary.       Attr12 ::= ALIGNOF AssignExpr13 ;
+AlignOfAttrTypeName.    Attr12 ::= ALIGNOF "(" TypeName ")" ;
+PlusUnaryAttr.          Attr12 ::= "+" Attr12 ;
+MinusUnaryAttr.         Attr12 ::= "-" Attr12 ;
+MultUnaryAttr.          Attr12 ::= "*" Attr12 ;
+AmpUnaryAttr.           Attr12 ::= "&" Attr12 ;
+NotUnaryAttr.           Attr12 ::= "!" Attr12 ;
+TildeUnaryAttr.         Attr12 ::= "~" Attr12 ;
+
+_.          Attr11 ::= Attr12 ;
+MultOp.     Attr11 ::= Attr11 "*" Attr12 ;
+DivOp.      Attr11 ::= Attr11 "/" Attr12	;
+ModOp.      Attr11 ::= Attr11 "%" Attr12 ;
+
+
+_.      Attr10 ::= Attr11 ;
+AddOp.  Attr10 ::= Attr10 "+" Attr11 ;
+SubOp.  Attr10 ::= Attr10 "-" Attr11 ;
+
+_.              Attr9 ::= Attr10 ;
+LeftShiftOp.    Attr9 ::= Attr9 "<<" Attr10	;
+RightShiftOp.   Attr9 ::= Attr9 ">>" Attr10	;
+
+
+_.              Attr8 ::= Attr9 ;
+Less.           Attr8 ::= Attr8 "<" Attr9 ;
+Greater.        Attr8 ::= Attr8 ">" Attr9 ;
+LessEqual.      Attr8 ::= Attr8 "<=" Attr9 ;
+GreaterEqual.   Attr8 ::= Attr8 ">=" Attr9 ;
+
+
+_.          Attr7 ::= Attr8 ;
+EqualEqual. Attr7 ::= Attr7 "==" Attr8 ;
+NotEqual.   Attr7 ::= Attr7 "!=" Attr8 ;
+
+
+_.          Attr6 ::= Attr7 ;
+BitAnd.     Attr6 ::= Attr6 "&" Attr7	;
+
+_.          Attr5 ::= Attr6 ;
+Xor.        Attr5 ::= Attr5 "^" Attr6 ;
+
+_.          Attr4 ::= Attr5 ;
+BitOr.      Attr4 ::= Attr4 "|" Attr5 ;
+
+_.          Attr3 ::= Attr4 ;
+And.        Attr3 ::= Attr3 "&&" Attr4 ;
+
+_.          Attr2 ::= Attr3 ;
+Or.         Attr2 ::= Attr2 "||" Attr3 ;
+
+_.              Attr1 ::= Attr2 ;
+TernaryCond.    Attr1 ::= Attr2 "?" AttrTest Attr1 ":" Attr1 ; --COLON2
+
+_.          Attr ::= Attr1 ;
+AnAttr.     Attr ::= Attr1 "=" Attr1 ;
+separator nonempty Attr "," ;
+
+--/* hack to avoid shift reduce conflict in Attribute parsing. */
+AvoidShiftReduce.   AttrTest ::= ; --/* empty */ ;
+
+EmptyAtrList.   AttrList ::= ; --/* empty */ ;
+AtrList.        AttrList ::= [Attr] ;
+
+--/*** GCC ASM instructions ***/
+VolatileKeyWrod.    Asmattr ::= VOLATILE  ;
+ConstKeyWrod.       Asmattr ::= CONST ;
+separator Asmattr "" ;
+
+NoAsmoutputs.       Asmoutputs ::= ; --/* empty */ ;
+SomeAsmoutputs.     Asmoutputs ::= ":" Asmoperands Asminputs;
+
+NoAsmoperands.      Asmoperands ::= ; --/* empty */ ;
+SomeAsmoperands.    Asmoperands ::= [Asmoperand] ;
+
+AsmOperand.     Asmoperand ::= Asmopname StringConstant "(" Expression ")" ;
+separator nonempty Asmoperand "," ;
+
+NoAsminputs.    Asminputs ::= ; --/* empty */ ;
+SomeAsminputs.  Asminputs ::= ":" Asmoperands Asmclobber ;
+
+NoAsmopname.    Asmopname ::= ; --/* empty */ ;
+SomeAsmopname.  Asmopname ::= LBRACKET Ident RBRACKET ;
+
+
+NoAsmclobber.           Asmclobber ::= ; --/* empty */ ;
+ColonAsmclobber.        Asmclobber ::= ":" Asmlabels ;
+ColonStringAsmclobber.  Asmclobber ::= ":" [StringConstant] Asmlabels ;
+
+separator nonempty StringConstant "," ;
+
+NoAsmlabels.    Asmlabels ::= ; --/* empty */ ;
+SomeAsmlabels.  Asmlabels ::= ":" [LocalLabelName] ;

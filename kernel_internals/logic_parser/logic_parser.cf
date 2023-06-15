@@ -1,0 +1,1041 @@
+token EXT_GLOBAL ({"EXT_GLOBAL"} (letter)*) ;
+token EXT_GLOBAL_BLOCK ({"EXT_GLOBAL_BLOCK"} (letter)*) ;
+token EXT_CODE_ANNOT ({"EXT_CODE_ANNOT"} (letter)*) ;
+token EXT_CONTRACT ({"EXT_CONTRACT"} (letter)*) ;
+token STRING_LITERAL (letter) ;
+token WSTRING_CONSTANT (('`') (letter)* ('`')) ;
+token TYPENAME ((letter) (digit | letter | '_')*) ;
+
+--%type <Logic_ptree.Lexpr> LexprEOF
+--%start LexprEOF
+
+--/*** predicates and terms ***/
+
+LexprEof.  LexprEOF ::= Lexpr ; -- EOF ;
+
+EmptyLexprList.     LexprList ::= ; --/* epsilon */
+NonEmptyLexprList.  LexprList ::= [Lexpr] ;
+
+separator nonempty Lexpr "," ;
+
+NoLexprOption.      LexprOption ::= ; --/* epsilon */
+SomeLexprOption.    LexprOption ::= Lexpr ;
+
+NoLexpr.        Lexpr ::= ; --/* predicates */ 
+ImplLexpr.      Lexpr ::= Lexpr "==>" Lexpr ;
+IffLexpr.       Lexpr ::= Lexpr "<==>" Lexpr ;
+OrLexpr.        Lexpr ::= Lexpr "||" Lexpr ;
+AndLexpr.       Lexpr ::= Lexpr "&&" Lexpr ;
+HatHatLexpr.    Lexpr ::= Lexpr "^^" Lexpr ;
+--/* terms */
+AmpLexpr.       Lexpr ::= Lexpr "&" Lexpr ;
+PipeLexpr.      Lexpr ::= Lexpr "|" Lexpr ;
+HatLexpr.       Lexpr ::= Lexpr "^" Lexpr ;
+BimpliesLexpr.  Lexpr ::= Lexpr "-->" Lexpr ;
+BiffLexpr.      Lexpr ::= Lexpr "<-->" Lexpr ;
+InLexpr.        Lexpr ::= Lexpr "\\in" Lexpr ;
+TernaryLexpr.   Lexpr ::= Lexpr "?" Lexpr ":" Lexpr ; --%prec prec_question
+--/* both terms and predicates */
+IdAssignLexpr.  Lexpr ::= AnyIdentifier ":" Lexpr ; --%prec prec_named 
+StrAssignLexpr. Lexpr ::= [STRING_LITERAL] ":" Lexpr ; --%prec prec_named
+_.  Lexpr ::= Lexpr1 ;
+
+--lexpr_rel
+_.              Lexpr1 ::= Lexpr2 ;
+RelationLexpr.  Lexpr1 ::= Lexpr3 [LexprRelInner] Relation Lexpr2 ;
+
+--lexpr_end_rel
+_.              Lexpr2 ::= Lexpr3 ;
+BinderLexpr.    Lexpr2 ::= LexprBinder ;
+NotBinderLexpr. Lexpr2 ::= "!" LexprBinder ;
+
+--LexprBinder
+LetBinderLexpr.     LexprBinder ::= "\\let" BoundedVar "=" Lexpr ";" Lexpr ; --%prec "\\let"
+ForallBinderLexpr.  LexprBinder ::= "\\forall" Binders ";" Lexpr ; --%prec prec_forall
+ExistBinderLexpr.   LexprBinder ::= "\\exists" Binders ";" Lexpr ; --%prec prec_exists
+LambdaBinderLexpr.  LexprBinder ::= "\\lambda" Binders ";" Lexpr ; --%prec prec_lambda 
+
+RelInnerLexpr.      LexprRelInner ::= Relation Lexpr3;
+separator LexprRelInner "" ;
+
+LessRel.        Relation ::= "<" ;
+GreaterRel.     Relation ::= ">" ;
+LessEqRel.      Relation ::= "<=" ;
+GreaterEqRel.   Relation ::= ">=" ;
+EqRel.          Relation ::= "==" ;
+NotEqRel.       Relation ::= "!=" ;
+--/* C. Marche: added to produce better error messages */
+EQUALRel.       Relation ::= "=" ;
+
+--lexpr_inner
+StringLexpr.            Lexpr3 ::= [STRING_LITERAL] ; 
+NotLexprInner.          Lexpr3 ::= "!" Lexpr3 ;
+TrueLexpr.              Lexpr3 ::= "\\true" ;
+FalseLexpr.             Lexpr3 ::= "\\false" ;
+PointerLexpr.           Lexpr3 ::= "\\object_pointer" OptLabel1 "(" Lexpr ")" ;
+ValidLexpr.             Lexpr3 ::= "\\valid" OptLabel1 "(" Lexpr ")" ;
+ValidReadLexpr.         Lexpr3 ::= "\\valid_read" OptLabel1 "(" Lexpr ")" ;
+ValidFuncLexpr.         Lexpr3 ::= "\\valid_function" "(" Lexpr ")" ;
+ValidIndxLexpr.         Lexpr3 ::= "\\valid_index" OptLabel1 "(" Lexpr "," Lexpr ")" ;
+ValidRangeLexpr.        Lexpr3 ::= "\\valid_range" OptLabel1 "(" Lexpr "," Lexpr "," Lexpr ")" ;
+InitializedLexpr.       Lexpr3 ::= "\\initialized" OptLabel1 "(" Lexpr ")" ;
+DanglingLexpr.          Lexpr3 ::= "\\dangling" OptLabel1 "(" Lexpr ")" ;
+FreshLexpr.             Lexpr3 ::= "\\fresh" OptLabel2 "(" Lexpr "," Lexpr ")" ;
+BaseAddrLexpr.          Lexpr3 ::= "\\base_addr" OptLabel1 "(" Lexpr ")" ;
+BlockLengthLexpr.       Lexpr3 ::= "\\block_length" OptLabel1 "(" Lexpr ")" ;
+OffsetLexpr.            Lexpr3 ::= "\\offset" OptLabel1 "(" Lexpr ")" ;
+AllocableLexpr.         Lexpr3 ::= "\\allocable" OptLabel1 "(" Lexpr ")" ;
+FreeableLexpr.          Lexpr3 ::= "\\freeable" OptLabel1 "(" Lexpr ")" ;
+AllocationLexpr.        Lexpr3 ::= "\\Allocation" OptLabel1 "(" Lexpr ")" ;
+AutomaticLexpr.         Lexpr3 ::= "\\automatic" ;
+DynamicLexpr.           Lexpr3 ::= "\\dynamic" ;
+RegisterLexpr.          Lexpr3 ::= "\\register" ;
+StaticLexpr.            Lexpr3 ::= "\\static" ;
+UnallocatedLexpr.       Lexpr3 ::= "\\unallocated" ;
+NullLexpr.              Lexpr3 ::= "\\null" ;
+IntConst.               Lexpr3 ::= Integer ;
+FloatConst.             Lexpr3 ::= Double ;
+StringConst.            Lexpr3 ::= String ;
+WStringConst.           Lexpr3 ::= WSTRING_CONSTANT ;
+AddLexpr.               Lexpr3 ::= Lexpr3 "+" Lexpr3 ;
+SubtrLexpr.             Lexpr3 ::= Lexpr3 "-" Lexpr3 ;
+MultLexpr.              Lexpr3 ::= Lexpr3 "*" Lexpr3 ;
+DivLexpr.               Lexpr3 ::= Lexpr3 "/" Lexpr3 ;
+ModLexpr.               Lexpr3 ::= Lexpr3 "%" Lexpr3 ;
+StarHatLexpr.           Lexpr3 ::= Lexpr3 "*^" Lexpr3 ;
+ArrowLexpr.             Lexpr3 ::= Lexpr3 "->" IdentifierOrTypenameFull ;
+DotLexpr.               Lexpr3 ::= Lexpr3 "." IdentifierOrTypenameFull ;
+SquaresRangeLexpr.      Lexpr3 ::= Lexpr3 "[" Range "]" ;
+SquaresLexpr.           Lexpr3 ::= Lexpr3 "[" Lexpr "]" ;
+SquaresPipeLexpr.       Lexpr3 ::= "[|" LexprList "|]" ;
+MinusLexpr.             Lexpr3 ::= "-" Lexpr3 ; --%prec prec_unary_op
+PlusLexpr.              Lexpr3 ::= "+" Lexpr3 ; --%prec prec_unary_op
+TildeLexpr.             Lexpr3 ::= "~" Lexpr3 ;
+StarLexpr.              Lexpr3 ::= "*" Lexpr3 ; --%prec prec_unary_op 
+AmpUnaryLexpr.          Lexpr3 ::= "&" Lexpr3 ; --%prec prec_unary_op 
+SizeOfLexpr.            Lexpr3 ::= "sizeof" "(" Lexpr ")" ;
+SizeOfLogicTypeLexpr.   Lexpr3 ::= "sizeof" "(" CastLogicType ")" ;
+OldLexpr.               Lexpr3 ::= "\\old" "(" Lexpr ")" ;
+AtLexpr.                Lexpr3 ::= "\\at" "(" Lexpr "," LabelName ")" ;
+ResultLexpr.            Lexpr3 ::= "\\result" ;
+SeparatedLexpr.         Lexpr3 ::= "\\separated" "(" [Lexpr] ")" ;
+FullIdParenLexpr.       Lexpr3 ::= FullIdentifier "(" [Lexpr] ")" ;
+FullIdBraceParenLexpr.  Lexpr3 ::= FullIdentifier "{" [IdentifierOrTypenameFull] "}" "(" [Lexpr] ")" ;
+FullIdBracesLexpr.      Lexpr3 ::= FullIdentifier "{" [IdentifierOrTypenameFull] "}" ;
+FullId.                 Lexpr3 ::= FullIdentifier ;
+PiLexpr.                Lexpr3 ::= "\\pi" ;
+LessLessLexpr.          Lexpr3 ::= Lexpr3 ">>" Lexpr3 ;
+GreaterGreaterLexpr.    Lexpr3 ::= Lexpr3 "<<" Lexpr3 ;
+_.                      Lexpr3 ::= "(" Lexpr ")" ;
+ParenRangeLexpr.        Lexpr3 ::= "(" Range ")" ;
+CastLexpr.              Lexpr3 ::= "(" CastLogicType ")" Lexpr3 ; --%prec prec_cast
+TypeOfLexpr.            Lexpr3 ::= "\\typeof" "(" Lexpr ")" ;
+--TypeLexpr.          Lexpr3 ::= "\\type" "(" type_spec(typename) ")" ;
+--TypeWithStarsLexpr. Lexpr3 ::= "\\type" "(" type_spec(typename) [Stars] ")" ;
+TypeLexpr.              Lexpr3 ::= "\\type" "(" TypeSpecOFTYPENAME ")" ;
+TypeWithStarsLexpr.     Lexpr3 ::= "\\type" "(" TypeSpecOFTYPENAME [Stars] ")" ;
+
+--    /* tsets */
+EmptyLexpr.         Lexpr3 ::= "\\empty" ;
+UnionLexpr.         Lexpr3 ::= "\\union" "(" LexprList ")" ;
+InterLexpr.         Lexpr3 ::= "\\inter" "(" LexprList ")" ;
+BraceLexprList.     Lexpr3 ::= "{" LexprList "}" ;
+BraceBinderLexpr.   Lexpr3 ::= "{" Lexpr "|" Binders "}" ;
+BraceBinderLexprLexpr.   Lexpr3 ::= "{" Lexpr "|" Binders ";" Lexpr "}" ;
+--    /* Aggregated object initialization */
+FieldInitLexpr.     Lexpr3 ::= "{" [FieldInitElt] "}" ;
+ArrayInitLexpr.     Lexpr3 ::= "{" [ArrayInitElt] "}" ;
+UpdateBraceLexpr.   Lexpr3 ::= "{" Lexpr "\\with" [UpdateElt] "}" ;
+--| "\\let" BoundedVar "=" Lexpr ";" Lexpr %prec "\\let" */
+
+separator nonempty STRING_LITERAL "" ;
+
+LexprRange.  Range ::= LexprOption ".." LexprOption ;
+
+--/*** Aggregated object initialization ***/
+
+AFieldInitElt.  FieldInitElt ::= "." IdentifierOrTypenameFull "=" Lexpr ;
+separator nonempty FieldInitElt ",";
+
+AnArrayInitElt.     ArrayInitElt ::= "[" Lexpr "]" "=" Lexpr ;
+ArrayInitRangeElt.  ArrayInitElt ::= "[" Range "]" "=" Lexpr ;
+separator nonempty ArrayInitElt "," ;
+
+--/*** Functional update ***/
+--update ::= UpdateElt ;
+--update ::= UpdateElt "," update ;
+
+AnUpdateElt.    UpdateElt ::= [PathElt] "=" Lexpr ;
+UpdateEltWith.  UpdateElt ::= [PathElt] "=" "{" "\\with" [UpdateElt] "}" ;
+separator nonempty UpdateElt "," ;
+
+FieldElt.       PathElt ::= "." IdentifierOrTypenameFull ;
+ArrayElt.       PathElt ::= "[" Lexpr "]" ;
+ArrayRangeElt.  PathElt ::= "[" Range "]" ;
+separator nonempty PathElt "" ;
+
+--/*** Binders ***/
+
+TheBinders.    Binders ::= TypeSpecOFTYPENAME VarSpec "," [BindersReentrance] ;
+
+--BindersReentrance ::= DeclSpec ;
+--BindersReentrance ::= BindersReentrance "," DeclSpec ;
+--BindersReentrance ::= BindersReentrance "," VarSpec ;
+--DeclSpec.   BindersReentrance ::= type_spec(typename) VarSpec ;
+BindersReentranceDeclSpec.       BindersReentrance ::= TypeSpecOFTYPENAME VarSpec ;
+BindersReentranceVarSpec.        BindersReentrance ::= VarSpec ;
+separator nonempty BindersReentrance ",";
+
+_.              VarSpec ::= VarSpec1 ;
+StartVarSpec.   VarSpec ::= [Stars] VarSpec1 ;
+
+
+IntConstArraySize.  ArraySize ::= Integer ;
+SomeArraySize.      ArraySize ::= FullIdentifier ;
+NoSize.             ArraySize ::= ; --/* empty */`
+
+--VarSpecBits
+SimpleSpec.     VarSpec1 ::= FullIdentifier ;
+ArraySpec.      VarSpec1 ::= VarSpec1 "[" ArraySize "]" ;
+_.              VarSpec1 ::= "(" VarSpec ")" ;
+FunctionSpec.   VarSpec1 ::= VarSpec1 "(" AbsParamTypeList ")" ;
+
+
+EmptyTypeParam.     AbsParamTypeList ::= ; --/* empty */
+SomeTypeParam.      AbsParamTypeList ::= [AbsParam] ;
+InfTypeParam.       AbsParamTypeList ::= [AbsParam] "," "..." ;
+
+--/* TODO: AbsParam should be less restrictive than Parameter since its name can be omitted */
+--logic_type_gen(typename)
+AbsParamsElement.   AbsParam ::= LogicTypeGenOFTYPENAME ;
+separator nonempty AbsParam "," ;
+
+Prartemer.  Parameter ::= TypeSpecOFIdentifierOrTypename VarSpec ;
+separator nonempty Parameter "," ; 
+
+
+
+--/*** type expressions ***/
+
+--logic_type_gen(tname) ::= type_spec(tname) AbsSpecOption ;
+LogicTypeGenTypemane.       LogicTypeGenOFTYPENAME ::= TypeSpecOFTYPENAME AbsSpecOption ;
+separator nonempty LogicTypeGenOFTYPENAME "," ;
+
+LogicTypeGenIdOrTypename.   LogicTypeGenOFIdentifierOrTypename ::= TypeSpecOFIdentifierOrTypename AbsSpecOption ;
+separator nonempty LogicTypeGenOFIdentifierOrTypename "," ;
+
+
+
+--/* TODO treat the case of an ACSL Keyword that is also a Typedef */
+--typename ::= TYPENAME ;
+
+--logic_type ::= logic_type_gen(typename) ;
+
+ConstCV.    CV ::= "const" ;
+VolatileCV. CV ::= "volatile" ;
+GhostCV.    CV ::= "\\ghost" ;
+separator CV "" ;
+
+--type_spec_cv(tname) ::= type_spec(tname) cv_after ;
+--type_spec_cv(tname) ::= CV type_spec_cv(tname) ;
+--TypeSpecCVOFTYPENAME ::= TypeSpecOFTYPENAME cv_after ;
+--TypeSpecCVOFTYPENAME ::= CV TypeSpecCVOFTYPENAME ;
+--cv_after ::= ; --/* empty */
+--cv_after ::= CV cv_after ;
+TypeSpecCVTypename. TypeSpecCVOFTYPENAME ::= [CV] TypeSpecOFTYPENAME [CV] ;
+
+
+--CastLogicType ::= type_spec_cv(TYPENAME) AbsSpecCVOption ;
+AnCastLogicType.      CastLogicType ::= TypeSpecCVOFTYPENAME AbsSpecCVOption ;
+
+--LogicRtType ::= logic_type_gen(IdentifierOrTypename) ;
+LogicRTType.    LogicRtType ::= LogicTypeGenOFIdentifierOrTypename ;
+
+NoAbsSpec.      AbsSpecOption ::= ; --/* empty */
+SomeAbsSpec.    AbsSpecOption ::= AbsSpec ;
+
+NoAbsSpecCV.    AbsSpecCVOption ::= ; --/* empty */
+SomeAbsSpecCV.  AbsSpecCVOption ::= AbsSpecCV ;
+
+AbsSpecTabs.            AbsSpec ::= [Tabs] ;
+AbsSpecStars.           AbsSpec ::= [Stars] ;
+AbsSpecStarsTabs.       AbsSpec ::= [Stars] [Tabs] ;
+AbsSpecBitsStars.       AbsSpec ::= [Stars] AbsSpec1 ;
+AbsSpecBitsStarsTabs.   AbsSpec ::= [Stars] AbsSpec1 [Tabs] ;
+AbsSpecBitsTabs.        AbsSpec ::= AbsSpec1 [Tabs] ;
+AbsSpecBits.            AbsSpec ::= AbsSpec1 ;
+
+
+AbsSpecCVTabs.          AbsSpecCV ::= [Tabs] ;
+AbsSpecCVStars.         AbsSpecCV ::= [StarsCV] ;
+AbsSpecCVStarsTabs.     AbsSpecCV ::= [StarsCV] [Tabs] ;
+AbsSpecCVBitsStars.     AbsSpecCV ::= [StarsCV] AbsSpecCV1 ;
+AbsSpecCVBitsStarsTabs. AbsSpecCV ::= [StarsCV] AbsSpecCV1 [Tabs] ;
+AbsSpecCVBitsTabs.      AbsSpecCV ::= AbsSpecCV1 [Tabs] ;
+AbsSpecCVBits.          AbsSpecCV ::= AbsSpecCV1 ;
+
+--AbsSpecBits
+_.                      AbsSpec1 ::= "(" AbsSpec ")" ;
+AbsSpecBitsParams.      AbsSpec1 ::= AbsSpec1 "(" AbsParamTypeList ")" ;
+
+--AbsSpecCVBits
+_.                      AbsSpecCV1 ::= "(" AbsSpecCV ")" ;
+AbsSpecBitsCVParams.    AbsSpecCV1 ::= AbsSpecCV1 "(" AbsParamTypeList ")" ;
+
+Star.   Stars ::= "*" ;
+separator nonempty Stars "";
+
+
+StarCV.         StarsCV ::= "*" ;
+StarCVWithCV.   StarsCV ::= "*" CV ;
+separator nonempty StarsCV "" ;
+
+
+Tab.    Tabs ::= "[" ArraySize "]" ;
+separator nonempty Tabs "";
+
+
+--type_spec(tname)
+TypeSpecIntegerKeyWord.                 TypeSpecSimple ::= "integer" ;
+TypeSpecRealKeyWord.                    TypeSpecSimple ::= "real" ;
+TypeSpecBooleanKeyWord.                 TypeSpecSimple ::= "boolean" ;
+TypeSpecVoidKeyWord.                    TypeSpecSimple ::= "void" ;
+TypeSpecBoolKeyWord.                    TypeSpecSimple ::= "_Bool" ;
+TypeSpecCharKeyWord.                    TypeSpecSimple ::= "char" ;                           --/** [char] */
+TypeSpecSignedCharKeyWord.              TypeSpecSimple ::= "signed" "char" ;                  --/** [signed char] */
+TypeSpecUnsignedCharKeyWord.            TypeSpecSimple ::= "unsigned" "char" ;                --/** [unsigned char] */
+TypeSpecIntKeyWord.                     TypeSpecSimple ::= "int" ;                            --/** [int] */
+TypeSpecSignedIntKeyWord.               TypeSpecSimple ::= "signed" "int" ;                   --/** [int] */
+TypeSpecUnsignedIntKeyWord.             TypeSpecSimple ::= "unsigned" "int" ;                 --/** [unsigned int] */
+TypeSpecUnsignedKeyWord.                TypeSpecSimple ::= "unsigned" ;   
+TypeSpecShortKeyWord.                   TypeSpecSimple ::= "short" ;                          --/** [short] */
+TypeSpecSignedShortKeyWord.             TypeSpecSimple ::= "signed" "short" ;                 --/** [short] */
+TypeSpecUnsignedShortKeyWord.           TypeSpecSimple ::= "unsigned" "short" ;               --/** [unsigned short] */
+TypeSpecShortIntKeyWord.                TypeSpecSimple ::= "short" "int" ;                    --/** [short] */
+TypeSpecSignedShortIntKeyWord.          TypeSpecSimple ::= "signed" "short" "int" ;           --/** [short] */
+TypeSpecUnsignedShortIntKeyWord.        TypeSpecSimple ::= "unsigned" "short" "int" ;         --/** [unsigned short] */
+TypeSpecLongKeyWord.                    TypeSpecSimple ::= "long" ;                           --/** [long] */
+TypeSpecSignedLongKeyWord.              TypeSpecSimple ::= "signed" "long" ;                  --/** [long] */
+TypeSpecUnsignedLongKeyWord.            TypeSpecSimple ::= "unsigned" "long" ;                --/** [unsigned long] */
+TypeSpecSignedLongIntKeyWord.           TypeSpecSimple ::= "signed" "long" "int" ;            --/** [long] */
+TypeSpecLongIntKeyWord.                 TypeSpecSimple ::= "long" "int" ;                     --/** [long] */
+TypeSpecUnsignedLongIntKeyWord.         TypeSpecSimple ::= "unsigned" "long" "int" ;          --/** [unsigned long] */
+TypeSpecLongLongKeyWord.                TypeSpecSimple ::= "long" "long" ;                    --/** [long long] (or [_int64] on Microsoft Visual C) */
+TypeSpecSignedLongLongKeyWord.          TypeSpecSimple ::= "signed" "long" "long" ;           --/** [long long] (or [_int64] on Microsoft Visual C) */
+TypeSpecUnsignedLongLongKeyWord.        TypeSpecSimple ::= "unsigned" "long" "long" ;         --/** [unsigned long long] (or [unsigned _int64] on Microsoft Visual C) */
+TypeSpecLongLongIntKeyWord.             TypeSpecSimple ::= "long" "long" "int" ;              --/** [long long] (or [_int64] on Microsoft Visual C) */
+TypeSpecSignedLongLongIntKeyWord.       TypeSpecSimple ::= "signed" "long" "long" "int" ;     --/** [long long] (or [_int64] on Microsoft Visual C) */
+TypeSpecUnsignedLongLongIntKeyWord.     TypeSpecSimple ::= "unsigned" "long" "long" "int" ;   --/** [unsigned long long] (or [unsigned _int64] on Microsoft Visual C) */
+TypeSpecFloatKeyWord.                   TypeSpecSimple ::= "float" ;
+TypeSpecDoubleKeyWord.                  TypeSpecSimple ::= "double" ;
+TypeSpecLongDoubleKeyWord.              TypeSpecSimple ::= "long" "double" ;
+TypeSpecStruct.                         TypeSpecSimple ::= "struct" IdentifierOrTypenameFull ;
+TypeSpecEnum.                           TypeSpecSimple ::= "enum" IdentifierOrTypenameFull ;
+TypeSpecUnion.                          TypeSpecSimple ::= "union" IdentifierOrTypenameFull ;
+
+--type_spec(tname) ::= tname ;
+--type_spec(tname) ::= tname "<" ne_logic_type_list(tname) ">" ;
+TYPENAME.                           TypeSpecOFTYPENAME ::= TYPENAME ;
+TypeSpecTYPENAME.                   TypeSpecOFTYPENAME ::= TYPENAME "<" [LogicTypeGenOFTYPENAME] ">" ;
+TypeSpecSimpleFromTypenameTypeSpec. TypeSpecOFTYPENAME ::= TypeSpecSimple ;
+
+TypeSpecIdentifierOrTypename.           TypeSpecOFIdentifierOrTypename ::= IdentifierOrTypename ;
+TypeSpecIdentifierOrTypenameAngles.     TypeSpecOFIdentifierOrTypename ::= IdentifierOrTypename "<" [LogicTypeGenOFIdentifierOrTypename] ">" ;
+TypeSpecSimpleFromIdTypenameTypeSpec.   TypeSpecOFIdentifierOrTypename ::= TypeSpecSimple ;
+
+--ne_logic_type_list(tname) ::= separated_nonempty_list(",", logic_type_gen(tname)) ;
+
+SimpleIdentifierFull.           FullIdentifier ::= Identifier ;
+AdmitKeyWordFullIdent.          FullIdentifier ::= "admit" ;
+AllocatesKeyWordFullIdent.      FullIdentifier ::= "allocates" ;
+AssertKeyWordFullIdent.         FullIdentifier ::= "assert" ;
+AssignsKeyWordFullIdent.        FullIdentifier ::= "Assigns" ;
+AssumesKeyWordFullIdent.        FullIdentifier ::= "Assumes" ;
+AtKeyWordFullIdent.             FullIdentifier ::= "at" ;
+AxiomKeyWordFullIdent.          FullIdentifier ::= "axiom" ;
+AxiomaticKeyWordFullIdent.      FullIdentifier ::= "axiomatic" ;
+BehaviorKeyWordFullIdent.       FullIdentifier ::= "behavior" ;
+BreaksKeyWordFullIdent.         FullIdentifier ::= "breaks" ;
+CheckKeyWordFullIdent.          FullIdentifier ::= "check" ;
+CompleteKeyWordFullIdent.       FullIdentifier ::= "complete" ;
+ContinuesKeyWordFullIdent.      FullIdentifier ::= "continues" ;
+ContractKeyWordFullIdent.       FullIdentifier ::= "Contract" ;
+DecreasesKeyWordFullIdent.      FullIdentifier ::= "Decreases" ;
+DisjointKeyWordFullIdent.       FullIdentifier ::= "disjoint" ;
+EnsuresKeyWordFullIdent.        FullIdentifier ::= "ensures" ;
+ExitsKeyWordFullIdent.          FullIdentifier ::= "exits" ;
+FreesKeyWordFullIdent.          FullIdentifier ::= "frees" ;
+FunctionKeyWordFullIdent.       FullIdentifier ::= "function" ;
+GlobalKeyWordFullIdent.         FullIdentifier ::= "global" ;
+ImpactKeyWordFullIdent.         FullIdentifier ::= "impact" ;
+InductiveKeyWordFullIdent.      FullIdentifier ::= "inductive" ;
+IncludeKeyWordFullIdent.        FullIdentifier ::= "include" ;
+InvariantKeyWordFullIdent.      FullIdentifier ::= "invariant" ;
+LemmaKeyWordFullIdent.          FullIdentifier ::= "lemma" ;
+LetKeyWordFullIdent.            FullIdentifier ::= "let" ;
+LogicKeyWordFullIdent.          FullIdentifier ::= "logic" ;
+LoopKeyWordFullIdent.           FullIdentifier ::= "loop" ;
+ModelKeyWordFullIdent.          FullIdentifier ::= "model" ;
+ModuleKeyWordFullIdent.         FullIdentifier ::= "module" ;
+PragmaKeyWordFullIdent.         FullIdentifier ::= "pragma" ;
+PredicateKeyWordFullIdent.      FullIdentifier ::= "predicate" ;
+RequiresKeyWordFullIdent.       FullIdentifier ::= "Requires" ;
+ReturnsKeyWordFullIdent.        FullIdentifier ::= "returns" ;
+SliceKeyWordFullIdent.          FullIdentifier ::= "slice" ;
+TerminatesKeyWordFullIdent.     FullIdentifier ::= "Terminates" ;
+TypeKeyWordFullIdent.           FullIdentifier ::= "type" ;
+VariantKeyWordFullIdent.        FullIdentifier ::= "Variant" ;
+IdentExtCodeAnnotFullIdent.     FullIdentifier ::= EXT_CODE_ANNOT ;
+IdentExtContractFullIdent.      FullIdentifier ::= EXT_CONTRACT ;
+IdentExtGlobalFullIdent.        FullIdentifier ::= EXT_GLOBAL ;
+IdentExtGlobalBlockFullIdent.   FullIdentifier ::= EXT_GLOBAL_BLOCK ;
+separator nonempty FullIdentifier "," ;
+
+--/*** ACSL extension for external Spec file ***/
+--%type <Logic_ptree.ExtSpec> ExtSpec
+--%start ExtSpec
+
+ExrSpec.    ExtSpec ::= ExtGlobalClausesOpt ExtModuleSpecsOpt ExtGlobalSpecsOpt ; -- EOF ;
+
+EmptyExtGlobalClauses.  ExtGlobalClausesOpt ::= ; --/* empty */
+SomeExtGlobalClauses.   ExtGlobalClausesOpt ::= [ExtGlobalClause] ;
+
+
+DeclClause.         ExtGlobalClause ::= Decl ;
+LetClause.          ExtGlobalClause ::= "let" AnyIdentifier "=" Lexpr ";" ;
+GlobalLetClause.    ExtGlobalClause ::= "global" "let" AnyIdentifier "=" Lexpr ";" ;
+IncludeClause.      ExtGlobalClause ::= "include" [STRING_LITERAL] ";" ;
+separator nonempty ExtGlobalClause "" ;
+
+
+EmptyExtGlobalSpecs.    ExtGlobalSpecsOpt ::= ; --/* empty */
+SomeExtGlobalSpecs.     ExtGlobalSpecsOpt ::= [ExtGlobalSpec] ;
+
+
+ExtGlobalSpecClauseModule.  ExtGlobalSpec ::= "module" AnyIdentifier ":" [ExtGlobalClause] [ExtModuleSpec] ;
+ExtGlobalSpecModule.        ExtGlobalSpec ::= "module" AnyIdentifier ":" [ExtModuleSpec] ;
+ExtGlobalSpecClause.        ExtGlobalSpec ::= "module" AnyIdentifier ":" [ExtGlobalClause] ;
+ExtGlobalSpecSimple.        ExtGlobalSpec ::= "module" AnyIdentifier ":" ;
+separator nonempty ExtGlobalSpec "" ;
+
+
+EmptyExtModuleSpecs.    ExtModuleSpecsOpt ::= ; --/* empty */
+ListExtModuleSpecs.     ExtModuleSpecsOpt ::= [ExtModuleSpec] ;
+FunSpecExtModuleSpecs.  ExtModuleSpecsOpt ::= [ExtFunSpec] ;
+FunSpecWithListModules. ExtModuleSpecsOpt ::= [ExtFunSpec] [ExtModuleSpec] ;
+
+
+AnExtModuleSpec.   ExtModuleSpec ::= "function" AnyIdentifier ":" ExtFunctionSpecsOpt ;
+separator nonempty ExtModuleSpec "" ; 
+
+NoExtFunctionSpecs.     ExtFunctionSpecsOpt ::= ; --/* empty */
+SomeExtFunctionSpecs.   ExtFunctionSpecsOpt ::= ExtFunctionSpecs ;
+
+
+AtMarkup.                       ExtFunctionSpecs ::= "at" [StmtMarkup] ":" ;
+ListFunctionSpecs.              ExtFunctionSpecs ::= [ExtFunctionSpec] ;
+ListFunctionSpecsAtMarkup.      ExtFunctionSpecs ::= [ExtFunctionSpec] "at" [StmtMarkup] ":" ;
+
+
+AnExtGlobalClause.    ExtFunctionSpec ::= ExtGlobalClause ;
+AnExtFunSpec.         ExtFunctionSpec ::= ExtFunSpec ;
+separator nonempty ExtFunctionSpec "" ;
+
+
+FunSpecAtAnnotation.    ExtFunSpec ::= "at" [StmtMarkup] ":" Annotation ;
+FunSpecAtContract.      ExtFunSpec ::= "at" [StmtMarkup] ":" "Contract" ExtIdentifierOpt ":" Contract ;
+FunSpecContract.        ExtFunSpec ::= "Contract" ExtIdentifierOpt ":" Contract ;
+separator nonempty ExtFunSpec "" ;
+
+
+ExtIdentifierEmpty. ExtIdentifierOpt ::= ; --/* empty*/
+ExtIdentifierSome.  ExtIdentifierOpt ::= AnyIdentifier ;
+
+
+MarkupStmtIdentifier.   StmtMarkup ::= AnyIdentifier ;
+MarkupIntConstant.      StmtMarkup ::= Integer ;
+separator nonempty StmtMarkup "" ;
+
+
+--/*** function and statement contracts ***/
+--%type <Logic_ptree.Spec> Spec
+--%start Spec
+
+SpecConstract.  Spec ::= Contract ; -- EOF ;
+
+
+SimpleContract.                 Contract ::= Requires Terminates Decreases SimpleClauses Behaviors CompleteOrDisjoint ;
+TerminatesRequiresContract.     Contract ::= Requires NETerminates "Requires" ;
+DecreasesRequiresContract.      Contract ::= Requires Terminates NEDecreases "Requires" ;
+DecreasesTerminatesContract.    Contract ::= Requires Terminates NEDecreases "Terminates" ;
+ClausesRequiresContract.        Contract ::= Requires Terminates Decreases NESimpleClauses "Requires" ;
+ClausesTerminatesContract.      Contract ::= Requires Terminates Decreases NESimpleClauses "Terminates" ;
+ClausesDecreasesContract.       Contract ::= Requires Terminates Decreases NESimpleClauses "Decreases" ;
+BehaviorsTerminatesContract.    Contract ::= Requires Terminates Decreases SimpleClauses NEBehaviors "Terminates" ;
+BehaviorsDecreasesContract.     Contract ::= Requires Terminates Decreases SimpleClauses NEBehaviors "Decreases" ;
+ComplDisjRequiresContract.      Contract ::= Requires Terminates Decreases SimpleClauses Behaviors NECompleteOrDisjoint "Requires" ;
+ComplDisjTerminatesContract.    Contract ::= Requires Terminates Decreases SimpleClauses Behaviors NECompleteOrDisjoint "Terminates" ;
+ComplDisjDecreasesContract.     Contract ::= Requires Terminates Decreases SimpleClauses Behaviors NECompleteOrDisjoint "Decreases" ;
+ComplDisjBehaviorContract.      Contract ::= Requires Terminates Decreases SimpleClauses Behaviors NECompleteOrDisjoint "behavior" ;
+ComplDisjAssignsContract.       Contract ::= Requires Terminates Decreases SimpleClauses Behaviors NECompleteOrDisjoint "Assigns" ;
+ComplDisjAllocatesContract.     Contract ::= Requires Terminates Decreases SimpleClauses Behaviors NECompleteOrDisjoint "allocates" ;
+ComplDisjFreesContract.         Contract ::= Requires Terminates Decreases SimpleClauses Behaviors NECompleteOrDisjoint "frees" ;
+ComplDisjPostCondContract.      Contract ::= Requires Terminates Decreases SimpleClauses Behaviors NECompleteOrDisjoint PostCond ;
+
+
+--// use that to detect potentially missing ';' at end of clause
+AdmitRequiresClause.    ClauseKW ::= "admit" "requires" ;
+AdmitInvariantClause.   ClauseKW ::= "admit" "invariant" ; 
+AdmitLemmaClause.       ClauseKW ::= "admit" "lemma" ;
+AdmitLoopClause.        ClauseKW ::= "admit" "loop" ;
+CheckRequiresClause.    ClauseKW ::= "check" "requires" ;
+CheckInvariantClause.   ClauseKW ::= "check" "invariant" ;
+CheckLemmaClause.       ClauseKW ::= "check" "lemma" ;
+CheckLoopClause.        ClauseKW ::= "check" "loop" ; 
+
+RequiresClause.         ClauseKW ::= "Requires" ;
+AssumesClause.          ClauseKW ::= "Assumes" ;
+AssignsClause.          ClauseKW ::= "Assigns" ;
+PostCondClause.         ClauseKW ::= PostCond ;
+DecreasesClause.        ClauseKW ::= "Decreases" ;
+BehaviorClause.         ClauseKW ::= "behavior" ;
+AllocatesClause.        ClauseKW ::= "allocates" ;
+FreesClause.            ClauseKW ::= "frees" ;
+CompleteClause.         ClauseKW ::= "complete" ;
+DisjointClause.         ClauseKW ::= "disjoint" ;
+ClauseExtConstract.     ClauseKW ::= EXT_CONTRACT ;
+EmptyClauseKW.          ClauseKW ::= ; -- EOF ;
+
+
+NoRequires.     Requires ::= ; --/* epsilon */
+SomeRequires.   Requires ::= NERequires ;
+
+SimpleRequires.         NERequires ::= "Requires" Lexpr ";" Requires ;
+CheckRequires.          NERequires ::= "check" "requires" Lexpr ";" Requires ;
+AdimtRequires.          NERequires ::= "admit" "requires" Lexpr ";" Requires ;
+ClauseSimpleRequires.   NERequires ::= "Requires" Lexpr ClauseKW ;
+ClauseCheckRequires.    NERequires ::= "check" "requires" Lexpr ClauseKW ;
+ClauseAdimtRequires.    NERequires ::= "admit" "requires" Lexpr ClauseKW ;
+
+
+NoTerminate.    Terminates ::= ; --/* epsilon */
+SomeTerminate.  Terminates ::= NETerminates ;
+
+SimpleTerminates.   NETerminates ::= "Terminates" Lexpr ";" ;
+ClauseTerminates.   NETerminates ::= "Terminates" Lexpr ClauseKW ;
+
+
+NoDecreases.    Decreases ::= ; --/* epsilon */
+SomeDecreases.  Decreases ::= NEDecreases ;
+
+
+SimpleDecreases.   NEDecreases ::= "Decreases" Variant ";" ;
+ClauseDecreases.   NEDecreases ::= "Decreases" Variant ClauseKW ;
+
+
+ForVariant.     Variant ::= Lexpr "for" AnyIdentifier ;
+LexprVariant.   Variant ::= Lexpr ;
+
+
+NoSimpleClauses.    SimpleClauses ::= ; --/* epsilon */
+SomeSimpleClauses.  SimpleClauses ::= NESimpleClauses ;
+
+
+AllocatesZones. Allocation ::= "allocates" Zones ;
+FreesZones.     Allocation ::= "frees" Zones ;
+
+
+PostCondSimpleClauses.              NESimpleClauses ::= PostCond Lexpr ";" SimpleClauses ;
+AllocationSimpleClauses.            NESimpleClauses ::= Allocation ";" SimpleClauses ;
+AssignsSimpleClauses.               NESimpleClauses ::= "Assigns" Assigns ";" SimpleClauses ;
+ExtContractSimpleClauses.           NESimpleClauses ::= EXT_CONTRACT ExtensionContent ";" SimpleClauses ;
+ClausesPostCondSimpleClauses.       NESimpleClauses ::= PostCond Lexpr ClauseKW ;
+ClausesAllocationSimpleClauses.     NESimpleClauses ::= Allocation ClauseKW ;
+ClausesAssignsSimpleClauses.        NESimpleClauses ::= "Assigns" Assigns ClauseKW ;
+ExtConClausestractSimpleClauses.    NESimpleClauses ::= EXT_CONTRACT Zones ClauseKW ;
+
+
+--/* possibly empty list of terms, for ACSL extensions registered by plugins. */
+NoExtensionContent.     ExtensionContent ::= ; -- /* epsilon */
+SomeExtensionContent.   ExtensionContent ::= Zones ;
+
+
+NoBehaviors.    Behaviors ::= ; --/* epsilon */ 
+SomeBehaviors.  Behaviors ::= NEBehaviors ;
+
+TheBehaviors.   NEBehaviors ::= "behavior" BehaviorName ":" BehaviorBody Behaviors ;
+
+
+SimpleClausesBehavior.  BehaviorBody ::= Assumes Requires SimpleClauses ;
+RequiresAssumes.        BehaviorBody ::= Assumes NERequires "Assumes" ;
+SimpleClausesAssumes.   BehaviorBody ::= Assumes Requires NESimpleClauses "Assumes" ;
+RequiresRequires.       BehaviorBody ::= Assumes Requires NESimpleClauses "Requires" ;
+
+
+NoAssumes.      Assumes ::= ; --/* epsilon */ 
+SimpleAssumes.  Assumes ::= "Assumes" Lexpr ";" Assumes ;
+ClauseAssumes.  Assumes ::= "Assumes" Lexpr ClauseKW ;
+
+
+NoComplDisj.    CompleteOrDisjoint ::= ; --/* epsilon */
+SomeComplDisj.  CompleteOrDisjoint ::= NECompleteOrDisjoint ;
+
+
+CompleteBehavior.           NECompleteOrDisjoint ::= "complete" "Behaviors" BehaviorNameList ";" CompleteOrDisjoint ;
+DisjointBehavior.           NECompleteOrDisjoint ::= "disjoint" "Behaviors" BehaviorNameList ";" CompleteOrDisjoint ; --/* complete Behaviors Decreases; is valid (provided there's a behavior named Decreases) */
+CompleteBehaviorClause.     NECompleteOrDisjoint ::= "complete" "Behaviors" [BehaviorName] ClauseKW ;
+DisjointBehaviorClause.     NECompleteOrDisjoint ::= "disjoint" "Behaviors" [BehaviorName] ClauseKW ;
+
+
+--/*** Assigns and tsets ***/
+
+AssignZone.         Assigns ::= Zones ;
+AssignZoneFromZone. Assigns ::= [Lexpr] "\\from" Zones ;
+
+
+SomeZone.   Zones ::= [Lexpr] ;
+NoZone.     Zones ::= "\\nothing" ;
+
+--/*** annotations ***/
+--%type <Logic_ptree.Annot> Annot
+--%start Annot
+
+AnAnnotation.   Annot ::= Annotation ; -- EOF ;
+ACSLSpec.       Annot ::= IsACSLSpec [Wildcard] ; -- EOF ;
+AnnotDecl.      Annot ::= [Decl] ; -- EOF ;
+
+
+LoopAnnotation.                 Annotation ::= LoopAnnotStack ; --LoopAnnotStack => loop_annotations
+ForContractAnnotation.          Annotation ::= "for" [BehaviorName] ":" Contract ;
+ForCodeAnnotation.              Annotation ::= "for" [BehaviorName] ":" CodeAnnotation ;
+SimplePragmaOrCodeAnnotation.   Annotation ::= PragmaOrCodeAnnotation ;
+PragmaOrCodeAnnotationBeg.      Annotation ::= PragmaOrCodeAnnotation BegPragmaOrCodeAnnotation ;
+IdentifierAnnotation.           Annotation ::= Identifier ;
+GhostAnnotation.                Annotation ::= "\\ghost" ;
+
+
+--/*** loop annotations ***/
+
+--loop_annotations ::= LoopAnnotStack ;
+
+
+--/* TODO: gather loop Assigns that are related to the same behavior */
+LoopAnnotStackInvariant.      LoopAnnotStack ::= LoopInvariant LoopAnnotOpt ;
+LoopAnnotStackEffects.        LoopAnnotStack ::= LoopEffects LoopAnnotOpt ;
+LoopAnnotStackAllocation.     LoopAnnotStack ::= LoopAllocation LoopAnnotOpt ;
+LoopAnnotStackForBehavior.    LoopAnnotStack ::= "for" [BehaviorName] ":" LoopAnnotStack ;
+LoopAnnotStackVariant.        LoopAnnotStack ::= LoopVariant LoopAnnotOpt ;
+LoopAnnotStackPragma.         LoopAnnotStack ::= LoopPragma LoopAnnotOpt ;
+LoopAnnotStackGrammarExten.   LoopAnnotStack ::= LoopGrammarExtension LoopAnnotOpt ;
+
+
+NoLoopAnnot.    LoopAnnotOpt ::= ; --/* epsilon */
+SomeLoopAnnot.  LoopAnnotOpt ::= LoopAnnotStack ;
+
+LoopAssigns.    LoopEffects ::= "loop" "Assigns" Assigns ";" ;
+
+SimpleLoopAllocation.   LoopAllocation ::= "loop" Allocation ";" ;
+
+
+SimpleLoopInvariant.    LoopInvariant ::= "loop" "invariant" Lexpr ";" ;
+CheckLoopInvariant.     LoopInvariant ::= "check" "loop" "invariant" Lexpr ";" ;
+AdmitLoopInvariant.     LoopInvariant ::= "admit" "loop" "invariant" Lexpr ";" ;
+
+
+SimpleLoopVariant.      LoopVariant ::= "loop" "Variant" Variant ";" ;
+
+--/* Grammar Extensibility for plugins */
+SimpleLoopGrammarExten. LoopGrammarExtension ::= "loop" EXT_CODE_ANNOT ExtensionContent ";" ;
+
+PragmaLoop. LoopPragma ::= "loop" "pragma" AnyIdentifier [Lexpr] ";" ;
+
+
+--/*** code annotations ***/
+
+ImpactKeyWordBegPragma.         BegPragmaOrCodeAnnotation ::= "impact" ;
+SliceKeyWordBegPragma.          BegPragmaOrCodeAnnotation ::= "slice" ;
+ForKeyWordBegPragma.            BegPragmaOrCodeAnnotation ::= "for" ;
+AssertKeyWordBegPragma.         BegPragmaOrCodeAnnotation ::= "assert" ;
+CheckKeyWordBegPragma.          BegPragmaOrCodeAnnotation ::= "check" ;
+AdmitKeyWordBegPragma.          BegPragmaOrCodeAnnotation ::= "admit" ;
+InvariantKeyWordBegPragma.      BegPragmaOrCodeAnnotation ::= "invariant" ;
+CheckInvariantKeyWordBegPragma. BegPragmaOrCodeAnnotation ::= "check" "invariant" ;
+AdmitInvariantKeyWordBegPragma. BegPragmaOrCodeAnnotation ::= "admit" "invariant" ;
+CheckLoopKeyWordBegPragma.      BegPragmaOrCodeAnnotation ::= "check" "loop" ;
+AdmitLoopKeyWordBegPragma.      BegPragmaOrCodeAnnotation ::= "admit" "loop" ;
+BegExtCodeAnnotBegPragma.       BegPragmaOrCodeAnnotation ::= EXT_CODE_ANNOT ;
+
+
+PragmaCodeAnnotSlice.       PragmaOrCodeAnnotation ::= SlicePragma ;
+PragmaCodeAnnotImpact.      PragmaOrCodeAnnotation ::= ImpactPragma ;
+CodeAnnot.                  PragmaOrCodeAnnotation ::= CodeAnnotation ;
+
+
+AssertCodeAnnot.            CodeAnnotation ::= "assert" Lexpr ";" ;
+CheckCodeAnnot.             CodeAnnotation ::= "check" Lexpr ";" ;
+AdmitCodeAnnot.             CodeAnnotation ::= "admit" Lexpr ";" ;
+InvariantCodeAnnot.         CodeAnnotation ::= "invariant" Lexpr ";" ;
+CheckInvariantCodeAnnot.    CodeAnnotation ::= "check" "invariant" Lexpr ";" ;
+AdmitInvariantCodeAnnot.    CodeAnnotation ::= "admit" "invariant" Lexpr ";" ;
+ExtCodeAnnotCodeAnnot.      CodeAnnotation ::= EXT_CODE_ANNOT ExtensionContent ";" ;
+
+
+PragmaSliceLexpr.   SlicePragma ::= "slice" "pragma" AnyIdentifier Lexpr ";" ;
+PragmaSlice.        SlicePragma ::= "slice" "pragma" AnyIdentifier ";" ;
+
+
+ImpactPragmaLexpr.  ImpactPragma ::= "impact" "pragma" AnyIdentifier Lexpr ";" ;
+AnImpactPragma.     ImpactPragma ::= "impact" "pragma" AnyIdentifier ";" ;
+
+--/*** declarations and logical definitions ***/
+
+DeclGlobalInvariant.    Decl ::= "global" "invariant" AnyIdentifier ":" Lexpr ";" ;
+DeclVolatile.           Decl ::= "volatile" [Lexpr] [VolatileOpt] ";" ; --ne_zones ::= [Lexpr] ;
+DeclTypeAnnot.          Decl ::= TypeAnnot ;
+DeclModelAnnot.         Decl ::= ModelAnnot ;
+DeclLogicDef.           Decl ::= LogicDef ;
+DeclExt.                Decl ::= ExtDecl ;
+DeclDeprecatedLogic.    Decl ::= DeprecatedLogicDecl ;
+separator nonempty Decl "" ;
+
+
+ExtGlobalDecl.      ExtDecl ::= EXT_GLOBAL ExtensionContent ";" ;
+ExtGlobalBlockDecl. ExtDecl ::= EXT_GLOBAL_BLOCK AnyIdentifier "{" [ExtDecl] "}" ;
+
+separator ExtDecl "" ;
+--NoExtDecls.     ExtDecls ::= ; --/* epsilon */ 
+--SomeExtDecls.   ExtDecls ::= ExtDecl ExtDecls ; --ext_decl_loc ::= ExtDecl ;
+
+
+--VolatileOpt ::= ; --/* empty */ 
+--VolatileOpt ::= "reads" AnyIdentifier VolatileOpt ;
+--VolatileOpt ::= "writes" AnyIdentifier VolatileOpt ;
+ReadVolotile.   VolatileOpt ::= "reads" AnyIdentifier ;
+WriteVolotile.  VolatileOpt ::= "writes" AnyIdentifier ;
+separator VolatileOpt "" ;
+
+TypeInvariant.  TypeAnnot ::= "type" "invariant" AnyIdentifier "(" Parameter ")" "=" Lexpr ";" ;
+
+NoSemicolon.    OptSemicolon ::= ; --/* epsilon */ 
+Semicolon.      OptSemicolon ::= ";" ;
+
+--ModelAnnot ::= "model" type_spec(typename) "{" Parameter OptSemicolon "}" ";" ;
+ModelAnnotation.    ModelAnnot ::= "model" TypeSpecOFTYPENAME "{" Parameter OptSemicolon "}" ";" ;
+
+SimplePolyIdType.    PolyIdType ::= FullIdentifier ;
+PolyIdTypeAngles.    PolyIdType ::= FullIdentifier "<" [FullIdentifier] ">" ;
+
+
+PolyTypeId.                 PolyId ::= PolyIdType ;
+PolyIdTypeSquares.          PolyId ::= FullIdentifier "{" [LabelName] "}" ;
+PolyIdTypeSquaresAngles.    PolyId ::= FullIdentifier "{" [LabelName] "}" "<" [FullIdentifier] ">" ;
+
+
+NoParameters.       OptParameters ::= ; --/*epsilon*/ 
+SomeParameters.     OptParameters ::= Parameters ;
+
+AParameters.     Parameters ::= "(" [Parameter] ")" ;
+
+SimpleLogicDef.     LogicDef ::= "logic" LogicRtType PolyId OptParameters "=" Lexpr ";" ;                                                      --/* logic function definition */
+PredicateLogicDef.  LogicDef ::= "predicate" PolyId OptParameters "=" Lexpr ";" ; --/* predicate definition */
+InductiveLogicDef.  LogicDef ::= "inductive" PolyId Parameters "{" [Indcase] "}" ;  --/* inductive predicate definition */
+LemmaLogicDef.      LogicDef ::= "lemma" PolyId ":" Lexpr ";" ;
+CheckLemmaLogicDef. LogicDef ::= "check" "lemma" PolyId ":" Lexpr ";" ;
+AdmitLemmaLogicDef. LogicDef ::= "admit" "lemma" PolyId ":" Lexpr ";" ;
+AxiomaticLogicDef.  LogicDef ::= "axiomatic" AnyIdentifier "{" [LogicDecl] "}" ; --logic_decl_loc ::= LogicDecl ;
+TypeLogicDef.       LogicDef ::= "type" PolyIdType "=" Typedef ";" ; --poly_id_type_add_typename ::= PolyIdType ;                              --/* we need to recognize the typename as soon as it has been declared, so that it can be used in data constructors in the type definition itself */
+
+
+SimpleDeprecatedLogicDecl.      DeprecatedLogicDecl ::= "logic" LogicRtType PolyId OptParameters ";" ;     --/* OBSOLETE: logic function declaration */
+PredicateDeprecatedLogicDecl.   DeprecatedLogicDecl ::= "predicate" PolyId OptParameters ";" ;               --/* OBSOLETE: predicate declaration */
+TypeDeprecatedLogicDecl.        DeprecatedLogicDecl ::= "type" PolyIdType ";" ;                                                             --/* OBSOLETE: type declaration */
+AxiomDeprecatedLogicDecl.       DeprecatedLogicDecl ::= "axiom" PolyId ":" Lexpr ";" ;                                                       --/* OBSOLETE: axiom */
+
+
+LocidDeclDef.       LogicDecl ::= LogicDef ;
+SimpleLogicDecl.    LogicDecl ::= "logic" LogicRtType PolyId OptParameters ReadsClause ";" ; --/* logic function declaration */
+PredicateLogicDecl. LogicDecl ::= "predicate" PolyId OptParameters ReadsClause ";" ; --/* predicate declaration */
+TypeLogicDecl.      LogicDecl ::= "type" PolyIdType ";" ; --/* type declaration */
+AxiomLogicDecl.     LogicDecl ::= "axiom" PolyId ":" Lexpr ";" ; --/* axiom */
+separator LogicDecl "" ;
+
+
+--logic_decl_loc ::= LogicDecl ;
+--separator logic_decl_loc "" ;
+
+NoReadsClause.      ReadsClause ::= ; --/* epsilon */ 
+SomeReadsClause.    ReadsClause ::= "reads" Zones ;
+
+
+ListOfDatacons.         Typedef ::= [DataconsWithSeparator] ;
+TypedefLogicTypeGen.    Typedef ::= LogicTypeGenOFTYPENAME ;
+
+
+--datacons_list ::= ; --/* epsilon */ 
+--datacons_list ::= "|" Datacons datacons_list ;
+
+
+--ne_datacons_list ::= Datacons       datacons_list ;
+--ne_datacons_list ::= "|" Datacons   datacons_list ;
+
+SimpleDataCons.     DataconsWithSeparator ::= Datacons ;
+DataConsWithPipe.   DataconsWithSeparator ::= "|" Datacons ;
+separator nonempty DataconsWithSeparator "" ;
+
+DataConsFullIdentifier.     Datacons ::= FullIdentifier ;
+DataConsFullIdentifierFun.  Datacons ::= FullIdentifier "(" [LogicTypeGenOFTYPENAME] ")" ;
+
+
+IndCase.    Indcase ::= "case" PolyId ":" Lexpr ";" ;
+separator Indcase "" ;
+
+--ne_tvar_list ::= FullIdentifier ;
+--ne_tvar_list ::= FullIdentifier "," ne_tvar_list ;
+
+OptLabelOne.    OptLabel1 ::= OptLabelList ;
+
+OptLabelTwo.    OptLabel2 ::= OptLabelList ;
+
+NoLableList.    OptLabelList ::= ; --/* epsilon */ 
+LableList.      OptLabelList ::= "{" [LabelName] "}" ;
+
+--/* names */
+LableName.  LabelName ::= AnyIdentifier ;
+separator nonempty LabelName "," ;
+
+EmptyBehaviorNameList.  BehaviorNameList ::= ; --/* epsilon */ 
+AnBehaviorNameList.     BehaviorNameList ::= [BehaviorName] ;
+
+BehaviorNameAnyIdent.   BehaviorName ::= AnyIdentifier ;
+separator nonempty BehaviorName "," ;
+
+SimpleIdentifierAny.        AnyIdentifier ::= Identifier ;
+ACSLTypenameIdentifier.     AnyIdentifier ::= IsACSLTypename ;
+TypenameIdentifier.         AnyIdentifier ::= TYPENAME ;
+KeywordIdentifier.          AnyIdentifier ::= Keyword ;
+
+
+Typename.               IdentifierOrTypename ::= TYPENAME ;
+AnFullIdentifier.       IdentifierOrTypename ::= FullIdentifier ;
+
+
+--/* allowed as C field names */
+ACSLTypename.           IdentifierOrTypenameFull ::= IsACSLTypename ;
+AnIdentifierOrTypename. IdentifierOrTypenameFull ::= IdentifierOrTypename ;
+separator nonempty IdentifierOrTypenameFull "," ;
+
+--/* part included into 'IdentifierOrTypename', but duplicated to avoid parsing conflicts */
+IdentifierIdent.    Identifier ::= Ident ;
+--/* token list used inside acsl clauses: */
+BehaviorsKeyWord.   Identifier ::= "Behaviors" ;
+LabelKeyWord.       Identifier ::= "label" ;
+ReadsKeyWord.       Identifier ::= "reads" ;
+WritesKeyWord.      Identifier ::= "writes" ;
+
+
+BoendedVarFullIdentifier.   BoundedVar ::= FullIdentifier ;
+BoendedVarACSLTypename.     BoundedVar ::= IsACSLTypename ;                              --/* Since TYPENAME cannot be accepted by Lexpr rule */
+BoendedVarTypename.         BoundedVar ::= TYPENAME ;                                      --/* Since TYPENAME cannot be accepted by Lexpr rule */
+
+
+CharKeyWord.        CKeyword ::= "char" ;
+BooleanKeyWord.     CKeyword ::= "boolean" ;
+BoolKeyWord.        CKeyword ::= "_Bool" ;
+ConstKeyWord.       CKeyword ::= "const" ;
+DoubleKeyWord.      CKeyword ::= "double" ;
+EnumKeyWord.        CKeyword ::= "enum" ;
+ElseKeyWord.        CKeyword ::= "else" ;
+FloatKeyWord.       CKeyword ::= "float" ;
+IfKeyWord.          CKeyword ::= "if" ;
+IntKeyWord.         CKeyword ::= "int" ;
+LongKeyWord.        CKeyword ::= "long" ;
+ShortKeyWord.       CKeyword ::= "short" ;
+SignedKeyWord.      CKeyword ::= "signed" ;
+SizeofKeyWord.      CKeyword ::= "sizeof" ;
+StaticKeyWord.      CKeyword ::= "\\static" ;
+StructKeyWord.      CKeyword ::= "struct" ;
+UnionKeyWord.       CKeyword ::= "union" ;
+UnsignedKeyWord.    CKeyword ::= "unsigned" ;
+VoidKeyWord.        CKeyword ::= "void" ;
+
+CaseKeyWord.        ACSLCKeyword ::= "case" ;
+ForKeyWord.         ACSLCKeyword ::= "for" ;
+VolatileKeyWord.    ACSLCKeyword ::= "volatile" ;
+
+
+EnsuresKeyWord.         PostCond ::= "ensures" ;
+ExitsKeyWord.           PostCond ::= "exits" ;
+BreaksKeyWord.          PostCond ::= "breaks" ;
+ContinuesKeyWord.       PostCond ::= "continues" ;
+ReturnsKeyWord.         PostCond ::= "returns" ;
+CheckEnsuresKeyWord.    PostCond ::= "check" "ensures" ;
+CheckExitsKeyWord.      PostCond ::= "check" "exits" ;
+CheckBreaksKeyWord.     PostCond ::= "check" "breaks" ;
+CheckContinuesKeyWord.  PostCond ::= "check" "continues" ;
+CheckReturnsKeyWord.    PostCond ::= "check" "returns" ;
+AdmitEnsuresKeyWord.    PostCond ::= "admit" "ensures" ;
+AdmitExitsKeyWord.      PostCond ::= "admit" "exits" ;
+AdmitBreaksKeyWord.     PostCond ::= "admit" "breaks" ;
+AdmitContinuesKeyWord.  PostCond ::= "admit" "continues" ;
+AdmitReturnsKeyWord.    PostCond ::= "admit" "returns" ;
+
+PostCondKeyWord.        IsACSLSpec ::= PostCond ;
+ExtContractKeyWord.     IsACSLSpec ::= EXT_CONTRACT ;
+AssignsKeyWord.         IsACSLSpec ::= "Assigns" ;
+AllocatesKeyWord.       IsACSLSpec ::= "allocates" ;
+FreesKeyWord.           IsACSLSpec ::= "frees" ;
+BehaviorKeyWord.        IsACSLSpec ::= "behavior" ;
+RequiresKeyWord.        IsACSLSpec ::= "Requires" ;
+CheckRequiresKeyWord.   IsACSLSpec ::= "check" "requires" ;
+AdmitRequiresKeyWord.   IsACSLSpec ::= "admit" "requires" ;
+TerminatesKeyWord.      IsACSLSpec ::= "Terminates" ;
+CompleteKeyWord.        IsACSLSpec ::= "complete" ;
+DecreasesKeyWord.       IsACSLSpec ::= "Decreases" ;
+DisjointKeyWord.        IsACSLSpec ::= "disjoint" ;
+
+
+ExtCodeAnnotKeyWord.    IsACSLDeclOrCodeAnnot ::= EXT_CODE_ANNOT ;
+ExtGlobalKeyWord.       IsACSLDeclOrCodeAnnot ::= EXT_GLOBAL ;
+ExtGlobalBlockKeyWord.  IsACSLDeclOrCodeAnnot ::= EXT_GLOBAL_BLOCK ;
+AssumesKeyWord.         IsACSLDeclOrCodeAnnot ::= "Assumes" ;
+AssertKeyWord.          IsACSLDeclOrCodeAnnot ::= "assert" ;
+CheckKeyWord.           IsACSLDeclOrCodeAnnot ::= "check" ;
+AdmitKeyWord.           IsACSLDeclOrCodeAnnot ::= "admit" ;
+GlobalKeyWord.          IsACSLDeclOrCodeAnnot ::= "global" ;
+ImpactKeyWord.          IsACSLDeclOrCodeAnnot ::= "impact" ;
+InductiveKeyWord.       IsACSLDeclOrCodeAnnot ::= "inductive" ;
+InvariantKeyWord.       IsACSLDeclOrCodeAnnot ::= "invariant" ;
+AdmitInvariantKeyWord.  IsACSLDeclOrCodeAnnot ::= "admit" "invariant" ;
+CheckInvariantKeyWord.  IsACSLDeclOrCodeAnnot ::= "check" "invariant" ;
+LemmaKeyWord.           IsACSLDeclOrCodeAnnot ::= "lemma" ;
+AdmitLemmaKeyWord.      IsACSLDeclOrCodeAnnot ::= "admit" "lemma" ;
+CheckLemmaKeyWord.      IsACSLDeclOrCodeAnnot ::= "check" "lemma" ;
+LoopKeyWord.            IsACSLDeclOrCodeAnnot ::= "loop" ;
+AdmitLoopKeyWord.       IsACSLDeclOrCodeAnnot ::= "admit" "loop" ;
+CheckLoopKeyWord.       IsACSLDeclOrCodeAnnot ::= "check" "loop" ;
+PragmaKeyWord.          IsACSLDeclOrCodeAnnot ::= "pragma" ;
+PredicateKeyWord.       IsACSLDeclOrCodeAnnot ::= "predicate" ;
+SliceKeyWord.           IsACSLDeclOrCodeAnnot ::= "slice" ;
+TypeKeyWord.            IsACSLDeclOrCodeAnnot ::= "type" ;
+ModelKeyWord.           IsACSLDeclOrCodeAnnot ::= "model" ;
+AxiomKeyWord.           IsACSLDeclOrCodeAnnot ::= "axiom" ;
+VariantKeyWord.         IsACSLDeclOrCodeAnnot ::= "Variant" ;
+AxiomaticKeyWord.       IsACSLDeclOrCodeAnnot ::= "axiomatic" ;
+
+
+Integer.    IsACSLTypename ::= "integer" ;
+Real.       IsACSLTypename ::= "real" ;
+
+
+ContractKeyWord.    IsExtSpec ::= "Contract" ;
+FunctionKeyWord.    IsExtSpec ::= "function" ;
+ModuleKeyWord.      IsExtSpec ::= "module" ;
+IncludeKeyWord.     IsExtSpec ::= "include" ;
+AtKeyWord.          IsExtSpec ::= "at" ;
+LetKeyWord.         IsExtSpec ::= "let" ;
+
+
+LogicKeyWord.               Keyword ::= "logic" ;
+CKeyWord.                   Keyword ::= CKeyword ;                     --non_logic_keyword
+ACSLCKeyWord.               Keyword ::= ACSLCKeyword ;                --non_logic_keyword
+ExtSpecKeyWord.             Keyword ::= IsExtSpec ;                   --non_logic_keyword
+ACSLSpecKeyWord.            Keyword ::= IsACSLSpec ;                  --non_logic_keyword
+ACSLDeclCodeAnnotKeyWord.   Keyword ::= IsACSLDeclOrCodeAnnot ;    --non_logic_keyword
+
+SlashAllocableKeyWord.      BSKeyword ::= "\\allocable" ;
+SlashAllocationKeyWord.     BSKeyword ::= "\\Allocation" ;
+SlashAutomaticKeyWord.      BSKeyword ::= "\\automatic" ;
+SlashAtKeyWord.             BSKeyword ::= "\\at" ;
+SlashBaseAddrKeyWord.       BSKeyword ::= "\\base_addr" ;
+SlashBlockLengthKeyWord.    BSKeyword ::= "\\block_length" ;
+SlashGhostKeyWord.          BSKeyword ::= "\\ghost" ;
+SlashDynamicKeyWord.        BSKeyword ::= "\\dynamic" ;
+SlashEmptyKeyWord.          BSKeyword ::= "\\empty" ;
+SlashFalseKeyWord.          BSKeyword ::= "\\false" ;
+SlashForallKeyWord.         BSKeyword ::= "\\forall" ;
+SlashFreeableKeyWord.       BSKeyword ::= "\\freeable" ;
+SlashFreshKeyWord.          BSKeyword ::= "\\fresh" ;
+SlashFromKeyWord.           BSKeyword ::= "\\from" ;
+SlashInterKeyWord.          BSKeyword ::= "\\inter" ;
+SlashLambdaKeyWord.         BSKeyword ::= "\\lambda" ;
+SlashLetKeyWord.            BSKeyword ::= "\\let" ;
+SlashNothingKeyWord.        BSKeyword ::= "\\nothing" ;
+SlashNullKeyWord.           BSKeyword ::= "\\null" ;
+SlashOldKeyWord.            BSKeyword ::= "\\old" ;
+SlashOffsetKeyWord.         BSKeyword ::= "\\offset" ;
+SlashRegisterKeyWord.       BSKeyword ::= "\\register" ;
+SlashResultKeyWord.         BSKeyword ::= "\\result" ;
+SlashSeparatedKeyWord.      BSKeyword ::= "\\separated" ;
+SlashTrueKeyWord.           BSKeyword ::= "\\true" ;
+SlashTypeKeyWord.           BSKeyword ::= "\\type" ;
+SlashTypeofKeyWord.         BSKeyword ::= "\\typeof" ;
+SlashUnionKeyWord.          BSKeyword ::= "\\union" ;
+SlashUnallocatedKeyWord.    BSKeyword ::= "\\unallocated" ;
+SlashObjectPointerKeyWord.  BSKeyword ::= "\\object_pointer" ;
+SlashValidKeyWord.          BSKeyword ::= "\\valid" ;
+SlashValidIndexKeyWord.     BSKeyword ::= "\\valid_index" ;
+SlashValidRangeKeyWord.     BSKeyword ::= "\\valid_range" ;
+SlashValidReadKeyWord.      BSKeyword ::= "\\valid_read" ;
+SlashValidFunctionKeyWord.  BSKeyword ::= "\\valid_function" ;
+SlashInitializedKeyWord.    BSKeyword ::= "\\initialized" ;
+SlashDanglingKeyWord.       BSKeyword ::= "\\dangling" ;
+SlashWithKeyWord.           BSKeyword ::= "\\with" ;
+
+
+WildCardAnyIdent.   Wildcard ::= AnyIdentifier ;
+WildCardBSKeyWord.  Wildcard ::= BSKeyword ;
+Amp.                Wildcard ::= "&" ;
+And.                Wildcard ::= "&&" ;
+Arrow.              Wildcard ::= "->" ;
+BIff.               Wildcard ::= "<-->" ;
+BImplicate.         Wildcard ::= "-->" ;
+Colon.              Wildcard ::= ":" ;
+ColonColon.         Wildcard ::= "::" ;
+Comma.              Wildcard ::= "," ;
+IntConstant.        Wildcard ::= Integer ;
+FloatConstant.      Wildcard ::= Double ;
+StringConstant.     Wildcard ::= String ;
+WstringConstant.    Wildcard ::= WSTRING_CONSTANT ;
+Dollar.             Wildcard ::= "$" ;
+Dot.                Wildcard ::= "." ;
+DotDot.             Wildcard ::= ".." ;
+DotDotDot.          Wildcard ::= "..." ;
+EQ.                 Wildcard ::= "==" ;
+Equal.              Wildcard ::= "=" ;
+ExistsKeyWord.      Wildcard ::= "\\exists" ;
+GreaterEq.          Wildcard ::= ">=" ;
+GhostKeyWord.       Wildcard ::= "\\ghost" ; --GHOST
+Greater.            Wildcard ::= ">" ;
+GreaterGreater.     Wildcard ::= ">>" ;
+Hat.                Wildcard ::= "^" ;
+HatHat.             Wildcard ::= "^^" ;
+Iff.                Wildcard ::= "<==>" ;
+Implicate.          Wildcard ::= "==>" ;
+LeftBrace.          Wildcard ::= "{" ;
+LessEq.             Wildcard ::= "<=" ;
+LeftPar.            Wildcard ::= "(" ;
+LeftSquare.         Wildcard ::= "[" ;
+LeftSquarePipe.     Wildcard ::= "[|" ;
+Less.               Wildcard ::= "<" ;
+LessLess.           Wildcard ::= "<<" ;
+Minus.              Wildcard ::= "-" ;
+NotEq.              Wildcard ::= "!=" ;
+Not.                Wildcard ::= "!" ;
+PipePipe.           Wildcard ::= "||" ;
+Mod.                Wildcard ::= "%" ;
+PiKeyWord.          Wildcard ::= "\\pi" ;
+Pipe.               Wildcard ::= "|" ;
+Plus.               Wildcard ::= "+" ;
+Question.           Wildcard ::= "?" ;
+RightBrace.         Wildcard ::= "}" ;
+RightPar.           Wildcard ::= ")" ;
+RightSquare.        Wildcard ::= "]" ;
+RightSquarePipe.    Wildcard ::= "|]" ;
+SemiColon.          Wildcard ::= ";" ;
+Divide.             Wildcard ::= "/" ;
+Mult.               Wildcard ::= "*" ;
+MultHat.            Wildcard ::= "*^" ;
+StringLiteral.      Wildcard ::= STRING_LITERAL ;
+TildeKeyWord.       Wildcard ::= "~" ;
+InKeyWord.          Wildcard ::= "\\in" ;
+separator nonempty Wildcard "" ;

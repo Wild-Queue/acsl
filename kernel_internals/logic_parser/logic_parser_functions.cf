@@ -1,0 +1,91 @@
+
+--type_spec(typename) || type_spec(identifier_or_typename) || logic_type_gen(tname) =>> type_spec(tname) || type_spec_cv(tname) =>> type_spec(tname)
+--logic_type_gen(typename) || logic_type_gen(identifier_or_typename) || ne_logic_type_list(tname) =>> logic_type_gen(tname)
+--type_spec_cv(TYPENAME) || type_spec_cv(tname) =>> type_spec_cv(tname)
+--type_spec(tname) =>> ne_logic_type_list(tname)
+
+--type_spec_cv(TYPENAME) <==> type_spec_cv(TYPENAME)
+--                        ==> type_spec(TYPENAME) ==> TYPENAME
+--                                                ==> TYPENAME ne_logic_type_list(TYPENAME) ==> logic_type_gen(TYPENAME) ==> type_spec(TYPENAME)
+
+--logic_type_gen(typename) ==> type_spec(typename) ==> typename
+--                                                 ==> ne_logic_type_list(typename) ==> logic_type_gen(typename)
+
+--logic_type_gen(identifier_or_typename) ==> type_spec(identifier_or_typename) ==> typename
+--                                                                             ==> ne_logic_type_list(identifier_or_typename) ==> logic_type_gen(identifier_or_typename)
+
+--type_spec(typename) ==> typename
+--                    ==> typename ne_logic_type_list(typename) ==> logic_type_gen(typename) ==> type_spec(typename)
+
+--type_spec(identifier_or_typename) ==> identifier_or_typename
+--                                  ==> identifier_or_typename ne_logic_type_list(identifier_or_typename) ==> logic_type_gen(identifier_or_typename) ==> type_spec(identifier_or_typename)
+
+
+lexpr3 ::= "\\type" "(" type_spec__typename ")" ;
+lexpr3 ::= "\\type" "(" type_spec__typename stars ")" ;
+
+
+binders_reentrance ::= type_spec__typename var_spec ;
+
+parameter ::= type_spec__identifier_or_typename var_spec ;
+
+logic_type_gen__typename ::= type_spec__typename abs_spec_option ;
+separator nonempty logic_type_gen__typename "," ;
+logic_type_gen__TYPENAME ::= type_spec__TYPENAME abs_spec_option ;
+separator nonempty logic_type_gen__TYPENAME "," ;
+logic_type_gen__identifier_or_typename ::= type_spec__identifier_or_typename abs_spec_option ;
+separator nonempty logic_type_gen__identifier_or_typename "," ;
+
+logic_type ::= logic_type_gen__typename ;
+
+type_spec_cv__TYPENAME ::= type_spec__TYPENAME cv_after ;
+type_spec_cv__TYPENAME ::= cv type_spec_cv__TYPENAME ;
+
+cast_logic_type ::= type_spec_cv__TYPENAME abs_spec_cv_option ;
+
+logic_rt_type ::= logic_type_gen__identifier_or_typename ;
+
+type_spec__simple ::= INTEGER ;
+type_spec__simple ::= REAL ;
+type_spec__simple ::= BOOLEAN ;
+type_spec__simple ::= "void" ;
+type_spec__simple ::= "_Bool" ;
+type_spec__simple ::= "char" ;                           --/** [char] */
+type_spec__simple ::= "signed" "char" ;                  --/** [signed char] */
+type_spec__simple ::= "unsigned" "char" ;                --/** [unsigned char] */
+type_spec__simple ::= "int" ;                            --/** [int] */
+type_spec__simple ::= "signed" "int" ;                   --/** [int] */
+type_spec__simple ::= "unsigned" "int" ;                 --/** [unsigned int] */
+type_spec__simple ::= "unsigned" ;   
+type_spec__simple ::= "short" ;                          --/** [short] */
+type_spec__simple ::= "signed" "short" ;                 --/** [short] */
+type_spec__simple ::= "unsigned" "short" ;               --/** [unsigned short] */
+type_spec__simple ::= "short" "int" ;                    --/** [short] */
+type_spec__simple ::= "signed" "short" "int" ;           --/** [short] */
+type_spec__simple ::= "unsigned" "short" "int" ;         --/** [unsigned short] */
+type_spec__simple ::= "long" ;                           --/** [long] */
+type_spec__simple ::= "signed" "long" ;                  --/** [long] */
+type_spec__simple ::= "unsigned" "long" ;                --/** [unsigned long] */
+type_spec__simple ::= "signed" "long" "int" ;            --/** [long] */
+type_spec__simple ::= "long" "int" ;                     --/** [long] */
+type_spec__simple ::= "unsigned" "long" "int" ;          --/** [unsigned long] */
+type_spec__simple ::= "long" "long" ;                    --/** [long long] (or [_int64] on Microsoft Visual C) */
+type_spec__simple ::= "signed" "long" "long" ;           --/** [long long] (or [_int64] on Microsoft Visual C) */
+type_spec__simple ::= "unsigned" "long" "long" ;         --/** [unsigned long long] (or [unsigned _int64] on Microsoft Visual C) */
+type_spec__simple ::= "long" "long" "int" ;              --/** [long long] (or [_int64] on Microsoft Visual C) */
+type_spec__simple ::= "signed" "long" "long" "int" ;     --/** [long long] (or [_int64] on Microsoft Visual C) */
+type_spec__simple ::= "unsigned" "long" "long" "int" ;   --/** [unsigned long long] (or [unsigned _int64] on Microsoft Visual C) */
+type_spec__simple ::= "float" ;
+type_spec__simple ::= "double" ;
+type_spec__simple ::= "long" "double" ;
+type_spec__simple ::= "struct" identifier_or_typename_full ;
+type_spec__simple ::= "enum" identifier_or_typename_full ;
+type_spec__simple ::= "union" identifier_or_typename_full ;
+type_spec__typename ::= typename ;
+type_spec__TYPENAME ::= TYPENAME ;
+type_spec__identifier_or_typename ::= identifier_or_typename ;
+type_spec__typename ::= typename "<" [logic_type_gen__typename] ">" ;
+type_spec__TYPENAME ::= TYPENAME "<" [logic_type_gen__TYPENAME] ">" ;
+type_spec__identifier_or_typename ::= identifier_or_typename "<" [logic_type_gen__identifier_or_typename] ">" ;
+
+model_annot ::= "model" type_spec__typename "{" parameter opt_semicolon "}" ";" ;

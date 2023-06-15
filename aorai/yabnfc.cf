@@ -1,0 +1,128 @@
+comment "//" ;
+comment "/*" "*/" ;
+
+--digit
+--token num (["0123456789"]);
+--letter
+--Double
+--token alpha (["abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"]);
+token Ident ((letter) (digit | letter | '_')*);
+
+--start main
+
+separator nonempty Ident "," ;
+--main : options metavars states EOF;
+-- EOF => eof
+AMain.           Main ::= [AnOption] [Metavar] [State];
+
+Option.         AnOption ::= "%" Ident OptIdentifiers ";";
+separator nonempty AnOption "" ;
+
+EmptyOptIdent.  OptIdentifiers ::= ;
+OptIdent.       OptIdentifiers ::= ":" [Ident];
+
+
+AMetavar.        Metavar ::= "$" Ident ":" Ident ";";
+separator Metavar "" ;
+
+AState.          State ::= Ident ":" [Transition] ";";
+separator nonempty State "";
+
+EmptyTransition.    Transition ::=  ;
+SeqTransition.      Transition ::= "{" SeqElt "}" [Action] "->" Ident;
+OtherTransition.    Transition ::= "other" [Action] "->" Ident;
+SimpleTransition.   Transition ::= [Action] "->" Ident;
+separator nonempty Transition "|";
+
+GuardSquares.       Guard ::= "[" [SeqElt] "]";
+--GuardSquares.       Guard ::= "[" [SeqElt] ";" "]";
+GuardWithPreEmpty.  Guard ::= Ident PreCond "(" ")" PostCond;
+GuardWithPre.       Guard ::= Ident PreCond "(" [SeqElt] ")" PostCond;
+--GuardWithPre.       Guard ::= Ident PreCond "(" [SeqElt] ";" ")" PostCond;
+GuardPostOnly.      Guard ::= Ident "(" [SeqElt] ")" PostCond;
+--GuardPostOnly.      Guard ::= Ident "(" [SeqElt] ";" ")" PostCond;
+GuardPostOnlyEmpty. Guard ::= Ident "(" ")" PostCond;
+
+PrecondCC.      PreCond ::= "::" Ident;
+PrecondBB.      PreCond ::= "{{" Cond "}}";
+
+PostcondEmpty.  PostCond ::= ;
+PostcondSimple. PostCond ::= "{{" Cond "}}";
+
+SeqEltCond.     SeqElt ::= Cond; 
+SeqEltGuardRep. SeqElt ::= Guard Repetition;
+separator nonempty SeqElt ";";
+
+RepetitionEmpty.    Repetition ::= ;
+RepetitionPlus.     Repetition ::= "+" ;
+RepetitionMinus.    Repetition ::= "*" ;
+RepetitionQuestion. Repetition ::= "?" ;
+RepetitionPair.     Repetition ::= "{" Expr "," Expr "}" ;
+RepetitionOne.      Repetition ::= "{" Expr "}" ;
+RepetitionREmpty.   Repetition ::= "{" Expr "," "}" ;
+RepetitionLEmpty.   Repetition ::= "{" "," Expr "}" ;
+
+LogicOr.    Cond ::= Cond1 "||" Cond ;
+_.          Cond ::= Cond1 ;
+
+LogicAnd.   Cond1 ::= Cond2 "&&" Cond1 ;
+_.          Cond1 ::= Cond2 ;
+
+ACondCOR.       Cond2 ::= "COR"  "(" Ident ")" ;
+ACondCALL.      Cond2 ::= "CALL"  "(" Ident ")" ;
+ACondReturn.    Cond2 ::= "RETURN"  "(" Ident ")" ;
+ACondTrue.      Cond2 ::= "true" ;
+ACondFalse.     Cond2 ::= "false" ;
+ACondNot.       Cond2 ::= "!" Cond2 ;
+_.              Cond2 ::= "(" Cond ")" ;
+RelationCond.   Cond2 ::= LogicRelation ;
+
+LogicEQ.        LogicRelation ::= Expr "==" Expr ;
+LogicLess.      LogicRelation ::= Expr "<" Expr ;
+LogicGreater.   LogicRelation ::= Expr ">" Expr ;
+LogicLessEQ.    LogicRelation ::= Expr "<=" Expr ;
+LogicGreaterEQ. LogicRelation ::= Expr ">=" Expr ;
+LogicNotEQ.     LogicRelation ::= Expr "!=" Expr ;
+--/*  | ArithRelation  */
+
+-- ArithRelation
+Add.            Expr ::= Expr1 "+" Expr ;
+Subtract.       Expr ::= Expr1 "-" Expr ;
+_.              Expr ::= Expr1 ;
+
+--ArithRelationMul
+Divide.     Expr1 ::= Expr1 "/" Expr2 ;
+Multiply.   Expr1 ::= Expr1 "*" Expr2 ;
+Mod.        Expr1 ::= Expr1 "%" Expr2 ;
+_.          Expr1 ::= Expr2 ;
+
+--ArithRelationBw
+BitAnd. Expr2 ::= Expr2 "&" Expr3 ;
+BitOr.  Expr2 ::= Expr2 "|" Expr3 ;
+BitXor. Expr2 ::= Expr2 "^" Expr3 ;
+_.      Expr2 ::= Expr3 ;
+
+--/* returns a Lval exp or a Const exp*/
+-- AccessOrConst
+Int.            Expr3 ::= Integer ;
+Float.          Expr3 ::= Double ;
+NegativeInt.    Expr3 ::= "-" Integer ;
+NegativeDouble. Expr3 ::= "-" Double ;
+_.              Expr3 ::= Expr4 ;
+
+--/* returns a lval */
+--Access
+StructFielsAccess.  Expr4 ::= Expr4 "." Ident ;
+PointerAccess.      Expr4 ::= Expr4 "->" Ident ;
+ArrayAccess.        Expr4 ::= Expr4 "[" Expr3 "]" ;
+_.                  Expr4 ::= Expr5 ;
+
+--AccessLeaf
+RefAccess.      Expr5 ::= "*" Expr4 ;
+FunAccess.      Expr5 ::= Ident "(" ")" "." Ident ;
+Identifier.     Expr5 ::= Ident ;
+MetavarAccess.  Expr5 ::= "$" Ident ;
+_.              Expr5 ::= "(" Expr ")" ;
+
+AnAction.     Action ::= "$" Ident ":=" Expr ";" ;
+separator Action "";
