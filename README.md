@@ -1,14 +1,6 @@
-# aorai and kernel_internals
+# acsl
 
-These folders contain fragments of the grammar together with corresponding source ocaml files.
 
-## kernel_internals
-
-Inside this folder, the grammar files are contained in the folders cparser and logic_parser. Files outside these two folders are auxiliary.
-
-# main 
-
-The main grammar folder 
 
 To build:
 
@@ -26,3 +18,15 @@ To run:
 cd main/src/acsl/
 ./Testcombined_parser
 ```
+
+
+## References
+
+The grammar is inspired by the frama-c open repository available at:  
+https://git.frama-c.com/pub/frama-c 
+
+In particular, the grammar files were used: 
+
+https://git.frama-c.com/pub/frama-c/-/blob/master/src/kernel_internals/parsing/cparser.mly
+
+https://git.frama-c.com/pub/frama-c/-/blob/master/src/kernel_internals/parsing/logic_parser.mly
