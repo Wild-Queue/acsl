@@ -2,6 +2,10 @@
 
 These folders contain fragments of the grammar together with corresponding source ocaml files.
 
+## kernel_internals
+
+Inside this folder, the grammar files are contained in the folders cparser and logic_parser. Files outside these two folders are auxiliary.
+
 # main 
 
 The main grammar folder 
