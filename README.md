@@ -6,6 +6,7 @@ To build:
 
 ```sh
 mkdir -p src/acsl/
+cd src/acsl/
 bnfc -m --cpp ../../bnfc_parser.cf -l -p acsl
 make
 cd .. && cd .. 
@@ -15,7 +16,7 @@ To run:
 
 ```sh
 cd src/acsl/
-./Testcombined_parser
+./Testbnfc_parser
 ```
 
 

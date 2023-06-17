@@ -302,6 +302,7 @@ class PrintAbsyn : public Visitor
   void visitTypeSpecBoolKeyWord(TypeSpecBoolKeyWord *p);
   void visitTypeSpecShortKeyWord(TypeSpecShortKeyWord *p);
   void visitTypeSpecIntKeyWord(TypeSpecIntKeyWord *p);
+  void visitTypeSpecInt32KeyWord(TypeSpecInt32KeyWord *p);
   void visitTypeSpecLongKeyWord(TypeSpecLongKeyWord *p);
   void visitTypeSpecInt64KeyWord(TypeSpecInt64KeyWord *p);
   void visitTypeSpecFloatKeyWord(TypeSpecFloatKeyWord *p);
@@ -1440,7 +1441,6 @@ class PrintAbsyn : public Visitor
   void visitBLOCKATTRIBUTE(String s);
   void visitCONST(String s);
   void visitFUNCTION__(String s);
-  void visitINT(String s);
   void visitMSATTR(String s);
   void visitRESTRICT(String s);
   void visitSIGNED(String s);
@@ -1782,6 +1782,7 @@ class ShowAbsyn : public Visitor
   void visitTypeSpecBoolKeyWord(TypeSpecBoolKeyWord *p);
   void visitTypeSpecShortKeyWord(TypeSpecShortKeyWord *p);
   void visitTypeSpecIntKeyWord(TypeSpecIntKeyWord *p);
+  void visitTypeSpecInt32KeyWord(TypeSpecInt32KeyWord *p);
   void visitTypeSpecLongKeyWord(TypeSpecLongKeyWord *p);
   void visitTypeSpecInt64KeyWord(TypeSpecInt64KeyWord *p);
   void visitTypeSpecFloatKeyWord(TypeSpecFloatKeyWord *p);
@@ -2920,7 +2921,6 @@ class ShowAbsyn : public Visitor
   void visitBLOCKATTRIBUTE(String s);
   void visitCONST(String s);
   void visitFUNCTION__(String s);
-  void visitINT(String s);
   void visitMSATTR(String s);
   void visitRESTRICT(String s);
   void visitSIGNED(String s);

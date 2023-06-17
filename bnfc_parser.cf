@@ -9,6 +9,7 @@
 --token CODE_ANNOT ({"CODE_ANNOT"});
 --token SPEC ({"SPEC"});
 --token LOOP_ANNOT ({"LOOP_ANNOT"});
+
 token NAMEDTYPE ((letter) (digit | letter | '_')*);
 token CST_WCHAR (letter);
 token CST_WSTRING ((letter) (digit | letter | '_')*);
@@ -28,7 +29,6 @@ token ATTRIBUTE ({"__attribute__"} | {"__attribute"});
 token BLOCKATTRIBUTE ({"__blockattribute__"} | {"__blockattribute"});
 token CONST ({"const"} | {"__const"} | {"__const__"});
 token FUNCTION__ ({"__FUNCTION__"} | {"__func__"});
-token INT ({"__int32"} | {"int"});
 token MSATTR ({"_cdecl"} | {"__cdecl"} | {"_stdcall"} | {"__stdcall"} | {"_fastcall"} | {"__fastcall"} | {"__w64"});
 token RESTRICT ({"__restrict"} | {"restrict"});
 token SIGNED ({"__signed__"} | {"signed"} | {"__signed"});
@@ -39,9 +39,9 @@ token INLINE ({"__inline__"} | {"inline"} | {"__inline"} | {"_inline"} | {"__for
 token TYPEOF ({"__typeof__"} | {"__typeof"} | {"typeof"});
 
 --file ::= globals EOF ;
-AProgram.  Program ::= Globals ; --eof ;
+AProgram.  Program ::= Globals ; --eof 
 
-NoGlobals.          Globals ::= ; --/* empty */ ;
+NoGlobals.          Globals ::= ; --/* empty */ 
 SimpleGlobals.      Globals ::= Global Globals ;
 AGhostGlobals.      Globals ::= "ghost" GhostGlobals Globals ;
 SemiColonGlobals.   Globals ::= ";" Globals ;
@@ -53,16 +53,14 @@ GhostGlobalsFunctionDef.    GhostGlobals ::= FunctionDef GhostGlobals ;
 GhostGlobalsRGhost.         GhostGlobals ::= RGHOST ;
 
 --/*** Global Definition ***/
-GlobalDecl.         Global ::= Decl ; --DECL => Decl
-GlobalsDeclataion.  Global ::= Declaration ;
-GlobalsFunctionDef. Global ::= FunctionDef ;
-
+GlobalDecl.                 Global ::= Decl ; --DECL => Decl
+GlobalsDeclataion.          Global ::= Declaration ;
+GlobalsFunctionDef.         Global ::= FunctionDef ;
 --/*(* Some C header files are shared with the C++ compiler and have linkage specification *)*/
 ExternGlobalDeclataion.     Global ::= "extern" StringConstant Declaration ;
 ExternGlobalPar.            Global ::= "extern" StringConstant LBRACE Globals RBRACE ;
 AsmGlobal.                  Global ::= ASM "(" StringConstant ")" ";" ;
 PragmaGlobal.               Global ::= Pragma ;
-
 --/* (* Old-style function prototype. This should be somewhere else, like in "Declaration". For now we keep it at global scope only because in local scope it looks too much like a function call  *) */
 GlobalOldStyle.             Global ::= Ident "(" [Ident] ")" OldPardefList ";" ;
 GlobalEmptyOldStyle.        Global ::= Ident "(" ")" ";" ;
@@ -72,7 +70,7 @@ IdOrTypenameAsIdNamedType.      IdOrTypenameAsId ::= NAMEDTYPE ;
 
 IdTypename.     IdOrTypename ::= IdOrTypenameAsId ;
 
-NoComa.     MaybeComma ::= ; --/* empty */ ;
+NoComa.     MaybeComma ::= ; --/* empty */ 
 Coma.       MaybeComma ::= "," ;
 
 --/* *** Expressions *** */
@@ -227,7 +225,7 @@ BracesExpression.   InitExpression ::= LBRACE InitializerListOpt RBRACE ;
 --initializer_list ::= InitializerSingle ;
 --initializer_list ::= InitializerSingle "," InitializerListOpt ;
 
-EmptyInitializerList.   InitializerListOpt ::= ; --/* empty */ ;
+EmptyInitializerList.   InitializerListOpt ::= ; --/* empty */ 
 InitializerList.        InitializerListOpt ::= [InitializerSingle] ;
 InitializerListComma.   InitializerListOpt ::= [InitializerSingle] "," ;
 
@@ -238,32 +236,32 @@ separator nonempty InitializerSingle "," ;
 
 EquationSign.   EqOpt ::= "=" ;
 --   /*(* GCC allows missing = *)*/
-NoEquationSign. EqOpt ::= ; --/*(* empty *)*/ ;
+NoEquationSign. EqOpt ::= ; --/*(* empty *)*/ 
 
 DotInitDesignator.              InitDesignators ::= "." IdOrTypename InitDesignatorsOpt ;
 BracketsInitDesignator.         InitDesignators ::= LBRACKET  Expression RBRACKET InitDesignatorsOpt ;
 BracketsSliceInitDesignator.    InitDesignators ::= LBRACKET  Expression "..." Expression RBRACKET ;
 
-NoInitDesignator.       InitDesignatorsOpt ::= ; --/* empty */ ;
+NoInitDesignator.       InitDesignatorsOpt ::= ; --/* empty */ 
 SomeInitDesignator.     InitDesignatorsOpt ::= InitDesignators ;
 
 --/*(* GCC supports these strange things *)*/
 --gcc_init_designators ::=  IdOrTypename ":" ;
 
-NoGhostArguments.   GhostArgumentsOpt ::= ; --/* empty */; 
+NoGhostArguments.   GhostArgumentsOpt ::= ; --/* empty */
 SomeGhostArguments. GhostArgumentsOpt ::= "ghost" "(" Arguments ")" RGHOST ;
 
-NoArguments.    Arguments ::= ; --/* empty */ ;
+NoArguments.    Arguments ::= ; --/* empty */ 
 SomeArguments.  Arguments ::= [Expression] ;
 
-NoExpression.   OptExpression ::= ; --/* empty */ ;
+NoExpression.   OptExpression ::= ; --/* empty */ 
 SomeExpression. OptExpression ::= [Expression] ;
 
 --comma_expression ::= Expression ;
 --comma_expression ::= Expression "," comma_expression ;
 separator nonempty Expression "," ;
 
-NoCommaExpression.      CommaExpressionOpt ::= ; --/* empty */ ;
+NoCommaExpression.      CommaExpressionOpt ::= ; --/* empty */ 
 SomeCommaExpression.    CommaExpressionOpt ::= [Expression] ;
 
 
@@ -272,7 +270,7 @@ SomeCommaExpression.    CommaExpressionOpt ::= [Expression] ;
 --/* ISO 6.8.2 */
 ABlock.  Block ::= LBRACE [LocalLabel] BlockAttrs [BlockElement] [Annot] RBRACE ;
 
-NoBlockAttrs.   BlockAttrs ::= ; --/* empty */ ;
+NoBlockAttrs.   BlockAttrs ::= ; --/* empty */ 
 SomeBlockAttrs. BlockAttrs ::= BLOCKATTRIBUTE "(" [Attr] ")" ;
 
 --/* statements and declarations in a Block, in any order (for C99 support) */
@@ -282,7 +280,7 @@ StatementElement.   BlockElement ::= [Annot] Statement ;
 PragmaElement.      BlockElement ::= [Annot] Pragma ;
 separator BlockElement "" ;
 
-CodeAnnot.  Annot ::= LogicPTreeAnnot ; --CODE_ANNOT => LogicPTreeAnnot
+CodeAnnot.  Annot ::= PragmaOrCodeAnnotation ; --CODE_ANNOT => PragmaOrCodeAnnotation
 GhostAnnot. Annot ::= "ghost" [BlockElement] [Annot] RGHOST ;
 separator Annot "" ;
 
@@ -294,13 +292,13 @@ separator nonempty LocalLabelName "," ;
 
 AnnotatedStatement.     AnnotatedStmt ::= [Annot] Statement ;
 
-NoElsePart.             ElsePart ::= ; --/* empty */ ;                 --%prec if_no_else /* To attach the next else to the current if */
+NoElsePart.             ElsePart ::= ; --/* empty */                  --%prec if_no_else /* To attach the next else to the current if */
 SimpleElsePart.         ElsePart ::= "else" AnnotatedStmt ;
 SimpleGhostElsePart.    ElsePart ::= "ghost" AnnotatedStmt RGHOST ;      --%prec ghost_else_no_else /* To force the non ghost else to be attached to the current if */
 GhostElsePart.          ElsePart ::= "ghost" AnnotatedStmt RGHOST "else" AnnotatedStmt ;
 
 SemicolonStatement.         Statement ::= ";" ;
-SpecStatement.              Statement ::= Spec AnnotatedStmt ; -- SPEC => Spec 
+SpecStatement.              Statement ::= IsACSLSpec [Wildcard] AnnotatedStmt ; -- SPEC => IsACSLSpec [Wildcard]
 ExprsStatement.             Statement ::= [Expression] ";" ; 
 BlockStatement.             Statement ::= Block ;
 IfStatement.                Statement ::= "if" "(" [Expression] ")" AnnotatedStmt ElsePart ;
@@ -326,24 +324,24 @@ TryFinallyStatement.        Statement ::= "__try" Block "__finally" Block ;
 
 --separator LOOP_ANNOT "" ;
 
-NoLoopAnnotations.      OptLoopAnnotations ::= ; --/* epsilon */ ;
-SomeLoopAnnotations.    OptLoopAnnotations ::= [LogicPTreeAnnot] ; --LOOP_ANNOT => [LogicPTreeAnnot]
+NoLoopAnnotations.      OptLoopAnnotations ::= ; --/* epsilon */ 
+SomeLoopAnnotations.    OptLoopAnnotations ::= LoopAnnotStack ; --LOOP_ANNOT => LoopAnnotStack
 
---LoopAnnotations ::= [LogicPTreeAnnot] ; --LOOP_ANNOT => [LogicPTreeAnnot]
+--LoopAnnotations ::= LoopAnnotStack ; --LOOP_ANNOT => LoopAnnotStack
 -- Not in ACSL Grammar 
---LoopAnnotations ::= [LogicPTreeAnnot] LoopAnnotations ; --LOOP_ANNOT => [LogicPTreeAnnot]
+--LoopAnnotations ::= LoopAnnotStack LoopAnnotations ; --LOOP_ANNOT => LoopAnnotStack
 
 ForClauseExpression.    ForClause ::= OptExpression ";" ;
 ForClauseDeclaration.   ForClause ::= Declaration ;
 
-NoGhostParameter.       GhostParameterOpt ::= ; --/* empty */ ;
+NoGhostParameter.       GhostParameterOpt ::= ; --/* empty */ 
 SomeGhostParameter.     GhostParameterOpt ::= "ghost" "(" RestParList ")" RGHOST ;
 
 --/* ISO 6.7.*/
 DeclSpecInitDecl.               Declaration ::= DeclSpecList DeclAndInitDeclAttrList ";" ;
 DeclSpec.                       Declaration ::= DeclSpecList ";" ;
-SpecDeclSpecInitDecl.           Declaration ::= Spec DeclSpecList DeclAndInitDeclAttrList ";" ; --SPEC => Spec
-SpecDeclSpec.                   Declaration ::= Spec DeclSpecList ";" ; --SPEC => Spec
+SpecDeclSpecInitDecl.           Declaration ::= IsACSLSpec [Wildcard] DeclSpecList DeclAndInitDeclAttrList ";" ; --SPEC => IsACSLSpec [Wildcard]
+SpecDeclSpec.                   Declaration ::= IsACSLSpec [Wildcard] DeclSpecList ";" ; --SPEC => IsACSLSpec [Wildcard]
 StaticAssertDecl.               Declaration ::= "_Static_assert" "(" Expression ")" ;
 StaticAssertDeclStringConst.    Declaration ::= "_Static_assert" "(" Expression "," StringConstant ")" ;
 
@@ -392,7 +390,8 @@ TypeSpecVoidKeyWord.                TypeSpec ::= "void" ;
 TypeSpecCharKeyWord.                TypeSpec ::= "char" ;
 TypeSpecBoolKeyWord.                TypeSpec ::= "_Bool" ;
 TypeSpecShortKeyWord.               TypeSpec ::= "short" ;
-TypeSpecIntKeyWord.                 TypeSpec ::= INT ;
+TypeSpecIntKeyWord.                 TypeSpec ::= "__int32" ;
+TypeSpecInt32KeyWord.               TypeSpec ::= "int" ;
 TypeSpecLongKeyWord.                TypeSpec ::= "long" ;
 TypeSpecInt64KeyWord.               TypeSpec ::= "__int64" ;
 TypeSpecFloatKeyWord.               TypeSpec ::= "float" ;
@@ -421,7 +420,7 @@ TypeOfTypeName.             TypeSpec ::= TYPEOF "(" TypeName ")" ;
 
 
 --/* (* ISO 6.7.2. Except that we allow empty structs. We also allow missing field names. *) */
-EmptyStructDecl.            StructDeclList ::= ; --/* empty */ ;
+EmptyStructDecl.            StructDeclList ::= ; --/* empty */ 
 DeclSpecStructDecl.         StructDeclList ::= DeclSpecList ";" StructDeclList ;
 SemicolonStructDecl.        StructDeclList ::= ";" StructDeclList ;                                 --/*(* GCC allows extra semicolons *)*/
 SpecFieldDeclStructDecl.    StructDeclList ::= DeclSpecList [FieldDecl] ";" StructDeclList ;
@@ -482,7 +481,7 @@ OldDirectProtoDecl.     DirectOldProtoDecl ::= DirectDecl "(" [Ident] ")" OldPar
 
 separator nonempty Ident "," ;
 
-EmptyOldPardefList.     OldPardefList ::= ; --/* empty */ ;
+EmptyOldPardefList.     OldPardefList ::= ; --/* empty */ 
 DotDotDotOldPardefList. OldPardefList ::= [OldPardef] "..." ;
 SimpleOldPardefList.    OldPardefList ::= [OldPardef] ;
 
@@ -490,7 +489,7 @@ OldParDef.      OldPardef ::= DeclSpecList [Declarator] ;
 separator nonempty OldPardef ";" ;
 
 --/* (* ISO 6.7.5 *) */
-NoPointer.      PointerOpt ::= ; --/**/ ;
+NoPointer.      PointerOpt ::= ""; --/**/ 
 SomePointer.    PointerOpt ::= "*" [Attribute] PointerOpt ;
 
 --/* (* ISO 6.7.6 *) */
@@ -510,10 +509,10 @@ AbsDirectDeclRestPar.   AbsDirectDecl ::= AbsDirectDecl  "(" RestParList ")" ;
 AbsDirectDeclNoRestPar. AbsDirectDecl ::= AbsDirectDecl "(" ")" ;
 
 SomeAbsDirectDecl.  AbsDirectDeclOpt ::= AbsDirectDecl ;
-NoAbsDirectDecl.    AbsDirectDeclOpt ::= ; --/* empty */ ;
+NoAbsDirectDecl.    AbsDirectDeclOpt ::= ; --/* empty */ 
 
 --/* (* ISO 6.9.1 *) */
-FunctionDefSpec.    FunctionDef ::= Spec FunctionDefStart Block ; -- SPEC => Spec
+FunctionDefSpec.    FunctionDef ::= IsACSLSpec [Wildcard] FunctionDefStart Block ; -- SPEC => IsACSLSpec [Wildcard]
 SimpleFunctionDef.  FunctionDef ::= FunctionDefStart Block ;
 
 --/* (* ISO 6.9.1 *) */
@@ -528,10 +527,11 @@ CVSpecConstKeyWord.               CVSpec ::= CONST ;
 CVSpecVolatileKeyWord.            CVSpec ::= VOLATILE ;
 CVSpecRestrictKeyWord.            CVSpec ::= RESTRICT ;
 CVSpecGhostKeyWord.               CVSpec ::= "\\ghost" ;
-CVSpecAttribute_annotKeyWord.     CVSpec ::= ATTRIBUTE_ANNOT ;
+CVSpecAttribute_annotKeyWord.     CVSpec ::= Identifier ; --ATTRIBUTE_ANNOT => Identifier | "\\ghost" 
+
 
 --/* (* In some contexts we can have an inline assembly to specify the name to be used for a global. We treat this as a name Attribute *) */
-EmptyAttrWithASM.       AttributesWithAsm ::= ; --/* empty */ ;
+EmptyAttrWithASM.       AttributesWithAsm ::= ; --/* empty */ 
 ListAttrWithASM.        AttributesWithAsm ::= Attribute [Attribute] ;
 ListASMAttrWithASM.     AttributesWithAsm ::= Attribute [Attribute] ASM "(" StringConstant ")" [Attribute] ;
 ASMAttrWithASM.         AttributesWithAsm ::= ASM "(" StringConstant ")" [Attribute] ;
@@ -551,7 +551,7 @@ AttributeConst.             Attribute ::= CONST ;
 AttributeRestrict.          Attribute ::= RESTRICT ;
 AttributeVolatile.          Attribute ::= VOLATILE ;
 AttributeGhost.             Attribute ::= "\\ghost" ;
-AttributeAttributeAnnot.    Attribute ::= ATTRIBUTE_ANNOT ;
+AttributeAttributeAnnot.    Attribute ::= Identifier ; --ATTRIBUTE_ANNOT => Identifier | "\\ghost" 
 separator Attribute "" ;
 
 --/* (* sm: I need something that just includes __attribute__ and nothing more, to support them appearing between the 'struct' keyword and the type name. Actually, a declspec can appear there as well (on MSVC) *)  */
@@ -662,9 +662,9 @@ AnAttr.     Attr ::= Attr1 "=" Attr1 ;
 separator nonempty Attr "," ;
 
 --/* hack to avoid shift reduce conflict in Attribute parsing. */
-AvoidShiftReduce.   AttrTest ::= ; --/* empty */ ;
+AvoidShiftReduce.   AttrTest ::= ; --/* empty */ 
 
-EmptyAtrList.   AttrList ::= ; --/* empty */ ;
+EmptyAtrList.   AttrList ::= ; --/* empty */ 
 AtrList.        AttrList ::= [Attr] ;
 
 --/*** GCC ASM instructions ***/
@@ -672,29 +672,29 @@ VolatileKeyWrod.    Asmattr ::= VOLATILE  ;
 ConstKeyWrod.       Asmattr ::= CONST ;
 separator Asmattr "" ;
 
-NoAsmoutputs.       Asmoutputs ::= ; --/* empty */ ;
+NoAsmoutputs.       Asmoutputs ::= ; --/* empty */ 
 SomeAsmoutputs.     Asmoutputs ::= ":" Asmoperands Asminputs;
 
-NoAsmoperands.      Asmoperands ::= ; --/* empty */ ;
+NoAsmoperands.      Asmoperands ::= ; --/* empty */ 
 SomeAsmoperands.    Asmoperands ::= [Asmoperand] ;
 
 AsmOperand.     Asmoperand ::= Asmopname StringConstant "(" Expression ")" ;
 separator nonempty Asmoperand "," ;
 
-NoAsminputs.    Asminputs ::= ; --/* empty */ ;
+NoAsminputs.    Asminputs ::= ; --/* empty */ 
 SomeAsminputs.  Asminputs ::= ":" Asmoperands Asmclobber ;
 
-NoAsmopname.    Asmopname ::= ; --/* empty */ ;
+NoAsmopname.    Asmopname ::= ; --/* empty */ 
 SomeAsmopname.  Asmopname ::= LBRACKET Ident RBRACKET ;
 
 
-NoAsmclobber.           Asmclobber ::= ; --/* empty */ ;
+NoAsmclobber.           Asmclobber ::= ; --/* empty */ 
 ColonAsmclobber.        Asmclobber ::= ":" Asmlabels ;
 ColonStringAsmclobber.  Asmclobber ::= ":" [StringConstant] Asmlabels ;
 
 separator nonempty StringConstant "," ;
 
-NoAsmlabels.    Asmlabels ::= ; --/* empty */ ;
+NoAsmlabels.    Asmlabels ::= ; --/* empty */ 
 SomeAsmlabels.  Asmlabels ::= ":" [LocalLabelName] ;
 
 
@@ -712,7 +712,7 @@ token TYPENAME ((letter) (digit | letter | '_')*) ;
 
 --/*** predicates and terms ***/
 
-LexprEof.  LexprEOF ::= Lexpr ; -- EOF ;
+LexprEof.  LexprEOF ::= Lexpr ; -- EOF 
 
 EmptyLexprList.     LexprList ::= ; --/* epsilon */
 NonEmptyLexprList.  LexprList ::= [Lexpr] ;
@@ -1103,7 +1103,7 @@ separator nonempty FullIdentifier "," ;
 --%type <Logic_ptree.ExtSpec> ExtSpec
 --%start ExtSpec
 
-ExrSpec.    ExtSpec ::= ExtGlobalClausesOpt ExtModuleSpecsOpt ExtGlobalSpecsOpt ; -- EOF ;
+ExrSpec.    ExtSpec ::= ExtGlobalClausesOpt ExtModuleSpecsOpt ExtGlobalSpecsOpt ; -- EOF 
 
 EmptyExtGlobalClauses.  ExtGlobalClausesOpt ::= ; --/* empty */
 SomeExtGlobalClauses.   ExtGlobalClausesOpt ::= [ExtGlobalClause] ;
@@ -1169,7 +1169,7 @@ separator nonempty StmtMarkup "" ;
 --%type <Logic_ptree.Spec> Spec
 --%start Spec
 
-SpecConstract.  Spec ::= Contract ; -- EOF ;
+SpecConstract.  Spec ::= Contract ; -- EOF 
 
 
 SimpleContract.                 Contract ::= Requires Terminates Decreases SimpleClauses Behaviors CompleteOrDisjoint ;
@@ -1212,7 +1212,7 @@ FreesClause.            ClauseKW ::= "frees" ;
 CompleteClause.         ClauseKW ::= "complete" ;
 DisjointClause.         ClauseKW ::= "disjoint" ;
 ClauseExtConstract.     ClauseKW ::= EXT_CONTRACT ;
-EmptyClauseKW.          ClauseKW ::= ; -- EOF ;
+EmptyClauseKW.          ClauseKW ::= ; -- EOF 
 
 
 NoRequires.     Requires ::= ; --/* epsilon */
@@ -1290,7 +1290,7 @@ SomeComplDisj.  CompleteOrDisjoint ::= NECompleteOrDisjoint ;
 
 
 CompleteBehavior.           NECompleteOrDisjoint ::= "complete" "Behaviors" BehaviorNameList ";" CompleteOrDisjoint ;
-DisjointBehavior.           NECompleteOrDisjoint ::= "disjoint" "Behaviors" BehaviorNameList ";" CompleteOrDisjoint ; --/* complete Behaviors Decreases; is valid (provided there's a behavior named Decreases) */
+DisjointBehavior.           NECompleteOrDisjoint ::= "disjoint" "Behaviors" BehaviorNameList ";" CompleteOrDisjoint ; --/* complete Behaviors Decreases         -- is valid (provided there's a behavior named Decreases) */
 CompleteBehaviorClause.     NECompleteOrDisjoint ::= "complete" "Behaviors" [BehaviorName] ClauseKW ;
 DisjointBehaviorClause.     NECompleteOrDisjoint ::= "disjoint" "Behaviors" [BehaviorName] ClauseKW ;
 
@@ -1308,9 +1308,9 @@ NoZone.     Zones ::= "\\nothing" ;
 --%type <Logic_ptree.Annot> Annot
 --%start Annot
 
-AnAnnotation.   LogicPTreeAnnot ::= Annotation ; -- EOF ;
-ACSLSpec.       LogicPTreeAnnot ::= IsACSLSpec [Wildcard] ; -- EOF ;
-AnnotDecl.      LogicPTreeAnnot ::= [Decl] ; -- EOF ;
+AnAnnotation.   LogicPTreeAnnot ::= Annotation ; -- EOF 
+ACSLSpec.       LogicPTreeAnnot ::= IsACSLSpec [Wildcard] ; -- EOF 
+AnnotDecl.      LogicPTreeAnnot ::= [Decl] ; -- EOF 
 separator LogicPTreeAnnot "" ;
 
 LoopAnnotation.                 Annotation ::= LoopAnnotStack ; --LoopAnnotStack => loop_annotations
@@ -1398,7 +1398,7 @@ AnImpactPragma.       ImpactPragma ::= "impact" "pragma" AnyIdentifier ";" ;
 --/*** declarations and logical definitions ***/
 
 DeclGlobalInvariant.    Decl ::= "global" "invariant" AnyIdentifier ":" Lexpr ";" ;
-DeclVolatile.           Decl ::= "volatile" [Lexpr] [VolatileOpt] ";" ; --ne_zones ::= [Lexpr] ;
+DeclVolatile.           Decl ::= "volatile" [Lexpr] [VolatileOpt] ";" ; --ne_zones ::= [Lexpr] 
 DeclTypeAnnot.          Decl ::= TypeAnnot ;
 DeclModelAnnot.         Decl ::= ModelAnnot ;
 DeclLogicDef.           Decl ::= LogicDef ;
@@ -1412,7 +1412,7 @@ ExtGlobalBlockDecl. ExtDecl ::= EXT_GLOBAL_BLOCK AnyIdentifier "{" [ExtDecl] "}"
 
 separator ExtDecl "" ;
 --NoExtDecls.     ExtDecls ::= ; --/* epsilon */ 
---SomeExtDecls.   ExtDecls ::= ExtDecl ExtDecls ; --ext_decl_loc ::= ExtDecl ;
+--SomeExtDecls.   ExtDecls ::= ExtDecl ExtDecls ; --ext_decl_loc ::= ExtDecl 
 
 
 --VolatileOpt ::= ; --/* empty */ 
@@ -1450,8 +1450,8 @@ InductiveLogicDef.  LogicDef ::= "inductive" PolyId Parameters "{" [Indcase] "}"
 LemmaLogicDef.      LogicDef ::= "lemma" PolyId ":" Lexpr ";" ;
 CheckLemmaLogicDef. LogicDef ::= "check" "lemma" PolyId ":" Lexpr ";" ;
 AdmitLemmaLogicDef. LogicDef ::= "admit" "lemma" PolyId ":" Lexpr ";" ;
-AxiomaticLogicDef.  LogicDef ::= "axiomatic" AnyIdentifier "{" [LogicDecl] "}" ; --logic_decl_loc ::= LogicDecl ;
-TypeLogicDef.       LogicDef ::= "type" PolyIdType "=" Typedef ";" ; --poly_id_type_add_typename ::= PolyIdType ;                              --/* we need to recognize the typename as soon as it has been declared, so that it can be used in data constructors in the type definition itself */
+AxiomaticLogicDef.  LogicDef ::= "axiomatic" AnyIdentifier "{" [LogicDecl] "}" ; --logic_decl_loc ::= LogicDecl 
+TypeLogicDef.       LogicDef ::= "type" PolyIdType "=" Typedef ";" ; --poly_id_type_add_typename ::= PolyIdType                               --/* we need to recognize the typename as soon as it has been declared, so that it can be used in data constructors in the type definition itself */
 
 
 SimpleDeprecatedLogicDecl.      DeprecatedLogicDecl ::= "logic" LogicRtType PolyId OptParameters ";" ;     --/* OBSOLETE: logic function declaration */

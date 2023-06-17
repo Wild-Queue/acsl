@@ -370,8 +370,52 @@ GhostGlobalsRGhost *GhostGlobalsRGhost::clone() const
 
 
 
+/********************   GlobalsFunctionDef    ********************/
+GlobalsFunctionDef::GlobalsFunctionDef(FunctionDef *p1)
+{
+  functiondef_ = p1;
+
+}
+
+GlobalsFunctionDef::GlobalsFunctionDef(const GlobalsFunctionDef & other)
+{
+  functiondef_ = other.functiondef_->clone();
+
+}
+
+GlobalsFunctionDef &GlobalsFunctionDef::operator=(const GlobalsFunctionDef & other)
+{
+  GlobalsFunctionDef tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void GlobalsFunctionDef::swap(GlobalsFunctionDef & other)
+{
+  std::swap(functiondef_, other.functiondef_);
+
+}
+
+GlobalsFunctionDef::~GlobalsFunctionDef()
+{
+  delete(functiondef_);
+
+}
+
+void GlobalsFunctionDef::accept(Visitor *v)
+{
+  v->visitGlobalsFunctionDef(this);
+}
+
+GlobalsFunctionDef *GlobalsFunctionDef::clone() const
+{
+  return new GlobalsFunctionDef(*this);
+}
+
+
+
 /********************   GlobalDecl    ********************/
-GlobalDecl::GlobalDecl(DECL p1)
+GlobalDecl::GlobalDecl(Decl *p1)
 {
   decl_ = p1;
 
@@ -379,7 +423,7 @@ GlobalDecl::GlobalDecl(DECL p1)
 
 GlobalDecl::GlobalDecl(const GlobalDecl & other)
 {
-  decl_ = other.decl_;
+  decl_ = other.decl_->clone();
 
 }
 
@@ -398,6 +442,7 @@ void GlobalDecl::swap(GlobalDecl & other)
 
 GlobalDecl::~GlobalDecl()
 {
+  delete(decl_);
 
 }
 
@@ -453,50 +498,6 @@ void GlobalsDeclataion::accept(Visitor *v)
 GlobalsDeclataion *GlobalsDeclataion::clone() const
 {
   return new GlobalsDeclataion(*this);
-}
-
-
-
-/********************   GlobalsFunctionDef    ********************/
-GlobalsFunctionDef::GlobalsFunctionDef(FunctionDef *p1)
-{
-  functiondef_ = p1;
-
-}
-
-GlobalsFunctionDef::GlobalsFunctionDef(const GlobalsFunctionDef & other)
-{
-  functiondef_ = other.functiondef_->clone();
-
-}
-
-GlobalsFunctionDef &GlobalsFunctionDef::operator=(const GlobalsFunctionDef & other)
-{
-  GlobalsFunctionDef tmp(other);
-  swap(tmp);
-  return *this;
-}
-
-void GlobalsFunctionDef::swap(GlobalsFunctionDef & other)
-{
-  std::swap(functiondef_, other.functiondef_);
-
-}
-
-GlobalsFunctionDef::~GlobalsFunctionDef()
-{
-  delete(functiondef_);
-
-}
-
-void GlobalsFunctionDef::accept(Visitor *v)
-{
-  v->visitGlobalsFunctionDef(this);
-}
-
-GlobalsFunctionDef *GlobalsFunctionDef::clone() const
-{
-  return new GlobalsFunctionDef(*this);
 }
 
 
@@ -5946,15 +5947,15 @@ PragmaElement *PragmaElement::clone() const
 
 
 /********************   CodeAnnot    ********************/
-CodeAnnot::CodeAnnot(LogicPTreeAnnot *p1)
+CodeAnnot::CodeAnnot(PragmaOrCodeAnnotation *p1)
 {
-  logicptreeannot_ = p1;
+  pragmaorcodeannotation_ = p1;
 
 }
 
 CodeAnnot::CodeAnnot(const CodeAnnot & other)
 {
-  logicptreeannot_ = other.logicptreeannot_->clone();
+  pragmaorcodeannotation_ = other.pragmaorcodeannotation_->clone();
 
 }
 
@@ -5967,13 +5968,13 @@ CodeAnnot &CodeAnnot::operator=(const CodeAnnot & other)
 
 void CodeAnnot::swap(CodeAnnot & other)
 {
-  std::swap(logicptreeannot_, other.logicptreeannot_);
+  std::swap(pragmaorcodeannotation_, other.pragmaorcodeannotation_);
 
 }
 
 CodeAnnot::~CodeAnnot()
 {
-  delete(logicptreeannot_);
+  delete(pragmaorcodeannotation_);
 
 }
 
@@ -6399,16 +6400,18 @@ SemicolonStatement *SemicolonStatement::clone() const
 
 
 /********************   SpecStatement    ********************/
-SpecStatement::SpecStatement(Spec *p1, AnnotatedStmt *p2)
+SpecStatement::SpecStatement(IsACSLSpec *p1, ListWildcard *p2, AnnotatedStmt *p3)
 {
-  spec_ = p1;
-  annotatedstmt_ = p2;
+  isacslspec_ = p1;
+  listwildcard_ = p2;
+  annotatedstmt_ = p3;
 
 }
 
 SpecStatement::SpecStatement(const SpecStatement & other)
 {
-  spec_ = other.spec_->clone();
+  isacslspec_ = other.isacslspec_->clone();
+  listwildcard_ = other.listwildcard_->clone();
   annotatedstmt_ = other.annotatedstmt_->clone();
 
 }
@@ -6422,14 +6425,16 @@ SpecStatement &SpecStatement::operator=(const SpecStatement & other)
 
 void SpecStatement::swap(SpecStatement & other)
 {
-  std::swap(spec_, other.spec_);
+  std::swap(isacslspec_, other.isacslspec_);
+  std::swap(listwildcard_, other.listwildcard_);
   std::swap(annotatedstmt_, other.annotatedstmt_);
 
 }
 
 SpecStatement::~SpecStatement()
 {
-  delete(spec_);
+  delete(isacslspec_);
+  delete(listwildcard_);
   delete(annotatedstmt_);
 
 }
@@ -7540,15 +7545,15 @@ NoLoopAnnotations *NoLoopAnnotations::clone() const
 
 
 /********************   SomeLoopAnnotations    ********************/
-SomeLoopAnnotations::SomeLoopAnnotations(ListLogicPTreeAnnot *p1)
+SomeLoopAnnotations::SomeLoopAnnotations(LoopAnnotStack *p1)
 {
-  listlogicptreeannot_ = p1;
+  loopannotstack_ = p1;
 
 }
 
 SomeLoopAnnotations::SomeLoopAnnotations(const SomeLoopAnnotations & other)
 {
-  listlogicptreeannot_ = other.listlogicptreeannot_->clone();
+  loopannotstack_ = other.loopannotstack_->clone();
 
 }
 
@@ -7561,13 +7566,13 @@ SomeLoopAnnotations &SomeLoopAnnotations::operator=(const SomeLoopAnnotations & 
 
 void SomeLoopAnnotations::swap(SomeLoopAnnotations & other)
 {
-  std::swap(listlogicptreeannot_, other.listlogicptreeannot_);
+  std::swap(loopannotstack_, other.loopannotstack_);
 
 }
 
 SomeLoopAnnotations::~SomeLoopAnnotations()
 {
-  delete(listlogicptreeannot_);
+  delete(loopannotstack_);
 
 }
 
@@ -7851,17 +7856,19 @@ DeclSpec *DeclSpec::clone() const
 
 
 /********************   SpecDeclSpecInitDecl    ********************/
-SpecDeclSpecInitDecl::SpecDeclSpecInitDecl(Spec *p1, DeclSpecList *p2, DeclAndInitDeclAttrList *p3)
+SpecDeclSpecInitDecl::SpecDeclSpecInitDecl(IsACSLSpec *p1, ListWildcard *p2, DeclSpecList *p3, DeclAndInitDeclAttrList *p4)
 {
-  spec_ = p1;
-  declspeclist_ = p2;
-  declandinitdeclattrlist_ = p3;
+  isacslspec_ = p1;
+  listwildcard_ = p2;
+  declspeclist_ = p3;
+  declandinitdeclattrlist_ = p4;
 
 }
 
 SpecDeclSpecInitDecl::SpecDeclSpecInitDecl(const SpecDeclSpecInitDecl & other)
 {
-  spec_ = other.spec_->clone();
+  isacslspec_ = other.isacslspec_->clone();
+  listwildcard_ = other.listwildcard_->clone();
   declspeclist_ = other.declspeclist_->clone();
   declandinitdeclattrlist_ = other.declandinitdeclattrlist_->clone();
 
@@ -7876,7 +7883,8 @@ SpecDeclSpecInitDecl &SpecDeclSpecInitDecl::operator=(const SpecDeclSpecInitDecl
 
 void SpecDeclSpecInitDecl::swap(SpecDeclSpecInitDecl & other)
 {
-  std::swap(spec_, other.spec_);
+  std::swap(isacslspec_, other.isacslspec_);
+  std::swap(listwildcard_, other.listwildcard_);
   std::swap(declspeclist_, other.declspeclist_);
   std::swap(declandinitdeclattrlist_, other.declandinitdeclattrlist_);
 
@@ -7884,7 +7892,8 @@ void SpecDeclSpecInitDecl::swap(SpecDeclSpecInitDecl & other)
 
 SpecDeclSpecInitDecl::~SpecDeclSpecInitDecl()
 {
-  delete(spec_);
+  delete(isacslspec_);
+  delete(listwildcard_);
   delete(declspeclist_);
   delete(declandinitdeclattrlist_);
 
@@ -7903,16 +7912,18 @@ SpecDeclSpecInitDecl *SpecDeclSpecInitDecl::clone() const
 
 
 /********************   SpecDeclSpec    ********************/
-SpecDeclSpec::SpecDeclSpec(Spec *p1, DeclSpecList *p2)
+SpecDeclSpec::SpecDeclSpec(IsACSLSpec *p1, ListWildcard *p2, DeclSpecList *p3)
 {
-  spec_ = p1;
-  declspeclist_ = p2;
+  isacslspec_ = p1;
+  listwildcard_ = p2;
+  declspeclist_ = p3;
 
 }
 
 SpecDeclSpec::SpecDeclSpec(const SpecDeclSpec & other)
 {
-  spec_ = other.spec_->clone();
+  isacslspec_ = other.isacslspec_->clone();
+  listwildcard_ = other.listwildcard_->clone();
   declspeclist_ = other.declspeclist_->clone();
 
 }
@@ -7926,14 +7937,16 @@ SpecDeclSpec &SpecDeclSpec::operator=(const SpecDeclSpec & other)
 
 void SpecDeclSpec::swap(SpecDeclSpec & other)
 {
-  std::swap(spec_, other.spec_);
+  std::swap(isacslspec_, other.isacslspec_);
+  std::swap(listwildcard_, other.listwildcard_);
   std::swap(declspeclist_, other.declspeclist_);
 
 }
 
 SpecDeclSpec::~SpecDeclSpec()
 {
-  delete(spec_);
+  delete(isacslspec_);
+  delete(listwildcard_);
   delete(declspeclist_);
 
 }
@@ -9266,15 +9279,13 @@ TypeSpecShortKeyWord *TypeSpecShortKeyWord::clone() const
 
 
 /********************   TypeSpecIntKeyWord    ********************/
-TypeSpecIntKeyWord::TypeSpecIntKeyWord(INT p1)
+TypeSpecIntKeyWord::TypeSpecIntKeyWord()
 {
-  int_ = p1;
 
 }
 
 TypeSpecIntKeyWord::TypeSpecIntKeyWord(const TypeSpecIntKeyWord & other)
 {
-  int_ = other.int_;
 
 }
 
@@ -9287,7 +9298,6 @@ TypeSpecIntKeyWord &TypeSpecIntKeyWord::operator=(const TypeSpecIntKeyWord & oth
 
 void TypeSpecIntKeyWord::swap(TypeSpecIntKeyWord & other)
 {
-  std::swap(int_, other.int_);
 
 }
 
@@ -9304,6 +9314,46 @@ void TypeSpecIntKeyWord::accept(Visitor *v)
 TypeSpecIntKeyWord *TypeSpecIntKeyWord::clone() const
 {
   return new TypeSpecIntKeyWord(*this);
+}
+
+
+
+/********************   TypeSpecInt32KeyWord    ********************/
+TypeSpecInt32KeyWord::TypeSpecInt32KeyWord()
+{
+
+}
+
+TypeSpecInt32KeyWord::TypeSpecInt32KeyWord(const TypeSpecInt32KeyWord & other)
+{
+
+}
+
+TypeSpecInt32KeyWord &TypeSpecInt32KeyWord::operator=(const TypeSpecInt32KeyWord & other)
+{
+  TypeSpecInt32KeyWord tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void TypeSpecInt32KeyWord::swap(TypeSpecInt32KeyWord & other)
+{
+
+}
+
+TypeSpecInt32KeyWord::~TypeSpecInt32KeyWord()
+{
+
+}
+
+void TypeSpecInt32KeyWord::accept(Visitor *v)
+{
+  v->visitTypeSpecInt32KeyWord(this);
+}
+
+TypeSpecInt32KeyWord *TypeSpecInt32KeyWord::clone() const
+{
+  return new TypeSpecInt32KeyWord(*this);
 }
 
 
@@ -12683,17 +12733,19 @@ NoAbsDirectDecl *NoAbsDirectDecl::clone() const
 
 
 /********************   FunctionDefSpec    ********************/
-FunctionDefSpec::FunctionDefSpec(Spec *p1, FunctionDefStart *p2, Block *p3)
+FunctionDefSpec::FunctionDefSpec(IsACSLSpec *p1, ListWildcard *p2, FunctionDefStart *p3, Block *p4)
 {
-  spec_ = p1;
-  functiondefstart_ = p2;
-  block_ = p3;
+  isacslspec_ = p1;
+  listwildcard_ = p2;
+  functiondefstart_ = p3;
+  block_ = p4;
 
 }
 
 FunctionDefSpec::FunctionDefSpec(const FunctionDefSpec & other)
 {
-  spec_ = other.spec_->clone();
+  isacslspec_ = other.isacslspec_->clone();
+  listwildcard_ = other.listwildcard_->clone();
   functiondefstart_ = other.functiondefstart_->clone();
   block_ = other.block_->clone();
 
@@ -12708,7 +12760,8 @@ FunctionDefSpec &FunctionDefSpec::operator=(const FunctionDefSpec & other)
 
 void FunctionDefSpec::swap(FunctionDefSpec & other)
 {
-  std::swap(spec_, other.spec_);
+  std::swap(isacslspec_, other.isacslspec_);
+  std::swap(listwildcard_, other.listwildcard_);
   std::swap(functiondefstart_, other.functiondefstart_);
   std::swap(block_, other.block_);
 
@@ -12716,7 +12769,8 @@ void FunctionDefSpec::swap(FunctionDefSpec & other)
 
 FunctionDefSpec::~FunctionDefSpec()
 {
-  delete(spec_);
+  delete(isacslspec_);
+  delete(listwildcard_);
   delete(functiondefstart_);
   delete(block_);
 
@@ -13201,15 +13255,15 @@ CVSpecGhostKeyWord *CVSpecGhostKeyWord::clone() const
 
 
 /********************   CVSpecAttribute_annotKeyWord    ********************/
-CVSpecAttribute_annotKeyWord::CVSpecAttribute_annotKeyWord(ATTRIBUTE_ANNOT p1)
+CVSpecAttribute_annotKeyWord::CVSpecAttribute_annotKeyWord(Identifier *p1)
 {
-  attribute_annot_ = p1;
+  identifier_ = p1;
 
 }
 
 CVSpecAttribute_annotKeyWord::CVSpecAttribute_annotKeyWord(const CVSpecAttribute_annotKeyWord & other)
 {
-  attribute_annot_ = other.attribute_annot_;
+  identifier_ = other.identifier_->clone();
 
 }
 
@@ -13222,12 +13276,13 @@ CVSpecAttribute_annotKeyWord &CVSpecAttribute_annotKeyWord::operator=(const CVSp
 
 void CVSpecAttribute_annotKeyWord::swap(CVSpecAttribute_annotKeyWord & other)
 {
-  std::swap(attribute_annot_, other.attribute_annot_);
+  std::swap(identifier_, other.identifier_);
 
 }
 
 CVSpecAttribute_annotKeyWord::~CVSpecAttribute_annotKeyWord()
 {
+  delete(identifier_);
 
 }
 
@@ -13869,15 +13924,15 @@ AttributeGhost *AttributeGhost::clone() const
 
 
 /********************   AttributeAttributeAnnot    ********************/
-AttributeAttributeAnnot::AttributeAttributeAnnot(ATTRIBUTE_ANNOT p1)
+AttributeAttributeAnnot::AttributeAttributeAnnot(Identifier *p1)
 {
-  attribute_annot_ = p1;
+  identifier_ = p1;
 
 }
 
 AttributeAttributeAnnot::AttributeAttributeAnnot(const AttributeAttributeAnnot & other)
 {
-  attribute_annot_ = other.attribute_annot_;
+  identifier_ = other.identifier_->clone();
 
 }
 
@@ -13890,12 +13945,13 @@ AttributeAttributeAnnot &AttributeAttributeAnnot::operator=(const AttributeAttri
 
 void AttributeAttributeAnnot::swap(AttributeAttributeAnnot & other)
 {
-  std::swap(attribute_annot_, other.attribute_annot_);
+  std::swap(identifier_, other.identifier_);
 
 }
 
 AttributeAttributeAnnot::~AttributeAttributeAnnot()
 {
+  delete(identifier_);
 
 }
 

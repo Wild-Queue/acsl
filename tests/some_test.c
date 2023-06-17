@@ -11,3 +11,6 @@ int main()
     // not compatible: qualifiers cannot be dropped (see C99 6.7.3:9)
     return *(p(0));
 }
+
+
+int *f(int x); int main() { int *(*p)(int) = &f; return *(p(0)); }

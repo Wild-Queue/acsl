@@ -288,6 +288,14 @@ void Skeleton::visitGhostGlobalsRGhost(GhostGlobalsRGhost *ghost_globals_r_ghost
 
 }
 
+void Skeleton::visitGlobalsFunctionDef(GlobalsFunctionDef *globals_function_def)
+{
+  /* Code For GlobalsFunctionDef Goes Here */
+
+  if (globals_function_def->functiondef_) globals_function_def->functiondef_->accept(this);
+
+}
+
 void Skeleton::visitGlobalDecl(GlobalDecl *global_decl)
 {
   /* Code For GlobalDecl Goes Here */
@@ -301,14 +309,6 @@ void Skeleton::visitGlobalsDeclataion(GlobalsDeclataion *globals_declataion)
   /* Code For GlobalsDeclataion Goes Here */
 
   if (globals_declataion->declaration_) globals_declataion->declaration_->accept(this);
-
-}
-
-void Skeleton::visitGlobalsFunctionDef(GlobalsFunctionDef *globals_function_def)
-{
-  /* Code For GlobalsFunctionDef Goes Here */
-
-  if (globals_function_def->functiondef_) globals_function_def->functiondef_->accept(this);
 
 }
 
@@ -1332,7 +1332,7 @@ void Skeleton::visitCodeAnnot(CodeAnnot *code_annot)
 {
   /* Code For CodeAnnot Goes Here */
 
-  if (code_annot->logicptreeannot_) code_annot->logicptreeannot_->accept(this);
+  if (code_annot->pragmaorcodeannotation_) code_annot->pragmaorcodeannotation_->accept(this);
 
 }
 
@@ -1416,7 +1416,8 @@ void Skeleton::visitSpecStatement(SpecStatement *spec_statement)
 {
   /* Code For SpecStatement Goes Here */
 
-  if (spec_statement->spec_) spec_statement->spec_->accept(this);
+  if (spec_statement->isacslspec_) spec_statement->isacslspec_->accept(this);
+  if (spec_statement->listwildcard_) spec_statement->listwildcard_->accept(this);
   if (spec_statement->annotatedstmt_) spec_statement->annotatedstmt_->accept(this);
 
 }
@@ -1630,7 +1631,7 @@ void Skeleton::visitSomeLoopAnnotations(SomeLoopAnnotations *some_loop_annotatio
 {
   /* Code For SomeLoopAnnotations Goes Here */
 
-  if (some_loop_annotations->listlogicptreeannot_) some_loop_annotations->listlogicptreeannot_->accept(this);
+  if (some_loop_annotations->loopannotstack_) some_loop_annotations->loopannotstack_->accept(this);
 
 }
 
@@ -1687,7 +1688,8 @@ void Skeleton::visitSpecDeclSpecInitDecl(SpecDeclSpecInitDecl *spec_decl_spec_in
 {
   /* Code For SpecDeclSpecInitDecl Goes Here */
 
-  if (spec_decl_spec_init_decl->spec_) spec_decl_spec_init_decl->spec_->accept(this);
+  if (spec_decl_spec_init_decl->isacslspec_) spec_decl_spec_init_decl->isacslspec_->accept(this);
+  if (spec_decl_spec_init_decl->listwildcard_) spec_decl_spec_init_decl->listwildcard_->accept(this);
   if (spec_decl_spec_init_decl->declspeclist_) spec_decl_spec_init_decl->declspeclist_->accept(this);
   if (spec_decl_spec_init_decl->declandinitdeclattrlist_) spec_decl_spec_init_decl->declandinitdeclattrlist_->accept(this);
 
@@ -1697,7 +1699,8 @@ void Skeleton::visitSpecDeclSpec(SpecDeclSpec *spec_decl_spec)
 {
   /* Code For SpecDeclSpec Goes Here */
 
-  if (spec_decl_spec->spec_) spec_decl_spec->spec_->accept(this);
+  if (spec_decl_spec->isacslspec_) spec_decl_spec->isacslspec_->accept(this);
+  if (spec_decl_spec->listwildcard_) spec_decl_spec->listwildcard_->accept(this);
   if (spec_decl_spec->declspeclist_) spec_decl_spec->declspeclist_->accept(this);
 
 }
@@ -1945,7 +1948,13 @@ void Skeleton::visitTypeSpecIntKeyWord(TypeSpecIntKeyWord *type_spec_int_key_wor
 {
   /* Code For TypeSpecIntKeyWord Goes Here */
 
-  visitINT(type_spec_int_key_word->int_);
+
+}
+
+void Skeleton::visitTypeSpecInt32KeyWord(TypeSpecInt32KeyWord *type_spec_int_key_word)
+{
+  /* Code For TypeSpecInt32KeyWord Goes Here */
+
 
 }
 
@@ -2592,7 +2601,8 @@ void Skeleton::visitFunctionDefSpec(FunctionDefSpec *function_def_spec)
 {
   /* Code For FunctionDefSpec Goes Here */
 
-  if (function_def_spec->spec_) function_def_spec->spec_->accept(this);
+  if (function_def_spec->isacslspec_) function_def_spec->isacslspec_->accept(this);
+  if (function_def_spec->listwildcard_) function_def_spec->listwildcard_->accept(this);
   if (function_def_spec->functiondefstart_) function_def_spec->functiondefstart_->accept(this);
   if (function_def_spec->block_) function_def_spec->block_->accept(this);
 
@@ -2690,7 +2700,7 @@ void Skeleton::visitCVSpecAttribute_annotKeyWord(CVSpecAttribute_annotKeyWord *c
 {
   /* Code For CVSpecAttribute_annotKeyWord Goes Here */
 
-  visitATTRIBUTE_ANNOT(cv_spec_attribute_annot_key_word->attribute_annot_);
+  if (cv_spec_attribute_annot_key_word->identifier_) cv_spec_attribute_annot_key_word->identifier_->accept(this);
 
 }
 
@@ -2814,7 +2824,7 @@ void Skeleton::visitAttributeAttributeAnnot(AttributeAttributeAnnot *attribute_a
 {
   /* Code For AttributeAttributeAnnot Goes Here */
 
-  visitATTRIBUTE_ANNOT(attribute_attribute_annot->attribute_annot_);
+  if (attribute_attribute_annot->identifier_) attribute_attribute_annot->identifier_->accept(this);
 
 }
 
@@ -9351,11 +9361,6 @@ void Skeleton::visitIdent(Ident x)
   /* Code for Ident Goes Here */
 }
 
-void Skeleton::visitDECL(DECL x)
-{
-  /* Code for DECL Goes Here */
-}
-
 void Skeleton::visitNAMEDTYPE(NAMEDTYPE x)
 {
   /* Code for NAMEDTYPE Goes Here */
@@ -9429,11 +9434,6 @@ void Skeleton::visitCONST(CONST x)
 void Skeleton::visitFUNCTION__(FUNCTION__ x)
 {
   /* Code for FUNCTION__ Goes Here */
-}
-
-void Skeleton::visitINT(INT x)
-{
-  /* Code for INT Goes Here */
 }
 
 void Skeleton::visitMSATTR(MSATTR x)

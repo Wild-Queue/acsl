@@ -585,120 +585,120 @@ struct yy_trans_info
 static const flex_int16_t yy_accept[1063] =
     {   0,
         0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-        0,    0,  251,  249,  248,  204,   17,  225,  115,   21,
+        0,    0,  251,  249,  248,  205,   17,  225,  116,   21,
        16,  236,    2,    3,   15,   13,    4,   14,    9,   20,
-      246,   34,    1,   24,   35,   25,   33,  196,  196,  196,
-      196,  196,  196,  196,  196,  196,   94,  249,   95,   30,
-      249,  249,  196,  196,  196,  196,  196,  196,  196,  196,
-      196,  196,  196,  196,  196,  196,  196,  196,  196,  102,
-       31,  103,   18,  238,  250,  237,  243,  239,  240,  241,
+      246,   34,    1,   24,   35,   25,   33,  197,  197,  197,
+      197,  197,  197,  197,  197,  197,   95,  249,   96,   30,
+      249,  249,  197,  197,  197,  197,  197,  197,  197,  197,
+      197,  197,  197,  197,  197,  197,  197,  197,  197,  103,
+       31,  104,   18,  238,  250,  237,  243,  239,  240,  241,
       242,  244,  228,  227,  226,  235,  233,  234,  229,  230,
-      231,  232,   29,   40,  201,   19,   41,   38,   93,   11,
+      231,  232,   29,   40,  202,   19,   41,   38,   94,   11,
 
-       36,   12,   37,   10,  111,  204,   39,    0,  246,  114,
-      203,  200,    0,  202,   22,   26,   28,   27,   23,  247,
-      196,  196,  196,  196,  196,  196,  196,  196,  196,   96,
+       36,   12,   37,   10,  112,  205,   39,    0,  246,  115,
+      204,  201,    0,  203,   22,   26,   28,   27,   23,  247,
+      197,  197,  197,  197,  197,  197,  197,  197,  197,   97,
         0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-        0,    0,    0,    0,    0,    0,    0,    0,   43,   62,
+        0,    0,    0,    0,    0,    0,    0,    0,   43,   63,
         0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-        0,  223,  196,  196,  196,  127,  196,  196,  196,  196,
-      196,  196,  196,  196,  196,  196,  144,  196,  196,  196,
-      196,  196,  196,  196,  196,  196,  196,  158,  196,  196,
-      196,  196,  196,  196,  196,  196,  196,  196,  196,  196,
+        0,  223,  197,  197,  197,  128,  197,  197,  197,  197,
+      197,  197,  197,  197,  197,  197,  145,  197,  197,  197,
+      197,  197,  197,  197,  197,  197,  197,  159,  197,  197,
+      197,  197,  197,  197,  197,  197,  197,  197,  197,  197,
 
-      196,  196,  196,  196,  196,  196,   42,   97,   32,   63,
-       47,  245,    0,   44,    0,   60,   45,  196,  196,  196,
-      196,  196,  196,  196,  196,    0,    0,   99,    0,    0,
-        0,    0,    0,    0,    0,    0,    0,    0,    0,   65,
-        0,    0,    0,    0,    0,    0,    0,  104,    0,    0,
+      197,  197,  197,  197,  197,  197,   42,   98,   32,   64,
+       47,  245,    0,   44,    0,   61,   45,  197,  197,  197,
+      197,  197,  197,  197,  197,    0,    0,  100,    0,    0,
+        0,    0,    0,    0,    0,    0,    0,    0,    0,   66,
+        0,    0,    0,    0,    0,    0,    0,  105,    0,    0,
         0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
         0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
         0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-      196,  196,  196,  196,  196,  196,  196,  196,  196,  196,
-      196,  196,  196,  196,  196,  196,  196,  196,  196,  196,
+      197,  197,  197,  197,  197,  197,  197,  197,  197,  197,
+      197,  197,  197,  197,  197,  197,  197,  197,  197,  197,
 
-      196,  196,  196,  152,  196,  196,  196,  196,  196,  196,
-      196,  196,  196,  162,  196,  196,  196,  167,  196,  196,
-      196,  196,  196,  196,  196,  196,  196,  196,  196,  196,
-      196,  196,  196,  196,  196,  196,  196,  196,  196,  196,
-      196,  196,  196,    0,   64,   61,  196,  196,  196,  196,
-      196,  196,  196,  196,  196,    0,    0,    0,    0,    0,
+      197,  197,  197,  153,  197,  197,  197,  197,  197,  197,
+      197,  197,  197,  163,  197,  197,  197,  168,  197,  197,
+      197,  197,  197,  197,  197,  197,  197,  197,  197,  197,
+      197,  197,  197,  197,  197,  197,  197,  197,  197,  197,
+      197,  197,  197,    0,   65,   62,  197,  197,  197,  197,
+      197,  197,  197,  197,  197,    0,    0,    0,    0,    0,
         0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-        0,    0,   66,    0,    0,    0,    0,   98,    0,    0,
-        0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-        0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-
+        0,    0,   67,    0,    0,    0,    0,   99,    0,    0,
         0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
         0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-        0,    0,  196,  196,  196,  128,  196,  196,  196,  196,
-      135,  136,  196,  196,  196,  196,  196,  196,  196,  146,
-      196,  148,  196,  196,  196,  196,  196,  196,  196,  157,
-      196,  196,  196,  196,  196,  196,  196,  196,  196,  169,
-      170,  196,  196,  196,  196,  196,  176,  196,  196,  196,
-      196,  196,  196,  196,  196,  196,  196,  196,  188,  196,
-      196,  192,  196,  196,  196,    0,  245,  196,  196,  196,
-      196,  196,  196,  196,  196,  196,  196,    0,    0,    0,
 
         0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-      112,    0,    0,    0,    0,    0,   92,    0,    0,    0,
-        0,    0,    0,   70,  106,    0,    0,    0,  110,   54,
-        0,    0,    0,    0,    0,    0,    0,  205,    0,    0,
+        0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+        0,    0,  197,  197,  197,  129,  197,  197,  197,  197,
+      136,  137,  197,  197,  197,  197,  197,  197,  197,  147,
+      197,  149,  197,  197,  197,  197,  197,  197,  197,  158,
+      197,  197,  197,  197,  197,  197,  197,  197,  197,  170,
+      171,  197,  197,  197,  197,  197,  177,  197,  197,  197,
+      197,  197,  197,  197,  197,  197,  197,  197,  189,  197,
+      197,  193,  197,  197,  197,    0,  245,  197,  197,  197,
+      197,  197,  197,  197,  197,  197,  197,    0,    0,    0,
+
+        0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+      113,    0,    0,    0,    0,    0,   93,    0,    0,    0,
+        0,    0,    0,   71,  107,    0,    0,    0,  111,   54,
+        0,    0,    0,    0,    0,    0,    0,  206,    0,    0,
         0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
         0,    0,    0,    0,    0,    0,   49,    0,    0,  212,
-        0,    0,    0,    0,  124,  196,  196,  129,  196,  196,
-      133,  137,  196,  139,  196,  196,  196,  196,  196,  149,
-      196,  151,  153,  196,  155,  196,  196,  196,  196,  196,
-      196,  196,  165,  166,  168,  171,  196,  196,  196,  175,
+        0,    0,    0,    0,  125,  197,  197,  130,  197,  197,
+      134,  138,  197,  140,  197,  197,  197,  197,  197,  150,
+      197,  152,  154,  197,  156,  197,  197,  197,  197,  197,
+      197,  197,  166,  167,  169,  172,  197,  197,  197,  176,
 
-      196,  196,  196,  196,  181,  196,  196,  184,  196,  196,
-      196,  196,  196,  190,  196,  196,  194,  196,  196,  196,
-      196,  196,  196,  196,  196,  196,  196,  196,    0,    0,
-        0,    0,    0,    0,    0,  107,    0,   71,    0,    0,
-       80,   56,    0,  109,    0,    0,    0,    0,    0,    0,
-        0,    0,    0,    0,  108,   73,    0,    0,    0,    0,
+      197,  197,  197,  197,  182,  197,  197,  185,  197,  197,
+      197,  197,  197,  191,  197,  197,  195,  197,  197,  197,
+      197,  197,  197,  197,  197,  197,  197,  197,    0,    0,
+        0,    0,    0,    0,    0,  108,    0,   72,    0,    0,
+       81,   57,    0,  110,    0,    0,    0,    0,    0,    0,
+        0,    0,    0,    0,  109,   74,    0,    0,    0,    0,
         0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
         0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-        0,    0,    0,    0,    0,    0,    0,    0,  196,  126,
-      196,  196,  196,  134,  196,  196,  196,  196,  145,  196,
+        0,    0,    0,    0,    0,    0,    0,    0,  197,  127,
+      197,  197,  197,  135,  197,  197,  197,  197,  146,  197,
 
-      150,  196,  156,  159,  196,  196,  196,  196,  196,  172,
-      173,  196,  196,  196,  196,  179,  182,  183,  185,  186,
-      187,  196,  196,  196,  196,  195,  116,  117,  196,  196,
-      196,  196,  196,  196,  196,  196,  123,    0,    0,    0,
-        0,    0,    0,    0,   68,   67,    0,    0,   69,    0,
-        0,   83,    0,  100,    0,   90,  105,    0,    0,    0,
-        0,    0,    0,    0,    0,    0,  205,    0,    0,    0,
-      209,    0,    0,    0,    0,    0,    0,    0,  211,   55,
+      151,  197,  157,  160,  197,  197,  197,  197,  197,  173,
+      174,  197,  197,  197,  197,  180,  183,  184,  186,  187,
+      188,  197,  197,  197,  197,  196,  117,  118,  197,  197,
+      197,  197,  197,  197,  197,  197,  124,    0,    0,    0,
+        0,    0,    0,    0,   69,   68,    0,    0,   70,    0,
+        0,   84,    0,  101,    0,   91,  106,    0,    0,    0,
+        0,    0,    0,    0,    0,    0,  206,    0,    0,    0,
+      210,    0,    0,    0,    0,    0,    0,    0,   55,   56,
         0,    0,    0,    0,    0,    0,    0,    0,  216,    0,
-      196,  196,  196,  132,  196,  196,  142,  196,  147,  196,
+      197,  197,  197,  133,  197,  197,  143,  197,  148,  197,
 
-      160,  196,  163,  196,  196,  196,  196,  196,  180,  189,
-      196,  196,  196,  119,  196,  196,  196,  196,  121,  196,
-        0,    0,    0,    0,    0,    0,   88,    0,    0,  113,
+      161,  197,  164,  197,  197,  197,  197,  197,  181,  190,
+      197,  197,  197,  120,  197,  197,  197,  197,  122,  197,
+        0,    0,    0,    0,    0,    0,   89,    0,    0,  114,
         0,    0,    0,    0,    0,    0,    0,    5,    0,    0,
         0,    0,    0,    0,    0,    0,    0,    0,    0,   50,
-        0,    0,    0,  210,  216,    0,    0,  214,    0,   58,
-      217,    0,    0,  196,  196,  131,  138,  140,  143,  154,
-      196,  196,  196,  177,  178,  196,  191,  193,  118,  120,
-      196,  196,  196,  196,    0,    0,    0,    0,    0,   79,
-       85,    0,    0,   89,    0,    0,    0,    0,    0,    0,
+        0,    0,    0,  211,  216,    0,    0,  214,    0,   59,
+      217,    0,    0,  197,  197,  132,  139,  141,  144,  155,
+      197,  197,  197,  178,  179,  197,  192,  194,  119,  121,
+      197,  197,  197,  197,    0,    0,    0,    0,    0,   80,
+       86,    0,    0,   90,    0,    0,    0,    0,    0,    0,
 
-       53,    0,    0,    0,    0,  206,    0,    0,    0,  209,
+       53,    0,    0,    0,    0,  207,    0,    0,    0,  210,
         0,    0,   51,    0,    0,   48,    0,    0,    0,    0,
-      125,  130,  141,  161,  164,  174,  196,  196,  196,  122,
-        0,   84,   87,   81,    0,    0,    0,  101,    0,    0,
+      126,  131,  142,  162,  165,  175,  197,  197,  197,  123,
+        0,   85,   88,   82,    0,    0,    0,  102,    0,    0,
         0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-        0,   57,    0,  213,  214,  217,  215,  196,  196,  196,
-      196,   86,    0,    0,    0,    0,    0,    0,    0,   74,
-        0,    0,    0,    0,  206,  207,    0,    0,    0,    0,
-        0,    0,  196,  196,  196,    0,   78,    0,   91,    0,
-       76,   77,    0,    0,    0,    0,    0,    0,    0,    0,
+        0,   58,    0,  213,  214,  217,  215,  197,  197,  197,
+      197,   87,    0,    0,    0,    0,    0,    0,    0,   75,
+        0,    0,    0,    0,  207,  208,    0,    0,    0,    0,
+        0,    0,  197,  197,  197,    0,   79,    0,   92,    0,
+       77,   78,    0,    0,    0,    0,    0,    0,    0,    0,
 
-        0,  215,  196,  196,  196,   82,    0,    0,    0,   59,
-        0,  207,    0,    0,    0,    0,  196,  196,    0,    0,
-       52,    0,    0,    0,    0,    0,  196,  196,   72,   75,
-        0,    0,    0,    0,    0,  196,    0,  208,    0,    0,
-        6,  196,    0,    0,    0,    0,    0,  208,    8,    0,
+        0,  215,  197,  197,  197,   83,    0,    0,    0,   60,
+        0,  208,    0,    0,    0,    0,  197,  197,    0,    0,
+       52,    0,    0,    0,    0,    0,  197,  197,   73,   76,
+        0,    0,    0,    0,    0,  197,    0,  209,    0,    0,
+        6,  197,    0,    0,    0,    0,    0,  209,    8,    0,
        46,    0,    0,    0,    0,    0,    0,    0,    0,    0,
         7,    0
     } ;
@@ -1385,12 +1385,12 @@ static const flex_int16_t yy_chk[1717] =
 #define yymore() yymore_used_but_not_detected
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
-#line 1 "combined_parser.l"
+#line 1 "bnfc_parser.l"
 /* -*- c++ -*- File generated by the BNF Converter (bnfc 2.9.4.1). */
 /* Lexer definition for use with FLex */
 #define YY_NO_INPUT 1
 /* Additional data for the lexer: a buffer for lexing string literals. */
-#line 13 "combined_parser.l"
+#line 13 "bnfc_parser.l"
 #include "Absyn.H"
 #include "Bison.H"
 
@@ -1726,7 +1726,7 @@ YY_DECL
 		}
 
 	{
-#line 70 "combined_parser.l"
+#line 70 "bnfc_parser.l"
 
 
 #line 1733 "Lexer.C"
@@ -1788,1260 +1788,1260 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 72 "combined_parser.l"
+#line 72 "bnfc_parser.l"
 return _SEMI;
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 73 "combined_parser.l"
+#line 73 "bnfc_parser.l"
 return _LPAREN;
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 74 "combined_parser.l"
+#line 74 "bnfc_parser.l"
 return _RPAREN;
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 75 "combined_parser.l"
+#line 75 "bnfc_parser.l"
 return _COMMA;
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 76 "combined_parser.l"
+#line 76 "bnfc_parser.l"
 return _SYMB_4;
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 77 "combined_parser.l"
+#line 77 "bnfc_parser.l"
 return _SYMB_5;
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 78 "combined_parser.l"
+#line 78 "bnfc_parser.l"
 return _SYMB_6;
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 79 "combined_parser.l"
+#line 79 "bnfc_parser.l"
 return _SYMB_7;
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 80 "combined_parser.l"
+#line 80 "bnfc_parser.l"
 return _DOT;
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 81 "combined_parser.l"
+#line 81 "bnfc_parser.l"
 return _RARROW;
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 82 "combined_parser.l"
+#line 82 "bnfc_parser.l"
 return _DPLUS;
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 83 "combined_parser.l"
+#line 83 "bnfc_parser.l"
 return _DMINUS;
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 84 "combined_parser.l"
+#line 84 "bnfc_parser.l"
 return _PLUS;
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 85 "combined_parser.l"
+#line 85 "bnfc_parser.l"
 return _MINUS;
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 86 "combined_parser.l"
+#line 86 "bnfc_parser.l"
 return _STAR;
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 87 "combined_parser.l"
+#line 87 "bnfc_parser.l"
 return _AMP;
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 88 "combined_parser.l"
+#line 88 "bnfc_parser.l"
 return _BANG;
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 89 "combined_parser.l"
+#line 89 "bnfc_parser.l"
 return _TILDE;
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 90 "combined_parser.l"
+#line 90 "bnfc_parser.l"
 return _DAMP;
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 91 "combined_parser.l"
+#line 91 "bnfc_parser.l"
 return _SLASH;
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 92 "combined_parser.l"
+#line 92 "bnfc_parser.l"
 return _PERCENT;
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 93 "combined_parser.l"
+#line 93 "bnfc_parser.l"
 return _DLT;
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 94 "combined_parser.l"
+#line 94 "bnfc_parser.l"
 return _DGT;
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 95 "combined_parser.l"
+#line 95 "bnfc_parser.l"
 return _LT;
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 96 "combined_parser.l"
+#line 96 "bnfc_parser.l"
 return _GT;
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 97 "combined_parser.l"
+#line 97 "bnfc_parser.l"
 return _LDARROW;
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 98 "combined_parser.l"
+#line 98 "bnfc_parser.l"
 return _GTEQ;
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 99 "combined_parser.l"
+#line 99 "bnfc_parser.l"
 return _DEQ;
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 100 "combined_parser.l"
+#line 100 "bnfc_parser.l"
 return _BANGEQ;
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 101 "combined_parser.l"
+#line 101 "bnfc_parser.l"
 return _CARET;
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 102 "combined_parser.l"
+#line 102 "bnfc_parser.l"
 return _BAR;
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 103 "combined_parser.l"
+#line 103 "bnfc_parser.l"
 return _DBAR;
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 104 "combined_parser.l"
+#line 104 "bnfc_parser.l"
 return _QUESTION;
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 105 "combined_parser.l"
+#line 105 "bnfc_parser.l"
 return _COLON;
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 106 "combined_parser.l"
+#line 106 "bnfc_parser.l"
 return _EQ;
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 107 "combined_parser.l"
+#line 107 "bnfc_parser.l"
 return _PLUSEQ;
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 108 "combined_parser.l"
+#line 108 "bnfc_parser.l"
 return _MINUSEQ;
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 109 "combined_parser.l"
+#line 109 "bnfc_parser.l"
 return _STAREQ;
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 110 "combined_parser.l"
+#line 110 "bnfc_parser.l"
 return _SLASHEQ;
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 111 "combined_parser.l"
+#line 111 "bnfc_parser.l"
 return _PERCENTEQ;
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 112 "combined_parser.l"
+#line 112 "bnfc_parser.l"
 return _AMPEQ;
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 113 "combined_parser.l"
+#line 113 "bnfc_parser.l"
 return _BAREQ;
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 114 "combined_parser.l"
+#line 114 "bnfc_parser.l"
 return _CARETEQ;
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 115 "combined_parser.l"
+#line 115 "bnfc_parser.l"
 return _DLTEQ;
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 116 "combined_parser.l"
+#line 116 "bnfc_parser.l"
 return _DGTEQ;
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 117 "combined_parser.l"
+#line 117 "bnfc_parser.l"
 return _SYMB_45;
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 118 "combined_parser.l"
+#line 118 "bnfc_parser.l"
 return _ELLIPSIS;
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 119 "combined_parser.l"
+#line 119 "bnfc_parser.l"
 return _SYMB_47;
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 120 "combined_parser.l"
+#line 120 "bnfc_parser.l"
 return _SYMB_48;
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 121 "combined_parser.l"
+#line 121 "bnfc_parser.l"
 return _SYMB_49;
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 122 "combined_parser.l"
+#line 122 "bnfc_parser.l"
 return _SYMB_50;
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 123 "combined_parser.l"
+#line 123 "bnfc_parser.l"
 return _SYMB_51;
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 124 "combined_parser.l"
+#line 124 "bnfc_parser.l"
 return _SYMB_52;
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 125 "combined_parser.l"
+#line 125 "bnfc_parser.l"
 return _SYMB_53;
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
-#line 126 "combined_parser.l"
+#line 126 "bnfc_parser.l"
 return _SYMB_54;
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 127 "combined_parser.l"
+#line 127 "bnfc_parser.l"
 return _SYMB_55;
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
-#line 128 "combined_parser.l"
+#line 128 "bnfc_parser.l"
 return _SYMB_56;
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
-#line 129 "combined_parser.l"
+#line 129 "bnfc_parser.l"
 return _SYMB_57;
 	YY_BREAK
 case 59:
 YY_RULE_SETUP
-#line 130 "combined_parser.l"
+#line 130 "bnfc_parser.l"
 return _SYMB_58;
 	YY_BREAK
 case 60:
 YY_RULE_SETUP
-#line 131 "combined_parser.l"
+#line 131 "bnfc_parser.l"
 return _SYMB_59;
 	YY_BREAK
 case 61:
 YY_RULE_SETUP
-#line 132 "combined_parser.l"
+#line 132 "bnfc_parser.l"
 return _SYMB_60;
 	YY_BREAK
 case 62:
 YY_RULE_SETUP
-#line 133 "combined_parser.l"
-return _DCARET;
+#line 133 "bnfc_parser.l"
+return _SYMB_61;
 	YY_BREAK
 case 63:
 YY_RULE_SETUP
-#line 134 "combined_parser.l"
-return _SYMB_62;
+#line 134 "bnfc_parser.l"
+return _DCARET;
 	YY_BREAK
 case 64:
 YY_RULE_SETUP
-#line 135 "combined_parser.l"
+#line 135 "bnfc_parser.l"
 return _SYMB_63;
 	YY_BREAK
 case 65:
 YY_RULE_SETUP
-#line 136 "combined_parser.l"
+#line 136 "bnfc_parser.l"
 return _SYMB_64;
 	YY_BREAK
 case 66:
 YY_RULE_SETUP
-#line 137 "combined_parser.l"
+#line 137 "bnfc_parser.l"
 return _SYMB_65;
 	YY_BREAK
 case 67:
 YY_RULE_SETUP
-#line 138 "combined_parser.l"
+#line 138 "bnfc_parser.l"
 return _SYMB_66;
 	YY_BREAK
 case 68:
 YY_RULE_SETUP
-#line 139 "combined_parser.l"
+#line 139 "bnfc_parser.l"
 return _SYMB_67;
 	YY_BREAK
 case 69:
 YY_RULE_SETUP
-#line 140 "combined_parser.l"
+#line 140 "bnfc_parser.l"
 return _SYMB_68;
 	YY_BREAK
 case 70:
 YY_RULE_SETUP
-#line 141 "combined_parser.l"
+#line 141 "bnfc_parser.l"
 return _SYMB_69;
 	YY_BREAK
 case 71:
 YY_RULE_SETUP
-#line 142 "combined_parser.l"
+#line 142 "bnfc_parser.l"
 return _SYMB_70;
 	YY_BREAK
 case 72:
 YY_RULE_SETUP
-#line 143 "combined_parser.l"
+#line 143 "bnfc_parser.l"
 return _SYMB_71;
 	YY_BREAK
 case 73:
 YY_RULE_SETUP
-#line 144 "combined_parser.l"
+#line 144 "bnfc_parser.l"
 return _SYMB_72;
 	YY_BREAK
 case 74:
 YY_RULE_SETUP
-#line 145 "combined_parser.l"
+#line 145 "bnfc_parser.l"
 return _SYMB_73;
 	YY_BREAK
 case 75:
 YY_RULE_SETUP
-#line 146 "combined_parser.l"
+#line 146 "bnfc_parser.l"
 return _SYMB_74;
 	YY_BREAK
 case 76:
 YY_RULE_SETUP
-#line 147 "combined_parser.l"
+#line 147 "bnfc_parser.l"
 return _SYMB_75;
 	YY_BREAK
 case 77:
 YY_RULE_SETUP
-#line 148 "combined_parser.l"
+#line 148 "bnfc_parser.l"
 return _SYMB_76;
 	YY_BREAK
 case 78:
 YY_RULE_SETUP
-#line 149 "combined_parser.l"
+#line 149 "bnfc_parser.l"
 return _SYMB_77;
 	YY_BREAK
 case 79:
 YY_RULE_SETUP
-#line 150 "combined_parser.l"
+#line 150 "bnfc_parser.l"
 return _SYMB_78;
 	YY_BREAK
 case 80:
 YY_RULE_SETUP
-#line 151 "combined_parser.l"
+#line 151 "bnfc_parser.l"
 return _SYMB_79;
 	YY_BREAK
 case 81:
 YY_RULE_SETUP
-#line 152 "combined_parser.l"
+#line 152 "bnfc_parser.l"
 return _SYMB_80;
 	YY_BREAK
 case 82:
 YY_RULE_SETUP
-#line 153 "combined_parser.l"
+#line 153 "bnfc_parser.l"
 return _SYMB_81;
 	YY_BREAK
 case 83:
 YY_RULE_SETUP
-#line 154 "combined_parser.l"
+#line 154 "bnfc_parser.l"
 return _SYMB_82;
 	YY_BREAK
 case 84:
 YY_RULE_SETUP
-#line 155 "combined_parser.l"
+#line 155 "bnfc_parser.l"
 return _SYMB_83;
 	YY_BREAK
 case 85:
 YY_RULE_SETUP
-#line 156 "combined_parser.l"
+#line 156 "bnfc_parser.l"
 return _SYMB_84;
 	YY_BREAK
 case 86:
 YY_RULE_SETUP
-#line 157 "combined_parser.l"
+#line 157 "bnfc_parser.l"
 return _SYMB_85;
 	YY_BREAK
 case 87:
 YY_RULE_SETUP
-#line 158 "combined_parser.l"
+#line 158 "bnfc_parser.l"
 return _SYMB_86;
 	YY_BREAK
 case 88:
 YY_RULE_SETUP
-#line 159 "combined_parser.l"
+#line 159 "bnfc_parser.l"
 return _SYMB_87;
 	YY_BREAK
 case 89:
 YY_RULE_SETUP
-#line 160 "combined_parser.l"
+#line 160 "bnfc_parser.l"
 return _SYMB_88;
 	YY_BREAK
 case 90:
 YY_RULE_SETUP
-#line 161 "combined_parser.l"
+#line 161 "bnfc_parser.l"
 return _SYMB_89;
 	YY_BREAK
 case 91:
 YY_RULE_SETUP
-#line 162 "combined_parser.l"
+#line 162 "bnfc_parser.l"
 return _SYMB_90;
 	YY_BREAK
 case 92:
 YY_RULE_SETUP
-#line 163 "combined_parser.l"
+#line 163 "bnfc_parser.l"
 return _SYMB_91;
 	YY_BREAK
 case 93:
 YY_RULE_SETUP
-#line 164 "combined_parser.l"
+#line 164 "bnfc_parser.l"
 return _SYMB_92;
 	YY_BREAK
 case 94:
 YY_RULE_SETUP
-#line 165 "combined_parser.l"
-return _LBRACK;
+#line 165 "bnfc_parser.l"
+return _SYMB_93;
 	YY_BREAK
 case 95:
 YY_RULE_SETUP
-#line 166 "combined_parser.l"
-return _RBRACK;
+#line 166 "bnfc_parser.l"
+return _LBRACK;
 	YY_BREAK
 case 96:
 YY_RULE_SETUP
-#line 167 "combined_parser.l"
-return _SYMB_95;
+#line 167 "bnfc_parser.l"
+return _RBRACK;
 	YY_BREAK
 case 97:
 YY_RULE_SETUP
-#line 168 "combined_parser.l"
+#line 168 "bnfc_parser.l"
 return _SYMB_96;
 	YY_BREAK
 case 98:
 YY_RULE_SETUP
-#line 169 "combined_parser.l"
+#line 169 "bnfc_parser.l"
 return _SYMB_97;
 	YY_BREAK
 case 99:
 YY_RULE_SETUP
-#line 170 "combined_parser.l"
+#line 170 "bnfc_parser.l"
 return _SYMB_98;
 	YY_BREAK
 case 100:
 YY_RULE_SETUP
-#line 171 "combined_parser.l"
+#line 171 "bnfc_parser.l"
 return _SYMB_99;
 	YY_BREAK
 case 101:
 YY_RULE_SETUP
-#line 172 "combined_parser.l"
+#line 172 "bnfc_parser.l"
 return _SYMB_100;
 	YY_BREAK
 case 102:
 YY_RULE_SETUP
-#line 173 "combined_parser.l"
-return _LBRACE;
+#line 173 "bnfc_parser.l"
+return _SYMB_101;
 	YY_BREAK
 case 103:
 YY_RULE_SETUP
-#line 174 "combined_parser.l"
-return _RBRACE;
+#line 174 "bnfc_parser.l"
+return _LBRACE;
 	YY_BREAK
 case 104:
 YY_RULE_SETUP
-#line 175 "combined_parser.l"
-return _SYMB_103;
+#line 175 "bnfc_parser.l"
+return _RBRACE;
 	YY_BREAK
 case 105:
 YY_RULE_SETUP
-#line 176 "combined_parser.l"
+#line 176 "bnfc_parser.l"
 return _SYMB_104;
 	YY_BREAK
 case 106:
 YY_RULE_SETUP
-#line 177 "combined_parser.l"
+#line 177 "bnfc_parser.l"
 return _SYMB_105;
 	YY_BREAK
 case 107:
 YY_RULE_SETUP
-#line 178 "combined_parser.l"
+#line 178 "bnfc_parser.l"
 return _SYMB_106;
 	YY_BREAK
 case 108:
 YY_RULE_SETUP
-#line 179 "combined_parser.l"
+#line 179 "bnfc_parser.l"
 return _SYMB_107;
 	YY_BREAK
 case 109:
 YY_RULE_SETUP
-#line 180 "combined_parser.l"
+#line 180 "bnfc_parser.l"
 return _SYMB_108;
 	YY_BREAK
 case 110:
 YY_RULE_SETUP
-#line 181 "combined_parser.l"
+#line 181 "bnfc_parser.l"
 return _SYMB_109;
 	YY_BREAK
 case 111:
 YY_RULE_SETUP
-#line 182 "combined_parser.l"
-return _DDOT;
+#line 182 "bnfc_parser.l"
+return _SYMB_110;
 	YY_BREAK
 case 112:
 YY_RULE_SETUP
-#line 183 "combined_parser.l"
-return _SYMB_111;
+#line 183 "bnfc_parser.l"
+return _DDOT;
 	YY_BREAK
 case 113:
 YY_RULE_SETUP
-#line 184 "combined_parser.l"
+#line 184 "bnfc_parser.l"
 return _SYMB_112;
 	YY_BREAK
 case 114:
 YY_RULE_SETUP
-#line 185 "combined_parser.l"
-return _DCOLON;
+#line 185 "bnfc_parser.l"
+return _SYMB_113;
 	YY_BREAK
 case 115:
 YY_RULE_SETUP
-#line 186 "combined_parser.l"
-return _DOLLAR;
+#line 186 "bnfc_parser.l"
+return _DCOLON;
 	YY_BREAK
 case 116:
 YY_RULE_SETUP
-#line 187 "combined_parser.l"
-return _KW_Assigns;
+#line 187 "bnfc_parser.l"
+return _DOLLAR;
 	YY_BREAK
 case 117:
 YY_RULE_SETUP
-#line 188 "combined_parser.l"
-return _KW_Assumes;
+#line 188 "bnfc_parser.l"
+return _KW_Assigns;
 	YY_BREAK
 case 118:
 YY_RULE_SETUP
-#line 189 "combined_parser.l"
-return _KW_Behaviors;
+#line 189 "bnfc_parser.l"
+return _KW_Assumes;
 	YY_BREAK
 case 119:
 YY_RULE_SETUP
-#line 190 "combined_parser.l"
-return _KW_Contract;
+#line 190 "bnfc_parser.l"
+return _KW_Behaviors;
 	YY_BREAK
 case 120:
 YY_RULE_SETUP
-#line 191 "combined_parser.l"
-return _KW_Decreases;
+#line 191 "bnfc_parser.l"
+return _KW_Contract;
 	YY_BREAK
 case 121:
 YY_RULE_SETUP
-#line 192 "combined_parser.l"
-return _KW_Requires;
+#line 192 "bnfc_parser.l"
+return _KW_Decreases;
 	YY_BREAK
 case 122:
 YY_RULE_SETUP
-#line 193 "combined_parser.l"
-return _KW_Terminates;
+#line 193 "bnfc_parser.l"
+return _KW_Requires;
 	YY_BREAK
 case 123:
 YY_RULE_SETUP
-#line 194 "combined_parser.l"
-return _KW_Variant;
+#line 194 "bnfc_parser.l"
+return _KW_Terminates;
 	YY_BREAK
 case 124:
 YY_RULE_SETUP
-#line 195 "combined_parser.l"
-return _KW_admit;
+#line 195 "bnfc_parser.l"
+return _KW_Variant;
 	YY_BREAK
 case 125:
 YY_RULE_SETUP
-#line 196 "combined_parser.l"
-return _KW_allocates;
+#line 196 "bnfc_parser.l"
+return _KW_admit;
 	YY_BREAK
 case 126:
 YY_RULE_SETUP
-#line 197 "combined_parser.l"
-return _KW_assert;
+#line 197 "bnfc_parser.l"
+return _KW_allocates;
 	YY_BREAK
 case 127:
 YY_RULE_SETUP
-#line 198 "combined_parser.l"
-return _KW_at;
+#line 198 "bnfc_parser.l"
+return _KW_assert;
 	YY_BREAK
 case 128:
 YY_RULE_SETUP
-#line 199 "combined_parser.l"
-return _KW_auto;
+#line 199 "bnfc_parser.l"
+return _KW_at;
 	YY_BREAK
 case 129:
 YY_RULE_SETUP
-#line 200 "combined_parser.l"
-return _KW_axiom;
+#line 200 "bnfc_parser.l"
+return _KW_auto;
 	YY_BREAK
 case 130:
 YY_RULE_SETUP
-#line 201 "combined_parser.l"
-return _KW_axiomatic;
+#line 201 "bnfc_parser.l"
+return _KW_axiom;
 	YY_BREAK
 case 131:
 YY_RULE_SETUP
-#line 202 "combined_parser.l"
-return _KW_behavior;
+#line 202 "bnfc_parser.l"
+return _KW_axiomatic;
 	YY_BREAK
 case 132:
 YY_RULE_SETUP
-#line 203 "combined_parser.l"
-return _KW_boolean;
+#line 203 "bnfc_parser.l"
+return _KW_behavior;
 	YY_BREAK
 case 133:
 YY_RULE_SETUP
-#line 204 "combined_parser.l"
-return _KW_break;
+#line 204 "bnfc_parser.l"
+return _KW_boolean;
 	YY_BREAK
 case 134:
 YY_RULE_SETUP
-#line 205 "combined_parser.l"
-return _KW_breaks;
+#line 205 "bnfc_parser.l"
+return _KW_break;
 	YY_BREAK
 case 135:
 YY_RULE_SETUP
-#line 206 "combined_parser.l"
-return _KW_case;
+#line 206 "bnfc_parser.l"
+return _KW_breaks;
 	YY_BREAK
 case 136:
 YY_RULE_SETUP
-#line 207 "combined_parser.l"
-return _KW_char;
+#line 207 "bnfc_parser.l"
+return _KW_case;
 	YY_BREAK
 case 137:
 YY_RULE_SETUP
-#line 208 "combined_parser.l"
-return _KW_check;
+#line 208 "bnfc_parser.l"
+return _KW_char;
 	YY_BREAK
 case 138:
 YY_RULE_SETUP
-#line 209 "combined_parser.l"
-return _KW_complete;
+#line 209 "bnfc_parser.l"
+return _KW_check;
 	YY_BREAK
 case 139:
 YY_RULE_SETUP
-#line 210 "combined_parser.l"
-return _KW_const;
+#line 210 "bnfc_parser.l"
+return _KW_complete;
 	YY_BREAK
 case 140:
 YY_RULE_SETUP
-#line 211 "combined_parser.l"
-return _KW_continue;
+#line 211 "bnfc_parser.l"
+return _KW_const;
 	YY_BREAK
 case 141:
 YY_RULE_SETUP
-#line 212 "combined_parser.l"
-return _KW_continues;
+#line 212 "bnfc_parser.l"
+return _KW_continue;
 	YY_BREAK
 case 142:
 YY_RULE_SETUP
-#line 213 "combined_parser.l"
-return _KW_default;
+#line 213 "bnfc_parser.l"
+return _KW_continues;
 	YY_BREAK
 case 143:
 YY_RULE_SETUP
-#line 214 "combined_parser.l"
-return _KW_disjoint;
+#line 214 "bnfc_parser.l"
+return _KW_default;
 	YY_BREAK
 case 144:
 YY_RULE_SETUP
-#line 215 "combined_parser.l"
-return _KW_do;
+#line 215 "bnfc_parser.l"
+return _KW_disjoint;
 	YY_BREAK
 case 145:
 YY_RULE_SETUP
-#line 216 "combined_parser.l"
-return _KW_double;
+#line 216 "bnfc_parser.l"
+return _KW_do;
 	YY_BREAK
 case 146:
 YY_RULE_SETUP
-#line 217 "combined_parser.l"
-return _KW_else;
+#line 217 "bnfc_parser.l"
+return _KW_double;
 	YY_BREAK
 case 147:
 YY_RULE_SETUP
-#line 218 "combined_parser.l"
-return _KW_ensures;
+#line 218 "bnfc_parser.l"
+return _KW_else;
 	YY_BREAK
 case 148:
 YY_RULE_SETUP
-#line 219 "combined_parser.l"
-return _KW_enum;
+#line 219 "bnfc_parser.l"
+return _KW_ensures;
 	YY_BREAK
 case 149:
 YY_RULE_SETUP
-#line 220 "combined_parser.l"
-return _KW_exits;
+#line 220 "bnfc_parser.l"
+return _KW_enum;
 	YY_BREAK
 case 150:
 YY_RULE_SETUP
-#line 221 "combined_parser.l"
-return _KW_extern;
+#line 221 "bnfc_parser.l"
+return _KW_exits;
 	YY_BREAK
 case 151:
 YY_RULE_SETUP
-#line 222 "combined_parser.l"
-return _KW_float;
+#line 222 "bnfc_parser.l"
+return _KW_extern;
 	YY_BREAK
 case 152:
 YY_RULE_SETUP
-#line 223 "combined_parser.l"
-return _KW_for;
+#line 223 "bnfc_parser.l"
+return _KW_float;
 	YY_BREAK
 case 153:
 YY_RULE_SETUP
-#line 224 "combined_parser.l"
-return _KW_frees;
+#line 224 "bnfc_parser.l"
+return _KW_for;
 	YY_BREAK
 case 154:
 YY_RULE_SETUP
-#line 225 "combined_parser.l"
-return _KW_function;
+#line 225 "bnfc_parser.l"
+return _KW_frees;
 	YY_BREAK
 case 155:
 YY_RULE_SETUP
-#line 226 "combined_parser.l"
-return _KW_ghost;
+#line 226 "bnfc_parser.l"
+return _KW_function;
 	YY_BREAK
 case 156:
 YY_RULE_SETUP
-#line 227 "combined_parser.l"
-return _KW_global;
+#line 227 "bnfc_parser.l"
+return _KW_ghost;
 	YY_BREAK
 case 157:
 YY_RULE_SETUP
-#line 228 "combined_parser.l"
-return _KW_goto;
+#line 228 "bnfc_parser.l"
+return _KW_global;
 	YY_BREAK
 case 158:
 YY_RULE_SETUP
-#line 229 "combined_parser.l"
-return _KW_if;
+#line 229 "bnfc_parser.l"
+return _KW_goto;
 	YY_BREAK
 case 159:
 YY_RULE_SETUP
-#line 230 "combined_parser.l"
-return _KW_impact;
+#line 230 "bnfc_parser.l"
+return _KW_if;
 	YY_BREAK
 case 160:
 YY_RULE_SETUP
-#line 231 "combined_parser.l"
-return _KW_include;
+#line 231 "bnfc_parser.l"
+return _KW_impact;
 	YY_BREAK
 case 161:
 YY_RULE_SETUP
-#line 232 "combined_parser.l"
-return _KW_inductive;
+#line 232 "bnfc_parser.l"
+return _KW_include;
 	YY_BREAK
 case 162:
 YY_RULE_SETUP
-#line 233 "combined_parser.l"
-return _KW_int;
+#line 233 "bnfc_parser.l"
+return _KW_inductive;
 	YY_BREAK
 case 163:
 YY_RULE_SETUP
-#line 234 "combined_parser.l"
-return _KW_integer;
+#line 234 "bnfc_parser.l"
+return _KW_int;
 	YY_BREAK
 case 164:
 YY_RULE_SETUP
-#line 235 "combined_parser.l"
-return _KW_invariant;
+#line 235 "bnfc_parser.l"
+return _KW_integer;
 	YY_BREAK
 case 165:
 YY_RULE_SETUP
-#line 236 "combined_parser.l"
-return _KW_label;
+#line 236 "bnfc_parser.l"
+return _KW_invariant;
 	YY_BREAK
 case 166:
 YY_RULE_SETUP
-#line 237 "combined_parser.l"
-return _KW_lemma;
+#line 237 "bnfc_parser.l"
+return _KW_label;
 	YY_BREAK
 case 167:
 YY_RULE_SETUP
-#line 238 "combined_parser.l"
-return _KW_let;
+#line 238 "bnfc_parser.l"
+return _KW_lemma;
 	YY_BREAK
 case 168:
 YY_RULE_SETUP
-#line 239 "combined_parser.l"
-return _KW_logic;
+#line 239 "bnfc_parser.l"
+return _KW_let;
 	YY_BREAK
 case 169:
 YY_RULE_SETUP
-#line 240 "combined_parser.l"
-return _KW_long;
+#line 240 "bnfc_parser.l"
+return _KW_logic;
 	YY_BREAK
 case 170:
 YY_RULE_SETUP
-#line 241 "combined_parser.l"
-return _KW_loop;
+#line 241 "bnfc_parser.l"
+return _KW_long;
 	YY_BREAK
 case 171:
 YY_RULE_SETUP
-#line 242 "combined_parser.l"
-return _KW_model;
+#line 242 "bnfc_parser.l"
+return _KW_loop;
 	YY_BREAK
 case 172:
 YY_RULE_SETUP
-#line 243 "combined_parser.l"
-return _KW_module;
+#line 243 "bnfc_parser.l"
+return _KW_model;
 	YY_BREAK
 case 173:
 YY_RULE_SETUP
-#line 244 "combined_parser.l"
-return _KW_pragma;
+#line 244 "bnfc_parser.l"
+return _KW_module;
 	YY_BREAK
 case 174:
 YY_RULE_SETUP
-#line 245 "combined_parser.l"
-return _KW_predicate;
+#line 245 "bnfc_parser.l"
+return _KW_pragma;
 	YY_BREAK
 case 175:
 YY_RULE_SETUP
-#line 246 "combined_parser.l"
-return _KW_reads;
+#line 246 "bnfc_parser.l"
+return _KW_predicate;
 	YY_BREAK
 case 176:
 YY_RULE_SETUP
-#line 247 "combined_parser.l"
-return _KW_real;
+#line 247 "bnfc_parser.l"
+return _KW_reads;
 	YY_BREAK
 case 177:
 YY_RULE_SETUP
-#line 248 "combined_parser.l"
-return _KW_register;
+#line 248 "bnfc_parser.l"
+return _KW_real;
 	YY_BREAK
 case 178:
 YY_RULE_SETUP
-#line 249 "combined_parser.l"
-return _KW_requires;
+#line 249 "bnfc_parser.l"
+return _KW_register;
 	YY_BREAK
 case 179:
 YY_RULE_SETUP
-#line 250 "combined_parser.l"
-return _KW_return;
+#line 250 "bnfc_parser.l"
+return _KW_requires;
 	YY_BREAK
 case 180:
 YY_RULE_SETUP
-#line 251 "combined_parser.l"
-return _KW_returns;
+#line 251 "bnfc_parser.l"
+return _KW_return;
 	YY_BREAK
 case 181:
 YY_RULE_SETUP
-#line 252 "combined_parser.l"
-return _KW_short;
+#line 252 "bnfc_parser.l"
+return _KW_returns;
 	YY_BREAK
 case 182:
 YY_RULE_SETUP
-#line 253 "combined_parser.l"
-return _KW_signed;
+#line 253 "bnfc_parser.l"
+return _KW_short;
 	YY_BREAK
 case 183:
 YY_RULE_SETUP
-#line 254 "combined_parser.l"
-return _KW_sizeof;
+#line 254 "bnfc_parser.l"
+return _KW_signed;
 	YY_BREAK
 case 184:
 YY_RULE_SETUP
-#line 255 "combined_parser.l"
-return _KW_slice;
+#line 255 "bnfc_parser.l"
+return _KW_sizeof;
 	YY_BREAK
 case 185:
 YY_RULE_SETUP
-#line 256 "combined_parser.l"
-return _KW_static;
+#line 256 "bnfc_parser.l"
+return _KW_slice;
 	YY_BREAK
 case 186:
 YY_RULE_SETUP
-#line 257 "combined_parser.l"
-return _KW_struct;
+#line 257 "bnfc_parser.l"
+return _KW_static;
 	YY_BREAK
 case 187:
 YY_RULE_SETUP
-#line 258 "combined_parser.l"
-return _KW_switch;
+#line 258 "bnfc_parser.l"
+return _KW_struct;
 	YY_BREAK
 case 188:
 YY_RULE_SETUP
-#line 259 "combined_parser.l"
-return _KW_type;
+#line 259 "bnfc_parser.l"
+return _KW_switch;
 	YY_BREAK
 case 189:
 YY_RULE_SETUP
-#line 260 "combined_parser.l"
-return _KW_typedef;
+#line 260 "bnfc_parser.l"
+return _KW_type;
 	YY_BREAK
 case 190:
 YY_RULE_SETUP
-#line 261 "combined_parser.l"
-return _KW_union;
+#line 261 "bnfc_parser.l"
+return _KW_typedef;
 	YY_BREAK
 case 191:
 YY_RULE_SETUP
-#line 262 "combined_parser.l"
-return _KW_unsigned;
+#line 262 "bnfc_parser.l"
+return _KW_union;
 	YY_BREAK
 case 192:
 YY_RULE_SETUP
-#line 263 "combined_parser.l"
-return _KW_void;
+#line 263 "bnfc_parser.l"
+return _KW_unsigned;
 	YY_BREAK
 case 193:
 YY_RULE_SETUP
-#line 264 "combined_parser.l"
-return _KW_volatile;
+#line 264 "bnfc_parser.l"
+return _KW_void;
 	YY_BREAK
 case 194:
 YY_RULE_SETUP
-#line 265 "combined_parser.l"
-return _KW_while;
+#line 265 "bnfc_parser.l"
+return _KW_volatile;
 	YY_BREAK
 case 195:
 YY_RULE_SETUP
-#line 266 "combined_parser.l"
-return _KW_writes;
+#line 266 "bnfc_parser.l"
+return _KW_while;
 	YY_BREAK
 case 196:
 YY_RULE_SETUP
-#line 270 "combined_parser.l"
-yylval->_string = strdup(yytext); return T_NAMEDTYPE;
+#line 267 "bnfc_parser.l"
+return _KW_writes;
 	YY_BREAK
 case 197:
 YY_RULE_SETUP
-#line 271 "combined_parser.l"
-yylval->_string = strdup(yytext); return T_CST_WCHAR;
+#line 271 "bnfc_parser.l"
+yylval->_string = strdup(yytext); return T_NAMEDTYPE;
 	YY_BREAK
 case 198:
 YY_RULE_SETUP
-#line 272 "combined_parser.l"
-yylval->_string = strdup(yytext); return T_CST_WSTRING;
+#line 272 "bnfc_parser.l"
+yylval->_string = strdup(yytext); return T_CST_WCHAR;
 	YY_BREAK
 case 199:
 YY_RULE_SETUP
-#line 273 "combined_parser.l"
-yylval->_string = strdup(yytext); return T_ATTRIBUTE_ANNOT;
+#line 273 "bnfc_parser.l"
+yylval->_string = strdup(yytext); return T_CST_WSTRING;
 	YY_BREAK
 case 200:
 YY_RULE_SETUP
-#line 274 "combined_parser.l"
-yylval->_string = strdup(yytext); return T_LBRACE;
+#line 274 "bnfc_parser.l"
+yylval->_string = strdup(yytext); return T_ATTRIBUTE_ANNOT;
 	YY_BREAK
 case 201:
 YY_RULE_SETUP
-#line 275 "combined_parser.l"
-yylval->_string = strdup(yytext); return T_RBRACE;
+#line 275 "bnfc_parser.l"
+yylval->_string = strdup(yytext); return T_LBRACE;
 	YY_BREAK
 case 202:
 YY_RULE_SETUP
-#line 276 "combined_parser.l"
-yylval->_string = strdup(yytext); return T_LBRACKET;
+#line 276 "bnfc_parser.l"
+yylval->_string = strdup(yytext); return T_RBRACE;
 	YY_BREAK
 case 203:
 YY_RULE_SETUP
-#line 277 "combined_parser.l"
-yylval->_string = strdup(yytext); return T_RBRACKET;
+#line 277 "bnfc_parser.l"
+yylval->_string = strdup(yytext); return T_LBRACKET;
 	YY_BREAK
 case 204:
-/* rule 204 can match eol */
 YY_RULE_SETUP
-#line 278 "combined_parser.l"
-yylval->_string = strdup(yytext); return T_RGHOST;
+#line 278 "bnfc_parser.l"
+yylval->_string = strdup(yytext); return T_RBRACKET;
 	YY_BREAK
 case 205:
+/* rule 205 can match eol */
 YY_RULE_SETUP
-#line 279 "combined_parser.l"
-yylval->_string = strdup(yytext); return T_ASM;
+#line 279 "bnfc_parser.l"
+yylval->_string = strdup(yytext); return T_RGHOST;
 	YY_BREAK
 case 206:
 YY_RULE_SETUP
-#line 280 "combined_parser.l"
-yylval->_string = strdup(yytext); return T_ALIGNOF;
+#line 280 "bnfc_parser.l"
+yylval->_string = strdup(yytext); return T_ASM;
 	YY_BREAK
 case 207:
 YY_RULE_SETUP
-#line 281 "combined_parser.l"
-yylval->_string = strdup(yytext); return T_ATTRIBUTE;
+#line 281 "bnfc_parser.l"
+yylval->_string = strdup(yytext); return T_ALIGNOF;
 	YY_BREAK
 case 208:
 YY_RULE_SETUP
-#line 282 "combined_parser.l"
-yylval->_string = strdup(yytext); return T_BLOCKATTRIBUTE;
+#line 282 "bnfc_parser.l"
+yylval->_string = strdup(yytext); return T_ATTRIBUTE;
 	YY_BREAK
 case 209:
 YY_RULE_SETUP
-#line 283 "combined_parser.l"
-yylval->_string = strdup(yytext); return T_CONST;
+#line 283 "bnfc_parser.l"
+yylval->_string = strdup(yytext); return T_BLOCKATTRIBUTE;
 	YY_BREAK
 case 210:
 YY_RULE_SETUP
-#line 284 "combined_parser.l"
-yylval->_string = strdup(yytext); return T_FUNCTION__;
+#line 284 "bnfc_parser.l"
+yylval->_string = strdup(yytext); return T_CONST;
 	YY_BREAK
 case 211:
 YY_RULE_SETUP
-#line 285 "combined_parser.l"
-yylval->_string = strdup(yytext); return T_INT;
+#line 285 "bnfc_parser.l"
+yylval->_string = strdup(yytext); return T_FUNCTION__;
 	YY_BREAK
 case 212:
 YY_RULE_SETUP
-#line 286 "combined_parser.l"
+#line 286 "bnfc_parser.l"
 yylval->_string = strdup(yytext); return T_MSATTR;
 	YY_BREAK
 case 213:
 YY_RULE_SETUP
-#line 287 "combined_parser.l"
+#line 287 "bnfc_parser.l"
 yylval->_string = strdup(yytext); return T_RESTRICT;
 	YY_BREAK
 case 214:
 YY_RULE_SETUP
-#line 288 "combined_parser.l"
+#line 288 "bnfc_parser.l"
 yylval->_string = strdup(yytext); return T_SIGNED;
 	YY_BREAK
 case 215:
 YY_RULE_SETUP
-#line 289 "combined_parser.l"
+#line 289 "bnfc_parser.l"
 yylval->_string = strdup(yytext); return T_VOLATILE;
 	YY_BREAK
 case 216:
 YY_RULE_SETUP
-#line 290 "combined_parser.l"
+#line 290 "bnfc_parser.l"
 yylval->_string = strdup(yytext); return T_INLINE;
 	YY_BREAK
 case 217:
 YY_RULE_SETUP
-#line 291 "combined_parser.l"
+#line 291 "bnfc_parser.l"
 yylval->_string = strdup(yytext); return T_TYPEOF;
 	YY_BREAK
 case 218:
 YY_RULE_SETUP
-#line 292 "combined_parser.l"
+#line 292 "bnfc_parser.l"
 yylval->_string = strdup(yytext); return T_EXT_GLOBAL;
 	YY_BREAK
 case 219:
 YY_RULE_SETUP
-#line 293 "combined_parser.l"
+#line 293 "bnfc_parser.l"
 yylval->_string = strdup(yytext); return T_EXT_GLOBAL_BLOCK;
 	YY_BREAK
 case 220:
 YY_RULE_SETUP
-#line 294 "combined_parser.l"
+#line 294 "bnfc_parser.l"
 yylval->_string = strdup(yytext); return T_EXT_CODE_ANNOT;
 	YY_BREAK
 case 221:
 YY_RULE_SETUP
-#line 295 "combined_parser.l"
+#line 295 "bnfc_parser.l"
 yylval->_string = strdup(yytext); return T_EXT_CONTRACT;
 	YY_BREAK
 case 222:
 YY_RULE_SETUP
-#line 296 "combined_parser.l"
+#line 296 "bnfc_parser.l"
 yylval->_string = strdup(yytext); return T_STRING_LITERAL;
 	YY_BREAK
 case 223:
 YY_RULE_SETUP
-#line 297 "combined_parser.l"
+#line 297 "bnfc_parser.l"
 yylval->_string = strdup(yytext); return T_WSTRING_CONSTANT;
 	YY_BREAK
 case 224:
 YY_RULE_SETUP
-#line 298 "combined_parser.l"
+#line 298 "bnfc_parser.l"
 yylval->_string = strdup(yytext); return T_TYPENAME;
 	YY_BREAK
 case 225:
 YY_RULE_SETUP
-#line 299 "combined_parser.l"
+#line 299 "bnfc_parser.l"
 LITERAL_BUFFER_CREATE(); BEGIN STRING;
 	YY_BREAK
 case 226:
 YY_RULE_SETUP
-#line 300 "combined_parser.l"
+#line 300 "bnfc_parser.l"
 BEGIN ESCAPED;
 	YY_BREAK
 case 227:
 YY_RULE_SETUP
-#line 301 "combined_parser.l"
+#line 301 "bnfc_parser.l"
 yylval->_string = LITERAL_BUFFER_HARVEST(); BEGIN INITIAL; return _STRING_;
 	YY_BREAK
 case 228:
 YY_RULE_SETUP
-#line 302 "combined_parser.l"
+#line 302 "bnfc_parser.l"
 LITERAL_BUFFER_APPEND_CHAR(yytext[0]);
 	YY_BREAK
 case 229:
 YY_RULE_SETUP
-#line 303 "combined_parser.l"
+#line 303 "bnfc_parser.l"
 LITERAL_BUFFER_APPEND_CHAR('\f'); BEGIN STRING;
 	YY_BREAK
 case 230:
 YY_RULE_SETUP
-#line 304 "combined_parser.l"
+#line 304 "bnfc_parser.l"
 LITERAL_BUFFER_APPEND_CHAR('\n'); BEGIN STRING;
 	YY_BREAK
 case 231:
 YY_RULE_SETUP
-#line 305 "combined_parser.l"
+#line 305 "bnfc_parser.l"
 LITERAL_BUFFER_APPEND_CHAR('\r'); BEGIN STRING;
 	YY_BREAK
 case 232:
 YY_RULE_SETUP
-#line 306 "combined_parser.l"
+#line 306 "bnfc_parser.l"
 LITERAL_BUFFER_APPEND_CHAR('\t'); BEGIN STRING;
 	YY_BREAK
 case 233:
 YY_RULE_SETUP
-#line 307 "combined_parser.l"
+#line 307 "bnfc_parser.l"
 LITERAL_BUFFER_APPEND_CHAR('"');  BEGIN STRING;
 	YY_BREAK
 case 234:
 YY_RULE_SETUP
-#line 308 "combined_parser.l"
+#line 308 "bnfc_parser.l"
 LITERAL_BUFFER_APPEND_CHAR('\\'); BEGIN STRING;
 	YY_BREAK
 case 235:
 YY_RULE_SETUP
-#line 309 "combined_parser.l"
+#line 309 "bnfc_parser.l"
 LITERAL_BUFFER_APPEND(yytext);    BEGIN STRING;
 	YY_BREAK
 case YY_STATE_EOF(STRING):
 case YY_STATE_EOF(ESCAPED):
-#line 310 "combined_parser.l"
+#line 310 "bnfc_parser.l"
 LITERAL_BUFFER_FREE(); return _ERROR_;
 	YY_BREAK
 case 236:
 YY_RULE_SETUP
-#line 311 "combined_parser.l"
+#line 311 "bnfc_parser.l"
 BEGIN CHAR;
 	YY_BREAK
 case 237:
 YY_RULE_SETUP
-#line 312 "combined_parser.l"
+#line 312 "bnfc_parser.l"
 BEGIN CHARESC;
 	YY_BREAK
 case 238:
 /* rule 238 can match eol */
 YY_RULE_SETUP
-#line 313 "combined_parser.l"
+#line 313 "bnfc_parser.l"
 BEGIN CHAREND; yylval->_char = yytext[0]; return _CHAR_;
 	YY_BREAK
 case 239:
 YY_RULE_SETUP
-#line 314 "combined_parser.l"
+#line 314 "bnfc_parser.l"
 BEGIN CHAREND; yylval->_char = '\f';     return _CHAR_;
 	YY_BREAK
 case 240:
 YY_RULE_SETUP
-#line 315 "combined_parser.l"
+#line 315 "bnfc_parser.l"
 BEGIN CHAREND; yylval->_char = '\n';     return _CHAR_;
 	YY_BREAK
 case 241:
 YY_RULE_SETUP
-#line 316 "combined_parser.l"
+#line 316 "bnfc_parser.l"
 BEGIN CHAREND; yylval->_char = '\r';     return _CHAR_;
 	YY_BREAK
 case 242:
 YY_RULE_SETUP
-#line 317 "combined_parser.l"
+#line 317 "bnfc_parser.l"
 BEGIN CHAREND; yylval->_char = '\t';     return _CHAR_;
 	YY_BREAK
 case 243:
 YY_RULE_SETUP
-#line 318 "combined_parser.l"
+#line 318 "bnfc_parser.l"
 BEGIN CHAREND; yylval->_char = yytext[0]; return _CHAR_;
 	YY_BREAK
 case 244:
 YY_RULE_SETUP
-#line 319 "combined_parser.l"
+#line 319 "bnfc_parser.l"
 BEGIN INITIAL;
 	YY_BREAK
 case 245:
 YY_RULE_SETUP
-#line 320 "combined_parser.l"
+#line 320 "bnfc_parser.l"
 yylval->_double = atof(yytext); return _DOUBLE_;
 	YY_BREAK
 case 246:
 YY_RULE_SETUP
-#line 321 "combined_parser.l"
+#line 321 "bnfc_parser.l"
 yylval->_int = atoi(yytext); return _INTEGER_;
 	YY_BREAK
 case 247:
 YY_RULE_SETUP
-#line 322 "combined_parser.l"
+#line 322 "bnfc_parser.l"
 yylval->_string = strdup(yytext); return _IDENT_;
 	YY_BREAK
 case 248:
 /* rule 248 can match eol */
 YY_RULE_SETUP
-#line 323 "combined_parser.l"
+#line 323 "bnfc_parser.l"
 /* ignore white space. */;
 	YY_BREAK
 case 249:
 YY_RULE_SETUP
-#line 324 "combined_parser.l"
+#line 324 "bnfc_parser.l"
 return _ERROR_;
 	YY_BREAK
 case 250:
 YY_RULE_SETUP
-#line 326 "combined_parser.l"
+#line 326 "bnfc_parser.l"
 ECHO;
 	YY_BREAK
 #line 3048 "Lexer.C"
@@ -4202,7 +4202,7 @@ void yyfree (void * ptr , yyscan_t yyscanner)
 
 #define YYTABLES_NAME "yytables"
 
-#line 326 "combined_parser.l"
+#line 326 "bnfc_parser.l"
 
 
 yyscan_t initialize_lexer(FILE *inp)

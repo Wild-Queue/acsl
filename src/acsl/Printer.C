@@ -1862,7 +1862,7 @@ void PrintAbsyn::visitCodeAnnot(CodeAnnot *p)
   int oldi = _i_;
   if (oldi > 0) render(ACSL__L_PAREN);
 
-  _i_ = 0; p->logicptreeannot_->accept(this);
+  _i_ = 0; p->pragmaorcodeannotation_->accept(this);
 
   if (oldi > 0) render(ACSL__R_PAREN);
   _i_ = oldi;
@@ -2038,7 +2038,8 @@ void PrintAbsyn::visitSpecStatement(SpecStatement *p)
   int oldi = _i_;
   if (oldi > 0) render(ACSL__L_PAREN);
 
-  _i_ = 0; p->spec_->accept(this);
+  _i_ = 0; p->isacslspec_->accept(this);
+  _i_ = 0; visitListWildcard(p->listwildcard_);
   _i_ = 0; p->annotatedstmt_->accept(this);
 
   if (oldi > 0) render(ACSL__R_PAREN);
@@ -2379,7 +2380,7 @@ void PrintAbsyn::visitSomeLoopAnnotations(SomeLoopAnnotations *p)
   int oldi = _i_;
   if (oldi > 0) render(ACSL__L_PAREN);
 
-  _i_ = 0; visitListLogicPTreeAnnot(p->listlogicptreeannot_);
+  _i_ = 0; p->loopannotstack_->accept(this);
 
   if (oldi > 0) render(ACSL__R_PAREN);
   _i_ = oldi;
@@ -2469,7 +2470,8 @@ void PrintAbsyn::visitSpecDeclSpecInitDecl(SpecDeclSpecInitDecl *p)
   int oldi = _i_;
   if (oldi > 0) render(ACSL__L_PAREN);
 
-  _i_ = 0; p->spec_->accept(this);
+  _i_ = 0; p->isacslspec_->accept(this);
+  _i_ = 0; visitListWildcard(p->listwildcard_);
   _i_ = 0; p->declspeclist_->accept(this);
   _i_ = 0; p->declandinitdeclattrlist_->accept(this);
   render(';');
@@ -2483,7 +2485,8 @@ void PrintAbsyn::visitSpecDeclSpec(SpecDeclSpec *p)
   int oldi = _i_;
   if (oldi > 0) render(ACSL__L_PAREN);
 
-  _i_ = 0; p->spec_->accept(this);
+  _i_ = 0; p->isacslspec_->accept(this);
+  _i_ = 0; visitListWildcard(p->listwildcard_);
   _i_ = 0; p->declspeclist_->accept(this);
   render(';');
 
@@ -2903,7 +2906,18 @@ void PrintAbsyn::visitTypeSpecIntKeyWord(TypeSpecIntKeyWord *p)
   int oldi = _i_;
   if (oldi > 0) render(ACSL__L_PAREN);
 
-  visitINT(p->int_);
+  render("__int32");
+
+  if (oldi > 0) render(ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitTypeSpecInt32KeyWord(TypeSpecInt32KeyWord *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(ACSL__L_PAREN);
+
+  render("int");
 
   if (oldi > 0) render(ACSL__R_PAREN);
   _i_ = oldi;
@@ -3972,7 +3986,8 @@ void PrintAbsyn::visitFunctionDefSpec(FunctionDefSpec *p)
   int oldi = _i_;
   if (oldi > 0) render(ACSL__L_PAREN);
 
-  _i_ = 0; p->spec_->accept(this);
+  _i_ = 0; p->isacslspec_->accept(this);
+  _i_ = 0; visitListWildcard(p->listwildcard_);
   _i_ = 0; p->functiondefstart_->accept(this);
   _i_ = 0; p->block_->accept(this);
 
@@ -4114,7 +4129,7 @@ void PrintAbsyn::visitCVSpecAttribute_annotKeyWord(CVSpecAttribute_annotKeyWord 
   int oldi = _i_;
   if (oldi > 0) render(ACSL__L_PAREN);
 
-  visitATTRIBUTE_ANNOT(p->attribute_annot_);
+  _i_ = 0; p->identifier_->accept(this);
 
   if (oldi > 0) render(ACSL__R_PAREN);
   _i_ = oldi;
@@ -4316,7 +4331,7 @@ void PrintAbsyn::visitAttributeAttributeAnnot(AttributeAttributeAnnot *p)
   int oldi = _i_;
   if (oldi > 0) render(ACSL__L_PAREN);
 
-  visitATTRIBUTE_ANNOT(p->attribute_annot_);
+  _i_ = 0; p->identifier_->accept(this);
 
   if (oldi > 0) render(ACSL__R_PAREN);
   _i_ = oldi;
@@ -14604,12 +14619,6 @@ void PrintAbsyn::visitFUNCTION__(String s)
 }
 
 
-void PrintAbsyn::visitINT(String s)
-{
-  render(s);
-}
-
-
 void PrintAbsyn::visitMSATTR(String s)
 {
   render(s);
@@ -16181,7 +16190,7 @@ void ShowAbsyn::visitCodeAnnot(CodeAnnot *p)
   bufAppend("CodeAnnot");
   bufAppend(' ');
   bufAppend('[');
-  if (p->logicptreeannot_)  p->logicptreeannot_->accept(this);
+  if (p->pragmaorcodeannotation_)  p->pragmaorcodeannotation_->accept(this);
   bufAppend(']');
   bufAppend(')');
 }
@@ -16321,7 +16330,11 @@ void ShowAbsyn::visitSpecStatement(SpecStatement *p)
   bufAppend("SpecStatement");
   bufAppend(' ');
   bufAppend('[');
-  if (p->spec_)  p->spec_->accept(this);
+  if (p->isacslspec_)  p->isacslspec_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->listwildcard_)  p->listwildcard_->accept(this);
   bufAppend(']');
   bufAppend(' ');
   bufAppend('[');
@@ -16628,7 +16641,7 @@ void ShowAbsyn::visitSomeLoopAnnotations(SomeLoopAnnotations *p)
   bufAppend("SomeLoopAnnotations");
   bufAppend(' ');
   bufAppend('[');
-  if (p->listlogicptreeannot_)  p->listlogicptreeannot_->accept(this);
+  if (p->loopannotstack_)  p->loopannotstack_->accept(this);
   bufAppend(']');
   bufAppend(')');
 }
@@ -16707,7 +16720,11 @@ void ShowAbsyn::visitSpecDeclSpecInitDecl(SpecDeclSpecInitDecl *p)
   bufAppend("SpecDeclSpecInitDecl");
   bufAppend(' ');
   bufAppend('[');
-  if (p->spec_)  p->spec_->accept(this);
+  if (p->isacslspec_)  p->isacslspec_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->listwildcard_)  p->listwildcard_->accept(this);
   bufAppend(']');
   bufAppend(' ');
   bufAppend('[');
@@ -16726,7 +16743,11 @@ void ShowAbsyn::visitSpecDeclSpec(SpecDeclSpec *p)
   bufAppend("SpecDeclSpec");
   bufAppend(' ');
   bufAppend('[');
-  if (p->spec_)  p->spec_->accept(this);
+  if (p->isacslspec_)  p->isacslspec_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->listwildcard_)  p->listwildcard_->accept(this);
   bufAppend(']');
   bufAppend(' ');
   bufAppend('[');
@@ -17047,11 +17068,11 @@ void ShowAbsyn::visitTypeSpecShortKeyWord(TypeSpecShortKeyWord *p)
 }
 void ShowAbsyn::visitTypeSpecIntKeyWord(TypeSpecIntKeyWord *p)
 {
-  bufAppend('(');
   bufAppend("TypeSpecIntKeyWord");
-  bufAppend(' ');
-  visitINT(p->int_);
-  bufAppend(')');
+}
+void ShowAbsyn::visitTypeSpecInt32KeyWord(TypeSpecInt32KeyWord *p)
+{
+  bufAppend("TypeSpecInt32KeyWord");
 }
 void ShowAbsyn::visitTypeSpecLongKeyWord(TypeSpecLongKeyWord *p)
 {
@@ -18068,7 +18089,11 @@ void ShowAbsyn::visitFunctionDefSpec(FunctionDefSpec *p)
   bufAppend("FunctionDefSpec");
   bufAppend(' ');
   bufAppend('[');
-  if (p->spec_)  p->spec_->accept(this);
+  if (p->isacslspec_)  p->isacslspec_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->listwildcard_)  p->listwildcard_->accept(this);
   bufAppend(']');
   bufAppend(' ');
   bufAppend('[');
@@ -18207,7 +18232,9 @@ void ShowAbsyn::visitCVSpecAttribute_annotKeyWord(CVSpecAttribute_annotKeyWord *
   bufAppend('(');
   bufAppend("CVSpecAttribute_annotKeyWord");
   bufAppend(' ');
-  visitATTRIBUTE_ANNOT(p->attribute_annot_);
+  bufAppend('[');
+  if (p->identifier_)  p->identifier_->accept(this);
+  bufAppend(']');
   bufAppend(')');
 }
 void ShowAbsyn::visitAttributesWithAsm(AttributesWithAsm *p) {} //abstract class
@@ -18362,7 +18389,9 @@ void ShowAbsyn::visitAttributeAttributeAnnot(AttributeAttributeAnnot *p)
   bufAppend('(');
   bufAppend("AttributeAttributeAnnot");
   bufAppend(' ');
-  visitATTRIBUTE_ANNOT(p->attribute_annot_);
+  bufAppend('[');
+  if (p->identifier_)  p->identifier_->accept(this);
+  bufAppend(']');
   bufAppend(')');
 }
 void ShowAbsyn::visitListAttribute(ListAttribute *listattribute)
@@ -25809,14 +25838,6 @@ void ShowAbsyn::visitCONST(String s)
 
 
 void ShowAbsyn::visitFUNCTION__(String s)
-{
-  bufAppend('\"');
-  bufAppend(s);
-  bufAppend('\"');
-}
-
-
-void ShowAbsyn::visitINT(String s)
 {
   bufAppend('\"');
   bufAppend(s);

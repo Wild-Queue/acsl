@@ -33,7 +33,6 @@ typedef std::string ATTRIBUTE;
 typedef std::string BLOCKATTRIBUTE;
 typedef std::string CONST;
 typedef std::string FUNCTION__;
-typedef std::string INT;
 typedef std::string MSATTR;
 typedef std::string RESTRICT;
 typedef std::string SIGNED;
@@ -463,6 +462,7 @@ class TypeSpecCharKeyWord;
 class TypeSpecBoolKeyWord;
 class TypeSpecShortKeyWord;
 class TypeSpecIntKeyWord;
+class TypeSpecInt32KeyWord;
 class TypeSpecLongKeyWord;
 class TypeSpecInt64KeyWord;
 class TypeSpecFloatKeyWord;
@@ -1796,6 +1796,7 @@ public:
   virtual void visitTypeSpecBoolKeyWord(TypeSpecBoolKeyWord *p) = 0;
   virtual void visitTypeSpecShortKeyWord(TypeSpecShortKeyWord *p) = 0;
   virtual void visitTypeSpecIntKeyWord(TypeSpecIntKeyWord *p) = 0;
+  virtual void visitTypeSpecInt32KeyWord(TypeSpecInt32KeyWord *p) = 0;
   virtual void visitTypeSpecLongKeyWord(TypeSpecLongKeyWord *p) = 0;
   virtual void visitTypeSpecInt64KeyWord(TypeSpecInt64KeyWord *p) = 0;
   virtual void visitTypeSpecFloatKeyWord(TypeSpecFloatKeyWord *p) = 0;
@@ -2732,7 +2733,6 @@ public:
   virtual void visitBLOCKATTRIBUTE(BLOCKATTRIBUTE x) = 0;
   virtual void visitCONST(CONST x) = 0;
   virtual void visitFUNCTION__(FUNCTION__ x) = 0;
-  virtual void visitINT(INT x) = 0;
   virtual void visitMSATTR(MSATTR x) = 0;
   virtual void visitRESTRICT(RESTRICT x) = 0;
   virtual void visitSIGNED(SIGNED x) = 0;
@@ -6109,11 +6109,11 @@ public:
 class CodeAnnot : public Annot
 {
 public:
-  LogicPTreeAnnot *logicptreeannot_;
+  PragmaOrCodeAnnotation *pragmaorcodeannotation_;
 
   CodeAnnot(const CodeAnnot &);
   CodeAnnot &operator=(const CodeAnnot &);
-  CodeAnnot(LogicPTreeAnnot *p1);
+  CodeAnnot(PragmaOrCodeAnnotation *p1);
   ~CodeAnnot();
   virtual void accept(Visitor *v);
   virtual CodeAnnot *clone() const;
@@ -6253,12 +6253,13 @@ public:
 class SpecStatement : public Statement
 {
 public:
-  Spec *spec_;
+  IsACSLSpec *isacslspec_;
+  ListWildcard *listwildcard_;
   AnnotatedStmt *annotatedstmt_;
 
   SpecStatement(const SpecStatement &);
   SpecStatement &operator=(const SpecStatement &);
-  SpecStatement(Spec *p1, AnnotatedStmt *p2);
+  SpecStatement(IsACSLSpec *p1, ListWildcard *p2, AnnotatedStmt *p3);
   ~SpecStatement();
   virtual void accept(Visitor *v);
   virtual SpecStatement *clone() const;
@@ -6611,11 +6612,11 @@ public:
 class SomeLoopAnnotations : public OptLoopAnnotations
 {
 public:
-  ListLogicPTreeAnnot *listlogicptreeannot_;
+  LoopAnnotStack *loopannotstack_;
 
   SomeLoopAnnotations(const SomeLoopAnnotations &);
   SomeLoopAnnotations &operator=(const SomeLoopAnnotations &);
-  SomeLoopAnnotations(ListLogicPTreeAnnot *p1);
+  SomeLoopAnnotations(LoopAnnotStack *p1);
   ~SomeLoopAnnotations();
   virtual void accept(Visitor *v);
   virtual SomeLoopAnnotations *clone() const;
@@ -6710,13 +6711,14 @@ public:
 class SpecDeclSpecInitDecl : public Declaration
 {
 public:
-  Spec *spec_;
+  IsACSLSpec *isacslspec_;
+  ListWildcard *listwildcard_;
   DeclSpecList *declspeclist_;
   DeclAndInitDeclAttrList *declandinitdeclattrlist_;
 
   SpecDeclSpecInitDecl(const SpecDeclSpecInitDecl &);
   SpecDeclSpecInitDecl &operator=(const SpecDeclSpecInitDecl &);
-  SpecDeclSpecInitDecl(Spec *p1, DeclSpecList *p2, DeclAndInitDeclAttrList *p3);
+  SpecDeclSpecInitDecl(IsACSLSpec *p1, ListWildcard *p2, DeclSpecList *p3, DeclAndInitDeclAttrList *p4);
   ~SpecDeclSpecInitDecl();
   virtual void accept(Visitor *v);
   virtual SpecDeclSpecInitDecl *clone() const;
@@ -6726,12 +6728,13 @@ public:
 class SpecDeclSpec : public Declaration
 {
 public:
-  Spec *spec_;
+  IsACSLSpec *isacslspec_;
+  ListWildcard *listwildcard_;
   DeclSpecList *declspeclist_;
 
   SpecDeclSpec(const SpecDeclSpec &);
   SpecDeclSpec &operator=(const SpecDeclSpec &);
-  SpecDeclSpec(Spec *p1, DeclSpecList *p2);
+  SpecDeclSpec(IsACSLSpec *p1, ListWildcard *p2, DeclSpecList *p3);
   ~SpecDeclSpec();
   virtual void accept(Visitor *v);
   virtual SpecDeclSpec *clone() const;
@@ -7160,15 +7163,27 @@ public:
 class TypeSpecIntKeyWord : public TypeSpec
 {
 public:
-  INT int_;
 
   TypeSpecIntKeyWord(const TypeSpecIntKeyWord &);
   TypeSpecIntKeyWord &operator=(const TypeSpecIntKeyWord &);
-  TypeSpecIntKeyWord(INT p1);
+  TypeSpecIntKeyWord();
   ~TypeSpecIntKeyWord();
   virtual void accept(Visitor *v);
   virtual TypeSpecIntKeyWord *clone() const;
   void swap(TypeSpecIntKeyWord &);
+};
+
+class TypeSpecInt32KeyWord : public TypeSpec
+{
+public:
+
+  TypeSpecInt32KeyWord(const TypeSpecInt32KeyWord &);
+  TypeSpecInt32KeyWord &operator=(const TypeSpecInt32KeyWord &);
+  TypeSpecInt32KeyWord();
+  ~TypeSpecInt32KeyWord();
+  virtual void accept(Visitor *v);
+  virtual TypeSpecInt32KeyWord *clone() const;
+  void swap(TypeSpecInt32KeyWord &);
 };
 
 class TypeSpecLongKeyWord : public TypeSpec
@@ -8239,13 +8254,14 @@ public:
 class FunctionDefSpec : public FunctionDef
 {
 public:
-  Spec *spec_;
+  IsACSLSpec *isacslspec_;
+  ListWildcard *listwildcard_;
   FunctionDefStart *functiondefstart_;
   Block *block_;
 
   FunctionDefSpec(const FunctionDefSpec &);
   FunctionDefSpec &operator=(const FunctionDefSpec &);
-  FunctionDefSpec(Spec *p1, FunctionDefStart *p2, Block *p3);
+  FunctionDefSpec(IsACSLSpec *p1, ListWildcard *p2, FunctionDefStart *p3, Block *p4);
   ~FunctionDefSpec();
   virtual void accept(Visitor *v);
   virtual FunctionDefSpec *clone() const;
@@ -8403,11 +8419,11 @@ public:
 class CVSpecAttribute_annotKeyWord : public CVSpec
 {
 public:
-  ATTRIBUTE_ANNOT attribute_annot_;
+  Identifier *identifier_;
 
   CVSpecAttribute_annotKeyWord(const CVSpecAttribute_annotKeyWord &);
   CVSpecAttribute_annotKeyWord &operator=(const CVSpecAttribute_annotKeyWord &);
-  CVSpecAttribute_annotKeyWord(ATTRIBUTE_ANNOT p1);
+  CVSpecAttribute_annotKeyWord(Identifier *p1);
   ~CVSpecAttribute_annotKeyWord();
   virtual void accept(Visitor *v);
   virtual CVSpecAttribute_annotKeyWord *clone() const;
@@ -8617,11 +8633,11 @@ public:
 class AttributeAttributeAnnot : public Attribute
 {
 public:
-  ATTRIBUTE_ANNOT attribute_annot_;
+  Identifier *identifier_;
 
   AttributeAttributeAnnot(const AttributeAttributeAnnot &);
   AttributeAttributeAnnot &operator=(const AttributeAttributeAnnot &);
-  AttributeAttributeAnnot(ATTRIBUTE_ANNOT p1);
+  AttributeAttributeAnnot(Identifier *p1);
   ~AttributeAttributeAnnot();
   virtual void accept(Visitor *v);
   virtual AttributeAttributeAnnot *clone() const;

@@ -228,9 +228,9 @@ public:
   void visitGhostGlobalsDeclataion(GhostGlobalsDeclataion *p);
   void visitGhostGlobalsFunctionDef(GhostGlobalsFunctionDef *p);
   void visitGhostGlobalsRGhost(GhostGlobalsRGhost *p);
+  void visitGlobalsFunctionDef(GlobalsFunctionDef *p);
   void visitGlobalDecl(GlobalDecl *p);
   void visitGlobalsDeclataion(GlobalsDeclataion *p);
-  void visitGlobalsFunctionDef(GlobalsFunctionDef *p);
   void visitExternGlobalDeclataion(ExternGlobalDeclataion *p);
   void visitExternGlobalPar(ExternGlobalPar *p);
   void visitAsmGlobal(AsmGlobal *p);
@@ -423,6 +423,7 @@ public:
   void visitTypeSpecBoolKeyWord(TypeSpecBoolKeyWord *p);
   void visitTypeSpecShortKeyWord(TypeSpecShortKeyWord *p);
   void visitTypeSpecIntKeyWord(TypeSpecIntKeyWord *p);
+  void visitTypeSpecInt32KeyWord(TypeSpecInt32KeyWord *p);
   void visitTypeSpecLongKeyWord(TypeSpecLongKeyWord *p);
   void visitTypeSpecInt64KeyWord(TypeSpecInt64KeyWord *p);
   void visitTypeSpecFloatKeyWord(TypeSpecFloatKeyWord *p);
@@ -1343,7 +1344,6 @@ public:
   void visitDouble(Double x);
   void visitString(String x);
   void visitIdent(Ident x);
-  void visitDECL(DECL x);
   void visitNAMEDTYPE(NAMEDTYPE x);
   void visitCST_WCHAR(CST_WCHAR x);
   void visitCST_WSTRING(CST_WSTRING x);
@@ -1359,7 +1359,6 @@ public:
   void visitBLOCKATTRIBUTE(BLOCKATTRIBUTE x);
   void visitCONST(CONST x);
   void visitFUNCTION__(FUNCTION__ x);
-  void visitINT(INT x);
   void visitMSATTR(MSATTR x);
   void visitRESTRICT(RESTRICT x);
   void visitSIGNED(SIGNED x);

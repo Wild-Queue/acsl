@@ -4,26 +4,26 @@ CC=g++ -g
 CCFLAGS=--ansi -W -Wall -Wsign-conversion -Wno-unused-parameter -Wno-unused-function -Wno-unneeded-internal-declaration
 
 FLEX=flex
-FLEX_OPTS=-Pcombined_parser_
+FLEX_OPTS=-Pbnfc_parser_
 
 BISON=bison
-BISON_OPTS=-t -pcombined_parser_
+BISON_OPTS=-t -pbnfc_parser_
 
 OBJS=Absyn.o Buffer.o Lexer.o Parser.o Printer.o
 
 .PHONY : clean distclean
 
-all : Testcombined_parser
+all : Testbnfc_parser
 
 clean :
-	rm -f *.o Testcombined_parser combined_parser.aux combined_parser.log combined_parser.pdf combined_parser.dvi combined_parser.ps combined_parser
+	rm -f *.o Testbnfc_parser bnfc_parser.aux bnfc_parser.log bnfc_parser.pdf bnfc_parser.dvi bnfc_parser.ps bnfc_parser
 
 distclean : clean
-	rm -f Absyn.C Absyn.H Buffer.C Buffer.H Test.C Bison.H Parser.C Parser.H ParserError.H combined_parser.y Lexer.C combined_parser.l Skeleton.C Skeleton.H Printer.C Printer.H Makefile combined_parser.tex
+	rm -f Absyn.C Absyn.H Buffer.C Buffer.H Test.C Bison.H Parser.C Parser.H ParserError.H bnfc_parser.y Lexer.C bnfc_parser.l Skeleton.C Skeleton.H Printer.C Printer.H Makefile bnfc_parser.tex
 
-Testcombined_parser : ${OBJS} Test.o
-	@echo "Linking Testcombined_parser..."
-	${CC} ${OBJS} Test.o -o Testcombined_parser
+Testbnfc_parser : ${OBJS} Test.o
+	@echo "Linking Testbnfc_parser..."
+	${CC} ${OBJS} Test.o -o Testbnfc_parser
 
 Absyn.o : Absyn.C Absyn.H
 	${CC} ${CCFLAGS} -c Absyn.C
@@ -31,11 +31,11 @@ Absyn.o : Absyn.C Absyn.H
 Buffer.o : Buffer.C Buffer.H
 	${CC} ${CCFLAGS} -c Buffer.C
 
-Lexer.C : combined_parser.l
-	${FLEX} ${FLEX_OPTS} -oLexer.C combined_parser.l
+Lexer.C : bnfc_parser.l
+	${FLEX} ${FLEX_OPTS} -oLexer.C bnfc_parser.l
 
-Parser.C Bison.H : combined_parser.y
-	${BISON} ${BISON_OPTS} combined_parser.y -o Parser.C
+Parser.C Bison.H : bnfc_parser.y
+	${BISON} ${BISON_OPTS} bnfc_parser.y -o Parser.C
 
 Lexer.o : CCFLAGS+=-Wno-sign-conversion
 
