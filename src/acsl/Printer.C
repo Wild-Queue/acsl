@@ -14547,12 +14547,6 @@ void PrintAbsyn::visitCST_WSTRING(String s)
 }
 
 
-void PrintAbsyn::visitATTRIBUTE_ANNOT(String s)
-{
-  render(s);
-}
-
-
 void PrintAbsyn::visitLBRACE(String s)
 {
   render(s);
@@ -25742,14 +25736,6 @@ void ShowAbsyn::visitCST_WCHAR(String s)
 
 
 void ShowAbsyn::visitCST_WSTRING(String s)
-{
-  bufAppend('\"');
-  bufAppend(s);
-  bufAppend('\"');
-}
-
-
-void ShowAbsyn::visitATTRIBUTE_ANNOT(String s)
 {
   bufAppend('\"');
   bufAppend(s);

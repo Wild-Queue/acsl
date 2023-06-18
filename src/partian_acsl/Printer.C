@@ -434,6 +434,47 @@ void PrintAbsyn::visitTypeSpecUnsignedKeyWord(TypeSpecUnsignedKeyWord *p)
   _i_ = oldi;
 }
 
+void PrintAbsyn::visitStructId(StructId *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAN_ACSL__L_PAREN);
+
+  render("struct");
+  _i_ = 0; p->idortypename_->accept(this);
+
+  if (oldi > 0) render(PARTIAN_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitStructIdBraces(StructIdBraces *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAN_ACSL__L_PAREN);
+
+  render("struct");
+  _i_ = 0; p->idortypename_->accept(this);
+  visitLBRACE(p->lbrace_);
+  _i_ = 0; p->structdecllist_->accept(this);
+  visitRBRACE(p->rbrace_);
+
+  if (oldi > 0) render(PARTIAN_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitStructBraces(StructBraces *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAN_ACSL__L_PAREN);
+
+  render("struct");
+  visitLBRACE(p->lbrace_);
+  _i_ = 0; p->structdecllist_->accept(this);
+  visitRBRACE(p->rbrace_);
+
+  if (oldi > 0) render(PARTIAN_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
 void PrintAbsyn::visitDeclarator(Declarator *p) {} //abstract class
 
 void PrintAbsyn::visitADeclarator(ADeclarator *p)
@@ -447,24 +488,6 @@ void PrintAbsyn::visitADeclarator(ADeclarator *p)
 
   if (oldi > 0) render(PARTIAN_ACSL__R_PAREN);
   _i_ = oldi;
-}
-
-void PrintAbsyn::visitListDeclarator(ListDeclarator *listdeclarator)
-{
-  iterListDeclarator(listdeclarator->begin(), listdeclarator->end());
-}
-
-void PrintAbsyn::iterListDeclarator(ListDeclarator::const_iterator i, ListDeclarator::const_iterator j)
-{
-  if (i == j) return;
-  if (i == j-1)
-  { /* last */
-    (*i)->accept(this);
-  }
-  else
-  { /* cons */
-    (*i)->accept(this); render(','); iterListDeclarator(i+1, j);
-  }
 }
 
 void PrintAbsyn::visitPointerOpt(PointerOpt *p) {} //abstract class
@@ -485,6 +508,7 @@ void PrintAbsyn::visitSomePointer(SomePointer *p)
   if (oldi > 0) render(PARTIAN_ACSL__L_PAREN);
 
   render('*');
+  _i_ = 0; visitListAttribute(p->listattribute_);
   _i_ = 0; p->pointeropt_->accept(this);
 
   if (oldi > 0) render(PARTIAN_ACSL__R_PAREN);
@@ -751,6 +775,114 @@ void PrintAbsyn::visitSimpleInitDeclarator(SimpleInitDeclarator *p)
   _i_ = oldi;
 }
 
+void PrintAbsyn::visitStructDeclList(StructDeclList *p) {} //abstract class
+
+void PrintAbsyn::visitEmptyStructDecl(EmptyStructDecl *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAN_ACSL__L_PAREN);
+
+
+  if (oldi > 0) render(PARTIAN_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitDeclSpecStructDecl(DeclSpecStructDecl *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAN_ACSL__L_PAREN);
+
+  _i_ = 0; p->declspeclist_->accept(this);
+  render(';');
+  _i_ = 0; p->structdecllist_->accept(this);
+
+  if (oldi > 0) render(PARTIAN_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitSemicolonStructDecl(SemicolonStructDecl *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAN_ACSL__L_PAREN);
+
+  render(';');
+  _i_ = 0; p->structdecllist_->accept(this);
+
+  if (oldi > 0) render(PARTIAN_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitSpecFieldDeclStructDecl(SpecFieldDeclStructDecl *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAN_ACSL__L_PAREN);
+
+  _i_ = 0; p->declspeclist_->accept(this);
+  _i_ = 0; visitListFieldDecl(p->listfielddecl_);
+  render(';');
+  _i_ = 0; p->structdecllist_->accept(this);
+
+  if (oldi > 0) render(PARTIAN_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitFieldDecl(FieldDecl *p) {} //abstract class
+
+void PrintAbsyn::visitFieldDeclDeclarator(FieldDeclDeclarator *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAN_ACSL__L_PAREN);
+
+  _i_ = 0; p->declarator_->accept(this);
+
+  if (oldi > 0) render(PARTIAN_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitListFieldDecl(ListFieldDecl *listfielddecl)
+{
+  iterListFieldDecl(listfielddecl->begin(), listfielddecl->end());
+}
+
+void PrintAbsyn::iterListFieldDecl(ListFieldDecl::const_iterator i, ListFieldDecl::const_iterator j)
+{
+  if (i == j) return;
+  if (i == j-1)
+  { /* last */
+    (*i)->accept(this);
+  }
+  else
+  { /* cons */
+    (*i)->accept(this); render(','); iterListFieldDecl(i+1, j);
+  }
+}
+
+void PrintAbsyn::visitAttribute(Attribute *p) {} //abstract class
+
+void PrintAbsyn::visitAttributeConst(AttributeConst *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAN_ACSL__L_PAREN);
+
+  visitCONST(p->const_);
+
+  if (oldi > 0) render(PARTIAN_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitListAttribute(ListAttribute *listattribute)
+{
+  iterListAttribute(listattribute->begin(), listattribute->end());
+}
+
+void PrintAbsyn::iterListAttribute(ListAttribute::const_iterator i, ListAttribute::const_iterator j)
+{
+  if (i == j) return;
+  { /* cons */
+    (*i)->accept(this); iterListAttribute(i+1, j);
+  }
+}
+
 void PrintAbsyn::visitInteger(Integer i)
 {
   char tmp[20];
@@ -798,6 +930,24 @@ void PrintAbsyn::visitLBRACE(String s)
 
 
 void PrintAbsyn::visitRBRACE(String s)
+{
+  render(s);
+}
+
+
+void PrintAbsyn::visitCONST(String s)
+{
+  render(s);
+}
+
+
+void PrintAbsyn::visitRESTRICT(String s)
+{
+  render(s);
+}
+
+
+void PrintAbsyn::visitVOLATILE(String s)
 {
   render(s);
 }
@@ -1034,6 +1184,48 @@ void ShowAbsyn::visitTypeSpecUnsignedKeyWord(TypeSpecUnsignedKeyWord *p)
 {
   bufAppend("TypeSpecUnsignedKeyWord");
 }
+void ShowAbsyn::visitStructId(StructId *p)
+{
+  bufAppend('(');
+  bufAppend("StructId");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->idortypename_)  p->idortypename_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitStructIdBraces(StructIdBraces *p)
+{
+  bufAppend('(');
+  bufAppend("StructIdBraces");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->idortypename_)  p->idortypename_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  visitLBRACE(p->lbrace_);
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->structdecllist_)  p->structdecllist_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  visitRBRACE(p->rbrace_);
+  bufAppend(')');
+}
+void ShowAbsyn::visitStructBraces(StructBraces *p)
+{
+  bufAppend('(');
+  bufAppend("StructBraces");
+  bufAppend(' ');
+  visitLBRACE(p->lbrace_);
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->structdecllist_)  p->structdecllist_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  visitRBRACE(p->rbrace_);
+  bufAppend(')');
+}
 void ShowAbsyn::visitDeclarator(Declarator *p) {} //abstract class
 
 void ShowAbsyn::visitADeclarator(ADeclarator *p)
@@ -1054,15 +1246,6 @@ void ShowAbsyn::visitADeclarator(ADeclarator *p)
   bufAppend(']');
   bufAppend(')');
 }
-void ShowAbsyn::visitListDeclarator(ListDeclarator *listdeclarator)
-{
-  for (ListDeclarator::const_iterator i = listdeclarator->begin() ; i != listdeclarator->end() ; ++i)
-  {
-    (*i)->accept(this);
-    if (i != listdeclarator->end() - 1) bufAppend(", ");
-  }
-}
-
 void ShowAbsyn::visitPointerOpt(PointerOpt *p) {} //abstract class
 
 void ShowAbsyn::visitNoPointer(NoPointer *p)
@@ -1073,6 +1256,10 @@ void ShowAbsyn::visitSomePointer(SomePointer *p)
 {
   bufAppend('(');
   bufAppend("SomePointer");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->listattribute_)  p->listattribute_->accept(this);
+  bufAppend(']');
   bufAppend(' ');
   bufAppend('[');
   if (p->pointeropt_)  p->pointeropt_->accept(this);
@@ -1302,6 +1489,94 @@ void ShowAbsyn::visitSimpleInitDeclarator(SimpleInitDeclarator *p)
   bufAppend(']');
   bufAppend(')');
 }
+void ShowAbsyn::visitStructDeclList(StructDeclList *p) {} //abstract class
+
+void ShowAbsyn::visitEmptyStructDecl(EmptyStructDecl *p)
+{
+  bufAppend("EmptyStructDecl");
+}
+void ShowAbsyn::visitDeclSpecStructDecl(DeclSpecStructDecl *p)
+{
+  bufAppend('(');
+  bufAppend("DeclSpecStructDecl");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->declspeclist_)  p->declspeclist_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->structdecllist_)  p->structdecllist_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitSemicolonStructDecl(SemicolonStructDecl *p)
+{
+  bufAppend('(');
+  bufAppend("SemicolonStructDecl");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->structdecllist_)  p->structdecllist_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitSpecFieldDeclStructDecl(SpecFieldDeclStructDecl *p)
+{
+  bufAppend('(');
+  bufAppend("SpecFieldDeclStructDecl");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->declspeclist_)  p->declspeclist_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->listfielddecl_)  p->listfielddecl_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->structdecllist_)  p->structdecllist_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitFieldDecl(FieldDecl *p) {} //abstract class
+
+void ShowAbsyn::visitFieldDeclDeclarator(FieldDeclDeclarator *p)
+{
+  bufAppend('(');
+  bufAppend("FieldDeclDeclarator");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->declarator_)  p->declarator_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitListFieldDecl(ListFieldDecl *listfielddecl)
+{
+  for (ListFieldDecl::const_iterator i = listfielddecl->begin() ; i != listfielddecl->end() ; ++i)
+  {
+    (*i)->accept(this);
+    if (i != listfielddecl->end() - 1) bufAppend(", ");
+  }
+}
+
+void ShowAbsyn::visitAttribute(Attribute *p) {} //abstract class
+
+void ShowAbsyn::visitAttributeConst(AttributeConst *p)
+{
+  bufAppend('(');
+  bufAppend("AttributeConst");
+  bufAppend(' ');
+  visitCONST(p->const_);
+  bufAppend(')');
+}
+void ShowAbsyn::visitListAttribute(ListAttribute *listattribute)
+{
+  for (ListAttribute::const_iterator i = listattribute->begin() ; i != listattribute->end() ; ++i)
+  {
+    (*i)->accept(this);
+    if (i != listattribute->end() - 1) bufAppend(", ");
+  }
+}
+
 void ShowAbsyn::visitInteger(Integer i)
 {
   char tmp[20];
@@ -1350,6 +1625,30 @@ void ShowAbsyn::visitLBRACE(String s)
 
 
 void ShowAbsyn::visitRBRACE(String s)
+{
+  bufAppend('\"');
+  bufAppend(s);
+  bufAppend('\"');
+}
+
+
+void ShowAbsyn::visitCONST(String s)
+{
+  bufAppend('\"');
+  bufAppend(s);
+  bufAppend('\"');
+}
+
+
+void ShowAbsyn::visitRESTRICT(String s)
+{
+  bufAppend('\"');
+  bufAppend(s);
+  bufAppend('\"');
+}
+
+
+void ShowAbsyn::visitVOLATILE(String s)
 {
   bufAppend('\"');
   bufAppend(s);

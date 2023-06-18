@@ -50,6 +50,26 @@ IdOrTypename* pIdOrTypename(FILE *inp);
 IdOrTypename* pIdOrTypename(const char *str);
 IdOrTypenameAsId* pIdOrTypenameAsId(FILE *inp);
 IdOrTypenameAsId* pIdOrTypenameAsId(const char *str);
+Declaration* pDeclaration(FILE *inp);
+Declaration* pDeclaration(const char *str);
+DeclAndInitDeclAttrList* pDeclAndInitDeclAttrList(FILE *inp);
+DeclAndInitDeclAttrList* pDeclAndInitDeclAttrList(const char *str);
+InitDeclaratorAttr* pInitDeclaratorAttr(FILE *inp);
+InitDeclaratorAttr* pInitDeclaratorAttr(const char *str);
+ListInitDeclaratorAttr* pListInitDeclaratorAttr(FILE *inp);
+ListInitDeclaratorAttr* pListInitDeclaratorAttr(const char *str);
+InitDeclarator* pInitDeclarator(FILE *inp);
+InitDeclarator* pInitDeclarator(const char *str);
+StructDeclList* pStructDeclList(FILE *inp);
+StructDeclList* pStructDeclList(const char *str);
+FieldDecl* pFieldDecl(FILE *inp);
+FieldDecl* pFieldDecl(const char *str);
+ListFieldDecl* pListFieldDecl(FILE *inp);
+ListFieldDecl* pListFieldDecl(const char *str);
+Attribute* pAttribute(FILE *inp);
+Attribute* pAttribute(const char *str);
+ListAttribute* pListAttribute(FILE *inp);
+ListAttribute* pListAttribute(const char *str);
 }
 
 #endif

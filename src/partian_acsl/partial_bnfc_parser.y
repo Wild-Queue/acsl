@@ -64,7 +64,6 @@ extern yyscan_t partian_acsl_initialize_lexer(FILE * inp);
   partian_acsl::DeclSpecListNoNamed* declspeclistnonamed_;
   partian_acsl::TypeSpec* typespec_;
   partian_acsl::Declarator* declarator_;
-  partian_acsl::ListDeclarator* listdeclarator_;
   partian_acsl::PointerOpt* pointeropt_;
   partian_acsl::DirectDecl* directdecl_;
   partian_acsl::AttributesWithAsm* attributeswithasm_;
@@ -79,6 +78,11 @@ extern yyscan_t partian_acsl_initialize_lexer(FILE * inp);
   partian_acsl::InitDeclaratorAttr* initdeclaratorattr_;
   partian_acsl::ListInitDeclaratorAttr* listinitdeclaratorattr_;
   partian_acsl::InitDeclarator* initdeclarator_;
+  partian_acsl::StructDeclList* structdecllist_;
+  partian_acsl::FieldDecl* fielddecl_;
+  partian_acsl::ListFieldDecl* listfielddecl_;
+  partian_acsl::Attribute* attribute_;
+  partian_acsl::ListAttribute* listattribute_;
 }
 
 %{
@@ -108,11 +112,15 @@ extern int yylex(YYSTYPE *lvalp, YYLTYPE *llocp, yyscan_t scanner);
 %token          _KW_int       /* int */
 %token          _KW_long      /* long */
 %token          _KW_short     /* short */
+%token          _KW_struct    /* struct */
 %token          _KW_unsigned  /* unsigned */
 %token          _KW_void      /* void */
+%token<_string> T_CONST       /* CONST */
 %token<_string> T_LBRACE      /* LBRACE */
 %token<_string> T_RBRACE      /* RBRACE */
+%token<_string> T_RESTRICT    /* RESTRICT */
 %token<_string> T_SIGNED      /* SIGNED */
+%token<_string> T_VOLATILE    /* VOLATILE */
 %token<_string> _IDENT_
 
 %type <program_> Program
@@ -125,7 +133,6 @@ extern int yylex(YYSTYPE *lvalp, YYLTYPE *llocp, yyscan_t scanner);
 %type <declspeclistnonamed_> DeclSpecListNoNamed
 %type <typespec_> TypeSpec
 %type <declarator_> Declarator
-%type <listdeclarator_> ListDeclarator
 %type <pointeropt_> PointerOpt
 %type <directdecl_> DirectDecl
 %type <attributeswithasm_> AttributesWithAsm
@@ -140,6 +147,11 @@ extern int yylex(YYSTYPE *lvalp, YYLTYPE *llocp, yyscan_t scanner);
 %type <initdeclaratorattr_> InitDeclaratorAttr
 %type <listinitdeclaratorattr_> ListInitDeclaratorAttr
 %type <initdeclarator_> InitDeclarator
+%type <structdecllist_> StructDeclList
+%type <fielddecl_> FieldDecl
+%type <listfielddecl_> ListFieldDecl
+%type <attribute_> Attribute
+%type <listattribute_> ListAttribute
 
 %start Program
 
@@ -178,14 +190,14 @@ TypeSpec : _KW_void { $$ = new partian_acsl::TypeSpecVoidKeyWord(); $$->line_num
   | _KW_double { $$ = new partian_acsl::TypeSpecDoubleKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespec_ = $$; }
   | T_SIGNED { $$ = new partian_acsl::TypeSpecSignedKeyWord($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespec_ = $$; }
   | _KW_unsigned { $$ = new partian_acsl::TypeSpecUnsignedKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespec_ = $$; }
+  | _KW_struct IdOrTypename { $$ = new partian_acsl::StructId($2); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespec_ = $$; }
+  | _KW_struct IdOrTypename T_LBRACE StructDeclList T_RBRACE { $$ = new partian_acsl::StructIdBraces($2, $3, $4, $5); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespec_ = $$; }
+  | _KW_struct T_LBRACE StructDeclList T_RBRACE { $$ = new partian_acsl::StructBraces($2, $3, $4); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespec_ = $$; }
 ;
 Declarator : PointerOpt DirectDecl AttributesWithAsm { $$ = new partian_acsl::ADeclarator($1, $2, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->declarator_ = $$; }
 ;
-ListDeclarator : Declarator { $$ = new partian_acsl::ListDeclarator(); $$->push_back($1); result->listdeclarator_ = $$; }
-  | Declarator _COMMA ListDeclarator { $3->push_back($1); $$ = $3; result->listdeclarator_ = $$; }
-;
 PointerOpt : /* empty */ { $$ = new partian_acsl::NoPointer(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->pointeropt_ = $$; }
-  | _STAR PointerOpt { $$ = new partian_acsl::SomePointer($2); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->pointeropt_ = $$; }
+  | _STAR ListAttribute PointerOpt { $$ = new partian_acsl::SomePointer($2, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->pointeropt_ = $$; }
 ;
 DirectDecl : IdOrTypename { $$ = new partian_acsl::DirectDeclIdTypename($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->directdecl_ = $$; }
   | DirectDecl _LPAREN _RPAREN GhostParameterOpt { $$ = new partian_acsl::DirectDeclGhostParam($1, $4); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->directdecl_ = $$; }
@@ -220,6 +232,21 @@ ListInitDeclaratorAttr : InitDeclaratorAttr { $$ = new partian_acsl::ListInitDec
   | InitDeclaratorAttr _COMMA ListInitDeclaratorAttr { $3->push_back($1); $$ = $3; result->listinitdeclaratorattr_ = $$; }
 ;
 InitDeclarator : Declarator { $$ = new partian_acsl::SimpleInitDeclarator($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->initdeclarator_ = $$; }
+;
+StructDeclList : /* empty */ { $$ = new partian_acsl::EmptyStructDecl(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->structdecllist_ = $$; }
+  | DeclSpecList _SEMI StructDeclList { $$ = new partian_acsl::DeclSpecStructDecl($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->structdecllist_ = $$; }
+  | _SEMI StructDeclList { $$ = new partian_acsl::SemicolonStructDecl($2); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->structdecllist_ = $$; }
+  | DeclSpecList ListFieldDecl _SEMI StructDeclList { std::reverse($2->begin(),$2->end()) ;$$ = new partian_acsl::SpecFieldDeclStructDecl($1, $2, $4); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->structdecllist_ = $$; }
+;
+FieldDecl : Declarator { $$ = new partian_acsl::FieldDeclDeclarator($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->fielddecl_ = $$; }
+;
+ListFieldDecl : FieldDecl { $$ = new partian_acsl::ListFieldDecl(); $$->push_back($1); result->listfielddecl_ = $$; }
+  | FieldDecl _COMMA ListFieldDecl { $3->push_back($1); $$ = $3; result->listfielddecl_ = $$; }
+;
+Attribute : T_CONST { $$ = new partian_acsl::AttributeConst($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->attribute_ = $$; }
+;
+ListAttribute : /* empty */ { $$ = new partian_acsl::ListAttribute(); result->listattribute_ = $$; }
+  | ListAttribute Attribute { $1->push_back($2); $$ = $1; result->listattribute_ = $$; }
 ;
 
 %%
@@ -663,52 +690,6 @@ Declarator* psDeclarator(const char *str)
   else
   { /* Success */
     return result.declarator_;
-  }
-}
-
-/* Entrypoint: parse ListDeclarator* from file. */
-ListDeclarator* pListDeclarator(FILE *inp)
-{
-  YYSTYPE result;
-  yyscan_t scanner = partian_acsl_initialize_lexer(inp);
-  if (!scanner) {
-    fprintf(stderr, "Failed to initialize lexer.\n");
-    return 0;
-  }
-  int error = yyparse(scanner, &result);
-  partian_acsllex_destroy(scanner);
-  if (error)
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-std::reverse(result.listdeclarator_->begin(), result.listdeclarator_->end());
-    return result.listdeclarator_;
-  }
-}
-
-/* Entrypoint: parse ListDeclarator* from string. */
-ListDeclarator* psListDeclarator(const char *str)
-{
-  YYSTYPE result;
-  yyscan_t scanner = partian_acsl_initialize_lexer(0);
-  if (!scanner) {
-    fprintf(stderr, "Failed to initialize lexer.\n");
-    return 0;
-  }
-  YY_BUFFER_STATE buf = partian_acsl_scan_string(str, scanner);
-  int error = yyparse(scanner, &result);
-  partian_acsl_delete_buffer(buf, scanner);
-  partian_acsllex_destroy(scanner);
-  if (error)
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-std::reverse(result.listdeclarator_->begin(), result.listdeclarator_->end());
-    return result.listdeclarator_;
   }
 }
 
@@ -1329,6 +1310,228 @@ InitDeclarator* psInitDeclarator(const char *str)
   else
   { /* Success */
     return result.initdeclarator_;
+  }
+}
+
+/* Entrypoint: parse StructDeclList* from file. */
+StructDeclList* pStructDeclList(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partian_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partian_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.structdecllist_;
+  }
+}
+
+/* Entrypoint: parse StructDeclList* from string. */
+StructDeclList* psStructDeclList(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partian_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partian_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partian_acsl_delete_buffer(buf, scanner);
+  partian_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.structdecllist_;
+  }
+}
+
+/* Entrypoint: parse FieldDecl* from file. */
+FieldDecl* pFieldDecl(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partian_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partian_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.fielddecl_;
+  }
+}
+
+/* Entrypoint: parse FieldDecl* from string. */
+FieldDecl* psFieldDecl(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partian_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partian_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partian_acsl_delete_buffer(buf, scanner);
+  partian_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.fielddecl_;
+  }
+}
+
+/* Entrypoint: parse ListFieldDecl* from file. */
+ListFieldDecl* pListFieldDecl(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partian_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partian_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+std::reverse(result.listfielddecl_->begin(), result.listfielddecl_->end());
+    return result.listfielddecl_;
+  }
+}
+
+/* Entrypoint: parse ListFieldDecl* from string. */
+ListFieldDecl* psListFieldDecl(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partian_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partian_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partian_acsl_delete_buffer(buf, scanner);
+  partian_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+std::reverse(result.listfielddecl_->begin(), result.listfielddecl_->end());
+    return result.listfielddecl_;
+  }
+}
+
+/* Entrypoint: parse Attribute* from file. */
+Attribute* pAttribute(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partian_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partian_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attribute_;
+  }
+}
+
+/* Entrypoint: parse Attribute* from string. */
+Attribute* psAttribute(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partian_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partian_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partian_acsl_delete_buffer(buf, scanner);
+  partian_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attribute_;
+  }
+}
+
+/* Entrypoint: parse ListAttribute* from file. */
+ListAttribute* pListAttribute(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partian_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partian_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.listattribute_;
+  }
+}
+
+/* Entrypoint: parse ListAttribute* from string. */
+ListAttribute* psListAttribute(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partian_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partian_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partian_acsl_delete_buffer(buf, scanner);
+  partian_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.listattribute_;
   }
 }
 

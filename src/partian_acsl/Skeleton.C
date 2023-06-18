@@ -33,6 +33,9 @@ void Skeleton::visitDeclaration(Declaration *t) {} //abstract class
 void Skeleton::visitDeclAndInitDeclAttrList(DeclAndInitDeclAttrList *t) {} //abstract class
 void Skeleton::visitInitDeclaratorAttr(InitDeclaratorAttr *t) {} //abstract class
 void Skeleton::visitInitDeclarator(InitDeclarator *t) {} //abstract class
+void Skeleton::visitStructDeclList(StructDeclList *t) {} //abstract class
+void Skeleton::visitFieldDecl(FieldDecl *t) {} //abstract class
+void Skeleton::visitAttribute(Attribute *t) {} //abstract class
 
 void Skeleton::visitAProgram(AProgram *a_program)
 {
@@ -228,6 +231,35 @@ void Skeleton::visitTypeSpecUnsignedKeyWord(TypeSpecUnsignedKeyWord *type_spec_u
 
 }
 
+void Skeleton::visitStructId(StructId *struct_id)
+{
+  /* Code For StructId Goes Here */
+
+  if (struct_id->idortypename_) struct_id->idortypename_->accept(this);
+
+}
+
+void Skeleton::visitStructIdBraces(StructIdBraces *struct_id_braces)
+{
+  /* Code For StructIdBraces Goes Here */
+
+  if (struct_id_braces->idortypename_) struct_id_braces->idortypename_->accept(this);
+  visitLBRACE(struct_id_braces->lbrace_);
+  if (struct_id_braces->structdecllist_) struct_id_braces->structdecllist_->accept(this);
+  visitRBRACE(struct_id_braces->rbrace_);
+
+}
+
+void Skeleton::visitStructBraces(StructBraces *struct_braces)
+{
+  /* Code For StructBraces Goes Here */
+
+  visitLBRACE(struct_braces->lbrace_);
+  if (struct_braces->structdecllist_) struct_braces->structdecllist_->accept(this);
+  visitRBRACE(struct_braces->rbrace_);
+
+}
+
 void Skeleton::visitADeclarator(ADeclarator *a_declarator)
 {
   /* Code For ADeclarator Goes Here */
@@ -249,6 +281,7 @@ void Skeleton::visitSomePointer(SomePointer *some_pointer)
 {
   /* Code For SomePointer Goes Here */
 
+  if (some_pointer->listattribute_) some_pointer->listattribute_->accept(this);
   if (some_pointer->pointeropt_) some_pointer->pointeropt_->accept(this);
 
 }
@@ -393,14 +426,56 @@ void Skeleton::visitSimpleInitDeclarator(SimpleInitDeclarator *simple_init_decla
 
 }
 
-
-void Skeleton::visitListDeclarator(ListDeclarator *list_declarator)
+void Skeleton::visitEmptyStructDecl(EmptyStructDecl *empty_struct_decl)
 {
-  for (ListDeclarator::iterator i = list_declarator->begin() ; i != list_declarator->end() ; ++i)
-  {
-    (*i)->accept(this);
-  }
+  /* Code For EmptyStructDecl Goes Here */
+
+
 }
+
+void Skeleton::visitDeclSpecStructDecl(DeclSpecStructDecl *decl_spec_struct_decl)
+{
+  /* Code For DeclSpecStructDecl Goes Here */
+
+  if (decl_spec_struct_decl->declspeclist_) decl_spec_struct_decl->declspeclist_->accept(this);
+  if (decl_spec_struct_decl->structdecllist_) decl_spec_struct_decl->structdecllist_->accept(this);
+
+}
+
+void Skeleton::visitSemicolonStructDecl(SemicolonStructDecl *semicolon_struct_decl)
+{
+  /* Code For SemicolonStructDecl Goes Here */
+
+  if (semicolon_struct_decl->structdecllist_) semicolon_struct_decl->structdecllist_->accept(this);
+
+}
+
+void Skeleton::visitSpecFieldDeclStructDecl(SpecFieldDeclStructDecl *spec_field_decl_struct_decl)
+{
+  /* Code For SpecFieldDeclStructDecl Goes Here */
+
+  if (spec_field_decl_struct_decl->declspeclist_) spec_field_decl_struct_decl->declspeclist_->accept(this);
+  if (spec_field_decl_struct_decl->listfielddecl_) spec_field_decl_struct_decl->listfielddecl_->accept(this);
+  if (spec_field_decl_struct_decl->structdecllist_) spec_field_decl_struct_decl->structdecllist_->accept(this);
+
+}
+
+void Skeleton::visitFieldDeclDeclarator(FieldDeclDeclarator *field_decl_declarator)
+{
+  /* Code For FieldDeclDeclarator Goes Here */
+
+  if (field_decl_declarator->declarator_) field_decl_declarator->declarator_->accept(this);
+
+}
+
+void Skeleton::visitAttributeConst(AttributeConst *attribute_const)
+{
+  /* Code For AttributeConst Goes Here */
+
+  visitCONST(attribute_const->const_);
+
+}
+
 
 void Skeleton::visitListParameterDecl(ListParameterDecl *list_parameter_decl)
 {
@@ -413,6 +488,22 @@ void Skeleton::visitListParameterDecl(ListParameterDecl *list_parameter_decl)
 void Skeleton::visitListInitDeclaratorAttr(ListInitDeclaratorAttr *list_init_declarator_attr)
 {
   for (ListInitDeclaratorAttr::iterator i = list_init_declarator_attr->begin() ; i != list_init_declarator_attr->end() ; ++i)
+  {
+    (*i)->accept(this);
+  }
+}
+
+void Skeleton::visitListFieldDecl(ListFieldDecl *list_field_decl)
+{
+  for (ListFieldDecl::iterator i = list_field_decl->begin() ; i != list_field_decl->end() ; ++i)
+  {
+    (*i)->accept(this);
+  }
+}
+
+void Skeleton::visitListAttribute(ListAttribute *list_attribute)
+{
+  for (ListAttribute::iterator i = list_attribute->begin() ; i != list_attribute->end() ; ++i)
   {
     (*i)->accept(this);
   }
@@ -457,6 +548,21 @@ void Skeleton::visitLBRACE(LBRACE x)
 void Skeleton::visitRBRACE(RBRACE x)
 {
   /* Code for RBRACE Goes Here */
+}
+
+void Skeleton::visitCONST(CONST x)
+{
+  /* Code for CONST Goes Here */
+}
+
+void Skeleton::visitRESTRICT(RESTRICT x)
+{
+  /* Code for RESTRICT Goes Here */
+}
+
+void Skeleton::visitVOLATILE(VOLATILE x)
+{
+  /* Code for VOLATILE Goes Here */
 }
 
 

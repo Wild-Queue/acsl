@@ -9376,11 +9376,6 @@ void Skeleton::visitCST_WSTRING(CST_WSTRING x)
   /* Code for CST_WSTRING Goes Here */
 }
 
-void Skeleton::visitATTRIBUTE_ANNOT(ATTRIBUTE_ANNOT x)
-{
-  /* Code for ATTRIBUTE_ANNOT Goes Here */
-}
-
 void Skeleton::visitLBRACE(LBRACE x)
 {
   /* Code for LBRACE Goes Here */

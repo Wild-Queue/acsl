@@ -21,7 +21,6 @@ typedef std::string Ident;
 typedef std::string NAMEDTYPE;
 typedef std::string CST_WCHAR;
 typedef std::string CST_WSTRING;
-typedef std::string ATTRIBUTE_ANNOT;
 typedef std::string LBRACE;
 typedef std::string RBRACE;
 typedef std::string LBRACKET;
@@ -2721,7 +2720,6 @@ public:
   virtual void visitNAMEDTYPE(NAMEDTYPE x) = 0;
   virtual void visitCST_WCHAR(CST_WCHAR x) = 0;
   virtual void visitCST_WSTRING(CST_WSTRING x) = 0;
-  virtual void visitATTRIBUTE_ANNOT(ATTRIBUTE_ANNOT x) = 0;
   virtual void visitLBRACE(LBRACE x) = 0;
   virtual void visitRBRACE(RBRACE x) = 0;
   virtual void visitLBRACKET(LBRACKET x) = 0;

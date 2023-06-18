@@ -245,15 +245,6 @@ void Skeleton::visitSimpleGlobals(SimpleGlobals *simple_globals)
 
 }
 
-void Skeleton::visitAGhostGlobals(AGhostGlobals *a_ghost_globals)
-{
-  /* Code For AGhostGlobals Goes Here */
-
-  if (a_ghost_globals->ghostglobals_) a_ghost_globals->ghostglobals_->accept(this);
-  if (a_ghost_globals->globals_) a_ghost_globals->globals_->accept(this);
-
-}
-
 void Skeleton::visitSemiColonGlobals(SemiColonGlobals *semi_colon_globals)
 {
   /* Code For SemiColonGlobals Goes Here */
@@ -288,22 +279,6 @@ void Skeleton::visitGhostGlobalsRGhost(GhostGlobalsRGhost *ghost_globals_r_ghost
 
 }
 
-void Skeleton::visitGlobalDecl(GlobalDecl *global_decl)
-{
-  /* Code For GlobalDecl Goes Here */
-
-  if (global_decl->decl_) global_decl->decl_->accept(this);
-
-}
-
-void Skeleton::visitGlobalEmptyOldStyle(GlobalEmptyOldStyle *global_empty_old_style)
-{
-  /* Code For GlobalEmptyOldStyle Goes Here */
-
-  visitIdent(global_empty_old_style->ident_);
-
-}
-
 void Skeleton::visitGlobalsDeclataion(GlobalsDeclataion *globals_declataion)
 {
   /* Code For GlobalsDeclataion Goes Here */
@@ -317,53 +292,6 @@ void Skeleton::visitGlobalsFunctionDef(GlobalsFunctionDef *globals_function_def)
   /* Code For GlobalsFunctionDef Goes Here */
 
   if (globals_function_def->functiondef_) globals_function_def->functiondef_->accept(this);
-
-}
-
-void Skeleton::visitExternGlobalDeclataion(ExternGlobalDeclataion *extern_global_declataion)
-{
-  /* Code For ExternGlobalDeclataion Goes Here */
-
-  if (extern_global_declataion->stringconstant_) extern_global_declataion->stringconstant_->accept(this);
-  if (extern_global_declataion->declaration_) extern_global_declataion->declaration_->accept(this);
-
-}
-
-void Skeleton::visitExternGlobalPar(ExternGlobalPar *extern_global_par)
-{
-  /* Code For ExternGlobalPar Goes Here */
-
-  if (extern_global_par->stringconstant_) extern_global_par->stringconstant_->accept(this);
-  visitLBRACE(extern_global_par->lbrace_);
-  if (extern_global_par->globals_) extern_global_par->globals_->accept(this);
-  visitRBRACE(extern_global_par->rbrace_);
-
-}
-
-void Skeleton::visitAsmGlobal(AsmGlobal *asm_global)
-{
-  /* Code For AsmGlobal Goes Here */
-
-  visitASM(asm_global->asm_);
-  if (asm_global->stringconstant_) asm_global->stringconstant_->accept(this);
-
-}
-
-void Skeleton::visitPragmaGlobal(PragmaGlobal *pragma_global)
-{
-  /* Code For PragmaGlobal Goes Here */
-
-  if (pragma_global->pragma_) pragma_global->pragma_->accept(this);
-
-}
-
-void Skeleton::visitGlobalOldStyle(GlobalOldStyle *global_old_style)
-{
-  /* Code For GlobalOldStyle Goes Here */
-
-  visitIdent(global_old_style->ident_);
-  if (global_old_style->listident_) global_old_style->listident_->accept(this);
-  if (global_old_style->oldpardeflist_) global_old_style->oldpardeflist_->accept(this);
 
 }
 
@@ -1947,6 +1875,13 @@ void Skeleton::visitTypeSpecShortKeyWord(TypeSpecShortKeyWord *type_spec_short_k
 void Skeleton::visitTypeSpecInt32KeyWord(TypeSpecInt32KeyWord *type_spec_int_key_word)
 {
   /* Code For TypeSpecInt32KeyWord Goes Here */
+
+
+}
+
+void Skeleton::visitTypeSpecIntKeyWord(TypeSpecIntKeyWord *type_spec_int_key_word)
+{
+  /* Code For TypeSpecIntKeyWord Goes Here */
 
 
 }
@@ -9367,11 +9302,6 @@ void Skeleton::visitCST_WCHAR(CST_WCHAR x)
 void Skeleton::visitCST_WSTRING(CST_WSTRING x)
 {
   /* Code for CST_WSTRING Goes Here */
-}
-
-void Skeleton::visitATTRIBUTE_ANNOT(ATTRIBUTE_ANNOT x)
-{
-  /* Code for ATTRIBUTE_ANNOT Goes Here */
 }
 
 void Skeleton::visitLBRACE(LBRACE x)

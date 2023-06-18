@@ -1080,6 +1080,154 @@ TypeSpecUnsignedKeyWord *TypeSpecUnsignedKeyWord::clone() const
 
 
 
+/********************   StructId    ********************/
+StructId::StructId(IdOrTypename *p1)
+{
+  idortypename_ = p1;
+
+}
+
+StructId::StructId(const StructId & other)
+{
+  idortypename_ = other.idortypename_->clone();
+
+}
+
+StructId &StructId::operator=(const StructId & other)
+{
+  StructId tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void StructId::swap(StructId & other)
+{
+  std::swap(idortypename_, other.idortypename_);
+
+}
+
+StructId::~StructId()
+{
+  delete(idortypename_);
+
+}
+
+void StructId::accept(Visitor *v)
+{
+  v->visitStructId(this);
+}
+
+StructId *StructId::clone() const
+{
+  return new StructId(*this);
+}
+
+
+
+/********************   StructIdBraces    ********************/
+StructIdBraces::StructIdBraces(IdOrTypename *p1, LBRACE p2, StructDeclList *p3, RBRACE p4)
+{
+  idortypename_ = p1;
+  lbrace_ = p2;
+  structdecllist_ = p3;
+  rbrace_ = p4;
+
+}
+
+StructIdBraces::StructIdBraces(const StructIdBraces & other)
+{
+  idortypename_ = other.idortypename_->clone();
+  lbrace_ = other.lbrace_;
+  structdecllist_ = other.structdecllist_->clone();
+  rbrace_ = other.rbrace_;
+
+}
+
+StructIdBraces &StructIdBraces::operator=(const StructIdBraces & other)
+{
+  StructIdBraces tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void StructIdBraces::swap(StructIdBraces & other)
+{
+  std::swap(idortypename_, other.idortypename_);
+  std::swap(lbrace_, other.lbrace_);
+  std::swap(structdecllist_, other.structdecllist_);
+  std::swap(rbrace_, other.rbrace_);
+
+}
+
+StructIdBraces::~StructIdBraces()
+{
+  delete(idortypename_);
+  delete(structdecllist_);
+
+}
+
+void StructIdBraces::accept(Visitor *v)
+{
+  v->visitStructIdBraces(this);
+}
+
+StructIdBraces *StructIdBraces::clone() const
+{
+  return new StructIdBraces(*this);
+}
+
+
+
+/********************   StructBraces    ********************/
+StructBraces::StructBraces(LBRACE p1, StructDeclList *p2, RBRACE p3)
+{
+  lbrace_ = p1;
+  structdecllist_ = p2;
+  rbrace_ = p3;
+
+}
+
+StructBraces::StructBraces(const StructBraces & other)
+{
+  lbrace_ = other.lbrace_;
+  structdecllist_ = other.structdecllist_->clone();
+  rbrace_ = other.rbrace_;
+
+}
+
+StructBraces &StructBraces::operator=(const StructBraces & other)
+{
+  StructBraces tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void StructBraces::swap(StructBraces & other)
+{
+  std::swap(lbrace_, other.lbrace_);
+  std::swap(structdecllist_, other.structdecllist_);
+  std::swap(rbrace_, other.rbrace_);
+
+}
+
+StructBraces::~StructBraces()
+{
+  delete(structdecllist_);
+
+}
+
+void StructBraces::accept(Visitor *v)
+{
+  v->visitStructBraces(this);
+}
+
+StructBraces *StructBraces::clone() const
+{
+  return new StructBraces(*this);
+}
+
+
+
 /********************   ADeclarator    ********************/
 ADeclarator::ADeclarator(PointerOpt *p1, DirectDecl *p2, AttributesWithAsm *p3)
 {
@@ -1173,14 +1321,16 @@ NoPointer *NoPointer::clone() const
 
 
 /********************   SomePointer    ********************/
-SomePointer::SomePointer(PointerOpt *p1)
+SomePointer::SomePointer(ListAttribute *p1, PointerOpt *p2)
 {
-  pointeropt_ = p1;
+  listattribute_ = p1;
+  pointeropt_ = p2;
 
 }
 
 SomePointer::SomePointer(const SomePointer & other)
 {
+  listattribute_ = other.listattribute_->clone();
   pointeropt_ = other.pointeropt_->clone();
 
 }
@@ -1194,12 +1344,14 @@ SomePointer &SomePointer::operator=(const SomePointer & other)
 
 void SomePointer::swap(SomePointer & other)
 {
+  std::swap(listattribute_, other.listattribute_);
   std::swap(pointeropt_, other.pointeropt_);
 
 }
 
 SomePointer::~SomePointer()
 {
+  delete(listattribute_);
   delete(pointeropt_);
 
 }
@@ -1979,23 +2131,276 @@ SimpleInitDeclarator *SimpleInitDeclarator::clone() const
 
 
 
-
-/********************   ListDeclarator    ********************/
-
-void ListDeclarator::accept(Visitor *v)
+/********************   EmptyStructDecl    ********************/
+EmptyStructDecl::EmptyStructDecl()
 {
-  v->visitListDeclarator(this);
+
 }
 
-ListDeclarator *ListDeclarator::clone() const
+EmptyStructDecl::EmptyStructDecl(const EmptyStructDecl & other)
 {
-  return new ListDeclarator(*this);
+
 }
 
-ListDeclarator* consListDeclarator(Declarator* x, ListDeclarator* xs) {
-  xs->insert(xs->begin(), x);
-  return xs;
+EmptyStructDecl &EmptyStructDecl::operator=(const EmptyStructDecl & other)
+{
+  EmptyStructDecl tmp(other);
+  swap(tmp);
+  return *this;
 }
+
+void EmptyStructDecl::swap(EmptyStructDecl & other)
+{
+
+}
+
+EmptyStructDecl::~EmptyStructDecl()
+{
+
+}
+
+void EmptyStructDecl::accept(Visitor *v)
+{
+  v->visitEmptyStructDecl(this);
+}
+
+EmptyStructDecl *EmptyStructDecl::clone() const
+{
+  return new EmptyStructDecl(*this);
+}
+
+
+
+/********************   DeclSpecStructDecl    ********************/
+DeclSpecStructDecl::DeclSpecStructDecl(DeclSpecList *p1, StructDeclList *p2)
+{
+  declspeclist_ = p1;
+  structdecllist_ = p2;
+
+}
+
+DeclSpecStructDecl::DeclSpecStructDecl(const DeclSpecStructDecl & other)
+{
+  declspeclist_ = other.declspeclist_->clone();
+  structdecllist_ = other.structdecllist_->clone();
+
+}
+
+DeclSpecStructDecl &DeclSpecStructDecl::operator=(const DeclSpecStructDecl & other)
+{
+  DeclSpecStructDecl tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void DeclSpecStructDecl::swap(DeclSpecStructDecl & other)
+{
+  std::swap(declspeclist_, other.declspeclist_);
+  std::swap(structdecllist_, other.structdecllist_);
+
+}
+
+DeclSpecStructDecl::~DeclSpecStructDecl()
+{
+  delete(declspeclist_);
+  delete(structdecllist_);
+
+}
+
+void DeclSpecStructDecl::accept(Visitor *v)
+{
+  v->visitDeclSpecStructDecl(this);
+}
+
+DeclSpecStructDecl *DeclSpecStructDecl::clone() const
+{
+  return new DeclSpecStructDecl(*this);
+}
+
+
+
+/********************   SemicolonStructDecl    ********************/
+SemicolonStructDecl::SemicolonStructDecl(StructDeclList *p1)
+{
+  structdecllist_ = p1;
+
+}
+
+SemicolonStructDecl::SemicolonStructDecl(const SemicolonStructDecl & other)
+{
+  structdecllist_ = other.structdecllist_->clone();
+
+}
+
+SemicolonStructDecl &SemicolonStructDecl::operator=(const SemicolonStructDecl & other)
+{
+  SemicolonStructDecl tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void SemicolonStructDecl::swap(SemicolonStructDecl & other)
+{
+  std::swap(structdecllist_, other.structdecllist_);
+
+}
+
+SemicolonStructDecl::~SemicolonStructDecl()
+{
+  delete(structdecllist_);
+
+}
+
+void SemicolonStructDecl::accept(Visitor *v)
+{
+  v->visitSemicolonStructDecl(this);
+}
+
+SemicolonStructDecl *SemicolonStructDecl::clone() const
+{
+  return new SemicolonStructDecl(*this);
+}
+
+
+
+/********************   SpecFieldDeclStructDecl    ********************/
+SpecFieldDeclStructDecl::SpecFieldDeclStructDecl(DeclSpecList *p1, ListFieldDecl *p2, StructDeclList *p3)
+{
+  declspeclist_ = p1;
+  listfielddecl_ = p2;
+  structdecllist_ = p3;
+
+}
+
+SpecFieldDeclStructDecl::SpecFieldDeclStructDecl(const SpecFieldDeclStructDecl & other)
+{
+  declspeclist_ = other.declspeclist_->clone();
+  listfielddecl_ = other.listfielddecl_->clone();
+  structdecllist_ = other.structdecllist_->clone();
+
+}
+
+SpecFieldDeclStructDecl &SpecFieldDeclStructDecl::operator=(const SpecFieldDeclStructDecl & other)
+{
+  SpecFieldDeclStructDecl tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void SpecFieldDeclStructDecl::swap(SpecFieldDeclStructDecl & other)
+{
+  std::swap(declspeclist_, other.declspeclist_);
+  std::swap(listfielddecl_, other.listfielddecl_);
+  std::swap(structdecllist_, other.structdecllist_);
+
+}
+
+SpecFieldDeclStructDecl::~SpecFieldDeclStructDecl()
+{
+  delete(declspeclist_);
+  delete(listfielddecl_);
+  delete(structdecllist_);
+
+}
+
+void SpecFieldDeclStructDecl::accept(Visitor *v)
+{
+  v->visitSpecFieldDeclStructDecl(this);
+}
+
+SpecFieldDeclStructDecl *SpecFieldDeclStructDecl::clone() const
+{
+  return new SpecFieldDeclStructDecl(*this);
+}
+
+
+
+/********************   FieldDeclDeclarator    ********************/
+FieldDeclDeclarator::FieldDeclDeclarator(Declarator *p1)
+{
+  declarator_ = p1;
+
+}
+
+FieldDeclDeclarator::FieldDeclDeclarator(const FieldDeclDeclarator & other)
+{
+  declarator_ = other.declarator_->clone();
+
+}
+
+FieldDeclDeclarator &FieldDeclDeclarator::operator=(const FieldDeclDeclarator & other)
+{
+  FieldDeclDeclarator tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void FieldDeclDeclarator::swap(FieldDeclDeclarator & other)
+{
+  std::swap(declarator_, other.declarator_);
+
+}
+
+FieldDeclDeclarator::~FieldDeclDeclarator()
+{
+  delete(declarator_);
+
+}
+
+void FieldDeclDeclarator::accept(Visitor *v)
+{
+  v->visitFieldDeclDeclarator(this);
+}
+
+FieldDeclDeclarator *FieldDeclDeclarator::clone() const
+{
+  return new FieldDeclDeclarator(*this);
+}
+
+
+
+/********************   AttributeConst    ********************/
+AttributeConst::AttributeConst(CONST p1)
+{
+  const_ = p1;
+
+}
+
+AttributeConst::AttributeConst(const AttributeConst & other)
+{
+  const_ = other.const_;
+
+}
+
+AttributeConst &AttributeConst::operator=(const AttributeConst & other)
+{
+  AttributeConst tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void AttributeConst::swap(AttributeConst & other)
+{
+  std::swap(const_, other.const_);
+
+}
+
+AttributeConst::~AttributeConst()
+{
+
+}
+
+void AttributeConst::accept(Visitor *v)
+{
+  v->visitAttributeConst(this);
+}
+
+AttributeConst *AttributeConst::clone() const
+{
+  return new AttributeConst(*this);
+}
+
+
 
 
 /********************   ListParameterDecl    ********************/
@@ -2029,6 +2434,42 @@ ListInitDeclaratorAttr *ListInitDeclaratorAttr::clone() const
 }
 
 ListInitDeclaratorAttr* consListInitDeclaratorAttr(InitDeclaratorAttr* x, ListInitDeclaratorAttr* xs) {
+  xs->insert(xs->begin(), x);
+  return xs;
+}
+
+
+/********************   ListFieldDecl    ********************/
+
+void ListFieldDecl::accept(Visitor *v)
+{
+  v->visitListFieldDecl(this);
+}
+
+ListFieldDecl *ListFieldDecl::clone() const
+{
+  return new ListFieldDecl(*this);
+}
+
+ListFieldDecl* consListFieldDecl(FieldDecl* x, ListFieldDecl* xs) {
+  xs->insert(xs->begin(), x);
+  return xs;
+}
+
+
+/********************   ListAttribute    ********************/
+
+void ListAttribute::accept(Visitor *v)
+{
+  v->visitListAttribute(this);
+}
+
+ListAttribute *ListAttribute::clone() const
+{
+  return new ListAttribute(*this);
+}
+
+ListAttribute* consListAttribute(Attribute* x, ListAttribute* xs) {
   xs->insert(xs->begin(), x);
   return xs;
 }

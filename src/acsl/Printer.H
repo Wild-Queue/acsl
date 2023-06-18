@@ -1429,7 +1429,6 @@ class PrintAbsyn : public Visitor
   void visitNAMEDTYPE(String s);
   void visitCST_WCHAR(String s);
   void visitCST_WSTRING(String s);
-  void visitATTRIBUTE_ANNOT(String s);
   void visitLBRACE(String s);
   void visitRBRACE(String s);
   void visitLBRACKET(String s);
@@ -2909,7 +2908,6 @@ class ShowAbsyn : public Visitor
   void visitNAMEDTYPE(String s);
   void visitCST_WCHAR(String s);
   void visitCST_WSTRING(String s);
-  void visitATTRIBUTE_ANNOT(String s);
   void visitLBRACE(String s);
   void visitRBRACE(String s);
   void visitLBRACKET(String s);

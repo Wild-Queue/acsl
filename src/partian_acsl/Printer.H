@@ -70,10 +70,11 @@ class PrintAbsyn : public Visitor
   void visitTypeSpecDoubleKeyWord(TypeSpecDoubleKeyWord *p);
   void visitTypeSpecSignedKeyWord(TypeSpecSignedKeyWord *p);
   void visitTypeSpecUnsignedKeyWord(TypeSpecUnsignedKeyWord *p);
+  void visitStructId(StructId *p);
+  void visitStructIdBraces(StructIdBraces *p);
+  void visitStructBraces(StructBraces *p);
   void visitDeclarator(Declarator *p); /* abstract class */
   void visitADeclarator(ADeclarator *p);
-  void visitListDeclarator(ListDeclarator *p);
-  void iterListDeclarator(ListDeclarator::const_iterator i, ListDeclarator::const_iterator j);
   void visitPointerOpt(PointerOpt *p); /* abstract class */
   void visitNoPointer(NoPointer *p);
   void visitSomePointer(SomePointer *p);
@@ -109,6 +110,19 @@ class PrintAbsyn : public Visitor
   void iterListInitDeclaratorAttr(ListInitDeclaratorAttr::const_iterator i, ListInitDeclaratorAttr::const_iterator j);
   void visitInitDeclarator(InitDeclarator *p); /* abstract class */
   void visitSimpleInitDeclarator(SimpleInitDeclarator *p);
+  void visitStructDeclList(StructDeclList *p); /* abstract class */
+  void visitEmptyStructDecl(EmptyStructDecl *p);
+  void visitDeclSpecStructDecl(DeclSpecStructDecl *p);
+  void visitSemicolonStructDecl(SemicolonStructDecl *p);
+  void visitSpecFieldDeclStructDecl(SpecFieldDeclStructDecl *p);
+  void visitFieldDecl(FieldDecl *p); /* abstract class */
+  void visitFieldDeclDeclarator(FieldDeclDeclarator *p);
+  void visitListFieldDecl(ListFieldDecl *p);
+  void iterListFieldDecl(ListFieldDecl::const_iterator i, ListFieldDecl::const_iterator j);
+  void visitAttribute(Attribute *p); /* abstract class */
+  void visitAttributeConst(AttributeConst *p);
+  void visitListAttribute(ListAttribute *p);
+  void iterListAttribute(ListAttribute::const_iterator i, ListAttribute::const_iterator j);
 
   void visitInteger(Integer i);
   void visitDouble(Double d);
@@ -118,6 +132,9 @@ class PrintAbsyn : public Visitor
   void visitSIGNED(String s);
   void visitLBRACE(String s);
   void visitRBRACE(String s);
+  void visitCONST(String s);
+  void visitRESTRICT(String s);
+  void visitVOLATILE(String s);
  protected:
   char *buf_;
   size_t cur_, buf_size;
@@ -214,10 +231,11 @@ class ShowAbsyn : public Visitor
   void visitTypeSpecDoubleKeyWord(TypeSpecDoubleKeyWord *p);
   void visitTypeSpecSignedKeyWord(TypeSpecSignedKeyWord *p);
   void visitTypeSpecUnsignedKeyWord(TypeSpecUnsignedKeyWord *p);
+  void visitStructId(StructId *p);
+  void visitStructIdBraces(StructIdBraces *p);
+  void visitStructBraces(StructBraces *p);
   void visitDeclarator(Declarator *p); /* abstract class */
   void visitADeclarator(ADeclarator *p);
-  void visitListDeclarator(ListDeclarator *p);
-  void iterListDeclarator(ListDeclarator::const_iterator i, ListDeclarator::const_iterator j);
   void visitPointerOpt(PointerOpt *p); /* abstract class */
   void visitNoPointer(NoPointer *p);
   void visitSomePointer(SomePointer *p);
@@ -253,6 +271,19 @@ class ShowAbsyn : public Visitor
   void iterListInitDeclaratorAttr(ListInitDeclaratorAttr::const_iterator i, ListInitDeclaratorAttr::const_iterator j);
   void visitInitDeclarator(InitDeclarator *p); /* abstract class */
   void visitSimpleInitDeclarator(SimpleInitDeclarator *p);
+  void visitStructDeclList(StructDeclList *p); /* abstract class */
+  void visitEmptyStructDecl(EmptyStructDecl *p);
+  void visitDeclSpecStructDecl(DeclSpecStructDecl *p);
+  void visitSemicolonStructDecl(SemicolonStructDecl *p);
+  void visitSpecFieldDeclStructDecl(SpecFieldDeclStructDecl *p);
+  void visitFieldDecl(FieldDecl *p); /* abstract class */
+  void visitFieldDeclDeclarator(FieldDeclDeclarator *p);
+  void visitListFieldDecl(ListFieldDecl *p);
+  void iterListFieldDecl(ListFieldDecl::const_iterator i, ListFieldDecl::const_iterator j);
+  void visitAttribute(Attribute *p); /* abstract class */
+  void visitAttributeConst(AttributeConst *p);
+  void visitListAttribute(ListAttribute *p);
+  void iterListAttribute(ListAttribute::const_iterator i, ListAttribute::const_iterator j);
 
   void visitInteger(Integer i);
   void visitDouble(Double d);
@@ -262,6 +293,9 @@ class ShowAbsyn : public Visitor
   void visitSIGNED(String s);
   void visitLBRACE(String s);
   void visitRBRACE(String s);
+  void visitCONST(String s);
+  void visitRESTRICT(String s);
+  void visitVOLATILE(String s);
  protected:
   char *buf_;
   size_t cur_, buf_size;

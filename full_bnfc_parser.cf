@@ -13,7 +13,7 @@
 token NAMEDTYPE ((letter) (digit | letter | '_')*);
 token CST_WCHAR (letter);
 token CST_WSTRING ((letter) (digit | letter | '_')*);
-token ATTRIBUTE_ANNOT ((letter) (digit | letter | '_')*);
+--token ATTRIBUTE_ANNOT ((letter) (digit | letter | '_')*);
 
 --Correct tokens
 token LBRACE ({"<%"} | '{');

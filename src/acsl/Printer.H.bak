@@ -41,22 +41,14 @@ class PrintAbsyn : public Visitor
   void visitGlobals(Globals *p); /* abstract class */
   void visitNoGlobals(NoGlobals *p);
   void visitSimpleGlobals(SimpleGlobals *p);
-  void visitAGhostGlobals(AGhostGlobals *p);
   void visitSemiColonGlobals(SemiColonGlobals *p);
   void visitGhostGlobals(GhostGlobals *p); /* abstract class */
   void visitGhostGlobalsDeclataion(GhostGlobalsDeclataion *p);
   void visitGhostGlobalsFunctionDef(GhostGlobalsFunctionDef *p);
   void visitGhostGlobalsRGhost(GhostGlobalsRGhost *p);
   void visitGlobal(Global *p); /* abstract class */
-  void visitGlobalDecl(GlobalDecl *p);
-  void visitGlobalEmptyOldStyle(GlobalEmptyOldStyle *p);
   void visitGlobalsDeclataion(GlobalsDeclataion *p);
   void visitGlobalsFunctionDef(GlobalsFunctionDef *p);
-  void visitExternGlobalDeclataion(ExternGlobalDeclataion *p);
-  void visitExternGlobalPar(ExternGlobalPar *p);
-  void visitAsmGlobal(AsmGlobal *p);
-  void visitPragmaGlobal(PragmaGlobal *p);
-  void visitGlobalOldStyle(GlobalOldStyle *p);
   void visitIdOrTypenameAsId(IdOrTypenameAsId *p); /* abstract class */
   void visitIdOrTypenameAsIdIdentifier(IdOrTypenameAsIdIdentifier *p);
   void visitIdOrTypenameAsIdNamedType(IdOrTypenameAsIdNamedType *p);
@@ -302,6 +294,7 @@ class PrintAbsyn : public Visitor
   void visitTypeSpecBoolKeyWord(TypeSpecBoolKeyWord *p);
   void visitTypeSpecShortKeyWord(TypeSpecShortKeyWord *p);
   void visitTypeSpecInt32KeyWord(TypeSpecInt32KeyWord *p);
+  void visitTypeSpecIntKeyWord(TypeSpecIntKeyWord *p);
   void visitTypeSpecLongKeyWord(TypeSpecLongKeyWord *p);
   void visitTypeSpecInt64KeyWord(TypeSpecInt64KeyWord *p);
   void visitTypeSpecFloatKeyWord(TypeSpecFloatKeyWord *p);
@@ -1428,7 +1421,6 @@ class PrintAbsyn : public Visitor
   void visitNAMEDTYPE(String s);
   void visitCST_WCHAR(String s);
   void visitCST_WSTRING(String s);
-  void visitATTRIBUTE_ANNOT(String s);
   void visitLBRACE(String s);
   void visitRBRACE(String s);
   void visitLBRACKET(String s);
@@ -1520,22 +1512,14 @@ class ShowAbsyn : public Visitor
   void visitGlobals(Globals *p); /* abstract class */
   void visitNoGlobals(NoGlobals *p);
   void visitSimpleGlobals(SimpleGlobals *p);
-  void visitAGhostGlobals(AGhostGlobals *p);
   void visitSemiColonGlobals(SemiColonGlobals *p);
   void visitGhostGlobals(GhostGlobals *p); /* abstract class */
   void visitGhostGlobalsDeclataion(GhostGlobalsDeclataion *p);
   void visitGhostGlobalsFunctionDef(GhostGlobalsFunctionDef *p);
   void visitGhostGlobalsRGhost(GhostGlobalsRGhost *p);
   void visitGlobal(Global *p); /* abstract class */
-  void visitGlobalDecl(GlobalDecl *p);
-  void visitGlobalEmptyOldStyle(GlobalEmptyOldStyle *p);
   void visitGlobalsDeclataion(GlobalsDeclataion *p);
   void visitGlobalsFunctionDef(GlobalsFunctionDef *p);
-  void visitExternGlobalDeclataion(ExternGlobalDeclataion *p);
-  void visitExternGlobalPar(ExternGlobalPar *p);
-  void visitAsmGlobal(AsmGlobal *p);
-  void visitPragmaGlobal(PragmaGlobal *p);
-  void visitGlobalOldStyle(GlobalOldStyle *p);
   void visitIdOrTypenameAsId(IdOrTypenameAsId *p); /* abstract class */
   void visitIdOrTypenameAsIdIdentifier(IdOrTypenameAsIdIdentifier *p);
   void visitIdOrTypenameAsIdNamedType(IdOrTypenameAsIdNamedType *p);
@@ -1781,6 +1765,7 @@ class ShowAbsyn : public Visitor
   void visitTypeSpecBoolKeyWord(TypeSpecBoolKeyWord *p);
   void visitTypeSpecShortKeyWord(TypeSpecShortKeyWord *p);
   void visitTypeSpecInt32KeyWord(TypeSpecInt32KeyWord *p);
+  void visitTypeSpecIntKeyWord(TypeSpecIntKeyWord *p);
   void visitTypeSpecLongKeyWord(TypeSpecLongKeyWord *p);
   void visitTypeSpecInt64KeyWord(TypeSpecInt64KeyWord *p);
   void visitTypeSpecFloatKeyWord(TypeSpecFloatKeyWord *p);
@@ -2907,7 +2892,6 @@ class ShowAbsyn : public Visitor
   void visitNAMEDTYPE(String s);
   void visitCST_WCHAR(String s);
   void visitCST_WSTRING(String s);
-  void visitATTRIBUTE_ANNOT(String s);
   void visitLBRACE(String s);
   void visitRBRACE(String s);
   void visitLBRACKET(String s);

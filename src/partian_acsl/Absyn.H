@@ -21,6 +21,9 @@ typedef std::string Ident;
 typedef std::string SIGNED;
 typedef std::string LBRACE;
 typedef std::string RBRACE;
+typedef std::string CONST;
+typedef std::string RESTRICT;
+typedef std::string VOLATILE;
 
 
 /********************   Forward Declarations    ********************/
@@ -47,6 +50,9 @@ class Declaration;
 class DeclAndInitDeclAttrList;
 class InitDeclaratorAttr;
 class InitDeclarator;
+class StructDeclList;
+class FieldDecl;
+class Attribute;
 class AProgram;
 class NoGlobals;
 class SimpleGlobals;
@@ -72,6 +78,9 @@ class TypeSpecFloatKeyWord;
 class TypeSpecDoubleKeyWord;
 class TypeSpecSignedKeyWord;
 class TypeSpecUnsignedKeyWord;
+class StructId;
+class StructIdBraces;
+class StructBraces;
 class ADeclarator;
 class NoPointer;
 class SomePointer;
@@ -92,9 +101,16 @@ class InitDeclaration;
 class InitDeclarationWithAttr;
 class InitDeclaratorAttribute;
 class SimpleInitDeclarator;
-class ListDeclarator;
+class EmptyStructDecl;
+class DeclSpecStructDecl;
+class SemicolonStructDecl;
+class SpecFieldDeclStructDecl;
+class FieldDeclDeclarator;
+class AttributeConst;
 class ListParameterDecl;
 class ListInitDeclaratorAttr;
+class ListFieldDecl;
+class ListAttribute;
 
 
 /********************   Visitor Interfaces    ********************/
@@ -124,6 +140,9 @@ public:
   virtual void visitDeclAndInitDeclAttrList(DeclAndInitDeclAttrList *p) = 0;
   virtual void visitInitDeclaratorAttr(InitDeclaratorAttr *p) = 0;
   virtual void visitInitDeclarator(InitDeclarator *p) = 0;
+  virtual void visitStructDeclList(StructDeclList *p) = 0;
+  virtual void visitFieldDecl(FieldDecl *p) = 0;
+  virtual void visitAttribute(Attribute *p) = 0;
   virtual void visitAProgram(AProgram *p) = 0;
   virtual void visitNoGlobals(NoGlobals *p) = 0;
   virtual void visitSimpleGlobals(SimpleGlobals *p) = 0;
@@ -149,6 +168,9 @@ public:
   virtual void visitTypeSpecDoubleKeyWord(TypeSpecDoubleKeyWord *p) = 0;
   virtual void visitTypeSpecSignedKeyWord(TypeSpecSignedKeyWord *p) = 0;
   virtual void visitTypeSpecUnsignedKeyWord(TypeSpecUnsignedKeyWord *p) = 0;
+  virtual void visitStructId(StructId *p) = 0;
+  virtual void visitStructIdBraces(StructIdBraces *p) = 0;
+  virtual void visitStructBraces(StructBraces *p) = 0;
   virtual void visitADeclarator(ADeclarator *p) = 0;
   virtual void visitNoPointer(NoPointer *p) = 0;
   virtual void visitSomePointer(SomePointer *p) = 0;
@@ -169,9 +191,16 @@ public:
   virtual void visitInitDeclarationWithAttr(InitDeclarationWithAttr *p) = 0;
   virtual void visitInitDeclaratorAttribute(InitDeclaratorAttribute *p) = 0;
   virtual void visitSimpleInitDeclarator(SimpleInitDeclarator *p) = 0;
-  virtual void visitListDeclarator(ListDeclarator *p) = 0;
+  virtual void visitEmptyStructDecl(EmptyStructDecl *p) = 0;
+  virtual void visitDeclSpecStructDecl(DeclSpecStructDecl *p) = 0;
+  virtual void visitSemicolonStructDecl(SemicolonStructDecl *p) = 0;
+  virtual void visitSpecFieldDeclStructDecl(SpecFieldDeclStructDecl *p) = 0;
+  virtual void visitFieldDeclDeclarator(FieldDeclDeclarator *p) = 0;
+  virtual void visitAttributeConst(AttributeConst *p) = 0;
   virtual void visitListParameterDecl(ListParameterDecl *p) = 0;
   virtual void visitListInitDeclaratorAttr(ListInitDeclaratorAttr *p) = 0;
+  virtual void visitListFieldDecl(ListFieldDecl *p) = 0;
+  virtual void visitListAttribute(ListAttribute *p) = 0;
 
 
   virtual void visitInteger(Integer x) = 0;
@@ -182,6 +211,9 @@ public:
   virtual void visitSIGNED(SIGNED x) = 0;
   virtual void visitLBRACE(LBRACE x) = 0;
   virtual void visitRBRACE(RBRACE x) = 0;
+  virtual void visitCONST(CONST x) = 0;
+  virtual void visitRESTRICT(RESTRICT x) = 0;
+  virtual void visitVOLATILE(VOLATILE x) = 0;
 
 };
 
@@ -347,6 +379,27 @@ class InitDeclarator : public Visitable
 {
 public:
   virtual InitDeclarator *clone() const = 0;
+  int line_number, char_number;
+};
+
+class StructDeclList : public Visitable
+{
+public:
+  virtual StructDeclList *clone() const = 0;
+  int line_number, char_number;
+};
+
+class FieldDecl : public Visitable
+{
+public:
+  virtual FieldDecl *clone() const = 0;
+  int line_number, char_number;
+};
+
+class Attribute : public Visitable
+{
+public:
+  virtual Attribute *clone() const = 0;
   int line_number, char_number;
 };
 
@@ -696,6 +749,53 @@ public:
   void swap(TypeSpecUnsignedKeyWord &);
 };
 
+class StructId : public TypeSpec
+{
+public:
+  IdOrTypename *idortypename_;
+
+  StructId(const StructId &);
+  StructId &operator=(const StructId &);
+  StructId(IdOrTypename *p1);
+  ~StructId();
+  virtual void accept(Visitor *v);
+  virtual StructId *clone() const;
+  void swap(StructId &);
+};
+
+class StructIdBraces : public TypeSpec
+{
+public:
+  IdOrTypename *idortypename_;
+  LBRACE lbrace_;
+  StructDeclList *structdecllist_;
+  RBRACE rbrace_;
+
+  StructIdBraces(const StructIdBraces &);
+  StructIdBraces &operator=(const StructIdBraces &);
+  StructIdBraces(IdOrTypename *p1, LBRACE p2, StructDeclList *p3, RBRACE p4);
+  ~StructIdBraces();
+  virtual void accept(Visitor *v);
+  virtual StructIdBraces *clone() const;
+  void swap(StructIdBraces &);
+};
+
+class StructBraces : public TypeSpec
+{
+public:
+  LBRACE lbrace_;
+  StructDeclList *structdecllist_;
+  RBRACE rbrace_;
+
+  StructBraces(const StructBraces &);
+  StructBraces &operator=(const StructBraces &);
+  StructBraces(LBRACE p1, StructDeclList *p2, RBRACE p3);
+  ~StructBraces();
+  virtual void accept(Visitor *v);
+  virtual StructBraces *clone() const;
+  void swap(StructBraces &);
+};
+
 class ADeclarator : public Declarator
 {
 public:
@@ -728,11 +828,12 @@ public:
 class SomePointer : public PointerOpt
 {
 public:
+  ListAttribute *listattribute_;
   PointerOpt *pointeropt_;
 
   SomePointer(const SomePointer &);
   SomePointer &operator=(const SomePointer &);
-  SomePointer(PointerOpt *p1);
+  SomePointer(ListAttribute *p1, PointerOpt *p2);
   ~SomePointer();
   virtual void accept(Visitor *v);
   virtual SomePointer *clone() const;
@@ -981,16 +1082,93 @@ public:
   void swap(SimpleInitDeclarator &);
 };
 
-
-
-class ListDeclarator : public Visitable, public std::vector<Declarator*>
+class EmptyStructDecl : public StructDeclList
 {
 public:
+
+  EmptyStructDecl(const EmptyStructDecl &);
+  EmptyStructDecl &operator=(const EmptyStructDecl &);
+  EmptyStructDecl();
+  ~EmptyStructDecl();
   virtual void accept(Visitor *v);
-  virtual ListDeclarator *clone() const;
+  virtual EmptyStructDecl *clone() const;
+  void swap(EmptyStructDecl &);
 };
 
-ListDeclarator* consListDeclarator(Declarator* x, ListDeclarator* xs);
+class DeclSpecStructDecl : public StructDeclList
+{
+public:
+  DeclSpecList *declspeclist_;
+  StructDeclList *structdecllist_;
+
+  DeclSpecStructDecl(const DeclSpecStructDecl &);
+  DeclSpecStructDecl &operator=(const DeclSpecStructDecl &);
+  DeclSpecStructDecl(DeclSpecList *p1, StructDeclList *p2);
+  ~DeclSpecStructDecl();
+  virtual void accept(Visitor *v);
+  virtual DeclSpecStructDecl *clone() const;
+  void swap(DeclSpecStructDecl &);
+};
+
+class SemicolonStructDecl : public StructDeclList
+{
+public:
+  StructDeclList *structdecllist_;
+
+  SemicolonStructDecl(const SemicolonStructDecl &);
+  SemicolonStructDecl &operator=(const SemicolonStructDecl &);
+  SemicolonStructDecl(StructDeclList *p1);
+  ~SemicolonStructDecl();
+  virtual void accept(Visitor *v);
+  virtual SemicolonStructDecl *clone() const;
+  void swap(SemicolonStructDecl &);
+};
+
+class SpecFieldDeclStructDecl : public StructDeclList
+{
+public:
+  DeclSpecList *declspeclist_;
+  ListFieldDecl *listfielddecl_;
+  StructDeclList *structdecllist_;
+
+  SpecFieldDeclStructDecl(const SpecFieldDeclStructDecl &);
+  SpecFieldDeclStructDecl &operator=(const SpecFieldDeclStructDecl &);
+  SpecFieldDeclStructDecl(DeclSpecList *p1, ListFieldDecl *p2, StructDeclList *p3);
+  ~SpecFieldDeclStructDecl();
+  virtual void accept(Visitor *v);
+  virtual SpecFieldDeclStructDecl *clone() const;
+  void swap(SpecFieldDeclStructDecl &);
+};
+
+class FieldDeclDeclarator : public FieldDecl
+{
+public:
+  Declarator *declarator_;
+
+  FieldDeclDeclarator(const FieldDeclDeclarator &);
+  FieldDeclDeclarator &operator=(const FieldDeclDeclarator &);
+  FieldDeclDeclarator(Declarator *p1);
+  ~FieldDeclDeclarator();
+  virtual void accept(Visitor *v);
+  virtual FieldDeclDeclarator *clone() const;
+  void swap(FieldDeclDeclarator &);
+};
+
+class AttributeConst : public Attribute
+{
+public:
+  CONST const_;
+
+  AttributeConst(const AttributeConst &);
+  AttributeConst &operator=(const AttributeConst &);
+  AttributeConst(CONST p1);
+  ~AttributeConst();
+  virtual void accept(Visitor *v);
+  virtual AttributeConst *clone() const;
+  void swap(AttributeConst &);
+};
+
+
 
 class ListParameterDecl : public Visitable, public std::vector<ParameterDecl*>
 {
@@ -1009,6 +1187,24 @@ public:
 };
 
 ListInitDeclaratorAttr* consListInitDeclaratorAttr(InitDeclaratorAttr* x, ListInitDeclaratorAttr* xs);
+
+class ListFieldDecl : public Visitable, public std::vector<FieldDecl*>
+{
+public:
+  virtual void accept(Visitor *v);
+  virtual ListFieldDecl *clone() const;
+};
+
+ListFieldDecl* consListFieldDecl(FieldDecl* x, ListFieldDecl* xs);
+
+class ListAttribute : public Visitable, public std::vector<Attribute*>
+{
+public:
+  virtual void accept(Visitor *v);
+  virtual ListAttribute *clone() const;
+};
+
+ListAttribute* consListAttribute(Attribute* x, ListAttribute* xs);
 
 
 

@@ -2,6 +2,9 @@
 token SIGNED ({"__signed__"} | {"signed"} | {"__signed"});
 token LBRACE ({"<%"} | '{');
 token RBRACE ({"%>"} | '}');
+token CONST ({"const"} | {"__const"} | {"__const__"});
+token RESTRICT ({"__restrict"} | {"restrict"});
+token VOLATILE ({"volatile"} | {"__volatile"} | {"__volatile__"} | {"__volatile"});
 
 AProgram.  Program ::= Globals ;
 
@@ -65,12 +68,12 @@ TypeSpecFloatKeyWord.               TypeSpec ::= "float" ;
 TypeSpecDoubleKeyWord.              TypeSpec ::= "double" ;
 TypeSpecSignedKeyWord.              TypeSpec ::= SIGNED ;
 TypeSpecUnsignedKeyWord.            TypeSpec ::= "unsigned" ;
---StructId.                   TypeSpec ::= "struct" IdOrTypename ;
---StructJustAttr.             TypeSpec ::= "struct" [JustAttribute] IdOrTypename ;
---StructIdBraces.             TypeSpec ::= "struct" IdOrTypename LBRACE StructDeclList RBRACE ;
---StructBraces.               TypeSpec ::= "struct" LBRACE StructDeclList RBRACE ;
---StructJustAttrIdBraces.     TypeSpec ::= "struct" [JustAttribute] IdOrTypename LBRACE StructDeclList RBRACE ;
---StructJustAttrBraces.       TypeSpec ::= "struct" [JustAttribute] LBRACE StructDeclList RBRACE ;
+StructId.                           TypeSpec ::= "struct" IdOrTypename ;
+--StructJustAttr.                     TypeSpec ::= "struct" [JustAttribute] IdOrTypename ;
+StructIdBraces.                     TypeSpec ::= "struct" IdOrTypename LBRACE StructDeclList RBRACE ;
+StructBraces.                       TypeSpec ::= "struct" LBRACE StructDeclList RBRACE ;
+--StructJustAttrIdBraces.             TypeSpec ::= "struct" [JustAttribute] IdOrTypename LBRACE StructDeclList RBRACE ;
+--StructJustAttrBraces.               TypeSpec ::= "struct" [JustAttribute] LBRACE StructDeclList RBRACE ;
 --UnionId.                    TypeSpec ::= "union" IdOrTypename ;
 --UnionIdBraces.              TypeSpec ::= "union" IdOrTypename LBRACE StructDeclList RBRACE ;
 --UnionBraces.                TypeSpec ::= "union" LBRACE StructDeclList RBRACE ;
@@ -87,11 +90,10 @@ TypeSpecUnsignedKeyWord.            TypeSpec ::= "unsigned" ;
 
 
 ADeclarator.        Declarator ::= PointerOpt DirectDecl AttributesWithAsm ;
-separator nonempty Declarator "," ; 
+--separator nonempty Declarator "," ; 
 
 NoPointer.      PointerOpt ::= ""; --/**/ 
--- SomePointer.    PointerOpt ::= "*" [Attribute] PointerOpt ;
-SomePointer.    PointerOpt ::= "*" PointerOpt ;
+SomePointer.    PointerOpt ::= "*" [Attribute] PointerOpt ;
 
 
 DirectDeclIdTypename.           DirectDecl ::= IdOrTypename ;                                        --/* (* We want to be able to redefine named types as variable names *) */
@@ -144,3 +146,27 @@ separator nonempty InitDeclaratorAttr "," ;
 
 SimpleInitDeclarator.       InitDeclarator ::= Declarator ;
 --InitDeclaratorExpression.   InitDeclarator ::= Declarator "=" InitExpression ;
+
+
+EmptyStructDecl.            StructDeclList ::= ; --/* empty */ 
+DeclSpecStructDecl.         StructDeclList ::= DeclSpecList ";" StructDeclList ;
+SemicolonStructDecl.        StructDeclList ::= ";" StructDeclList ;                                 --/*(* GCC allows extra semicolons *)*/
+SpecFieldDeclStructDecl.    StructDeclList ::= DeclSpecList [FieldDecl] ";" StructDeclList ;
+--PragmaStructDecl.           StructDeclList ::= Pragma StructDeclList ;                              --/*(* MSVC allows pragmas in strange places *)*/
+--StaticAssertStructDecl.     StructDeclList ::= StaticAssertDeclaration ;                            --/*(* C11 allows static_assert-declaration *)*/
+--StaticAssertStructDeclNext. StructDeclList ::= StaticAssertDeclaration ";" StructDeclList ;
+
+
+FieldDeclDeclarator.        FieldDecl ::= Declarator ;
+--FieldDeclDeclaratorColon.   FieldDecl ::= Declarator ":" Expression [Attribute] ;
+--FieldDeclColonExpression.   FieldDecl ::= ":" Expression ;
+separator nonempty FieldDecl "," ;
+
+
+--AttributeNoCV.              Attribute ::= AttributeNocv ;
+AttributeConst.             Attribute ::= CONST ;
+--AttributeRestrict.          Attribute ::= RESTRICT ;
+--AttributeVolatile.          Attribute ::= VOLATILE ;
+--AttributeGhost.             Attribute ::= "\\ghost" ;
+--AttributeAttributeAnnot.    Attribute ::= Identifier ; --ATTRIBUTE_ANNOT => Identifier | "\\ghost" 
+separator Attribute "" ;

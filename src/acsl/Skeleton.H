@@ -1347,7 +1347,6 @@ public:
   void visitNAMEDTYPE(NAMEDTYPE x);
   void visitCST_WCHAR(CST_WCHAR x);
   void visitCST_WSTRING(CST_WSTRING x);
-  void visitATTRIBUTE_ANNOT(ATTRIBUTE_ANNOT x);
   void visitLBRACE(LBRACE x);
   void visitRBRACE(RBRACE x);
   void visitLBRACKET(LBRACKET x);

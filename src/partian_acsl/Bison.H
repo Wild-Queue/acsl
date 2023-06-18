@@ -69,12 +69,16 @@ extern int partian_acsldebug;
     _KW_int = 270,                 /* _KW_int  */
     _KW_long = 271,                /* _KW_long  */
     _KW_short = 272,               /* _KW_short  */
-    _KW_unsigned = 273,            /* _KW_unsigned  */
-    _KW_void = 274,                /* _KW_void  */
-    T_LBRACE = 275,                /* T_LBRACE  */
-    T_RBRACE = 276,                /* T_RBRACE  */
-    T_SIGNED = 277,                /* T_SIGNED  */
-    _IDENT_ = 278                  /* _IDENT_  */
+    _KW_struct = 273,              /* _KW_struct  */
+    _KW_unsigned = 274,            /* _KW_unsigned  */
+    _KW_void = 275,                /* _KW_void  */
+    T_CONST = 276,                 /* T_CONST  */
+    T_LBRACE = 277,                /* T_LBRACE  */
+    T_RBRACE = 278,                /* T_RBRACE  */
+    T_RESTRICT = 279,              /* T_RESTRICT  */
+    T_SIGNED = 280,                /* T_SIGNED  */
+    T_VOLATILE = 281,              /* T_VOLATILE  */
+    _IDENT_ = 282                  /* _IDENT_  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -99,7 +103,6 @@ union YYSTYPE
   partian_acsl::DeclSpecListNoNamed* declspeclistnonamed_;
   partian_acsl::TypeSpec* typespec_;
   partian_acsl::Declarator* declarator_;
-  partian_acsl::ListDeclarator* listdeclarator_;
   partian_acsl::PointerOpt* pointeropt_;
   partian_acsl::DirectDecl* directdecl_;
   partian_acsl::AttributesWithAsm* attributeswithasm_;
@@ -114,8 +117,13 @@ union YYSTYPE
   partian_acsl::InitDeclaratorAttr* initdeclaratorattr_;
   partian_acsl::ListInitDeclaratorAttr* listinitdeclaratorattr_;
   partian_acsl::InitDeclarator* initdeclarator_;
+  partian_acsl::StructDeclList* structdecllist_;
+  partian_acsl::FieldDecl* fielddecl_;
+  partian_acsl::ListFieldDecl* listfielddecl_;
+  partian_acsl::Attribute* attribute_;
+  partian_acsl::ListAttribute* listattribute_;
 
-#line 119 "Bison.H"
+#line 127 "Bison.H"
 
 };
 typedef union YYSTYPE YYSTYPE;

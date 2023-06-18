@@ -172,19 +172,6 @@ void PrintAbsyn::visitSimpleGlobals(SimpleGlobals *p)
   _i_ = oldi;
 }
 
-void PrintAbsyn::visitAGhostGlobals(AGhostGlobals *p)
-{
-  int oldi = _i_;
-  if (oldi > 0) render(ACSL__L_PAREN);
-
-  render("ghost");
-  _i_ = 0; p->ghostglobals_->accept(this);
-  _i_ = 0; p->globals_->accept(this);
-
-  if (oldi > 0) render(ACSL__R_PAREN);
-  _i_ = oldi;
-}
-
 void PrintAbsyn::visitSemiColonGlobals(SemiColonGlobals *p)
 {
   int oldi = _i_;
@@ -236,31 +223,6 @@ void PrintAbsyn::visitGhostGlobalsRGhost(GhostGlobalsRGhost *p)
 
 void PrintAbsyn::visitGlobal(Global *p) {} //abstract class
 
-void PrintAbsyn::visitGlobalDecl(GlobalDecl *p)
-{
-  int oldi = _i_;
-  if (oldi > 0) render(ACSL__L_PAREN);
-
-  _i_ = 0; p->decl_->accept(this);
-
-  if (oldi > 0) render(ACSL__R_PAREN);
-  _i_ = oldi;
-}
-
-void PrintAbsyn::visitGlobalEmptyOldStyle(GlobalEmptyOldStyle *p)
-{
-  int oldi = _i_;
-  if (oldi > 0) render(ACSL__L_PAREN);
-
-  visitIdent(p->ident_);
-  render('(');
-  render(')');
-  render(';');
-
-  if (oldi > 0) render(ACSL__R_PAREN);
-  _i_ = oldi;
-}
-
 void PrintAbsyn::visitGlobalsDeclataion(GlobalsDeclataion *p)
 {
   int oldi = _i_;
@@ -278,76 +240,6 @@ void PrintAbsyn::visitGlobalsFunctionDef(GlobalsFunctionDef *p)
   if (oldi > 0) render(ACSL__L_PAREN);
 
   _i_ = 0; p->functiondef_->accept(this);
-
-  if (oldi > 0) render(ACSL__R_PAREN);
-  _i_ = oldi;
-}
-
-void PrintAbsyn::visitExternGlobalDeclataion(ExternGlobalDeclataion *p)
-{
-  int oldi = _i_;
-  if (oldi > 0) render(ACSL__L_PAREN);
-
-  render("extern");
-  _i_ = 0; p->stringconstant_->accept(this);
-  _i_ = 0; p->declaration_->accept(this);
-
-  if (oldi > 0) render(ACSL__R_PAREN);
-  _i_ = oldi;
-}
-
-void PrintAbsyn::visitExternGlobalPar(ExternGlobalPar *p)
-{
-  int oldi = _i_;
-  if (oldi > 0) render(ACSL__L_PAREN);
-
-  render("extern");
-  _i_ = 0; p->stringconstant_->accept(this);
-  visitLBRACE(p->lbrace_);
-  _i_ = 0; p->globals_->accept(this);
-  visitRBRACE(p->rbrace_);
-
-  if (oldi > 0) render(ACSL__R_PAREN);
-  _i_ = oldi;
-}
-
-void PrintAbsyn::visitAsmGlobal(AsmGlobal *p)
-{
-  int oldi = _i_;
-  if (oldi > 0) render(ACSL__L_PAREN);
-
-  visitASM(p->asm_);
-  render('(');
-  _i_ = 0; p->stringconstant_->accept(this);
-  render(')');
-  render(';');
-
-  if (oldi > 0) render(ACSL__R_PAREN);
-  _i_ = oldi;
-}
-
-void PrintAbsyn::visitPragmaGlobal(PragmaGlobal *p)
-{
-  int oldi = _i_;
-  if (oldi > 0) render(ACSL__L_PAREN);
-
-  _i_ = 0; p->pragma_->accept(this);
-
-  if (oldi > 0) render(ACSL__R_PAREN);
-  _i_ = oldi;
-}
-
-void PrintAbsyn::visitGlobalOldStyle(GlobalOldStyle *p)
-{
-  int oldi = _i_;
-  if (oldi > 0) render(ACSL__L_PAREN);
-
-  visitIdent(p->ident_);
-  render('(');
-  _i_ = 0; visitListIdent(p->listident_);
-  render(')');
-  _i_ = 0; p->oldpardeflist_->accept(this);
-  render(';');
 
   if (oldi > 0) render(ACSL__R_PAREN);
   _i_ = oldi;
@@ -2902,6 +2794,17 @@ void PrintAbsyn::visitTypeSpecShortKeyWord(TypeSpecShortKeyWord *p)
 }
 
 void PrintAbsyn::visitTypeSpecInt32KeyWord(TypeSpecInt32KeyWord *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(ACSL__L_PAREN);
+
+  render("__int32");
+
+  if (oldi > 0) render(ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitTypeSpecIntKeyWord(TypeSpecIntKeyWord *p)
 {
   int oldi = _i_;
   if (oldi > 0) render(ACSL__L_PAREN);
@@ -14536,12 +14439,6 @@ void PrintAbsyn::visitCST_WSTRING(String s)
 }
 
 
-void PrintAbsyn::visitATTRIBUTE_ANNOT(String s)
-{
-  render(s);
-}
-
-
 void PrintAbsyn::visitLBRACE(String s)
 {
   render(s);
@@ -14735,20 +14632,6 @@ void ShowAbsyn::visitSimpleGlobals(SimpleGlobals *p)
   bufAppend(']');
   bufAppend(')');
 }
-void ShowAbsyn::visitAGhostGlobals(AGhostGlobals *p)
-{
-  bufAppend('(');
-  bufAppend("AGhostGlobals");
-  bufAppend(' ');
-  bufAppend('[');
-  if (p->ghostglobals_)  p->ghostglobals_->accept(this);
-  bufAppend(']');
-  bufAppend(' ');
-  bufAppend('[');
-  if (p->globals_)  p->globals_->accept(this);
-  bufAppend(']');
-  bufAppend(')');
-}
 void ShowAbsyn::visitSemiColonGlobals(SemiColonGlobals *p)
 {
   bufAppend('(');
@@ -14799,25 +14682,6 @@ void ShowAbsyn::visitGhostGlobalsRGhost(GhostGlobalsRGhost *p)
 }
 void ShowAbsyn::visitGlobal(Global *p) {} //abstract class
 
-void ShowAbsyn::visitGlobalDecl(GlobalDecl *p)
-{
-  bufAppend('(');
-  bufAppend("GlobalDecl");
-  bufAppend(' ');
-  bufAppend('[');
-  if (p->decl_)  p->decl_->accept(this);
-  bufAppend(']');
-  bufAppend(')');
-}
-void ShowAbsyn::visitGlobalEmptyOldStyle(GlobalEmptyOldStyle *p)
-{
-  bufAppend('(');
-  bufAppend("GlobalEmptyOldStyle");
-  bufAppend(' ');
-  visitIdent(p->ident_);
-  bufAppend(' ');
-  bufAppend(')');
-}
 void ShowAbsyn::visitGlobalsDeclataion(GlobalsDeclataion *p)
 {
   bufAppend('(');
@@ -14836,78 +14700,6 @@ void ShowAbsyn::visitGlobalsFunctionDef(GlobalsFunctionDef *p)
   bufAppend('[');
   if (p->functiondef_)  p->functiondef_->accept(this);
   bufAppend(']');
-  bufAppend(')');
-}
-void ShowAbsyn::visitExternGlobalDeclataion(ExternGlobalDeclataion *p)
-{
-  bufAppend('(');
-  bufAppend("ExternGlobalDeclataion");
-  bufAppend(' ');
-  bufAppend('[');
-  if (p->stringconstant_)  p->stringconstant_->accept(this);
-  bufAppend(']');
-  bufAppend(' ');
-  bufAppend('[');
-  if (p->declaration_)  p->declaration_->accept(this);
-  bufAppend(']');
-  bufAppend(')');
-}
-void ShowAbsyn::visitExternGlobalPar(ExternGlobalPar *p)
-{
-  bufAppend('(');
-  bufAppend("ExternGlobalPar");
-  bufAppend(' ');
-  bufAppend('[');
-  if (p->stringconstant_)  p->stringconstant_->accept(this);
-  bufAppend(']');
-  bufAppend(' ');
-  visitLBRACE(p->lbrace_);
-  bufAppend(' ');
-  bufAppend('[');
-  if (p->globals_)  p->globals_->accept(this);
-  bufAppend(']');
-  bufAppend(' ');
-  visitRBRACE(p->rbrace_);
-  bufAppend(')');
-}
-void ShowAbsyn::visitAsmGlobal(AsmGlobal *p)
-{
-  bufAppend('(');
-  bufAppend("AsmGlobal");
-  bufAppend(' ');
-  visitASM(p->asm_);
-  bufAppend(' ');
-  bufAppend('[');
-  if (p->stringconstant_)  p->stringconstant_->accept(this);
-  bufAppend(']');
-  bufAppend(' ');
-  bufAppend(')');
-}
-void ShowAbsyn::visitPragmaGlobal(PragmaGlobal *p)
-{
-  bufAppend('(');
-  bufAppend("PragmaGlobal");
-  bufAppend(' ');
-  bufAppend('[');
-  if (p->pragma_)  p->pragma_->accept(this);
-  bufAppend(']');
-  bufAppend(')');
-}
-void ShowAbsyn::visitGlobalOldStyle(GlobalOldStyle *p)
-{
-  bufAppend('(');
-  bufAppend("GlobalOldStyle");
-  bufAppend(' ');
-  visitIdent(p->ident_);
-  bufAppend(' ');
-  bufAppend('[');
-  if (p->listident_)  p->listident_->accept(this);
-  bufAppend(']');
-  bufAppend(' ');
-  bufAppend('[');
-  if (p->oldpardeflist_)  p->oldpardeflist_->accept(this);
-  bufAppend(']');
-  bufAppend(' ');
   bufAppend(')');
 }
 void ShowAbsyn::visitIdOrTypenameAsId(IdOrTypenameAsId *p) {} //abstract class
@@ -17058,6 +16850,10 @@ void ShowAbsyn::visitTypeSpecShortKeyWord(TypeSpecShortKeyWord *p)
 void ShowAbsyn::visitTypeSpecInt32KeyWord(TypeSpecInt32KeyWord *p)
 {
   bufAppend("TypeSpecInt32KeyWord");
+}
+void ShowAbsyn::visitTypeSpecIntKeyWord(TypeSpecIntKeyWord *p)
+{
+  bufAppend("TypeSpecIntKeyWord");
 }
 void ShowAbsyn::visitTypeSpecLongKeyWord(TypeSpecLongKeyWord *p)
 {
@@ -25727,14 +25523,6 @@ void ShowAbsyn::visitCST_WCHAR(String s)
 
 
 void ShowAbsyn::visitCST_WSTRING(String s)
-{
-  bufAppend('\"');
-  bufAppend(s);
-  bufAppend('\"');
-}
-
-
-void ShowAbsyn::visitATTRIBUTE_ANNOT(String s)
 {
   bufAppend('\"');
   bufAppend(s);

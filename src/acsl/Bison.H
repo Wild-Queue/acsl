@@ -254,36 +254,35 @@ extern int acsldebug;
     T_ALIGNOF = 455,               /* T_ALIGNOF  */
     T_ASM = 456,                   /* T_ASM  */
     T_ATTRIBUTE = 457,             /* T_ATTRIBUTE  */
-    T_ATTRIBUTE_ANNOT = 458,       /* T_ATTRIBUTE_ANNOT  */
-    T_BLOCKATTRIBUTE = 459,        /* T_BLOCKATTRIBUTE  */
-    T_CONST = 460,                 /* T_CONST  */
-    T_CST_WCHAR = 461,             /* T_CST_WCHAR  */
-    T_CST_WSTRING = 462,           /* T_CST_WSTRING  */
-    T_EXT_CODE_ANNOT = 463,        /* T_EXT_CODE_ANNOT  */
-    T_EXT_CONTRACT = 464,          /* T_EXT_CONTRACT  */
-    T_EXT_GLOBAL = 465,            /* T_EXT_GLOBAL  */
-    T_EXT_GLOBAL_BLOCK = 466,      /* T_EXT_GLOBAL_BLOCK  */
-    T_FUNCTION__ = 467,            /* T_FUNCTION__  */
-    T_INLINE = 468,                /* T_INLINE  */
-    T_LBRACE = 469,                /* T_LBRACE  */
-    T_LBRACKET = 470,              /* T_LBRACKET  */
-    T_MSATTR = 471,                /* T_MSATTR  */
-    T_NAMEDTYPE = 472,             /* T_NAMEDTYPE  */
-    T_RBRACE = 473,                /* T_RBRACE  */
-    T_RBRACKET = 474,              /* T_RBRACKET  */
-    T_RESTRICT = 475,              /* T_RESTRICT  */
-    T_RGHOST = 476,                /* T_RGHOST  */
-    T_SIGNED = 477,                /* T_SIGNED  */
-    T_STRING_LITERAL = 478,        /* T_STRING_LITERAL  */
-    T_TYPENAME = 479,              /* T_TYPENAME  */
-    T_TYPEOF = 480,                /* T_TYPEOF  */
-    T_VOLATILE = 481,              /* T_VOLATILE  */
-    T_WSTRING_CONSTANT = 482,      /* T_WSTRING_CONSTANT  */
-    _STRING_ = 483,                /* _STRING_  */
-    _CHAR_ = 484,                  /* _CHAR_  */
-    _INTEGER_ = 485,               /* _INTEGER_  */
-    _DOUBLE_ = 486,                /* _DOUBLE_  */
-    _IDENT_ = 487                  /* _IDENT_  */
+    T_BLOCKATTRIBUTE = 458,        /* T_BLOCKATTRIBUTE  */
+    T_CONST = 459,                 /* T_CONST  */
+    T_CST_WCHAR = 460,             /* T_CST_WCHAR  */
+    T_CST_WSTRING = 461,           /* T_CST_WSTRING  */
+    T_EXT_CODE_ANNOT = 462,        /* T_EXT_CODE_ANNOT  */
+    T_EXT_CONTRACT = 463,          /* T_EXT_CONTRACT  */
+    T_EXT_GLOBAL = 464,            /* T_EXT_GLOBAL  */
+    T_EXT_GLOBAL_BLOCK = 465,      /* T_EXT_GLOBAL_BLOCK  */
+    T_FUNCTION__ = 466,            /* T_FUNCTION__  */
+    T_INLINE = 467,                /* T_INLINE  */
+    T_LBRACE = 468,                /* T_LBRACE  */
+    T_LBRACKET = 469,              /* T_LBRACKET  */
+    T_MSATTR = 470,                /* T_MSATTR  */
+    T_NAMEDTYPE = 471,             /* T_NAMEDTYPE  */
+    T_RBRACE = 472,                /* T_RBRACE  */
+    T_RBRACKET = 473,              /* T_RBRACKET  */
+    T_RESTRICT = 474,              /* T_RESTRICT  */
+    T_RGHOST = 475,                /* T_RGHOST  */
+    T_SIGNED = 476,                /* T_SIGNED  */
+    T_STRING_LITERAL = 477,        /* T_STRING_LITERAL  */
+    T_TYPENAME = 478,              /* T_TYPENAME  */
+    T_TYPEOF = 479,                /* T_TYPEOF  */
+    T_VOLATILE = 480,              /* T_VOLATILE  */
+    T_WSTRING_CONSTANT = 481,      /* T_WSTRING_CONSTANT  */
+    _STRING_ = 482,                /* _STRING_  */
+    _CHAR_ = 483,                  /* _CHAR_  */
+    _INTEGER_ = 484,               /* _INTEGER_  */
+    _DOUBLE_ = 485,                /* _DOUBLE_  */
+    _IDENT_ = 486                  /* _IDENT_  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -292,7 +291,7 @@ extern int acsldebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 52 "bnfc_parser.y"
+#line 52 "full_bnfc_parser.y"
 
   int    _int;
   char   _char;
@@ -565,7 +564,7 @@ union YYSTYPE
   acsl::Wildcard* wildcard_;
   acsl::ListWildcard* listwildcard_;
 
-#line 569 "Bison.H"
+#line 568 "Bison.H"
 
 };
 typedef union YYSTYPE YYSTYPE;

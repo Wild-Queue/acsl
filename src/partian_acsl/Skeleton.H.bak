@@ -29,10 +29,18 @@ public:
   void visitGhostParameterOpt(GhostParameterOpt *p);
   void visitIdOrTypename(IdOrTypename *p);
   void visitIdOrTypenameAsId(IdOrTypenameAsId *p);
+  void visitDeclaration(Declaration *p);
+  void visitDeclAndInitDeclAttrList(DeclAndInitDeclAttrList *p);
+  void visitInitDeclaratorAttr(InitDeclaratorAttr *p);
+  void visitInitDeclarator(InitDeclarator *p);
+  void visitStructDeclList(StructDeclList *p);
+  void visitFieldDecl(FieldDecl *p);
+  void visitAttribute(Attribute *p);
   void visitAProgram(AProgram *p);
   void visitNoGlobals(NoGlobals *p);
   void visitSimpleGlobals(SimpleGlobals *p);
   void visitSemiColonGlobals(SemiColonGlobals *p);
+  void visitGlobalsDeclataion(GlobalsDeclataion *p);
   void visitGlobalsFunctionDef(GlobalsFunctionDef *p);
   void visitSimpleFunctionDef(SimpleFunctionDef *p);
   void visitABlock(ABlock *p);
@@ -53,6 +61,9 @@ public:
   void visitTypeSpecDoubleKeyWord(TypeSpecDoubleKeyWord *p);
   void visitTypeSpecSignedKeyWord(TypeSpecSignedKeyWord *p);
   void visitTypeSpecUnsignedKeyWord(TypeSpecUnsignedKeyWord *p);
+  void visitStructId(StructId *p);
+  void visitStructIdBraces(StructIdBraces *p);
+  void visitStructBraces(StructBraces *p);
   void visitADeclarator(ADeclarator *p);
   void visitNoPointer(NoPointer *p);
   void visitSomePointer(SomePointer *p);
@@ -67,8 +78,23 @@ public:
   void visitNoGhostParameter(NoGhostParameter *p);
   void visitIdTypename(IdTypename *p);
   void visitIdOrTypenameAsIdIdentifier(IdOrTypenameAsIdIdentifier *p);
+  void visitDeclSpecInitDecl(DeclSpecInitDecl *p);
+  void visitDeclSpec(DeclSpec *p);
+  void visitInitDeclaration(InitDeclaration *p);
+  void visitInitDeclarationWithAttr(InitDeclarationWithAttr *p);
+  void visitInitDeclaratorAttribute(InitDeclaratorAttribute *p);
+  void visitSimpleInitDeclarator(SimpleInitDeclarator *p);
+  void visitEmptyStructDecl(EmptyStructDecl *p);
+  void visitDeclSpecStructDecl(DeclSpecStructDecl *p);
+  void visitSemicolonStructDecl(SemicolonStructDecl *p);
+  void visitSpecFieldDeclStructDecl(SpecFieldDeclStructDecl *p);
+  void visitFieldDeclDeclarator(FieldDeclDeclarator *p);
+  void visitAttributeConst(AttributeConst *p);
   void visitListDeclarator(ListDeclarator *p);
   void visitListParameterDecl(ListParameterDecl *p);
+  void visitListInitDeclaratorAttr(ListInitDeclaratorAttr *p);
+  void visitListFieldDecl(ListFieldDecl *p);
+  void visitListAttribute(ListAttribute *p);
 
   void visitInteger(Integer x);
   void visitChar(Char x);
@@ -78,6 +104,9 @@ public:
   void visitSIGNED(SIGNED x);
   void visitLBRACE(LBRACE x);
   void visitRBRACE(RBRACE x);
+  void visitCONST(CONST x);
+  void visitRESTRICT(RESTRICT x);
+  void visitVOLATILE(VOLATILE x);
 
 };
 }

@@ -43,16 +43,17 @@ IDENT [a-zA-Z0-9'_]
 <INITIAL>"_Bool"      	 return _SYMB_1;
 <INITIAL>"__int32"      	 return _SYMB_2;
 <INITIAL>"__int64"      	 return _SYMB_3;
-<INITIAL>","      	 return _COMMA;
 <INITIAL>"*"      	 return _STAR;
 <INITIAL>"("      	 return _LPAREN;
 <INITIAL>")"      	 return _RPAREN;
+<INITIAL>","      	 return _COMMA;
 <INITIAL>"char"      	 return _KW_char;
 <INITIAL>"double"      	 return _KW_double;
 <INITIAL>"float"      	 return _KW_float;
 <INITIAL>"int"      	 return _KW_int;
 <INITIAL>"long"      	 return _KW_long;
 <INITIAL>"short"      	 return _KW_short;
+<INITIAL>"struct"      	 return _KW_struct;
 <INITIAL>"unsigned"      	 return _KW_unsigned;
 <INITIAL>"void"      	 return _KW_void;
 
@@ -61,6 +62,9 @@ IDENT [a-zA-Z0-9'_]
 <INITIAL>\_\_signed\_\_|signed|\_\_signed    	 yylval->_string = strdup(yytext); return T_SIGNED;
 <INITIAL>\<\%|\{    	 yylval->_string = strdup(yytext); return T_LBRACE;
 <INITIAL>\%\>|\}    	 yylval->_string = strdup(yytext); return T_RBRACE;
+<INITIAL>const|\_\_const|\_\_const\_\_    	 yylval->_string = strdup(yytext); return T_CONST;
+<INITIAL>\_\_restrict|restrict    	 yylval->_string = strdup(yytext); return T_RESTRICT;
+<INITIAL>volatile|\_\_volatile|\_\_volatile\_\_|\_\_volatile    	 yylval->_string = strdup(yytext); return T_VOLATILE;
 <INITIAL>{LETTER}{IDENT}*      	 yylval->_string = strdup(yytext); return _IDENT_;
 <INITIAL>[ \t\r\n\f]      	 /* ignore white space. */;
 <INITIAL>.      	 return _ERROR_;

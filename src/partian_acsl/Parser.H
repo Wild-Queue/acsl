@@ -30,8 +30,6 @@ TypeSpec* pTypeSpec(FILE *inp);
 TypeSpec* pTypeSpec(const char *str);
 Declarator* pDeclarator(FILE *inp);
 Declarator* pDeclarator(const char *str);
-ListDeclarator* pListDeclarator(FILE *inp);
-ListDeclarator* pListDeclarator(const char *str);
 PointerOpt* pPointerOpt(FILE *inp);
 PointerOpt* pPointerOpt(const char *str);
 DirectDecl* pDirectDecl(FILE *inp);
@@ -60,6 +58,16 @@ ListInitDeclaratorAttr* pListInitDeclaratorAttr(FILE *inp);
 ListInitDeclaratorAttr* pListInitDeclaratorAttr(const char *str);
 InitDeclarator* pInitDeclarator(FILE *inp);
 InitDeclarator* pInitDeclarator(const char *str);
+StructDeclList* pStructDeclList(FILE *inp);
+StructDeclList* pStructDeclList(const char *str);
+FieldDecl* pFieldDecl(FILE *inp);
+FieldDecl* pFieldDecl(const char *str);
+ListFieldDecl* pListFieldDecl(FILE *inp);
+ListFieldDecl* pListFieldDecl(const char *str);
+Attribute* pAttribute(FILE *inp);
+Attribute* pAttribute(const char *str);
+ListAttribute* pListAttribute(FILE *inp);
+ListAttribute* pListAttribute(const char *str);
 }
 
 #endif

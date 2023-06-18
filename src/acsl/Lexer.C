@@ -573,8 +573,8 @@ static void yynoreturn yy_fatal_error ( const char* msg , yyscan_t yyscanner );
 	yyg->yy_hold_char = *yy_cp; \
 	*yy_cp = '\0'; \
 	yyg->yy_c_buf_p = yy_cp;
-#define YY_NUM_RULES 250
-#define YY_END_OF_BUFFER 251
+#define YY_NUM_RULES 249
+#define YY_END_OF_BUFFER 250
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -585,29 +585,29 @@ struct yy_trans_info
 static const flex_int16_t yy_accept[1063] =
     {   0,
         0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-        0,    0,  251,  249,  248,  205,   17,  225,  116,   21,
-       16,  236,    2,    3,   15,   13,    4,   14,    9,   20,
-      246,   34,    1,   24,   35,   25,   33,  197,  197,  197,
-      197,  197,  197,  197,  197,  197,   95,  249,   96,   30,
-      249,  249,  197,  197,  197,  197,  197,  197,  197,  197,
+        0,    0,  250,  248,  247,  204,   17,  224,  116,   21,
+       16,  235,    3,    4,   15,   13,    2,   14,    9,   20,
+      245,   34,    1,   24,   35,   25,   33,  197,  197,  197,
+      197,  197,  197,  197,  197,  197,   95,  248,   96,   30,
+      248,  248,  197,  197,  197,  197,  197,  197,  197,  197,
       197,  197,  197,  197,  197,  197,  197,  197,  197,  103,
-       31,  104,   18,  238,  250,  237,  243,  239,  240,  241,
-      242,  244,  228,  227,  226,  235,  233,  234,  229,  230,
-      231,  232,   29,   40,  202,   19,   41,   38,   94,   11,
+       31,  104,   18,  237,  249,  236,  242,  238,  239,  240,
+      241,  243,  227,  226,  225,  234,  232,  233,  228,  229,
+      230,  231,   29,   40,  201,   19,   41,   38,   94,   11,
 
-       36,   12,   37,   10,  112,  205,   39,    0,  246,  115,
-      204,  201,    0,  203,   22,   26,   28,   27,   23,  247,
+       36,   12,   37,   10,  112,  204,   39,    0,  245,  115,
+      203,  200,    0,  202,   22,   26,   28,   27,   23,  246,
       197,  197,  197,  197,  197,  197,  197,  197,  197,   97,
         0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
         0,    0,    0,    0,    0,    0,    0,    0,   43,   63,
         0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-        0,  223,  197,  197,  197,  128,  197,  197,  197,  197,
+        0,  222,  197,  197,  197,  128,  197,  197,  197,  197,
       197,  197,  197,  197,  197,  197,  145,  197,  197,  197,
       197,  197,  197,  197,  197,  197,  197,  159,  197,  197,
       197,  197,  197,  197,  197,  197,  197,  197,  197,  197,
 
       197,  197,  197,  197,  197,  197,   42,   98,   32,   64,
-       47,  245,    0,   44,    0,   61,   45,  197,  197,  197,
+       47,  244,    0,   44,    0,   61,   45,  197,  197,  197,
       197,  197,  197,  197,  197,    0,    0,  100,    0,    0,
         0,    0,    0,    0,    0,    0,    0,    0,    0,   66,
         0,    0,    0,    0,    0,    0,    0,  105,    0,    0,
@@ -636,15 +636,15 @@ static const flex_int16_t yy_accept[1063] =
       197,  197,  197,  197,  197,  197,  197,  197,  197,  170,
       171,  197,  197,  197,  197,  197,  177,  197,  197,  197,
       197,  197,  197,  197,  197,  197,  197,  197,  189,  197,
-      197,  193,  197,  197,  197,    0,  245,  197,  197,  197,
+      197,  193,  197,  197,  197,    0,  244,  197,  197,  197,
       197,  197,  197,  197,  197,  197,  197,    0,    0,    0,
 
         0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
       113,    0,    0,    0,    0,    0,   93,    0,    0,    0,
         0,    0,    0,   71,  107,    0,    0,    0,  111,   54,
-        0,    0,    0,    0,    0,    0,    0,  206,    0,    0,
+        0,    0,    0,    0,    0,    0,    0,  205,    0,    0,
         0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-        0,    0,    0,    0,    0,    0,   49,    0,    0,  212,
+        0,    0,    0,    0,    0,    0,   49,    0,    0,  211,
         0,    0,    0,    0,  125,  197,  197,  130,  197,  197,
       134,  138,  197,  140,  197,  197,  197,  197,  197,  150,
       197,  152,  154,  197,  156,  197,  197,  197,  197,  197,
@@ -667,9 +667,9 @@ static const flex_int16_t yy_accept[1063] =
       197,  197,  197,  197,  197,  197,  124,    0,    0,    0,
         0,    0,    0,    0,   69,   68,    0,    0,   70,    0,
         0,   84,    0,  101,    0,   91,  106,    0,    0,    0,
-        0,    0,    0,    0,    0,    0,  206,    0,    0,    0,
-      210,    0,    0,    0,    0,    0,    0,    0,   55,   56,
-        0,    0,    0,    0,    0,    0,    0,    0,  216,    0,
+        0,    0,    0,    0,    0,    0,  205,    0,    0,    0,
+      209,    0,    0,    0,    0,    0,    0,    0,   55,   56,
+        0,    0,    0,    0,    0,    0,    0,    0,  215,    0,
       197,  197,  197,  133,  197,  197,  143,  197,  148,  197,
 
       161,  197,  164,  197,  197,  197,  197,  197,  181,  190,
@@ -677,28 +677,28 @@ static const flex_int16_t yy_accept[1063] =
         0,    0,    0,    0,    0,    0,   89,    0,    0,  114,
         0,    0,    0,    0,    0,    0,    0,    5,    0,    0,
         0,    0,    0,    0,    0,    0,    0,    0,    0,   50,
-        0,    0,    0,  211,  216,    0,    0,  214,    0,   59,
-      217,    0,    0,  197,  197,  132,  139,  141,  144,  155,
+        0,    0,    0,  210,  215,    0,    0,  213,    0,   59,
+      216,    0,    0,  197,  197,  132,  139,  141,  144,  155,
       197,  197,  197,  178,  179,  197,  192,  194,  119,  121,
       197,  197,  197,  197,    0,    0,    0,    0,    0,   80,
        86,    0,    0,   90,    0,    0,    0,    0,    0,    0,
 
-       53,    0,    0,    0,    0,  207,    0,    0,    0,  210,
+       53,    0,    0,    0,    0,  206,    0,    0,    0,  209,
         0,    0,   51,    0,    0,   48,    0,    0,    0,    0,
       126,  131,  142,  162,  165,  175,  197,  197,  197,  123,
         0,   85,   88,   82,    0,    0,    0,  102,    0,    0,
         0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-        0,   58,    0,  213,  214,  217,  215,  197,  197,  197,
+        0,   58,    0,  212,  213,  216,  214,  197,  197,  197,
       197,   87,    0,    0,    0,    0,    0,    0,    0,   75,
-        0,    0,    0,    0,  207,  208,    0,    0,    0,    0,
+        0,    0,    0,    0,  206,  207,    0,    0,    0,    0,
         0,    0,  197,  197,  197,    0,   79,    0,   92,    0,
        77,   78,    0,    0,    0,    0,    0,    0,    0,    0,
 
-        0,  215,  197,  197,  197,   83,    0,    0,    0,   60,
-        0,  208,    0,    0,    0,    0,  197,  197,    0,    0,
+        0,  214,  197,  197,  197,   83,    0,    0,    0,   60,
+        0,  207,    0,    0,    0,    0,  197,  197,    0,    0,
        52,    0,    0,    0,    0,    0,  197,  197,   73,   76,
-        0,    0,    0,    0,    0,  197,    0,  209,    0,    0,
-        6,  197,    0,    0,    0,    0,    0,  209,    8,    0,
+        0,    0,    0,    0,    0,  197,    0,  208,    0,    0,
+        6,  197,    0,    0,    0,    0,    0,  208,    8,    0,
        46,    0,    0,    0,    0,    0,    0,    0,    0,    0,
         7,    0
     } ;
@@ -1385,12 +1385,12 @@ static const flex_int16_t yy_chk[1717] =
 #define yymore() yymore_used_but_not_detected
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
-#line 1 "bnfc_parser.l"
+#line 1 "full_bnfc_parser.l"
 /* -*- c++ -*- File generated by the BNF Converter (bnfc 2.9.4.1). */
 /* Lexer definition for use with FLex */
 #define YY_NO_INPUT 1
 /* Additional data for the lexer: a buffer for lexing string literals. */
-#line 13 "bnfc_parser.l"
+#line 13 "full_bnfc_parser.l"
 #include "Absyn.H"
 #include "Bison.H"
 
@@ -1726,7 +1726,7 @@ YY_DECL
 		}
 
 	{
-#line 70 "bnfc_parser.l"
+#line 70 "full_bnfc_parser.l"
 
 
 #line 1733 "Lexer.C"
@@ -1788,1263 +1788,1258 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 72 "bnfc_parser.l"
+#line 72 "full_bnfc_parser.l"
 return _SEMI;
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 73 "bnfc_parser.l"
-return _LPAREN;
+#line 73 "full_bnfc_parser.l"
+return _COMMA;
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 74 "bnfc_parser.l"
-return _RPAREN;
+#line 74 "full_bnfc_parser.l"
+return _LPAREN;
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 75 "bnfc_parser.l"
-return _COMMA;
+#line 75 "full_bnfc_parser.l"
+return _RPAREN;
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 76 "bnfc_parser.l"
+#line 76 "full_bnfc_parser.l"
 return _SYMB_4;
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 77 "bnfc_parser.l"
+#line 77 "full_bnfc_parser.l"
 return _SYMB_5;
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 78 "bnfc_parser.l"
+#line 78 "full_bnfc_parser.l"
 return _SYMB_6;
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 79 "bnfc_parser.l"
+#line 79 "full_bnfc_parser.l"
 return _SYMB_7;
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 80 "bnfc_parser.l"
+#line 80 "full_bnfc_parser.l"
 return _DOT;
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 81 "bnfc_parser.l"
+#line 81 "full_bnfc_parser.l"
 return _RARROW;
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 82 "bnfc_parser.l"
+#line 82 "full_bnfc_parser.l"
 return _DPLUS;
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 83 "bnfc_parser.l"
+#line 83 "full_bnfc_parser.l"
 return _DMINUS;
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 84 "bnfc_parser.l"
+#line 84 "full_bnfc_parser.l"
 return _PLUS;
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 85 "bnfc_parser.l"
+#line 85 "full_bnfc_parser.l"
 return _MINUS;
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 86 "bnfc_parser.l"
+#line 86 "full_bnfc_parser.l"
 return _STAR;
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 87 "bnfc_parser.l"
+#line 87 "full_bnfc_parser.l"
 return _AMP;
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 88 "bnfc_parser.l"
+#line 88 "full_bnfc_parser.l"
 return _BANG;
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 89 "bnfc_parser.l"
+#line 89 "full_bnfc_parser.l"
 return _TILDE;
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 90 "bnfc_parser.l"
+#line 90 "full_bnfc_parser.l"
 return _DAMP;
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 91 "bnfc_parser.l"
+#line 91 "full_bnfc_parser.l"
 return _SLASH;
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 92 "bnfc_parser.l"
+#line 92 "full_bnfc_parser.l"
 return _PERCENT;
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 93 "bnfc_parser.l"
+#line 93 "full_bnfc_parser.l"
 return _DLT;
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 94 "bnfc_parser.l"
+#line 94 "full_bnfc_parser.l"
 return _DGT;
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 95 "bnfc_parser.l"
+#line 95 "full_bnfc_parser.l"
 return _LT;
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 96 "bnfc_parser.l"
+#line 96 "full_bnfc_parser.l"
 return _GT;
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 97 "bnfc_parser.l"
+#line 97 "full_bnfc_parser.l"
 return _LDARROW;
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 98 "bnfc_parser.l"
+#line 98 "full_bnfc_parser.l"
 return _GTEQ;
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 99 "bnfc_parser.l"
+#line 99 "full_bnfc_parser.l"
 return _DEQ;
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 100 "bnfc_parser.l"
+#line 100 "full_bnfc_parser.l"
 return _BANGEQ;
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 101 "bnfc_parser.l"
+#line 101 "full_bnfc_parser.l"
 return _CARET;
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 102 "bnfc_parser.l"
+#line 102 "full_bnfc_parser.l"
 return _BAR;
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 103 "bnfc_parser.l"
+#line 103 "full_bnfc_parser.l"
 return _DBAR;
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 104 "bnfc_parser.l"
+#line 104 "full_bnfc_parser.l"
 return _QUESTION;
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 105 "bnfc_parser.l"
+#line 105 "full_bnfc_parser.l"
 return _COLON;
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 106 "bnfc_parser.l"
+#line 106 "full_bnfc_parser.l"
 return _EQ;
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 107 "bnfc_parser.l"
+#line 107 "full_bnfc_parser.l"
 return _PLUSEQ;
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 108 "bnfc_parser.l"
+#line 108 "full_bnfc_parser.l"
 return _MINUSEQ;
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 109 "bnfc_parser.l"
+#line 109 "full_bnfc_parser.l"
 return _STAREQ;
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 110 "bnfc_parser.l"
+#line 110 "full_bnfc_parser.l"
 return _SLASHEQ;
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 111 "bnfc_parser.l"
+#line 111 "full_bnfc_parser.l"
 return _PERCENTEQ;
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 112 "bnfc_parser.l"
+#line 112 "full_bnfc_parser.l"
 return _AMPEQ;
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 113 "bnfc_parser.l"
+#line 113 "full_bnfc_parser.l"
 return _BAREQ;
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 114 "bnfc_parser.l"
+#line 114 "full_bnfc_parser.l"
 return _CARETEQ;
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 115 "bnfc_parser.l"
+#line 115 "full_bnfc_parser.l"
 return _DLTEQ;
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 116 "bnfc_parser.l"
+#line 116 "full_bnfc_parser.l"
 return _DGTEQ;
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 117 "bnfc_parser.l"
+#line 117 "full_bnfc_parser.l"
 return _SYMB_45;
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 118 "bnfc_parser.l"
+#line 118 "full_bnfc_parser.l"
 return _ELLIPSIS;
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 119 "bnfc_parser.l"
+#line 119 "full_bnfc_parser.l"
 return _SYMB_47;
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 120 "bnfc_parser.l"
+#line 120 "full_bnfc_parser.l"
 return _SYMB_48;
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 121 "bnfc_parser.l"
+#line 121 "full_bnfc_parser.l"
 return _SYMB_49;
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 122 "bnfc_parser.l"
+#line 122 "full_bnfc_parser.l"
 return _SYMB_50;
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 123 "bnfc_parser.l"
+#line 123 "full_bnfc_parser.l"
 return _SYMB_51;
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 124 "bnfc_parser.l"
+#line 124 "full_bnfc_parser.l"
 return _SYMB_52;
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 125 "bnfc_parser.l"
+#line 125 "full_bnfc_parser.l"
 return _SYMB_53;
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
-#line 126 "bnfc_parser.l"
+#line 126 "full_bnfc_parser.l"
 return _SYMB_54;
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 127 "bnfc_parser.l"
+#line 127 "full_bnfc_parser.l"
 return _SYMB_55;
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
-#line 128 "bnfc_parser.l"
+#line 128 "full_bnfc_parser.l"
 return _SYMB_56;
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
-#line 129 "bnfc_parser.l"
+#line 129 "full_bnfc_parser.l"
 return _SYMB_57;
 	YY_BREAK
 case 59:
 YY_RULE_SETUP
-#line 130 "bnfc_parser.l"
+#line 130 "full_bnfc_parser.l"
 return _SYMB_58;
 	YY_BREAK
 case 60:
 YY_RULE_SETUP
-#line 131 "bnfc_parser.l"
+#line 131 "full_bnfc_parser.l"
 return _SYMB_59;
 	YY_BREAK
 case 61:
 YY_RULE_SETUP
-#line 132 "bnfc_parser.l"
+#line 132 "full_bnfc_parser.l"
 return _SYMB_60;
 	YY_BREAK
 case 62:
 YY_RULE_SETUP
-#line 133 "bnfc_parser.l"
+#line 133 "full_bnfc_parser.l"
 return _SYMB_61;
 	YY_BREAK
 case 63:
 YY_RULE_SETUP
-#line 134 "bnfc_parser.l"
+#line 134 "full_bnfc_parser.l"
 return _DCARET;
 	YY_BREAK
 case 64:
 YY_RULE_SETUP
-#line 135 "bnfc_parser.l"
+#line 135 "full_bnfc_parser.l"
 return _SYMB_63;
 	YY_BREAK
 case 65:
 YY_RULE_SETUP
-#line 136 "bnfc_parser.l"
+#line 136 "full_bnfc_parser.l"
 return _SYMB_64;
 	YY_BREAK
 case 66:
 YY_RULE_SETUP
-#line 137 "bnfc_parser.l"
+#line 137 "full_bnfc_parser.l"
 return _SYMB_65;
 	YY_BREAK
 case 67:
 YY_RULE_SETUP
-#line 138 "bnfc_parser.l"
+#line 138 "full_bnfc_parser.l"
 return _SYMB_66;
 	YY_BREAK
 case 68:
 YY_RULE_SETUP
-#line 139 "bnfc_parser.l"
+#line 139 "full_bnfc_parser.l"
 return _SYMB_67;
 	YY_BREAK
 case 69:
 YY_RULE_SETUP
-#line 140 "bnfc_parser.l"
+#line 140 "full_bnfc_parser.l"
 return _SYMB_68;
 	YY_BREAK
 case 70:
 YY_RULE_SETUP
-#line 141 "bnfc_parser.l"
+#line 141 "full_bnfc_parser.l"
 return _SYMB_69;
 	YY_BREAK
 case 71:
 YY_RULE_SETUP
-#line 142 "bnfc_parser.l"
+#line 142 "full_bnfc_parser.l"
 return _SYMB_70;
 	YY_BREAK
 case 72:
 YY_RULE_SETUP
-#line 143 "bnfc_parser.l"
+#line 143 "full_bnfc_parser.l"
 return _SYMB_71;
 	YY_BREAK
 case 73:
 YY_RULE_SETUP
-#line 144 "bnfc_parser.l"
+#line 144 "full_bnfc_parser.l"
 return _SYMB_72;
 	YY_BREAK
 case 74:
 YY_RULE_SETUP
-#line 145 "bnfc_parser.l"
+#line 145 "full_bnfc_parser.l"
 return _SYMB_73;
 	YY_BREAK
 case 75:
 YY_RULE_SETUP
-#line 146 "bnfc_parser.l"
+#line 146 "full_bnfc_parser.l"
 return _SYMB_74;
 	YY_BREAK
 case 76:
 YY_RULE_SETUP
-#line 147 "bnfc_parser.l"
+#line 147 "full_bnfc_parser.l"
 return _SYMB_75;
 	YY_BREAK
 case 77:
 YY_RULE_SETUP
-#line 148 "bnfc_parser.l"
+#line 148 "full_bnfc_parser.l"
 return _SYMB_76;
 	YY_BREAK
 case 78:
 YY_RULE_SETUP
-#line 149 "bnfc_parser.l"
+#line 149 "full_bnfc_parser.l"
 return _SYMB_77;
 	YY_BREAK
 case 79:
 YY_RULE_SETUP
-#line 150 "bnfc_parser.l"
+#line 150 "full_bnfc_parser.l"
 return _SYMB_78;
 	YY_BREAK
 case 80:
 YY_RULE_SETUP
-#line 151 "bnfc_parser.l"
+#line 151 "full_bnfc_parser.l"
 return _SYMB_79;
 	YY_BREAK
 case 81:
 YY_RULE_SETUP
-#line 152 "bnfc_parser.l"
+#line 152 "full_bnfc_parser.l"
 return _SYMB_80;
 	YY_BREAK
 case 82:
 YY_RULE_SETUP
-#line 153 "bnfc_parser.l"
+#line 153 "full_bnfc_parser.l"
 return _SYMB_81;
 	YY_BREAK
 case 83:
 YY_RULE_SETUP
-#line 154 "bnfc_parser.l"
+#line 154 "full_bnfc_parser.l"
 return _SYMB_82;
 	YY_BREAK
 case 84:
 YY_RULE_SETUP
-#line 155 "bnfc_parser.l"
+#line 155 "full_bnfc_parser.l"
 return _SYMB_83;
 	YY_BREAK
 case 85:
 YY_RULE_SETUP
-#line 156 "bnfc_parser.l"
+#line 156 "full_bnfc_parser.l"
 return _SYMB_84;
 	YY_BREAK
 case 86:
 YY_RULE_SETUP
-#line 157 "bnfc_parser.l"
+#line 157 "full_bnfc_parser.l"
 return _SYMB_85;
 	YY_BREAK
 case 87:
 YY_RULE_SETUP
-#line 158 "bnfc_parser.l"
+#line 158 "full_bnfc_parser.l"
 return _SYMB_86;
 	YY_BREAK
 case 88:
 YY_RULE_SETUP
-#line 159 "bnfc_parser.l"
+#line 159 "full_bnfc_parser.l"
 return _SYMB_87;
 	YY_BREAK
 case 89:
 YY_RULE_SETUP
-#line 160 "bnfc_parser.l"
+#line 160 "full_bnfc_parser.l"
 return _SYMB_88;
 	YY_BREAK
 case 90:
 YY_RULE_SETUP
-#line 161 "bnfc_parser.l"
+#line 161 "full_bnfc_parser.l"
 return _SYMB_89;
 	YY_BREAK
 case 91:
 YY_RULE_SETUP
-#line 162 "bnfc_parser.l"
+#line 162 "full_bnfc_parser.l"
 return _SYMB_90;
 	YY_BREAK
 case 92:
 YY_RULE_SETUP
-#line 163 "bnfc_parser.l"
+#line 163 "full_bnfc_parser.l"
 return _SYMB_91;
 	YY_BREAK
 case 93:
 YY_RULE_SETUP
-#line 164 "bnfc_parser.l"
+#line 164 "full_bnfc_parser.l"
 return _SYMB_92;
 	YY_BREAK
 case 94:
 YY_RULE_SETUP
-#line 165 "bnfc_parser.l"
+#line 165 "full_bnfc_parser.l"
 return _SYMB_93;
 	YY_BREAK
 case 95:
 YY_RULE_SETUP
-#line 166 "bnfc_parser.l"
+#line 166 "full_bnfc_parser.l"
 return _LBRACK;
 	YY_BREAK
 case 96:
 YY_RULE_SETUP
-#line 167 "bnfc_parser.l"
+#line 167 "full_bnfc_parser.l"
 return _RBRACK;
 	YY_BREAK
 case 97:
 YY_RULE_SETUP
-#line 168 "bnfc_parser.l"
+#line 168 "full_bnfc_parser.l"
 return _SYMB_96;
 	YY_BREAK
 case 98:
 YY_RULE_SETUP
-#line 169 "bnfc_parser.l"
+#line 169 "full_bnfc_parser.l"
 return _SYMB_97;
 	YY_BREAK
 case 99:
 YY_RULE_SETUP
-#line 170 "bnfc_parser.l"
+#line 170 "full_bnfc_parser.l"
 return _SYMB_98;
 	YY_BREAK
 case 100:
 YY_RULE_SETUP
-#line 171 "bnfc_parser.l"
+#line 171 "full_bnfc_parser.l"
 return _SYMB_99;
 	YY_BREAK
 case 101:
 YY_RULE_SETUP
-#line 172 "bnfc_parser.l"
+#line 172 "full_bnfc_parser.l"
 return _SYMB_100;
 	YY_BREAK
 case 102:
 YY_RULE_SETUP
-#line 173 "bnfc_parser.l"
+#line 173 "full_bnfc_parser.l"
 return _SYMB_101;
 	YY_BREAK
 case 103:
 YY_RULE_SETUP
-#line 174 "bnfc_parser.l"
+#line 174 "full_bnfc_parser.l"
 return _LBRACE;
 	YY_BREAK
 case 104:
 YY_RULE_SETUP
-#line 175 "bnfc_parser.l"
+#line 175 "full_bnfc_parser.l"
 return _RBRACE;
 	YY_BREAK
 case 105:
 YY_RULE_SETUP
-#line 176 "bnfc_parser.l"
+#line 176 "full_bnfc_parser.l"
 return _SYMB_104;
 	YY_BREAK
 case 106:
 YY_RULE_SETUP
-#line 177 "bnfc_parser.l"
+#line 177 "full_bnfc_parser.l"
 return _SYMB_105;
 	YY_BREAK
 case 107:
 YY_RULE_SETUP
-#line 178 "bnfc_parser.l"
+#line 178 "full_bnfc_parser.l"
 return _SYMB_106;
 	YY_BREAK
 case 108:
 YY_RULE_SETUP
-#line 179 "bnfc_parser.l"
+#line 179 "full_bnfc_parser.l"
 return _SYMB_107;
 	YY_BREAK
 case 109:
 YY_RULE_SETUP
-#line 180 "bnfc_parser.l"
+#line 180 "full_bnfc_parser.l"
 return _SYMB_108;
 	YY_BREAK
 case 110:
 YY_RULE_SETUP
-#line 181 "bnfc_parser.l"
+#line 181 "full_bnfc_parser.l"
 return _SYMB_109;
 	YY_BREAK
 case 111:
 YY_RULE_SETUP
-#line 182 "bnfc_parser.l"
+#line 182 "full_bnfc_parser.l"
 return _SYMB_110;
 	YY_BREAK
 case 112:
 YY_RULE_SETUP
-#line 183 "bnfc_parser.l"
+#line 183 "full_bnfc_parser.l"
 return _DDOT;
 	YY_BREAK
 case 113:
 YY_RULE_SETUP
-#line 184 "bnfc_parser.l"
+#line 184 "full_bnfc_parser.l"
 return _SYMB_112;
 	YY_BREAK
 case 114:
 YY_RULE_SETUP
-#line 185 "bnfc_parser.l"
+#line 185 "full_bnfc_parser.l"
 return _SYMB_113;
 	YY_BREAK
 case 115:
 YY_RULE_SETUP
-#line 186 "bnfc_parser.l"
+#line 186 "full_bnfc_parser.l"
 return _DCOLON;
 	YY_BREAK
 case 116:
 YY_RULE_SETUP
-#line 187 "bnfc_parser.l"
+#line 187 "full_bnfc_parser.l"
 return _DOLLAR;
 	YY_BREAK
 case 117:
 YY_RULE_SETUP
-#line 188 "bnfc_parser.l"
+#line 188 "full_bnfc_parser.l"
 return _KW_Assigns;
 	YY_BREAK
 case 118:
 YY_RULE_SETUP
-#line 189 "bnfc_parser.l"
+#line 189 "full_bnfc_parser.l"
 return _KW_Assumes;
 	YY_BREAK
 case 119:
 YY_RULE_SETUP
-#line 190 "bnfc_parser.l"
+#line 190 "full_bnfc_parser.l"
 return _KW_Behaviors;
 	YY_BREAK
 case 120:
 YY_RULE_SETUP
-#line 191 "bnfc_parser.l"
+#line 191 "full_bnfc_parser.l"
 return _KW_Contract;
 	YY_BREAK
 case 121:
 YY_RULE_SETUP
-#line 192 "bnfc_parser.l"
+#line 192 "full_bnfc_parser.l"
 return _KW_Decreases;
 	YY_BREAK
 case 122:
 YY_RULE_SETUP
-#line 193 "bnfc_parser.l"
+#line 193 "full_bnfc_parser.l"
 return _KW_Requires;
 	YY_BREAK
 case 123:
 YY_RULE_SETUP
-#line 194 "bnfc_parser.l"
+#line 194 "full_bnfc_parser.l"
 return _KW_Terminates;
 	YY_BREAK
 case 124:
 YY_RULE_SETUP
-#line 195 "bnfc_parser.l"
+#line 195 "full_bnfc_parser.l"
 return _KW_Variant;
 	YY_BREAK
 case 125:
 YY_RULE_SETUP
-#line 196 "bnfc_parser.l"
+#line 196 "full_bnfc_parser.l"
 return _KW_admit;
 	YY_BREAK
 case 126:
 YY_RULE_SETUP
-#line 197 "bnfc_parser.l"
+#line 197 "full_bnfc_parser.l"
 return _KW_allocates;
 	YY_BREAK
 case 127:
 YY_RULE_SETUP
-#line 198 "bnfc_parser.l"
+#line 198 "full_bnfc_parser.l"
 return _KW_assert;
 	YY_BREAK
 case 128:
 YY_RULE_SETUP
-#line 199 "bnfc_parser.l"
+#line 199 "full_bnfc_parser.l"
 return _KW_at;
 	YY_BREAK
 case 129:
 YY_RULE_SETUP
-#line 200 "bnfc_parser.l"
+#line 200 "full_bnfc_parser.l"
 return _KW_auto;
 	YY_BREAK
 case 130:
 YY_RULE_SETUP
-#line 201 "bnfc_parser.l"
+#line 201 "full_bnfc_parser.l"
 return _KW_axiom;
 	YY_BREAK
 case 131:
 YY_RULE_SETUP
-#line 202 "bnfc_parser.l"
+#line 202 "full_bnfc_parser.l"
 return _KW_axiomatic;
 	YY_BREAK
 case 132:
 YY_RULE_SETUP
-#line 203 "bnfc_parser.l"
+#line 203 "full_bnfc_parser.l"
 return _KW_behavior;
 	YY_BREAK
 case 133:
 YY_RULE_SETUP
-#line 204 "bnfc_parser.l"
+#line 204 "full_bnfc_parser.l"
 return _KW_boolean;
 	YY_BREAK
 case 134:
 YY_RULE_SETUP
-#line 205 "bnfc_parser.l"
+#line 205 "full_bnfc_parser.l"
 return _KW_break;
 	YY_BREAK
 case 135:
 YY_RULE_SETUP
-#line 206 "bnfc_parser.l"
+#line 206 "full_bnfc_parser.l"
 return _KW_breaks;
 	YY_BREAK
 case 136:
 YY_RULE_SETUP
-#line 207 "bnfc_parser.l"
+#line 207 "full_bnfc_parser.l"
 return _KW_case;
 	YY_BREAK
 case 137:
 YY_RULE_SETUP
-#line 208 "bnfc_parser.l"
+#line 208 "full_bnfc_parser.l"
 return _KW_char;
 	YY_BREAK
 case 138:
 YY_RULE_SETUP
-#line 209 "bnfc_parser.l"
+#line 209 "full_bnfc_parser.l"
 return _KW_check;
 	YY_BREAK
 case 139:
 YY_RULE_SETUP
-#line 210 "bnfc_parser.l"
+#line 210 "full_bnfc_parser.l"
 return _KW_complete;
 	YY_BREAK
 case 140:
 YY_RULE_SETUP
-#line 211 "bnfc_parser.l"
+#line 211 "full_bnfc_parser.l"
 return _KW_const;
 	YY_BREAK
 case 141:
 YY_RULE_SETUP
-#line 212 "bnfc_parser.l"
+#line 212 "full_bnfc_parser.l"
 return _KW_continue;
 	YY_BREAK
 case 142:
 YY_RULE_SETUP
-#line 213 "bnfc_parser.l"
+#line 213 "full_bnfc_parser.l"
 return _KW_continues;
 	YY_BREAK
 case 143:
 YY_RULE_SETUP
-#line 214 "bnfc_parser.l"
+#line 214 "full_bnfc_parser.l"
 return _KW_default;
 	YY_BREAK
 case 144:
 YY_RULE_SETUP
-#line 215 "bnfc_parser.l"
+#line 215 "full_bnfc_parser.l"
 return _KW_disjoint;
 	YY_BREAK
 case 145:
 YY_RULE_SETUP
-#line 216 "bnfc_parser.l"
+#line 216 "full_bnfc_parser.l"
 return _KW_do;
 	YY_BREAK
 case 146:
 YY_RULE_SETUP
-#line 217 "bnfc_parser.l"
+#line 217 "full_bnfc_parser.l"
 return _KW_double;
 	YY_BREAK
 case 147:
 YY_RULE_SETUP
-#line 218 "bnfc_parser.l"
+#line 218 "full_bnfc_parser.l"
 return _KW_else;
 	YY_BREAK
 case 148:
 YY_RULE_SETUP
-#line 219 "bnfc_parser.l"
+#line 219 "full_bnfc_parser.l"
 return _KW_ensures;
 	YY_BREAK
 case 149:
 YY_RULE_SETUP
-#line 220 "bnfc_parser.l"
+#line 220 "full_bnfc_parser.l"
 return _KW_enum;
 	YY_BREAK
 case 150:
 YY_RULE_SETUP
-#line 221 "bnfc_parser.l"
+#line 221 "full_bnfc_parser.l"
 return _KW_exits;
 	YY_BREAK
 case 151:
 YY_RULE_SETUP
-#line 222 "bnfc_parser.l"
+#line 222 "full_bnfc_parser.l"
 return _KW_extern;
 	YY_BREAK
 case 152:
 YY_RULE_SETUP
-#line 223 "bnfc_parser.l"
+#line 223 "full_bnfc_parser.l"
 return _KW_float;
 	YY_BREAK
 case 153:
 YY_RULE_SETUP
-#line 224 "bnfc_parser.l"
+#line 224 "full_bnfc_parser.l"
 return _KW_for;
 	YY_BREAK
 case 154:
 YY_RULE_SETUP
-#line 225 "bnfc_parser.l"
+#line 225 "full_bnfc_parser.l"
 return _KW_frees;
 	YY_BREAK
 case 155:
 YY_RULE_SETUP
-#line 226 "bnfc_parser.l"
+#line 226 "full_bnfc_parser.l"
 return _KW_function;
 	YY_BREAK
 case 156:
 YY_RULE_SETUP
-#line 227 "bnfc_parser.l"
+#line 227 "full_bnfc_parser.l"
 return _KW_ghost;
 	YY_BREAK
 case 157:
 YY_RULE_SETUP
-#line 228 "bnfc_parser.l"
+#line 228 "full_bnfc_parser.l"
 return _KW_global;
 	YY_BREAK
 case 158:
 YY_RULE_SETUP
-#line 229 "bnfc_parser.l"
+#line 229 "full_bnfc_parser.l"
 return _KW_goto;
 	YY_BREAK
 case 159:
 YY_RULE_SETUP
-#line 230 "bnfc_parser.l"
+#line 230 "full_bnfc_parser.l"
 return _KW_if;
 	YY_BREAK
 case 160:
 YY_RULE_SETUP
-#line 231 "bnfc_parser.l"
+#line 231 "full_bnfc_parser.l"
 return _KW_impact;
 	YY_BREAK
 case 161:
 YY_RULE_SETUP
-#line 232 "bnfc_parser.l"
+#line 232 "full_bnfc_parser.l"
 return _KW_include;
 	YY_BREAK
 case 162:
 YY_RULE_SETUP
-#line 233 "bnfc_parser.l"
+#line 233 "full_bnfc_parser.l"
 return _KW_inductive;
 	YY_BREAK
 case 163:
 YY_RULE_SETUP
-#line 234 "bnfc_parser.l"
+#line 234 "full_bnfc_parser.l"
 return _KW_int;
 	YY_BREAK
 case 164:
 YY_RULE_SETUP
-#line 235 "bnfc_parser.l"
+#line 235 "full_bnfc_parser.l"
 return _KW_integer;
 	YY_BREAK
 case 165:
 YY_RULE_SETUP
-#line 236 "bnfc_parser.l"
+#line 236 "full_bnfc_parser.l"
 return _KW_invariant;
 	YY_BREAK
 case 166:
 YY_RULE_SETUP
-#line 237 "bnfc_parser.l"
+#line 237 "full_bnfc_parser.l"
 return _KW_label;
 	YY_BREAK
 case 167:
 YY_RULE_SETUP
-#line 238 "bnfc_parser.l"
+#line 238 "full_bnfc_parser.l"
 return _KW_lemma;
 	YY_BREAK
 case 168:
 YY_RULE_SETUP
-#line 239 "bnfc_parser.l"
+#line 239 "full_bnfc_parser.l"
 return _KW_let;
 	YY_BREAK
 case 169:
 YY_RULE_SETUP
-#line 240 "bnfc_parser.l"
+#line 240 "full_bnfc_parser.l"
 return _KW_logic;
 	YY_BREAK
 case 170:
 YY_RULE_SETUP
-#line 241 "bnfc_parser.l"
+#line 241 "full_bnfc_parser.l"
 return _KW_long;
 	YY_BREAK
 case 171:
 YY_RULE_SETUP
-#line 242 "bnfc_parser.l"
+#line 242 "full_bnfc_parser.l"
 return _KW_loop;
 	YY_BREAK
 case 172:
 YY_RULE_SETUP
-#line 243 "bnfc_parser.l"
+#line 243 "full_bnfc_parser.l"
 return _KW_model;
 	YY_BREAK
 case 173:
 YY_RULE_SETUP
-#line 244 "bnfc_parser.l"
+#line 244 "full_bnfc_parser.l"
 return _KW_module;
 	YY_BREAK
 case 174:
 YY_RULE_SETUP
-#line 245 "bnfc_parser.l"
+#line 245 "full_bnfc_parser.l"
 return _KW_pragma;
 	YY_BREAK
 case 175:
 YY_RULE_SETUP
-#line 246 "bnfc_parser.l"
+#line 246 "full_bnfc_parser.l"
 return _KW_predicate;
 	YY_BREAK
 case 176:
 YY_RULE_SETUP
-#line 247 "bnfc_parser.l"
+#line 247 "full_bnfc_parser.l"
 return _KW_reads;
 	YY_BREAK
 case 177:
 YY_RULE_SETUP
-#line 248 "bnfc_parser.l"
+#line 248 "full_bnfc_parser.l"
 return _KW_real;
 	YY_BREAK
 case 178:
 YY_RULE_SETUP
-#line 249 "bnfc_parser.l"
+#line 249 "full_bnfc_parser.l"
 return _KW_register;
 	YY_BREAK
 case 179:
 YY_RULE_SETUP
-#line 250 "bnfc_parser.l"
+#line 250 "full_bnfc_parser.l"
 return _KW_requires;
 	YY_BREAK
 case 180:
 YY_RULE_SETUP
-#line 251 "bnfc_parser.l"
+#line 251 "full_bnfc_parser.l"
 return _KW_return;
 	YY_BREAK
 case 181:
 YY_RULE_SETUP
-#line 252 "bnfc_parser.l"
+#line 252 "full_bnfc_parser.l"
 return _KW_returns;
 	YY_BREAK
 case 182:
 YY_RULE_SETUP
-#line 253 "bnfc_parser.l"
+#line 253 "full_bnfc_parser.l"
 return _KW_short;
 	YY_BREAK
 case 183:
 YY_RULE_SETUP
-#line 254 "bnfc_parser.l"
+#line 254 "full_bnfc_parser.l"
 return _KW_signed;
 	YY_BREAK
 case 184:
 YY_RULE_SETUP
-#line 255 "bnfc_parser.l"
+#line 255 "full_bnfc_parser.l"
 return _KW_sizeof;
 	YY_BREAK
 case 185:
 YY_RULE_SETUP
-#line 256 "bnfc_parser.l"
+#line 256 "full_bnfc_parser.l"
 return _KW_slice;
 	YY_BREAK
 case 186:
 YY_RULE_SETUP
-#line 257 "bnfc_parser.l"
+#line 257 "full_bnfc_parser.l"
 return _KW_static;
 	YY_BREAK
 case 187:
 YY_RULE_SETUP
-#line 258 "bnfc_parser.l"
+#line 258 "full_bnfc_parser.l"
 return _KW_struct;
 	YY_BREAK
 case 188:
 YY_RULE_SETUP
-#line 259 "bnfc_parser.l"
+#line 259 "full_bnfc_parser.l"
 return _KW_switch;
 	YY_BREAK
 case 189:
 YY_RULE_SETUP
-#line 260 "bnfc_parser.l"
+#line 260 "full_bnfc_parser.l"
 return _KW_type;
 	YY_BREAK
 case 190:
 YY_RULE_SETUP
-#line 261 "bnfc_parser.l"
+#line 261 "full_bnfc_parser.l"
 return _KW_typedef;
 	YY_BREAK
 case 191:
 YY_RULE_SETUP
-#line 262 "bnfc_parser.l"
+#line 262 "full_bnfc_parser.l"
 return _KW_union;
 	YY_BREAK
 case 192:
 YY_RULE_SETUP
-#line 263 "bnfc_parser.l"
+#line 263 "full_bnfc_parser.l"
 return _KW_unsigned;
 	YY_BREAK
 case 193:
 YY_RULE_SETUP
-#line 264 "bnfc_parser.l"
+#line 264 "full_bnfc_parser.l"
 return _KW_void;
 	YY_BREAK
 case 194:
 YY_RULE_SETUP
-#line 265 "bnfc_parser.l"
+#line 265 "full_bnfc_parser.l"
 return _KW_volatile;
 	YY_BREAK
 case 195:
 YY_RULE_SETUP
-#line 266 "bnfc_parser.l"
+#line 266 "full_bnfc_parser.l"
 return _KW_while;
 	YY_BREAK
 case 196:
 YY_RULE_SETUP
-#line 267 "bnfc_parser.l"
+#line 267 "full_bnfc_parser.l"
 return _KW_writes;
 	YY_BREAK
 case 197:
 YY_RULE_SETUP
-#line 271 "bnfc_parser.l"
+#line 271 "full_bnfc_parser.l"
 yylval->_string = strdup(yytext); return T_NAMEDTYPE;
 	YY_BREAK
 case 198:
 YY_RULE_SETUP
-#line 272 "bnfc_parser.l"
+#line 272 "full_bnfc_parser.l"
 yylval->_string = strdup(yytext); return T_CST_WCHAR;
 	YY_BREAK
 case 199:
 YY_RULE_SETUP
-#line 273 "bnfc_parser.l"
+#line 273 "full_bnfc_parser.l"
 yylval->_string = strdup(yytext); return T_CST_WSTRING;
 	YY_BREAK
 case 200:
 YY_RULE_SETUP
-#line 274 "bnfc_parser.l"
-yylval->_string = strdup(yytext); return T_ATTRIBUTE_ANNOT;
+#line 274 "full_bnfc_parser.l"
+yylval->_string = strdup(yytext); return T_LBRACE;
 	YY_BREAK
 case 201:
 YY_RULE_SETUP
-#line 275 "bnfc_parser.l"
-yylval->_string = strdup(yytext); return T_LBRACE;
+#line 275 "full_bnfc_parser.l"
+yylval->_string = strdup(yytext); return T_RBRACE;
 	YY_BREAK
 case 202:
 YY_RULE_SETUP
-#line 276 "bnfc_parser.l"
-yylval->_string = strdup(yytext); return T_RBRACE;
+#line 276 "full_bnfc_parser.l"
+yylval->_string = strdup(yytext); return T_LBRACKET;
 	YY_BREAK
 case 203:
 YY_RULE_SETUP
-#line 277 "bnfc_parser.l"
-yylval->_string = strdup(yytext); return T_LBRACKET;
-	YY_BREAK
-case 204:
-YY_RULE_SETUP
-#line 278 "bnfc_parser.l"
+#line 277 "full_bnfc_parser.l"
 yylval->_string = strdup(yytext); return T_RBRACKET;
 	YY_BREAK
-case 205:
-/* rule 205 can match eol */
+case 204:
+/* rule 204 can match eol */
 YY_RULE_SETUP
-#line 279 "bnfc_parser.l"
+#line 278 "full_bnfc_parser.l"
 yylval->_string = strdup(yytext); return T_RGHOST;
+	YY_BREAK
+case 205:
+YY_RULE_SETUP
+#line 279 "full_bnfc_parser.l"
+yylval->_string = strdup(yytext); return T_ASM;
 	YY_BREAK
 case 206:
 YY_RULE_SETUP
-#line 280 "bnfc_parser.l"
-yylval->_string = strdup(yytext); return T_ASM;
+#line 280 "full_bnfc_parser.l"
+yylval->_string = strdup(yytext); return T_ALIGNOF;
 	YY_BREAK
 case 207:
 YY_RULE_SETUP
-#line 281 "bnfc_parser.l"
-yylval->_string = strdup(yytext); return T_ALIGNOF;
+#line 281 "full_bnfc_parser.l"
+yylval->_string = strdup(yytext); return T_ATTRIBUTE;
 	YY_BREAK
 case 208:
 YY_RULE_SETUP
-#line 282 "bnfc_parser.l"
-yylval->_string = strdup(yytext); return T_ATTRIBUTE;
+#line 282 "full_bnfc_parser.l"
+yylval->_string = strdup(yytext); return T_BLOCKATTRIBUTE;
 	YY_BREAK
 case 209:
 YY_RULE_SETUP
-#line 283 "bnfc_parser.l"
-yylval->_string = strdup(yytext); return T_BLOCKATTRIBUTE;
+#line 283 "full_bnfc_parser.l"
+yylval->_string = strdup(yytext); return T_CONST;
 	YY_BREAK
 case 210:
 YY_RULE_SETUP
-#line 284 "bnfc_parser.l"
-yylval->_string = strdup(yytext); return T_CONST;
+#line 284 "full_bnfc_parser.l"
+yylval->_string = strdup(yytext); return T_FUNCTION__;
 	YY_BREAK
 case 211:
 YY_RULE_SETUP
-#line 285 "bnfc_parser.l"
-yylval->_string = strdup(yytext); return T_FUNCTION__;
+#line 285 "full_bnfc_parser.l"
+yylval->_string = strdup(yytext); return T_MSATTR;
 	YY_BREAK
 case 212:
 YY_RULE_SETUP
-#line 286 "bnfc_parser.l"
-yylval->_string = strdup(yytext); return T_MSATTR;
+#line 286 "full_bnfc_parser.l"
+yylval->_string = strdup(yytext); return T_RESTRICT;
 	YY_BREAK
 case 213:
 YY_RULE_SETUP
-#line 287 "bnfc_parser.l"
-yylval->_string = strdup(yytext); return T_RESTRICT;
+#line 287 "full_bnfc_parser.l"
+yylval->_string = strdup(yytext); return T_SIGNED;
 	YY_BREAK
 case 214:
 YY_RULE_SETUP
-#line 288 "bnfc_parser.l"
-yylval->_string = strdup(yytext); return T_SIGNED;
+#line 288 "full_bnfc_parser.l"
+yylval->_string = strdup(yytext); return T_VOLATILE;
 	YY_BREAK
 case 215:
 YY_RULE_SETUP
-#line 289 "bnfc_parser.l"
-yylval->_string = strdup(yytext); return T_VOLATILE;
+#line 289 "full_bnfc_parser.l"
+yylval->_string = strdup(yytext); return T_INLINE;
 	YY_BREAK
 case 216:
 YY_RULE_SETUP
-#line 290 "bnfc_parser.l"
-yylval->_string = strdup(yytext); return T_INLINE;
+#line 290 "full_bnfc_parser.l"
+yylval->_string = strdup(yytext); return T_TYPEOF;
 	YY_BREAK
 case 217:
 YY_RULE_SETUP
-#line 291 "bnfc_parser.l"
-yylval->_string = strdup(yytext); return T_TYPEOF;
+#line 291 "full_bnfc_parser.l"
+yylval->_string = strdup(yytext); return T_EXT_GLOBAL;
 	YY_BREAK
 case 218:
 YY_RULE_SETUP
-#line 292 "bnfc_parser.l"
-yylval->_string = strdup(yytext); return T_EXT_GLOBAL;
+#line 292 "full_bnfc_parser.l"
+yylval->_string = strdup(yytext); return T_EXT_GLOBAL_BLOCK;
 	YY_BREAK
 case 219:
 YY_RULE_SETUP
-#line 293 "bnfc_parser.l"
-yylval->_string = strdup(yytext); return T_EXT_GLOBAL_BLOCK;
+#line 293 "full_bnfc_parser.l"
+yylval->_string = strdup(yytext); return T_EXT_CODE_ANNOT;
 	YY_BREAK
 case 220:
 YY_RULE_SETUP
-#line 294 "bnfc_parser.l"
-yylval->_string = strdup(yytext); return T_EXT_CODE_ANNOT;
+#line 294 "full_bnfc_parser.l"
+yylval->_string = strdup(yytext); return T_EXT_CONTRACT;
 	YY_BREAK
 case 221:
 YY_RULE_SETUP
-#line 295 "bnfc_parser.l"
-yylval->_string = strdup(yytext); return T_EXT_CONTRACT;
+#line 295 "full_bnfc_parser.l"
+yylval->_string = strdup(yytext); return T_STRING_LITERAL;
 	YY_BREAK
 case 222:
 YY_RULE_SETUP
-#line 296 "bnfc_parser.l"
-yylval->_string = strdup(yytext); return T_STRING_LITERAL;
+#line 296 "full_bnfc_parser.l"
+yylval->_string = strdup(yytext); return T_WSTRING_CONSTANT;
 	YY_BREAK
 case 223:
 YY_RULE_SETUP
-#line 297 "bnfc_parser.l"
-yylval->_string = strdup(yytext); return T_WSTRING_CONSTANT;
+#line 297 "full_bnfc_parser.l"
+yylval->_string = strdup(yytext); return T_TYPENAME;
 	YY_BREAK
 case 224:
 YY_RULE_SETUP
-#line 298 "bnfc_parser.l"
-yylval->_string = strdup(yytext); return T_TYPENAME;
+#line 298 "full_bnfc_parser.l"
+LITERAL_BUFFER_CREATE(); BEGIN STRING;
 	YY_BREAK
 case 225:
 YY_RULE_SETUP
-#line 299 "bnfc_parser.l"
-LITERAL_BUFFER_CREATE(); BEGIN STRING;
+#line 299 "full_bnfc_parser.l"
+BEGIN ESCAPED;
 	YY_BREAK
 case 226:
 YY_RULE_SETUP
-#line 300 "bnfc_parser.l"
-BEGIN ESCAPED;
+#line 300 "full_bnfc_parser.l"
+yylval->_string = LITERAL_BUFFER_HARVEST(); BEGIN INITIAL; return _STRING_;
 	YY_BREAK
 case 227:
 YY_RULE_SETUP
-#line 301 "bnfc_parser.l"
-yylval->_string = LITERAL_BUFFER_HARVEST(); BEGIN INITIAL; return _STRING_;
+#line 301 "full_bnfc_parser.l"
+LITERAL_BUFFER_APPEND_CHAR(yytext[0]);
 	YY_BREAK
 case 228:
 YY_RULE_SETUP
-#line 302 "bnfc_parser.l"
-LITERAL_BUFFER_APPEND_CHAR(yytext[0]);
+#line 302 "full_bnfc_parser.l"
+LITERAL_BUFFER_APPEND_CHAR('\f'); BEGIN STRING;
 	YY_BREAK
 case 229:
 YY_RULE_SETUP
-#line 303 "bnfc_parser.l"
-LITERAL_BUFFER_APPEND_CHAR('\f'); BEGIN STRING;
+#line 303 "full_bnfc_parser.l"
+LITERAL_BUFFER_APPEND_CHAR('\n'); BEGIN STRING;
 	YY_BREAK
 case 230:
 YY_RULE_SETUP
-#line 304 "bnfc_parser.l"
-LITERAL_BUFFER_APPEND_CHAR('\n'); BEGIN STRING;
+#line 304 "full_bnfc_parser.l"
+LITERAL_BUFFER_APPEND_CHAR('\r'); BEGIN STRING;
 	YY_BREAK
 case 231:
 YY_RULE_SETUP
-#line 305 "bnfc_parser.l"
-LITERAL_BUFFER_APPEND_CHAR('\r'); BEGIN STRING;
+#line 305 "full_bnfc_parser.l"
+LITERAL_BUFFER_APPEND_CHAR('\t'); BEGIN STRING;
 	YY_BREAK
 case 232:
 YY_RULE_SETUP
-#line 306 "bnfc_parser.l"
-LITERAL_BUFFER_APPEND_CHAR('\t'); BEGIN STRING;
+#line 306 "full_bnfc_parser.l"
+LITERAL_BUFFER_APPEND_CHAR('"');  BEGIN STRING;
 	YY_BREAK
 case 233:
 YY_RULE_SETUP
-#line 307 "bnfc_parser.l"
-LITERAL_BUFFER_APPEND_CHAR('"');  BEGIN STRING;
+#line 307 "full_bnfc_parser.l"
+LITERAL_BUFFER_APPEND_CHAR('\\'); BEGIN STRING;
 	YY_BREAK
 case 234:
 YY_RULE_SETUP
-#line 308 "bnfc_parser.l"
-LITERAL_BUFFER_APPEND_CHAR('\\'); BEGIN STRING;
-	YY_BREAK
-case 235:
-YY_RULE_SETUP
-#line 309 "bnfc_parser.l"
+#line 308 "full_bnfc_parser.l"
 LITERAL_BUFFER_APPEND(yytext);    BEGIN STRING;
 	YY_BREAK
 case YY_STATE_EOF(STRING):
 case YY_STATE_EOF(ESCAPED):
-#line 310 "bnfc_parser.l"
+#line 309 "full_bnfc_parser.l"
 LITERAL_BUFFER_FREE(); return _ERROR_;
+	YY_BREAK
+case 235:
+YY_RULE_SETUP
+#line 310 "full_bnfc_parser.l"
+BEGIN CHAR;
 	YY_BREAK
 case 236:
 YY_RULE_SETUP
-#line 311 "bnfc_parser.l"
-BEGIN CHAR;
-	YY_BREAK
-case 237:
-YY_RULE_SETUP
-#line 312 "bnfc_parser.l"
+#line 311 "full_bnfc_parser.l"
 BEGIN CHARESC;
 	YY_BREAK
-case 238:
-/* rule 238 can match eol */
+case 237:
+/* rule 237 can match eol */
 YY_RULE_SETUP
-#line 313 "bnfc_parser.l"
+#line 312 "full_bnfc_parser.l"
 BEGIN CHAREND; yylval->_char = yytext[0]; return _CHAR_;
+	YY_BREAK
+case 238:
+YY_RULE_SETUP
+#line 313 "full_bnfc_parser.l"
+BEGIN CHAREND; yylval->_char = '\f';     return _CHAR_;
 	YY_BREAK
 case 239:
 YY_RULE_SETUP
-#line 314 "bnfc_parser.l"
-BEGIN CHAREND; yylval->_char = '\f';     return _CHAR_;
+#line 314 "full_bnfc_parser.l"
+BEGIN CHAREND; yylval->_char = '\n';     return _CHAR_;
 	YY_BREAK
 case 240:
 YY_RULE_SETUP
-#line 315 "bnfc_parser.l"
-BEGIN CHAREND; yylval->_char = '\n';     return _CHAR_;
+#line 315 "full_bnfc_parser.l"
+BEGIN CHAREND; yylval->_char = '\r';     return _CHAR_;
 	YY_BREAK
 case 241:
 YY_RULE_SETUP
-#line 316 "bnfc_parser.l"
-BEGIN CHAREND; yylval->_char = '\r';     return _CHAR_;
+#line 316 "full_bnfc_parser.l"
+BEGIN CHAREND; yylval->_char = '\t';     return _CHAR_;
 	YY_BREAK
 case 242:
 YY_RULE_SETUP
-#line 317 "bnfc_parser.l"
-BEGIN CHAREND; yylval->_char = '\t';     return _CHAR_;
+#line 317 "full_bnfc_parser.l"
+BEGIN CHAREND; yylval->_char = yytext[0]; return _CHAR_;
 	YY_BREAK
 case 243:
 YY_RULE_SETUP
-#line 318 "bnfc_parser.l"
-BEGIN CHAREND; yylval->_char = yytext[0]; return _CHAR_;
+#line 318 "full_bnfc_parser.l"
+BEGIN INITIAL;
 	YY_BREAK
 case 244:
 YY_RULE_SETUP
-#line 319 "bnfc_parser.l"
-BEGIN INITIAL;
+#line 319 "full_bnfc_parser.l"
+yylval->_double = atof(yytext); return _DOUBLE_;
 	YY_BREAK
 case 245:
 YY_RULE_SETUP
-#line 320 "bnfc_parser.l"
-yylval->_double = atof(yytext); return _DOUBLE_;
+#line 320 "full_bnfc_parser.l"
+yylval->_int = atoi(yytext); return _INTEGER_;
 	YY_BREAK
 case 246:
 YY_RULE_SETUP
-#line 321 "bnfc_parser.l"
-yylval->_int = atoi(yytext); return _INTEGER_;
-	YY_BREAK
-case 247:
-YY_RULE_SETUP
-#line 322 "bnfc_parser.l"
+#line 321 "full_bnfc_parser.l"
 yylval->_string = strdup(yytext); return _IDENT_;
 	YY_BREAK
-case 248:
-/* rule 248 can match eol */
+case 247:
+/* rule 247 can match eol */
 YY_RULE_SETUP
-#line 323 "bnfc_parser.l"
+#line 322 "full_bnfc_parser.l"
 /* ignore white space. */;
+	YY_BREAK
+case 248:
+YY_RULE_SETUP
+#line 323 "full_bnfc_parser.l"
+return _ERROR_;
 	YY_BREAK
 case 249:
 YY_RULE_SETUP
-#line 324 "bnfc_parser.l"
-return _ERROR_;
-	YY_BREAK
-case 250:
-YY_RULE_SETUP
-#line 326 "bnfc_parser.l"
+#line 325 "full_bnfc_parser.l"
 ECHO;
 	YY_BREAK
-#line 3048 "Lexer.C"
+#line 3043 "Lexer.C"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(CHAR):
 case YY_STATE_EOF(CHARESC):
@@ -4202,7 +4197,7 @@ void yyfree (void * ptr , yyscan_t yyscanner)
 
 #define YYTABLES_NAME "yytables"
 
-#line 326 "bnfc_parser.l"
+#line 325 "full_bnfc_parser.l"
 
 
 yyscan_t initialize_lexer(FILE *inp)
