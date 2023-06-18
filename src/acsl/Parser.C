@@ -6950,13 +6950,13 @@ yyreduce:
 
   case 237: /* TypeSpec: _SYMB_54  */
 #line 1178 "bnfc_parser.y"
-             { (yyval.typespec_) = new acsl::TypeSpecIntKeyWord(); (yyval.typespec_)->line_number = (yyloc).first_line; (yyval.typespec_)->char_number = (yyloc).first_column; result->typespec_ = (yyval.typespec_); }
+             { (yyval.typespec_) = new acsl::TypeSpecInt32KeyWord(); (yyval.typespec_)->line_number = (yyloc).first_line; (yyval.typespec_)->char_number = (yyloc).first_column; result->typespec_ = (yyval.typespec_); }
 #line 6955 "Parser.C"
     break;
 
   case 238: /* TypeSpec: _KW_int  */
 #line 1179 "bnfc_parser.y"
-            { (yyval.typespec_) = new acsl::TypeSpecInt32KeyWord(); (yyval.typespec_)->line_number = (yyloc).first_line; (yyval.typespec_)->char_number = (yyloc).first_column; result->typespec_ = (yyval.typespec_); }
+            { (yyval.typespec_) = new acsl::TypeSpecIntKeyWord(); (yyval.typespec_)->line_number = (yyloc).first_line; (yyval.typespec_)->char_number = (yyloc).first_column; result->typespec_ = (yyval.typespec_); }
 #line 6961 "Parser.C"
     break;
 

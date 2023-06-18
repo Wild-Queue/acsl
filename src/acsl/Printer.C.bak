@@ -236,17 +236,6 @@ void PrintAbsyn::visitGhostGlobalsRGhost(GhostGlobalsRGhost *p)
 
 void PrintAbsyn::visitGlobal(Global *p) {} //abstract class
 
-void PrintAbsyn::visitGlobalsFunctionDef(GlobalsFunctionDef *p)
-{
-  int oldi = _i_;
-  if (oldi > 0) render(ACSL__L_PAREN);
-
-  _i_ = 0; p->functiondef_->accept(this);
-
-  if (oldi > 0) render(ACSL__R_PAREN);
-  _i_ = oldi;
-}
-
 void PrintAbsyn::visitGlobalDecl(GlobalDecl *p)
 {
   int oldi = _i_;
@@ -258,12 +247,37 @@ void PrintAbsyn::visitGlobalDecl(GlobalDecl *p)
   _i_ = oldi;
 }
 
+void PrintAbsyn::visitGlobalEmptyOldStyle(GlobalEmptyOldStyle *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(ACSL__L_PAREN);
+
+  visitIdent(p->ident_);
+  render('(');
+  render(')');
+  render(';');
+
+  if (oldi > 0) render(ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
 void PrintAbsyn::visitGlobalsDeclataion(GlobalsDeclataion *p)
 {
   int oldi = _i_;
   if (oldi > 0) render(ACSL__L_PAREN);
 
   _i_ = 0; p->declaration_->accept(this);
+
+  if (oldi > 0) render(ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitGlobalsFunctionDef(GlobalsFunctionDef *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(ACSL__L_PAREN);
+
+  _i_ = 0; p->functiondef_->accept(this);
 
   if (oldi > 0) render(ACSL__R_PAREN);
   _i_ = oldi;
@@ -333,20 +347,6 @@ void PrintAbsyn::visitGlobalOldStyle(GlobalOldStyle *p)
   _i_ = 0; visitListIdent(p->listident_);
   render(')');
   _i_ = 0; p->oldpardeflist_->accept(this);
-  render(';');
-
-  if (oldi > 0) render(ACSL__R_PAREN);
-  _i_ = oldi;
-}
-
-void PrintAbsyn::visitGlobalEmptyOldStyle(GlobalEmptyOldStyle *p)
-{
-  int oldi = _i_;
-  if (oldi > 0) render(ACSL__L_PAREN);
-
-  visitIdent(p->ident_);
-  render('(');
-  render(')');
   render(';');
 
   if (oldi > 0) render(ACSL__R_PAREN);
@@ -2896,17 +2896,6 @@ void PrintAbsyn::visitTypeSpecShortKeyWord(TypeSpecShortKeyWord *p)
   if (oldi > 0) render(ACSL__L_PAREN);
 
   render("short");
-
-  if (oldi > 0) render(ACSL__R_PAREN);
-  _i_ = oldi;
-}
-
-void PrintAbsyn::visitTypeSpecIntKeyWord(TypeSpecIntKeyWord *p)
-{
-  int oldi = _i_;
-  if (oldi > 0) render(ACSL__L_PAREN);
-
-  render("__int32");
 
   if (oldi > 0) render(ACSL__R_PAREN);
   _i_ = oldi;
@@ -14810,16 +14799,6 @@ void ShowAbsyn::visitGhostGlobalsRGhost(GhostGlobalsRGhost *p)
 }
 void ShowAbsyn::visitGlobal(Global *p) {} //abstract class
 
-void ShowAbsyn::visitGlobalsFunctionDef(GlobalsFunctionDef *p)
-{
-  bufAppend('(');
-  bufAppend("GlobalsFunctionDef");
-  bufAppend(' ');
-  bufAppend('[');
-  if (p->functiondef_)  p->functiondef_->accept(this);
-  bufAppend(']');
-  bufAppend(')');
-}
 void ShowAbsyn::visitGlobalDecl(GlobalDecl *p)
 {
   bufAppend('(');
@@ -14830,6 +14809,15 @@ void ShowAbsyn::visitGlobalDecl(GlobalDecl *p)
   bufAppend(']');
   bufAppend(')');
 }
+void ShowAbsyn::visitGlobalEmptyOldStyle(GlobalEmptyOldStyle *p)
+{
+  bufAppend('(');
+  bufAppend("GlobalEmptyOldStyle");
+  bufAppend(' ');
+  visitIdent(p->ident_);
+  bufAppend(' ');
+  bufAppend(')');
+}
 void ShowAbsyn::visitGlobalsDeclataion(GlobalsDeclataion *p)
 {
   bufAppend('(');
@@ -14837,6 +14825,16 @@ void ShowAbsyn::visitGlobalsDeclataion(GlobalsDeclataion *p)
   bufAppend(' ');
   bufAppend('[');
   if (p->declaration_)  p->declaration_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitGlobalsFunctionDef(GlobalsFunctionDef *p)
+{
+  bufAppend('(');
+  bufAppend("GlobalsFunctionDef");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->functiondef_)  p->functiondef_->accept(this);
   bufAppend(']');
   bufAppend(')');
 }
@@ -14909,15 +14907,6 @@ void ShowAbsyn::visitGlobalOldStyle(GlobalOldStyle *p)
   bufAppend('[');
   if (p->oldpardeflist_)  p->oldpardeflist_->accept(this);
   bufAppend(']');
-  bufAppend(' ');
-  bufAppend(')');
-}
-void ShowAbsyn::visitGlobalEmptyOldStyle(GlobalEmptyOldStyle *p)
-{
-  bufAppend('(');
-  bufAppend("GlobalEmptyOldStyle");
-  bufAppend(' ');
-  visitIdent(p->ident_);
   bufAppend(' ');
   bufAppend(')');
 }
@@ -17065,10 +17054,6 @@ void ShowAbsyn::visitTypeSpecBoolKeyWord(TypeSpecBoolKeyWord *p)
 void ShowAbsyn::visitTypeSpecShortKeyWord(TypeSpecShortKeyWord *p)
 {
   bufAppend("TypeSpecShortKeyWord");
-}
-void ShowAbsyn::visitTypeSpecIntKeyWord(TypeSpecIntKeyWord *p)
-{
-  bufAppend("TypeSpecIntKeyWord");
 }
 void ShowAbsyn::visitTypeSpecInt32KeyWord(TypeSpecInt32KeyWord *p)
 {

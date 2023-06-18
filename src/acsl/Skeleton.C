@@ -1944,16 +1944,16 @@ void Skeleton::visitTypeSpecShortKeyWord(TypeSpecShortKeyWord *type_spec_short_k
 
 }
 
-void Skeleton::visitTypeSpecIntKeyWord(TypeSpecIntKeyWord *type_spec_int_key_word)
+void Skeleton::visitTypeSpecInt32KeyWord(TypeSpecInt32KeyWord *type_spec_int_key_word)
 {
-  /* Code For TypeSpecIntKeyWord Goes Here */
+  /* Code For TypeSpecInt32KeyWord Goes Here */
 
 
 }
 
-void Skeleton::visitTypeSpecInt32KeyWord(TypeSpecInt32KeyWord *type_spec_int_key_word)
+void Skeleton::visitTypeSpecIntKeyWord(TypeSpecIntKeyWord *type_spec_int_key_word)
 {
-  /* Code For TypeSpecInt32KeyWord Goes Here */
+  /* Code For TypeSpecIntKeyWord Goes Here */
 
 
 }

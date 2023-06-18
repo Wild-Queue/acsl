@@ -228,15 +228,15 @@ public:
   void visitGhostGlobalsDeclataion(GhostGlobalsDeclataion *p);
   void visitGhostGlobalsFunctionDef(GhostGlobalsFunctionDef *p);
   void visitGhostGlobalsRGhost(GhostGlobalsRGhost *p);
-  void visitGlobalsFunctionDef(GlobalsFunctionDef *p);
   void visitGlobalDecl(GlobalDecl *p);
+  void visitGlobalEmptyOldStyle(GlobalEmptyOldStyle *p);
   void visitGlobalsDeclataion(GlobalsDeclataion *p);
+  void visitGlobalsFunctionDef(GlobalsFunctionDef *p);
   void visitExternGlobalDeclataion(ExternGlobalDeclataion *p);
   void visitExternGlobalPar(ExternGlobalPar *p);
   void visitAsmGlobal(AsmGlobal *p);
   void visitPragmaGlobal(PragmaGlobal *p);
   void visitGlobalOldStyle(GlobalOldStyle *p);
-  void visitGlobalEmptyOldStyle(GlobalEmptyOldStyle *p);
   void visitIdOrTypenameAsIdIdentifier(IdOrTypenameAsIdIdentifier *p);
   void visitIdOrTypenameAsIdNamedType(IdOrTypenameAsIdNamedType *p);
   void visitIdTypename(IdTypename *p);
@@ -422,7 +422,6 @@ public:
   void visitTypeSpecCharKeyWord(TypeSpecCharKeyWord *p);
   void visitTypeSpecBoolKeyWord(TypeSpecBoolKeyWord *p);
   void visitTypeSpecShortKeyWord(TypeSpecShortKeyWord *p);
-  void visitTypeSpecIntKeyWord(TypeSpecIntKeyWord *p);
   void visitTypeSpecInt32KeyWord(TypeSpecInt32KeyWord *p);
   void visitTypeSpecLongKeyWord(TypeSpecLongKeyWord *p);
   void visitTypeSpecInt64KeyWord(TypeSpecInt64KeyWord *p);

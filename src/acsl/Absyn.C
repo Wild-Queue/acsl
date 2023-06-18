@@ -9278,46 +9278,6 @@ TypeSpecShortKeyWord *TypeSpecShortKeyWord::clone() const
 
 
 
-/********************   TypeSpecIntKeyWord    ********************/
-TypeSpecIntKeyWord::TypeSpecIntKeyWord()
-{
-
-}
-
-TypeSpecIntKeyWord::TypeSpecIntKeyWord(const TypeSpecIntKeyWord & other)
-{
-
-}
-
-TypeSpecIntKeyWord &TypeSpecIntKeyWord::operator=(const TypeSpecIntKeyWord & other)
-{
-  TypeSpecIntKeyWord tmp(other);
-  swap(tmp);
-  return *this;
-}
-
-void TypeSpecIntKeyWord::swap(TypeSpecIntKeyWord & other)
-{
-
-}
-
-TypeSpecIntKeyWord::~TypeSpecIntKeyWord()
-{
-
-}
-
-void TypeSpecIntKeyWord::accept(Visitor *v)
-{
-  v->visitTypeSpecIntKeyWord(this);
-}
-
-TypeSpecIntKeyWord *TypeSpecIntKeyWord::clone() const
-{
-  return new TypeSpecIntKeyWord(*this);
-}
-
-
-
 /********************   TypeSpecInt32KeyWord    ********************/
 TypeSpecInt32KeyWord::TypeSpecInt32KeyWord()
 {
@@ -9354,6 +9314,46 @@ void TypeSpecInt32KeyWord::accept(Visitor *v)
 TypeSpecInt32KeyWord *TypeSpecInt32KeyWord::clone() const
 {
   return new TypeSpecInt32KeyWord(*this);
+}
+
+
+
+/********************   TypeSpecIntKeyWord    ********************/
+TypeSpecIntKeyWord::TypeSpecIntKeyWord()
+{
+
+}
+
+TypeSpecIntKeyWord::TypeSpecIntKeyWord(const TypeSpecIntKeyWord & other)
+{
+
+}
+
+TypeSpecIntKeyWord &TypeSpecIntKeyWord::operator=(const TypeSpecIntKeyWord & other)
+{
+  TypeSpecIntKeyWord tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void TypeSpecIntKeyWord::swap(TypeSpecIntKeyWord & other)
+{
+
+}
+
+TypeSpecIntKeyWord::~TypeSpecIntKeyWord()
+{
+
+}
+
+void TypeSpecIntKeyWord::accept(Visitor *v)
+{
+  v->visitTypeSpecIntKeyWord(this);
+}
+
+TypeSpecIntKeyWord *TypeSpecIntKeyWord::clone() const
+{
+  return new TypeSpecIntKeyWord(*this);
 }
 
 

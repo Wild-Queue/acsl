@@ -2901,7 +2901,7 @@ void PrintAbsyn::visitTypeSpecShortKeyWord(TypeSpecShortKeyWord *p)
   _i_ = oldi;
 }
 
-void PrintAbsyn::visitTypeSpecIntKeyWord(TypeSpecIntKeyWord *p)
+void PrintAbsyn::visitTypeSpecInt32KeyWord(TypeSpecInt32KeyWord *p)
 {
   int oldi = _i_;
   if (oldi > 0) render(ACSL__L_PAREN);
@@ -2912,7 +2912,7 @@ void PrintAbsyn::visitTypeSpecIntKeyWord(TypeSpecIntKeyWord *p)
   _i_ = oldi;
 }
 
-void PrintAbsyn::visitTypeSpecInt32KeyWord(TypeSpecInt32KeyWord *p)
+void PrintAbsyn::visitTypeSpecIntKeyWord(TypeSpecIntKeyWord *p)
 {
   int oldi = _i_;
   if (oldi > 0) render(ACSL__L_PAREN);
@@ -17066,13 +17066,13 @@ void ShowAbsyn::visitTypeSpecShortKeyWord(TypeSpecShortKeyWord *p)
 {
   bufAppend("TypeSpecShortKeyWord");
 }
-void ShowAbsyn::visitTypeSpecIntKeyWord(TypeSpecIntKeyWord *p)
-{
-  bufAppend("TypeSpecIntKeyWord");
-}
 void ShowAbsyn::visitTypeSpecInt32KeyWord(TypeSpecInt32KeyWord *p)
 {
   bufAppend("TypeSpecInt32KeyWord");
+}
+void ShowAbsyn::visitTypeSpecIntKeyWord(TypeSpecIntKeyWord *p)
+{
+  bufAppend("TypeSpecIntKeyWord");
 }
 void ShowAbsyn::visitTypeSpecLongKeyWord(TypeSpecLongKeyWord *p)
 {

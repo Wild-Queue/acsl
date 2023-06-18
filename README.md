@@ -1,13 +1,17 @@
-# acsl
+# ACSL
 
+## Full bnfc grammar
 
+Located in the file full_bnfc_parser.cf
+
+This grammar contains all the rules found in the frama-c repository
 
 To build:
 
 ```sh
 mkdir -p src/acsl/
 cd src/acsl/
-bnfc -m --cpp ../../bnfc_parser.cf -l -p acsl
+bnfc -m --cpp ../../full_bnfc_parser.cf -l -p acsl
 make
 cd .. && cd .. 
 ```
@@ -16,7 +20,30 @@ To run:
 
 ```sh
 cd src/acsl/
-./Testbnfc_parser
+./Testfull_bnfc_parser
+```
+
+## Partial bnfc grammar
+
+Located in the file partial_bnfc_parser.cf
+
+This grammar contains a subset of the full grammar files. This grammar is designed to get rid of conflicts that prevent proper parsing of the files.
+
+To build:
+
+```sh
+mkdir -p src/partian_acsl/
+cd src/partian_acsl/
+bnfc -m --cpp ../../partial_bnfc_parser.cf -l -p partian_acsl
+make
+cd .. && cd .. 
+```
+
+To run:
+
+```sh
+cd src/partian_acsl/
+./Testpartial_bnfc_parser
 ```
 
 

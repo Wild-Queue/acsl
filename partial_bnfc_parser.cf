@@ -1,0 +1,146 @@
+
+token SIGNED ({"__signed__"} | {"signed"} | {"__signed"});
+token LBRACE ({"<%"} | '{');
+token RBRACE ({"%>"} | '}');
+
+AProgram.  Program ::= Globals ;
+
+
+NoGlobals.          Globals ::= ; --/* empty */ 
+SimpleGlobals.      Globals ::= Global Globals ;
+-- AGhostGlobals.      Globals ::= "ghost" GhostGlobals Globals ;
+SemiColonGlobals.   Globals ::= ";" Globals ;
+
+
+--/*** Global Definition ***/
+--GlobalDecl.                 Global ::= Decl ; --DECL => Decl
+GlobalsDeclataion.          Global ::= Declaration ;
+GlobalsFunctionDef.         Global ::= FunctionDef ;
+--/*(* Some C header files are shared with the C++ compiler and have linkage specification *)*/
+--ExternGlobalDeclataion.     Global ::= "extern" StringConstant Declaration ;
+--ExternGlobalPar.            Global ::= "extern" StringConstant LBRACE Globals RBRACE ;
+--AsmGlobal.                  Global ::= ASM "(" StringConstant ")" ";" ;
+--PragmaGlobal.               Global ::= Pragma ;
+--/* (* Old-style function prototype. This should be somewhere else, like in "Declaration". For now we keep it at global scope only because in local scope it looks too much like a function call  *) */
+--GlobalOldStyle.             Global ::= Ident "(" [Ident] ")" OldPardefList ";" ;
+--GlobalEmptyOldStyle.        Global ::= Ident "(" ")" ";" ;
+
+
+--FunctionDefSpec.    FunctionDef ::= IsACSLSpec [Wildcard] FunctionDefStart Block ; -- SPEC => IsACSLSpec [Wildcard]
+SimpleFunctionDef.  FunctionDef ::= FunctionDefStart Block ;
+
+
+--ABlock.  Block ::= LBRACE [LocalLabel] BlockAttrs [BlockElement] [Annot] RBRACE ;
+ABlock.  Block ::= LBRACE RBRACE ;
+
+
+FunctionDefStartDeclarator.             FunctionDefStart ::= DeclSpecList Declarator ;
+--FunctionDefStartOldProtoDecl.           FunctionDefStart ::= DeclSpecList PointerOpt DirectOldProtoDecl ;                              --/* (* Old-style function prototype *) */
+--FunctionDefStartReatParGhostParameter.  FunctionDefStart ::= Ident "(" RestParList ")" GhostParameterOpt ;            --/* (* New-style function that does not have a return type *) */
+--FunctionDefStartOldPardef.              FunctionDefStart ::= Ident "(" [Ident] ")" OldPardefList ;                      --/* (* No return type and old-style parameter list *) */
+--FunctionDefStartGhostParameter.         FunctionDefStart ::= Ident "(" ")" GhostParameterOpt ;
+
+
+--DeclSpecWoType.         DeclSpecList ::= DeclSpecWOType ;
+--DeclSpecWoTypeNext.     DeclSpecList ::= DeclSpecWOType DeclSpecList ;
+DeclSpecTypeSpec.       DeclSpecList ::= TypeSpec ;
+DeclSpecTypeSpecNext.   DeclSpecList ::= TypeSpec DeclSpecListNoNamed ;
+
+
+--DeclSpecNoNamedWOType.         DeclSpecListNoNamed ::= DeclSpecWOType ;
+--DeclSpecNoNamedWOTypeNext.     DeclSpecListNoNamed ::= DeclSpecWOType DeclSpecListNoNamed ;
+DeclSpecNoNamedTypeSpec.       DeclSpecListNoNamed ::= TypeSpec ;
+DeclSpecNoNamedTypeSpecNext.   DeclSpecListNoNamed ::= TypeSpec DeclSpecListNoNamed ;
+
+
+TypeSpecVoidKeyWord.                TypeSpec ::= "void" ;
+TypeSpecCharKeyWord.                TypeSpec ::= "char" ;
+TypeSpecBoolKeyWord.                TypeSpec ::= "_Bool" ;
+TypeSpecShortKeyWord.               TypeSpec ::= "short" ;
+TypeSpecInt32KeyWord.               TypeSpec ::= "__int32" ;
+TypeSpecIntKeyWord.                 TypeSpec ::= "int" ;
+TypeSpecLongKeyWord.                TypeSpec ::= "long" ;
+TypeSpecInt64KeyWord.               TypeSpec ::= "__int64" ;
+TypeSpecFloatKeyWord.               TypeSpec ::= "float" ;
+TypeSpecDoubleKeyWord.              TypeSpec ::= "double" ;
+TypeSpecSignedKeyWord.              TypeSpec ::= SIGNED ;
+TypeSpecUnsignedKeyWord.            TypeSpec ::= "unsigned" ;
+--StructId.                   TypeSpec ::= "struct" IdOrTypename ;
+--StructJustAttr.             TypeSpec ::= "struct" [JustAttribute] IdOrTypename ;
+--StructIdBraces.             TypeSpec ::= "struct" IdOrTypename LBRACE StructDeclList RBRACE ;
+--StructBraces.               TypeSpec ::= "struct" LBRACE StructDeclList RBRACE ;
+--StructJustAttrIdBraces.     TypeSpec ::= "struct" [JustAttribute] IdOrTypename LBRACE StructDeclList RBRACE ;
+--StructJustAttrBraces.       TypeSpec ::= "struct" [JustAttribute] LBRACE StructDeclList RBRACE ;
+--UnionId.                    TypeSpec ::= "union" IdOrTypename ;
+--UnionIdBraces.              TypeSpec ::= "union" IdOrTypename LBRACE StructDeclList RBRACE ;
+--UnionBraces.                TypeSpec ::= "union" LBRACE StructDeclList RBRACE ;
+--UnionJustAttrIdBraces.      TypeSpec ::= "union" [JustAttribute] IdOrTypename LBRACE StructDeclList RBRACE ;
+--UnionJustAttrBraces.        TypeSpec ::= "union" [JustAttribute] LBRACE StructDeclList RBRACE ;
+--EnumId.                     TypeSpec ::= "enum" IdOrTypename ;
+--EnumIdBraces.               TypeSpec ::= "enum" IdOrTypename LBRACE [Enumerator] MaybeComma RBRACE ;
+--EnumBraces.                 TypeSpec ::= "enum" LBRACE [Enumerator] MaybeComma RBRACE ;
+--EnumJustAttrIdBraces.       TypeSpec ::= "enum" [JustAttribute] IdOrTypename LBRACE [Enumerator] MaybeComma RBRACE ;
+--EnumJustAttrBraces.         TypeSpec ::= "enum" [JustAttribute] LBRACE [Enumerator] MaybeComma RBRACE ;
+--NamedTypeTypeSpec.          TypeSpec ::= NAMEDTYPE ;
+--TypeOfExpression.           TypeSpec ::= TYPEOF "(" Expression ")" ;
+--TypeOfTypeName.             TypeSpec ::= TYPEOF "(" TypeName ")" ;
+
+
+ADeclarator.        Declarator ::= PointerOpt DirectDecl AttributesWithAsm ;
+separator nonempty Declarator "," ; 
+
+NoPointer.      PointerOpt ::= ""; --/**/ 
+-- SomePointer.    PointerOpt ::= "*" [Attribute] PointerOpt ;
+SomePointer.    PointerOpt ::= "*" PointerOpt ;
+
+
+DirectDeclIdTypename.           DirectDecl ::= IdOrTypename ;                                        --/* (* We want to be able to redefine named types as variable names *) */
+--DirectDeclAttrDecl.             DirectDecl ::= "(" [Attribute] Declarator ")" ;
+--DirectDeclAttrStatic.           DirectDecl ::= DirectDecl LBRACKET AttributesOrStatic  RBRACKET ;
+DirectDeclGhostParam.           DirectDecl ::= DirectDecl "(" ")" GhostParameterOpt ;
+DirectDeclGhostRestParParam.    DirectDecl ::= DirectDecl "(" RestParList ")" GhostParameterOpt ;
+
+
+EmptyAttrWithASM.       AttributesWithAsm ::= ; --/* empty */ 
+--ListAttrWithASM.        AttributesWithAsm ::= Attribute [Attribute] ;
+--ListASMAttrWithASM.     AttributesWithAsm ::= Attribute [Attribute] ASM "(" StringConstant ")" [Attribute] ;
+--ASMAttrWithASM.         AttributesWithAsm ::= ASM "(" StringConstant ")" [Attribute] ;
+
+SimpleParameterDecl.    RestParList ::= [ParameterDecl] ;
+--DotDotDotParameterDecl. RestParList ::= [ParameterDecl] "," "..." ;
+
+
+ParameterDeclSpecDeclarator.    ParameterDecl ::= DeclSpecList Declarator ;
+--ParameterDeclSpecAbstract.      ParameterDecl ::= DeclSpecList AbstractDecl ;
+ParameterDeclSpec.              ParameterDecl ::= DeclSpecList ;
+ParameterDeclPar.               ParameterDecl ::= "(" ParameterDecl ")" ;
+separator nonempty ParameterDecl "," ;
+
+NoGhostParameter.       GhostParameterOpt ::= ; --/* empty */ 
+--SomeGhostParameter.     GhostParameterOpt ::= "ghost" "(" RestParList ")" RGHOST ;
+
+
+IdTypename.     IdOrTypename ::= IdOrTypenameAsId ;
+
+
+IdOrTypenameAsIdIdentifier.     IdOrTypenameAsId ::= Ident ;
+--IdOrTypenameAsIdNamedType.      IdOrTypenameAsId ::= NAMEDTYPE ;
+
+
+DeclSpecInitDecl.               Declaration ::= DeclSpecList DeclAndInitDeclAttrList ";" ;
+DeclSpec.                       Declaration ::= DeclSpecList ";" ;
+--SpecDeclSpecInitDecl.           Declaration ::= IsACSLSpec [Wildcard] DeclSpecList DeclAndInitDeclAttrList ";" ;  --SPEC => IsACSLSpec [Wildcard]
+--SpecDeclSpec.                   Declaration ::= IsACSLSpec [Wildcard] DeclSpecList ";" ;                          --SPEC => IsACSLSpec [Wildcard]
+--StaticAssertDecl.               Declaration ::= "_Static_assert" "(" Expression ")" ;
+--StaticAssertDeclStringConst.    Declaration ::= "_Static_assert" "(" Expression "," StringConstant ")" ;
+
+
+InitDeclaration.            DeclAndInitDeclAttrList ::= InitDeclarator ;
+InitDeclarationWithAttr.    DeclAndInitDeclAttrList ::= InitDeclarator "," [InitDeclaratorAttr] ;
+
+--InitDeclaratorAttribute.    InitDeclaratorAttr ::= [AttributeNocv] InitDeclarator ;
+InitDeclaratorAttribute.    InitDeclaratorAttr ::= InitDeclarator ;
+separator nonempty InitDeclaratorAttr "," ;
+
+SimpleInitDeclarator.       InitDeclarator ::= Declarator ;
+--InitDeclaratorExpression.   InitDeclarator ::= Declarator "=" InitExpression ;

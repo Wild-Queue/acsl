@@ -1175,8 +1175,8 @@ TypeSpec : _KW_void { $$ = new acsl::TypeSpecVoidKeyWord(); $$->line_number = @$
   | _KW_char { $$ = new acsl::TypeSpecCharKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespec_ = $$; }
   | _SYMB_53 { $$ = new acsl::TypeSpecBoolKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespec_ = $$; }
   | _KW_short { $$ = new acsl::TypeSpecShortKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespec_ = $$; }
-  | _SYMB_54 { $$ = new acsl::TypeSpecIntKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespec_ = $$; }
-  | _KW_int { $$ = new acsl::TypeSpecInt32KeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespec_ = $$; }
+  | _SYMB_54 { $$ = new acsl::TypeSpecInt32KeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespec_ = $$; }
+  | _KW_int { $$ = new acsl::TypeSpecIntKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespec_ = $$; }
   | _KW_long { $$ = new acsl::TypeSpecLongKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespec_ = $$; }
   | _SYMB_55 { $$ = new acsl::TypeSpecInt64KeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespec_ = $$; }
   | _KW_float { $$ = new acsl::TypeSpecFloatKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespec_ = $$; }

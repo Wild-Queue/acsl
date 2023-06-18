@@ -461,8 +461,8 @@ class TypeSpecVoidKeyWord;
 class TypeSpecCharKeyWord;
 class TypeSpecBoolKeyWord;
 class TypeSpecShortKeyWord;
-class TypeSpecIntKeyWord;
 class TypeSpecInt32KeyWord;
+class TypeSpecIntKeyWord;
 class TypeSpecLongKeyWord;
 class TypeSpecInt64KeyWord;
 class TypeSpecFloatKeyWord;
@@ -1795,8 +1795,8 @@ public:
   virtual void visitTypeSpecCharKeyWord(TypeSpecCharKeyWord *p) = 0;
   virtual void visitTypeSpecBoolKeyWord(TypeSpecBoolKeyWord *p) = 0;
   virtual void visitTypeSpecShortKeyWord(TypeSpecShortKeyWord *p) = 0;
-  virtual void visitTypeSpecIntKeyWord(TypeSpecIntKeyWord *p) = 0;
   virtual void visitTypeSpecInt32KeyWord(TypeSpecInt32KeyWord *p) = 0;
+  virtual void visitTypeSpecIntKeyWord(TypeSpecIntKeyWord *p) = 0;
   virtual void visitTypeSpecLongKeyWord(TypeSpecLongKeyWord *p) = 0;
   virtual void visitTypeSpecInt64KeyWord(TypeSpecInt64KeyWord *p) = 0;
   virtual void visitTypeSpecFloatKeyWord(TypeSpecFloatKeyWord *p) = 0;
@@ -7160,19 +7160,6 @@ public:
   void swap(TypeSpecShortKeyWord &);
 };
 
-class TypeSpecIntKeyWord : public TypeSpec
-{
-public:
-
-  TypeSpecIntKeyWord(const TypeSpecIntKeyWord &);
-  TypeSpecIntKeyWord &operator=(const TypeSpecIntKeyWord &);
-  TypeSpecIntKeyWord();
-  ~TypeSpecIntKeyWord();
-  virtual void accept(Visitor *v);
-  virtual TypeSpecIntKeyWord *clone() const;
-  void swap(TypeSpecIntKeyWord &);
-};
-
 class TypeSpecInt32KeyWord : public TypeSpec
 {
 public:
@@ -7184,6 +7171,19 @@ public:
   virtual void accept(Visitor *v);
   virtual TypeSpecInt32KeyWord *clone() const;
   void swap(TypeSpecInt32KeyWord &);
+};
+
+class TypeSpecIntKeyWord : public TypeSpec
+{
+public:
+
+  TypeSpecIntKeyWord(const TypeSpecIntKeyWord &);
+  TypeSpecIntKeyWord &operator=(const TypeSpecIntKeyWord &);
+  TypeSpecIntKeyWord();
+  ~TypeSpecIntKeyWord();
+  virtual void accept(Visitor *v);
+  virtual TypeSpecIntKeyWord *clone() const;
+  void swap(TypeSpecIntKeyWord &);
 };
 
 class TypeSpecLongKeyWord : public TypeSpec

@@ -370,50 +370,6 @@ GhostGlobalsRGhost *GhostGlobalsRGhost::clone() const
 
 
 
-/********************   GlobalsFunctionDef    ********************/
-GlobalsFunctionDef::GlobalsFunctionDef(FunctionDef *p1)
-{
-  functiondef_ = p1;
-
-}
-
-GlobalsFunctionDef::GlobalsFunctionDef(const GlobalsFunctionDef & other)
-{
-  functiondef_ = other.functiondef_->clone();
-
-}
-
-GlobalsFunctionDef &GlobalsFunctionDef::operator=(const GlobalsFunctionDef & other)
-{
-  GlobalsFunctionDef tmp(other);
-  swap(tmp);
-  return *this;
-}
-
-void GlobalsFunctionDef::swap(GlobalsFunctionDef & other)
-{
-  std::swap(functiondef_, other.functiondef_);
-
-}
-
-GlobalsFunctionDef::~GlobalsFunctionDef()
-{
-  delete(functiondef_);
-
-}
-
-void GlobalsFunctionDef::accept(Visitor *v)
-{
-  v->visitGlobalsFunctionDef(this);
-}
-
-GlobalsFunctionDef *GlobalsFunctionDef::clone() const
-{
-  return new GlobalsFunctionDef(*this);
-}
-
-
-
 /********************   GlobalDecl    ********************/
 GlobalDecl::GlobalDecl(Decl *p1)
 {
@@ -458,6 +414,49 @@ GlobalDecl *GlobalDecl::clone() const
 
 
 
+/********************   GlobalEmptyOldStyle    ********************/
+GlobalEmptyOldStyle::GlobalEmptyOldStyle(Ident p1)
+{
+  ident_ = p1;
+
+}
+
+GlobalEmptyOldStyle::GlobalEmptyOldStyle(const GlobalEmptyOldStyle & other)
+{
+  ident_ = other.ident_;
+
+}
+
+GlobalEmptyOldStyle &GlobalEmptyOldStyle::operator=(const GlobalEmptyOldStyle & other)
+{
+  GlobalEmptyOldStyle tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void GlobalEmptyOldStyle::swap(GlobalEmptyOldStyle & other)
+{
+  std::swap(ident_, other.ident_);
+
+}
+
+GlobalEmptyOldStyle::~GlobalEmptyOldStyle()
+{
+
+}
+
+void GlobalEmptyOldStyle::accept(Visitor *v)
+{
+  v->visitGlobalEmptyOldStyle(this);
+}
+
+GlobalEmptyOldStyle *GlobalEmptyOldStyle::clone() const
+{
+  return new GlobalEmptyOldStyle(*this);
+}
+
+
+
 /********************   GlobalsDeclataion    ********************/
 GlobalsDeclataion::GlobalsDeclataion(Declaration *p1)
 {
@@ -498,6 +497,50 @@ void GlobalsDeclataion::accept(Visitor *v)
 GlobalsDeclataion *GlobalsDeclataion::clone() const
 {
   return new GlobalsDeclataion(*this);
+}
+
+
+
+/********************   GlobalsFunctionDef    ********************/
+GlobalsFunctionDef::GlobalsFunctionDef(FunctionDef *p1)
+{
+  functiondef_ = p1;
+
+}
+
+GlobalsFunctionDef::GlobalsFunctionDef(const GlobalsFunctionDef & other)
+{
+  functiondef_ = other.functiondef_->clone();
+
+}
+
+GlobalsFunctionDef &GlobalsFunctionDef::operator=(const GlobalsFunctionDef & other)
+{
+  GlobalsFunctionDef tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void GlobalsFunctionDef::swap(GlobalsFunctionDef & other)
+{
+  std::swap(functiondef_, other.functiondef_);
+
+}
+
+GlobalsFunctionDef::~GlobalsFunctionDef()
+{
+  delete(functiondef_);
+
+}
+
+void GlobalsFunctionDef::accept(Visitor *v)
+{
+  v->visitGlobalsFunctionDef(this);
+}
+
+GlobalsFunctionDef *GlobalsFunctionDef::clone() const
+{
+  return new GlobalsFunctionDef(*this);
 }
 
 
@@ -742,49 +785,6 @@ void GlobalOldStyle::accept(Visitor *v)
 GlobalOldStyle *GlobalOldStyle::clone() const
 {
   return new GlobalOldStyle(*this);
-}
-
-
-
-/********************   GlobalEmptyOldStyle    ********************/
-GlobalEmptyOldStyle::GlobalEmptyOldStyle(Ident p1)
-{
-  ident_ = p1;
-
-}
-
-GlobalEmptyOldStyle::GlobalEmptyOldStyle(const GlobalEmptyOldStyle & other)
-{
-  ident_ = other.ident_;
-
-}
-
-GlobalEmptyOldStyle &GlobalEmptyOldStyle::operator=(const GlobalEmptyOldStyle & other)
-{
-  GlobalEmptyOldStyle tmp(other);
-  swap(tmp);
-  return *this;
-}
-
-void GlobalEmptyOldStyle::swap(GlobalEmptyOldStyle & other)
-{
-  std::swap(ident_, other.ident_);
-
-}
-
-GlobalEmptyOldStyle::~GlobalEmptyOldStyle()
-{
-
-}
-
-void GlobalEmptyOldStyle::accept(Visitor *v)
-{
-  v->visitGlobalEmptyOldStyle(this);
-}
-
-GlobalEmptyOldStyle *GlobalEmptyOldStyle::clone() const
-{
-  return new GlobalEmptyOldStyle(*this);
 }
 
 
@@ -9274,46 +9274,6 @@ void TypeSpecShortKeyWord::accept(Visitor *v)
 TypeSpecShortKeyWord *TypeSpecShortKeyWord::clone() const
 {
   return new TypeSpecShortKeyWord(*this);
-}
-
-
-
-/********************   TypeSpecIntKeyWord    ********************/
-TypeSpecIntKeyWord::TypeSpecIntKeyWord()
-{
-
-}
-
-TypeSpecIntKeyWord::TypeSpecIntKeyWord(const TypeSpecIntKeyWord & other)
-{
-
-}
-
-TypeSpecIntKeyWord &TypeSpecIntKeyWord::operator=(const TypeSpecIntKeyWord & other)
-{
-  TypeSpecIntKeyWord tmp(other);
-  swap(tmp);
-  return *this;
-}
-
-void TypeSpecIntKeyWord::swap(TypeSpecIntKeyWord & other)
-{
-
-}
-
-TypeSpecIntKeyWord::~TypeSpecIntKeyWord()
-{
-
-}
-
-void TypeSpecIntKeyWord::accept(Visitor *v)
-{
-  v->visitTypeSpecIntKeyWord(this);
-}
-
-TypeSpecIntKeyWord *TypeSpecIntKeyWord::clone() const
-{
-  return new TypeSpecIntKeyWord(*this);
 }
 
 

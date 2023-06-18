@@ -301,8 +301,8 @@ class PrintAbsyn : public Visitor
   void visitTypeSpecCharKeyWord(TypeSpecCharKeyWord *p);
   void visitTypeSpecBoolKeyWord(TypeSpecBoolKeyWord *p);
   void visitTypeSpecShortKeyWord(TypeSpecShortKeyWord *p);
-  void visitTypeSpecIntKeyWord(TypeSpecIntKeyWord *p);
   void visitTypeSpecInt32KeyWord(TypeSpecInt32KeyWord *p);
+  void visitTypeSpecIntKeyWord(TypeSpecIntKeyWord *p);
   void visitTypeSpecLongKeyWord(TypeSpecLongKeyWord *p);
   void visitTypeSpecInt64KeyWord(TypeSpecInt64KeyWord *p);
   void visitTypeSpecFloatKeyWord(TypeSpecFloatKeyWord *p);
@@ -1781,8 +1781,8 @@ class ShowAbsyn : public Visitor
   void visitTypeSpecCharKeyWord(TypeSpecCharKeyWord *p);
   void visitTypeSpecBoolKeyWord(TypeSpecBoolKeyWord *p);
   void visitTypeSpecShortKeyWord(TypeSpecShortKeyWord *p);
-  void visitTypeSpecIntKeyWord(TypeSpecIntKeyWord *p);
   void visitTypeSpecInt32KeyWord(TypeSpecInt32KeyWord *p);
+  void visitTypeSpecIntKeyWord(TypeSpecIntKeyWord *p);
   void visitTypeSpecLongKeyWord(TypeSpecLongKeyWord *p);
   void visitTypeSpecInt64KeyWord(TypeSpecInt64KeyWord *p);
   void visitTypeSpecFloatKeyWord(TypeSpecFloatKeyWord *p);

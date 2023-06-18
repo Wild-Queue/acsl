@@ -288,14 +288,6 @@ void Skeleton::visitGhostGlobalsRGhost(GhostGlobalsRGhost *ghost_globals_r_ghost
 
 }
 
-void Skeleton::visitGlobalsFunctionDef(GlobalsFunctionDef *globals_function_def)
-{
-  /* Code For GlobalsFunctionDef Goes Here */
-
-  if (globals_function_def->functiondef_) globals_function_def->functiondef_->accept(this);
-
-}
-
 void Skeleton::visitGlobalDecl(GlobalDecl *global_decl)
 {
   /* Code For GlobalDecl Goes Here */
@@ -304,11 +296,27 @@ void Skeleton::visitGlobalDecl(GlobalDecl *global_decl)
 
 }
 
+void Skeleton::visitGlobalEmptyOldStyle(GlobalEmptyOldStyle *global_empty_old_style)
+{
+  /* Code For GlobalEmptyOldStyle Goes Here */
+
+  visitIdent(global_empty_old_style->ident_);
+
+}
+
 void Skeleton::visitGlobalsDeclataion(GlobalsDeclataion *globals_declataion)
 {
   /* Code For GlobalsDeclataion Goes Here */
 
   if (globals_declataion->declaration_) globals_declataion->declaration_->accept(this);
+
+}
+
+void Skeleton::visitGlobalsFunctionDef(GlobalsFunctionDef *globals_function_def)
+{
+  /* Code For GlobalsFunctionDef Goes Here */
+
+  if (globals_function_def->functiondef_) globals_function_def->functiondef_->accept(this);
 
 }
 
@@ -356,14 +364,6 @@ void Skeleton::visitGlobalOldStyle(GlobalOldStyle *global_old_style)
   visitIdent(global_old_style->ident_);
   if (global_old_style->listident_) global_old_style->listident_->accept(this);
   if (global_old_style->oldpardeflist_) global_old_style->oldpardeflist_->accept(this);
-
-}
-
-void Skeleton::visitGlobalEmptyOldStyle(GlobalEmptyOldStyle *global_empty_old_style)
-{
-  /* Code For GlobalEmptyOldStyle Goes Here */
-
-  visitIdent(global_empty_old_style->ident_);
 
 }
 
@@ -1940,13 +1940,6 @@ void Skeleton::visitTypeSpecBoolKeyWord(TypeSpecBoolKeyWord *type_spec_bool_key_
 void Skeleton::visitTypeSpecShortKeyWord(TypeSpecShortKeyWord *type_spec_short_key_word)
 {
   /* Code For TypeSpecShortKeyWord Goes Here */
-
-
-}
-
-void Skeleton::visitTypeSpecIntKeyWord(TypeSpecIntKeyWord *type_spec_int_key_word)
-{
-  /* Code For TypeSpecIntKeyWord Goes Here */
 
 
 }

@@ -267,15 +267,15 @@ class SemiColonGlobals;
 class GhostGlobalsDeclataion;
 class GhostGlobalsFunctionDef;
 class GhostGlobalsRGhost;
-class GlobalsFunctionDef;
 class GlobalDecl;
+class GlobalEmptyOldStyle;
 class GlobalsDeclataion;
+class GlobalsFunctionDef;
 class ExternGlobalDeclataion;
 class ExternGlobalPar;
 class AsmGlobal;
 class PragmaGlobal;
 class GlobalOldStyle;
-class GlobalEmptyOldStyle;
 class IdOrTypenameAsIdIdentifier;
 class IdOrTypenameAsIdNamedType;
 class IdTypename;
@@ -461,7 +461,6 @@ class TypeSpecVoidKeyWord;
 class TypeSpecCharKeyWord;
 class TypeSpecBoolKeyWord;
 class TypeSpecShortKeyWord;
-class TypeSpecIntKeyWord;
 class TypeSpecInt32KeyWord;
 class TypeSpecLongKeyWord;
 class TypeSpecInt64KeyWord;
@@ -1601,15 +1600,15 @@ public:
   virtual void visitGhostGlobalsDeclataion(GhostGlobalsDeclataion *p) = 0;
   virtual void visitGhostGlobalsFunctionDef(GhostGlobalsFunctionDef *p) = 0;
   virtual void visitGhostGlobalsRGhost(GhostGlobalsRGhost *p) = 0;
-  virtual void visitGlobalsFunctionDef(GlobalsFunctionDef *p) = 0;
   virtual void visitGlobalDecl(GlobalDecl *p) = 0;
+  virtual void visitGlobalEmptyOldStyle(GlobalEmptyOldStyle *p) = 0;
   virtual void visitGlobalsDeclataion(GlobalsDeclataion *p) = 0;
+  virtual void visitGlobalsFunctionDef(GlobalsFunctionDef *p) = 0;
   virtual void visitExternGlobalDeclataion(ExternGlobalDeclataion *p) = 0;
   virtual void visitExternGlobalPar(ExternGlobalPar *p) = 0;
   virtual void visitAsmGlobal(AsmGlobal *p) = 0;
   virtual void visitPragmaGlobal(PragmaGlobal *p) = 0;
   virtual void visitGlobalOldStyle(GlobalOldStyle *p) = 0;
-  virtual void visitGlobalEmptyOldStyle(GlobalEmptyOldStyle *p) = 0;
   virtual void visitIdOrTypenameAsIdIdentifier(IdOrTypenameAsIdIdentifier *p) = 0;
   virtual void visitIdOrTypenameAsIdNamedType(IdOrTypenameAsIdNamedType *p) = 0;
   virtual void visitIdTypename(IdTypename *p) = 0;
@@ -1795,7 +1794,6 @@ public:
   virtual void visitTypeSpecCharKeyWord(TypeSpecCharKeyWord *p) = 0;
   virtual void visitTypeSpecBoolKeyWord(TypeSpecBoolKeyWord *p) = 0;
   virtual void visitTypeSpecShortKeyWord(TypeSpecShortKeyWord *p) = 0;
-  virtual void visitTypeSpecIntKeyWord(TypeSpecIntKeyWord *p) = 0;
   virtual void visitTypeSpecInt32KeyWord(TypeSpecInt32KeyWord *p) = 0;
   virtual void visitTypeSpecLongKeyWord(TypeSpecLongKeyWord *p) = 0;
   virtual void visitTypeSpecInt64KeyWord(TypeSpecInt64KeyWord *p) = 0;
@@ -4340,20 +4338,6 @@ public:
   void swap(GhostGlobalsRGhost &);
 };
 
-class GlobalsFunctionDef : public Global
-{
-public:
-  FunctionDef *functiondef_;
-
-  GlobalsFunctionDef(const GlobalsFunctionDef &);
-  GlobalsFunctionDef &operator=(const GlobalsFunctionDef &);
-  GlobalsFunctionDef(FunctionDef *p1);
-  ~GlobalsFunctionDef();
-  virtual void accept(Visitor *v);
-  virtual GlobalsFunctionDef *clone() const;
-  void swap(GlobalsFunctionDef &);
-};
-
 class GlobalDecl : public Global
 {
 public:
@@ -4368,6 +4352,20 @@ public:
   void swap(GlobalDecl &);
 };
 
+class GlobalEmptyOldStyle : public Global
+{
+public:
+  Ident ident_;
+
+  GlobalEmptyOldStyle(const GlobalEmptyOldStyle &);
+  GlobalEmptyOldStyle &operator=(const GlobalEmptyOldStyle &);
+  GlobalEmptyOldStyle(Ident p1);
+  ~GlobalEmptyOldStyle();
+  virtual void accept(Visitor *v);
+  virtual GlobalEmptyOldStyle *clone() const;
+  void swap(GlobalEmptyOldStyle &);
+};
+
 class GlobalsDeclataion : public Global
 {
 public:
@@ -4380,6 +4378,20 @@ public:
   virtual void accept(Visitor *v);
   virtual GlobalsDeclataion *clone() const;
   void swap(GlobalsDeclataion &);
+};
+
+class GlobalsFunctionDef : public Global
+{
+public:
+  FunctionDef *functiondef_;
+
+  GlobalsFunctionDef(const GlobalsFunctionDef &);
+  GlobalsFunctionDef &operator=(const GlobalsFunctionDef &);
+  GlobalsFunctionDef(FunctionDef *p1);
+  ~GlobalsFunctionDef();
+  virtual void accept(Visitor *v);
+  virtual GlobalsFunctionDef *clone() const;
+  void swap(GlobalsFunctionDef &);
 };
 
 class ExternGlobalDeclataion : public Global
@@ -4457,20 +4469,6 @@ public:
   virtual void accept(Visitor *v);
   virtual GlobalOldStyle *clone() const;
   void swap(GlobalOldStyle &);
-};
-
-class GlobalEmptyOldStyle : public Global
-{
-public:
-  Ident ident_;
-
-  GlobalEmptyOldStyle(const GlobalEmptyOldStyle &);
-  GlobalEmptyOldStyle &operator=(const GlobalEmptyOldStyle &);
-  GlobalEmptyOldStyle(Ident p1);
-  ~GlobalEmptyOldStyle();
-  virtual void accept(Visitor *v);
-  virtual GlobalEmptyOldStyle *clone() const;
-  void swap(GlobalEmptyOldStyle &);
 };
 
 class IdOrTypenameAsIdIdentifier : public IdOrTypenameAsId
@@ -7158,19 +7156,6 @@ public:
   virtual void accept(Visitor *v);
   virtual TypeSpecShortKeyWord *clone() const;
   void swap(TypeSpecShortKeyWord &);
-};
-
-class TypeSpecIntKeyWord : public TypeSpec
-{
-public:
-
-  TypeSpecIntKeyWord(const TypeSpecIntKeyWord &);
-  TypeSpecIntKeyWord &operator=(const TypeSpecIntKeyWord &);
-  TypeSpecIntKeyWord();
-  ~TypeSpecIntKeyWord();
-  virtual void accept(Visitor *v);
-  virtual TypeSpecIntKeyWord *clone() const;
-  void swap(TypeSpecIntKeyWord &);
 };
 
 class TypeSpecInt32KeyWord : public TypeSpec
