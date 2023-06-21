@@ -106,6 +106,8 @@ Annot* pAnnot(FILE *inp);
 Annot* pAnnot(const char *str);
 ListAnnot* pListAnnot(FILE *inp);
 ListAnnot* pListAnnot(const char *str);
+Code_Annot* pCode_Annot(FILE *inp);
+Code_Annot* pCode_Annot(const char *str);
 LocalLabel* pLocalLabel(FILE *inp);
 LocalLabel* pLocalLabel(const char *str);
 ListLocalLabel* pListLocalLabel(FILE *inp);

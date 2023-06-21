@@ -330,6 +330,7 @@ union YYSTYPE
   acsl::ListBlockElement* listblockelement_;
   acsl::Annot* annot_;
   acsl::ListAnnot* listannot_;
+  acsl::Code_Annot* code_annot_;
   acsl::LocalLabel* locallabel_;
   acsl::ListLocalLabel* listlocallabel_;
   acsl::LocalLabelName* locallabelname_;
@@ -564,7 +565,7 @@ union YYSTYPE
   acsl::Wildcard* wildcard_;
   acsl::ListWildcard* listwildcard_;
 
-#line 568 "Bison.H"
+#line 569 "Bison.H"
 
 };
 typedef union YYSTYPE YYSTYPE;

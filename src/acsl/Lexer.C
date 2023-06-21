@@ -586,7 +586,7 @@ static const flex_int16_t yy_accept[1063] =
     {   0,
         0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
         0,    0,  250,  248,  247,  204,   17,  224,  116,   21,
-       16,  235,    3,    4,   15,   13,    2,   14,    9,   20,
+       16,  235,    2,    3,   15,   13,    4,   14,    9,   20,
       245,   34,    1,   24,   35,   25,   33,  197,  197,  197,
       197,  197,  197,  197,  197,  197,   95,  248,   96,   30,
       248,  248,  197,  197,  197,  197,  197,  197,  197,  197,
@@ -1794,17 +1794,17 @@ return _SEMI;
 case 2:
 YY_RULE_SETUP
 #line 73 "full_bnfc_parser.l"
-return _COMMA;
+return _LPAREN;
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
 #line 74 "full_bnfc_parser.l"
-return _LPAREN;
+return _RPAREN;
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
 #line 75 "full_bnfc_parser.l"
-return _RPAREN;
+return _COMMA;
 	YY_BREAK
 case 5:
 YY_RULE_SETUP

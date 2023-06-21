@@ -139,6 +139,54 @@ SimpleGlobals *SimpleGlobals::clone() const
 
 
 
+/********************   AGhostGlobals    ********************/
+AGhostGlobals::AGhostGlobals(GhostGlobals *p1, Globals *p2)
+{
+  ghostglobals_ = p1;
+  globals_ = p2;
+
+}
+
+AGhostGlobals::AGhostGlobals(const AGhostGlobals & other)
+{
+  ghostglobals_ = other.ghostglobals_->clone();
+  globals_ = other.globals_->clone();
+
+}
+
+AGhostGlobals &AGhostGlobals::operator=(const AGhostGlobals & other)
+{
+  AGhostGlobals tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void AGhostGlobals::swap(AGhostGlobals & other)
+{
+  std::swap(ghostglobals_, other.ghostglobals_);
+  std::swap(globals_, other.globals_);
+
+}
+
+AGhostGlobals::~AGhostGlobals()
+{
+  delete(ghostglobals_);
+  delete(globals_);
+
+}
+
+void AGhostGlobals::accept(Visitor *v)
+{
+  v->visitAGhostGlobals(this);
+}
+
+AGhostGlobals *AGhostGlobals::clone() const
+{
+  return new AGhostGlobals(*this);
+}
+
+
+
 /********************   SemiColonGlobals    ********************/
 SemiColonGlobals::SemiColonGlobals(Globals *p1)
 {
@@ -322,6 +370,50 @@ GhostGlobalsRGhost *GhostGlobalsRGhost::clone() const
 
 
 
+/********************   GlobalDecl    ********************/
+GlobalDecl::GlobalDecl(Decl *p1)
+{
+  decl_ = p1;
+
+}
+
+GlobalDecl::GlobalDecl(const GlobalDecl & other)
+{
+  decl_ = other.decl_->clone();
+
+}
+
+GlobalDecl &GlobalDecl::operator=(const GlobalDecl & other)
+{
+  GlobalDecl tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void GlobalDecl::swap(GlobalDecl & other)
+{
+  std::swap(decl_, other.decl_);
+
+}
+
+GlobalDecl::~GlobalDecl()
+{
+  delete(decl_);
+
+}
+
+void GlobalDecl::accept(Visitor *v)
+{
+  v->visitGlobalDecl(this);
+}
+
+GlobalDecl *GlobalDecl::clone() const
+{
+  return new GlobalDecl(*this);
+}
+
+
+
 /********************   GlobalsDeclataion    ********************/
 GlobalsDeclataion::GlobalsDeclataion(Declaration *p1)
 {
@@ -406,6 +498,293 @@ void GlobalsFunctionDef::accept(Visitor *v)
 GlobalsFunctionDef *GlobalsFunctionDef::clone() const
 {
   return new GlobalsFunctionDef(*this);
+}
+
+
+
+/********************   ExternGlobalDeclataion    ********************/
+ExternGlobalDeclataion::ExternGlobalDeclataion(StringConstant *p1, Declaration *p2)
+{
+  stringconstant_ = p1;
+  declaration_ = p2;
+
+}
+
+ExternGlobalDeclataion::ExternGlobalDeclataion(const ExternGlobalDeclataion & other)
+{
+  stringconstant_ = other.stringconstant_->clone();
+  declaration_ = other.declaration_->clone();
+
+}
+
+ExternGlobalDeclataion &ExternGlobalDeclataion::operator=(const ExternGlobalDeclataion & other)
+{
+  ExternGlobalDeclataion tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void ExternGlobalDeclataion::swap(ExternGlobalDeclataion & other)
+{
+  std::swap(stringconstant_, other.stringconstant_);
+  std::swap(declaration_, other.declaration_);
+
+}
+
+ExternGlobalDeclataion::~ExternGlobalDeclataion()
+{
+  delete(stringconstant_);
+  delete(declaration_);
+
+}
+
+void ExternGlobalDeclataion::accept(Visitor *v)
+{
+  v->visitExternGlobalDeclataion(this);
+}
+
+ExternGlobalDeclataion *ExternGlobalDeclataion::clone() const
+{
+  return new ExternGlobalDeclataion(*this);
+}
+
+
+
+/********************   ExternGlobalPar    ********************/
+ExternGlobalPar::ExternGlobalPar(StringConstant *p1, LBRACE p2, Globals *p3, RBRACE p4)
+{
+  stringconstant_ = p1;
+  lbrace_ = p2;
+  globals_ = p3;
+  rbrace_ = p4;
+
+}
+
+ExternGlobalPar::ExternGlobalPar(const ExternGlobalPar & other)
+{
+  stringconstant_ = other.stringconstant_->clone();
+  lbrace_ = other.lbrace_;
+  globals_ = other.globals_->clone();
+  rbrace_ = other.rbrace_;
+
+}
+
+ExternGlobalPar &ExternGlobalPar::operator=(const ExternGlobalPar & other)
+{
+  ExternGlobalPar tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void ExternGlobalPar::swap(ExternGlobalPar & other)
+{
+  std::swap(stringconstant_, other.stringconstant_);
+  std::swap(lbrace_, other.lbrace_);
+  std::swap(globals_, other.globals_);
+  std::swap(rbrace_, other.rbrace_);
+
+}
+
+ExternGlobalPar::~ExternGlobalPar()
+{
+  delete(stringconstant_);
+  delete(globals_);
+
+}
+
+void ExternGlobalPar::accept(Visitor *v)
+{
+  v->visitExternGlobalPar(this);
+}
+
+ExternGlobalPar *ExternGlobalPar::clone() const
+{
+  return new ExternGlobalPar(*this);
+}
+
+
+
+/********************   AsmGlobal    ********************/
+AsmGlobal::AsmGlobal(ASM p1, StringConstant *p2)
+{
+  asm_ = p1;
+  stringconstant_ = p2;
+
+}
+
+AsmGlobal::AsmGlobal(const AsmGlobal & other)
+{
+  asm_ = other.asm_;
+  stringconstant_ = other.stringconstant_->clone();
+
+}
+
+AsmGlobal &AsmGlobal::operator=(const AsmGlobal & other)
+{
+  AsmGlobal tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void AsmGlobal::swap(AsmGlobal & other)
+{
+  std::swap(asm_, other.asm_);
+  std::swap(stringconstant_, other.stringconstant_);
+
+}
+
+AsmGlobal::~AsmGlobal()
+{
+  delete(stringconstant_);
+
+}
+
+void AsmGlobal::accept(Visitor *v)
+{
+  v->visitAsmGlobal(this);
+}
+
+AsmGlobal *AsmGlobal::clone() const
+{
+  return new AsmGlobal(*this);
+}
+
+
+
+/********************   PragmaGlobal    ********************/
+PragmaGlobal::PragmaGlobal(Pragma *p1)
+{
+  pragma_ = p1;
+
+}
+
+PragmaGlobal::PragmaGlobal(const PragmaGlobal & other)
+{
+  pragma_ = other.pragma_->clone();
+
+}
+
+PragmaGlobal &PragmaGlobal::operator=(const PragmaGlobal & other)
+{
+  PragmaGlobal tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void PragmaGlobal::swap(PragmaGlobal & other)
+{
+  std::swap(pragma_, other.pragma_);
+
+}
+
+PragmaGlobal::~PragmaGlobal()
+{
+  delete(pragma_);
+
+}
+
+void PragmaGlobal::accept(Visitor *v)
+{
+  v->visitPragmaGlobal(this);
+}
+
+PragmaGlobal *PragmaGlobal::clone() const
+{
+  return new PragmaGlobal(*this);
+}
+
+
+
+/********************   GlobalOldStyle    ********************/
+GlobalOldStyle::GlobalOldStyle(Ident p1, ListIdent *p2, OldPardefList *p3)
+{
+  ident_ = p1;
+  listident_ = p2;
+  oldpardeflist_ = p3;
+
+}
+
+GlobalOldStyle::GlobalOldStyle(const GlobalOldStyle & other)
+{
+  ident_ = other.ident_;
+  listident_ = other.listident_->clone();
+  oldpardeflist_ = other.oldpardeflist_->clone();
+
+}
+
+GlobalOldStyle &GlobalOldStyle::operator=(const GlobalOldStyle & other)
+{
+  GlobalOldStyle tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void GlobalOldStyle::swap(GlobalOldStyle & other)
+{
+  std::swap(ident_, other.ident_);
+  std::swap(listident_, other.listident_);
+  std::swap(oldpardeflist_, other.oldpardeflist_);
+
+}
+
+GlobalOldStyle::~GlobalOldStyle()
+{
+  delete(listident_);
+  delete(oldpardeflist_);
+
+}
+
+void GlobalOldStyle::accept(Visitor *v)
+{
+  v->visitGlobalOldStyle(this);
+}
+
+GlobalOldStyle *GlobalOldStyle::clone() const
+{
+  return new GlobalOldStyle(*this);
+}
+
+
+
+/********************   GlobalEmptyOldStyle    ********************/
+GlobalEmptyOldStyle::GlobalEmptyOldStyle(Ident p1)
+{
+  ident_ = p1;
+
+}
+
+GlobalEmptyOldStyle::GlobalEmptyOldStyle(const GlobalEmptyOldStyle & other)
+{
+  ident_ = other.ident_;
+
+}
+
+GlobalEmptyOldStyle &GlobalEmptyOldStyle::operator=(const GlobalEmptyOldStyle & other)
+{
+  GlobalEmptyOldStyle tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void GlobalEmptyOldStyle::swap(GlobalEmptyOldStyle & other)
+{
+  std::swap(ident_, other.ident_);
+
+}
+
+GlobalEmptyOldStyle::~GlobalEmptyOldStyle()
+{
+
+}
+
+void GlobalEmptyOldStyle::accept(Visitor *v)
+{
+  v->visitGlobalEmptyOldStyle(this);
+}
+
+GlobalEmptyOldStyle *GlobalEmptyOldStyle::clone() const
+{
+  return new GlobalEmptyOldStyle(*this);
 }
 
 

@@ -41,14 +41,22 @@ class PrintAbsyn : public Visitor
   void visitGlobals(Globals *p); /* abstract class */
   void visitNoGlobals(NoGlobals *p);
   void visitSimpleGlobals(SimpleGlobals *p);
+  void visitAGhostGlobals(AGhostGlobals *p);
   void visitSemiColonGlobals(SemiColonGlobals *p);
   void visitGhostGlobals(GhostGlobals *p); /* abstract class */
   void visitGhostGlobalsDeclataion(GhostGlobalsDeclataion *p);
   void visitGhostGlobalsFunctionDef(GhostGlobalsFunctionDef *p);
   void visitGhostGlobalsRGhost(GhostGlobalsRGhost *p);
   void visitGlobal(Global *p); /* abstract class */
+  void visitGlobalDecl(GlobalDecl *p);
   void visitGlobalsDeclataion(GlobalsDeclataion *p);
   void visitGlobalsFunctionDef(GlobalsFunctionDef *p);
+  void visitExternGlobalDeclataion(ExternGlobalDeclataion *p);
+  void visitExternGlobalPar(ExternGlobalPar *p);
+  void visitAsmGlobal(AsmGlobal *p);
+  void visitPragmaGlobal(PragmaGlobal *p);
+  void visitGlobalOldStyle(GlobalOldStyle *p);
+  void visitGlobalEmptyOldStyle(GlobalEmptyOldStyle *p);
   void visitIdOrTypenameAsId(IdOrTypenameAsId *p); /* abstract class */
   void visitIdOrTypenameAsIdIdentifier(IdOrTypenameAsIdIdentifier *p);
   void visitIdOrTypenameAsIdNamedType(IdOrTypenameAsIdNamedType *p);
@@ -1512,14 +1520,22 @@ class ShowAbsyn : public Visitor
   void visitGlobals(Globals *p); /* abstract class */
   void visitNoGlobals(NoGlobals *p);
   void visitSimpleGlobals(SimpleGlobals *p);
+  void visitAGhostGlobals(AGhostGlobals *p);
   void visitSemiColonGlobals(SemiColonGlobals *p);
   void visitGhostGlobals(GhostGlobals *p); /* abstract class */
   void visitGhostGlobalsDeclataion(GhostGlobalsDeclataion *p);
   void visitGhostGlobalsFunctionDef(GhostGlobalsFunctionDef *p);
   void visitGhostGlobalsRGhost(GhostGlobalsRGhost *p);
   void visitGlobal(Global *p); /* abstract class */
+  void visitGlobalDecl(GlobalDecl *p);
   void visitGlobalsDeclataion(GlobalsDeclataion *p);
   void visitGlobalsFunctionDef(GlobalsFunctionDef *p);
+  void visitExternGlobalDeclataion(ExternGlobalDeclataion *p);
+  void visitExternGlobalPar(ExternGlobalPar *p);
+  void visitAsmGlobal(AsmGlobal *p);
+  void visitPragmaGlobal(PragmaGlobal *p);
+  void visitGlobalOldStyle(GlobalOldStyle *p);
+  void visitGlobalEmptyOldStyle(GlobalEmptyOldStyle *p);
   void visitIdOrTypenameAsId(IdOrTypenameAsId *p); /* abstract class */
   void visitIdOrTypenameAsIdIdentifier(IdOrTypenameAsIdIdentifier *p);
   void visitIdOrTypenameAsIdNamedType(IdOrTypenameAsIdNamedType *p);

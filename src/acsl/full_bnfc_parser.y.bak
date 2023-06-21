@@ -875,14 +875,22 @@ Program : Globals { $$ = new acsl::AProgram($1); $$->line_number = @$.first_line
 ;
 Globals : /* empty */ { $$ = new acsl::NoGlobals(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->globals_ = $$; }
   | Global Globals { $$ = new acsl::SimpleGlobals($1, $2); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->globals_ = $$; }
+  | _KW_ghost GhostGlobals Globals { $$ = new acsl::AGhostGlobals($2, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->globals_ = $$; }
   | _SEMI Globals { $$ = new acsl::SemiColonGlobals($2); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->globals_ = $$; }
 ;
 GhostGlobals : Declaration GhostGlobals { $$ = new acsl::GhostGlobalsDeclataion($1, $2); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->ghostglobals_ = $$; }
   | FunctionDef GhostGlobals { $$ = new acsl::GhostGlobalsFunctionDef($1, $2); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->ghostglobals_ = $$; }
   | T_RGHOST { $$ = new acsl::GhostGlobalsRGhost($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->ghostglobals_ = $$; }
 ;
-Global : Declaration { $$ = new acsl::GlobalsDeclataion($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->global_ = $$; }
+Global : Decl { $$ = new acsl::GlobalDecl($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->global_ = $$; }
+  | Declaration { $$ = new acsl::GlobalsDeclataion($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->global_ = $$; }
   | FunctionDef { $$ = new acsl::GlobalsFunctionDef($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->global_ = $$; }
+  | _KW_extern StringConstant Declaration { $$ = new acsl::ExternGlobalDeclataion($2, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->global_ = $$; }
+  | _KW_extern StringConstant T_LBRACE Globals T_RBRACE { $$ = new acsl::ExternGlobalPar($2, $3, $4, $5); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->global_ = $$; }
+  | T_ASM _LPAREN StringConstant _RPAREN _SEMI { $$ = new acsl::AsmGlobal($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->global_ = $$; }
+  | Pragma { $$ = new acsl::PragmaGlobal($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->global_ = $$; }
+  | _IDENT_ _LPAREN ListIdent _RPAREN OldPardefList _SEMI { std::reverse($3->begin(),$3->end()) ;$$ = new acsl::GlobalOldStyle($1, $3, $5); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->global_ = $$; }
+  | _IDENT_ _LPAREN _RPAREN _SEMI { $$ = new acsl::GlobalEmptyOldStyle($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->global_ = $$; }
 ;
 IdOrTypenameAsId : _IDENT_ { $$ = new acsl::IdOrTypenameAsIdIdentifier($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->idortypenameasid_ = $$; }
   | T_NAMEDTYPE { $$ = new acsl::IdOrTypenameAsIdNamedType($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->idortypenameasid_ = $$; }

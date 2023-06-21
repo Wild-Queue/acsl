@@ -9,18 +9,19 @@ This grammar contains all the rules found in the frama-c repository
 To build:
 
 ```sh
-mkdir -p src/acsl/
-cd src/acsl/
-bnfc -m --cpp ../../full_bnfc_parser.cf -l -p acsl
-make
-cd .. && cd .. 
+make build-full-bnfc
 ```
 
 To run:
 
 ```sh
-cd src/acsl/
-./Testfull_bnfc_parser
+make run-full-bnfc
+```
+
+To clean:
+
+```sh
+make clean-full-bnfc
 ```
 
 ## Partial bnfc grammar
@@ -32,18 +33,19 @@ This grammar contains a subset of the full grammar files. This grammar is design
 To build:
 
 ```sh
-mkdir -p src/partian_acsl/
-cd src/partian_acsl/
-bnfc -m --cpp ../../partial_bnfc_parser.cf -l -p partian_acsl
-make
-cd .. && cd .. 
+make build-partial-bnfc
 ```
 
 To run:
 
 ```sh
-cd src/partian_acsl/
-./Testpartial_bnfc_parser
+make run-partial-bnfc
+```
+
+To clean:
+
+```sh
+make clean-partial-bnfc
 ```
 
 

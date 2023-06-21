@@ -5947,15 +5947,15 @@ PragmaElement *PragmaElement::clone() const
 
 
 /********************   CodeAnnot    ********************/
-CodeAnnot::CodeAnnot(PragmaOrCodeAnnotation *p1)
+CodeAnnot::CodeAnnot(Code_Annot *p1)
 {
-  pragmaorcodeannotation_ = p1;
+  code_annot_ = p1;
 
 }
 
 CodeAnnot::CodeAnnot(const CodeAnnot & other)
 {
-  pragmaorcodeannotation_ = other.pragmaorcodeannotation_->clone();
+  code_annot_ = other.code_annot_->clone();
 
 }
 
@@ -5968,13 +5968,13 @@ CodeAnnot &CodeAnnot::operator=(const CodeAnnot & other)
 
 void CodeAnnot::swap(CodeAnnot & other)
 {
-  std::swap(pragmaorcodeannotation_, other.pragmaorcodeannotation_);
+  std::swap(code_annot_, other.code_annot_);
 
 }
 
 CodeAnnot::~CodeAnnot()
 {
-  delete(pragmaorcodeannotation_);
+  delete(code_annot_);
 
 }
 
@@ -6037,6 +6037,186 @@ void GhostAnnot::accept(Visitor *v)
 GhostAnnot *GhostAnnot::clone() const
 {
   return new GhostAnnot(*this);
+}
+
+
+
+/********************   CodeAnnotExtContract    ********************/
+CodeAnnotExtContract::CodeAnnotExtContract(ExtIdentifierOpt *p1, Contract *p2)
+{
+  extidentifieropt_ = p1;
+  contract_ = p2;
+
+}
+
+CodeAnnotExtContract::CodeAnnotExtContract(const CodeAnnotExtContract & other)
+{
+  extidentifieropt_ = other.extidentifieropt_->clone();
+  contract_ = other.contract_->clone();
+
+}
+
+CodeAnnotExtContract &CodeAnnotExtContract::operator=(const CodeAnnotExtContract & other)
+{
+  CodeAnnotExtContract tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void CodeAnnotExtContract::swap(CodeAnnotExtContract & other)
+{
+  std::swap(extidentifieropt_, other.extidentifieropt_);
+  std::swap(contract_, other.contract_);
+
+}
+
+CodeAnnotExtContract::~CodeAnnotExtContract()
+{
+  delete(extidentifieropt_);
+  delete(contract_);
+
+}
+
+void CodeAnnotExtContract::accept(Visitor *v)
+{
+  v->visitCodeAnnotExtContract(this);
+}
+
+CodeAnnotExtContract *CodeAnnotExtContract::clone() const
+{
+  return new CodeAnnotExtContract(*this);
+}
+
+
+
+/********************   CodeAnnotPragmaOrCodeAnnotation    ********************/
+CodeAnnotPragmaOrCodeAnnotation::CodeAnnotPragmaOrCodeAnnotation(PragmaOrCodeAnnotation *p1)
+{
+  pragmaorcodeannotation_ = p1;
+
+}
+
+CodeAnnotPragmaOrCodeAnnotation::CodeAnnotPragmaOrCodeAnnotation(const CodeAnnotPragmaOrCodeAnnotation & other)
+{
+  pragmaorcodeannotation_ = other.pragmaorcodeannotation_->clone();
+
+}
+
+CodeAnnotPragmaOrCodeAnnotation &CodeAnnotPragmaOrCodeAnnotation::operator=(const CodeAnnotPragmaOrCodeAnnotation & other)
+{
+  CodeAnnotPragmaOrCodeAnnotation tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void CodeAnnotPragmaOrCodeAnnotation::swap(CodeAnnotPragmaOrCodeAnnotation & other)
+{
+  std::swap(pragmaorcodeannotation_, other.pragmaorcodeannotation_);
+
+}
+
+CodeAnnotPragmaOrCodeAnnotation::~CodeAnnotPragmaOrCodeAnnotation()
+{
+  delete(pragmaorcodeannotation_);
+
+}
+
+void CodeAnnotPragmaOrCodeAnnotation::accept(Visitor *v)
+{
+  v->visitCodeAnnotPragmaOrCodeAnnotation(this);
+}
+
+CodeAnnotPragmaOrCodeAnnotation *CodeAnnotPragmaOrCodeAnnotation::clone() const
+{
+  return new CodeAnnotPragmaOrCodeAnnotation(*this);
+}
+
+
+
+/********************   CodeAnnotContract    ********************/
+CodeAnnotContract::CodeAnnotContract(Contract *p1)
+{
+  contract_ = p1;
+
+}
+
+CodeAnnotContract::CodeAnnotContract(const CodeAnnotContract & other)
+{
+  contract_ = other.contract_->clone();
+
+}
+
+CodeAnnotContract &CodeAnnotContract::operator=(const CodeAnnotContract & other)
+{
+  CodeAnnotContract tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void CodeAnnotContract::swap(CodeAnnotContract & other)
+{
+  std::swap(contract_, other.contract_);
+
+}
+
+CodeAnnotContract::~CodeAnnotContract()
+{
+  delete(contract_);
+
+}
+
+void CodeAnnotContract::accept(Visitor *v)
+{
+  v->visitCodeAnnotContract(this);
+}
+
+CodeAnnotContract *CodeAnnotContract::clone() const
+{
+  return new CodeAnnotContract(*this);
+}
+
+
+
+/********************   CodeAnnotCodeAnnotation    ********************/
+CodeAnnotCodeAnnotation::CodeAnnotCodeAnnotation(CodeAnnotation *p1)
+{
+  codeannotation_ = p1;
+
+}
+
+CodeAnnotCodeAnnotation::CodeAnnotCodeAnnotation(const CodeAnnotCodeAnnotation & other)
+{
+  codeannotation_ = other.codeannotation_->clone();
+
+}
+
+CodeAnnotCodeAnnotation &CodeAnnotCodeAnnotation::operator=(const CodeAnnotCodeAnnotation & other)
+{
+  CodeAnnotCodeAnnotation tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void CodeAnnotCodeAnnotation::swap(CodeAnnotCodeAnnotation & other)
+{
+  std::swap(codeannotation_, other.codeannotation_);
+
+}
+
+CodeAnnotCodeAnnotation::~CodeAnnotCodeAnnotation()
+{
+  delete(codeannotation_);
+
+}
+
+void CodeAnnotCodeAnnotation::accept(Visitor *v)
+{
+  v->visitCodeAnnotCodeAnnotation(this);
+}
+
+CodeAnnotCodeAnnotation *CodeAnnotCodeAnnotation::clone() const
+{
+  return new CodeAnnotCodeAnnotation(*this);
 }
 
 

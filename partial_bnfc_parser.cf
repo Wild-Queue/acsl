@@ -5,6 +5,7 @@ token RBRACE ({"%>"} | '}');
 token CONST ({"const"} | {"__const"} | {"__const__"});
 token RESTRICT ({"__restrict"} | {"restrict"});
 token VOLATILE ({"volatile"} | {"__volatile"} | {"__volatile__"} | {"__volatile"});
+token BLOCKATTRIBUTE ({"__blockattribute__"} | {"__blockattribute"});
 
 AProgram.  Program ::= Globals ;
 
@@ -31,10 +32,6 @@ GlobalsFunctionDef.         Global ::= FunctionDef ;
 
 --FunctionDefSpec.    FunctionDef ::= IsACSLSpec [Wildcard] FunctionDefStart Block ; -- SPEC => IsACSLSpec [Wildcard]
 SimpleFunctionDef.  FunctionDef ::= FunctionDefStart Block ;
-
-
---ABlock.  Block ::= LBRACE [LocalLabel] BlockAttrs [BlockElement] [Annot] RBRACE ;
-ABlock.  Block ::= LBRACE RBRACE ;
 
 
 FunctionDefStartDeclarator.             FunctionDefStart ::= DeclSpecList Declarator ;
@@ -170,3 +167,16 @@ AttributeConst.             Attribute ::= CONST ;
 --AttributeGhost.             Attribute ::= "\\ghost" ;
 --AttributeAttributeAnnot.    Attribute ::= Identifier ; --ATTRIBUTE_ANNOT => Identifier | "\\ghost" 
 separator Attribute "" ;
+
+
+--ABlock.  Block ::= LBRACE [LocalLabel] BlockAttrs [BlockElement] [Annot] RBRACE ;
+ABlock.  Block ::= LBRACE BlockAttrs [BlockElement] RBRACE ;
+
+
+NoBlockAttrs.   BlockAttrs ::= ; --/* empty */ 
+SomeBlockAttrs. BlockAttrs ::= BLOCKATTRIBUTE "(" [Attr] ")" ;
+
+DeclarationElement. BlockElement ::= [Annot] Declaration ;
+StatementElement.   BlockElement ::= [Annot] Statement ;
+--PragmaElement.      BlockElement ::= [Annot] Pragma ;
+separator BlockElement "" ;

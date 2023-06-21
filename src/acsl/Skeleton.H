@@ -39,6 +39,7 @@ public:
   void visitBlockAttrs(BlockAttrs *p);
   void visitBlockElement(BlockElement *p);
   void visitAnnot(Annot *p);
+  void visitCode_Annot(Code_Annot *p);
   void visitLocalLabel(LocalLabel *p);
   void visitLocalLabelName(LocalLabelName *p);
   void visitAnnotatedStmt(AnnotatedStmt *p);
@@ -351,6 +352,10 @@ public:
   void visitPragmaElement(PragmaElement *p);
   void visitCodeAnnot(CodeAnnot *p);
   void visitGhostAnnot(GhostAnnot *p);
+  void visitCodeAnnotExtContract(CodeAnnotExtContract *p);
+  void visitCodeAnnotPragmaOrCodeAnnotation(CodeAnnotPragmaOrCodeAnnotation *p);
+  void visitCodeAnnotContract(CodeAnnotContract *p);
+  void visitCodeAnnotCodeAnnotation(CodeAnnotCodeAnnotation *p);
   void visitLocalLable(LocalLable *p);
   void visitALocalLabelName(ALocalLabelName *p);
   void visitAnnotatedStatement(AnnotatedStatement *p);

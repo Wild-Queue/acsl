@@ -1862,7 +1862,7 @@ void PrintAbsyn::visitCodeAnnot(CodeAnnot *p)
   int oldi = _i_;
   if (oldi > 0) render(ACSL__L_PAREN);
 
-  _i_ = 0; p->pragmaorcodeannotation_->accept(this);
+  _i_ = 0; p->code_annot_->accept(this);
 
   if (oldi > 0) render(ACSL__R_PAREN);
   _i_ = oldi;
@@ -1893,6 +1893,55 @@ void PrintAbsyn::iterListAnnot(ListAnnot::const_iterator i, ListAnnot::const_ite
   { /* cons */
     (*i)->accept(this); iterListAnnot(i+1, j);
   }
+}
+
+void PrintAbsyn::visitCode_Annot(Code_Annot *p) {} //abstract class
+
+void PrintAbsyn::visitCodeAnnotExtContract(CodeAnnotExtContract *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(ACSL__L_PAREN);
+
+  render("Contract");
+  _i_ = 0; p->extidentifieropt_->accept(this);
+  render(':');
+  _i_ = 0; p->contract_->accept(this);
+
+  if (oldi > 0) render(ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitCodeAnnotPragmaOrCodeAnnotation(CodeAnnotPragmaOrCodeAnnotation *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(ACSL__L_PAREN);
+
+  _i_ = 0; p->pragmaorcodeannotation_->accept(this);
+
+  if (oldi > 0) render(ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitCodeAnnotContract(CodeAnnotContract *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(ACSL__L_PAREN);
+
+  _i_ = 0; p->contract_->accept(this);
+
+  if (oldi > 0) render(ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitCodeAnnotCodeAnnotation(CodeAnnotCodeAnnotation *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(ACSL__L_PAREN);
+
+  _i_ = 0; p->codeannotation_->accept(this);
+
+  if (oldi > 0) render(ACSL__R_PAREN);
+  _i_ = oldi;
 }
 
 void PrintAbsyn::visitLocalLabel(LocalLabel *p) {} //abstract class
@@ -16184,7 +16233,7 @@ void ShowAbsyn::visitCodeAnnot(CodeAnnot *p)
   bufAppend("CodeAnnot");
   bufAppend(' ');
   bufAppend('[');
-  if (p->pragmaorcodeannotation_)  p->pragmaorcodeannotation_->accept(this);
+  if (p->code_annot_)  p->code_annot_->accept(this);
   bufAppend(']');
   bufAppend(')');
 }
@@ -16213,6 +16262,52 @@ void ShowAbsyn::visitListAnnot(ListAnnot *listannot)
   }
 }
 
+void ShowAbsyn::visitCode_Annot(Code_Annot *p) {} //abstract class
+
+void ShowAbsyn::visitCodeAnnotExtContract(CodeAnnotExtContract *p)
+{
+  bufAppend('(');
+  bufAppend("CodeAnnotExtContract");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->extidentifieropt_)  p->extidentifieropt_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->contract_)  p->contract_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitCodeAnnotPragmaOrCodeAnnotation(CodeAnnotPragmaOrCodeAnnotation *p)
+{
+  bufAppend('(');
+  bufAppend("CodeAnnotPragmaOrCodeAnnotation");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->pragmaorcodeannotation_)  p->pragmaorcodeannotation_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitCodeAnnotContract(CodeAnnotContract *p)
+{
+  bufAppend('(');
+  bufAppend("CodeAnnotContract");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->contract_)  p->contract_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitCodeAnnotCodeAnnotation(CodeAnnotCodeAnnotation *p)
+{
+  bufAppend('(');
+  bufAppend("CodeAnnotCodeAnnotation");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->codeannotation_)  p->codeannotation_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
 void ShowAbsyn::visitLocalLabel(LocalLabel *p) {} //abstract class
 
 void ShowAbsyn::visitLocalLable(LocalLable *p)

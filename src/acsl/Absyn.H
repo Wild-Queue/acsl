@@ -77,6 +77,7 @@ class Block;
 class BlockAttrs;
 class BlockElement;
 class Annot;
+class Code_Annot;
 class LocalLabel;
 class LocalLabelName;
 class AnnotatedStmt;
@@ -389,6 +390,10 @@ class StatementElement;
 class PragmaElement;
 class CodeAnnot;
 class GhostAnnot;
+class CodeAnnotExtContract;
+class CodeAnnotPragmaOrCodeAnnotation;
+class CodeAnnotContract;
+class CodeAnnotCodeAnnotation;
 class LocalLable;
 class ALocalLabelName;
 class AnnotatedStatement;
@@ -1411,6 +1416,7 @@ public:
   virtual void visitBlockAttrs(BlockAttrs *p) = 0;
   virtual void visitBlockElement(BlockElement *p) = 0;
   virtual void visitAnnot(Annot *p) = 0;
+  virtual void visitCode_Annot(Code_Annot *p) = 0;
   virtual void visitLocalLabel(LocalLabel *p) = 0;
   virtual void visitLocalLabelName(LocalLabelName *p) = 0;
   virtual void visitAnnotatedStmt(AnnotatedStmt *p) = 0;
@@ -1723,6 +1729,10 @@ public:
   virtual void visitPragmaElement(PragmaElement *p) = 0;
   virtual void visitCodeAnnot(CodeAnnot *p) = 0;
   virtual void visitGhostAnnot(GhostAnnot *p) = 0;
+  virtual void visitCodeAnnotExtContract(CodeAnnotExtContract *p) = 0;
+  virtual void visitCodeAnnotPragmaOrCodeAnnotation(CodeAnnotPragmaOrCodeAnnotation *p) = 0;
+  virtual void visitCodeAnnotContract(CodeAnnotContract *p) = 0;
+  virtual void visitCodeAnnotCodeAnnotation(CodeAnnotCodeAnnotation *p) = 0;
   virtual void visitLocalLable(LocalLable *p) = 0;
   virtual void visitALocalLabelName(ALocalLabelName *p) = 0;
   virtual void visitAnnotatedStatement(AnnotatedStatement *p) = 0;
@@ -2951,6 +2961,13 @@ class Annot : public Visitable
 {
 public:
   virtual Annot *clone() const = 0;
+  int line_number, char_number;
+};
+
+class Code_Annot : public Visitable
+{
+public:
+  virtual Code_Annot *clone() const = 0;
   int line_number, char_number;
 };
 
@@ -6107,11 +6124,11 @@ public:
 class CodeAnnot : public Annot
 {
 public:
-  PragmaOrCodeAnnotation *pragmaorcodeannotation_;
+  Code_Annot *code_annot_;
 
   CodeAnnot(const CodeAnnot &);
   CodeAnnot &operator=(const CodeAnnot &);
-  CodeAnnot(PragmaOrCodeAnnotation *p1);
+  CodeAnnot(Code_Annot *p1);
   ~CodeAnnot();
   virtual void accept(Visitor *v);
   virtual CodeAnnot *clone() const;
@@ -6132,6 +6149,63 @@ public:
   virtual void accept(Visitor *v);
   virtual GhostAnnot *clone() const;
   void swap(GhostAnnot &);
+};
+
+class CodeAnnotExtContract : public Code_Annot
+{
+public:
+  ExtIdentifierOpt *extidentifieropt_;
+  Contract *contract_;
+
+  CodeAnnotExtContract(const CodeAnnotExtContract &);
+  CodeAnnotExtContract &operator=(const CodeAnnotExtContract &);
+  CodeAnnotExtContract(ExtIdentifierOpt *p1, Contract *p2);
+  ~CodeAnnotExtContract();
+  virtual void accept(Visitor *v);
+  virtual CodeAnnotExtContract *clone() const;
+  void swap(CodeAnnotExtContract &);
+};
+
+class CodeAnnotPragmaOrCodeAnnotation : public Code_Annot
+{
+public:
+  PragmaOrCodeAnnotation *pragmaorcodeannotation_;
+
+  CodeAnnotPragmaOrCodeAnnotation(const CodeAnnotPragmaOrCodeAnnotation &);
+  CodeAnnotPragmaOrCodeAnnotation &operator=(const CodeAnnotPragmaOrCodeAnnotation &);
+  CodeAnnotPragmaOrCodeAnnotation(PragmaOrCodeAnnotation *p1);
+  ~CodeAnnotPragmaOrCodeAnnotation();
+  virtual void accept(Visitor *v);
+  virtual CodeAnnotPragmaOrCodeAnnotation *clone() const;
+  void swap(CodeAnnotPragmaOrCodeAnnotation &);
+};
+
+class CodeAnnotContract : public Code_Annot
+{
+public:
+  Contract *contract_;
+
+  CodeAnnotContract(const CodeAnnotContract &);
+  CodeAnnotContract &operator=(const CodeAnnotContract &);
+  CodeAnnotContract(Contract *p1);
+  ~CodeAnnotContract();
+  virtual void accept(Visitor *v);
+  virtual CodeAnnotContract *clone() const;
+  void swap(CodeAnnotContract &);
+};
+
+class CodeAnnotCodeAnnotation : public Code_Annot
+{
+public:
+  CodeAnnotation *codeannotation_;
+
+  CodeAnnotCodeAnnotation(const CodeAnnotCodeAnnotation &);
+  CodeAnnotCodeAnnotation &operator=(const CodeAnnotCodeAnnotation &);
+  CodeAnnotCodeAnnotation(CodeAnnotation *p1);
+  ~CodeAnnotCodeAnnotation();
+  virtual void accept(Visitor *v);
+  virtual CodeAnnotCodeAnnotation *clone() const;
+  void swap(CodeAnnotCodeAnnotation &);
 };
 
 class LocalLable : public LocalLabel

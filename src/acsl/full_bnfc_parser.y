@@ -87,6 +87,7 @@ extern yyscan_t acsl_initialize_lexer(FILE * inp);
   acsl::ListBlockElement* listblockelement_;
   acsl::Annot* annot_;
   acsl::ListAnnot* listannot_;
+  acsl::Code_Annot* code_annot_;
   acsl::LocalLabel* locallabel_;
   acsl::ListLocalLabel* listlocallabel_;
   acsl::LocalLabelName* locallabelname_;
@@ -612,6 +613,7 @@ extern int yylex(YYSTYPE *lvalp, YYLTYPE *llocp, yyscan_t scanner);
 %type <listblockelement_> ListBlockElement
 %type <annot_> Annot
 %type <listannot_> ListAnnot
+%type <code_annot_> Code_Annot
 %type <locallabel_> LocalLabel
 %type <listlocallabel_> ListLocalLabel
 %type <locallabelname_> LocalLabelName
@@ -1069,11 +1071,16 @@ BlockElement : ListAnnot Declaration { $$ = new acsl::DeclarationElement($1, $2)
 ListBlockElement : /* empty */ { $$ = new acsl::ListBlockElement(); result->listblockelement_ = $$; }
   | ListBlockElement BlockElement { $1->push_back($2); $$ = $1; result->listblockelement_ = $$; }
 ;
-Annot : PragmaOrCodeAnnotation { $$ = new acsl::CodeAnnot($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->annot_ = $$; }
+Annot : Code_Annot { $$ = new acsl::CodeAnnot($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->annot_ = $$; }
   | _KW_ghost ListBlockElement ListAnnot T_RGHOST { $$ = new acsl::GhostAnnot($2, $3, $4); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->annot_ = $$; }
 ;
 ListAnnot : /* empty */ { $$ = new acsl::ListAnnot(); result->listannot_ = $$; }
   | ListAnnot Annot { $1->push_back($2); $$ = $1; result->listannot_ = $$; }
+;
+Code_Annot : _KW_Contract ExtIdentifierOpt _COLON Contract { $$ = new acsl::CodeAnnotExtContract($2, $4); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->code_annot_ = $$; }
+  | PragmaOrCodeAnnotation { $$ = new acsl::CodeAnnotPragmaOrCodeAnnotation($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->code_annot_ = $$; }
+  | Contract { $$ = new acsl::CodeAnnotContract($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->code_annot_ = $$; }
+  | CodeAnnotation { $$ = new acsl::CodeAnnotCodeAnnotation($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->code_annot_ = $$; }
 ;
 LocalLabel : _SYMB_47 ListLocalLabelName _SEMI { std::reverse($2->begin(),$2->end()) ;$$ = new acsl::LocalLable($2); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->locallabel_ = $$; }
 ;
@@ -4506,6 +4513,50 @@ ListAnnot* psListAnnot(const char *str)
   else
   { /* Success */
     return result.listannot_;
+  }
+}
+
+/* Entrypoint: parse Code_Annot* from file. */
+Code_Annot* pCode_Annot(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.code_annot_;
+  }
+}
+
+/* Entrypoint: parse Code_Annot* from string. */
+Code_Annot* psCode_Annot(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  acsl_delete_buffer(buf, scanner);
+  acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.code_annot_;
   }
 }
 

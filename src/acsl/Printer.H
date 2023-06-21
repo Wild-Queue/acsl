@@ -205,6 +205,11 @@ class PrintAbsyn : public Visitor
   void visitGhostAnnot(GhostAnnot *p);
   void visitListAnnot(ListAnnot *p);
   void iterListAnnot(ListAnnot::const_iterator i, ListAnnot::const_iterator j);
+  void visitCode_Annot(Code_Annot *p); /* abstract class */
+  void visitCodeAnnotExtContract(CodeAnnotExtContract *p);
+  void visitCodeAnnotPragmaOrCodeAnnotation(CodeAnnotPragmaOrCodeAnnotation *p);
+  void visitCodeAnnotContract(CodeAnnotContract *p);
+  void visitCodeAnnotCodeAnnotation(CodeAnnotCodeAnnotation *p);
   void visitLocalLabel(LocalLabel *p); /* abstract class */
   void visitLocalLable(LocalLable *p);
   void visitListLocalLabel(ListLocalLabel *p);
@@ -1684,6 +1689,11 @@ class ShowAbsyn : public Visitor
   void visitGhostAnnot(GhostAnnot *p);
   void visitListAnnot(ListAnnot *p);
   void iterListAnnot(ListAnnot::const_iterator i, ListAnnot::const_iterator j);
+  void visitCode_Annot(Code_Annot *p); /* abstract class */
+  void visitCodeAnnotExtContract(CodeAnnotExtContract *p);
+  void visitCodeAnnotPragmaOrCodeAnnotation(CodeAnnotPragmaOrCodeAnnotation *p);
+  void visitCodeAnnotContract(CodeAnnotContract *p);
+  void visitCodeAnnotCodeAnnotation(CodeAnnotCodeAnnotation *p);
   void visitLocalLabel(LocalLabel *p); /* abstract class */
   void visitLocalLable(LocalLable *p);
   void visitListLocalLabel(ListLocalLabel *p);

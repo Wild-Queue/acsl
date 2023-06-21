@@ -39,6 +39,7 @@ void Skeleton::visitBlock(Block *t) {} //abstract class
 void Skeleton::visitBlockAttrs(BlockAttrs *t) {} //abstract class
 void Skeleton::visitBlockElement(BlockElement *t) {} //abstract class
 void Skeleton::visitAnnot(Annot *t) {} //abstract class
+void Skeleton::visitCode_Annot(Code_Annot *t) {} //abstract class
 void Skeleton::visitLocalLabel(LocalLabel *t) {} //abstract class
 void Skeleton::visitLocalLabelName(LocalLabelName *t) {} //abstract class
 void Skeleton::visitAnnotatedStmt(AnnotatedStmt *t) {} //abstract class
@@ -1332,7 +1333,7 @@ void Skeleton::visitCodeAnnot(CodeAnnot *code_annot)
 {
   /* Code For CodeAnnot Goes Here */
 
-  if (code_annot->pragmaorcodeannotation_) code_annot->pragmaorcodeannotation_->accept(this);
+  if (code_annot->code_annot_) code_annot->code_annot_->accept(this);
 
 }
 
@@ -1343,6 +1344,39 @@ void Skeleton::visitGhostAnnot(GhostAnnot *ghost_annot)
   if (ghost_annot->listblockelement_) ghost_annot->listblockelement_->accept(this);
   if (ghost_annot->listannot_) ghost_annot->listannot_->accept(this);
   visitRGHOST(ghost_annot->rghost_);
+
+}
+
+void Skeleton::visitCodeAnnotExtContract(CodeAnnotExtContract *code_annot_ext_contract)
+{
+  /* Code For CodeAnnotExtContract Goes Here */
+
+  if (code_annot_ext_contract->extidentifieropt_) code_annot_ext_contract->extidentifieropt_->accept(this);
+  if (code_annot_ext_contract->contract_) code_annot_ext_contract->contract_->accept(this);
+
+}
+
+void Skeleton::visitCodeAnnotPragmaOrCodeAnnotation(CodeAnnotPragmaOrCodeAnnotation *code_annot_pragma_or_code_annotation)
+{
+  /* Code For CodeAnnotPragmaOrCodeAnnotation Goes Here */
+
+  if (code_annot_pragma_or_code_annotation->pragmaorcodeannotation_) code_annot_pragma_or_code_annotation->pragmaorcodeannotation_->accept(this);
+
+}
+
+void Skeleton::visitCodeAnnotContract(CodeAnnotContract *code_annot_contract)
+{
+  /* Code For CodeAnnotContract Goes Here */
+
+  if (code_annot_contract->contract_) code_annot_contract->contract_->accept(this);
+
+}
+
+void Skeleton::visitCodeAnnotCodeAnnotation(CodeAnnotCodeAnnotation *code_annot_code_annotation)
+{
+  /* Code For CodeAnnotCodeAnnotation Goes Here */
+
+  if (code_annot_code_annotation->codeannotation_) code_annot_code_annotation->codeannotation_->accept(this);
 
 }
 

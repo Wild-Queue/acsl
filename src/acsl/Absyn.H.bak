@@ -261,12 +261,20 @@ class Wildcard;
 class AProgram;
 class NoGlobals;
 class SimpleGlobals;
+class AGhostGlobals;
 class SemiColonGlobals;
 class GhostGlobalsDeclataion;
 class GhostGlobalsFunctionDef;
 class GhostGlobalsRGhost;
+class GlobalDecl;
 class GlobalsDeclataion;
 class GlobalsFunctionDef;
+class ExternGlobalDeclataion;
+class ExternGlobalPar;
+class AsmGlobal;
+class PragmaGlobal;
+class GlobalOldStyle;
+class GlobalEmptyOldStyle;
 class IdOrTypenameAsIdIdentifier;
 class IdOrTypenameAsIdNamedType;
 class IdTypename;
@@ -1587,12 +1595,20 @@ public:
   virtual void visitAProgram(AProgram *p) = 0;
   virtual void visitNoGlobals(NoGlobals *p) = 0;
   virtual void visitSimpleGlobals(SimpleGlobals *p) = 0;
+  virtual void visitAGhostGlobals(AGhostGlobals *p) = 0;
   virtual void visitSemiColonGlobals(SemiColonGlobals *p) = 0;
   virtual void visitGhostGlobalsDeclataion(GhostGlobalsDeclataion *p) = 0;
   virtual void visitGhostGlobalsFunctionDef(GhostGlobalsFunctionDef *p) = 0;
   virtual void visitGhostGlobalsRGhost(GhostGlobalsRGhost *p) = 0;
+  virtual void visitGlobalDecl(GlobalDecl *p) = 0;
   virtual void visitGlobalsDeclataion(GlobalsDeclataion *p) = 0;
   virtual void visitGlobalsFunctionDef(GlobalsFunctionDef *p) = 0;
+  virtual void visitExternGlobalDeclataion(ExternGlobalDeclataion *p) = 0;
+  virtual void visitExternGlobalPar(ExternGlobalPar *p) = 0;
+  virtual void visitAsmGlobal(AsmGlobal *p) = 0;
+  virtual void visitPragmaGlobal(PragmaGlobal *p) = 0;
+  virtual void visitGlobalOldStyle(GlobalOldStyle *p) = 0;
+  virtual void visitGlobalEmptyOldStyle(GlobalEmptyOldStyle *p) = 0;
   virtual void visitIdOrTypenameAsIdIdentifier(IdOrTypenameAsIdIdentifier *p) = 0;
   virtual void visitIdOrTypenameAsIdNamedType(IdOrTypenameAsIdNamedType *p) = 0;
   virtual void visitIdTypename(IdTypename *p) = 0;
@@ -4249,6 +4265,21 @@ public:
   void swap(SimpleGlobals &);
 };
 
+class AGhostGlobals : public Globals
+{
+public:
+  GhostGlobals *ghostglobals_;
+  Globals *globals_;
+
+  AGhostGlobals(const AGhostGlobals &);
+  AGhostGlobals &operator=(const AGhostGlobals &);
+  AGhostGlobals(GhostGlobals *p1, Globals *p2);
+  ~AGhostGlobals();
+  virtual void accept(Visitor *v);
+  virtual AGhostGlobals *clone() const;
+  void swap(AGhostGlobals &);
+};
+
 class SemiColonGlobals : public Globals
 {
 public:
@@ -4307,6 +4338,20 @@ public:
   void swap(GhostGlobalsRGhost &);
 };
 
+class GlobalDecl : public Global
+{
+public:
+  Decl *decl_;
+
+  GlobalDecl(const GlobalDecl &);
+  GlobalDecl &operator=(const GlobalDecl &);
+  GlobalDecl(Decl *p1);
+  ~GlobalDecl();
+  virtual void accept(Visitor *v);
+  virtual GlobalDecl *clone() const;
+  void swap(GlobalDecl &);
+};
+
 class GlobalsDeclataion : public Global
 {
 public:
@@ -4333,6 +4378,97 @@ public:
   virtual void accept(Visitor *v);
   virtual GlobalsFunctionDef *clone() const;
   void swap(GlobalsFunctionDef &);
+};
+
+class ExternGlobalDeclataion : public Global
+{
+public:
+  StringConstant *stringconstant_;
+  Declaration *declaration_;
+
+  ExternGlobalDeclataion(const ExternGlobalDeclataion &);
+  ExternGlobalDeclataion &operator=(const ExternGlobalDeclataion &);
+  ExternGlobalDeclataion(StringConstant *p1, Declaration *p2);
+  ~ExternGlobalDeclataion();
+  virtual void accept(Visitor *v);
+  virtual ExternGlobalDeclataion *clone() const;
+  void swap(ExternGlobalDeclataion &);
+};
+
+class ExternGlobalPar : public Global
+{
+public:
+  StringConstant *stringconstant_;
+  LBRACE lbrace_;
+  Globals *globals_;
+  RBRACE rbrace_;
+
+  ExternGlobalPar(const ExternGlobalPar &);
+  ExternGlobalPar &operator=(const ExternGlobalPar &);
+  ExternGlobalPar(StringConstant *p1, LBRACE p2, Globals *p3, RBRACE p4);
+  ~ExternGlobalPar();
+  virtual void accept(Visitor *v);
+  virtual ExternGlobalPar *clone() const;
+  void swap(ExternGlobalPar &);
+};
+
+class AsmGlobal : public Global
+{
+public:
+  ASM asm_;
+  StringConstant *stringconstant_;
+
+  AsmGlobal(const AsmGlobal &);
+  AsmGlobal &operator=(const AsmGlobal &);
+  AsmGlobal(ASM p1, StringConstant *p2);
+  ~AsmGlobal();
+  virtual void accept(Visitor *v);
+  virtual AsmGlobal *clone() const;
+  void swap(AsmGlobal &);
+};
+
+class PragmaGlobal : public Global
+{
+public:
+  Pragma *pragma_;
+
+  PragmaGlobal(const PragmaGlobal &);
+  PragmaGlobal &operator=(const PragmaGlobal &);
+  PragmaGlobal(Pragma *p1);
+  ~PragmaGlobal();
+  virtual void accept(Visitor *v);
+  virtual PragmaGlobal *clone() const;
+  void swap(PragmaGlobal &);
+};
+
+class GlobalOldStyle : public Global
+{
+public:
+  Ident ident_;
+  ListIdent *listident_;
+  OldPardefList *oldpardeflist_;
+
+  GlobalOldStyle(const GlobalOldStyle &);
+  GlobalOldStyle &operator=(const GlobalOldStyle &);
+  GlobalOldStyle(Ident p1, ListIdent *p2, OldPardefList *p3);
+  ~GlobalOldStyle();
+  virtual void accept(Visitor *v);
+  virtual GlobalOldStyle *clone() const;
+  void swap(GlobalOldStyle &);
+};
+
+class GlobalEmptyOldStyle : public Global
+{
+public:
+  Ident ident_;
+
+  GlobalEmptyOldStyle(const GlobalEmptyOldStyle &);
+  GlobalEmptyOldStyle &operator=(const GlobalEmptyOldStyle &);
+  GlobalEmptyOldStyle(Ident p1);
+  ~GlobalEmptyOldStyle();
+  virtual void accept(Visitor *v);
+  virtual GlobalEmptyOldStyle *clone() const;
+  void swap(GlobalEmptyOldStyle &);
 };
 
 class IdOrTypenameAsIdIdentifier : public IdOrTypenameAsId

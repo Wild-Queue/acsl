@@ -280,9 +280,14 @@ StatementElement.   BlockElement ::= [Annot] Statement ;
 PragmaElement.      BlockElement ::= [Annot] Pragma ;
 separator BlockElement "" ;
 
-CodeAnnot.  Annot ::= PragmaOrCodeAnnotation ; --CODE_ANNOT => PragmaOrCodeAnnotation
+CodeAnnot.  Annot ::= Code_Annot ; --CODE_ANNOT => CodeAnnot
 GhostAnnot. Annot ::= "ghost" [BlockElement] [Annot] RGHOST ;
 separator Annot "" ;
+
+CodeAnnotExtContract.               Code_Annot ::= "Contract" ExtIdentifierOpt ":" Contract ;
+CodeAnnotPragmaOrCodeAnnotation.    Code_Annot ::= PragmaOrCodeAnnotation ;
+CodeAnnotContract.                  Code_Annot ::= Contract ;
+CodeAnnotCodeAnnotation.            Code_Annot ::= CodeAnnotation ;
 
 LocalLable.    LocalLabel ::= "__label__" [LocalLabelName] ";" ;
 separator LocalLabel "" ;
