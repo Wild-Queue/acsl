@@ -35,7 +35,7 @@ CAPITAL [A-Z]
 SMALL [a-z]
 DIGIT [0-9]
 IDENT [a-zA-Z0-9'_]
-%START CHAR CHARESC CHAREND STRING ESCAPED
+%START CHAR CHARESC CHAREND STRING ESCAPED COMMENT
 
 %%  /* Rules. */
 
@@ -47,17 +47,67 @@ IDENT [a-zA-Z0-9'_]
 <INITIAL>"("      	 return _LPAREN;
 <INITIAL>")"      	 return _RPAREN;
 <INITIAL>","      	 return _COMMA;
+<INITIAL>":"      	 return _COLON;
+<INITIAL>"..."      	 return _ELLIPSIS;
+<INITIAL>"="      	 return _EQ;
+<INITIAL>"?"      	 return _QUESTION;
+<INITIAL>"||"      	 return _DBAR;
+<INITIAL>"&&"      	 return _DAMP;
+<INITIAL>"|"      	 return _BAR;
+<INITIAL>"^"      	 return _CARET;
+<INITIAL>"&"      	 return _AMP;
+<INITIAL>"=="      	 return _DEQ;
+<INITIAL>"!="      	 return _BANGEQ;
+<INITIAL>"<"      	 return _LT;
+<INITIAL>">"      	 return _GT;
+<INITIAL>"<="      	 return _LDARROW;
+<INITIAL>">="      	 return _GTEQ;
+<INITIAL>"<<"      	 return _DLT;
+<INITIAL>">>"      	 return _DGT;
+<INITIAL>"+"      	 return _PLUS;
+<INITIAL>"-"      	 return _MINUS;
+<INITIAL>"/"      	 return _SLASH;
+<INITIAL>"%"      	 return _PERCENT;
+<INITIAL>"!"      	 return _BANG;
+<INITIAL>"~"      	 return _TILDE;
+<INITIAL>"->"      	 return _RARROW;
+<INITIAL>"."      	 return _DOT;
+<INITIAL>"+="      	 return _PLUSEQ;
+<INITIAL>"-="      	 return _MINUSEQ;
+<INITIAL>"*="      	 return _STAREQ;
+<INITIAL>"/="      	 return _SLASHEQ;
+<INITIAL>"%="      	 return _PERCENTEQ;
+<INITIAL>"&="      	 return _AMPEQ;
+<INITIAL>"|="      	 return _BAREQ;
+<INITIAL>"^="      	 return _CARETEQ;
+<INITIAL>"<<="      	 return _DLTEQ;
+<INITIAL>">>="      	 return _DGTEQ;
+<INITIAL>"++"      	 return _DPLUS;
+<INITIAL>"--"      	 return _DMINUS;
+<INITIAL>"break"      	 return _KW_break;
+<INITIAL>"case"      	 return _KW_case;
 <INITIAL>"char"      	 return _KW_char;
+<INITIAL>"continue"      	 return _KW_continue;
+<INITIAL>"default"      	 return _KW_default;
 <INITIAL>"double"      	 return _KW_double;
+<INITIAL>"else"      	 return _KW_else;
 <INITIAL>"float"      	 return _KW_float;
+<INITIAL>"if"      	 return _KW_if;
 <INITIAL>"int"      	 return _KW_int;
 <INITIAL>"long"      	 return _KW_long;
+<INITIAL>"return"      	 return _KW_return;
 <INITIAL>"short"      	 return _KW_short;
 <INITIAL>"struct"      	 return _KW_struct;
+<INITIAL>"switch"      	 return _KW_switch;
 <INITIAL>"unsigned"      	 return _KW_unsigned;
 <INITIAL>"void"      	 return _KW_void;
+<INITIAL>"while"      	 return _KW_while;
 
-
+<INITIAL>"//"[^\n]* /* skip */; /* BNFC: comment "//" */
+<INITIAL>"/*" BEGIN COMMENT;
+<COMMENT>"*/" BEGIN INITIAL;
+<COMMENT>.    /* skip */;
+<COMMENT>[\n] /* skip */;
 
 <INITIAL>\_\_signed\_\_|signed|\_\_signed    	 yylval->_string = strdup(yytext); return T_SIGNED;
 <INITIAL>\<\%|\{    	 yylval->_string = strdup(yytext); return T_LBRACE;
@@ -65,6 +115,20 @@ IDENT [a-zA-Z0-9'_]
 <INITIAL>const|\_\_const|\_\_const\_\_    	 yylval->_string = strdup(yytext); return T_CONST;
 <INITIAL>\_\_restrict|restrict    	 yylval->_string = strdup(yytext); return T_RESTRICT;
 <INITIAL>volatile|\_\_volatile|\_\_volatile\_\_|\_\_volatile    	 yylval->_string = strdup(yytext); return T_VOLATILE;
+<INITIAL>\_\_blockattribute\_\_|\_\_blockattribute    	 yylval->_string = strdup(yytext); return T_BLOCKATTRIBUTE;
+<INITIAL>\<\:|\[    	 yylval->_string = strdup(yytext); return T_LBRACKET;
+<INITIAL>\:\>|\]    	 yylval->_string = strdup(yytext); return T_RBRACKET;
+<INITIAL>"'" 	BEGIN CHAR;
+<CHAR>\\      	 BEGIN CHARESC;
+<CHAR>[^']      	 BEGIN CHAREND; yylval->_char = yytext[0]; return _CHAR_;
+<CHARESC>f      	 BEGIN CHAREND; yylval->_char = '\f';     return _CHAR_;
+<CHARESC>n      	 BEGIN CHAREND; yylval->_char = '\n';     return _CHAR_;
+<CHARESC>r      	 BEGIN CHAREND; yylval->_char = '\r';     return _CHAR_;
+<CHARESC>t      	 BEGIN CHAREND; yylval->_char = '\t';     return _CHAR_;
+<CHARESC>.      	 BEGIN CHAREND; yylval->_char = yytext[0]; return _CHAR_;
+<CHAREND>"'"      	 BEGIN INITIAL;
+<INITIAL>{DIGIT}+"."{DIGIT}+("e"(\-)?{DIGIT}+)?      	 yylval->_double = atof(yytext); return _DOUBLE_;
+<INITIAL>{DIGIT}+      	 yylval->_int = atoi(yytext); return _INTEGER_;
 <INITIAL>{LETTER}{IDENT}*      	 yylval->_string = strdup(yytext); return _IDENT_;
 <INITIAL>[ \t\r\n\f]      	 /* ignore white space. */;
 <INITIAL>.      	 return _ERROR_;

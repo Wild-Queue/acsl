@@ -222,20 +222,6 @@ void PrintAbsyn::visitSimpleFunctionDef(SimpleFunctionDef *p)
   _i_ = oldi;
 }
 
-void PrintAbsyn::visitBlock(Block *p) {} //abstract class
-
-void PrintAbsyn::visitABlock(ABlock *p)
-{
-  int oldi = _i_;
-  if (oldi > 0) render(PARTIAL_ACSL__L_PAREN);
-
-  visitLBRACE(p->lbrace_);
-  visitRBRACE(p->rbrace_);
-
-  if (oldi > 0) render(PARTIAL_ACSL__R_PAREN);
-  _i_ = oldi;
-}
-
 void PrintAbsyn::visitFunctionDefStart(FunctionDefStart *p) {} //abstract class
 
 void PrintAbsyn::visitFunctionDefStartDeclarator(FunctionDefStartDeclarator *p)
@@ -883,6 +869,1473 @@ void PrintAbsyn::iterListAttribute(ListAttribute::const_iterator i, ListAttribut
   }
 }
 
+void PrintAbsyn::visitBlock(Block *p) {} //abstract class
+
+void PrintAbsyn::visitABlock(ABlock *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_ACSL__L_PAREN);
+
+  visitLBRACE(p->lbrace_);
+  _i_ = 0; p->blockattrs_->accept(this);
+  _i_ = 0; visitListBlockElement(p->listblockelement_);
+  visitRBRACE(p->rbrace_);
+
+  if (oldi > 0) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitBlockAttrs(BlockAttrs *p) {} //abstract class
+
+void PrintAbsyn::visitNoBlockAttrs(NoBlockAttrs *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_ACSL__L_PAREN);
+
+
+  if (oldi > 0) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitSomeBlockAttrs(SomeBlockAttrs *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_ACSL__L_PAREN);
+
+  visitBLOCKATTRIBUTE(p->blockattribute_);
+  render('(');
+  _i_ = 0; visitListAttr(p->listattr_);
+  render(')');
+
+  if (oldi > 0) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitBlockElement(BlockElement *p) {} //abstract class
+
+void PrintAbsyn::visitDeclarationElement(DeclarationElement *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 0; p->declaration_->accept(this);
+
+  if (oldi > 0) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitStatementElement(StatementElement *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 0; p->statement_->accept(this);
+
+  if (oldi > 0) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitListBlockElement(ListBlockElement *listblockelement)
+{
+  iterListBlockElement(listblockelement->begin(), listblockelement->end());
+}
+
+void PrintAbsyn::iterListBlockElement(ListBlockElement::const_iterator i, ListBlockElement::const_iterator j)
+{
+  if (i == j) return;
+  { /* cons */
+    (*i)->accept(this); iterListBlockElement(i+1, j);
+  }
+}
+
+void PrintAbsyn::visitStatement(Statement *p) {} //abstract class
+
+void PrintAbsyn::visitSemicolonStatement(SemicolonStatement *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_ACSL__L_PAREN);
+
+  render(';');
+
+  if (oldi > 0) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitExprsStatement(ExprsStatement *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 0; visitListExpression(p->listexpression_);
+  render(';');
+
+  if (oldi > 0) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitBlockStatement(BlockStatement *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 0; p->block_->accept(this);
+
+  if (oldi > 0) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitIfStatement(IfStatement *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_ACSL__L_PAREN);
+
+  render("if");
+  render('(');
+  _i_ = 0; visitListExpression(p->listexpression_);
+  render(')');
+  _i_ = 0; p->annotatedstmt_->accept(this);
+  _i_ = 0; p->elsepart_->accept(this);
+
+  if (oldi > 0) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitSwitchStatement(SwitchStatement *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_ACSL__L_PAREN);
+
+  render("switch");
+  render('(');
+  _i_ = 0; visitListExpression(p->listexpression_);
+  render(')');
+  _i_ = 0; p->annotatedstmt_->accept(this);
+
+  if (oldi > 0) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitWhileStatement(WhileStatement *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_ACSL__L_PAREN);
+
+  render("while");
+  render('(');
+  _i_ = 0; visitListExpression(p->listexpression_);
+  render(')');
+  _i_ = 0; p->annotatedstmt_->accept(this);
+
+  if (oldi > 0) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitCaseStatement(CaseStatement *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_ACSL__L_PAREN);
+
+  render("case");
+  _i_ = 0; p->expression_->accept(this);
+  render(':');
+  _i_ = 0; p->annotatedstmt_->accept(this);
+
+  if (oldi > 0) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitCaseSliceStatement(CaseSliceStatement *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_ACSL__L_PAREN);
+
+  render("case");
+  _i_ = 0; p->expression_1->accept(this);
+  render("...");
+  _i_ = 0; p->expression_2->accept(this);
+  render(':');
+  _i_ = 0; p->annotatedstmt_->accept(this);
+
+  if (oldi > 0) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitDefaultStatement(DefaultStatement *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_ACSL__L_PAREN);
+
+  render("default");
+  render(':');
+  _i_ = 0; p->annotatedstmt_->accept(this);
+
+  if (oldi > 0) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitEmptyReturnStatement(EmptyReturnStatement *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_ACSL__L_PAREN);
+
+  render("return");
+  render(';');
+
+  if (oldi > 0) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitBreakStatement(BreakStatement *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_ACSL__L_PAREN);
+
+  render("break");
+  render(';');
+
+  if (oldi > 0) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitContinueStatement(ContinueStatement *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_ACSL__L_PAREN);
+
+  render("continue");
+  render(';');
+
+  if (oldi > 0) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitAttr(Attr *p) {} //abstract class
+
+void PrintAbsyn::visitAnAttr(AnAttr *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 1; p->attr_1->accept(this);
+  render('=');
+  _i_ = 1; p->attr_2->accept(this);
+
+  if (oldi > 0) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitTernaryCond(TernaryCond *p)
+{
+  int oldi = _i_;
+  if (oldi > 1) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 2; p->attr_1->accept(this);
+  render('?');
+  _i_ = 1; p->attr_2->accept(this);
+  render(':');
+  _i_ = 1; p->attr_3->accept(this);
+
+  if (oldi > 1) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitOr(Or *p)
+{
+  int oldi = _i_;
+  if (oldi > 2) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 2; p->attr_1->accept(this);
+  render("||");
+  _i_ = 3; p->attr_2->accept(this);
+
+  if (oldi > 2) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitAnd(And *p)
+{
+  int oldi = _i_;
+  if (oldi > 3) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 3; p->attr_1->accept(this);
+  render("&&");
+  _i_ = 4; p->attr_2->accept(this);
+
+  if (oldi > 3) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitBitOr(BitOr *p)
+{
+  int oldi = _i_;
+  if (oldi > 4) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 4; p->attr_1->accept(this);
+  render('|');
+  _i_ = 5; p->attr_2->accept(this);
+
+  if (oldi > 4) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitXor(Xor *p)
+{
+  int oldi = _i_;
+  if (oldi > 5) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 5; p->attr_1->accept(this);
+  render('^');
+  _i_ = 6; p->attr_2->accept(this);
+
+  if (oldi > 5) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitBitAnd(BitAnd *p)
+{
+  int oldi = _i_;
+  if (oldi > 6) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 6; p->attr_1->accept(this);
+  render('&');
+  _i_ = 7; p->attr_2->accept(this);
+
+  if (oldi > 6) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitEqualEqual(EqualEqual *p)
+{
+  int oldi = _i_;
+  if (oldi > 7) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 7; p->attr_1->accept(this);
+  render("==");
+  _i_ = 8; p->attr_2->accept(this);
+
+  if (oldi > 7) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitNotEqual(NotEqual *p)
+{
+  int oldi = _i_;
+  if (oldi > 7) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 7; p->attr_1->accept(this);
+  render("!=");
+  _i_ = 8; p->attr_2->accept(this);
+
+  if (oldi > 7) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitLess(Less *p)
+{
+  int oldi = _i_;
+  if (oldi > 8) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 8; p->attr_1->accept(this);
+  render('<');
+  _i_ = 9; p->attr_2->accept(this);
+
+  if (oldi > 8) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitGreater(Greater *p)
+{
+  int oldi = _i_;
+  if (oldi > 8) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 8; p->attr_1->accept(this);
+  render('>');
+  _i_ = 9; p->attr_2->accept(this);
+
+  if (oldi > 8) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitLessEqual(LessEqual *p)
+{
+  int oldi = _i_;
+  if (oldi > 8) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 8; p->attr_1->accept(this);
+  render("<=");
+  _i_ = 9; p->attr_2->accept(this);
+
+  if (oldi > 8) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitGreaterEqual(GreaterEqual *p)
+{
+  int oldi = _i_;
+  if (oldi > 8) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 8; p->attr_1->accept(this);
+  render(">=");
+  _i_ = 9; p->attr_2->accept(this);
+
+  if (oldi > 8) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitLeftShiftOp(LeftShiftOp *p)
+{
+  int oldi = _i_;
+  if (oldi > 9) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 9; p->attr_1->accept(this);
+  render("<<");
+  _i_ = 10; p->attr_2->accept(this);
+
+  if (oldi > 9) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitRightShiftOp(RightShiftOp *p)
+{
+  int oldi = _i_;
+  if (oldi > 9) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 9; p->attr_1->accept(this);
+  render(">>");
+  _i_ = 10; p->attr_2->accept(this);
+
+  if (oldi > 9) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitAddOp(AddOp *p)
+{
+  int oldi = _i_;
+  if (oldi > 10) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 10; p->attr_1->accept(this);
+  render('+');
+  _i_ = 11; p->attr_2->accept(this);
+
+  if (oldi > 10) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitSubOp(SubOp *p)
+{
+  int oldi = _i_;
+  if (oldi > 10) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 10; p->attr_1->accept(this);
+  render('-');
+  _i_ = 11; p->attr_2->accept(this);
+
+  if (oldi > 10) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitMultOp(MultOp *p)
+{
+  int oldi = _i_;
+  if (oldi > 11) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 11; p->attr_1->accept(this);
+  render('*');
+  _i_ = 12; p->attr_2->accept(this);
+
+  if (oldi > 11) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitDivOp(DivOp *p)
+{
+  int oldi = _i_;
+  if (oldi > 11) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 11; p->attr_1->accept(this);
+  render('/');
+  _i_ = 12; p->attr_2->accept(this);
+
+  if (oldi > 11) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitModOp(ModOp *p)
+{
+  int oldi = _i_;
+  if (oldi > 11) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 11; p->attr_1->accept(this);
+  render('%');
+  _i_ = 12; p->attr_2->accept(this);
+
+  if (oldi > 11) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitPlusUnaryAttr(PlusUnaryAttr *p)
+{
+  int oldi = _i_;
+  if (oldi > 12) render(PARTIAL_ACSL__L_PAREN);
+
+  render('+');
+  _i_ = 12; p->attr_->accept(this);
+
+  if (oldi > 12) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitMinusUnaryAttr(MinusUnaryAttr *p)
+{
+  int oldi = _i_;
+  if (oldi > 12) render(PARTIAL_ACSL__L_PAREN);
+
+  render('-');
+  _i_ = 12; p->attr_->accept(this);
+
+  if (oldi > 12) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitMultUnaryAttr(MultUnaryAttr *p)
+{
+  int oldi = _i_;
+  if (oldi > 12) render(PARTIAL_ACSL__L_PAREN);
+
+  render('*');
+  _i_ = 12; p->attr_->accept(this);
+
+  if (oldi > 12) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitAmpUnaryAttr(AmpUnaryAttr *p)
+{
+  int oldi = _i_;
+  if (oldi > 12) render(PARTIAL_ACSL__L_PAREN);
+
+  render('&');
+  _i_ = 12; p->attr_->accept(this);
+
+  if (oldi > 12) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitNotUnaryAttr(NotUnaryAttr *p)
+{
+  int oldi = _i_;
+  if (oldi > 12) render(PARTIAL_ACSL__L_PAREN);
+
+  render('!');
+  _i_ = 12; p->attr_->accept(this);
+
+  if (oldi > 12) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitTildeUnaryAttr(TildeUnaryAttr *p)
+{
+  int oldi = _i_;
+  if (oldi > 12) render(PARTIAL_ACSL__L_PAREN);
+
+  render('~');
+  _i_ = 12; p->attr_->accept(this);
+
+  if (oldi > 12) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitFuncationCall(FuncationCall *p)
+{
+  int oldi = _i_;
+  if (oldi > 13) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 0; p->idortypenameasid_->accept(this);
+  render('(');
+  _i_ = 0; visitListAttr(p->listattr_);
+  render(')');
+
+  if (oldi > 13) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitProcedureCall(ProcedureCall *p)
+{
+  int oldi = _i_;
+  if (oldi > 13) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 0; p->idortypenameasid_->accept(this);
+  render('(');
+  render(')');
+
+  if (oldi > 13) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitArrowAttr(ArrowAttr *p)
+{
+  int oldi = _i_;
+  if (oldi > 13) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 13; p->attr_->accept(this);
+  render("->");
+  _i_ = 0; p->idortypename_->accept(this);
+
+  if (oldi > 13) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitDotAttr(DotAttr *p)
+{
+  int oldi = _i_;
+  if (oldi > 13) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 13; p->attr_->accept(this);
+  render('.');
+  _i_ = 0; p->idortypename_->accept(this);
+
+  if (oldi > 13) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitArrayAttr(ArrayAttr *p)
+{
+  int oldi = _i_;
+  if (oldi > 13) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 13; p->attr_1->accept(this);
+  visitLBRACKET(p->lbracket_);
+  _i_ = 0; p->attr_2->accept(this);
+  visitRBRACKET(p->rbracket_);
+
+  if (oldi > 13) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitBasicAttr(BasicAttr *p)
+{
+  int oldi = _i_;
+  if (oldi > 14) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 0; p->basicattribute_->accept(this);
+
+  if (oldi > 14) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitListAttr(ListAttr *listattr)
+{
+  iterListAttr(listattr->begin(), listattr->end());
+}
+
+void PrintAbsyn::iterListAttr(ListAttr::const_iterator i, ListAttr::const_iterator j)
+{
+  if (i == j) return;
+  if (i == j-1)
+  { /* last */
+    (*i)->accept(this);
+  }
+  else
+  { /* cons */
+    (*i)->accept(this); render(','); iterListAttr(i+1, j);
+  }
+}
+
+void PrintAbsyn::visitBasicAttribute(BasicAttribute *p) {} //abstract class
+
+void PrintAbsyn::visitBasicAttrConsInt(BasicAttrConsInt *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_ACSL__L_PAREN);
+
+  visitInteger(p->integer_);
+
+  if (oldi > 0) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitBasicAttrConsFloat(BasicAttrConsFloat *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_ACSL__L_PAREN);
+
+  visitDouble(p->double_);
+
+  if (oldi > 0) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitListBasicAttribute(ListBasicAttribute *listbasicattribute)
+{
+  iterListBasicAttribute(listbasicattribute->begin(), listbasicattribute->end());
+}
+
+void PrintAbsyn::iterListBasicAttribute(ListBasicAttribute::const_iterator i, ListBasicAttribute::const_iterator j)
+{
+  if (i == j) return;
+  if (i == j-1)
+  { /* last */
+    (*i)->accept(this);
+  }
+  else
+  { /* cons */
+    (*i)->accept(this); iterListBasicAttribute(i+1, j);
+  }
+}
+
+void PrintAbsyn::visitAnnotatedStmt(AnnotatedStmt *p) {} //abstract class
+
+void PrintAbsyn::visitAnnotatedStatement(AnnotatedStatement *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 0; p->statement_->accept(this);
+
+  if (oldi > 0) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitElsePart(ElsePart *p) {} //abstract class
+
+void PrintAbsyn::visitNoElsePart(NoElsePart *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_ACSL__L_PAREN);
+
+
+  if (oldi > 0) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitSimpleElsePart(SimpleElsePart *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_ACSL__L_PAREN);
+
+  render("else");
+  _i_ = 0; p->annotatedstmt_->accept(this);
+
+  if (oldi > 0) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitOptExpression(OptExpression *p) {} //abstract class
+
+void PrintAbsyn::visitNoExpression(NoExpression *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_ACSL__L_PAREN);
+
+
+  if (oldi > 0) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitSomeExpression(SomeExpression *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 0; visitListExpression(p->listexpression_);
+
+  if (oldi > 0) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitExpression(Expression *p) {} //abstract class
+
+void PrintAbsyn::visitAssignmentExpr(AssignmentExpr *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 0; p->assignexpr_->accept(this);
+
+  if (oldi > 0) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitListExpression(ListExpression *listexpression)
+{
+  iterListExpression(listexpression->begin(), listexpression->end());
+}
+
+void PrintAbsyn::iterListExpression(ListExpression::const_iterator i, ListExpression::const_iterator j)
+{
+  if (i == j) return;
+  if (i == j-1)
+  { /* last */
+    (*i)->accept(this);
+  }
+  else
+  { /* cons */
+    (*i)->accept(this); render(','); iterListExpression(i+1, j);
+  }
+}
+
+void PrintAbsyn::visitAssignExpr(AssignExpr *p) {} //abstract class
+
+void PrintAbsyn::visitEqAssignExpr(EqAssignExpr *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 12; p->assignexpr_1->accept(this);
+  render('=');
+  _i_ = 0; p->assignexpr_2->accept(this);
+
+  if (oldi > 0) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitPlusEqAssignExpr(PlusEqAssignExpr *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 12; p->assignexpr_1->accept(this);
+  render("+=");
+  _i_ = 0; p->assignexpr_2->accept(this);
+
+  if (oldi > 0) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitMinusEqAssignExpr(MinusEqAssignExpr *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 12; p->assignexpr_1->accept(this);
+  render("-=");
+  _i_ = 0; p->assignexpr_2->accept(this);
+
+  if (oldi > 0) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitMultEqAssignExpr(MultEqAssignExpr *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 12; p->assignexpr_1->accept(this);
+  render("*=");
+  _i_ = 0; p->assignexpr_2->accept(this);
+
+  if (oldi > 0) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitDivEqAssignExpr(DivEqAssignExpr *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 12; p->assignexpr_1->accept(this);
+  render("/=");
+  _i_ = 0; p->assignexpr_2->accept(this);
+
+  if (oldi > 0) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitModEqAssignExpr(ModEqAssignExpr *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 12; p->assignexpr_1->accept(this);
+  render("%=");
+  _i_ = 0; p->assignexpr_2->accept(this);
+
+  if (oldi > 0) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitAndEqAssignExpr(AndEqAssignExpr *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 12; p->assignexpr_1->accept(this);
+  render("&=");
+  _i_ = 0; p->assignexpr_2->accept(this);
+
+  if (oldi > 0) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitOrEqAssignExpr(OrEqAssignExpr *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 12; p->assignexpr_1->accept(this);
+  render("|=");
+  _i_ = 0; p->assignexpr_2->accept(this);
+
+  if (oldi > 0) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitXorEqAssignExpr(XorEqAssignExpr *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 12; p->assignexpr_1->accept(this);
+  render("^=");
+  _i_ = 0; p->assignexpr_2->accept(this);
+
+  if (oldi > 0) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitLeftShiftEqAssignExpr(LeftShiftEqAssignExpr *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 12; p->assignexpr_1->accept(this);
+  render("<<=");
+  _i_ = 0; p->assignexpr_2->accept(this);
+
+  if (oldi > 0) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitRightShiftEqAssignExpr(RightShiftEqAssignExpr *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 12; p->assignexpr_1->accept(this);
+  render(">>=");
+  _i_ = 0; p->assignexpr_2->accept(this);
+
+  if (oldi > 0) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitTernaryCondExpr(TernaryCondExpr *p)
+{
+  int oldi = _i_;
+  if (oldi > 1) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 2; p->assignexpr_1->accept(this);
+  render('?');
+  _i_ = 0; p->optexpression_->accept(this);
+  render(':');
+  _i_ = 1; p->assignexpr_2->accept(this);
+
+  if (oldi > 1) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitOrExpr(OrExpr *p)
+{
+  int oldi = _i_;
+  if (oldi > 2) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 2; p->assignexpr_1->accept(this);
+  render("||");
+  _i_ = 3; p->assignexpr_2->accept(this);
+
+  if (oldi > 2) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitAndExpr(AndExpr *p)
+{
+  int oldi = _i_;
+  if (oldi > 3) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 3; p->assignexpr_1->accept(this);
+  render("&&");
+  _i_ = 4; p->assignexpr_2->accept(this);
+
+  if (oldi > 3) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitBitOrExpr(BitOrExpr *p)
+{
+  int oldi = _i_;
+  if (oldi > 4) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 4; p->assignexpr_1->accept(this);
+  render('|');
+  _i_ = 5; p->assignexpr_2->accept(this);
+
+  if (oldi > 4) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitBitXorExpr(BitXorExpr *p)
+{
+  int oldi = _i_;
+  if (oldi > 5) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 5; p->assignexpr_1->accept(this);
+  render('^');
+  _i_ = 6; p->assignexpr_2->accept(this);
+
+  if (oldi > 5) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitBitAndExpr(BitAndExpr *p)
+{
+  int oldi = _i_;
+  if (oldi > 6) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 6; p->assignexpr_1->accept(this);
+  render('&');
+  _i_ = 7; p->assignexpr_2->accept(this);
+
+  if (oldi > 6) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitEqExpr(EqExpr *p)
+{
+  int oldi = _i_;
+  if (oldi > 7) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 7; p->assignexpr_1->accept(this);
+  render("==");
+  _i_ = 8; p->assignexpr_2->accept(this);
+
+  if (oldi > 7) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitNotEqExpr(NotEqExpr *p)
+{
+  int oldi = _i_;
+  if (oldi > 7) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 7; p->assignexpr_1->accept(this);
+  render("!=");
+  _i_ = 8; p->assignexpr_2->accept(this);
+
+  if (oldi > 7) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitLessExpr(LessExpr *p)
+{
+  int oldi = _i_;
+  if (oldi > 8) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 8; p->assignexpr_1->accept(this);
+  render('<');
+  _i_ = 9; p->assignexpr_2->accept(this);
+
+  if (oldi > 8) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitGreaterExpr(GreaterExpr *p)
+{
+  int oldi = _i_;
+  if (oldi > 8) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 8; p->assignexpr_1->accept(this);
+  render('>');
+  _i_ = 9; p->assignexpr_2->accept(this);
+
+  if (oldi > 8) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitLessEqualExpr(LessEqualExpr *p)
+{
+  int oldi = _i_;
+  if (oldi > 8) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 8; p->assignexpr_1->accept(this);
+  render("<=");
+  _i_ = 9; p->assignexpr_2->accept(this);
+
+  if (oldi > 8) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitGreaterEqualExpr(GreaterEqualExpr *p)
+{
+  int oldi = _i_;
+  if (oldi > 8) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 8; p->assignexpr_1->accept(this);
+  render(">=");
+  _i_ = 9; p->assignexpr_2->accept(this);
+
+  if (oldi > 8) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitLeftShiftExpr(LeftShiftExpr *p)
+{
+  int oldi = _i_;
+  if (oldi > 9) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 9; p->assignexpr_1->accept(this);
+  render("<<");
+  _i_ = 10; p->assignexpr_2->accept(this);
+
+  if (oldi > 9) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitRightShiftExpr(RightShiftExpr *p)
+{
+  int oldi = _i_;
+  if (oldi > 9) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 9; p->assignexpr_1->accept(this);
+  render(">>");
+  _i_ = 10; p->assignexpr_2->accept(this);
+
+  if (oldi > 9) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitPlusExpr(PlusExpr *p)
+{
+  int oldi = _i_;
+  if (oldi > 10) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 10; p->assignexpr_1->accept(this);
+  render('+');
+  _i_ = 11; p->assignexpr_2->accept(this);
+
+  if (oldi > 10) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitMinusExpr(MinusExpr *p)
+{
+  int oldi = _i_;
+  if (oldi > 10) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 10; p->assignexpr_1->accept(this);
+  render('-');
+  _i_ = 11; p->assignexpr_2->accept(this);
+
+  if (oldi > 10) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitMulsExpr(MulsExpr *p)
+{
+  int oldi = _i_;
+  if (oldi > 11) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 11; p->assignexpr_1->accept(this);
+  render('*');
+  _i_ = 12; p->assignexpr_2->accept(this);
+
+  if (oldi > 11) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitDivExpr(DivExpr *p)
+{
+  int oldi = _i_;
+  if (oldi > 11) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 11; p->assignexpr_1->accept(this);
+  render('/');
+  _i_ = 12; p->assignexpr_2->accept(this);
+
+  if (oldi > 11) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitModExpr(ModExpr *p)
+{
+  int oldi = _i_;
+  if (oldi > 11) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 11; p->assignexpr_1->accept(this);
+  render('%');
+  _i_ = 12; p->assignexpr_2->accept(this);
+
+  if (oldi > 11) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitCastExpr(CastExpr *p)
+{
+  int oldi = _i_;
+  if (oldi > 12) render(PARTIAL_ACSL__L_PAREN);
+
+  render('(');
+  _i_ = 0; p->typename_->accept(this);
+  render(')');
+  _i_ = 12; p->assignexpr_->accept(this);
+
+  if (oldi > 12) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitUnaryExprPlusPlus(UnaryExprPlusPlus *p)
+{
+  int oldi = _i_;
+  if (oldi > 13) render(PARTIAL_ACSL__L_PAREN);
+
+  render("++");
+  _i_ = 13; p->assignexpr_->accept(this);
+
+  if (oldi > 13) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitUnaryExprMinusMinus(UnaryExprMinusMinus *p)
+{
+  int oldi = _i_;
+  if (oldi > 13) render(PARTIAL_ACSL__L_PAREN);
+
+  render("--");
+  _i_ = 13; p->assignexpr_->accept(this);
+
+  if (oldi > 13) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitUnaryExprPlus(UnaryExprPlus *p)
+{
+  int oldi = _i_;
+  if (oldi > 13) render(PARTIAL_ACSL__L_PAREN);
+
+  render('+');
+  _i_ = 12; p->assignexpr_->accept(this);
+
+  if (oldi > 13) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitUnaryExprMinus(UnaryExprMinus *p)
+{
+  int oldi = _i_;
+  if (oldi > 13) render(PARTIAL_ACSL__L_PAREN);
+
+  render('-');
+  _i_ = 12; p->assignexpr_->accept(this);
+
+  if (oldi > 13) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitUnaryExprMult(UnaryExprMult *p)
+{
+  int oldi = _i_;
+  if (oldi > 13) render(PARTIAL_ACSL__L_PAREN);
+
+  render('*');
+  _i_ = 12; p->assignexpr_->accept(this);
+
+  if (oldi > 13) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitUnaryExprAmp(UnaryExprAmp *p)
+{
+  int oldi = _i_;
+  if (oldi > 13) render(PARTIAL_ACSL__L_PAREN);
+
+  render('&');
+  _i_ = 12; p->assignexpr_->accept(this);
+
+  if (oldi > 13) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitUnaryExprNot(UnaryExprNot *p)
+{
+  int oldi = _i_;
+  if (oldi > 13) render(PARTIAL_ACSL__L_PAREN);
+
+  render('!');
+  _i_ = 12; p->assignexpr_->accept(this);
+
+  if (oldi > 13) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitUnaryExprTilde(UnaryExprTilde *p)
+{
+  int oldi = _i_;
+  if (oldi > 13) render(PARTIAL_ACSL__L_PAREN);
+
+  render('~');
+  _i_ = 12; p->assignexpr_->accept(this);
+
+  if (oldi > 13) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitUnaryExprAddress(UnaryExprAddress *p)
+{
+  int oldi = _i_;
+  if (oldi > 13) render(PARTIAL_ACSL__L_PAREN);
+
+  render("&&");
+  _i_ = 0; p->idortypenameasid_->accept(this);
+
+  if (oldi > 13) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitDotPostfixExpression(DotPostfixExpression *p)
+{
+  int oldi = _i_;
+  if (oldi > 14) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 14; p->assignexpr_->accept(this);
+  render('.');
+  _i_ = 0; p->idortypename_->accept(this);
+
+  if (oldi > 14) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitArrowPostfixExpression(ArrowPostfixExpression *p)
+{
+  int oldi = _i_;
+  if (oldi > 14) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 14; p->assignexpr_->accept(this);
+  render("->");
+  _i_ = 0; p->idortypename_->accept(this);
+
+  if (oldi > 14) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitPlusPlusPostfixExpression(PlusPlusPostfixExpression *p)
+{
+  int oldi = _i_;
+  if (oldi > 14) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 14; p->assignexpr_->accept(this);
+  render("++");
+
+  if (oldi > 14) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitMinusMinusPostfixExpression(MinusMinusPostfixExpression *p)
+{
+  int oldi = _i_;
+  if (oldi > 14) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 14; p->assignexpr_->accept(this);
+  render("--");
+
+  if (oldi > 14) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitIdentifierPrimaryExpression(IdentifierPrimaryExpression *p)
+{
+  int oldi = _i_;
+  if (oldi > 15) render(PARTIAL_ACSL__L_PAREN);
+
+  visitIdent(p->ident_);
+
+  if (oldi > 15) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitConstantPrimaryExpressin(ConstantPrimaryExpressin *p)
+{
+  int oldi = _i_;
+  if (oldi > 15) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 0; p->constant_->accept(this);
+
+  if (oldi > 15) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitCommaExpressionPrimaryExpressin(CommaExpressionPrimaryExpressin *p)
+{
+  int oldi = _i_;
+  if (oldi > 15) render(PARTIAL_ACSL__L_PAREN);
+
+  render('(');
+  _i_ = 0; visitListExpression(p->listexpression_);
+  render(')');
+
+  if (oldi > 15) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitBlockPrimaryExpressin(BlockPrimaryExpressin *p)
+{
+  int oldi = _i_;
+  if (oldi > 15) render(PARTIAL_ACSL__L_PAREN);
+
+  render('(');
+  _i_ = 0; p->block_->accept(this);
+  render(')');
+
+  if (oldi > 15) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitConstant(Constant *p) {} //abstract class
+
+void PrintAbsyn::visitConstantInt(ConstantInt *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_ACSL__L_PAREN);
+
+  visitInteger(p->integer_);
+
+  if (oldi > 0) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitConstantFloat(ConstantFloat *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_ACSL__L_PAREN);
+
+  visitDouble(p->double_);
+
+  if (oldi > 0) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitConstantChar(ConstantChar *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_ACSL__L_PAREN);
+
+  visitChar(p->char_);
+
+  if (oldi > 0) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitTypeName(TypeName *p) {} //abstract class
+
+void PrintAbsyn::visitTypeNameDeclSpecList(TypeNameDeclSpecList *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 0; p->declspeclist_->accept(this);
+
+  if (oldi > 0) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
 void PrintAbsyn::visitInteger(Integer i)
 {
   char tmp[20];
@@ -948,6 +2401,24 @@ void PrintAbsyn::visitRESTRICT(String s)
 
 
 void PrintAbsyn::visitVOLATILE(String s)
+{
+  render(s);
+}
+
+
+void PrintAbsyn::visitBLOCKATTRIBUTE(String s)
+{
+  render(s);
+}
+
+
+void PrintAbsyn::visitLBRACKET(String s)
+{
+  render(s);
+}
+
+
+void PrintAbsyn::visitRBRACKET(String s)
 {
   render(s);
 }
@@ -1048,18 +2519,6 @@ void ShowAbsyn::visitSimpleFunctionDef(SimpleFunctionDef *p)
   bufAppend('[');
   if (p->block_)  p->block_->accept(this);
   bufAppend(']');
-  bufAppend(')');
-}
-void ShowAbsyn::visitBlock(Block *p) {} //abstract class
-
-void ShowAbsyn::visitABlock(ABlock *p)
-{
-  bufAppend('(');
-  bufAppend("ABlock");
-  bufAppend(' ');
-  visitLBRACE(p->lbrace_);
-  bufAppend(' ');
-  visitRBRACE(p->rbrace_);
   bufAppend(')');
 }
 void ShowAbsyn::visitFunctionDefStart(FunctionDefStart *p) {} //abstract class
@@ -1577,6 +3036,1180 @@ void ShowAbsyn::visitListAttribute(ListAttribute *listattribute)
   }
 }
 
+void ShowAbsyn::visitBlock(Block *p) {} //abstract class
+
+void ShowAbsyn::visitABlock(ABlock *p)
+{
+  bufAppend('(');
+  bufAppend("ABlock");
+  bufAppend(' ');
+  visitLBRACE(p->lbrace_);
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->blockattrs_)  p->blockattrs_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->listblockelement_)  p->listblockelement_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  visitRBRACE(p->rbrace_);
+  bufAppend(')');
+}
+void ShowAbsyn::visitBlockAttrs(BlockAttrs *p) {} //abstract class
+
+void ShowAbsyn::visitNoBlockAttrs(NoBlockAttrs *p)
+{
+  bufAppend("NoBlockAttrs");
+}
+void ShowAbsyn::visitSomeBlockAttrs(SomeBlockAttrs *p)
+{
+  bufAppend('(');
+  bufAppend("SomeBlockAttrs");
+  bufAppend(' ');
+  visitBLOCKATTRIBUTE(p->blockattribute_);
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->listattr_)  p->listattr_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend(')');
+}
+void ShowAbsyn::visitBlockElement(BlockElement *p) {} //abstract class
+
+void ShowAbsyn::visitDeclarationElement(DeclarationElement *p)
+{
+  bufAppend('(');
+  bufAppend("DeclarationElement");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->declaration_)  p->declaration_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitStatementElement(StatementElement *p)
+{
+  bufAppend('(');
+  bufAppend("StatementElement");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->statement_)  p->statement_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitListBlockElement(ListBlockElement *listblockelement)
+{
+  for (ListBlockElement::const_iterator i = listblockelement->begin() ; i != listblockelement->end() ; ++i)
+  {
+    (*i)->accept(this);
+    if (i != listblockelement->end() - 1) bufAppend(", ");
+  }
+}
+
+void ShowAbsyn::visitStatement(Statement *p) {} //abstract class
+
+void ShowAbsyn::visitSemicolonStatement(SemicolonStatement *p)
+{
+  bufAppend("SemicolonStatement");
+}
+void ShowAbsyn::visitExprsStatement(ExprsStatement *p)
+{
+  bufAppend('(');
+  bufAppend("ExprsStatement");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->listexpression_)  p->listexpression_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend(')');
+}
+void ShowAbsyn::visitBlockStatement(BlockStatement *p)
+{
+  bufAppend('(');
+  bufAppend("BlockStatement");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->block_)  p->block_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitIfStatement(IfStatement *p)
+{
+  bufAppend('(');
+  bufAppend("IfStatement");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->listexpression_)  p->listexpression_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->annotatedstmt_)  p->annotatedstmt_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->elsepart_)  p->elsepart_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitSwitchStatement(SwitchStatement *p)
+{
+  bufAppend('(');
+  bufAppend("SwitchStatement");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->listexpression_)  p->listexpression_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->annotatedstmt_)  p->annotatedstmt_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitWhileStatement(WhileStatement *p)
+{
+  bufAppend('(');
+  bufAppend("WhileStatement");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->listexpression_)  p->listexpression_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->annotatedstmt_)  p->annotatedstmt_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitCaseStatement(CaseStatement *p)
+{
+  bufAppend('(');
+  bufAppend("CaseStatement");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->expression_)  p->expression_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->annotatedstmt_)  p->annotatedstmt_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitCaseSliceStatement(CaseSliceStatement *p)
+{
+  bufAppend('(');
+  bufAppend("CaseSliceStatement");
+  bufAppend(' ');
+  p->expression_1->accept(this);
+  bufAppend(' ');
+  p->expression_2->accept(this);
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->annotatedstmt_)  p->annotatedstmt_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitDefaultStatement(DefaultStatement *p)
+{
+  bufAppend('(');
+  bufAppend("DefaultStatement");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->annotatedstmt_)  p->annotatedstmt_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitEmptyReturnStatement(EmptyReturnStatement *p)
+{
+  bufAppend("EmptyReturnStatement");
+}
+void ShowAbsyn::visitBreakStatement(BreakStatement *p)
+{
+  bufAppend("BreakStatement");
+}
+void ShowAbsyn::visitContinueStatement(ContinueStatement *p)
+{
+  bufAppend("ContinueStatement");
+}
+void ShowAbsyn::visitAttr(Attr *p) {} //abstract class
+
+void ShowAbsyn::visitAnAttr(AnAttr *p)
+{
+  bufAppend('(');
+  bufAppend("AnAttr");
+  bufAppend(' ');
+  p->attr_1->accept(this);
+  bufAppend(' ');
+  p->attr_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitTernaryCond(TernaryCond *p)
+{
+  bufAppend('(');
+  bufAppend("TernaryCond");
+  bufAppend(' ');
+  p->attr_1->accept(this);
+  bufAppend(' ');
+  p->attr_2->accept(this);
+  bufAppend(' ');
+  p->attr_3->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitOr(Or *p)
+{
+  bufAppend('(');
+  bufAppend("Or");
+  bufAppend(' ');
+  p->attr_1->accept(this);
+  bufAppend(' ');
+  p->attr_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitAnd(And *p)
+{
+  bufAppend('(');
+  bufAppend("And");
+  bufAppend(' ');
+  p->attr_1->accept(this);
+  bufAppend(' ');
+  p->attr_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitBitOr(BitOr *p)
+{
+  bufAppend('(');
+  bufAppend("BitOr");
+  bufAppend(' ');
+  p->attr_1->accept(this);
+  bufAppend(' ');
+  p->attr_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitXor(Xor *p)
+{
+  bufAppend('(');
+  bufAppend("Xor");
+  bufAppend(' ');
+  p->attr_1->accept(this);
+  bufAppend(' ');
+  p->attr_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitBitAnd(BitAnd *p)
+{
+  bufAppend('(');
+  bufAppend("BitAnd");
+  bufAppend(' ');
+  p->attr_1->accept(this);
+  bufAppend(' ');
+  p->attr_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitEqualEqual(EqualEqual *p)
+{
+  bufAppend('(');
+  bufAppend("EqualEqual");
+  bufAppend(' ');
+  p->attr_1->accept(this);
+  bufAppend(' ');
+  p->attr_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitNotEqual(NotEqual *p)
+{
+  bufAppend('(');
+  bufAppend("NotEqual");
+  bufAppend(' ');
+  p->attr_1->accept(this);
+  bufAppend(' ');
+  p->attr_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitLess(Less *p)
+{
+  bufAppend('(');
+  bufAppend("Less");
+  bufAppend(' ');
+  p->attr_1->accept(this);
+  bufAppend(' ');
+  p->attr_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitGreater(Greater *p)
+{
+  bufAppend('(');
+  bufAppend("Greater");
+  bufAppend(' ');
+  p->attr_1->accept(this);
+  bufAppend(' ');
+  p->attr_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitLessEqual(LessEqual *p)
+{
+  bufAppend('(');
+  bufAppend("LessEqual");
+  bufAppend(' ');
+  p->attr_1->accept(this);
+  bufAppend(' ');
+  p->attr_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitGreaterEqual(GreaterEqual *p)
+{
+  bufAppend('(');
+  bufAppend("GreaterEqual");
+  bufAppend(' ');
+  p->attr_1->accept(this);
+  bufAppend(' ');
+  p->attr_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitLeftShiftOp(LeftShiftOp *p)
+{
+  bufAppend('(');
+  bufAppend("LeftShiftOp");
+  bufAppend(' ');
+  p->attr_1->accept(this);
+  bufAppend(' ');
+  p->attr_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitRightShiftOp(RightShiftOp *p)
+{
+  bufAppend('(');
+  bufAppend("RightShiftOp");
+  bufAppend(' ');
+  p->attr_1->accept(this);
+  bufAppend(' ');
+  p->attr_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitAddOp(AddOp *p)
+{
+  bufAppend('(');
+  bufAppend("AddOp");
+  bufAppend(' ');
+  p->attr_1->accept(this);
+  bufAppend(' ');
+  p->attr_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitSubOp(SubOp *p)
+{
+  bufAppend('(');
+  bufAppend("SubOp");
+  bufAppend(' ');
+  p->attr_1->accept(this);
+  bufAppend(' ');
+  p->attr_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitMultOp(MultOp *p)
+{
+  bufAppend('(');
+  bufAppend("MultOp");
+  bufAppend(' ');
+  p->attr_1->accept(this);
+  bufAppend(' ');
+  p->attr_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitDivOp(DivOp *p)
+{
+  bufAppend('(');
+  bufAppend("DivOp");
+  bufAppend(' ');
+  p->attr_1->accept(this);
+  bufAppend(' ');
+  p->attr_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitModOp(ModOp *p)
+{
+  bufAppend('(');
+  bufAppend("ModOp");
+  bufAppend(' ');
+  p->attr_1->accept(this);
+  bufAppend(' ');
+  p->attr_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitPlusUnaryAttr(PlusUnaryAttr *p)
+{
+  bufAppend('(');
+  bufAppend("PlusUnaryAttr");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->attr_)  p->attr_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitMinusUnaryAttr(MinusUnaryAttr *p)
+{
+  bufAppend('(');
+  bufAppend("MinusUnaryAttr");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->attr_)  p->attr_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitMultUnaryAttr(MultUnaryAttr *p)
+{
+  bufAppend('(');
+  bufAppend("MultUnaryAttr");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->attr_)  p->attr_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitAmpUnaryAttr(AmpUnaryAttr *p)
+{
+  bufAppend('(');
+  bufAppend("AmpUnaryAttr");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->attr_)  p->attr_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitNotUnaryAttr(NotUnaryAttr *p)
+{
+  bufAppend('(');
+  bufAppend("NotUnaryAttr");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->attr_)  p->attr_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitTildeUnaryAttr(TildeUnaryAttr *p)
+{
+  bufAppend('(');
+  bufAppend("TildeUnaryAttr");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->attr_)  p->attr_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitFuncationCall(FuncationCall *p)
+{
+  bufAppend('(');
+  bufAppend("FuncationCall");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->idortypenameasid_)  p->idortypenameasid_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->listattr_)  p->listattr_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend(')');
+}
+void ShowAbsyn::visitProcedureCall(ProcedureCall *p)
+{
+  bufAppend('(');
+  bufAppend("ProcedureCall");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->idortypenameasid_)  p->idortypenameasid_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend(')');
+}
+void ShowAbsyn::visitArrowAttr(ArrowAttr *p)
+{
+  bufAppend('(');
+  bufAppend("ArrowAttr");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->attr_)  p->attr_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->idortypename_)  p->idortypename_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitDotAttr(DotAttr *p)
+{
+  bufAppend('(');
+  bufAppend("DotAttr");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->attr_)  p->attr_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->idortypename_)  p->idortypename_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitArrayAttr(ArrayAttr *p)
+{
+  bufAppend('(');
+  bufAppend("ArrayAttr");
+  bufAppend(' ');
+  p->attr_1->accept(this);
+  bufAppend(' ');
+  visitLBRACKET(p->lbracket_);
+  bufAppend(' ');
+  p->attr_2->accept(this);
+  bufAppend(' ');
+  visitRBRACKET(p->rbracket_);
+  bufAppend(')');
+}
+void ShowAbsyn::visitBasicAttr(BasicAttr *p)
+{
+  bufAppend('(');
+  bufAppend("BasicAttr");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->basicattribute_)  p->basicattribute_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitListAttr(ListAttr *listattr)
+{
+  for (ListAttr::const_iterator i = listattr->begin() ; i != listattr->end() ; ++i)
+  {
+    (*i)->accept(this);
+    if (i != listattr->end() - 1) bufAppend(", ");
+  }
+}
+
+void ShowAbsyn::visitBasicAttribute(BasicAttribute *p) {} //abstract class
+
+void ShowAbsyn::visitBasicAttrConsInt(BasicAttrConsInt *p)
+{
+  bufAppend('(');
+  bufAppend("BasicAttrConsInt");
+  bufAppend(' ');
+  visitInteger(p->integer_);
+  bufAppend(')');
+}
+void ShowAbsyn::visitBasicAttrConsFloat(BasicAttrConsFloat *p)
+{
+  bufAppend('(');
+  bufAppend("BasicAttrConsFloat");
+  bufAppend(' ');
+  visitDouble(p->double_);
+  bufAppend(')');
+}
+void ShowAbsyn::visitListBasicAttribute(ListBasicAttribute *listbasicattribute)
+{
+  for (ListBasicAttribute::const_iterator i = listbasicattribute->begin() ; i != listbasicattribute->end() ; ++i)
+  {
+    (*i)->accept(this);
+    if (i != listbasicattribute->end() - 1) bufAppend(", ");
+  }
+}
+
+void ShowAbsyn::visitAnnotatedStmt(AnnotatedStmt *p) {} //abstract class
+
+void ShowAbsyn::visitAnnotatedStatement(AnnotatedStatement *p)
+{
+  bufAppend('(');
+  bufAppend("AnnotatedStatement");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->statement_)  p->statement_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitElsePart(ElsePart *p) {} //abstract class
+
+void ShowAbsyn::visitNoElsePart(NoElsePart *p)
+{
+  bufAppend("NoElsePart");
+}
+void ShowAbsyn::visitSimpleElsePart(SimpleElsePart *p)
+{
+  bufAppend('(');
+  bufAppend("SimpleElsePart");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->annotatedstmt_)  p->annotatedstmt_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitOptExpression(OptExpression *p) {} //abstract class
+
+void ShowAbsyn::visitNoExpression(NoExpression *p)
+{
+  bufAppend("NoExpression");
+}
+void ShowAbsyn::visitSomeExpression(SomeExpression *p)
+{
+  bufAppend('(');
+  bufAppend("SomeExpression");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->listexpression_)  p->listexpression_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitExpression(Expression *p) {} //abstract class
+
+void ShowAbsyn::visitAssignmentExpr(AssignmentExpr *p)
+{
+  bufAppend('(');
+  bufAppend("AssignmentExpr");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->assignexpr_)  p->assignexpr_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitListExpression(ListExpression *listexpression)
+{
+  for (ListExpression::const_iterator i = listexpression->begin() ; i != listexpression->end() ; ++i)
+  {
+    (*i)->accept(this);
+    if (i != listexpression->end() - 1) bufAppend(", ");
+  }
+}
+
+void ShowAbsyn::visitAssignExpr(AssignExpr *p) {} //abstract class
+
+void ShowAbsyn::visitEqAssignExpr(EqAssignExpr *p)
+{
+  bufAppend('(');
+  bufAppend("EqAssignExpr");
+  bufAppend(' ');
+  p->assignexpr_1->accept(this);
+  bufAppend(' ');
+  p->assignexpr_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitPlusEqAssignExpr(PlusEqAssignExpr *p)
+{
+  bufAppend('(');
+  bufAppend("PlusEqAssignExpr");
+  bufAppend(' ');
+  p->assignexpr_1->accept(this);
+  bufAppend(' ');
+  p->assignexpr_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitMinusEqAssignExpr(MinusEqAssignExpr *p)
+{
+  bufAppend('(');
+  bufAppend("MinusEqAssignExpr");
+  bufAppend(' ');
+  p->assignexpr_1->accept(this);
+  bufAppend(' ');
+  p->assignexpr_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitMultEqAssignExpr(MultEqAssignExpr *p)
+{
+  bufAppend('(');
+  bufAppend("MultEqAssignExpr");
+  bufAppend(' ');
+  p->assignexpr_1->accept(this);
+  bufAppend(' ');
+  p->assignexpr_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitDivEqAssignExpr(DivEqAssignExpr *p)
+{
+  bufAppend('(');
+  bufAppend("DivEqAssignExpr");
+  bufAppend(' ');
+  p->assignexpr_1->accept(this);
+  bufAppend(' ');
+  p->assignexpr_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitModEqAssignExpr(ModEqAssignExpr *p)
+{
+  bufAppend('(');
+  bufAppend("ModEqAssignExpr");
+  bufAppend(' ');
+  p->assignexpr_1->accept(this);
+  bufAppend(' ');
+  p->assignexpr_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitAndEqAssignExpr(AndEqAssignExpr *p)
+{
+  bufAppend('(');
+  bufAppend("AndEqAssignExpr");
+  bufAppend(' ');
+  p->assignexpr_1->accept(this);
+  bufAppend(' ');
+  p->assignexpr_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitOrEqAssignExpr(OrEqAssignExpr *p)
+{
+  bufAppend('(');
+  bufAppend("OrEqAssignExpr");
+  bufAppend(' ');
+  p->assignexpr_1->accept(this);
+  bufAppend(' ');
+  p->assignexpr_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitXorEqAssignExpr(XorEqAssignExpr *p)
+{
+  bufAppend('(');
+  bufAppend("XorEqAssignExpr");
+  bufAppend(' ');
+  p->assignexpr_1->accept(this);
+  bufAppend(' ');
+  p->assignexpr_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitLeftShiftEqAssignExpr(LeftShiftEqAssignExpr *p)
+{
+  bufAppend('(');
+  bufAppend("LeftShiftEqAssignExpr");
+  bufAppend(' ');
+  p->assignexpr_1->accept(this);
+  bufAppend(' ');
+  p->assignexpr_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitRightShiftEqAssignExpr(RightShiftEqAssignExpr *p)
+{
+  bufAppend('(');
+  bufAppend("RightShiftEqAssignExpr");
+  bufAppend(' ');
+  p->assignexpr_1->accept(this);
+  bufAppend(' ');
+  p->assignexpr_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitTernaryCondExpr(TernaryCondExpr *p)
+{
+  bufAppend('(');
+  bufAppend("TernaryCondExpr");
+  bufAppend(' ');
+  p->assignexpr_1->accept(this);
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->optexpression_)  p->optexpression_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  p->assignexpr_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitOrExpr(OrExpr *p)
+{
+  bufAppend('(');
+  bufAppend("OrExpr");
+  bufAppend(' ');
+  p->assignexpr_1->accept(this);
+  bufAppend(' ');
+  p->assignexpr_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitAndExpr(AndExpr *p)
+{
+  bufAppend('(');
+  bufAppend("AndExpr");
+  bufAppend(' ');
+  p->assignexpr_1->accept(this);
+  bufAppend(' ');
+  p->assignexpr_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitBitOrExpr(BitOrExpr *p)
+{
+  bufAppend('(');
+  bufAppend("BitOrExpr");
+  bufAppend(' ');
+  p->assignexpr_1->accept(this);
+  bufAppend(' ');
+  p->assignexpr_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitBitXorExpr(BitXorExpr *p)
+{
+  bufAppend('(');
+  bufAppend("BitXorExpr");
+  bufAppend(' ');
+  p->assignexpr_1->accept(this);
+  bufAppend(' ');
+  p->assignexpr_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitBitAndExpr(BitAndExpr *p)
+{
+  bufAppend('(');
+  bufAppend("BitAndExpr");
+  bufAppend(' ');
+  p->assignexpr_1->accept(this);
+  bufAppend(' ');
+  p->assignexpr_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitEqExpr(EqExpr *p)
+{
+  bufAppend('(');
+  bufAppend("EqExpr");
+  bufAppend(' ');
+  p->assignexpr_1->accept(this);
+  bufAppend(' ');
+  p->assignexpr_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitNotEqExpr(NotEqExpr *p)
+{
+  bufAppend('(');
+  bufAppend("NotEqExpr");
+  bufAppend(' ');
+  p->assignexpr_1->accept(this);
+  bufAppend(' ');
+  p->assignexpr_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitLessExpr(LessExpr *p)
+{
+  bufAppend('(');
+  bufAppend("LessExpr");
+  bufAppend(' ');
+  p->assignexpr_1->accept(this);
+  bufAppend(' ');
+  p->assignexpr_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitGreaterExpr(GreaterExpr *p)
+{
+  bufAppend('(');
+  bufAppend("GreaterExpr");
+  bufAppend(' ');
+  p->assignexpr_1->accept(this);
+  bufAppend(' ');
+  p->assignexpr_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitLessEqualExpr(LessEqualExpr *p)
+{
+  bufAppend('(');
+  bufAppend("LessEqualExpr");
+  bufAppend(' ');
+  p->assignexpr_1->accept(this);
+  bufAppend(' ');
+  p->assignexpr_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitGreaterEqualExpr(GreaterEqualExpr *p)
+{
+  bufAppend('(');
+  bufAppend("GreaterEqualExpr");
+  bufAppend(' ');
+  p->assignexpr_1->accept(this);
+  bufAppend(' ');
+  p->assignexpr_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitLeftShiftExpr(LeftShiftExpr *p)
+{
+  bufAppend('(');
+  bufAppend("LeftShiftExpr");
+  bufAppend(' ');
+  p->assignexpr_1->accept(this);
+  bufAppend(' ');
+  p->assignexpr_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitRightShiftExpr(RightShiftExpr *p)
+{
+  bufAppend('(');
+  bufAppend("RightShiftExpr");
+  bufAppend(' ');
+  p->assignexpr_1->accept(this);
+  bufAppend(' ');
+  p->assignexpr_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitPlusExpr(PlusExpr *p)
+{
+  bufAppend('(');
+  bufAppend("PlusExpr");
+  bufAppend(' ');
+  p->assignexpr_1->accept(this);
+  bufAppend(' ');
+  p->assignexpr_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitMinusExpr(MinusExpr *p)
+{
+  bufAppend('(');
+  bufAppend("MinusExpr");
+  bufAppend(' ');
+  p->assignexpr_1->accept(this);
+  bufAppend(' ');
+  p->assignexpr_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitMulsExpr(MulsExpr *p)
+{
+  bufAppend('(');
+  bufAppend("MulsExpr");
+  bufAppend(' ');
+  p->assignexpr_1->accept(this);
+  bufAppend(' ');
+  p->assignexpr_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitDivExpr(DivExpr *p)
+{
+  bufAppend('(');
+  bufAppend("DivExpr");
+  bufAppend(' ');
+  p->assignexpr_1->accept(this);
+  bufAppend(' ');
+  p->assignexpr_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitModExpr(ModExpr *p)
+{
+  bufAppend('(');
+  bufAppend("ModExpr");
+  bufAppend(' ');
+  p->assignexpr_1->accept(this);
+  bufAppend(' ');
+  p->assignexpr_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitCastExpr(CastExpr *p)
+{
+  bufAppend('(');
+  bufAppend("CastExpr");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->typename_)  p->typename_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->assignexpr_)  p->assignexpr_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitUnaryExprPlusPlus(UnaryExprPlusPlus *p)
+{
+  bufAppend('(');
+  bufAppend("UnaryExprPlusPlus");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->assignexpr_)  p->assignexpr_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitUnaryExprMinusMinus(UnaryExprMinusMinus *p)
+{
+  bufAppend('(');
+  bufAppend("UnaryExprMinusMinus");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->assignexpr_)  p->assignexpr_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitUnaryExprPlus(UnaryExprPlus *p)
+{
+  bufAppend('(');
+  bufAppend("UnaryExprPlus");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->assignexpr_)  p->assignexpr_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitUnaryExprMinus(UnaryExprMinus *p)
+{
+  bufAppend('(');
+  bufAppend("UnaryExprMinus");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->assignexpr_)  p->assignexpr_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitUnaryExprMult(UnaryExprMult *p)
+{
+  bufAppend('(');
+  bufAppend("UnaryExprMult");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->assignexpr_)  p->assignexpr_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitUnaryExprAmp(UnaryExprAmp *p)
+{
+  bufAppend('(');
+  bufAppend("UnaryExprAmp");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->assignexpr_)  p->assignexpr_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitUnaryExprNot(UnaryExprNot *p)
+{
+  bufAppend('(');
+  bufAppend("UnaryExprNot");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->assignexpr_)  p->assignexpr_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitUnaryExprTilde(UnaryExprTilde *p)
+{
+  bufAppend('(');
+  bufAppend("UnaryExprTilde");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->assignexpr_)  p->assignexpr_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitUnaryExprAddress(UnaryExprAddress *p)
+{
+  bufAppend('(');
+  bufAppend("UnaryExprAddress");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->idortypenameasid_)  p->idortypenameasid_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitDotPostfixExpression(DotPostfixExpression *p)
+{
+  bufAppend('(');
+  bufAppend("DotPostfixExpression");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->assignexpr_)  p->assignexpr_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->idortypename_)  p->idortypename_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitArrowPostfixExpression(ArrowPostfixExpression *p)
+{
+  bufAppend('(');
+  bufAppend("ArrowPostfixExpression");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->assignexpr_)  p->assignexpr_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->idortypename_)  p->idortypename_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitPlusPlusPostfixExpression(PlusPlusPostfixExpression *p)
+{
+  bufAppend('(');
+  bufAppend("PlusPlusPostfixExpression");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->assignexpr_)  p->assignexpr_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend(')');
+}
+void ShowAbsyn::visitMinusMinusPostfixExpression(MinusMinusPostfixExpression *p)
+{
+  bufAppend('(');
+  bufAppend("MinusMinusPostfixExpression");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->assignexpr_)  p->assignexpr_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend(')');
+}
+void ShowAbsyn::visitIdentifierPrimaryExpression(IdentifierPrimaryExpression *p)
+{
+  bufAppend('(');
+  bufAppend("IdentifierPrimaryExpression");
+  bufAppend(' ');
+  visitIdent(p->ident_);
+  bufAppend(')');
+}
+void ShowAbsyn::visitConstantPrimaryExpressin(ConstantPrimaryExpressin *p)
+{
+  bufAppend('(');
+  bufAppend("ConstantPrimaryExpressin");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->constant_)  p->constant_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitCommaExpressionPrimaryExpressin(CommaExpressionPrimaryExpressin *p)
+{
+  bufAppend('(');
+  bufAppend("CommaExpressionPrimaryExpressin");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->listexpression_)  p->listexpression_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend(')');
+}
+void ShowAbsyn::visitBlockPrimaryExpressin(BlockPrimaryExpressin *p)
+{
+  bufAppend('(');
+  bufAppend("BlockPrimaryExpressin");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->block_)  p->block_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend(')');
+}
+void ShowAbsyn::visitConstant(Constant *p) {} //abstract class
+
+void ShowAbsyn::visitConstantInt(ConstantInt *p)
+{
+  bufAppend('(');
+  bufAppend("ConstantInt");
+  bufAppend(' ');
+  visitInteger(p->integer_);
+  bufAppend(')');
+}
+void ShowAbsyn::visitConstantFloat(ConstantFloat *p)
+{
+  bufAppend('(');
+  bufAppend("ConstantFloat");
+  bufAppend(' ');
+  visitDouble(p->double_);
+  bufAppend(')');
+}
+void ShowAbsyn::visitConstantChar(ConstantChar *p)
+{
+  bufAppend('(');
+  bufAppend("ConstantChar");
+  bufAppend(' ');
+  visitChar(p->char_);
+  bufAppend(')');
+}
+void ShowAbsyn::visitTypeName(TypeName *p) {} //abstract class
+
+void ShowAbsyn::visitTypeNameDeclSpecList(TypeNameDeclSpecList *p)
+{
+  bufAppend('(');
+  bufAppend("TypeNameDeclSpecList");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->declspeclist_)  p->declspeclist_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
 void ShowAbsyn::visitInteger(Integer i)
 {
   char tmp[20];
@@ -1649,6 +4282,30 @@ void ShowAbsyn::visitRESTRICT(String s)
 
 
 void ShowAbsyn::visitVOLATILE(String s)
+{
+  bufAppend('\"');
+  bufAppend(s);
+  bufAppend('\"');
+}
+
+
+void ShowAbsyn::visitBLOCKATTRIBUTE(String s)
+{
+  bufAppend('\"');
+  bufAppend(s);
+  bufAppend('\"');
+}
+
+
+void ShowAbsyn::visitLBRACKET(String s)
+{
+  bufAppend('\"');
+  bufAppend(s);
+  bufAppend('\"');
+}
+
+
+void ShowAbsyn::visitRBRACKET(String s)
 {
   bufAppend('\"');
   bufAppend(s);

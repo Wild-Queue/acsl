@@ -47,8 +47,6 @@ class PrintAbsyn : public Visitor
   void visitGlobalsFunctionDef(GlobalsFunctionDef *p);
   void visitFunctionDef(FunctionDef *p); /* abstract class */
   void visitSimpleFunctionDef(SimpleFunctionDef *p);
-  void visitBlock(Block *p); /* abstract class */
-  void visitABlock(ABlock *p);
   void visitFunctionDefStart(FunctionDefStart *p); /* abstract class */
   void visitFunctionDefStartDeclarator(FunctionDefStartDeclarator *p);
   void visitDeclSpecList(DeclSpecList *p); /* abstract class */
@@ -123,6 +121,136 @@ class PrintAbsyn : public Visitor
   void visitAttributeConst(AttributeConst *p);
   void visitListAttribute(ListAttribute *p);
   void iterListAttribute(ListAttribute::const_iterator i, ListAttribute::const_iterator j);
+  void visitBlock(Block *p); /* abstract class */
+  void visitABlock(ABlock *p);
+  void visitBlockAttrs(BlockAttrs *p); /* abstract class */
+  void visitNoBlockAttrs(NoBlockAttrs *p);
+  void visitSomeBlockAttrs(SomeBlockAttrs *p);
+  void visitBlockElement(BlockElement *p); /* abstract class */
+  void visitDeclarationElement(DeclarationElement *p);
+  void visitStatementElement(StatementElement *p);
+  void visitListBlockElement(ListBlockElement *p);
+  void iterListBlockElement(ListBlockElement::const_iterator i, ListBlockElement::const_iterator j);
+  void visitStatement(Statement *p); /* abstract class */
+  void visitSemicolonStatement(SemicolonStatement *p);
+  void visitExprsStatement(ExprsStatement *p);
+  void visitBlockStatement(BlockStatement *p);
+  void visitIfStatement(IfStatement *p);
+  void visitSwitchStatement(SwitchStatement *p);
+  void visitWhileStatement(WhileStatement *p);
+  void visitCaseStatement(CaseStatement *p);
+  void visitCaseSliceStatement(CaseSliceStatement *p);
+  void visitDefaultStatement(DefaultStatement *p);
+  void visitEmptyReturnStatement(EmptyReturnStatement *p);
+  void visitBreakStatement(BreakStatement *p);
+  void visitContinueStatement(ContinueStatement *p);
+  void visitAttr(Attr *p); /* abstract class */
+  void visitAnAttr(AnAttr *p);
+  void visitTernaryCond(TernaryCond *p);
+  void visitOr(Or *p);
+  void visitAnd(And *p);
+  void visitBitOr(BitOr *p);
+  void visitXor(Xor *p);
+  void visitBitAnd(BitAnd *p);
+  void visitEqualEqual(EqualEqual *p);
+  void visitNotEqual(NotEqual *p);
+  void visitLess(Less *p);
+  void visitGreater(Greater *p);
+  void visitLessEqual(LessEqual *p);
+  void visitGreaterEqual(GreaterEqual *p);
+  void visitLeftShiftOp(LeftShiftOp *p);
+  void visitRightShiftOp(RightShiftOp *p);
+  void visitAddOp(AddOp *p);
+  void visitSubOp(SubOp *p);
+  void visitMultOp(MultOp *p);
+  void visitDivOp(DivOp *p);
+  void visitModOp(ModOp *p);
+  void visitPlusUnaryAttr(PlusUnaryAttr *p);
+  void visitMinusUnaryAttr(MinusUnaryAttr *p);
+  void visitMultUnaryAttr(MultUnaryAttr *p);
+  void visitAmpUnaryAttr(AmpUnaryAttr *p);
+  void visitNotUnaryAttr(NotUnaryAttr *p);
+  void visitTildeUnaryAttr(TildeUnaryAttr *p);
+  void visitFuncationCall(FuncationCall *p);
+  void visitProcedureCall(ProcedureCall *p);
+  void visitArrowAttr(ArrowAttr *p);
+  void visitDotAttr(DotAttr *p);
+  void visitArrayAttr(ArrayAttr *p);
+  void visitBasicAttr(BasicAttr *p);
+  void visitListAttr(ListAttr *p);
+  void iterListAttr(ListAttr::const_iterator i, ListAttr::const_iterator j);
+  void visitBasicAttribute(BasicAttribute *p); /* abstract class */
+  void visitBasicAttrConsInt(BasicAttrConsInt *p);
+  void visitBasicAttrConsFloat(BasicAttrConsFloat *p);
+  void visitListBasicAttribute(ListBasicAttribute *p);
+  void iterListBasicAttribute(ListBasicAttribute::const_iterator i, ListBasicAttribute::const_iterator j);
+  void visitAnnotatedStmt(AnnotatedStmt *p); /* abstract class */
+  void visitAnnotatedStatement(AnnotatedStatement *p);
+  void visitElsePart(ElsePart *p); /* abstract class */
+  void visitNoElsePart(NoElsePart *p);
+  void visitSimpleElsePart(SimpleElsePart *p);
+  void visitOptExpression(OptExpression *p); /* abstract class */
+  void visitNoExpression(NoExpression *p);
+  void visitSomeExpression(SomeExpression *p);
+  void visitExpression(Expression *p); /* abstract class */
+  void visitAssignmentExpr(AssignmentExpr *p);
+  void visitListExpression(ListExpression *p);
+  void iterListExpression(ListExpression::const_iterator i, ListExpression::const_iterator j);
+  void visitAssignExpr(AssignExpr *p); /* abstract class */
+  void visitEqAssignExpr(EqAssignExpr *p);
+  void visitPlusEqAssignExpr(PlusEqAssignExpr *p);
+  void visitMinusEqAssignExpr(MinusEqAssignExpr *p);
+  void visitMultEqAssignExpr(MultEqAssignExpr *p);
+  void visitDivEqAssignExpr(DivEqAssignExpr *p);
+  void visitModEqAssignExpr(ModEqAssignExpr *p);
+  void visitAndEqAssignExpr(AndEqAssignExpr *p);
+  void visitOrEqAssignExpr(OrEqAssignExpr *p);
+  void visitXorEqAssignExpr(XorEqAssignExpr *p);
+  void visitLeftShiftEqAssignExpr(LeftShiftEqAssignExpr *p);
+  void visitRightShiftEqAssignExpr(RightShiftEqAssignExpr *p);
+  void visitTernaryCondExpr(TernaryCondExpr *p);
+  void visitOrExpr(OrExpr *p);
+  void visitAndExpr(AndExpr *p);
+  void visitBitOrExpr(BitOrExpr *p);
+  void visitBitXorExpr(BitXorExpr *p);
+  void visitBitAndExpr(BitAndExpr *p);
+  void visitEqExpr(EqExpr *p);
+  void visitNotEqExpr(NotEqExpr *p);
+  void visitLessExpr(LessExpr *p);
+  void visitGreaterExpr(GreaterExpr *p);
+  void visitLessEqualExpr(LessEqualExpr *p);
+  void visitGreaterEqualExpr(GreaterEqualExpr *p);
+  void visitLeftShiftExpr(LeftShiftExpr *p);
+  void visitRightShiftExpr(RightShiftExpr *p);
+  void visitPlusExpr(PlusExpr *p);
+  void visitMinusExpr(MinusExpr *p);
+  void visitMulsExpr(MulsExpr *p);
+  void visitDivExpr(DivExpr *p);
+  void visitModExpr(ModExpr *p);
+  void visitCastExpr(CastExpr *p);
+  void visitUnaryExprPlusPlus(UnaryExprPlusPlus *p);
+  void visitUnaryExprMinusMinus(UnaryExprMinusMinus *p);
+  void visitUnaryExprPlus(UnaryExprPlus *p);
+  void visitUnaryExprMinus(UnaryExprMinus *p);
+  void visitUnaryExprMult(UnaryExprMult *p);
+  void visitUnaryExprAmp(UnaryExprAmp *p);
+  void visitUnaryExprNot(UnaryExprNot *p);
+  void visitUnaryExprTilde(UnaryExprTilde *p);
+  void visitUnaryExprAddress(UnaryExprAddress *p);
+  void visitDotPostfixExpression(DotPostfixExpression *p);
+  void visitArrowPostfixExpression(ArrowPostfixExpression *p);
+  void visitPlusPlusPostfixExpression(PlusPlusPostfixExpression *p);
+  void visitMinusMinusPostfixExpression(MinusMinusPostfixExpression *p);
+  void visitIdentifierPrimaryExpression(IdentifierPrimaryExpression *p);
+  void visitConstantPrimaryExpressin(ConstantPrimaryExpressin *p);
+  void visitCommaExpressionPrimaryExpressin(CommaExpressionPrimaryExpressin *p);
+  void visitBlockPrimaryExpressin(BlockPrimaryExpressin *p);
+  void visitConstant(Constant *p); /* abstract class */
+  void visitConstantInt(ConstantInt *p);
+  void visitConstantFloat(ConstantFloat *p);
+  void visitConstantChar(ConstantChar *p);
+  void visitTypeName(TypeName *p); /* abstract class */
+  void visitTypeNameDeclSpecList(TypeNameDeclSpecList *p);
 
   void visitInteger(Integer i);
   void visitDouble(Double d);
@@ -135,6 +263,9 @@ class PrintAbsyn : public Visitor
   void visitCONST(String s);
   void visitRESTRICT(String s);
   void visitVOLATILE(String s);
+  void visitBLOCKATTRIBUTE(String s);
+  void visitLBRACKET(String s);
+  void visitRBRACKET(String s);
  protected:
   char *buf_;
   size_t cur_, buf_size;
@@ -208,8 +339,6 @@ class ShowAbsyn : public Visitor
   void visitGlobalsFunctionDef(GlobalsFunctionDef *p);
   void visitFunctionDef(FunctionDef *p); /* abstract class */
   void visitSimpleFunctionDef(SimpleFunctionDef *p);
-  void visitBlock(Block *p); /* abstract class */
-  void visitABlock(ABlock *p);
   void visitFunctionDefStart(FunctionDefStart *p); /* abstract class */
   void visitFunctionDefStartDeclarator(FunctionDefStartDeclarator *p);
   void visitDeclSpecList(DeclSpecList *p); /* abstract class */
@@ -284,6 +413,136 @@ class ShowAbsyn : public Visitor
   void visitAttributeConst(AttributeConst *p);
   void visitListAttribute(ListAttribute *p);
   void iterListAttribute(ListAttribute::const_iterator i, ListAttribute::const_iterator j);
+  void visitBlock(Block *p); /* abstract class */
+  void visitABlock(ABlock *p);
+  void visitBlockAttrs(BlockAttrs *p); /* abstract class */
+  void visitNoBlockAttrs(NoBlockAttrs *p);
+  void visitSomeBlockAttrs(SomeBlockAttrs *p);
+  void visitBlockElement(BlockElement *p); /* abstract class */
+  void visitDeclarationElement(DeclarationElement *p);
+  void visitStatementElement(StatementElement *p);
+  void visitListBlockElement(ListBlockElement *p);
+  void iterListBlockElement(ListBlockElement::const_iterator i, ListBlockElement::const_iterator j);
+  void visitStatement(Statement *p); /* abstract class */
+  void visitSemicolonStatement(SemicolonStatement *p);
+  void visitExprsStatement(ExprsStatement *p);
+  void visitBlockStatement(BlockStatement *p);
+  void visitIfStatement(IfStatement *p);
+  void visitSwitchStatement(SwitchStatement *p);
+  void visitWhileStatement(WhileStatement *p);
+  void visitCaseStatement(CaseStatement *p);
+  void visitCaseSliceStatement(CaseSliceStatement *p);
+  void visitDefaultStatement(DefaultStatement *p);
+  void visitEmptyReturnStatement(EmptyReturnStatement *p);
+  void visitBreakStatement(BreakStatement *p);
+  void visitContinueStatement(ContinueStatement *p);
+  void visitAttr(Attr *p); /* abstract class */
+  void visitAnAttr(AnAttr *p);
+  void visitTernaryCond(TernaryCond *p);
+  void visitOr(Or *p);
+  void visitAnd(And *p);
+  void visitBitOr(BitOr *p);
+  void visitXor(Xor *p);
+  void visitBitAnd(BitAnd *p);
+  void visitEqualEqual(EqualEqual *p);
+  void visitNotEqual(NotEqual *p);
+  void visitLess(Less *p);
+  void visitGreater(Greater *p);
+  void visitLessEqual(LessEqual *p);
+  void visitGreaterEqual(GreaterEqual *p);
+  void visitLeftShiftOp(LeftShiftOp *p);
+  void visitRightShiftOp(RightShiftOp *p);
+  void visitAddOp(AddOp *p);
+  void visitSubOp(SubOp *p);
+  void visitMultOp(MultOp *p);
+  void visitDivOp(DivOp *p);
+  void visitModOp(ModOp *p);
+  void visitPlusUnaryAttr(PlusUnaryAttr *p);
+  void visitMinusUnaryAttr(MinusUnaryAttr *p);
+  void visitMultUnaryAttr(MultUnaryAttr *p);
+  void visitAmpUnaryAttr(AmpUnaryAttr *p);
+  void visitNotUnaryAttr(NotUnaryAttr *p);
+  void visitTildeUnaryAttr(TildeUnaryAttr *p);
+  void visitFuncationCall(FuncationCall *p);
+  void visitProcedureCall(ProcedureCall *p);
+  void visitArrowAttr(ArrowAttr *p);
+  void visitDotAttr(DotAttr *p);
+  void visitArrayAttr(ArrayAttr *p);
+  void visitBasicAttr(BasicAttr *p);
+  void visitListAttr(ListAttr *p);
+  void iterListAttr(ListAttr::const_iterator i, ListAttr::const_iterator j);
+  void visitBasicAttribute(BasicAttribute *p); /* abstract class */
+  void visitBasicAttrConsInt(BasicAttrConsInt *p);
+  void visitBasicAttrConsFloat(BasicAttrConsFloat *p);
+  void visitListBasicAttribute(ListBasicAttribute *p);
+  void iterListBasicAttribute(ListBasicAttribute::const_iterator i, ListBasicAttribute::const_iterator j);
+  void visitAnnotatedStmt(AnnotatedStmt *p); /* abstract class */
+  void visitAnnotatedStatement(AnnotatedStatement *p);
+  void visitElsePart(ElsePart *p); /* abstract class */
+  void visitNoElsePart(NoElsePart *p);
+  void visitSimpleElsePart(SimpleElsePart *p);
+  void visitOptExpression(OptExpression *p); /* abstract class */
+  void visitNoExpression(NoExpression *p);
+  void visitSomeExpression(SomeExpression *p);
+  void visitExpression(Expression *p); /* abstract class */
+  void visitAssignmentExpr(AssignmentExpr *p);
+  void visitListExpression(ListExpression *p);
+  void iterListExpression(ListExpression::const_iterator i, ListExpression::const_iterator j);
+  void visitAssignExpr(AssignExpr *p); /* abstract class */
+  void visitEqAssignExpr(EqAssignExpr *p);
+  void visitPlusEqAssignExpr(PlusEqAssignExpr *p);
+  void visitMinusEqAssignExpr(MinusEqAssignExpr *p);
+  void visitMultEqAssignExpr(MultEqAssignExpr *p);
+  void visitDivEqAssignExpr(DivEqAssignExpr *p);
+  void visitModEqAssignExpr(ModEqAssignExpr *p);
+  void visitAndEqAssignExpr(AndEqAssignExpr *p);
+  void visitOrEqAssignExpr(OrEqAssignExpr *p);
+  void visitXorEqAssignExpr(XorEqAssignExpr *p);
+  void visitLeftShiftEqAssignExpr(LeftShiftEqAssignExpr *p);
+  void visitRightShiftEqAssignExpr(RightShiftEqAssignExpr *p);
+  void visitTernaryCondExpr(TernaryCondExpr *p);
+  void visitOrExpr(OrExpr *p);
+  void visitAndExpr(AndExpr *p);
+  void visitBitOrExpr(BitOrExpr *p);
+  void visitBitXorExpr(BitXorExpr *p);
+  void visitBitAndExpr(BitAndExpr *p);
+  void visitEqExpr(EqExpr *p);
+  void visitNotEqExpr(NotEqExpr *p);
+  void visitLessExpr(LessExpr *p);
+  void visitGreaterExpr(GreaterExpr *p);
+  void visitLessEqualExpr(LessEqualExpr *p);
+  void visitGreaterEqualExpr(GreaterEqualExpr *p);
+  void visitLeftShiftExpr(LeftShiftExpr *p);
+  void visitRightShiftExpr(RightShiftExpr *p);
+  void visitPlusExpr(PlusExpr *p);
+  void visitMinusExpr(MinusExpr *p);
+  void visitMulsExpr(MulsExpr *p);
+  void visitDivExpr(DivExpr *p);
+  void visitModExpr(ModExpr *p);
+  void visitCastExpr(CastExpr *p);
+  void visitUnaryExprPlusPlus(UnaryExprPlusPlus *p);
+  void visitUnaryExprMinusMinus(UnaryExprMinusMinus *p);
+  void visitUnaryExprPlus(UnaryExprPlus *p);
+  void visitUnaryExprMinus(UnaryExprMinus *p);
+  void visitUnaryExprMult(UnaryExprMult *p);
+  void visitUnaryExprAmp(UnaryExprAmp *p);
+  void visitUnaryExprNot(UnaryExprNot *p);
+  void visitUnaryExprTilde(UnaryExprTilde *p);
+  void visitUnaryExprAddress(UnaryExprAddress *p);
+  void visitDotPostfixExpression(DotPostfixExpression *p);
+  void visitArrowPostfixExpression(ArrowPostfixExpression *p);
+  void visitPlusPlusPostfixExpression(PlusPlusPostfixExpression *p);
+  void visitMinusMinusPostfixExpression(MinusMinusPostfixExpression *p);
+  void visitIdentifierPrimaryExpression(IdentifierPrimaryExpression *p);
+  void visitConstantPrimaryExpressin(ConstantPrimaryExpressin *p);
+  void visitCommaExpressionPrimaryExpressin(CommaExpressionPrimaryExpressin *p);
+  void visitBlockPrimaryExpressin(BlockPrimaryExpressin *p);
+  void visitConstant(Constant *p); /* abstract class */
+  void visitConstantInt(ConstantInt *p);
+  void visitConstantFloat(ConstantFloat *p);
+  void visitConstantChar(ConstantChar *p);
+  void visitTypeName(TypeName *p); /* abstract class */
+  void visitTypeNameDeclSpecList(TypeNameDeclSpecList *p);
 
   void visitInteger(Integer i);
   void visitDouble(Double d);
@@ -296,6 +555,9 @@ class ShowAbsyn : public Visitor
   void visitCONST(String s);
   void visitRESTRICT(String s);
   void visitVOLATILE(String s);
+  void visitBLOCKATTRIBUTE(String s);
+  void visitLBRACKET(String s);
+  void visitRBRACKET(String s);
  protected:
   char *buf_;
   size_t cur_, buf_size;

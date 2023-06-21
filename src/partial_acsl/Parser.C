@@ -133,66 +133,162 @@ enum yysymbol_kind_t
   YYSYMBOL_YYerror = 1,                    /* error  */
   YYSYMBOL_YYUNDEF = 2,                    /* "invalid token"  */
   YYSYMBOL__ERROR_ = 3,                    /* _ERROR_  */
-  YYSYMBOL__LPAREN = 4,                    /* _LPAREN  */
-  YYSYMBOL__RPAREN = 5,                    /* _RPAREN  */
-  YYSYMBOL__STAR = 6,                      /* _STAR  */
-  YYSYMBOL__COMMA = 7,                     /* _COMMA  */
-  YYSYMBOL__SEMI = 8,                      /* _SEMI  */
-  YYSYMBOL__SYMB_1 = 9,                    /* _SYMB_1  */
-  YYSYMBOL__SYMB_2 = 10,                   /* _SYMB_2  */
-  YYSYMBOL__SYMB_3 = 11,                   /* _SYMB_3  */
-  YYSYMBOL__KW_char = 12,                  /* _KW_char  */
-  YYSYMBOL__KW_double = 13,                /* _KW_double  */
-  YYSYMBOL__KW_float = 14,                 /* _KW_float  */
-  YYSYMBOL__KW_int = 15,                   /* _KW_int  */
-  YYSYMBOL__KW_long = 16,                  /* _KW_long  */
-  YYSYMBOL__KW_short = 17,                 /* _KW_short  */
-  YYSYMBOL__KW_struct = 18,                /* _KW_struct  */
-  YYSYMBOL__KW_unsigned = 19,              /* _KW_unsigned  */
-  YYSYMBOL__KW_void = 20,                  /* _KW_void  */
-  YYSYMBOL_T_CONST = 21,                   /* T_CONST  */
-  YYSYMBOL_T_LBRACE = 22,                  /* T_LBRACE  */
-  YYSYMBOL_T_RBRACE = 23,                  /* T_RBRACE  */
-  YYSYMBOL_T_RESTRICT = 24,                /* T_RESTRICT  */
-  YYSYMBOL_T_SIGNED = 25,                  /* T_SIGNED  */
-  YYSYMBOL_T_VOLATILE = 26,                /* T_VOLATILE  */
-  YYSYMBOL__IDENT_ = 27,                   /* _IDENT_  */
-  YYSYMBOL_YYACCEPT = 28,                  /* $accept  */
-  YYSYMBOL_Program = 29,                   /* Program  */
-  YYSYMBOL_Globals = 30,                   /* Globals  */
-  YYSYMBOL_Global = 31,                    /* Global  */
-  YYSYMBOL_FunctionDef = 32,               /* FunctionDef  */
-  YYSYMBOL_Block = 33,                     /* Block  */
-  YYSYMBOL_FunctionDefStart = 34,          /* FunctionDefStart  */
-  YYSYMBOL_DeclSpecList = 35,              /* DeclSpecList  */
-  YYSYMBOL_DeclSpecListNoNamed = 36,       /* DeclSpecListNoNamed  */
-  YYSYMBOL_TypeSpec = 37,                  /* TypeSpec  */
-  YYSYMBOL_Declarator = 38,                /* Declarator  */
-  YYSYMBOL_PointerOpt = 39,                /* PointerOpt  */
-  YYSYMBOL_DirectDecl = 40,                /* DirectDecl  */
-  YYSYMBOL_AttributesWithAsm = 41,         /* AttributesWithAsm  */
-  YYSYMBOL_RestParList = 42,               /* RestParList  */
-  YYSYMBOL_ParameterDecl = 43,             /* ParameterDecl  */
-  YYSYMBOL_ListParameterDecl = 44,         /* ListParameterDecl  */
-  YYSYMBOL_GhostParameterOpt = 45,         /* GhostParameterOpt  */
-  YYSYMBOL_IdOrTypename = 46,              /* IdOrTypename  */
-  YYSYMBOL_IdOrTypenameAsId = 47,          /* IdOrTypenameAsId  */
-  YYSYMBOL_Declaration = 48,               /* Declaration  */
-  YYSYMBOL_DeclAndInitDeclAttrList = 49,   /* DeclAndInitDeclAttrList  */
-  YYSYMBOL_InitDeclaratorAttr = 50,        /* InitDeclaratorAttr  */
-  YYSYMBOL_ListInitDeclaratorAttr = 51,    /* ListInitDeclaratorAttr  */
-  YYSYMBOL_InitDeclarator = 52,            /* InitDeclarator  */
-  YYSYMBOL_StructDeclList = 53,            /* StructDeclList  */
-  YYSYMBOL_FieldDecl = 54,                 /* FieldDecl  */
-  YYSYMBOL_ListFieldDecl = 55,             /* ListFieldDecl  */
-  YYSYMBOL_Attribute = 56,                 /* Attribute  */
-  YYSYMBOL_ListAttribute = 57              /* ListAttribute  */
+  YYSYMBOL__BANG = 4,                      /* _BANG  */
+  YYSYMBOL__BANGEQ = 5,                    /* _BANGEQ  */
+  YYSYMBOL__PERCENT = 6,                   /* _PERCENT  */
+  YYSYMBOL__PERCENTEQ = 7,                 /* _PERCENTEQ  */
+  YYSYMBOL__AMP = 8,                       /* _AMP  */
+  YYSYMBOL__DAMP = 9,                      /* _DAMP  */
+  YYSYMBOL__AMPEQ = 10,                    /* _AMPEQ  */
+  YYSYMBOL__LPAREN = 11,                   /* _LPAREN  */
+  YYSYMBOL__RPAREN = 12,                   /* _RPAREN  */
+  YYSYMBOL__STAR = 13,                     /* _STAR  */
+  YYSYMBOL__STAREQ = 14,                   /* _STAREQ  */
+  YYSYMBOL__PLUS = 15,                     /* _PLUS  */
+  YYSYMBOL__DPLUS = 16,                    /* _DPLUS  */
+  YYSYMBOL__PLUSEQ = 17,                   /* _PLUSEQ  */
+  YYSYMBOL__COMMA = 18,                    /* _COMMA  */
+  YYSYMBOL__MINUS = 19,                    /* _MINUS  */
+  YYSYMBOL__DMINUS = 20,                   /* _DMINUS  */
+  YYSYMBOL__MINUSEQ = 21,                  /* _MINUSEQ  */
+  YYSYMBOL__RARROW = 22,                   /* _RARROW  */
+  YYSYMBOL__DOT = 23,                      /* _DOT  */
+  YYSYMBOL__ELLIPSIS = 24,                 /* _ELLIPSIS  */
+  YYSYMBOL__SLASH = 25,                    /* _SLASH  */
+  YYSYMBOL__SLASHEQ = 26,                  /* _SLASHEQ  */
+  YYSYMBOL__COLON = 27,                    /* _COLON  */
+  YYSYMBOL__SEMI = 28,                     /* _SEMI  */
+  YYSYMBOL__LT = 29,                       /* _LT  */
+  YYSYMBOL__DLT = 30,                      /* _DLT  */
+  YYSYMBOL__DLTEQ = 31,                    /* _DLTEQ  */
+  YYSYMBOL__LDARROW = 32,                  /* _LDARROW  */
+  YYSYMBOL__EQ = 33,                       /* _EQ  */
+  YYSYMBOL__DEQ = 34,                      /* _DEQ  */
+  YYSYMBOL__GT = 35,                       /* _GT  */
+  YYSYMBOL__GTEQ = 36,                     /* _GTEQ  */
+  YYSYMBOL__DGT = 37,                      /* _DGT  */
+  YYSYMBOL__DGTEQ = 38,                    /* _DGTEQ  */
+  YYSYMBOL__QUESTION = 39,                 /* _QUESTION  */
+  YYSYMBOL__CARET = 40,                    /* _CARET  */
+  YYSYMBOL__CARETEQ = 41,                  /* _CARETEQ  */
+  YYSYMBOL__SYMB_1 = 42,                   /* _SYMB_1  */
+  YYSYMBOL__SYMB_2 = 43,                   /* _SYMB_2  */
+  YYSYMBOL__SYMB_3 = 44,                   /* _SYMB_3  */
+  YYSYMBOL__KW_break = 45,                 /* _KW_break  */
+  YYSYMBOL__KW_case = 46,                  /* _KW_case  */
+  YYSYMBOL__KW_char = 47,                  /* _KW_char  */
+  YYSYMBOL__KW_continue = 48,              /* _KW_continue  */
+  YYSYMBOL__KW_default = 49,               /* _KW_default  */
+  YYSYMBOL__KW_double = 50,                /* _KW_double  */
+  YYSYMBOL__KW_else = 51,                  /* _KW_else  */
+  YYSYMBOL__KW_float = 52,                 /* _KW_float  */
+  YYSYMBOL__KW_if = 53,                    /* _KW_if  */
+  YYSYMBOL__KW_int = 54,                   /* _KW_int  */
+  YYSYMBOL__KW_long = 55,                  /* _KW_long  */
+  YYSYMBOL__KW_return = 56,                /* _KW_return  */
+  YYSYMBOL__KW_short = 57,                 /* _KW_short  */
+  YYSYMBOL__KW_struct = 58,                /* _KW_struct  */
+  YYSYMBOL__KW_switch = 59,                /* _KW_switch  */
+  YYSYMBOL__KW_unsigned = 60,              /* _KW_unsigned  */
+  YYSYMBOL__KW_void = 61,                  /* _KW_void  */
+  YYSYMBOL__KW_while = 62,                 /* _KW_while  */
+  YYSYMBOL__BAR = 63,                      /* _BAR  */
+  YYSYMBOL__BAREQ = 64,                    /* _BAREQ  */
+  YYSYMBOL__DBAR = 65,                     /* _DBAR  */
+  YYSYMBOL__TILDE = 66,                    /* _TILDE  */
+  YYSYMBOL_T_BLOCKATTRIBUTE = 67,          /* T_BLOCKATTRIBUTE  */
+  YYSYMBOL_T_CONST = 68,                   /* T_CONST  */
+  YYSYMBOL_T_LBRACE = 69,                  /* T_LBRACE  */
+  YYSYMBOL_T_LBRACKET = 70,                /* T_LBRACKET  */
+  YYSYMBOL_T_RBRACE = 71,                  /* T_RBRACE  */
+  YYSYMBOL_T_RBRACKET = 72,                /* T_RBRACKET  */
+  YYSYMBOL_T_RESTRICT = 73,                /* T_RESTRICT  */
+  YYSYMBOL_T_SIGNED = 74,                  /* T_SIGNED  */
+  YYSYMBOL_T_VOLATILE = 75,                /* T_VOLATILE  */
+  YYSYMBOL__CHAR_ = 76,                    /* _CHAR_  */
+  YYSYMBOL__INTEGER_ = 77,                 /* _INTEGER_  */
+  YYSYMBOL__DOUBLE_ = 78,                  /* _DOUBLE_  */
+  YYSYMBOL__IDENT_ = 79,                   /* _IDENT_  */
+  YYSYMBOL_YYACCEPT = 80,                  /* $accept  */
+  YYSYMBOL_Program = 81,                   /* Program  */
+  YYSYMBOL_Globals = 82,                   /* Globals  */
+  YYSYMBOL_Global = 83,                    /* Global  */
+  YYSYMBOL_FunctionDef = 84,               /* FunctionDef  */
+  YYSYMBOL_FunctionDefStart = 85,          /* FunctionDefStart  */
+  YYSYMBOL_DeclSpecList = 86,              /* DeclSpecList  */
+  YYSYMBOL_DeclSpecListNoNamed = 87,       /* DeclSpecListNoNamed  */
+  YYSYMBOL_TypeSpec = 88,                  /* TypeSpec  */
+  YYSYMBOL_Declarator = 89,                /* Declarator  */
+  YYSYMBOL_PointerOpt = 90,                /* PointerOpt  */
+  YYSYMBOL_DirectDecl = 91,                /* DirectDecl  */
+  YYSYMBOL_AttributesWithAsm = 92,         /* AttributesWithAsm  */
+  YYSYMBOL_RestParList = 93,               /* RestParList  */
+  YYSYMBOL_ParameterDecl = 94,             /* ParameterDecl  */
+  YYSYMBOL_ListParameterDecl = 95,         /* ListParameterDecl  */
+  YYSYMBOL_GhostParameterOpt = 96,         /* GhostParameterOpt  */
+  YYSYMBOL_IdOrTypename = 97,              /* IdOrTypename  */
+  YYSYMBOL_IdOrTypenameAsId = 98,          /* IdOrTypenameAsId  */
+  YYSYMBOL_Declaration = 99,               /* Declaration  */
+  YYSYMBOL_DeclAndInitDeclAttrList = 100,  /* DeclAndInitDeclAttrList  */
+  YYSYMBOL_InitDeclaratorAttr = 101,       /* InitDeclaratorAttr  */
+  YYSYMBOL_ListInitDeclaratorAttr = 102,   /* ListInitDeclaratorAttr  */
+  YYSYMBOL_InitDeclarator = 103,           /* InitDeclarator  */
+  YYSYMBOL_StructDeclList = 104,           /* StructDeclList  */
+  YYSYMBOL_FieldDecl = 105,                /* FieldDecl  */
+  YYSYMBOL_ListFieldDecl = 106,            /* ListFieldDecl  */
+  YYSYMBOL_Attribute = 107,                /* Attribute  */
+  YYSYMBOL_ListAttribute = 108,            /* ListAttribute  */
+  YYSYMBOL_Block = 109,                    /* Block  */
+  YYSYMBOL_BlockAttrs = 110,               /* BlockAttrs  */
+  YYSYMBOL_BlockElement = 111,             /* BlockElement  */
+  YYSYMBOL_ListBlockElement = 112,         /* ListBlockElement  */
+  YYSYMBOL_Statement = 113,                /* Statement  */
+  YYSYMBOL_Attr = 114,                     /* Attr  */
+  YYSYMBOL_ListAttr = 115,                 /* ListAttr  */
+  YYSYMBOL_Attr1 = 116,                    /* Attr1  */
+  YYSYMBOL_Attr2 = 117,                    /* Attr2  */
+  YYSYMBOL_Attr3 = 118,                    /* Attr3  */
+  YYSYMBOL_Attr4 = 119,                    /* Attr4  */
+  YYSYMBOL_Attr5 = 120,                    /* Attr5  */
+  YYSYMBOL_Attr6 = 121,                    /* Attr6  */
+  YYSYMBOL_Attr7 = 122,                    /* Attr7  */
+  YYSYMBOL_Attr8 = 123,                    /* Attr8  */
+  YYSYMBOL_Attr9 = 124,                    /* Attr9  */
+  YYSYMBOL_Attr10 = 125,                   /* Attr10  */
+  YYSYMBOL_Attr11 = 126,                   /* Attr11  */
+  YYSYMBOL_Attr12 = 127,                   /* Attr12  */
+  YYSYMBOL_Attr13 = 128,                   /* Attr13  */
+  YYSYMBOL_Attr14 = 129,                   /* Attr14  */
+  YYSYMBOL_BasicAttribute = 130,           /* BasicAttribute  */
+  YYSYMBOL_AnnotatedStmt = 131,            /* AnnotatedStmt  */
+  YYSYMBOL_ElsePart = 132,                 /* ElsePart  */
+  YYSYMBOL_OptExpression = 133,            /* OptExpression  */
+  YYSYMBOL_Expression = 134,               /* Expression  */
+  YYSYMBOL_ListExpression = 135,           /* ListExpression  */
+  YYSYMBOL_AssignExpr = 136,               /* AssignExpr  */
+  YYSYMBOL_AssignExpr1 = 137,              /* AssignExpr1  */
+  YYSYMBOL_AssignExpr2 = 138,              /* AssignExpr2  */
+  YYSYMBOL_AssignExpr3 = 139,              /* AssignExpr3  */
+  YYSYMBOL_AssignExpr4 = 140,              /* AssignExpr4  */
+  YYSYMBOL_AssignExpr5 = 141,              /* AssignExpr5  */
+  YYSYMBOL_AssignExpr6 = 142,              /* AssignExpr6  */
+  YYSYMBOL_AssignExpr7 = 143,              /* AssignExpr7  */
+  YYSYMBOL_AssignExpr8 = 144,              /* AssignExpr8  */
+  YYSYMBOL_AssignExpr9 = 145,              /* AssignExpr9  */
+  YYSYMBOL_AssignExpr10 = 146,             /* AssignExpr10  */
+  YYSYMBOL_AssignExpr11 = 147,             /* AssignExpr11  */
+  YYSYMBOL_AssignExpr12 = 148,             /* AssignExpr12  */
+  YYSYMBOL_AssignExpr13 = 149,             /* AssignExpr13  */
+  YYSYMBOL_AssignExpr14 = 150,             /* AssignExpr14  */
+  YYSYMBOL_AssignExpr15 = 151,             /* AssignExpr15  */
+  YYSYMBOL_Constant = 152,                 /* Constant  */
+  YYSYMBOL_TypeName = 153                  /* TypeName  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
 
 /* Second part of user prologue.  */
-#line 88 "partial_bnfc_parser.y"
+#line 104 "partial_bnfc_parser.y"
 
 void yyerror(YYLTYPE *loc, yyscan_t scanner, YYSTYPE *result, const char *msg)
 {
@@ -204,7 +300,7 @@ int yyparse(yyscan_t scanner, YYSTYPE *result);
 
 extern int yylex(YYSTYPE *lvalp, YYLTYPE *llocp, yyscan_t scanner);
 
-#line 208 "Parser.C"
+#line 304 "Parser.C"
 
 
 #ifdef short
@@ -317,7 +413,7 @@ typedef int yytype_uint16;
 
 
 /* Stored state numbers (used for stacks). */
-typedef yytype_int8 yy_state_t;
+typedef yytype_int16 yy_state_t;
 
 /* State numbers in computations.  */
 typedef int yy_state_fast_t;
@@ -531,19 +627,19 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  28
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   137
+#define YYLAST   591
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  28
+#define YYNTOKENS  80
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  30
+#define YYNNTS  74
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  63
+#define YYNRULES  207
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  89
+#define YYNSTATES  350
 
 /* YYMAXUTOK -- Last valid token kind.  */
-#define YYMAXUTOK   282
+#define YYMAXUTOK   334
 
 
 /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
@@ -585,20 +681,39 @@ static const yytype_int8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
        5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
       15,    16,    17,    18,    19,    20,    21,    22,    23,    24,
-      25,    26,    27
+      25,    26,    27,    28,    29,    30,    31,    32,    33,    34,
+      35,    36,    37,    38,    39,    40,    41,    42,    43,    44,
+      45,    46,    47,    48,    49,    50,    51,    52,    53,    54,
+      55,    56,    57,    58,    59,    60,    61,    62,    63,    64,
+      65,    66,    67,    68,    69,    70,    71,    72,    73,    74,
+      75,    76,    77,    78,    79
 };
 
 #if YYDEBUG
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
-static const yytype_uint8 yyrline[] =
+static const yytype_int16 yyrline[] =
 {
-       0,   160,   160,   162,   163,   164,   166,   167,   169,   171,
-     173,   175,   176,   178,   179,   181,   182,   183,   184,   185,
-     186,   187,   188,   189,   190,   191,   192,   193,   194,   195,
-     197,   199,   200,   202,   203,   204,   206,   208,   210,   211,
-     212,   214,   215,   217,   219,   221,   223,   224,   226,   227,
-     229,   231,   232,   234,   236,   237,   238,   239,   241,   243,
-     244,   246,   248,   249
+       0,   273,   273,   275,   276,   277,   279,   280,   282,   284,
+     286,   287,   289,   290,   292,   293,   294,   295,   296,   297,
+     298,   299,   300,   301,   302,   303,   304,   305,   306,   308,
+     310,   311,   313,   314,   315,   317,   319,   321,   322,   323,
+     325,   326,   328,   330,   332,   334,   335,   337,   338,   340,
+     342,   343,   345,   347,   348,   349,   350,   352,   354,   355,
+     357,   359,   360,   362,   364,   365,   367,   368,   370,   371,
+     373,   374,   375,   376,   377,   378,   379,   380,   381,   382,
+     383,   384,   386,   387,   389,   390,   392,   393,   395,   396,
+     398,   399,   401,   402,   404,   405,   407,   408,   410,   411,
+     412,   414,   415,   416,   417,   418,   420,   421,   422,   424,
+     425,   426,   428,   429,   430,   431,   433,   434,   435,   436,
+     437,   438,   439,   441,   442,   443,   444,   445,   446,   448,
+     449,   451,   452,   457,   459,   460,   462,   463,   465,   467,
+     468,   470,   471,   472,   473,   474,   475,   476,   477,   478,
+     479,   480,   481,   483,   484,   486,   487,   489,   490,   492,
+     493,   495,   496,   498,   499,   501,   502,   503,   505,   506,
+     507,   508,   509,   511,   512,   513,   515,   516,   517,   519,
+     520,   521,   522,   524,   525,   527,   528,   529,   530,   531,
+     532,   533,   534,   535,   536,   538,   539,   540,   541,   542,
+     544,   545,   546,   547,   549,   550,   551,   553
 };
 #endif
 
@@ -614,19 +729,37 @@ static const char *yysymbol_name (yysymbol_kind_t yysymbol) YY_ATTRIBUTE_UNUSED;
    First, the terminals, then, starting at YYNTOKENS, nonterminals.  */
 static const char *const yytname[] =
 {
-  "\"end of file\"", "error", "\"invalid token\"", "_ERROR_", "_LPAREN",
-  "_RPAREN", "_STAR", "_COMMA", "_SEMI", "_SYMB_1", "_SYMB_2", "_SYMB_3",
-  "_KW_char", "_KW_double", "_KW_float", "_KW_int", "_KW_long",
-  "_KW_short", "_KW_struct", "_KW_unsigned", "_KW_void", "T_CONST",
-  "T_LBRACE", "T_RBRACE", "T_RESTRICT", "T_SIGNED", "T_VOLATILE",
-  "_IDENT_", "$accept", "Program", "Globals", "Global", "FunctionDef",
-  "Block", "FunctionDefStart", "DeclSpecList", "DeclSpecListNoNamed",
-  "TypeSpec", "Declarator", "PointerOpt", "DirectDecl",
-  "AttributesWithAsm", "RestParList", "ParameterDecl", "ListParameterDecl",
-  "GhostParameterOpt", "IdOrTypename", "IdOrTypenameAsId", "Declaration",
-  "DeclAndInitDeclAttrList", "InitDeclaratorAttr",
-  "ListInitDeclaratorAttr", "InitDeclarator", "StructDeclList",
-  "FieldDecl", "ListFieldDecl", "Attribute", "ListAttribute", YY_NULLPTR
+  "\"end of file\"", "error", "\"invalid token\"", "_ERROR_", "_BANG",
+  "_BANGEQ", "_PERCENT", "_PERCENTEQ", "_AMP", "_DAMP", "_AMPEQ",
+  "_LPAREN", "_RPAREN", "_STAR", "_STAREQ", "_PLUS", "_DPLUS", "_PLUSEQ",
+  "_COMMA", "_MINUS", "_DMINUS", "_MINUSEQ", "_RARROW", "_DOT",
+  "_ELLIPSIS", "_SLASH", "_SLASHEQ", "_COLON", "_SEMI", "_LT", "_DLT",
+  "_DLTEQ", "_LDARROW", "_EQ", "_DEQ", "_GT", "_GTEQ", "_DGT", "_DGTEQ",
+  "_QUESTION", "_CARET", "_CARETEQ", "_SYMB_1", "_SYMB_2", "_SYMB_3",
+  "_KW_break", "_KW_case", "_KW_char", "_KW_continue", "_KW_default",
+  "_KW_double", "_KW_else", "_KW_float", "_KW_if", "_KW_int", "_KW_long",
+  "_KW_return", "_KW_short", "_KW_struct", "_KW_switch", "_KW_unsigned",
+  "_KW_void", "_KW_while", "_BAR", "_BAREQ", "_DBAR", "_TILDE",
+  "T_BLOCKATTRIBUTE", "T_CONST", "T_LBRACE", "T_LBRACKET", "T_RBRACE",
+  "T_RBRACKET", "T_RESTRICT", "T_SIGNED", "T_VOLATILE", "_CHAR_",
+  "_INTEGER_", "_DOUBLE_", "_IDENT_", "$accept", "Program", "Globals",
+  "Global", "FunctionDef", "FunctionDefStart", "DeclSpecList",
+  "DeclSpecListNoNamed", "TypeSpec", "Declarator", "PointerOpt",
+  "DirectDecl", "AttributesWithAsm", "RestParList", "ParameterDecl",
+  "ListParameterDecl", "GhostParameterOpt", "IdOrTypename",
+  "IdOrTypenameAsId", "Declaration", "DeclAndInitDeclAttrList",
+  "InitDeclaratorAttr", "ListInitDeclaratorAttr", "InitDeclarator",
+  "StructDeclList", "FieldDecl", "ListFieldDecl", "Attribute",
+  "ListAttribute", "Block", "BlockAttrs", "BlockElement",
+  "ListBlockElement", "Statement", "Attr", "ListAttr", "Attr1", "Attr2",
+  "Attr3", "Attr4", "Attr5", "Attr6", "Attr7", "Attr8", "Attr9", "Attr10",
+  "Attr11", "Attr12", "Attr13", "Attr14", "BasicAttribute",
+  "AnnotatedStmt", "ElsePart", "OptExpression", "Expression",
+  "ListExpression", "AssignExpr", "AssignExpr1", "AssignExpr2",
+  "AssignExpr3", "AssignExpr4", "AssignExpr5", "AssignExpr6",
+  "AssignExpr7", "AssignExpr8", "AssignExpr9", "AssignExpr10",
+  "AssignExpr11", "AssignExpr12", "AssignExpr13", "AssignExpr14",
+  "AssignExpr15", "Constant", "TypeName", YY_NULLPTR
 };
 
 static const char *
@@ -636,139 +769,347 @@ yysymbol_name (yysymbol_kind_t yysymbol)
 }
 #endif
 
-#define YYPACT_NINF (-38)
+#define YYPACT_NINF (-269)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
 
-#define YYTABLE_NINF (-32)
+#define YYTABLE_NINF (-31)
 
 #define yytable_value_is_error(Yyn) \
   0
 
 /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
    STATE-NUM.  */
-static const yytype_int8 yypact[] =
+static const yytype_int16 yypact[] =
 {
-      77,    77,   -38,   -38,   -38,   -38,   -38,   -38,   -38,   -38,
-     -38,   -17,   -38,   -38,   -38,     4,   -38,    77,   -38,   -14,
-       1,   112,   -38,   -38,    95,   -38,   -11,   -38,   -38,   -38,
-      -7,   -38,   -38,   -38,    31,    29,    49,    47,   -38,   112,
-      95,    44,    35,    95,   -38,    43,    56,   -38,   -38,    59,
-     -38,   -38,    95,   -38,    55,    60,   -38,    50,   -38,   -38,
-     -38,     9,   -38,   -38,    62,   -38,   -38,   -38,    59,    95,
-     -38,    26,   -38,     6,    65,    67,   -38,    59,   -38,   -38,
-      70,   -38,   -38,   -38,    26,   -38,   -38,   -38,   -38
+     473,   473,  -269,  -269,  -269,  -269,  -269,  -269,  -269,  -269,
+    -269,   -30,  -269,  -269,  -269,    40,  -269,   473,  -269,   -26,
+      50,   517,  -269,  -269,   496,  -269,   -18,  -269,  -269,  -269,
+      29,  -269,  -269,  -269,    77,    73,   131,   144,  -269,   517,
+     496,    71,    93,   496,   158,  -269,     3,   162,  -269,  -269,
+     165,  -269,  -269,   496,  -269,   175,   187,  -269,   132,   415,
+     152,  -269,  -269,  -269,   395,  -269,  -269,   204,  -269,  -269,
+    -269,   165,   496,  -269,   415,   415,   415,   415,   415,   415,
+     415,  -269,  -269,   213,   209,   226,   212,    16,   238,   186,
+     222,   244,    20,    66,    57,   123,    61,  -269,     5,  -269,
+    -269,   325,   325,    73,   235,   325,   325,   401,   325,   401,
+    -269,   237,   325,   239,   236,   259,   245,   265,   269,   325,
+    -269,  -269,  -269,  -269,  -269,    50,  -269,  -269,  -269,  -269,
+     263,   255,  -269,  -269,    27,   275,   223,   251,   286,    42,
+      76,    70,   171,   141,   481,  -269,   154,  -269,  -269,   214,
+    -269,     1,   290,   285,  -269,   165,  -269,  -269,  -269,  -269,
+     293,  -269,  -269,  -269,  -269,    11,   415,  -269,   415,   415,
+     415,   415,   415,   415,   415,   415,   415,   415,   415,   415,
+     415,   415,   415,   415,   415,   415,   415,   415,    73,    73,
+     415,  -269,  -269,  -269,  -269,   294,   295,   296,  -269,  -269,
+      37,  -269,  -269,  -269,  -269,    58,  -269,   311,   325,  -269,
+     325,   325,  -269,   325,  -269,   325,   325,   325,   325,   325,
+     325,   325,   325,   325,   325,   325,   325,   325,   325,   325,
+     325,   325,   325,   325,   325,   325,   325,   325,   325,   325,
+     325,   325,   325,   325,   325,  -269,  -269,    73,    73,   298,
+    -269,  -269,  -269,   214,  -269,  -269,  -269,   304,  -269,  -269,
+     291,   238,   186,   222,   244,    20,    66,    66,    57,    57,
+      57,    57,   123,   123,    61,    61,  -269,  -269,  -269,  -269,
+    -269,   249,  -269,  -269,   325,   325,   311,  -269,  -269,   305,
+     313,   316,  -269,   308,  -269,   275,  -269,   223,   251,   286,
+      42,    76,    76,    70,    70,    70,    70,   171,   171,   141,
+     141,  -269,  -269,  -269,  -269,  -269,  -269,  -269,  -269,  -269,
+    -269,  -269,  -269,  -269,  -269,  -269,  -269,  -269,  -269,  -269,
+    -269,   415,  -269,  -269,   310,  -269,   311,   311,   311,   325,
+    -269,   311,   272,  -269,  -269,  -269,  -269,   311,  -269,  -269
 };
 
 /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
    Performed when YYTABLE does not specify something else to do.  Zero
    means the default is an error.  */
-static const yytype_int8 yydefact[] =
+static const yytype_uint8 yydefact[] =
 {
-       3,     3,    17,    19,    22,    16,    24,    23,    20,    21,
-      18,     0,    26,    15,    25,     0,     2,     3,     7,     0,
-      31,    11,     6,     5,    54,    45,    27,    44,     1,     4,
-       0,     8,    62,    47,    53,     0,     0,    48,    12,    13,
-      54,    31,     0,    54,     9,    31,    36,    33,    46,    31,
-      14,    56,    54,    58,    59,     0,    29,     0,    61,    32,
-      63,     0,    30,    53,    51,    49,    50,    55,    31,    54,
-      28,     0,    43,    39,     0,    41,    37,    31,    60,    57,
-       0,    34,    38,    43,     0,    52,    40,    35,    42
+       3,     3,    16,    18,    21,    15,    23,    22,    19,    20,
+      17,     0,    25,    14,    24,     0,     2,     3,     7,     0,
+      30,    10,     6,     5,    53,    44,    26,    43,     1,     4,
+      64,     8,    61,    46,    52,     0,     0,    47,    11,    12,
+      53,    30,     0,    53,     0,    68,    30,    35,    32,    45,
+      30,    13,    55,    53,    57,    58,     0,    28,     0,     0,
+       0,    60,    31,    62,     0,    29,    52,    50,    48,    49,
+      54,    30,    53,    27,     0,     0,     0,     0,     0,     0,
+       0,   131,   132,     0,    84,     0,    82,    86,    88,    90,
+      92,    94,    96,    98,   101,   106,   109,   112,   116,   123,
+     129,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+      70,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+      63,   206,   204,   205,   200,    30,    66,    72,    69,    67,
+     139,     0,   138,   141,   153,   155,   157,   159,   161,   163,
+     165,   168,   173,   176,   179,   183,   185,   195,   201,     0,
+      42,    38,     0,    40,    36,    30,    59,    56,   121,   120,
+       0,   119,   117,   118,   122,     0,     0,    65,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,   192,   191,   194,   207,     0,     0,     0,   190,   188,
+       0,   186,   189,   187,    80,     0,    81,     0,     0,    79,
+       0,     0,   193,     0,    71,   136,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,   198,   199,     0,     0,     0,
+      33,    37,    42,     0,    51,   130,   125,     0,    85,    83,
+       0,    89,    91,    93,    95,    97,   100,    99,   102,   104,
+     103,   105,   107,   108,   110,   111,   115,   113,   114,   126,
+     127,     0,   203,   202,     0,     0,     0,   133,    78,     0,
+       0,     0,   140,     0,   137,   156,   179,   158,   160,   162,
+     164,   167,   166,   169,   171,   170,   172,   174,   175,   177,
+     178,   182,   180,   181,   147,   148,   145,   143,   144,   146,
+     151,   142,   152,   150,   149,   197,   196,    39,    34,    41,
+     124,     0,   128,   184,     0,    76,     0,     0,     0,     0,
+      87,     0,   134,    74,    75,   154,    77,     0,    73,   135
 };
 
 /* YYPGOTO[NTERM-NUM].  */
-static const yytype_int8 yypgoto[] =
+static const yytype_int16 yypgoto[] =
 {
-     -38,   -38,    46,   -38,   -38,   -38,   -38,     0,    28,    27,
-     -18,    32,   -38,   -38,   -38,     5,   -12,    -5,    45,   -38,
-     -38,   -38,   -38,     2,    61,   -37,   -38,    14,   -38,   -38
+    -269,  -269,    41,  -269,  -269,  -269,     0,   303,    44,   -10,
+     297,  -269,  -269,  -269,   183,    94,    96,   -31,    -6,   289,
+    -269,  -269,   191,   -16,    19,  -269,   279,  -269,  -269,   -11,
+    -269,  -269,  -269,   292,   -55,   -56,  -156,  -269,   181,   182,
+     189,   185,   180,   -39,    55,     6,     8,   -42,  -269,  -269,
+    -269,  -268,  -269,  -269,  -101,   -60,   345,    23,  -269,   139,
+     146,   147,   149,   151,    -2,    74,     9,    30,   -99,    72,
+    -269,  -269,  -269,  -269
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
-static const yytype_int8 yydefgoto[] =
+static const yytype_int16 yydefgoto[] =
 {
-       0,    15,    16,    17,    18,    31,    19,    41,    38,    21,
-      53,    35,    46,    62,    74,    75,    76,    81,    26,    27,
-      22,    36,    64,    65,    66,    42,    54,    55,    60,    45
+       0,    15,    16,    17,    18,    19,    41,    38,    21,    66,
+      35,    47,    65,   152,   153,   154,   250,    26,    83,    22,
+      36,    67,    68,    37,    42,    55,    56,    63,    46,   127,
+      45,   128,    60,   287,    84,    85,    86,    87,    88,    89,
+      90,    91,    92,    93,    94,    95,    96,    97,    98,    99,
+     100,   288,   348,   293,   130,   131,   132,   133,   134,   135,
+     136,   137,   138,   139,   140,   141,   142,   143,   144,   145,
+     146,   147,   148,   197
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
    positive, shift that token.  If negative, reduce the rule whose
    number is the opposite.  If YYTABLE_NINF, syntax error.  */
-static const yytype_int8 yytable[] =
+static const yytype_int16 yytable[] =
 {
-      20,    20,    34,    51,    28,    24,    57,    32,    30,    33,
-      25,    43,    32,    71,    72,    67,    44,    20,     2,     3,
-       4,     5,     6,     7,     8,     9,    10,    11,    12,    13,
-      71,    63,    79,   -31,    14,     2,     3,     4,     5,     6,
-       7,     8,     9,    10,    11,    12,    13,    23,    39,    32,
-      32,    14,    52,   -10,    49,    82,    25,    48,    56,    63,
-      61,    73,    68,    29,    58,    32,    39,    50,    69,    77,
-      83,    73,    88,    70,    84,    86,    80,    59,    87,    85,
-      47,    37,    78,     0,    73,     1,     2,     3,     4,     5,
-       6,     7,     8,     9,    10,    11,    12,    13,     0,     0,
-       0,     0,    14,    40,     2,     3,     4,     5,     6,     7,
-       8,     9,    10,    11,    12,    13,     0,     0,     0,     0,
-      14,     2,     3,     4,     5,     6,     7,     8,     9,    10,
-      11,    12,    13,     0,     0,     0,     0,    14
+      20,    20,   191,   192,    48,    27,   198,   199,    31,   202,
+      34,   205,   259,   260,    32,    74,    32,    20,   335,    75,
+     212,   160,    76,   256,    77,   175,    78,   188,   189,    27,
+      79,    54,   158,   159,    69,   161,   162,   163,   164,    24,
+      28,   101,    23,    30,   196,   102,   103,   221,   104,    25,
+     105,    43,   106,   107,   176,   169,   108,   109,    29,    52,
+     125,    54,    58,    32,   151,    39,   215,   185,   342,   343,
+     344,    61,    70,   346,   186,   190,   222,    80,    33,   349,
+     -30,   170,   285,    39,    32,   286,   187,   181,    81,    82,
+      25,   157,   216,   195,   182,   177,    44,   193,   178,    53,
+     227,   179,   180,   119,   194,   223,    30,   228,   224,   257,
+     258,   225,   226,   121,   122,   123,   124,   296,   296,   296,
+     296,   296,   296,   296,   296,   296,   296,   296,   296,   296,
+     296,   296,   311,   312,   313,   281,   266,   267,   183,    69,
+     196,   251,   184,   276,   277,   278,    -9,   231,   289,   151,
+     290,   291,    25,   292,   232,   294,   101,   279,   280,    49,
+     102,   103,    50,   104,    57,   105,   233,   106,   107,    59,
+     245,   108,   109,    64,   246,   340,   247,   248,    32,   201,
+     110,   203,    27,    27,   334,   333,   229,   272,   273,   195,
+     230,   274,   275,    71,     2,     3,     4,   111,   112,     5,
+     113,   114,     6,    73,     7,   115,     8,     9,   116,    10,
+      11,   117,    12,    13,   118,    72,   325,   326,   119,   301,
+     302,    30,   155,   120,   165,   149,    14,   166,   121,   122,
+     123,   124,   268,   269,   270,   271,   307,   308,   167,   101,
+     296,    27,    27,   102,   103,   168,   104,   171,   105,   172,
+     106,   107,   174,   151,   108,   109,     2,     3,     4,   309,
+     310,     5,   173,   207,     6,   204,     7,   206,     8,     9,
+     208,    10,    11,   209,    12,    13,   210,     2,     3,     4,
+     211,   213,     5,   214,   217,     6,   218,     7,    14,     8,
+       9,   219,    10,    11,   220,    12,    13,   303,   304,   305,
+     306,   119,   252,   253,    30,   255,   282,   283,   284,    14,
+     327,   121,   122,   123,   124,   101,   330,   336,   331,   102,
+     103,   332,   104,   347,   105,   337,   106,   107,   338,   101,
+     108,   109,   249,   102,   103,   339,   104,   341,   105,   110,
+     106,   107,    51,    62,   108,   109,   254,   329,   328,   126,
+     156,   261,   129,   262,   265,   295,   111,   112,   264,   113,
+     114,   263,   345,   297,   115,   298,     0,   116,   299,     0,
+     117,   300,     0,   118,     0,     0,     0,   119,     0,     0,
+      30,     0,     0,     0,     0,     0,     0,   121,   122,   123,
+     124,   119,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,   121,   122,   123,   124,   101,   149,   150,     0,   102,
+     103,     0,   200,     0,   105,     0,   106,   107,     0,    74,
+     108,   109,     0,    75,     0,     0,    76,     0,    77,     0,
+      78,     0,     0,     0,    79,     0,     0,     2,     3,     4,
+       0,     0,     5,     0,     0,     6,     0,     7,     0,     8,
+       9,     0,    10,    11,     0,    12,    13,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,   119,     0,    14,
+       0,     0,     0,     0,     0,     0,     0,   121,   122,   123,
+     124,    80,     0,     0,     0,     0,     0,     0,   234,     0,
+       0,   235,    81,    82,    25,   236,     0,     0,   237,     0,
+       0,     1,   238,     0,     0,     0,     0,   239,     0,     0,
+       0,     0,   240,     0,   241,     2,     3,     4,     0,   242,
+       5,     0,   243,     6,    40,     7,     0,     8,     9,     0,
+      10,    11,     0,    12,    13,     0,     0,     0,     2,     3,
+       4,     0,     0,     5,     0,   244,     6,    14,     7,     0,
+       8,     9,     0,    10,    11,     0,    12,    13,     0,     2,
+       3,     4,     0,     0,     5,     0,     0,     6,     0,     7,
+      14,     8,     9,     0,    10,    11,     0,    12,    13,   314,
+     315,   316,   317,   318,   319,   320,   321,   322,   323,   324,
+       0,    14
 };
 
-static const yytype_int8 yycheck[] =
+static const yytype_int16 yycheck[] =
 {
-       0,     1,    20,    40,     0,    22,    43,     6,    22,     8,
-      27,    22,     6,     4,     5,    52,    23,    17,     9,    10,
-      11,    12,    13,    14,    15,    16,    17,    18,    19,    20,
-       4,    49,    69,    27,    25,     9,    10,    11,    12,    13,
-      14,    15,    16,    17,    18,    19,    20,     1,    21,     6,
-       6,    25,     8,    22,     7,    73,    27,     8,    23,    77,
-       4,    61,     7,    17,    21,     6,    39,    39,     8,     7,
-       5,    71,    84,    23,     7,     5,    71,    45,    83,    77,
-      35,    20,    68,    -1,    84,     8,     9,    10,    11,    12,
-      13,    14,    15,    16,    17,    18,    19,    20,    -1,    -1,
-      -1,    -1,    25,     8,     9,    10,    11,    12,    13,    14,
-      15,    16,    17,    18,    19,    20,    -1,    -1,    -1,    -1,
-      25,     9,    10,    11,    12,    13,    14,    15,    16,    17,
-      18,    19,    20,    -1,    -1,    -1,    -1,    25
+       0,     1,   101,   102,    35,    11,   105,   106,    19,   108,
+      20,   112,   168,   169,    13,     4,    13,    17,   286,     8,
+     119,    76,    11,    12,    13,     5,    15,    22,    23,    35,
+      19,    41,    74,    75,    50,    77,    78,    79,    80,    69,
+       0,     4,     1,    69,   104,     8,     9,     5,    11,    79,
+      13,    69,    15,    16,    34,    39,    19,    20,    17,    40,
+      60,    71,    43,    13,    64,    21,    39,     6,   336,   337,
+     338,    68,    53,   341,    13,    70,    34,    66,    28,   347,
+      79,    65,    24,    39,    13,    27,    25,    30,    77,    78,
+      79,    72,    65,   104,    37,    29,    67,   103,    32,    28,
+      30,    35,    36,    66,   104,    29,    69,    37,    32,   165,
+     166,    35,    36,    76,    77,    78,    79,   216,   217,   218,
+     219,   220,   221,   222,   223,   224,   225,   226,   227,   228,
+     229,   230,   231,   232,   233,   190,   175,   176,    15,   155,
+     200,   151,    19,   185,   186,   187,    69,     6,   208,   149,
+     210,   211,    79,   213,    13,   215,     4,   188,   189,    28,
+       8,     9,    18,    11,    71,    13,    25,    15,    16,    11,
+      16,    19,    20,    11,    20,   331,    22,    23,    13,   107,
+      28,   109,   188,   189,   285,   284,    15,   181,   182,   200,
+      19,   183,   184,    18,    42,    43,    44,    45,    46,    47,
+      48,    49,    50,    71,    52,    53,    54,    55,    56,    57,
+      58,    59,    60,    61,    62,    28,   247,   248,    66,   221,
+     222,    69,    18,    71,    11,    11,    74,    18,    76,    77,
+      78,    79,   177,   178,   179,   180,   227,   228,    12,     4,
+     339,   247,   248,     8,     9,    33,    11,     9,    13,    63,
+      15,    16,     8,   253,    19,    20,    42,    43,    44,   229,
+     230,    47,    40,    27,    50,    28,    52,    28,    54,    55,
+      11,    57,    58,    28,    60,    61,    11,    42,    43,    44,
+      11,    18,    47,    28,     9,    50,    63,    52,    74,    54,
+      55,    40,    57,    58,     8,    60,    61,   223,   224,   225,
+     226,    66,    12,    18,    69,    12,    12,    12,    12,    74,
+      12,    76,    77,    78,    79,     4,    12,    12,    27,     8,
+       9,    72,    11,    51,    13,    12,    15,    16,    12,     4,
+      19,    20,   149,     8,     9,    27,    11,    27,    13,    28,
+      15,    16,    39,    46,    19,    20,   155,   253,   252,    60,
+      71,   170,    60,   171,   174,   216,    45,    46,   173,    48,
+      49,   172,   339,   217,    53,   218,    -1,    56,   219,    -1,
+      59,   220,    -1,    62,    -1,    -1,    -1,    66,    -1,    -1,
+      69,    -1,    -1,    -1,    -1,    -1,    -1,    76,    77,    78,
+      79,    66,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    76,    77,    78,    79,     4,    11,    12,    -1,     8,
+       9,    -1,    11,    -1,    13,    -1,    15,    16,    -1,     4,
+      19,    20,    -1,     8,    -1,    -1,    11,    -1,    13,    -1,
+      15,    -1,    -1,    -1,    19,    -1,    -1,    42,    43,    44,
+      -1,    -1,    47,    -1,    -1,    50,    -1,    52,    -1,    54,
+      55,    -1,    57,    58,    -1,    60,    61,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    66,    -1,    74,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    76,    77,    78,
+      79,    66,    -1,    -1,    -1,    -1,    -1,    -1,     7,    -1,
+      -1,    10,    77,    78,    79,    14,    -1,    -1,    17,    -1,
+      -1,    28,    21,    -1,    -1,    -1,    -1,    26,    -1,    -1,
+      -1,    -1,    31,    -1,    33,    42,    43,    44,    -1,    38,
+      47,    -1,    41,    50,    28,    52,    -1,    54,    55,    -1,
+      57,    58,    -1,    60,    61,    -1,    -1,    -1,    42,    43,
+      44,    -1,    -1,    47,    -1,    64,    50,    74,    52,    -1,
+      54,    55,    -1,    57,    58,    -1,    60,    61,    -1,    42,
+      43,    44,    -1,    -1,    47,    -1,    -1,    50,    -1,    52,
+      74,    54,    55,    -1,    57,    58,    -1,    60,    61,   234,
+     235,   236,   237,   238,   239,   240,   241,   242,   243,   244,
+      -1,    74
 };
 
 /* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
    state STATE-NUM.  */
-static const yytype_int8 yystos[] =
+static const yytype_uint8 yystos[] =
 {
-       0,     8,     9,    10,    11,    12,    13,    14,    15,    16,
-      17,    18,    19,    20,    25,    29,    30,    31,    32,    34,
-      35,    37,    48,    30,    22,    27,    46,    47,     0,    30,
-      22,    33,     6,     8,    38,    39,    49,    52,    36,    37,
-       8,    35,    53,    22,    23,    57,    40,    46,     8,     7,
-      36,    53,     8,    38,    54,    55,    23,    53,    21,    39,
-      56,     4,    41,    38,    50,    51,    52,    53,     7,     8,
-      23,     4,     5,    35,    42,    43,    44,     7,    55,    53,
-      43,    45,    38,     5,     7,    51,     5,    45,    44
+       0,    28,    42,    43,    44,    47,    50,    52,    54,    55,
+      57,    58,    60,    61,    74,    81,    82,    83,    84,    85,
+      86,    88,    99,    82,    69,    79,    97,    98,     0,    82,
+      69,   109,    13,    28,    89,    90,   100,   103,    87,    88,
+      28,    86,   104,    69,    67,   110,   108,    91,    97,    28,
+      18,    87,   104,    28,    89,   105,   106,    71,   104,    11,
+     112,    68,    90,   107,    11,    92,    89,   101,   102,   103,
+     104,    18,    28,    71,     4,     8,    11,    13,    15,    19,
+      66,    77,    78,    98,   114,   115,   116,   117,   118,   119,
+     120,   121,   122,   123,   124,   125,   126,   127,   128,   129,
+     130,     4,     8,     9,    11,    13,    15,    16,    19,    20,
+      28,    45,    46,    48,    49,    53,    56,    59,    62,    66,
+      71,    76,    77,    78,    79,    86,    99,   109,   111,   113,
+     134,   135,   136,   137,   138,   139,   140,   141,   142,   143,
+     144,   145,   146,   147,   148,   149,   150,   151,   152,    11,
+      12,    86,    93,    94,    95,    18,   106,   104,   127,   127,
+     114,   127,   127,   127,   127,    11,    18,    12,    33,    39,
+      65,     9,    63,    40,     8,     5,    34,    29,    32,    35,
+      36,    30,    37,    15,    19,     6,    13,    25,    22,    23,
+      70,   148,   148,    98,    86,   109,   135,   153,   148,   148,
+      11,   149,   148,   149,    28,   134,    28,    27,    11,    28,
+      11,    11,   148,    18,    28,    39,    65,     9,    63,    40,
+       8,     5,    34,    29,    32,    35,    36,    30,    37,    15,
+      19,     6,    13,    25,     7,    10,    14,    17,    21,    26,
+      31,    33,    38,    41,    64,    16,    20,    22,    23,    94,
+      96,    89,    12,    18,   102,    12,    12,   115,   115,   116,
+     116,   118,   119,   120,   121,   122,   123,   123,   124,   124,
+     124,   124,   125,   125,   126,   126,   127,   127,   127,    97,
+      97,   114,    12,    12,    12,    24,    27,   113,   131,   135,
+     135,   135,   135,   133,   135,   139,   148,   140,   141,   142,
+     143,   144,   144,   145,   145,   145,   145,   146,   146,   147,
+     147,   148,   148,   148,   136,   136,   136,   136,   136,   136,
+     136,   136,   136,   136,   136,    97,    97,    12,    96,    95,
+      12,    27,    72,   148,   134,   131,    12,    12,    12,    27,
+     116,    27,   131,   131,   131,   137,   131,    51,   132,   131
 };
 
 /* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
-static const yytype_int8 yyr1[] =
+static const yytype_uint8 yyr1[] =
 {
-       0,    28,    29,    30,    30,    30,    31,    31,    32,    33,
-      34,    35,    35,    36,    36,    37,    37,    37,    37,    37,
-      37,    37,    37,    37,    37,    37,    37,    37,    37,    37,
-      38,    39,    39,    40,    40,    40,    41,    42,    43,    43,
-      43,    44,    44,    45,    46,    47,    48,    48,    49,    49,
-      50,    51,    51,    52,    53,    53,    53,    53,    54,    55,
-      55,    56,    57,    57
+       0,    80,    81,    82,    82,    82,    83,    83,    84,    85,
+      86,    86,    87,    87,    88,    88,    88,    88,    88,    88,
+      88,    88,    88,    88,    88,    88,    88,    88,    88,    89,
+      90,    90,    91,    91,    91,    92,    93,    94,    94,    94,
+      95,    95,    96,    97,    98,    99,    99,   100,   100,   101,
+     102,   102,   103,   104,   104,   104,   104,   105,   106,   106,
+     107,   108,   108,   109,   110,   110,   111,   111,   112,   112,
+     113,   113,   113,   113,   113,   113,   113,   113,   113,   113,
+     113,   113,   114,   114,   115,   115,   116,   116,   117,   117,
+     118,   118,   119,   119,   120,   120,   121,   121,   122,   122,
+     122,   123,   123,   123,   123,   123,   124,   124,   124,   125,
+     125,   125,   126,   126,   126,   126,   127,   127,   127,   127,
+     127,   127,   127,   128,   128,   128,   128,   128,   128,   129,
+     129,   130,   130,   131,   132,   132,   133,   133,   134,   135,
+     135,   136,   136,   136,   136,   136,   136,   136,   136,   136,
+     136,   136,   136,   137,   137,   138,   138,   139,   139,   140,
+     140,   141,   141,   142,   142,   143,   143,   143,   144,   144,
+     144,   144,   144,   145,   145,   145,   146,   146,   146,   147,
+     147,   147,   147,   148,   148,   149,   149,   149,   149,   149,
+     149,   149,   149,   149,   149,   150,   150,   150,   150,   150,
+     151,   151,   151,   151,   152,   152,   152,   153
 };
 
 /* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr2[] =
 {
        0,     2,     1,     0,     2,     2,     1,     1,     2,     2,
-       2,     1,     2,     1,     2,     1,     1,     1,     1,     1,
-       1,     1,     1,     1,     1,     1,     1,     2,     5,     4,
-       3,     0,     3,     1,     4,     5,     0,     1,     2,     1,
-       3,     1,     3,     0,     1,     1,     3,     2,     1,     3,
-       1,     1,     3,     1,     0,     3,     2,     4,     1,     1,
-       3,     1,     0,     2
+       1,     2,     1,     2,     1,     1,     1,     1,     1,     1,
+       1,     1,     1,     1,     1,     1,     2,     5,     4,     3,
+       0,     3,     1,     4,     5,     0,     1,     2,     1,     3,
+       1,     3,     0,     1,     1,     3,     2,     1,     3,     1,
+       1,     3,     1,     0,     3,     2,     4,     1,     1,     3,
+       1,     0,     2,     4,     0,     4,     1,     1,     0,     2,
+       1,     2,     1,     6,     5,     5,     4,     6,     3,     2,
+       2,     2,     1,     3,     1,     3,     1,     5,     1,     3,
+       1,     3,     1,     3,     1,     3,     1,     3,     1,     3,
+       3,     1,     3,     3,     3,     3,     1,     3,     3,     1,
+       3,     3,     1,     3,     3,     3,     1,     2,     2,     2,
+       2,     2,     2,     1,     4,     3,     3,     3,     4,     1,
+       3,     1,     1,     1,     0,     2,     0,     1,     1,     1,
+       3,     1,     3,     3,     3,     3,     3,     3,     3,     3,
+       3,     3,     3,     1,     5,     1,     3,     1,     3,     1,
+       3,     1,     3,     1,     3,     1,     3,     3,     1,     3,
+       3,     3,     3,     1,     3,     3,     1,     3,     3,     1,
+       3,     3,     3,     1,     4,     1,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     1,     3,     3,     2,     2,
+       1,     1,     3,     3,     1,     1,     1,     1
 };
 
 
@@ -1357,379 +1698,1243 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* Program: Globals  */
-#line 160 "partial_bnfc_parser.y"
+#line 273 "partial_bnfc_parser.y"
                   { (yyval.program_) = new partial_acsl::AProgram((yyvsp[0].globals_)); (yyval.program_)->line_number = (yyloc).first_line; (yyval.program_)->char_number = (yyloc).first_column; result->program_ = (yyval.program_); }
-#line 1363 "Parser.C"
+#line 1704 "Parser.C"
     break;
 
   case 3: /* Globals: %empty  */
-#line 162 "partial_bnfc_parser.y"
+#line 275 "partial_bnfc_parser.y"
                       { (yyval.globals_) = new partial_acsl::NoGlobals(); (yyval.globals_)->line_number = (yyloc).first_line; (yyval.globals_)->char_number = (yyloc).first_column; result->globals_ = (yyval.globals_); }
-#line 1369 "Parser.C"
+#line 1710 "Parser.C"
     break;
 
   case 4: /* Globals: Global Globals  */
-#line 163 "partial_bnfc_parser.y"
+#line 276 "partial_bnfc_parser.y"
                    { (yyval.globals_) = new partial_acsl::SimpleGlobals((yyvsp[-1].global_), (yyvsp[0].globals_)); (yyval.globals_)->line_number = (yyloc).first_line; (yyval.globals_)->char_number = (yyloc).first_column; result->globals_ = (yyval.globals_); }
-#line 1375 "Parser.C"
+#line 1716 "Parser.C"
     break;
 
   case 5: /* Globals: _SEMI Globals  */
-#line 164 "partial_bnfc_parser.y"
+#line 277 "partial_bnfc_parser.y"
                   { (yyval.globals_) = new partial_acsl::SemiColonGlobals((yyvsp[0].globals_)); (yyval.globals_)->line_number = (yyloc).first_line; (yyval.globals_)->char_number = (yyloc).first_column; result->globals_ = (yyval.globals_); }
-#line 1381 "Parser.C"
+#line 1722 "Parser.C"
     break;
 
   case 6: /* Global: Declaration  */
-#line 166 "partial_bnfc_parser.y"
+#line 279 "partial_bnfc_parser.y"
                      { (yyval.global_) = new partial_acsl::GlobalsDeclataion((yyvsp[0].declaration_)); (yyval.global_)->line_number = (yyloc).first_line; (yyval.global_)->char_number = (yyloc).first_column; result->global_ = (yyval.global_); }
-#line 1387 "Parser.C"
+#line 1728 "Parser.C"
     break;
 
   case 7: /* Global: FunctionDef  */
-#line 167 "partial_bnfc_parser.y"
+#line 280 "partial_bnfc_parser.y"
                 { (yyval.global_) = new partial_acsl::GlobalsFunctionDef((yyvsp[0].functiondef_)); (yyval.global_)->line_number = (yyloc).first_line; (yyval.global_)->char_number = (yyloc).first_column; result->global_ = (yyval.global_); }
-#line 1393 "Parser.C"
+#line 1734 "Parser.C"
     break;
 
   case 8: /* FunctionDef: FunctionDefStart Block  */
-#line 169 "partial_bnfc_parser.y"
+#line 282 "partial_bnfc_parser.y"
                                      { (yyval.functiondef_) = new partial_acsl::SimpleFunctionDef((yyvsp[-1].functiondefstart_), (yyvsp[0].block_)); (yyval.functiondef_)->line_number = (yyloc).first_line; (yyval.functiondef_)->char_number = (yyloc).first_column; result->functiondef_ = (yyval.functiondef_); }
-#line 1399 "Parser.C"
+#line 1740 "Parser.C"
     break;
 
-  case 9: /* Block: T_LBRACE T_RBRACE  */
-#line 171 "partial_bnfc_parser.y"
-                          { (yyval.block_) = new partial_acsl::ABlock((yyvsp[-1]._string), (yyvsp[0]._string)); (yyval.block_)->line_number = (yyloc).first_line; (yyval.block_)->char_number = (yyloc).first_column; result->block_ = (yyval.block_); }
-#line 1405 "Parser.C"
-    break;
-
-  case 10: /* FunctionDefStart: DeclSpecList Declarator  */
-#line 173 "partial_bnfc_parser.y"
+  case 9: /* FunctionDefStart: DeclSpecList Declarator  */
+#line 284 "partial_bnfc_parser.y"
                                            { (yyval.functiondefstart_) = new partial_acsl::FunctionDefStartDeclarator((yyvsp[-1].declspeclist_), (yyvsp[0].declarator_)); (yyval.functiondefstart_)->line_number = (yyloc).first_line; (yyval.functiondefstart_)->char_number = (yyloc).first_column; result->functiondefstart_ = (yyval.functiondefstart_); }
-#line 1411 "Parser.C"
+#line 1746 "Parser.C"
     break;
 
-  case 11: /* DeclSpecList: TypeSpec  */
-#line 175 "partial_bnfc_parser.y"
+  case 10: /* DeclSpecList: TypeSpec  */
+#line 286 "partial_bnfc_parser.y"
                         { (yyval.declspeclist_) = new partial_acsl::DeclSpecTypeSpec((yyvsp[0].typespec_)); (yyval.declspeclist_)->line_number = (yyloc).first_line; (yyval.declspeclist_)->char_number = (yyloc).first_column; result->declspeclist_ = (yyval.declspeclist_); }
-#line 1417 "Parser.C"
+#line 1752 "Parser.C"
     break;
 
-  case 12: /* DeclSpecList: TypeSpec DeclSpecListNoNamed  */
-#line 176 "partial_bnfc_parser.y"
+  case 11: /* DeclSpecList: TypeSpec DeclSpecListNoNamed  */
+#line 287 "partial_bnfc_parser.y"
                                  { (yyval.declspeclist_) = new partial_acsl::DeclSpecTypeSpecNext((yyvsp[-1].typespec_), (yyvsp[0].declspeclistnonamed_)); (yyval.declspeclist_)->line_number = (yyloc).first_line; (yyval.declspeclist_)->char_number = (yyloc).first_column; result->declspeclist_ = (yyval.declspeclist_); }
-#line 1423 "Parser.C"
+#line 1758 "Parser.C"
     break;
 
-  case 13: /* DeclSpecListNoNamed: TypeSpec  */
-#line 178 "partial_bnfc_parser.y"
+  case 12: /* DeclSpecListNoNamed: TypeSpec  */
+#line 289 "partial_bnfc_parser.y"
                                { (yyval.declspeclistnonamed_) = new partial_acsl::DeclSpecNoNamedTypeSpec((yyvsp[0].typespec_)); (yyval.declspeclistnonamed_)->line_number = (yyloc).first_line; (yyval.declspeclistnonamed_)->char_number = (yyloc).first_column; result->declspeclistnonamed_ = (yyval.declspeclistnonamed_); }
-#line 1429 "Parser.C"
+#line 1764 "Parser.C"
     break;
 
-  case 14: /* DeclSpecListNoNamed: TypeSpec DeclSpecListNoNamed  */
-#line 179 "partial_bnfc_parser.y"
+  case 13: /* DeclSpecListNoNamed: TypeSpec DeclSpecListNoNamed  */
+#line 290 "partial_bnfc_parser.y"
                                  { (yyval.declspeclistnonamed_) = new partial_acsl::DeclSpecNoNamedTypeSpecNext((yyvsp[-1].typespec_), (yyvsp[0].declspeclistnonamed_)); (yyval.declspeclistnonamed_)->line_number = (yyloc).first_line; (yyval.declspeclistnonamed_)->char_number = (yyloc).first_column; result->declspeclistnonamed_ = (yyval.declspeclistnonamed_); }
-#line 1435 "Parser.C"
+#line 1770 "Parser.C"
     break;
 
-  case 15: /* TypeSpec: _KW_void  */
-#line 181 "partial_bnfc_parser.y"
+  case 14: /* TypeSpec: _KW_void  */
+#line 292 "partial_bnfc_parser.y"
                     { (yyval.typespec_) = new partial_acsl::TypeSpecVoidKeyWord(); (yyval.typespec_)->line_number = (yyloc).first_line; (yyval.typespec_)->char_number = (yyloc).first_column; result->typespec_ = (yyval.typespec_); }
-#line 1441 "Parser.C"
+#line 1776 "Parser.C"
     break;
 
-  case 16: /* TypeSpec: _KW_char  */
-#line 182 "partial_bnfc_parser.y"
+  case 15: /* TypeSpec: _KW_char  */
+#line 293 "partial_bnfc_parser.y"
              { (yyval.typespec_) = new partial_acsl::TypeSpecCharKeyWord(); (yyval.typespec_)->line_number = (yyloc).first_line; (yyval.typespec_)->char_number = (yyloc).first_column; result->typespec_ = (yyval.typespec_); }
-#line 1447 "Parser.C"
+#line 1782 "Parser.C"
     break;
 
-  case 17: /* TypeSpec: _SYMB_1  */
-#line 183 "partial_bnfc_parser.y"
+  case 16: /* TypeSpec: _SYMB_1  */
+#line 294 "partial_bnfc_parser.y"
             { (yyval.typespec_) = new partial_acsl::TypeSpecBoolKeyWord(); (yyval.typespec_)->line_number = (yyloc).first_line; (yyval.typespec_)->char_number = (yyloc).first_column; result->typespec_ = (yyval.typespec_); }
-#line 1453 "Parser.C"
+#line 1788 "Parser.C"
     break;
 
-  case 18: /* TypeSpec: _KW_short  */
-#line 184 "partial_bnfc_parser.y"
+  case 17: /* TypeSpec: _KW_short  */
+#line 295 "partial_bnfc_parser.y"
               { (yyval.typespec_) = new partial_acsl::TypeSpecShortKeyWord(); (yyval.typespec_)->line_number = (yyloc).first_line; (yyval.typespec_)->char_number = (yyloc).first_column; result->typespec_ = (yyval.typespec_); }
-#line 1459 "Parser.C"
+#line 1794 "Parser.C"
     break;
 
-  case 19: /* TypeSpec: _SYMB_2  */
-#line 185 "partial_bnfc_parser.y"
+  case 18: /* TypeSpec: _SYMB_2  */
+#line 296 "partial_bnfc_parser.y"
             { (yyval.typespec_) = new partial_acsl::TypeSpecInt32KeyWord(); (yyval.typespec_)->line_number = (yyloc).first_line; (yyval.typespec_)->char_number = (yyloc).first_column; result->typespec_ = (yyval.typespec_); }
-#line 1465 "Parser.C"
+#line 1800 "Parser.C"
     break;
 
-  case 20: /* TypeSpec: _KW_int  */
-#line 186 "partial_bnfc_parser.y"
+  case 19: /* TypeSpec: _KW_int  */
+#line 297 "partial_bnfc_parser.y"
             { (yyval.typespec_) = new partial_acsl::TypeSpecIntKeyWord(); (yyval.typespec_)->line_number = (yyloc).first_line; (yyval.typespec_)->char_number = (yyloc).first_column; result->typespec_ = (yyval.typespec_); }
-#line 1471 "Parser.C"
+#line 1806 "Parser.C"
     break;
 
-  case 21: /* TypeSpec: _KW_long  */
-#line 187 "partial_bnfc_parser.y"
+  case 20: /* TypeSpec: _KW_long  */
+#line 298 "partial_bnfc_parser.y"
              { (yyval.typespec_) = new partial_acsl::TypeSpecLongKeyWord(); (yyval.typespec_)->line_number = (yyloc).first_line; (yyval.typespec_)->char_number = (yyloc).first_column; result->typespec_ = (yyval.typespec_); }
-#line 1477 "Parser.C"
+#line 1812 "Parser.C"
     break;
 
-  case 22: /* TypeSpec: _SYMB_3  */
-#line 188 "partial_bnfc_parser.y"
+  case 21: /* TypeSpec: _SYMB_3  */
+#line 299 "partial_bnfc_parser.y"
             { (yyval.typespec_) = new partial_acsl::TypeSpecInt64KeyWord(); (yyval.typespec_)->line_number = (yyloc).first_line; (yyval.typespec_)->char_number = (yyloc).first_column; result->typespec_ = (yyval.typespec_); }
-#line 1483 "Parser.C"
+#line 1818 "Parser.C"
     break;
 
-  case 23: /* TypeSpec: _KW_float  */
-#line 189 "partial_bnfc_parser.y"
+  case 22: /* TypeSpec: _KW_float  */
+#line 300 "partial_bnfc_parser.y"
               { (yyval.typespec_) = new partial_acsl::TypeSpecFloatKeyWord(); (yyval.typespec_)->line_number = (yyloc).first_line; (yyval.typespec_)->char_number = (yyloc).first_column; result->typespec_ = (yyval.typespec_); }
-#line 1489 "Parser.C"
+#line 1824 "Parser.C"
     break;
 
-  case 24: /* TypeSpec: _KW_double  */
-#line 190 "partial_bnfc_parser.y"
+  case 23: /* TypeSpec: _KW_double  */
+#line 301 "partial_bnfc_parser.y"
                { (yyval.typespec_) = new partial_acsl::TypeSpecDoubleKeyWord(); (yyval.typespec_)->line_number = (yyloc).first_line; (yyval.typespec_)->char_number = (yyloc).first_column; result->typespec_ = (yyval.typespec_); }
-#line 1495 "Parser.C"
+#line 1830 "Parser.C"
     break;
 
-  case 25: /* TypeSpec: T_SIGNED  */
-#line 191 "partial_bnfc_parser.y"
+  case 24: /* TypeSpec: T_SIGNED  */
+#line 302 "partial_bnfc_parser.y"
              { (yyval.typespec_) = new partial_acsl::TypeSpecSignedKeyWord((yyvsp[0]._string)); (yyval.typespec_)->line_number = (yyloc).first_line; (yyval.typespec_)->char_number = (yyloc).first_column; result->typespec_ = (yyval.typespec_); }
-#line 1501 "Parser.C"
+#line 1836 "Parser.C"
     break;
 
-  case 26: /* TypeSpec: _KW_unsigned  */
-#line 192 "partial_bnfc_parser.y"
+  case 25: /* TypeSpec: _KW_unsigned  */
+#line 303 "partial_bnfc_parser.y"
                  { (yyval.typespec_) = new partial_acsl::TypeSpecUnsignedKeyWord(); (yyval.typespec_)->line_number = (yyloc).first_line; (yyval.typespec_)->char_number = (yyloc).first_column; result->typespec_ = (yyval.typespec_); }
-#line 1507 "Parser.C"
+#line 1842 "Parser.C"
     break;
 
-  case 27: /* TypeSpec: _KW_struct IdOrTypename  */
-#line 193 "partial_bnfc_parser.y"
+  case 26: /* TypeSpec: _KW_struct IdOrTypename  */
+#line 304 "partial_bnfc_parser.y"
                             { (yyval.typespec_) = new partial_acsl::StructId((yyvsp[0].idortypename_)); (yyval.typespec_)->line_number = (yyloc).first_line; (yyval.typespec_)->char_number = (yyloc).first_column; result->typespec_ = (yyval.typespec_); }
-#line 1513 "Parser.C"
+#line 1848 "Parser.C"
     break;
 
-  case 28: /* TypeSpec: _KW_struct IdOrTypename T_LBRACE StructDeclList T_RBRACE  */
-#line 194 "partial_bnfc_parser.y"
+  case 27: /* TypeSpec: _KW_struct IdOrTypename T_LBRACE StructDeclList T_RBRACE  */
+#line 305 "partial_bnfc_parser.y"
                                                              { (yyval.typespec_) = new partial_acsl::StructIdBraces((yyvsp[-3].idortypename_), (yyvsp[-2]._string), (yyvsp[-1].structdecllist_), (yyvsp[0]._string)); (yyval.typespec_)->line_number = (yyloc).first_line; (yyval.typespec_)->char_number = (yyloc).first_column; result->typespec_ = (yyval.typespec_); }
-#line 1519 "Parser.C"
+#line 1854 "Parser.C"
     break;
 
-  case 29: /* TypeSpec: _KW_struct T_LBRACE StructDeclList T_RBRACE  */
-#line 195 "partial_bnfc_parser.y"
+  case 28: /* TypeSpec: _KW_struct T_LBRACE StructDeclList T_RBRACE  */
+#line 306 "partial_bnfc_parser.y"
                                                 { (yyval.typespec_) = new partial_acsl::StructBraces((yyvsp[-2]._string), (yyvsp[-1].structdecllist_), (yyvsp[0]._string)); (yyval.typespec_)->line_number = (yyloc).first_line; (yyval.typespec_)->char_number = (yyloc).first_column; result->typespec_ = (yyval.typespec_); }
-#line 1525 "Parser.C"
+#line 1860 "Parser.C"
     break;
 
-  case 30: /* Declarator: PointerOpt DirectDecl AttributesWithAsm  */
-#line 197 "partial_bnfc_parser.y"
+  case 29: /* Declarator: PointerOpt DirectDecl AttributesWithAsm  */
+#line 308 "partial_bnfc_parser.y"
                                                      { (yyval.declarator_) = new partial_acsl::ADeclarator((yyvsp[-2].pointeropt_), (yyvsp[-1].directdecl_), (yyvsp[0].attributeswithasm_)); (yyval.declarator_)->line_number = (yyloc).first_line; (yyval.declarator_)->char_number = (yyloc).first_column; result->declarator_ = (yyval.declarator_); }
-#line 1531 "Parser.C"
+#line 1866 "Parser.C"
     break;
 
-  case 31: /* PointerOpt: %empty  */
-#line 199 "partial_bnfc_parser.y"
+  case 30: /* PointerOpt: %empty  */
+#line 310 "partial_bnfc_parser.y"
                          { (yyval.pointeropt_) = new partial_acsl::NoPointer(); (yyval.pointeropt_)->line_number = (yyloc).first_line; (yyval.pointeropt_)->char_number = (yyloc).first_column; result->pointeropt_ = (yyval.pointeropt_); }
-#line 1537 "Parser.C"
+#line 1872 "Parser.C"
     break;
 
-  case 32: /* PointerOpt: _STAR ListAttribute PointerOpt  */
-#line 200 "partial_bnfc_parser.y"
+  case 31: /* PointerOpt: _STAR ListAttribute PointerOpt  */
+#line 311 "partial_bnfc_parser.y"
                                    { (yyval.pointeropt_) = new partial_acsl::SomePointer((yyvsp[-1].listattribute_), (yyvsp[0].pointeropt_)); (yyval.pointeropt_)->line_number = (yyloc).first_line; (yyval.pointeropt_)->char_number = (yyloc).first_column; result->pointeropt_ = (yyval.pointeropt_); }
-#line 1543 "Parser.C"
+#line 1878 "Parser.C"
     break;
 
-  case 33: /* DirectDecl: IdOrTypename  */
-#line 202 "partial_bnfc_parser.y"
+  case 32: /* DirectDecl: IdOrTypename  */
+#line 313 "partial_bnfc_parser.y"
                           { (yyval.directdecl_) = new partial_acsl::DirectDeclIdTypename((yyvsp[0].idortypename_)); (yyval.directdecl_)->line_number = (yyloc).first_line; (yyval.directdecl_)->char_number = (yyloc).first_column; result->directdecl_ = (yyval.directdecl_); }
-#line 1549 "Parser.C"
+#line 1884 "Parser.C"
     break;
 
-  case 34: /* DirectDecl: DirectDecl _LPAREN _RPAREN GhostParameterOpt  */
-#line 203 "partial_bnfc_parser.y"
+  case 33: /* DirectDecl: DirectDecl _LPAREN _RPAREN GhostParameterOpt  */
+#line 314 "partial_bnfc_parser.y"
                                                  { (yyval.directdecl_) = new partial_acsl::DirectDeclGhostParam((yyvsp[-3].directdecl_), (yyvsp[0].ghostparameteropt_)); (yyval.directdecl_)->line_number = (yyloc).first_line; (yyval.directdecl_)->char_number = (yyloc).first_column; result->directdecl_ = (yyval.directdecl_); }
-#line 1555 "Parser.C"
+#line 1890 "Parser.C"
     break;
 
-  case 35: /* DirectDecl: DirectDecl _LPAREN RestParList _RPAREN GhostParameterOpt  */
-#line 204 "partial_bnfc_parser.y"
+  case 34: /* DirectDecl: DirectDecl _LPAREN RestParList _RPAREN GhostParameterOpt  */
+#line 315 "partial_bnfc_parser.y"
                                                              { (yyval.directdecl_) = new partial_acsl::DirectDeclGhostRestParParam((yyvsp[-4].directdecl_), (yyvsp[-2].restparlist_), (yyvsp[0].ghostparameteropt_)); (yyval.directdecl_)->line_number = (yyloc).first_line; (yyval.directdecl_)->char_number = (yyloc).first_column; result->directdecl_ = (yyval.directdecl_); }
-#line 1561 "Parser.C"
+#line 1896 "Parser.C"
     break;
 
-  case 36: /* AttributesWithAsm: %empty  */
-#line 206 "partial_bnfc_parser.y"
+  case 35: /* AttributesWithAsm: %empty  */
+#line 317 "partial_bnfc_parser.y"
                                 { (yyval.attributeswithasm_) = new partial_acsl::EmptyAttrWithASM(); (yyval.attributeswithasm_)->line_number = (yyloc).first_line; (yyval.attributeswithasm_)->char_number = (yyloc).first_column; result->attributeswithasm_ = (yyval.attributeswithasm_); }
-#line 1567 "Parser.C"
+#line 1902 "Parser.C"
     break;
 
-  case 37: /* RestParList: ListParameterDecl  */
-#line 208 "partial_bnfc_parser.y"
+  case 36: /* RestParList: ListParameterDecl  */
+#line 319 "partial_bnfc_parser.y"
                                 { std::reverse((yyvsp[0].listparameterdecl_)->begin(),(yyvsp[0].listparameterdecl_)->end()) ;(yyval.restparlist_) = new partial_acsl::SimpleParameterDecl((yyvsp[0].listparameterdecl_)); (yyval.restparlist_)->line_number = (yyloc).first_line; (yyval.restparlist_)->char_number = (yyloc).first_column; result->restparlist_ = (yyval.restparlist_); }
-#line 1573 "Parser.C"
+#line 1908 "Parser.C"
     break;
 
-  case 38: /* ParameterDecl: DeclSpecList Declarator  */
-#line 210 "partial_bnfc_parser.y"
+  case 37: /* ParameterDecl: DeclSpecList Declarator  */
+#line 321 "partial_bnfc_parser.y"
                                         { (yyval.parameterdecl_) = new partial_acsl::ParameterDeclSpecDeclarator((yyvsp[-1].declspeclist_), (yyvsp[0].declarator_)); (yyval.parameterdecl_)->line_number = (yyloc).first_line; (yyval.parameterdecl_)->char_number = (yyloc).first_column; result->parameterdecl_ = (yyval.parameterdecl_); }
-#line 1579 "Parser.C"
+#line 1914 "Parser.C"
     break;
 
-  case 39: /* ParameterDecl: DeclSpecList  */
-#line 211 "partial_bnfc_parser.y"
+  case 38: /* ParameterDecl: DeclSpecList  */
+#line 322 "partial_bnfc_parser.y"
                  { (yyval.parameterdecl_) = new partial_acsl::ParameterDeclSpec((yyvsp[0].declspeclist_)); (yyval.parameterdecl_)->line_number = (yyloc).first_line; (yyval.parameterdecl_)->char_number = (yyloc).first_column; result->parameterdecl_ = (yyval.parameterdecl_); }
-#line 1585 "Parser.C"
+#line 1920 "Parser.C"
     break;
 
-  case 40: /* ParameterDecl: _LPAREN ParameterDecl _RPAREN  */
-#line 212 "partial_bnfc_parser.y"
+  case 39: /* ParameterDecl: _LPAREN ParameterDecl _RPAREN  */
+#line 323 "partial_bnfc_parser.y"
                                   { (yyval.parameterdecl_) = new partial_acsl::ParameterDeclPar((yyvsp[-1].parameterdecl_)); (yyval.parameterdecl_)->line_number = (yyloc).first_line; (yyval.parameterdecl_)->char_number = (yyloc).first_column; result->parameterdecl_ = (yyval.parameterdecl_); }
-#line 1591 "Parser.C"
+#line 1926 "Parser.C"
     break;
 
-  case 41: /* ListParameterDecl: ParameterDecl  */
-#line 214 "partial_bnfc_parser.y"
+  case 40: /* ListParameterDecl: ParameterDecl  */
+#line 325 "partial_bnfc_parser.y"
                                   { (yyval.listparameterdecl_) = new partial_acsl::ListParameterDecl(); (yyval.listparameterdecl_)->push_back((yyvsp[0].parameterdecl_)); result->listparameterdecl_ = (yyval.listparameterdecl_); }
-#line 1597 "Parser.C"
+#line 1932 "Parser.C"
     break;
 
-  case 42: /* ListParameterDecl: ParameterDecl _COMMA ListParameterDecl  */
-#line 215 "partial_bnfc_parser.y"
+  case 41: /* ListParameterDecl: ParameterDecl _COMMA ListParameterDecl  */
+#line 326 "partial_bnfc_parser.y"
                                            { (yyvsp[0].listparameterdecl_)->push_back((yyvsp[-2].parameterdecl_)); (yyval.listparameterdecl_) = (yyvsp[0].listparameterdecl_); result->listparameterdecl_ = (yyval.listparameterdecl_); }
-#line 1603 "Parser.C"
+#line 1938 "Parser.C"
     break;
 
-  case 43: /* GhostParameterOpt: %empty  */
-#line 217 "partial_bnfc_parser.y"
+  case 42: /* GhostParameterOpt: %empty  */
+#line 328 "partial_bnfc_parser.y"
                                 { (yyval.ghostparameteropt_) = new partial_acsl::NoGhostParameter(); (yyval.ghostparameteropt_)->line_number = (yyloc).first_line; (yyval.ghostparameteropt_)->char_number = (yyloc).first_column; result->ghostparameteropt_ = (yyval.ghostparameteropt_); }
-#line 1609 "Parser.C"
+#line 1944 "Parser.C"
     break;
 
-  case 44: /* IdOrTypename: IdOrTypenameAsId  */
-#line 219 "partial_bnfc_parser.y"
+  case 43: /* IdOrTypename: IdOrTypenameAsId  */
+#line 330 "partial_bnfc_parser.y"
                                 { (yyval.idortypename_) = new partial_acsl::IdTypename((yyvsp[0].idortypenameasid_)); (yyval.idortypename_)->line_number = (yyloc).first_line; (yyval.idortypename_)->char_number = (yyloc).first_column; result->idortypename_ = (yyval.idortypename_); }
-#line 1615 "Parser.C"
+#line 1950 "Parser.C"
     break;
 
-  case 45: /* IdOrTypenameAsId: _IDENT_  */
-#line 221 "partial_bnfc_parser.y"
+  case 44: /* IdOrTypenameAsId: _IDENT_  */
+#line 332 "partial_bnfc_parser.y"
                            { (yyval.idortypenameasid_) = new partial_acsl::IdOrTypenameAsIdIdentifier((yyvsp[0]._string)); (yyval.idortypenameasid_)->line_number = (yyloc).first_line; (yyval.idortypenameasid_)->char_number = (yyloc).first_column; result->idortypenameasid_ = (yyval.idortypenameasid_); }
-#line 1621 "Parser.C"
+#line 1956 "Parser.C"
     break;
 
-  case 46: /* Declaration: DeclSpecList DeclAndInitDeclAttrList _SEMI  */
-#line 223 "partial_bnfc_parser.y"
+  case 45: /* Declaration: DeclSpecList DeclAndInitDeclAttrList _SEMI  */
+#line 334 "partial_bnfc_parser.y"
                                                          { (yyval.declaration_) = new partial_acsl::DeclSpecInitDecl((yyvsp[-2].declspeclist_), (yyvsp[-1].declandinitdeclattrlist_)); (yyval.declaration_)->line_number = (yyloc).first_line; (yyval.declaration_)->char_number = (yyloc).first_column; result->declaration_ = (yyval.declaration_); }
-#line 1627 "Parser.C"
+#line 1962 "Parser.C"
     break;
 
-  case 47: /* Declaration: DeclSpecList _SEMI  */
-#line 224 "partial_bnfc_parser.y"
+  case 46: /* Declaration: DeclSpecList _SEMI  */
+#line 335 "partial_bnfc_parser.y"
                        { (yyval.declaration_) = new partial_acsl::DeclSpec((yyvsp[-1].declspeclist_)); (yyval.declaration_)->line_number = (yyloc).first_line; (yyval.declaration_)->char_number = (yyloc).first_column; result->declaration_ = (yyval.declaration_); }
-#line 1633 "Parser.C"
+#line 1968 "Parser.C"
     break;
 
-  case 48: /* DeclAndInitDeclAttrList: InitDeclarator  */
-#line 226 "partial_bnfc_parser.y"
+  case 47: /* DeclAndInitDeclAttrList: InitDeclarator  */
+#line 337 "partial_bnfc_parser.y"
                                          { (yyval.declandinitdeclattrlist_) = new partial_acsl::InitDeclaration((yyvsp[0].initdeclarator_)); (yyval.declandinitdeclattrlist_)->line_number = (yyloc).first_line; (yyval.declandinitdeclattrlist_)->char_number = (yyloc).first_column; result->declandinitdeclattrlist_ = (yyval.declandinitdeclattrlist_); }
-#line 1639 "Parser.C"
+#line 1974 "Parser.C"
     break;
 
-  case 49: /* DeclAndInitDeclAttrList: InitDeclarator _COMMA ListInitDeclaratorAttr  */
-#line 227 "partial_bnfc_parser.y"
+  case 48: /* DeclAndInitDeclAttrList: InitDeclarator _COMMA ListInitDeclaratorAttr  */
+#line 338 "partial_bnfc_parser.y"
                                                  { std::reverse((yyvsp[0].listinitdeclaratorattr_)->begin(),(yyvsp[0].listinitdeclaratorattr_)->end()) ;(yyval.declandinitdeclattrlist_) = new partial_acsl::InitDeclarationWithAttr((yyvsp[-2].initdeclarator_), (yyvsp[0].listinitdeclaratorattr_)); (yyval.declandinitdeclattrlist_)->line_number = (yyloc).first_line; (yyval.declandinitdeclattrlist_)->char_number = (yyloc).first_column; result->declandinitdeclattrlist_ = (yyval.declandinitdeclattrlist_); }
-#line 1645 "Parser.C"
+#line 1980 "Parser.C"
     break;
 
-  case 50: /* InitDeclaratorAttr: InitDeclarator  */
-#line 229 "partial_bnfc_parser.y"
+  case 49: /* InitDeclaratorAttr: InitDeclarator  */
+#line 340 "partial_bnfc_parser.y"
                                     { (yyval.initdeclaratorattr_) = new partial_acsl::InitDeclaratorAttribute((yyvsp[0].initdeclarator_)); (yyval.initdeclaratorattr_)->line_number = (yyloc).first_line; (yyval.initdeclaratorattr_)->char_number = (yyloc).first_column; result->initdeclaratorattr_ = (yyval.initdeclaratorattr_); }
-#line 1651 "Parser.C"
+#line 1986 "Parser.C"
     break;
 
-  case 51: /* ListInitDeclaratorAttr: InitDeclaratorAttr  */
-#line 231 "partial_bnfc_parser.y"
+  case 50: /* ListInitDeclaratorAttr: InitDeclaratorAttr  */
+#line 342 "partial_bnfc_parser.y"
                                             { (yyval.listinitdeclaratorattr_) = new partial_acsl::ListInitDeclaratorAttr(); (yyval.listinitdeclaratorattr_)->push_back((yyvsp[0].initdeclaratorattr_)); result->listinitdeclaratorattr_ = (yyval.listinitdeclaratorattr_); }
-#line 1657 "Parser.C"
+#line 1992 "Parser.C"
     break;
 
-  case 52: /* ListInitDeclaratorAttr: InitDeclaratorAttr _COMMA ListInitDeclaratorAttr  */
-#line 232 "partial_bnfc_parser.y"
+  case 51: /* ListInitDeclaratorAttr: InitDeclaratorAttr _COMMA ListInitDeclaratorAttr  */
+#line 343 "partial_bnfc_parser.y"
                                                      { (yyvsp[0].listinitdeclaratorattr_)->push_back((yyvsp[-2].initdeclaratorattr_)); (yyval.listinitdeclaratorattr_) = (yyvsp[0].listinitdeclaratorattr_); result->listinitdeclaratorattr_ = (yyval.listinitdeclaratorattr_); }
-#line 1663 "Parser.C"
+#line 1998 "Parser.C"
     break;
 
-  case 53: /* InitDeclarator: Declarator  */
-#line 234 "partial_bnfc_parser.y"
+  case 52: /* InitDeclarator: Declarator  */
+#line 345 "partial_bnfc_parser.y"
                             { (yyval.initdeclarator_) = new partial_acsl::SimpleInitDeclarator((yyvsp[0].declarator_)); (yyval.initdeclarator_)->line_number = (yyloc).first_line; (yyval.initdeclarator_)->char_number = (yyloc).first_column; result->initdeclarator_ = (yyval.initdeclarator_); }
-#line 1669 "Parser.C"
+#line 2004 "Parser.C"
     break;
 
-  case 54: /* StructDeclList: %empty  */
-#line 236 "partial_bnfc_parser.y"
+  case 53: /* StructDeclList: %empty  */
+#line 347 "partial_bnfc_parser.y"
                              { (yyval.structdecllist_) = new partial_acsl::EmptyStructDecl(); (yyval.structdecllist_)->line_number = (yyloc).first_line; (yyval.structdecllist_)->char_number = (yyloc).first_column; result->structdecllist_ = (yyval.structdecllist_); }
-#line 1675 "Parser.C"
+#line 2010 "Parser.C"
     break;
 
-  case 55: /* StructDeclList: DeclSpecList _SEMI StructDeclList  */
-#line 237 "partial_bnfc_parser.y"
+  case 54: /* StructDeclList: DeclSpecList _SEMI StructDeclList  */
+#line 348 "partial_bnfc_parser.y"
                                       { (yyval.structdecllist_) = new partial_acsl::DeclSpecStructDecl((yyvsp[-2].declspeclist_), (yyvsp[0].structdecllist_)); (yyval.structdecllist_)->line_number = (yyloc).first_line; (yyval.structdecllist_)->char_number = (yyloc).first_column; result->structdecllist_ = (yyval.structdecllist_); }
-#line 1681 "Parser.C"
+#line 2016 "Parser.C"
     break;
 
-  case 56: /* StructDeclList: _SEMI StructDeclList  */
-#line 238 "partial_bnfc_parser.y"
+  case 55: /* StructDeclList: _SEMI StructDeclList  */
+#line 349 "partial_bnfc_parser.y"
                          { (yyval.structdecllist_) = new partial_acsl::SemicolonStructDecl((yyvsp[0].structdecllist_)); (yyval.structdecllist_)->line_number = (yyloc).first_line; (yyval.structdecllist_)->char_number = (yyloc).first_column; result->structdecllist_ = (yyval.structdecllist_); }
-#line 1687 "Parser.C"
+#line 2022 "Parser.C"
     break;
 
-  case 57: /* StructDeclList: DeclSpecList ListFieldDecl _SEMI StructDeclList  */
-#line 239 "partial_bnfc_parser.y"
+  case 56: /* StructDeclList: DeclSpecList ListFieldDecl _SEMI StructDeclList  */
+#line 350 "partial_bnfc_parser.y"
                                                     { std::reverse((yyvsp[-2].listfielddecl_)->begin(),(yyvsp[-2].listfielddecl_)->end()) ;(yyval.structdecllist_) = new partial_acsl::SpecFieldDeclStructDecl((yyvsp[-3].declspeclist_), (yyvsp[-2].listfielddecl_), (yyvsp[0].structdecllist_)); (yyval.structdecllist_)->line_number = (yyloc).first_line; (yyval.structdecllist_)->char_number = (yyloc).first_column; result->structdecllist_ = (yyval.structdecllist_); }
-#line 1693 "Parser.C"
+#line 2028 "Parser.C"
     break;
 
-  case 58: /* FieldDecl: Declarator  */
-#line 241 "partial_bnfc_parser.y"
+  case 57: /* FieldDecl: Declarator  */
+#line 352 "partial_bnfc_parser.y"
                        { (yyval.fielddecl_) = new partial_acsl::FieldDeclDeclarator((yyvsp[0].declarator_)); (yyval.fielddecl_)->line_number = (yyloc).first_line; (yyval.fielddecl_)->char_number = (yyloc).first_column; result->fielddecl_ = (yyval.fielddecl_); }
-#line 1699 "Parser.C"
+#line 2034 "Parser.C"
     break;
 
-  case 59: /* ListFieldDecl: FieldDecl  */
-#line 243 "partial_bnfc_parser.y"
+  case 58: /* ListFieldDecl: FieldDecl  */
+#line 354 "partial_bnfc_parser.y"
                           { (yyval.listfielddecl_) = new partial_acsl::ListFieldDecl(); (yyval.listfielddecl_)->push_back((yyvsp[0].fielddecl_)); result->listfielddecl_ = (yyval.listfielddecl_); }
-#line 1705 "Parser.C"
+#line 2040 "Parser.C"
     break;
 
-  case 60: /* ListFieldDecl: FieldDecl _COMMA ListFieldDecl  */
-#line 244 "partial_bnfc_parser.y"
+  case 59: /* ListFieldDecl: FieldDecl _COMMA ListFieldDecl  */
+#line 355 "partial_bnfc_parser.y"
                                    { (yyvsp[0].listfielddecl_)->push_back((yyvsp[-2].fielddecl_)); (yyval.listfielddecl_) = (yyvsp[0].listfielddecl_); result->listfielddecl_ = (yyval.listfielddecl_); }
-#line 1711 "Parser.C"
+#line 2046 "Parser.C"
     break;
 
-  case 61: /* Attribute: T_CONST  */
-#line 246 "partial_bnfc_parser.y"
+  case 60: /* Attribute: T_CONST  */
+#line 357 "partial_bnfc_parser.y"
                     { (yyval.attribute_) = new partial_acsl::AttributeConst((yyvsp[0]._string)); (yyval.attribute_)->line_number = (yyloc).first_line; (yyval.attribute_)->char_number = (yyloc).first_column; result->attribute_ = (yyval.attribute_); }
-#line 1717 "Parser.C"
+#line 2052 "Parser.C"
     break;
 
-  case 62: /* ListAttribute: %empty  */
-#line 248 "partial_bnfc_parser.y"
+  case 61: /* ListAttribute: %empty  */
+#line 359 "partial_bnfc_parser.y"
                             { (yyval.listattribute_) = new partial_acsl::ListAttribute(); result->listattribute_ = (yyval.listattribute_); }
-#line 1723 "Parser.C"
+#line 2058 "Parser.C"
     break;
 
-  case 63: /* ListAttribute: ListAttribute Attribute  */
-#line 249 "partial_bnfc_parser.y"
+  case 62: /* ListAttribute: ListAttribute Attribute  */
+#line 360 "partial_bnfc_parser.y"
                             { (yyvsp[-1].listattribute_)->push_back((yyvsp[0].attribute_)); (yyval.listattribute_) = (yyvsp[-1].listattribute_); result->listattribute_ = (yyval.listattribute_); }
-#line 1729 "Parser.C"
+#line 2064 "Parser.C"
+    break;
+
+  case 63: /* Block: T_LBRACE BlockAttrs ListBlockElement T_RBRACE  */
+#line 362 "partial_bnfc_parser.y"
+                                                      { (yyval.block_) = new partial_acsl::ABlock((yyvsp[-3]._string), (yyvsp[-2].blockattrs_), (yyvsp[-1].listblockelement_), (yyvsp[0]._string)); (yyval.block_)->line_number = (yyloc).first_line; (yyval.block_)->char_number = (yyloc).first_column; result->block_ = (yyval.block_); }
+#line 2070 "Parser.C"
+    break;
+
+  case 64: /* BlockAttrs: %empty  */
+#line 364 "partial_bnfc_parser.y"
+                         { (yyval.blockattrs_) = new partial_acsl::NoBlockAttrs(); (yyval.blockattrs_)->line_number = (yyloc).first_line; (yyval.blockattrs_)->char_number = (yyloc).first_column; result->blockattrs_ = (yyval.blockattrs_); }
+#line 2076 "Parser.C"
+    break;
+
+  case 65: /* BlockAttrs: T_BLOCKATTRIBUTE _LPAREN ListAttr _RPAREN  */
+#line 365 "partial_bnfc_parser.y"
+                                              { std::reverse((yyvsp[-1].listattr_)->begin(),(yyvsp[-1].listattr_)->end()) ;(yyval.blockattrs_) = new partial_acsl::SomeBlockAttrs((yyvsp[-3]._string), (yyvsp[-1].listattr_)); (yyval.blockattrs_)->line_number = (yyloc).first_line; (yyval.blockattrs_)->char_number = (yyloc).first_column; result->blockattrs_ = (yyval.blockattrs_); }
+#line 2082 "Parser.C"
+    break;
+
+  case 66: /* BlockElement: Declaration  */
+#line 367 "partial_bnfc_parser.y"
+                           { (yyval.blockelement_) = new partial_acsl::DeclarationElement((yyvsp[0].declaration_)); (yyval.blockelement_)->line_number = (yyloc).first_line; (yyval.blockelement_)->char_number = (yyloc).first_column; result->blockelement_ = (yyval.blockelement_); }
+#line 2088 "Parser.C"
+    break;
+
+  case 67: /* BlockElement: Statement  */
+#line 368 "partial_bnfc_parser.y"
+              { (yyval.blockelement_) = new partial_acsl::StatementElement((yyvsp[0].statement_)); (yyval.blockelement_)->line_number = (yyloc).first_line; (yyval.blockelement_)->char_number = (yyloc).first_column; result->blockelement_ = (yyval.blockelement_); }
+#line 2094 "Parser.C"
+    break;
+
+  case 68: /* ListBlockElement: %empty  */
+#line 370 "partial_bnfc_parser.y"
+                               { (yyval.listblockelement_) = new partial_acsl::ListBlockElement(); result->listblockelement_ = (yyval.listblockelement_); }
+#line 2100 "Parser.C"
+    break;
+
+  case 69: /* ListBlockElement: ListBlockElement BlockElement  */
+#line 371 "partial_bnfc_parser.y"
+                                  { (yyvsp[-1].listblockelement_)->push_back((yyvsp[0].blockelement_)); (yyval.listblockelement_) = (yyvsp[-1].listblockelement_); result->listblockelement_ = (yyval.listblockelement_); }
+#line 2106 "Parser.C"
+    break;
+
+  case 70: /* Statement: _SEMI  */
+#line 373 "partial_bnfc_parser.y"
+                  { (yyval.statement_) = new partial_acsl::SemicolonStatement(); (yyval.statement_)->line_number = (yyloc).first_line; (yyval.statement_)->char_number = (yyloc).first_column; result->statement_ = (yyval.statement_); }
+#line 2112 "Parser.C"
+    break;
+
+  case 71: /* Statement: ListExpression _SEMI  */
+#line 374 "partial_bnfc_parser.y"
+                         { std::reverse((yyvsp[-1].listexpression_)->begin(),(yyvsp[-1].listexpression_)->end()) ;(yyval.statement_) = new partial_acsl::ExprsStatement((yyvsp[-1].listexpression_)); (yyval.statement_)->line_number = (yyloc).first_line; (yyval.statement_)->char_number = (yyloc).first_column; result->statement_ = (yyval.statement_); }
+#line 2118 "Parser.C"
+    break;
+
+  case 72: /* Statement: Block  */
+#line 375 "partial_bnfc_parser.y"
+          { (yyval.statement_) = new partial_acsl::BlockStatement((yyvsp[0].block_)); (yyval.statement_)->line_number = (yyloc).first_line; (yyval.statement_)->char_number = (yyloc).first_column; result->statement_ = (yyval.statement_); }
+#line 2124 "Parser.C"
+    break;
+
+  case 73: /* Statement: _KW_if _LPAREN ListExpression _RPAREN AnnotatedStmt ElsePart  */
+#line 376 "partial_bnfc_parser.y"
+                                                                 { std::reverse((yyvsp[-3].listexpression_)->begin(),(yyvsp[-3].listexpression_)->end()) ;(yyval.statement_) = new partial_acsl::IfStatement((yyvsp[-3].listexpression_), (yyvsp[-1].annotatedstmt_), (yyvsp[0].elsepart_)); (yyval.statement_)->line_number = (yyloc).first_line; (yyval.statement_)->char_number = (yyloc).first_column; result->statement_ = (yyval.statement_); }
+#line 2130 "Parser.C"
+    break;
+
+  case 74: /* Statement: _KW_switch _LPAREN ListExpression _RPAREN AnnotatedStmt  */
+#line 377 "partial_bnfc_parser.y"
+                                                            { std::reverse((yyvsp[-2].listexpression_)->begin(),(yyvsp[-2].listexpression_)->end()) ;(yyval.statement_) = new partial_acsl::SwitchStatement((yyvsp[-2].listexpression_), (yyvsp[0].annotatedstmt_)); (yyval.statement_)->line_number = (yyloc).first_line; (yyval.statement_)->char_number = (yyloc).first_column; result->statement_ = (yyval.statement_); }
+#line 2136 "Parser.C"
+    break;
+
+  case 75: /* Statement: _KW_while _LPAREN ListExpression _RPAREN AnnotatedStmt  */
+#line 378 "partial_bnfc_parser.y"
+                                                           { std::reverse((yyvsp[-2].listexpression_)->begin(),(yyvsp[-2].listexpression_)->end()) ;(yyval.statement_) = new partial_acsl::WhileStatement((yyvsp[-2].listexpression_), (yyvsp[0].annotatedstmt_)); (yyval.statement_)->line_number = (yyloc).first_line; (yyval.statement_)->char_number = (yyloc).first_column; result->statement_ = (yyval.statement_); }
+#line 2142 "Parser.C"
+    break;
+
+  case 76: /* Statement: _KW_case Expression _COLON AnnotatedStmt  */
+#line 379 "partial_bnfc_parser.y"
+                                             { (yyval.statement_) = new partial_acsl::CaseStatement((yyvsp[-2].expression_), (yyvsp[0].annotatedstmt_)); (yyval.statement_)->line_number = (yyloc).first_line; (yyval.statement_)->char_number = (yyloc).first_column; result->statement_ = (yyval.statement_); }
+#line 2148 "Parser.C"
+    break;
+
+  case 77: /* Statement: _KW_case Expression _ELLIPSIS Expression _COLON AnnotatedStmt  */
+#line 380 "partial_bnfc_parser.y"
+                                                                  { (yyval.statement_) = new partial_acsl::CaseSliceStatement((yyvsp[-4].expression_), (yyvsp[-2].expression_), (yyvsp[0].annotatedstmt_)); (yyval.statement_)->line_number = (yyloc).first_line; (yyval.statement_)->char_number = (yyloc).first_column; result->statement_ = (yyval.statement_); }
+#line 2154 "Parser.C"
+    break;
+
+  case 78: /* Statement: _KW_default _COLON AnnotatedStmt  */
+#line 381 "partial_bnfc_parser.y"
+                                     { (yyval.statement_) = new partial_acsl::DefaultStatement((yyvsp[0].annotatedstmt_)); (yyval.statement_)->line_number = (yyloc).first_line; (yyval.statement_)->char_number = (yyloc).first_column; result->statement_ = (yyval.statement_); }
+#line 2160 "Parser.C"
+    break;
+
+  case 79: /* Statement: _KW_return _SEMI  */
+#line 382 "partial_bnfc_parser.y"
+                     { (yyval.statement_) = new partial_acsl::EmptyReturnStatement(); (yyval.statement_)->line_number = (yyloc).first_line; (yyval.statement_)->char_number = (yyloc).first_column; result->statement_ = (yyval.statement_); }
+#line 2166 "Parser.C"
+    break;
+
+  case 80: /* Statement: _KW_break _SEMI  */
+#line 383 "partial_bnfc_parser.y"
+                    { (yyval.statement_) = new partial_acsl::BreakStatement(); (yyval.statement_)->line_number = (yyloc).first_line; (yyval.statement_)->char_number = (yyloc).first_column; result->statement_ = (yyval.statement_); }
+#line 2172 "Parser.C"
+    break;
+
+  case 81: /* Statement: _KW_continue _SEMI  */
+#line 384 "partial_bnfc_parser.y"
+                       { (yyval.statement_) = new partial_acsl::ContinueStatement(); (yyval.statement_)->line_number = (yyloc).first_line; (yyval.statement_)->char_number = (yyloc).first_column; result->statement_ = (yyval.statement_); }
+#line 2178 "Parser.C"
+    break;
+
+  case 82: /* Attr: Attr1  */
+#line 386 "partial_bnfc_parser.y"
+             { (yyval.attr_) = (yyvsp[0].attr_); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2184 "Parser.C"
+    break;
+
+  case 83: /* Attr: Attr1 _EQ Attr1  */
+#line 387 "partial_bnfc_parser.y"
+                    { (yyval.attr_) = new partial_acsl::AnAttr((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2190 "Parser.C"
+    break;
+
+  case 84: /* ListAttr: Attr  */
+#line 389 "partial_bnfc_parser.y"
+                { (yyval.listattr_) = new partial_acsl::ListAttr(); (yyval.listattr_)->push_back((yyvsp[0].attr_)); result->listattr_ = (yyval.listattr_); }
+#line 2196 "Parser.C"
+    break;
+
+  case 85: /* ListAttr: Attr _COMMA ListAttr  */
+#line 390 "partial_bnfc_parser.y"
+                         { (yyvsp[0].listattr_)->push_back((yyvsp[-2].attr_)); (yyval.listattr_) = (yyvsp[0].listattr_); result->listattr_ = (yyval.listattr_); }
+#line 2202 "Parser.C"
+    break;
+
+  case 86: /* Attr1: Attr2  */
+#line 392 "partial_bnfc_parser.y"
+              { (yyval.attr_) = (yyvsp[0].attr_); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2208 "Parser.C"
+    break;
+
+  case 87: /* Attr1: Attr2 _QUESTION Attr1 _COLON Attr1  */
+#line 393 "partial_bnfc_parser.y"
+                                       { (yyval.attr_) = new partial_acsl::TernaryCond((yyvsp[-4].attr_), (yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2214 "Parser.C"
+    break;
+
+  case 88: /* Attr2: Attr3  */
+#line 395 "partial_bnfc_parser.y"
+              { (yyval.attr_) = (yyvsp[0].attr_); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2220 "Parser.C"
+    break;
+
+  case 89: /* Attr2: Attr2 _DBAR Attr3  */
+#line 396 "partial_bnfc_parser.y"
+                      { (yyval.attr_) = new partial_acsl::Or((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2226 "Parser.C"
+    break;
+
+  case 90: /* Attr3: Attr4  */
+#line 398 "partial_bnfc_parser.y"
+              { (yyval.attr_) = (yyvsp[0].attr_); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2232 "Parser.C"
+    break;
+
+  case 91: /* Attr3: Attr3 _DAMP Attr4  */
+#line 399 "partial_bnfc_parser.y"
+                      { (yyval.attr_) = new partial_acsl::And((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2238 "Parser.C"
+    break;
+
+  case 92: /* Attr4: Attr5  */
+#line 401 "partial_bnfc_parser.y"
+              { (yyval.attr_) = (yyvsp[0].attr_); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2244 "Parser.C"
+    break;
+
+  case 93: /* Attr4: Attr4 _BAR Attr5  */
+#line 402 "partial_bnfc_parser.y"
+                     { (yyval.attr_) = new partial_acsl::BitOr((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2250 "Parser.C"
+    break;
+
+  case 94: /* Attr5: Attr6  */
+#line 404 "partial_bnfc_parser.y"
+              { (yyval.attr_) = (yyvsp[0].attr_); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2256 "Parser.C"
+    break;
+
+  case 95: /* Attr5: Attr5 _CARET Attr6  */
+#line 405 "partial_bnfc_parser.y"
+                       { (yyval.attr_) = new partial_acsl::Xor((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2262 "Parser.C"
+    break;
+
+  case 96: /* Attr6: Attr7  */
+#line 407 "partial_bnfc_parser.y"
+              { (yyval.attr_) = (yyvsp[0].attr_); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2268 "Parser.C"
+    break;
+
+  case 97: /* Attr6: Attr6 _AMP Attr7  */
+#line 408 "partial_bnfc_parser.y"
+                     { (yyval.attr_) = new partial_acsl::BitAnd((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2274 "Parser.C"
+    break;
+
+  case 98: /* Attr7: Attr8  */
+#line 410 "partial_bnfc_parser.y"
+              { (yyval.attr_) = (yyvsp[0].attr_); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2280 "Parser.C"
+    break;
+
+  case 99: /* Attr7: Attr7 _DEQ Attr8  */
+#line 411 "partial_bnfc_parser.y"
+                     { (yyval.attr_) = new partial_acsl::EqualEqual((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2286 "Parser.C"
+    break;
+
+  case 100: /* Attr7: Attr7 _BANGEQ Attr8  */
+#line 412 "partial_bnfc_parser.y"
+                        { (yyval.attr_) = new partial_acsl::NotEqual((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2292 "Parser.C"
+    break;
+
+  case 101: /* Attr8: Attr9  */
+#line 414 "partial_bnfc_parser.y"
+              { (yyval.attr_) = (yyvsp[0].attr_); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2298 "Parser.C"
+    break;
+
+  case 102: /* Attr8: Attr8 _LT Attr9  */
+#line 415 "partial_bnfc_parser.y"
+                    { (yyval.attr_) = new partial_acsl::Less((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2304 "Parser.C"
+    break;
+
+  case 103: /* Attr8: Attr8 _GT Attr9  */
+#line 416 "partial_bnfc_parser.y"
+                    { (yyval.attr_) = new partial_acsl::Greater((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2310 "Parser.C"
+    break;
+
+  case 104: /* Attr8: Attr8 _LDARROW Attr9  */
+#line 417 "partial_bnfc_parser.y"
+                         { (yyval.attr_) = new partial_acsl::LessEqual((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2316 "Parser.C"
+    break;
+
+  case 105: /* Attr8: Attr8 _GTEQ Attr9  */
+#line 418 "partial_bnfc_parser.y"
+                      { (yyval.attr_) = new partial_acsl::GreaterEqual((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2322 "Parser.C"
+    break;
+
+  case 106: /* Attr9: Attr10  */
+#line 420 "partial_bnfc_parser.y"
+               { (yyval.attr_) = (yyvsp[0].attr_); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2328 "Parser.C"
+    break;
+
+  case 107: /* Attr9: Attr9 _DLT Attr10  */
+#line 421 "partial_bnfc_parser.y"
+                      { (yyval.attr_) = new partial_acsl::LeftShiftOp((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2334 "Parser.C"
+    break;
+
+  case 108: /* Attr9: Attr9 _DGT Attr10  */
+#line 422 "partial_bnfc_parser.y"
+                      { (yyval.attr_) = new partial_acsl::RightShiftOp((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2340 "Parser.C"
+    break;
+
+  case 109: /* Attr10: Attr11  */
+#line 424 "partial_bnfc_parser.y"
+                { (yyval.attr_) = (yyvsp[0].attr_); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2346 "Parser.C"
+    break;
+
+  case 110: /* Attr10: Attr10 _PLUS Attr11  */
+#line 425 "partial_bnfc_parser.y"
+                        { (yyval.attr_) = new partial_acsl::AddOp((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2352 "Parser.C"
+    break;
+
+  case 111: /* Attr10: Attr10 _MINUS Attr11  */
+#line 426 "partial_bnfc_parser.y"
+                         { (yyval.attr_) = new partial_acsl::SubOp((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2358 "Parser.C"
+    break;
+
+  case 112: /* Attr11: Attr12  */
+#line 428 "partial_bnfc_parser.y"
+                { (yyval.attr_) = (yyvsp[0].attr_); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2364 "Parser.C"
+    break;
+
+  case 113: /* Attr11: Attr11 _STAR Attr12  */
+#line 429 "partial_bnfc_parser.y"
+                        { (yyval.attr_) = new partial_acsl::MultOp((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2370 "Parser.C"
+    break;
+
+  case 114: /* Attr11: Attr11 _SLASH Attr12  */
+#line 430 "partial_bnfc_parser.y"
+                         { (yyval.attr_) = new partial_acsl::DivOp((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2376 "Parser.C"
+    break;
+
+  case 115: /* Attr11: Attr11 _PERCENT Attr12  */
+#line 431 "partial_bnfc_parser.y"
+                           { (yyval.attr_) = new partial_acsl::ModOp((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2382 "Parser.C"
+    break;
+
+  case 116: /* Attr12: Attr13  */
+#line 433 "partial_bnfc_parser.y"
+                { (yyval.attr_) = (yyvsp[0].attr_); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2388 "Parser.C"
+    break;
+
+  case 117: /* Attr12: _PLUS Attr12  */
+#line 434 "partial_bnfc_parser.y"
+                 { (yyval.attr_) = new partial_acsl::PlusUnaryAttr((yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2394 "Parser.C"
+    break;
+
+  case 118: /* Attr12: _MINUS Attr12  */
+#line 435 "partial_bnfc_parser.y"
+                  { (yyval.attr_) = new partial_acsl::MinusUnaryAttr((yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2400 "Parser.C"
+    break;
+
+  case 119: /* Attr12: _STAR Attr12  */
+#line 436 "partial_bnfc_parser.y"
+                 { (yyval.attr_) = new partial_acsl::MultUnaryAttr((yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2406 "Parser.C"
+    break;
+
+  case 120: /* Attr12: _AMP Attr12  */
+#line 437 "partial_bnfc_parser.y"
+                { (yyval.attr_) = new partial_acsl::AmpUnaryAttr((yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2412 "Parser.C"
+    break;
+
+  case 121: /* Attr12: _BANG Attr12  */
+#line 438 "partial_bnfc_parser.y"
+                 { (yyval.attr_) = new partial_acsl::NotUnaryAttr((yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2418 "Parser.C"
+    break;
+
+  case 122: /* Attr12: _TILDE Attr12  */
+#line 439 "partial_bnfc_parser.y"
+                  { (yyval.attr_) = new partial_acsl::TildeUnaryAttr((yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2424 "Parser.C"
+    break;
+
+  case 123: /* Attr13: Attr14  */
+#line 441 "partial_bnfc_parser.y"
+                { (yyval.attr_) = (yyvsp[0].attr_); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2430 "Parser.C"
+    break;
+
+  case 124: /* Attr13: IdOrTypenameAsId _LPAREN ListAttr _RPAREN  */
+#line 442 "partial_bnfc_parser.y"
+                                              { std::reverse((yyvsp[-1].listattr_)->begin(),(yyvsp[-1].listattr_)->end()) ;(yyval.attr_) = new partial_acsl::FuncationCall((yyvsp[-3].idortypenameasid_), (yyvsp[-1].listattr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2436 "Parser.C"
+    break;
+
+  case 125: /* Attr13: IdOrTypenameAsId _LPAREN _RPAREN  */
+#line 443 "partial_bnfc_parser.y"
+                                     { (yyval.attr_) = new partial_acsl::ProcedureCall((yyvsp[-2].idortypenameasid_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2442 "Parser.C"
+    break;
+
+  case 126: /* Attr13: Attr13 _RARROW IdOrTypename  */
+#line 444 "partial_bnfc_parser.y"
+                                { (yyval.attr_) = new partial_acsl::ArrowAttr((yyvsp[-2].attr_), (yyvsp[0].idortypename_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2448 "Parser.C"
+    break;
+
+  case 127: /* Attr13: Attr13 _DOT IdOrTypename  */
+#line 445 "partial_bnfc_parser.y"
+                             { (yyval.attr_) = new partial_acsl::DotAttr((yyvsp[-2].attr_), (yyvsp[0].idortypename_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2454 "Parser.C"
+    break;
+
+  case 128: /* Attr13: Attr13 T_LBRACKET Attr T_RBRACKET  */
+#line 446 "partial_bnfc_parser.y"
+                                      { (yyval.attr_) = new partial_acsl::ArrayAttr((yyvsp[-3].attr_), (yyvsp[-2]._string), (yyvsp[-1].attr_), (yyvsp[0]._string)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2460 "Parser.C"
+    break;
+
+  case 129: /* Attr14: BasicAttribute  */
+#line 448 "partial_bnfc_parser.y"
+                        { (yyval.attr_) = new partial_acsl::BasicAttr((yyvsp[0].basicattribute_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2466 "Parser.C"
+    break;
+
+  case 130: /* Attr14: _LPAREN Attr _RPAREN  */
+#line 449 "partial_bnfc_parser.y"
+                         { (yyval.attr_) = (yyvsp[-1].attr_); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2472 "Parser.C"
+    break;
+
+  case 131: /* BasicAttribute: _INTEGER_  */
+#line 451 "partial_bnfc_parser.y"
+                           { (yyval.basicattribute_) = new partial_acsl::BasicAttrConsInt((yyvsp[0]._int)); (yyval.basicattribute_)->line_number = (yyloc).first_line; (yyval.basicattribute_)->char_number = (yyloc).first_column; result->basicattribute_ = (yyval.basicattribute_); }
+#line 2478 "Parser.C"
+    break;
+
+  case 132: /* BasicAttribute: _DOUBLE_  */
+#line 452 "partial_bnfc_parser.y"
+             { (yyval.basicattribute_) = new partial_acsl::BasicAttrConsFloat((yyvsp[0]._double)); (yyval.basicattribute_)->line_number = (yyloc).first_line; (yyval.basicattribute_)->char_number = (yyloc).first_column; result->basicattribute_ = (yyval.basicattribute_); }
+#line 2484 "Parser.C"
+    break;
+
+  case 133: /* AnnotatedStmt: Statement  */
+#line 457 "partial_bnfc_parser.y"
+                          { (yyval.annotatedstmt_) = new partial_acsl::AnnotatedStatement((yyvsp[0].statement_)); (yyval.annotatedstmt_)->line_number = (yyloc).first_line; (yyval.annotatedstmt_)->char_number = (yyloc).first_column; result->annotatedstmt_ = (yyval.annotatedstmt_); }
+#line 2490 "Parser.C"
+    break;
+
+  case 134: /* ElsePart: %empty  */
+#line 459 "partial_bnfc_parser.y"
+                       { (yyval.elsepart_) = new partial_acsl::NoElsePart(); (yyval.elsepart_)->line_number = (yyloc).first_line; (yyval.elsepart_)->char_number = (yyloc).first_column; result->elsepart_ = (yyval.elsepart_); }
+#line 2496 "Parser.C"
+    break;
+
+  case 135: /* ElsePart: _KW_else AnnotatedStmt  */
+#line 460 "partial_bnfc_parser.y"
+                           { (yyval.elsepart_) = new partial_acsl::SimpleElsePart((yyvsp[0].annotatedstmt_)); (yyval.elsepart_)->line_number = (yyloc).first_line; (yyval.elsepart_)->char_number = (yyloc).first_column; result->elsepart_ = (yyval.elsepart_); }
+#line 2502 "Parser.C"
+    break;
+
+  case 136: /* OptExpression: %empty  */
+#line 462 "partial_bnfc_parser.y"
+                            { (yyval.optexpression_) = new partial_acsl::NoExpression(); (yyval.optexpression_)->line_number = (yyloc).first_line; (yyval.optexpression_)->char_number = (yyloc).first_column; result->optexpression_ = (yyval.optexpression_); }
+#line 2508 "Parser.C"
+    break;
+
+  case 137: /* OptExpression: ListExpression  */
+#line 463 "partial_bnfc_parser.y"
+                   { std::reverse((yyvsp[0].listexpression_)->begin(),(yyvsp[0].listexpression_)->end()) ;(yyval.optexpression_) = new partial_acsl::SomeExpression((yyvsp[0].listexpression_)); (yyval.optexpression_)->line_number = (yyloc).first_line; (yyval.optexpression_)->char_number = (yyloc).first_column; result->optexpression_ = (yyval.optexpression_); }
+#line 2514 "Parser.C"
+    break;
+
+  case 138: /* Expression: AssignExpr  */
+#line 465 "partial_bnfc_parser.y"
+                        { (yyval.expression_) = new partial_acsl::AssignmentExpr((yyvsp[0].assignexpr_)); (yyval.expression_)->line_number = (yyloc).first_line; (yyval.expression_)->char_number = (yyloc).first_column; result->expression_ = (yyval.expression_); }
+#line 2520 "Parser.C"
+    break;
+
+  case 139: /* ListExpression: Expression  */
+#line 467 "partial_bnfc_parser.y"
+                            { (yyval.listexpression_) = new partial_acsl::ListExpression(); (yyval.listexpression_)->push_back((yyvsp[0].expression_)); result->listexpression_ = (yyval.listexpression_); }
+#line 2526 "Parser.C"
+    break;
+
+  case 140: /* ListExpression: Expression _COMMA ListExpression  */
+#line 468 "partial_bnfc_parser.y"
+                                     { (yyvsp[0].listexpression_)->push_back((yyvsp[-2].expression_)); (yyval.listexpression_) = (yyvsp[0].listexpression_); result->listexpression_ = (yyval.listexpression_); }
+#line 2532 "Parser.C"
+    break;
+
+  case 141: /* AssignExpr: AssignExpr1  */
+#line 470 "partial_bnfc_parser.y"
+                         { (yyval.assignexpr_) = (yyvsp[0].assignexpr_); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2538 "Parser.C"
+    break;
+
+  case 142: /* AssignExpr: AssignExpr12 _EQ AssignExpr  */
+#line 471 "partial_bnfc_parser.y"
+                                { (yyval.assignexpr_) = new partial_acsl::EqAssignExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2544 "Parser.C"
+    break;
+
+  case 143: /* AssignExpr: AssignExpr12 _PLUSEQ AssignExpr  */
+#line 472 "partial_bnfc_parser.y"
+                                    { (yyval.assignexpr_) = new partial_acsl::PlusEqAssignExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2550 "Parser.C"
+    break;
+
+  case 144: /* AssignExpr: AssignExpr12 _MINUSEQ AssignExpr  */
+#line 473 "partial_bnfc_parser.y"
+                                     { (yyval.assignexpr_) = new partial_acsl::MinusEqAssignExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2556 "Parser.C"
+    break;
+
+  case 145: /* AssignExpr: AssignExpr12 _STAREQ AssignExpr  */
+#line 474 "partial_bnfc_parser.y"
+                                    { (yyval.assignexpr_) = new partial_acsl::MultEqAssignExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2562 "Parser.C"
+    break;
+
+  case 146: /* AssignExpr: AssignExpr12 _SLASHEQ AssignExpr  */
+#line 475 "partial_bnfc_parser.y"
+                                     { (yyval.assignexpr_) = new partial_acsl::DivEqAssignExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2568 "Parser.C"
+    break;
+
+  case 147: /* AssignExpr: AssignExpr12 _PERCENTEQ AssignExpr  */
+#line 476 "partial_bnfc_parser.y"
+                                       { (yyval.assignexpr_) = new partial_acsl::ModEqAssignExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2574 "Parser.C"
+    break;
+
+  case 148: /* AssignExpr: AssignExpr12 _AMPEQ AssignExpr  */
+#line 477 "partial_bnfc_parser.y"
+                                   { (yyval.assignexpr_) = new partial_acsl::AndEqAssignExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2580 "Parser.C"
+    break;
+
+  case 149: /* AssignExpr: AssignExpr12 _BAREQ AssignExpr  */
+#line 478 "partial_bnfc_parser.y"
+                                   { (yyval.assignexpr_) = new partial_acsl::OrEqAssignExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2586 "Parser.C"
+    break;
+
+  case 150: /* AssignExpr: AssignExpr12 _CARETEQ AssignExpr  */
+#line 479 "partial_bnfc_parser.y"
+                                     { (yyval.assignexpr_) = new partial_acsl::XorEqAssignExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2592 "Parser.C"
+    break;
+
+  case 151: /* AssignExpr: AssignExpr12 _DLTEQ AssignExpr  */
+#line 480 "partial_bnfc_parser.y"
+                                   { (yyval.assignexpr_) = new partial_acsl::LeftShiftEqAssignExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2598 "Parser.C"
+    break;
+
+  case 152: /* AssignExpr: AssignExpr12 _DGTEQ AssignExpr  */
+#line 481 "partial_bnfc_parser.y"
+                                   { (yyval.assignexpr_) = new partial_acsl::RightShiftEqAssignExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2604 "Parser.C"
+    break;
+
+  case 153: /* AssignExpr1: AssignExpr2  */
+#line 483 "partial_bnfc_parser.y"
+                          { (yyval.assignexpr_) = (yyvsp[0].assignexpr_); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2610 "Parser.C"
+    break;
+
+  case 154: /* AssignExpr1: AssignExpr2 _QUESTION OptExpression _COLON AssignExpr1  */
+#line 484 "partial_bnfc_parser.y"
+                                                           { (yyval.assignexpr_) = new partial_acsl::TernaryCondExpr((yyvsp[-4].assignexpr_), (yyvsp[-2].optexpression_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2616 "Parser.C"
+    break;
+
+  case 155: /* AssignExpr2: AssignExpr3  */
+#line 486 "partial_bnfc_parser.y"
+                          { (yyval.assignexpr_) = (yyvsp[0].assignexpr_); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2622 "Parser.C"
+    break;
+
+  case 156: /* AssignExpr2: AssignExpr2 _DBAR AssignExpr3  */
+#line 487 "partial_bnfc_parser.y"
+                                  { (yyval.assignexpr_) = new partial_acsl::OrExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2628 "Parser.C"
+    break;
+
+  case 157: /* AssignExpr3: AssignExpr4  */
+#line 489 "partial_bnfc_parser.y"
+                          { (yyval.assignexpr_) = (yyvsp[0].assignexpr_); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2634 "Parser.C"
+    break;
+
+  case 158: /* AssignExpr3: AssignExpr3 _DAMP AssignExpr4  */
+#line 490 "partial_bnfc_parser.y"
+                                  { (yyval.assignexpr_) = new partial_acsl::AndExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2640 "Parser.C"
+    break;
+
+  case 159: /* AssignExpr4: AssignExpr5  */
+#line 492 "partial_bnfc_parser.y"
+                          { (yyval.assignexpr_) = (yyvsp[0].assignexpr_); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2646 "Parser.C"
+    break;
+
+  case 160: /* AssignExpr4: AssignExpr4 _BAR AssignExpr5  */
+#line 493 "partial_bnfc_parser.y"
+                                 { (yyval.assignexpr_) = new partial_acsl::BitOrExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2652 "Parser.C"
+    break;
+
+  case 161: /* AssignExpr5: AssignExpr6  */
+#line 495 "partial_bnfc_parser.y"
+                          { (yyval.assignexpr_) = (yyvsp[0].assignexpr_); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2658 "Parser.C"
+    break;
+
+  case 162: /* AssignExpr5: AssignExpr5 _CARET AssignExpr6  */
+#line 496 "partial_bnfc_parser.y"
+                                   { (yyval.assignexpr_) = new partial_acsl::BitXorExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2664 "Parser.C"
+    break;
+
+  case 163: /* AssignExpr6: AssignExpr7  */
+#line 498 "partial_bnfc_parser.y"
+                          { (yyval.assignexpr_) = (yyvsp[0].assignexpr_); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2670 "Parser.C"
+    break;
+
+  case 164: /* AssignExpr6: AssignExpr6 _AMP AssignExpr7  */
+#line 499 "partial_bnfc_parser.y"
+                                 { (yyval.assignexpr_) = new partial_acsl::BitAndExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2676 "Parser.C"
+    break;
+
+  case 165: /* AssignExpr7: AssignExpr8  */
+#line 501 "partial_bnfc_parser.y"
+                          { (yyval.assignexpr_) = (yyvsp[0].assignexpr_); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2682 "Parser.C"
+    break;
+
+  case 166: /* AssignExpr7: AssignExpr7 _DEQ AssignExpr8  */
+#line 502 "partial_bnfc_parser.y"
+                                 { (yyval.assignexpr_) = new partial_acsl::EqExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2688 "Parser.C"
+    break;
+
+  case 167: /* AssignExpr7: AssignExpr7 _BANGEQ AssignExpr8  */
+#line 503 "partial_bnfc_parser.y"
+                                    { (yyval.assignexpr_) = new partial_acsl::NotEqExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2694 "Parser.C"
+    break;
+
+  case 168: /* AssignExpr8: AssignExpr9  */
+#line 505 "partial_bnfc_parser.y"
+                          { (yyval.assignexpr_) = (yyvsp[0].assignexpr_); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2700 "Parser.C"
+    break;
+
+  case 169: /* AssignExpr8: AssignExpr8 _LT AssignExpr9  */
+#line 506 "partial_bnfc_parser.y"
+                                { (yyval.assignexpr_) = new partial_acsl::LessExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2706 "Parser.C"
+    break;
+
+  case 170: /* AssignExpr8: AssignExpr8 _GT AssignExpr9  */
+#line 507 "partial_bnfc_parser.y"
+                                { (yyval.assignexpr_) = new partial_acsl::GreaterExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2712 "Parser.C"
+    break;
+
+  case 171: /* AssignExpr8: AssignExpr8 _LDARROW AssignExpr9  */
+#line 508 "partial_bnfc_parser.y"
+                                     { (yyval.assignexpr_) = new partial_acsl::LessEqualExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2718 "Parser.C"
+    break;
+
+  case 172: /* AssignExpr8: AssignExpr8 _GTEQ AssignExpr9  */
+#line 509 "partial_bnfc_parser.y"
+                                  { (yyval.assignexpr_) = new partial_acsl::GreaterEqualExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2724 "Parser.C"
+    break;
+
+  case 173: /* AssignExpr9: AssignExpr10  */
+#line 511 "partial_bnfc_parser.y"
+                           { (yyval.assignexpr_) = (yyvsp[0].assignexpr_); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2730 "Parser.C"
+    break;
+
+  case 174: /* AssignExpr9: AssignExpr9 _DLT AssignExpr10  */
+#line 512 "partial_bnfc_parser.y"
+                                  { (yyval.assignexpr_) = new partial_acsl::LeftShiftExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2736 "Parser.C"
+    break;
+
+  case 175: /* AssignExpr9: AssignExpr9 _DGT AssignExpr10  */
+#line 513 "partial_bnfc_parser.y"
+                                  { (yyval.assignexpr_) = new partial_acsl::RightShiftExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2742 "Parser.C"
+    break;
+
+  case 176: /* AssignExpr10: AssignExpr11  */
+#line 515 "partial_bnfc_parser.y"
+                            { (yyval.assignexpr_) = (yyvsp[0].assignexpr_); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2748 "Parser.C"
+    break;
+
+  case 177: /* AssignExpr10: AssignExpr10 _PLUS AssignExpr11  */
+#line 516 "partial_bnfc_parser.y"
+                                    { (yyval.assignexpr_) = new partial_acsl::PlusExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2754 "Parser.C"
+    break;
+
+  case 178: /* AssignExpr10: AssignExpr10 _MINUS AssignExpr11  */
+#line 517 "partial_bnfc_parser.y"
+                                     { (yyval.assignexpr_) = new partial_acsl::MinusExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2760 "Parser.C"
+    break;
+
+  case 179: /* AssignExpr11: AssignExpr12  */
+#line 519 "partial_bnfc_parser.y"
+                            { (yyval.assignexpr_) = (yyvsp[0].assignexpr_); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2766 "Parser.C"
+    break;
+
+  case 180: /* AssignExpr11: AssignExpr11 _STAR AssignExpr12  */
+#line 520 "partial_bnfc_parser.y"
+                                    { (yyval.assignexpr_) = new partial_acsl::MulsExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2772 "Parser.C"
+    break;
+
+  case 181: /* AssignExpr11: AssignExpr11 _SLASH AssignExpr12  */
+#line 521 "partial_bnfc_parser.y"
+                                     { (yyval.assignexpr_) = new partial_acsl::DivExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2778 "Parser.C"
+    break;
+
+  case 182: /* AssignExpr11: AssignExpr11 _PERCENT AssignExpr12  */
+#line 522 "partial_bnfc_parser.y"
+                                       { (yyval.assignexpr_) = new partial_acsl::ModExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2784 "Parser.C"
+    break;
+
+  case 183: /* AssignExpr12: AssignExpr13  */
+#line 524 "partial_bnfc_parser.y"
+                            { (yyval.assignexpr_) = (yyvsp[0].assignexpr_); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2790 "Parser.C"
+    break;
+
+  case 184: /* AssignExpr12: _LPAREN TypeName _RPAREN AssignExpr12  */
+#line 525 "partial_bnfc_parser.y"
+                                          { (yyval.assignexpr_) = new partial_acsl::CastExpr((yyvsp[-2].typename_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2796 "Parser.C"
+    break;
+
+  case 185: /* AssignExpr13: AssignExpr14  */
+#line 527 "partial_bnfc_parser.y"
+                            { (yyval.assignexpr_) = (yyvsp[0].assignexpr_); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2802 "Parser.C"
+    break;
+
+  case 186: /* AssignExpr13: _DPLUS AssignExpr13  */
+#line 528 "partial_bnfc_parser.y"
+                        { (yyval.assignexpr_) = new partial_acsl::UnaryExprPlusPlus((yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2808 "Parser.C"
+    break;
+
+  case 187: /* AssignExpr13: _DMINUS AssignExpr13  */
+#line 529 "partial_bnfc_parser.y"
+                         { (yyval.assignexpr_) = new partial_acsl::UnaryExprMinusMinus((yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2814 "Parser.C"
+    break;
+
+  case 188: /* AssignExpr13: _PLUS AssignExpr12  */
+#line 530 "partial_bnfc_parser.y"
+                       { (yyval.assignexpr_) = new partial_acsl::UnaryExprPlus((yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2820 "Parser.C"
+    break;
+
+  case 189: /* AssignExpr13: _MINUS AssignExpr12  */
+#line 531 "partial_bnfc_parser.y"
+                        { (yyval.assignexpr_) = new partial_acsl::UnaryExprMinus((yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2826 "Parser.C"
+    break;
+
+  case 190: /* AssignExpr13: _STAR AssignExpr12  */
+#line 532 "partial_bnfc_parser.y"
+                       { (yyval.assignexpr_) = new partial_acsl::UnaryExprMult((yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2832 "Parser.C"
+    break;
+
+  case 191: /* AssignExpr13: _AMP AssignExpr12  */
+#line 533 "partial_bnfc_parser.y"
+                      { (yyval.assignexpr_) = new partial_acsl::UnaryExprAmp((yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2838 "Parser.C"
+    break;
+
+  case 192: /* AssignExpr13: _BANG AssignExpr12  */
+#line 534 "partial_bnfc_parser.y"
+                       { (yyval.assignexpr_) = new partial_acsl::UnaryExprNot((yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2844 "Parser.C"
+    break;
+
+  case 193: /* AssignExpr13: _TILDE AssignExpr12  */
+#line 535 "partial_bnfc_parser.y"
+                        { (yyval.assignexpr_) = new partial_acsl::UnaryExprTilde((yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2850 "Parser.C"
+    break;
+
+  case 194: /* AssignExpr13: _DAMP IdOrTypenameAsId  */
+#line 536 "partial_bnfc_parser.y"
+                           { (yyval.assignexpr_) = new partial_acsl::UnaryExprAddress((yyvsp[0].idortypenameasid_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2856 "Parser.C"
+    break;
+
+  case 195: /* AssignExpr14: AssignExpr15  */
+#line 538 "partial_bnfc_parser.y"
+                            { (yyval.assignexpr_) = (yyvsp[0].assignexpr_); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2862 "Parser.C"
+    break;
+
+  case 196: /* AssignExpr14: AssignExpr14 _DOT IdOrTypename  */
+#line 539 "partial_bnfc_parser.y"
+                                   { (yyval.assignexpr_) = new partial_acsl::DotPostfixExpression((yyvsp[-2].assignexpr_), (yyvsp[0].idortypename_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2868 "Parser.C"
+    break;
+
+  case 197: /* AssignExpr14: AssignExpr14 _RARROW IdOrTypename  */
+#line 540 "partial_bnfc_parser.y"
+                                      { (yyval.assignexpr_) = new partial_acsl::ArrowPostfixExpression((yyvsp[-2].assignexpr_), (yyvsp[0].idortypename_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2874 "Parser.C"
+    break;
+
+  case 198: /* AssignExpr14: AssignExpr14 _DPLUS  */
+#line 541 "partial_bnfc_parser.y"
+                        { (yyval.assignexpr_) = new partial_acsl::PlusPlusPostfixExpression((yyvsp[-1].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2880 "Parser.C"
+    break;
+
+  case 199: /* AssignExpr14: AssignExpr14 _DMINUS  */
+#line 542 "partial_bnfc_parser.y"
+                         { (yyval.assignexpr_) = new partial_acsl::MinusMinusPostfixExpression((yyvsp[-1].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2886 "Parser.C"
+    break;
+
+  case 200: /* AssignExpr15: _IDENT_  */
+#line 544 "partial_bnfc_parser.y"
+                       { (yyval.assignexpr_) = new partial_acsl::IdentifierPrimaryExpression((yyvsp[0]._string)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2892 "Parser.C"
+    break;
+
+  case 201: /* AssignExpr15: Constant  */
+#line 545 "partial_bnfc_parser.y"
+             { (yyval.assignexpr_) = new partial_acsl::ConstantPrimaryExpressin((yyvsp[0].constant_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2898 "Parser.C"
+    break;
+
+  case 202: /* AssignExpr15: _LPAREN ListExpression _RPAREN  */
+#line 546 "partial_bnfc_parser.y"
+                                   { std::reverse((yyvsp[-1].listexpression_)->begin(),(yyvsp[-1].listexpression_)->end()) ;(yyval.assignexpr_) = new partial_acsl::CommaExpressionPrimaryExpressin((yyvsp[-1].listexpression_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2904 "Parser.C"
+    break;
+
+  case 203: /* AssignExpr15: _LPAREN Block _RPAREN  */
+#line 547 "partial_bnfc_parser.y"
+                          { (yyval.assignexpr_) = new partial_acsl::BlockPrimaryExpressin((yyvsp[-1].block_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2910 "Parser.C"
+    break;
+
+  case 204: /* Constant: _INTEGER_  */
+#line 549 "partial_bnfc_parser.y"
+                     { (yyval.constant_) = new partial_acsl::ConstantInt((yyvsp[0]._int)); (yyval.constant_)->line_number = (yyloc).first_line; (yyval.constant_)->char_number = (yyloc).first_column; result->constant_ = (yyval.constant_); }
+#line 2916 "Parser.C"
+    break;
+
+  case 205: /* Constant: _DOUBLE_  */
+#line 550 "partial_bnfc_parser.y"
+             { (yyval.constant_) = new partial_acsl::ConstantFloat((yyvsp[0]._double)); (yyval.constant_)->line_number = (yyloc).first_line; (yyval.constant_)->char_number = (yyloc).first_column; result->constant_ = (yyval.constant_); }
+#line 2922 "Parser.C"
+    break;
+
+  case 206: /* Constant: _CHAR_  */
+#line 551 "partial_bnfc_parser.y"
+           { (yyval.constant_) = new partial_acsl::ConstantChar((yyvsp[0]._char)); (yyval.constant_)->line_number = (yyloc).first_line; (yyval.constant_)->char_number = (yyloc).first_column; result->constant_ = (yyval.constant_); }
+#line 2928 "Parser.C"
+    break;
+
+  case 207: /* TypeName: DeclSpecList  */
+#line 553 "partial_bnfc_parser.y"
+                        { (yyval.typename_) = new partial_acsl::TypeNameDeclSpecList((yyvsp[0].declspeclist_)); (yyval.typename_)->line_number = (yyloc).first_line; (yyval.typename_)->char_number = (yyloc).first_column; result->typename_ = (yyval.typename_); }
+#line 2934 "Parser.C"
     break;
 
 
-#line 1733 "Parser.C"
+#line 2938 "Parser.C"
 
       default: break;
     }
@@ -1927,7 +3132,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 252 "partial_bnfc_parser.y"
+#line 556 "partial_bnfc_parser.y"
 
 
 namespace partial_acsl
@@ -2105,50 +3310,6 @@ FunctionDef* psFunctionDef(const char *str)
   else
   { /* Success */
     return result.functiondef_;
-  }
-}
-
-/* Entrypoint: parse Block* from file. */
-Block* pBlock(FILE *inp)
-{
-  YYSTYPE result;
-  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
-  if (!scanner) {
-    fprintf(stderr, "Failed to initialize lexer.\n");
-    return 0;
-  }
-  int error = yyparse(scanner, &result);
-  partial_acsllex_destroy(scanner);
-  if (error)
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return result.block_;
-  }
-}
-
-/* Entrypoint: parse Block* from string. */
-Block* psBlock(const char *str)
-{
-  YYSTYPE result;
-  yyscan_t scanner = partial_acsl_initialize_lexer(0);
-  if (!scanner) {
-    fprintf(stderr, "Failed to initialize lexer.\n");
-    return 0;
-  }
-  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
-  int error = yyparse(scanner, &result);
-  partial_acsl_delete_buffer(buf, scanner);
-  partial_acsllex_destroy(scanner);
-  if (error)
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return result.block_;
   }
 }
 
@@ -3211,6 +4372,2036 @@ ListAttribute* psListAttribute(const char *str)
   else
   { /* Success */
     return result.listattribute_;
+  }
+}
+
+/* Entrypoint: parse Block* from file. */
+Block* pBlock(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.block_;
+  }
+}
+
+/* Entrypoint: parse Block* from string. */
+Block* psBlock(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.block_;
+  }
+}
+
+/* Entrypoint: parse BlockAttrs* from file. */
+BlockAttrs* pBlockAttrs(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.blockattrs_;
+  }
+}
+
+/* Entrypoint: parse BlockAttrs* from string. */
+BlockAttrs* psBlockAttrs(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.blockattrs_;
+  }
+}
+
+/* Entrypoint: parse BlockElement* from file. */
+BlockElement* pBlockElement(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.blockelement_;
+  }
+}
+
+/* Entrypoint: parse BlockElement* from string. */
+BlockElement* psBlockElement(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.blockelement_;
+  }
+}
+
+/* Entrypoint: parse ListBlockElement* from file. */
+ListBlockElement* pListBlockElement(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.listblockelement_;
+  }
+}
+
+/* Entrypoint: parse ListBlockElement* from string. */
+ListBlockElement* psListBlockElement(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.listblockelement_;
+  }
+}
+
+/* Entrypoint: parse Statement* from file. */
+Statement* pStatement(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.statement_;
+  }
+}
+
+/* Entrypoint: parse Statement* from string. */
+Statement* psStatement(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.statement_;
+  }
+}
+
+/* Entrypoint: parse Attr* from file. */
+Attr* pAttr(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from string. */
+Attr* psAttr(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse ListAttr* from file. */
+ListAttr* pListAttr(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+std::reverse(result.listattr_->begin(), result.listattr_->end());
+    return result.listattr_;
+  }
+}
+
+/* Entrypoint: parse ListAttr* from string. */
+ListAttr* psListAttr(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+std::reverse(result.listattr_->begin(), result.listattr_->end());
+    return result.listattr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from file. */
+Attr* pAttr1(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from string. */
+Attr* psAttr1(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from file. */
+Attr* pAttr2(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from string. */
+Attr* psAttr2(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from file. */
+Attr* pAttr3(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from string. */
+Attr* psAttr3(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from file. */
+Attr* pAttr4(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from string. */
+Attr* psAttr4(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from file. */
+Attr* pAttr5(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from string. */
+Attr* psAttr5(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from file. */
+Attr* pAttr6(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from string. */
+Attr* psAttr6(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from file. */
+Attr* pAttr7(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from string. */
+Attr* psAttr7(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from file. */
+Attr* pAttr8(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from string. */
+Attr* psAttr8(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from file. */
+Attr* pAttr9(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from string. */
+Attr* psAttr9(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from file. */
+Attr* pAttr10(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from string. */
+Attr* psAttr10(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from file. */
+Attr* pAttr11(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from string. */
+Attr* psAttr11(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from file. */
+Attr* pAttr12(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from string. */
+Attr* psAttr12(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from file. */
+Attr* pAttr13(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from string. */
+Attr* psAttr13(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from file. */
+Attr* pAttr14(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from string. */
+Attr* psAttr14(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse BasicAttribute* from file. */
+BasicAttribute* pBasicAttribute(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.basicattribute_;
+  }
+}
+
+/* Entrypoint: parse BasicAttribute* from string. */
+BasicAttribute* psBasicAttribute(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.basicattribute_;
+  }
+}
+
+/* Entrypoint: parse ListBasicAttribute* from file. */
+ListBasicAttribute* pListBasicAttribute(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+std::reverse(result.listbasicattribute_->begin(), result.listbasicattribute_->end());
+    return result.listbasicattribute_;
+  }
+}
+
+/* Entrypoint: parse ListBasicAttribute* from string. */
+ListBasicAttribute* psListBasicAttribute(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+std::reverse(result.listbasicattribute_->begin(), result.listbasicattribute_->end());
+    return result.listbasicattribute_;
+  }
+}
+
+/* Entrypoint: parse AnnotatedStmt* from file. */
+AnnotatedStmt* pAnnotatedStmt(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.annotatedstmt_;
+  }
+}
+
+/* Entrypoint: parse AnnotatedStmt* from string. */
+AnnotatedStmt* psAnnotatedStmt(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.annotatedstmt_;
+  }
+}
+
+/* Entrypoint: parse ElsePart* from file. */
+ElsePart* pElsePart(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.elsepart_;
+  }
+}
+
+/* Entrypoint: parse ElsePart* from string. */
+ElsePart* psElsePart(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.elsepart_;
+  }
+}
+
+/* Entrypoint: parse OptExpression* from file. */
+OptExpression* pOptExpression(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.optexpression_;
+  }
+}
+
+/* Entrypoint: parse OptExpression* from string. */
+OptExpression* psOptExpression(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.optexpression_;
+  }
+}
+
+/* Entrypoint: parse Expression* from file. */
+Expression* pExpression(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.expression_;
+  }
+}
+
+/* Entrypoint: parse Expression* from string. */
+Expression* psExpression(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.expression_;
+  }
+}
+
+/* Entrypoint: parse ListExpression* from file. */
+ListExpression* pListExpression(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+std::reverse(result.listexpression_->begin(), result.listexpression_->end());
+    return result.listexpression_;
+  }
+}
+
+/* Entrypoint: parse ListExpression* from string. */
+ListExpression* psListExpression(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+std::reverse(result.listexpression_->begin(), result.listexpression_->end());
+    return result.listexpression_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from file. */
+AssignExpr* pAssignExpr(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from string. */
+AssignExpr* psAssignExpr(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from file. */
+AssignExpr* pAssignExpr1(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from string. */
+AssignExpr* psAssignExpr1(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from file. */
+AssignExpr* pAssignExpr2(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from string. */
+AssignExpr* psAssignExpr2(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from file. */
+AssignExpr* pAssignExpr3(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from string. */
+AssignExpr* psAssignExpr3(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from file. */
+AssignExpr* pAssignExpr4(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from string. */
+AssignExpr* psAssignExpr4(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from file. */
+AssignExpr* pAssignExpr5(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from string. */
+AssignExpr* psAssignExpr5(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from file. */
+AssignExpr* pAssignExpr6(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from string. */
+AssignExpr* psAssignExpr6(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from file. */
+AssignExpr* pAssignExpr7(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from string. */
+AssignExpr* psAssignExpr7(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from file. */
+AssignExpr* pAssignExpr8(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from string. */
+AssignExpr* psAssignExpr8(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from file. */
+AssignExpr* pAssignExpr9(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from string. */
+AssignExpr* psAssignExpr9(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from file. */
+AssignExpr* pAssignExpr10(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from string. */
+AssignExpr* psAssignExpr10(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from file. */
+AssignExpr* pAssignExpr11(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from string. */
+AssignExpr* psAssignExpr11(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from file. */
+AssignExpr* pAssignExpr12(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from string. */
+AssignExpr* psAssignExpr12(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from file. */
+AssignExpr* pAssignExpr13(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from string. */
+AssignExpr* psAssignExpr13(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from file. */
+AssignExpr* pAssignExpr14(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from string. */
+AssignExpr* psAssignExpr14(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from file. */
+AssignExpr* pAssignExpr15(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from string. */
+AssignExpr* psAssignExpr15(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse Constant* from file. */
+Constant* pConstant(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.constant_;
+  }
+}
+
+/* Entrypoint: parse Constant* from string. */
+Constant* psConstant(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.constant_;
+  }
+}
+
+/* Entrypoint: parse TypeName* from file. */
+TypeName* pTypeName(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.typename_;
+  }
+}
+
+/* Entrypoint: parse TypeName* from string. */
+TypeName* psTypeName(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.typename_;
   }
 }
 

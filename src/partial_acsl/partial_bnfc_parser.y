@@ -58,7 +58,6 @@ extern yyscan_t partial_acsl_initialize_lexer(FILE * inp);
   partial_acsl::Globals* globals_;
   partial_acsl::Global* global_;
   partial_acsl::FunctionDef* functiondef_;
-  partial_acsl::Block* block_;
   partial_acsl::FunctionDefStart* functiondefstart_;
   partial_acsl::DeclSpecList* declspeclist_;
   partial_acsl::DeclSpecListNoNamed* declspeclistnonamed_;
@@ -83,6 +82,23 @@ extern yyscan_t partial_acsl_initialize_lexer(FILE * inp);
   partial_acsl::ListFieldDecl* listfielddecl_;
   partial_acsl::Attribute* attribute_;
   partial_acsl::ListAttribute* listattribute_;
+  partial_acsl::Block* block_;
+  partial_acsl::BlockAttrs* blockattrs_;
+  partial_acsl::BlockElement* blockelement_;
+  partial_acsl::ListBlockElement* listblockelement_;
+  partial_acsl::Statement* statement_;
+  partial_acsl::Attr* attr_;
+  partial_acsl::ListAttr* listattr_;
+  partial_acsl::BasicAttribute* basicattribute_;
+  partial_acsl::ListBasicAttribute* listbasicattribute_;
+  partial_acsl::AnnotatedStmt* annotatedstmt_;
+  partial_acsl::ElsePart* elsepart_;
+  partial_acsl::OptExpression* optexpression_;
+  partial_acsl::Expression* expression_;
+  partial_acsl::ListExpression* listexpression_;
+  partial_acsl::AssignExpr* assignexpr_;
+  partial_acsl::Constant* constant_;
+  partial_acsl::TypeName* typename_;
 }
 
 %{
@@ -98,36 +114,87 @@ extern int yylex(YYSTYPE *lvalp, YYLTYPE *llocp, yyscan_t scanner);
 %}
 
 %token          _ERROR_
-%token          _LPAREN       /* ( */
-%token          _RPAREN       /* ) */
-%token          _STAR         /* * */
-%token          _COMMA        /* , */
-%token          _SEMI         /* ; */
-%token          _SYMB_1       /* _Bool */
-%token          _SYMB_2       /* __int32 */
-%token          _SYMB_3       /* __int64 */
-%token          _KW_char      /* char */
-%token          _KW_double    /* double */
-%token          _KW_float     /* float */
-%token          _KW_int       /* int */
-%token          _KW_long      /* long */
-%token          _KW_short     /* short */
-%token          _KW_struct    /* struct */
-%token          _KW_unsigned  /* unsigned */
-%token          _KW_void      /* void */
-%token<_string> T_CONST       /* CONST */
-%token<_string> T_LBRACE      /* LBRACE */
-%token<_string> T_RBRACE      /* RBRACE */
-%token<_string> T_RESTRICT    /* RESTRICT */
-%token<_string> T_SIGNED      /* SIGNED */
-%token<_string> T_VOLATILE    /* VOLATILE */
+%token          _BANG             /* ! */
+%token          _BANGEQ           /* != */
+%token          _PERCENT          /* % */
+%token          _PERCENTEQ        /* %= */
+%token          _AMP              /* & */
+%token          _DAMP             /* && */
+%token          _AMPEQ            /* &= */
+%token          _LPAREN           /* ( */
+%token          _RPAREN           /* ) */
+%token          _STAR             /* * */
+%token          _STAREQ           /* *= */
+%token          _PLUS             /* + */
+%token          _DPLUS            /* ++ */
+%token          _PLUSEQ           /* += */
+%token          _COMMA            /* , */
+%token          _MINUS            /* - */
+%token          _DMINUS           /* -- */
+%token          _MINUSEQ          /* -= */
+%token          _RARROW           /* -> */
+%token          _DOT              /* . */
+%token          _ELLIPSIS         /* ... */
+%token          _SLASH            /* / */
+%token          _SLASHEQ          /* /= */
+%token          _COLON            /* : */
+%token          _SEMI             /* ; */
+%token          _LT               /* < */
+%token          _DLT              /* << */
+%token          _DLTEQ            /* <<= */
+%token          _LDARROW          /* <= */
+%token          _EQ               /* = */
+%token          _DEQ              /* == */
+%token          _GT               /* > */
+%token          _GTEQ             /* >= */
+%token          _DGT              /* >> */
+%token          _DGTEQ            /* >>= */
+%token          _QUESTION         /* ? */
+%token          _CARET            /* ^ */
+%token          _CARETEQ          /* ^= */
+%token          _SYMB_1           /* _Bool */
+%token          _SYMB_2           /* __int32 */
+%token          _SYMB_3           /* __int64 */
+%token          _KW_break         /* break */
+%token          _KW_case          /* case */
+%token          _KW_char          /* char */
+%token          _KW_continue      /* continue */
+%token          _KW_default       /* default */
+%token          _KW_double        /* double */
+%token          _KW_else          /* else */
+%token          _KW_float         /* float */
+%token          _KW_if            /* if */
+%token          _KW_int           /* int */
+%token          _KW_long          /* long */
+%token          _KW_return        /* return */
+%token          _KW_short         /* short */
+%token          _KW_struct        /* struct */
+%token          _KW_switch        /* switch */
+%token          _KW_unsigned      /* unsigned */
+%token          _KW_void          /* void */
+%token          _KW_while         /* while */
+%token          _BAR              /* | */
+%token          _BAREQ            /* |= */
+%token          _DBAR             /* || */
+%token          _TILDE            /* ~ */
+%token<_string> T_BLOCKATTRIBUTE  /* BLOCKATTRIBUTE */
+%token<_string> T_CONST           /* CONST */
+%token<_string> T_LBRACE          /* LBRACE */
+%token<_string> T_LBRACKET        /* LBRACKET */
+%token<_string> T_RBRACE          /* RBRACE */
+%token<_string> T_RBRACKET        /* RBRACKET */
+%token<_string> T_RESTRICT        /* RESTRICT */
+%token<_string> T_SIGNED          /* SIGNED */
+%token<_string> T_VOLATILE        /* VOLATILE */
+%token<_char>   _CHAR_
+%token<_int>    _INTEGER_
+%token<_double> _DOUBLE_
 %token<_string> _IDENT_
 
 %type <program_> Program
 %type <globals_> Globals
 %type <global_> Global
 %type <functiondef_> FunctionDef
-%type <block_> Block
 %type <functiondefstart_> FunctionDefStart
 %type <declspeclist_> DeclSpecList
 %type <declspeclistnonamed_> DeclSpecListNoNamed
@@ -152,6 +219,52 @@ extern int yylex(YYSTYPE *lvalp, YYLTYPE *llocp, yyscan_t scanner);
 %type <listfielddecl_> ListFieldDecl
 %type <attribute_> Attribute
 %type <listattribute_> ListAttribute
+%type <block_> Block
+%type <blockattrs_> BlockAttrs
+%type <blockelement_> BlockElement
+%type <listblockelement_> ListBlockElement
+%type <statement_> Statement
+%type <attr_> Attr
+%type <listattr_> ListAttr
+%type <attr_> Attr1
+%type <attr_> Attr2
+%type <attr_> Attr3
+%type <attr_> Attr4
+%type <attr_> Attr5
+%type <attr_> Attr6
+%type <attr_> Attr7
+%type <attr_> Attr8
+%type <attr_> Attr9
+%type <attr_> Attr10
+%type <attr_> Attr11
+%type <attr_> Attr12
+%type <attr_> Attr13
+%type <attr_> Attr14
+%type <basicattribute_> BasicAttribute
+%type <listbasicattribute_> ListBasicAttribute
+%type <annotatedstmt_> AnnotatedStmt
+%type <elsepart_> ElsePart
+%type <optexpression_> OptExpression
+%type <expression_> Expression
+%type <listexpression_> ListExpression
+%type <assignexpr_> AssignExpr
+%type <assignexpr_> AssignExpr1
+%type <assignexpr_> AssignExpr2
+%type <assignexpr_> AssignExpr3
+%type <assignexpr_> AssignExpr4
+%type <assignexpr_> AssignExpr5
+%type <assignexpr_> AssignExpr6
+%type <assignexpr_> AssignExpr7
+%type <assignexpr_> AssignExpr8
+%type <assignexpr_> AssignExpr9
+%type <assignexpr_> AssignExpr10
+%type <assignexpr_> AssignExpr11
+%type <assignexpr_> AssignExpr12
+%type <assignexpr_> AssignExpr13
+%type <assignexpr_> AssignExpr14
+%type <assignexpr_> AssignExpr15
+%type <constant_> Constant
+%type <typename_> TypeName
 
 %start Program
 
@@ -167,8 +280,6 @@ Global : Declaration { $$ = new partial_acsl::GlobalsDeclataion($1); $$->line_nu
   | FunctionDef { $$ = new partial_acsl::GlobalsFunctionDef($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->global_ = $$; }
 ;
 FunctionDef : FunctionDefStart Block { $$ = new partial_acsl::SimpleFunctionDef($1, $2); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->functiondef_ = $$; }
-;
-Block : T_LBRACE T_RBRACE { $$ = new partial_acsl::ABlock($1, $2); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->block_ = $$; }
 ;
 FunctionDefStart : DeclSpecList Declarator { $$ = new partial_acsl::FunctionDefStartDeclarator($1, $2); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->functiondefstart_ = $$; }
 ;
@@ -247,6 +358,199 @@ Attribute : T_CONST { $$ = new partial_acsl::AttributeConst($1); $$->line_number
 ;
 ListAttribute : /* empty */ { $$ = new partial_acsl::ListAttribute(); result->listattribute_ = $$; }
   | ListAttribute Attribute { $1->push_back($2); $$ = $1; result->listattribute_ = $$; }
+;
+Block : T_LBRACE BlockAttrs ListBlockElement T_RBRACE { $$ = new partial_acsl::ABlock($1, $2, $3, $4); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->block_ = $$; }
+;
+BlockAttrs : /* empty */ { $$ = new partial_acsl::NoBlockAttrs(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->blockattrs_ = $$; }
+  | T_BLOCKATTRIBUTE _LPAREN ListAttr _RPAREN { std::reverse($3->begin(),$3->end()) ;$$ = new partial_acsl::SomeBlockAttrs($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->blockattrs_ = $$; }
+;
+BlockElement : Declaration { $$ = new partial_acsl::DeclarationElement($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->blockelement_ = $$; }
+  | Statement { $$ = new partial_acsl::StatementElement($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->blockelement_ = $$; }
+;
+ListBlockElement : /* empty */ { $$ = new partial_acsl::ListBlockElement(); result->listblockelement_ = $$; }
+  | ListBlockElement BlockElement { $1->push_back($2); $$ = $1; result->listblockelement_ = $$; }
+;
+Statement : _SEMI { $$ = new partial_acsl::SemicolonStatement(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->statement_ = $$; }
+  | ListExpression _SEMI { std::reverse($1->begin(),$1->end()) ;$$ = new partial_acsl::ExprsStatement($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->statement_ = $$; }
+  | Block { $$ = new partial_acsl::BlockStatement($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->statement_ = $$; }
+  | _KW_if _LPAREN ListExpression _RPAREN AnnotatedStmt ElsePart { std::reverse($3->begin(),$3->end()) ;$$ = new partial_acsl::IfStatement($3, $5, $6); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->statement_ = $$; }
+  | _KW_switch _LPAREN ListExpression _RPAREN AnnotatedStmt { std::reverse($3->begin(),$3->end()) ;$$ = new partial_acsl::SwitchStatement($3, $5); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->statement_ = $$; }
+  | _KW_while _LPAREN ListExpression _RPAREN AnnotatedStmt { std::reverse($3->begin(),$3->end()) ;$$ = new partial_acsl::WhileStatement($3, $5); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->statement_ = $$; }
+  | _KW_case Expression _COLON AnnotatedStmt { $$ = new partial_acsl::CaseStatement($2, $4); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->statement_ = $$; }
+  | _KW_case Expression _ELLIPSIS Expression _COLON AnnotatedStmt { $$ = new partial_acsl::CaseSliceStatement($2, $4, $6); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->statement_ = $$; }
+  | _KW_default _COLON AnnotatedStmt { $$ = new partial_acsl::DefaultStatement($3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->statement_ = $$; }
+  | _KW_return _SEMI { $$ = new partial_acsl::EmptyReturnStatement(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->statement_ = $$; }
+  | _KW_break _SEMI { $$ = new partial_acsl::BreakStatement(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->statement_ = $$; }
+  | _KW_continue _SEMI { $$ = new partial_acsl::ContinueStatement(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->statement_ = $$; }
+;
+Attr : Attr1 { $$ = $1; $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->attr_ = $$; }
+  | Attr1 _EQ Attr1 { $$ = new partial_acsl::AnAttr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->attr_ = $$; }
+;
+ListAttr : Attr { $$ = new partial_acsl::ListAttr(); $$->push_back($1); result->listattr_ = $$; }
+  | Attr _COMMA ListAttr { $3->push_back($1); $$ = $3; result->listattr_ = $$; }
+;
+Attr1 : Attr2 { $$ = $1; $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->attr_ = $$; }
+  | Attr2 _QUESTION Attr1 _COLON Attr1 { $$ = new partial_acsl::TernaryCond($1, $3, $5); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->attr_ = $$; }
+;
+Attr2 : Attr3 { $$ = $1; $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->attr_ = $$; }
+  | Attr2 _DBAR Attr3 { $$ = new partial_acsl::Or($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->attr_ = $$; }
+;
+Attr3 : Attr4 { $$ = $1; $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->attr_ = $$; }
+  | Attr3 _DAMP Attr4 { $$ = new partial_acsl::And($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->attr_ = $$; }
+;
+Attr4 : Attr5 { $$ = $1; $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->attr_ = $$; }
+  | Attr4 _BAR Attr5 { $$ = new partial_acsl::BitOr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->attr_ = $$; }
+;
+Attr5 : Attr6 { $$ = $1; $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->attr_ = $$; }
+  | Attr5 _CARET Attr6 { $$ = new partial_acsl::Xor($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->attr_ = $$; }
+;
+Attr6 : Attr7 { $$ = $1; $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->attr_ = $$; }
+  | Attr6 _AMP Attr7 { $$ = new partial_acsl::BitAnd($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->attr_ = $$; }
+;
+Attr7 : Attr8 { $$ = $1; $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->attr_ = $$; }
+  | Attr7 _DEQ Attr8 { $$ = new partial_acsl::EqualEqual($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->attr_ = $$; }
+  | Attr7 _BANGEQ Attr8 { $$ = new partial_acsl::NotEqual($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->attr_ = $$; }
+;
+Attr8 : Attr9 { $$ = $1; $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->attr_ = $$; }
+  | Attr8 _LT Attr9 { $$ = new partial_acsl::Less($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->attr_ = $$; }
+  | Attr8 _GT Attr9 { $$ = new partial_acsl::Greater($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->attr_ = $$; }
+  | Attr8 _LDARROW Attr9 { $$ = new partial_acsl::LessEqual($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->attr_ = $$; }
+  | Attr8 _GTEQ Attr9 { $$ = new partial_acsl::GreaterEqual($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->attr_ = $$; }
+;
+Attr9 : Attr10 { $$ = $1; $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->attr_ = $$; }
+  | Attr9 _DLT Attr10 { $$ = new partial_acsl::LeftShiftOp($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->attr_ = $$; }
+  | Attr9 _DGT Attr10 { $$ = new partial_acsl::RightShiftOp($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->attr_ = $$; }
+;
+Attr10 : Attr11 { $$ = $1; $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->attr_ = $$; }
+  | Attr10 _PLUS Attr11 { $$ = new partial_acsl::AddOp($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->attr_ = $$; }
+  | Attr10 _MINUS Attr11 { $$ = new partial_acsl::SubOp($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->attr_ = $$; }
+;
+Attr11 : Attr12 { $$ = $1; $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->attr_ = $$; }
+  | Attr11 _STAR Attr12 { $$ = new partial_acsl::MultOp($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->attr_ = $$; }
+  | Attr11 _SLASH Attr12 { $$ = new partial_acsl::DivOp($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->attr_ = $$; }
+  | Attr11 _PERCENT Attr12 { $$ = new partial_acsl::ModOp($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->attr_ = $$; }
+;
+Attr12 : Attr13 { $$ = $1; $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->attr_ = $$; }
+  | _PLUS Attr12 { $$ = new partial_acsl::PlusUnaryAttr($2); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->attr_ = $$; }
+  | _MINUS Attr12 { $$ = new partial_acsl::MinusUnaryAttr($2); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->attr_ = $$; }
+  | _STAR Attr12 { $$ = new partial_acsl::MultUnaryAttr($2); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->attr_ = $$; }
+  | _AMP Attr12 { $$ = new partial_acsl::AmpUnaryAttr($2); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->attr_ = $$; }
+  | _BANG Attr12 { $$ = new partial_acsl::NotUnaryAttr($2); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->attr_ = $$; }
+  | _TILDE Attr12 { $$ = new partial_acsl::TildeUnaryAttr($2); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->attr_ = $$; }
+;
+Attr13 : Attr14 { $$ = $1; $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->attr_ = $$; }
+  | IdOrTypenameAsId _LPAREN ListAttr _RPAREN { std::reverse($3->begin(),$3->end()) ;$$ = new partial_acsl::FuncationCall($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->attr_ = $$; }
+  | IdOrTypenameAsId _LPAREN _RPAREN { $$ = new partial_acsl::ProcedureCall($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->attr_ = $$; }
+  | Attr13 _RARROW IdOrTypename { $$ = new partial_acsl::ArrowAttr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->attr_ = $$; }
+  | Attr13 _DOT IdOrTypename { $$ = new partial_acsl::DotAttr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->attr_ = $$; }
+  | Attr13 T_LBRACKET Attr T_RBRACKET { $$ = new partial_acsl::ArrayAttr($1, $2, $3, $4); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->attr_ = $$; }
+;
+Attr14 : BasicAttribute { $$ = new partial_acsl::BasicAttr($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->attr_ = $$; }
+  | _LPAREN Attr _RPAREN { $$ = $2; $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->attr_ = $$; }
+;
+BasicAttribute : _INTEGER_ { $$ = new partial_acsl::BasicAttrConsInt($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->basicattribute_ = $$; }
+  | _DOUBLE_ { $$ = new partial_acsl::BasicAttrConsFloat($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->basicattribute_ = $$; }
+;
+ListBasicAttribute : BasicAttribute { $$ = new partial_acsl::ListBasicAttribute(); $$->push_back($1); result->listbasicattribute_ = $$; }
+  | BasicAttribute ListBasicAttribute { $2->push_back($1); $$ = $2; result->listbasicattribute_ = $$; }
+;
+AnnotatedStmt : Statement { $$ = new partial_acsl::AnnotatedStatement($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->annotatedstmt_ = $$; }
+;
+ElsePart : /* empty */ { $$ = new partial_acsl::NoElsePart(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->elsepart_ = $$; }
+  | _KW_else AnnotatedStmt { $$ = new partial_acsl::SimpleElsePart($2); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->elsepart_ = $$; }
+;
+OptExpression : /* empty */ { $$ = new partial_acsl::NoExpression(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->optexpression_ = $$; }
+  | ListExpression { std::reverse($1->begin(),$1->end()) ;$$ = new partial_acsl::SomeExpression($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->optexpression_ = $$; }
+;
+Expression : AssignExpr { $$ = new partial_acsl::AssignmentExpr($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->expression_ = $$; }
+;
+ListExpression : Expression { $$ = new partial_acsl::ListExpression(); $$->push_back($1); result->listexpression_ = $$; }
+  | Expression _COMMA ListExpression { $3->push_back($1); $$ = $3; result->listexpression_ = $$; }
+;
+AssignExpr : AssignExpr1 { $$ = $1; $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+  | AssignExpr12 _EQ AssignExpr { $$ = new partial_acsl::EqAssignExpr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+  | AssignExpr12 _PLUSEQ AssignExpr { $$ = new partial_acsl::PlusEqAssignExpr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+  | AssignExpr12 _MINUSEQ AssignExpr { $$ = new partial_acsl::MinusEqAssignExpr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+  | AssignExpr12 _STAREQ AssignExpr { $$ = new partial_acsl::MultEqAssignExpr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+  | AssignExpr12 _SLASHEQ AssignExpr { $$ = new partial_acsl::DivEqAssignExpr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+  | AssignExpr12 _PERCENTEQ AssignExpr { $$ = new partial_acsl::ModEqAssignExpr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+  | AssignExpr12 _AMPEQ AssignExpr { $$ = new partial_acsl::AndEqAssignExpr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+  | AssignExpr12 _BAREQ AssignExpr { $$ = new partial_acsl::OrEqAssignExpr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+  | AssignExpr12 _CARETEQ AssignExpr { $$ = new partial_acsl::XorEqAssignExpr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+  | AssignExpr12 _DLTEQ AssignExpr { $$ = new partial_acsl::LeftShiftEqAssignExpr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+  | AssignExpr12 _DGTEQ AssignExpr { $$ = new partial_acsl::RightShiftEqAssignExpr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+;
+AssignExpr1 : AssignExpr2 { $$ = $1; $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+  | AssignExpr2 _QUESTION OptExpression _COLON AssignExpr1 { $$ = new partial_acsl::TernaryCondExpr($1, $3, $5); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+;
+AssignExpr2 : AssignExpr3 { $$ = $1; $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+  | AssignExpr2 _DBAR AssignExpr3 { $$ = new partial_acsl::OrExpr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+;
+AssignExpr3 : AssignExpr4 { $$ = $1; $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+  | AssignExpr3 _DAMP AssignExpr4 { $$ = new partial_acsl::AndExpr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+;
+AssignExpr4 : AssignExpr5 { $$ = $1; $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+  | AssignExpr4 _BAR AssignExpr5 { $$ = new partial_acsl::BitOrExpr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+;
+AssignExpr5 : AssignExpr6 { $$ = $1; $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+  | AssignExpr5 _CARET AssignExpr6 { $$ = new partial_acsl::BitXorExpr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+;
+AssignExpr6 : AssignExpr7 { $$ = $1; $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+  | AssignExpr6 _AMP AssignExpr7 { $$ = new partial_acsl::BitAndExpr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+;
+AssignExpr7 : AssignExpr8 { $$ = $1; $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+  | AssignExpr7 _DEQ AssignExpr8 { $$ = new partial_acsl::EqExpr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+  | AssignExpr7 _BANGEQ AssignExpr8 { $$ = new partial_acsl::NotEqExpr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+;
+AssignExpr8 : AssignExpr9 { $$ = $1; $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+  | AssignExpr8 _LT AssignExpr9 { $$ = new partial_acsl::LessExpr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+  | AssignExpr8 _GT AssignExpr9 { $$ = new partial_acsl::GreaterExpr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+  | AssignExpr8 _LDARROW AssignExpr9 { $$ = new partial_acsl::LessEqualExpr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+  | AssignExpr8 _GTEQ AssignExpr9 { $$ = new partial_acsl::GreaterEqualExpr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+;
+AssignExpr9 : AssignExpr10 { $$ = $1; $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+  | AssignExpr9 _DLT AssignExpr10 { $$ = new partial_acsl::LeftShiftExpr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+  | AssignExpr9 _DGT AssignExpr10 { $$ = new partial_acsl::RightShiftExpr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+;
+AssignExpr10 : AssignExpr11 { $$ = $1; $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+  | AssignExpr10 _PLUS AssignExpr11 { $$ = new partial_acsl::PlusExpr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+  | AssignExpr10 _MINUS AssignExpr11 { $$ = new partial_acsl::MinusExpr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+;
+AssignExpr11 : AssignExpr12 { $$ = $1; $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+  | AssignExpr11 _STAR AssignExpr12 { $$ = new partial_acsl::MulsExpr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+  | AssignExpr11 _SLASH AssignExpr12 { $$ = new partial_acsl::DivExpr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+  | AssignExpr11 _PERCENT AssignExpr12 { $$ = new partial_acsl::ModExpr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+;
+AssignExpr12 : AssignExpr13 { $$ = $1; $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+  | _LPAREN TypeName _RPAREN AssignExpr12 { $$ = new partial_acsl::CastExpr($2, $4); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+;
+AssignExpr13 : AssignExpr14 { $$ = $1; $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+  | _DPLUS AssignExpr13 { $$ = new partial_acsl::UnaryExprPlusPlus($2); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+  | _DMINUS AssignExpr13 { $$ = new partial_acsl::UnaryExprMinusMinus($2); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+  | _PLUS AssignExpr12 { $$ = new partial_acsl::UnaryExprPlus($2); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+  | _MINUS AssignExpr12 { $$ = new partial_acsl::UnaryExprMinus($2); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+  | _STAR AssignExpr12 { $$ = new partial_acsl::UnaryExprMult($2); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+  | _AMP AssignExpr12 { $$ = new partial_acsl::UnaryExprAmp($2); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+  | _BANG AssignExpr12 { $$ = new partial_acsl::UnaryExprNot($2); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+  | _TILDE AssignExpr12 { $$ = new partial_acsl::UnaryExprTilde($2); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+  | _DAMP IdOrTypenameAsId { $$ = new partial_acsl::UnaryExprAddress($2); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+;
+AssignExpr14 : AssignExpr15 { $$ = $1; $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+  | AssignExpr14 _DOT IdOrTypename { $$ = new partial_acsl::DotPostfixExpression($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+  | AssignExpr14 _RARROW IdOrTypename { $$ = new partial_acsl::ArrowPostfixExpression($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+  | AssignExpr14 _DPLUS { $$ = new partial_acsl::PlusPlusPostfixExpression($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+  | AssignExpr14 _DMINUS { $$ = new partial_acsl::MinusMinusPostfixExpression($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+;
+AssignExpr15 : _IDENT_ { $$ = new partial_acsl::IdentifierPrimaryExpression($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+  | Constant { $$ = new partial_acsl::ConstantPrimaryExpressin($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+  | _LPAREN ListExpression _RPAREN { std::reverse($2->begin(),$2->end()) ;$$ = new partial_acsl::CommaExpressionPrimaryExpressin($2); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+  | _LPAREN Block _RPAREN { $$ = new partial_acsl::BlockPrimaryExpressin($2); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+;
+Constant : _INTEGER_ { $$ = new partial_acsl::ConstantInt($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->constant_ = $$; }
+  | _DOUBLE_ { $$ = new partial_acsl::ConstantFloat($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->constant_ = $$; }
+  | _CHAR_ { $$ = new partial_acsl::ConstantChar($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->constant_ = $$; }
+;
+TypeName : DeclSpecList { $$ = new partial_acsl::TypeNameDeclSpecList($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typename_ = $$; }
 ;
 
 %%
@@ -426,50 +730,6 @@ FunctionDef* psFunctionDef(const char *str)
   else
   { /* Success */
     return result.functiondef_;
-  }
-}
-
-/* Entrypoint: parse Block* from file. */
-Block* pBlock(FILE *inp)
-{
-  YYSTYPE result;
-  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
-  if (!scanner) {
-    fprintf(stderr, "Failed to initialize lexer.\n");
-    return 0;
-  }
-  int error = yyparse(scanner, &result);
-  partial_acsllex_destroy(scanner);
-  if (error)
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return result.block_;
-  }
-}
-
-/* Entrypoint: parse Block* from string. */
-Block* psBlock(const char *str)
-{
-  YYSTYPE result;
-  yyscan_t scanner = partial_acsl_initialize_lexer(0);
-  if (!scanner) {
-    fprintf(stderr, "Failed to initialize lexer.\n");
-    return 0;
-  }
-  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
-  int error = yyparse(scanner, &result);
-  partial_acsl_delete_buffer(buf, scanner);
-  partial_acsllex_destroy(scanner);
-  if (error)
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return result.block_;
   }
 }
 
@@ -1532,6 +1792,2036 @@ ListAttribute* psListAttribute(const char *str)
   else
   { /* Success */
     return result.listattribute_;
+  }
+}
+
+/* Entrypoint: parse Block* from file. */
+Block* pBlock(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.block_;
+  }
+}
+
+/* Entrypoint: parse Block* from string. */
+Block* psBlock(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.block_;
+  }
+}
+
+/* Entrypoint: parse BlockAttrs* from file. */
+BlockAttrs* pBlockAttrs(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.blockattrs_;
+  }
+}
+
+/* Entrypoint: parse BlockAttrs* from string. */
+BlockAttrs* psBlockAttrs(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.blockattrs_;
+  }
+}
+
+/* Entrypoint: parse BlockElement* from file. */
+BlockElement* pBlockElement(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.blockelement_;
+  }
+}
+
+/* Entrypoint: parse BlockElement* from string. */
+BlockElement* psBlockElement(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.blockelement_;
+  }
+}
+
+/* Entrypoint: parse ListBlockElement* from file. */
+ListBlockElement* pListBlockElement(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.listblockelement_;
+  }
+}
+
+/* Entrypoint: parse ListBlockElement* from string. */
+ListBlockElement* psListBlockElement(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.listblockelement_;
+  }
+}
+
+/* Entrypoint: parse Statement* from file. */
+Statement* pStatement(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.statement_;
+  }
+}
+
+/* Entrypoint: parse Statement* from string. */
+Statement* psStatement(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.statement_;
+  }
+}
+
+/* Entrypoint: parse Attr* from file. */
+Attr* pAttr(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from string. */
+Attr* psAttr(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse ListAttr* from file. */
+ListAttr* pListAttr(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+std::reverse(result.listattr_->begin(), result.listattr_->end());
+    return result.listattr_;
+  }
+}
+
+/* Entrypoint: parse ListAttr* from string. */
+ListAttr* psListAttr(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+std::reverse(result.listattr_->begin(), result.listattr_->end());
+    return result.listattr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from file. */
+Attr* pAttr1(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from string. */
+Attr* psAttr1(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from file. */
+Attr* pAttr2(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from string. */
+Attr* psAttr2(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from file. */
+Attr* pAttr3(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from string. */
+Attr* psAttr3(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from file. */
+Attr* pAttr4(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from string. */
+Attr* psAttr4(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from file. */
+Attr* pAttr5(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from string. */
+Attr* psAttr5(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from file. */
+Attr* pAttr6(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from string. */
+Attr* psAttr6(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from file. */
+Attr* pAttr7(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from string. */
+Attr* psAttr7(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from file. */
+Attr* pAttr8(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from string. */
+Attr* psAttr8(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from file. */
+Attr* pAttr9(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from string. */
+Attr* psAttr9(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from file. */
+Attr* pAttr10(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from string. */
+Attr* psAttr10(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from file. */
+Attr* pAttr11(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from string. */
+Attr* psAttr11(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from file. */
+Attr* pAttr12(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from string. */
+Attr* psAttr12(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from file. */
+Attr* pAttr13(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from string. */
+Attr* psAttr13(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from file. */
+Attr* pAttr14(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse Attr* from string. */
+Attr* psAttr14(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attr_;
+  }
+}
+
+/* Entrypoint: parse BasicAttribute* from file. */
+BasicAttribute* pBasicAttribute(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.basicattribute_;
+  }
+}
+
+/* Entrypoint: parse BasicAttribute* from string. */
+BasicAttribute* psBasicAttribute(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.basicattribute_;
+  }
+}
+
+/* Entrypoint: parse ListBasicAttribute* from file. */
+ListBasicAttribute* pListBasicAttribute(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+std::reverse(result.listbasicattribute_->begin(), result.listbasicattribute_->end());
+    return result.listbasicattribute_;
+  }
+}
+
+/* Entrypoint: parse ListBasicAttribute* from string. */
+ListBasicAttribute* psListBasicAttribute(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+std::reverse(result.listbasicattribute_->begin(), result.listbasicattribute_->end());
+    return result.listbasicattribute_;
+  }
+}
+
+/* Entrypoint: parse AnnotatedStmt* from file. */
+AnnotatedStmt* pAnnotatedStmt(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.annotatedstmt_;
+  }
+}
+
+/* Entrypoint: parse AnnotatedStmt* from string. */
+AnnotatedStmt* psAnnotatedStmt(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.annotatedstmt_;
+  }
+}
+
+/* Entrypoint: parse ElsePart* from file. */
+ElsePart* pElsePart(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.elsepart_;
+  }
+}
+
+/* Entrypoint: parse ElsePart* from string. */
+ElsePart* psElsePart(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.elsepart_;
+  }
+}
+
+/* Entrypoint: parse OptExpression* from file. */
+OptExpression* pOptExpression(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.optexpression_;
+  }
+}
+
+/* Entrypoint: parse OptExpression* from string. */
+OptExpression* psOptExpression(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.optexpression_;
+  }
+}
+
+/* Entrypoint: parse Expression* from file. */
+Expression* pExpression(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.expression_;
+  }
+}
+
+/* Entrypoint: parse Expression* from string. */
+Expression* psExpression(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.expression_;
+  }
+}
+
+/* Entrypoint: parse ListExpression* from file. */
+ListExpression* pListExpression(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+std::reverse(result.listexpression_->begin(), result.listexpression_->end());
+    return result.listexpression_;
+  }
+}
+
+/* Entrypoint: parse ListExpression* from string. */
+ListExpression* psListExpression(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+std::reverse(result.listexpression_->begin(), result.listexpression_->end());
+    return result.listexpression_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from file. */
+AssignExpr* pAssignExpr(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from string. */
+AssignExpr* psAssignExpr(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from file. */
+AssignExpr* pAssignExpr1(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from string. */
+AssignExpr* psAssignExpr1(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from file. */
+AssignExpr* pAssignExpr2(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from string. */
+AssignExpr* psAssignExpr2(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from file. */
+AssignExpr* pAssignExpr3(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from string. */
+AssignExpr* psAssignExpr3(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from file. */
+AssignExpr* pAssignExpr4(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from string. */
+AssignExpr* psAssignExpr4(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from file. */
+AssignExpr* pAssignExpr5(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from string. */
+AssignExpr* psAssignExpr5(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from file. */
+AssignExpr* pAssignExpr6(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from string. */
+AssignExpr* psAssignExpr6(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from file. */
+AssignExpr* pAssignExpr7(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from string. */
+AssignExpr* psAssignExpr7(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from file. */
+AssignExpr* pAssignExpr8(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from string. */
+AssignExpr* psAssignExpr8(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from file. */
+AssignExpr* pAssignExpr9(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from string. */
+AssignExpr* psAssignExpr9(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from file. */
+AssignExpr* pAssignExpr10(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from string. */
+AssignExpr* psAssignExpr10(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from file. */
+AssignExpr* pAssignExpr11(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from string. */
+AssignExpr* psAssignExpr11(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from file. */
+AssignExpr* pAssignExpr12(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from string. */
+AssignExpr* psAssignExpr12(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from file. */
+AssignExpr* pAssignExpr13(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from string. */
+AssignExpr* psAssignExpr13(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from file. */
+AssignExpr* pAssignExpr14(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from string. */
+AssignExpr* psAssignExpr14(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from file. */
+AssignExpr* pAssignExpr15(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse AssignExpr* from string. */
+AssignExpr* psAssignExpr15(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.assignexpr_;
+  }
+}
+
+/* Entrypoint: parse Constant* from file. */
+Constant* pConstant(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.constant_;
+  }
+}
+
+/* Entrypoint: parse Constant* from string. */
+Constant* psConstant(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.constant_;
+  }
+}
+
+/* Entrypoint: parse TypeName* from file. */
+TypeName* pTypeName(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.typename_;
+  }
+}
+
+/* Entrypoint: parse TypeName* from string. */
+TypeName* psTypeName(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.typename_;
   }
 }
 

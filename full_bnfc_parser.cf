@@ -284,7 +284,7 @@ CodeAnnot.  Annot ::= Code_Annot ; --CODE_ANNOT => CodeAnnot
 GhostAnnot. Annot ::= "ghost" [BlockElement] [Annot] RGHOST ;
 separator Annot "" ;
 
-CodeAnnotExtContract.               Code_Annot ::= "Contract" ExtIdentifierOpt ":" Contract ;
+CodeAnnotExtContract.               Code_Annot ::= "contract" ExtIdentifierOpt ":" Contract ;
 CodeAnnotPragmaOrCodeAnnotation.    Code_Annot ::= PragmaOrCodeAnnotation ;
 CodeAnnotContract.                  Code_Annot ::= Contract ;
 CodeAnnotCodeAnnotation.            Code_Annot ::= CodeAnnotation ;
@@ -792,7 +792,7 @@ BlockLengthLexpr.   Lexpr3 ::= "\\block_length" OptLabel1 "(" Lexpr ")" ;
 OffsetLexpr.        Lexpr3 ::= "\\offset" OptLabel1 "(" Lexpr ")" ;
 AllocableLexpr.     Lexpr3 ::= "\\allocable" OptLabel1 "(" Lexpr ")" ;
 FreeableLexpr.      Lexpr3 ::= "\\freeable" OptLabel1 "(" Lexpr ")" ;
-AllocationLexpr.    Lexpr3 ::= "\\Allocation" OptLabel1 "(" Lexpr ")" ;
+AllocationLexpr.    Lexpr3 ::= "\\allocation" OptLabel1 "(" Lexpr ")" ;
 AutomaticLexpr.     Lexpr3 ::= "\\automatic" ;
 DynamicLexpr.       Lexpr3 ::= "\\dynamic" ;
 RegisterLexpr.      Lexpr3 ::= "\\register" ;
@@ -1062,8 +1062,8 @@ SimpleIdentifierFull.           FullIdentifier ::= Identifier ;
 AdmitKeyWordFullIdent.          FullIdentifier ::= "admit" ;
 AllocatesKeyWordFullIdent.      FullIdentifier ::= "allocates" ;
 AssertKeyWordFullIdent.         FullIdentifier ::= "assert" ;
-AssignsKeyWordFullIdent.        FullIdentifier ::= "Assigns" ;
-AssumesKeyWordFullIdent.        FullIdentifier ::= "Assumes" ;
+AssignsKeyWordFullIdent.        FullIdentifier ::= "assigns" ;
+AssumesKeyWordFullIdent.        FullIdentifier ::= "assumes" ;
 AtKeyWordFullIdent.             FullIdentifier ::= "at" ;
 AxiomKeyWordFullIdent.          FullIdentifier ::= "axiom" ;
 AxiomaticKeyWordFullIdent.      FullIdentifier ::= "axiomatic" ;
@@ -1072,8 +1072,8 @@ BreaksKeyWordFullIdent.         FullIdentifier ::= "breaks" ;
 CheckKeyWordFullIdent.          FullIdentifier ::= "check" ;
 CompleteKeyWordFullIdent.       FullIdentifier ::= "complete" ;
 ContinuesKeyWordFullIdent.      FullIdentifier ::= "continues" ;
-ContractKeyWordFullIdent.       FullIdentifier ::= "Contract" ;
-DecreasesKeyWordFullIdent.      FullIdentifier ::= "Decreases" ;
+ContractKeyWordFullIdent.       FullIdentifier ::= "contract" ;
+DecreasesKeyWordFullIdent.      FullIdentifier ::= "decreases" ;
 DisjointKeyWordFullIdent.       FullIdentifier ::= "disjoint" ;
 EnsuresKeyWordFullIdent.        FullIdentifier ::= "ensures" ;
 ExitsKeyWordFullIdent.          FullIdentifier ::= "exits" ;
@@ -1092,12 +1092,12 @@ ModelKeyWordFullIdent.          FullIdentifier ::= "model" ;
 ModuleKeyWordFullIdent.         FullIdentifier ::= "module" ;
 PragmaKeyWordFullIdent.         FullIdentifier ::= "pragma" ;
 PredicateKeyWordFullIdent.      FullIdentifier ::= "predicate" ;
-RequiresKeyWordFullIdent.       FullIdentifier ::= "Requires" ;
+RequiresKeyWordFullIdent.       FullIdentifier ::= "requires" ;
 ReturnsKeyWordFullIdent.        FullIdentifier ::= "returns" ;
 SliceKeyWordFullIdent.          FullIdentifier ::= "slice" ;
-TerminatesKeyWordFullIdent.     FullIdentifier ::= "Terminates" ;
+TerminatesKeyWordFullIdent.     FullIdentifier ::= "terminates" ;
 TypeKeyWordFullIdent.           FullIdentifier ::= "type" ;
-VariantKeyWordFullIdent.        FullIdentifier ::= "Variant" ;
+VariantKeyWordFullIdent.        FullIdentifier ::= "variant" ;
 IdentExtCodeAnnotFullIdent.     FullIdentifier ::= EXT_CODE_ANNOT ;
 IdentExtContractFullIdent.      FullIdentifier ::= EXT_CONTRACT ;
 IdentExtGlobalFullIdent.        FullIdentifier ::= EXT_GLOBAL ;
@@ -1156,8 +1156,8 @@ separator nonempty ExtFunctionSpec "" ;
 
 
 FunSpecAtAnnotation.    ExtFunSpec ::= "at" [StmtMarkup] ":" Annotation ;
-FunSpecAtContract.      ExtFunSpec ::= "at" [StmtMarkup] ":" "Contract" ExtIdentifierOpt ":" Contract ;
-FunSpecContract.        ExtFunSpec ::= "Contract" ExtIdentifierOpt ":" Contract ;
+FunSpecAtContract.      ExtFunSpec ::= "at" [StmtMarkup] ":" "contract" ExtIdentifierOpt ":" Contract ;
+FunSpecContract.        ExtFunSpec ::= "contract" ExtIdentifierOpt ":" Contract ;
 separator nonempty ExtFunSpec "" ;
 
 
@@ -1178,19 +1178,19 @@ SpecConstract.  Spec ::= Contract ; -- EOF
 
 
 SimpleContract.                 Contract ::= Requires Terminates Decreases SimpleClauses Behaviors CompleteOrDisjoint ;
-TerminatesRequiresContract.     Contract ::= Requires NETerminates "Requires" ;
-DecreasesRequiresContract.      Contract ::= Requires Terminates NEDecreases "Requires" ;
-DecreasesTerminatesContract.    Contract ::= Requires Terminates NEDecreases "Terminates" ;
-ClausesRequiresContract.        Contract ::= Requires Terminates Decreases NESimpleClauses "Requires" ;
-ClausesTerminatesContract.      Contract ::= Requires Terminates Decreases NESimpleClauses "Terminates" ;
-ClausesDecreasesContract.       Contract ::= Requires Terminates Decreases NESimpleClauses "Decreases" ;
-BehaviorsTerminatesContract.    Contract ::= Requires Terminates Decreases SimpleClauses NEBehaviors "Terminates" ;
-BehaviorsDecreasesContract.     Contract ::= Requires Terminates Decreases SimpleClauses NEBehaviors "Decreases" ;
-ComplDisjRequiresContract.      Contract ::= Requires Terminates Decreases SimpleClauses Behaviors NECompleteOrDisjoint "Requires" ;
-ComplDisjTerminatesContract.    Contract ::= Requires Terminates Decreases SimpleClauses Behaviors NECompleteOrDisjoint "Terminates" ;
-ComplDisjDecreasesContract.     Contract ::= Requires Terminates Decreases SimpleClauses Behaviors NECompleteOrDisjoint "Decreases" ;
+TerminatesRequiresContract.     Contract ::= Requires NETerminates "requires" ;
+DecreasesRequiresContract.      Contract ::= Requires Terminates NEDecreases "requires" ;
+DecreasesTerminatesContract.    Contract ::= Requires Terminates NEDecreases "terminates" ;
+ClausesRequiresContract.        Contract ::= Requires Terminates Decreases NESimpleClauses "requires" ;
+ClausesTerminatesContract.      Contract ::= Requires Terminates Decreases NESimpleClauses "terminates" ;
+ClausesDecreasesContract.       Contract ::= Requires Terminates Decreases NESimpleClauses "decreases" ;
+BehaviorsTerminatesContract.    Contract ::= Requires Terminates Decreases SimpleClauses NEBehaviors "terminates" ;
+BehaviorsDecreasesContract.     Contract ::= Requires Terminates Decreases SimpleClauses NEBehaviors "decreases" ;
+ComplDisjRequiresContract.      Contract ::= Requires Terminates Decreases SimpleClauses Behaviors NECompleteOrDisjoint "requires" ;
+ComplDisjTerminatesContract.    Contract ::= Requires Terminates Decreases SimpleClauses Behaviors NECompleteOrDisjoint "terminates" ;
+ComplDisjDecreasesContract.     Contract ::= Requires Terminates Decreases SimpleClauses Behaviors NECompleteOrDisjoint "decreases" ;
 ComplDisjBehaviorContract.      Contract ::= Requires Terminates Decreases SimpleClauses Behaviors NECompleteOrDisjoint "behavior" ;
-ComplDisjAssignsContract.       Contract ::= Requires Terminates Decreases SimpleClauses Behaviors NECompleteOrDisjoint "Assigns" ;
+ComplDisjAssignsContract.       Contract ::= Requires Terminates Decreases SimpleClauses Behaviors NECompleteOrDisjoint "assigns" ;
 ComplDisjAllocatesContract.     Contract ::= Requires Terminates Decreases SimpleClauses Behaviors NECompleteOrDisjoint "allocates" ;
 ComplDisjFreesContract.         Contract ::= Requires Terminates Decreases SimpleClauses Behaviors NECompleteOrDisjoint "frees" ;
 ComplDisjPostCondContract.      Contract ::= Requires Terminates Decreases SimpleClauses Behaviors NECompleteOrDisjoint PostCond ;
@@ -1206,11 +1206,11 @@ CheckInvariantClause.   ClauseKW ::= "check" "invariant" ;
 CheckLemmaClause.       ClauseKW ::= "check" "lemma" ;
 CheckLoopClause.        ClauseKW ::= "check" "loop" ; 
 
-RequiresClause.         ClauseKW ::= "Requires" ;
-AssumesClause.          ClauseKW ::= "Assumes" ;
-AssignsClause.          ClauseKW ::= "Assigns" ;
+RequiresClause.         ClauseKW ::= "requires" ;
+AssumesClause.          ClauseKW ::= "assumes" ;
+AssignsClause.          ClauseKW ::= "assigns" ;
 PostCondClause.         ClauseKW ::= PostCond ;
-DecreasesClause.        ClauseKW ::= "Decreases" ;
+DecreasesClause.        ClauseKW ::= "decreases" ;
 BehaviorClause.         ClauseKW ::= "behavior" ;
 AllocatesClause.        ClauseKW ::= "allocates" ;
 FreesClause.            ClauseKW ::= "frees" ;
@@ -1223,10 +1223,10 @@ EmptyClauseKW.          ClauseKW ::= ; -- EOF
 NoRequires.     Requires ::= ; --/* epsilon */
 SomeRequires.   Requires ::= NERequires ;
 
-SimpleRequires.         NERequires ::= "Requires" Lexpr ";" Requires ;
+SimpleRequires.         NERequires ::= "requires" Lexpr ";" Requires ;
 CheckRequires.          NERequires ::= "check" "requires" Lexpr ";" Requires ;
 AdimtRequires.          NERequires ::= "admit" "requires" Lexpr ";" Requires ;
-ClauseSimpleRequires.   NERequires ::= "Requires" Lexpr ClauseKW ;
+ClauseSimpleRequires.   NERequires ::= "requires" Lexpr ClauseKW ;
 ClauseCheckRequires.    NERequires ::= "check" "requires" Lexpr ClauseKW ;
 ClauseAdimtRequires.    NERequires ::= "admit" "requires" Lexpr ClauseKW ;
 
@@ -1234,16 +1234,16 @@ ClauseAdimtRequires.    NERequires ::= "admit" "requires" Lexpr ClauseKW ;
 NoTerminate.    Terminates ::= ; --/* epsilon */
 SomeTerminate.  Terminates ::= NETerminates ;
 
-SimpleTerminates.   NETerminates ::= "Terminates" Lexpr ";" ;
-ClauseTerminates.   NETerminates ::= "Terminates" Lexpr ClauseKW ;
+SimpleTerminates.   NETerminates ::= "terminates" Lexpr ";" ;
+ClauseTerminates.   NETerminates ::= "terminates" Lexpr ClauseKW ;
 
 
 NoDecreases.    Decreases ::= ; --/* epsilon */
 SomeDecreases.  Decreases ::= NEDecreases ;
 
 
-SimpleDecreases.   NEDecreases ::= "Decreases" Variant ";" ;
-ClauseDecreases.   NEDecreases ::= "Decreases" Variant ClauseKW ;
+SimpleDecreases.   NEDecreases ::= "decreases" Variant ";" ;
+ClauseDecreases.   NEDecreases ::= "decreases" Variant ClauseKW ;
 
 
 ForVariant.     Variant ::= Lexpr "for" AnyIdentifier ;
@@ -1260,11 +1260,11 @@ FreesZones.     Allocation ::= "frees" Zones ;
 
 PostCondSimpleClauses.              NESimpleClauses ::= PostCond Lexpr ";" SimpleClauses ;
 AllocationSimpleClauses.            NESimpleClauses ::= Allocation ";" SimpleClauses ;
-AssignsSimpleClauses.               NESimpleClauses ::= "Assigns" Assigns ";" SimpleClauses ;
+AssignsSimpleClauses.               NESimpleClauses ::= "assigns" Assigns ";" SimpleClauses ;
 ExtContractSimpleClauses.           NESimpleClauses ::= EXT_CONTRACT ExtensionContent ";" SimpleClauses ;
 ClausesPostCondSimpleClauses.       NESimpleClauses ::= PostCond Lexpr ClauseKW ;
 ClausesAllocationSimpleClauses.     NESimpleClauses ::= Allocation ClauseKW ;
-ClausesAssignsSimpleClauses.        NESimpleClauses ::= "Assigns" Assigns ClauseKW ;
+ClausesAssignsSimpleClauses.        NESimpleClauses ::= "assigns" Assigns ClauseKW ;
 ExtConClausestractSimpleClauses.    NESimpleClauses ::= EXT_CONTRACT Zones ClauseKW ;
 
 
@@ -1280,24 +1280,24 @@ TheBehaviors.      NEBehaviors ::= "behavior" BehaviorName ":" BehaviorBody Beha
 
 
 SimpleClausesBehavior.  BehaviorBody ::= Assumes Requires SimpleClauses ;
-RequiresAssumes.        BehaviorBody ::= Assumes NERequires "Assumes" ;
-SimpleClausesAssumes.   BehaviorBody ::= Assumes Requires NESimpleClauses "Assumes" ;
-RequiresRequires.       BehaviorBody ::= Assumes Requires NESimpleClauses "Requires" ;
+RequiresAssumes.        BehaviorBody ::= Assumes NERequires "assumes" ;
+SimpleClausesAssumes.   BehaviorBody ::= Assumes Requires NESimpleClauses "assumes" ;
+RequiresRequires.       BehaviorBody ::= Assumes Requires NESimpleClauses "requires" ;
 
 
 NoAssumes.      Assumes ::= ; --/* epsilon */ 
-SimpleAssumes.  Assumes ::= "Assumes" Lexpr ";" Assumes ;
-ClauseAssumes.  Assumes ::= "Assumes" Lexpr ClauseKW ;
+SimpleAssumes.  Assumes ::= "assumes" Lexpr ";" Assumes ;
+ClauseAssumes.  Assumes ::= "assumes" Lexpr ClauseKW ;
 
 
 NoComplDisj.    CompleteOrDisjoint ::= ; --/* epsilon */
 SomeComplDisj.  CompleteOrDisjoint ::= NECompleteOrDisjoint ;
 
 
-CompleteBehavior.           NECompleteOrDisjoint ::= "complete" "Behaviors" BehaviorNameList ";" CompleteOrDisjoint ;
-DisjointBehavior.           NECompleteOrDisjoint ::= "disjoint" "Behaviors" BehaviorNameList ";" CompleteOrDisjoint ; --/* complete Behaviors Decreases         -- is valid (provided there's a behavior named Decreases) */
-CompleteBehaviorClause.     NECompleteOrDisjoint ::= "complete" "Behaviors" [BehaviorName] ClauseKW ;
-DisjointBehaviorClause.     NECompleteOrDisjoint ::= "disjoint" "Behaviors" [BehaviorName] ClauseKW ;
+CompleteBehavior.           NECompleteOrDisjoint ::= "complete" "behaviors" BehaviorNameList ";" CompleteOrDisjoint ;
+DisjointBehavior.           NECompleteOrDisjoint ::= "disjoint" "behaviors" BehaviorNameList ";" CompleteOrDisjoint ; --/* complete Behaviors Decreases         -- is valid (provided there's a behavior named Decreases) */
+CompleteBehaviorClause.     NECompleteOrDisjoint ::= "complete" "behaviors" [BehaviorName] ClauseKW ;
+DisjointBehaviorClause.     NECompleteOrDisjoint ::= "disjoint" "behaviors" [BehaviorName] ClauseKW ;
 
 
 --/*** Assigns and tsets ***/
@@ -1345,7 +1345,7 @@ LoopAnnotStackGrammarExten.   LoopAnnotStack ::= LoopGrammarExtension LoopAnnotO
 NoLoopAnnot.    LoopAnnotOpt ::= ; --/* epsilon */
 SomeLoopAnnot.  LoopAnnotOpt ::= LoopAnnotStack ;
 
-LoopAssigns.    LoopEffects ::= "loop" "Assigns" Assigns ";" ;
+LoopAssigns.    LoopEffects ::= "loop" "assigns" Assigns ";" ;
 
 SimpleLoopAllocation.   LoopAllocation ::= "loop" Allocation ";" ;
 
@@ -1355,7 +1355,7 @@ CheckLoopInvariant.     LoopInvariant ::= "check" "loop" "invariant" Lexpr ";" ;
 AdmitLoopInvariant.     LoopInvariant ::= "admit" "loop" "invariant" Lexpr ";" ;
 
 
-SimpleLoopVariant.      LoopVariant ::= "loop" "Variant" Variant ";" ;
+SimpleLoopVariant.      LoopVariant ::= "loop" "variant" Variant ";" ;
 
 --/* Grammar Extensibility for plugins */
 SimpleLoopGrammarExten. LoopGrammarExtension ::= "loop" EXT_CODE_ANNOT ExtensionContent ";" ;
@@ -1540,7 +1540,7 @@ separator nonempty IdentifierOrTypenameFull "," ;
 --/* part included into 'IdentifierOrTypename', but duplicated to avoid parsing conflicts */
 IdentifierIdent.    Identifier ::= Ident ;
 --/* token list used inside acsl clauses: */
-BehaviorsKeyWord.   Identifier ::= "Behaviors" ;
+BehaviorsKeyWord.   Identifier ::= "behaviors" ;
 LabelKeyWord.       Identifier ::= "label" ;
 ReadsKeyWord.       Identifier ::= "reads" ;
 WritesKeyWord.      Identifier ::= "writes" ;
@@ -1594,23 +1594,23 @@ AdmitReturnsKeyWord.    PostCond ::= "admit" "returns" ;
 
 PostCondKeyWord.        IsACSLSpec ::= PostCond ;
 ExtContractKeyWord.     IsACSLSpec ::= EXT_CONTRACT ;
-AssignsKeyWord.         IsACSLSpec ::= "Assigns" ;
+AssignsKeyWord.         IsACSLSpec ::= "assigns" ;
 AllocatesKeyWord.       IsACSLSpec ::= "allocates" ;
 FreesKeyWord.           IsACSLSpec ::= "frees" ;
 BehaviorKeyWord.        IsACSLSpec ::= "behavior" ;
-RequiresKeyWord.        IsACSLSpec ::= "Requires" ;
+RequiresKeyWord.        IsACSLSpec ::= "requires" ;
 CheckRequiresKeyWord.   IsACSLSpec ::= "check" "requires" ;
 AdmitRequiresKeyWord.   IsACSLSpec ::= "admit" "requires" ;
-TerminatesKeyWord.      IsACSLSpec ::= "Terminates" ;
+TerminatesKeyWord.      IsACSLSpec ::= "terminates" ;
 CompleteKeyWord.        IsACSLSpec ::= "complete" ;
-DecreasesKeyWord.       IsACSLSpec ::= "Decreases" ;
+DecreasesKeyWord.       IsACSLSpec ::= "decreases" ;
 DisjointKeyWord.        IsACSLSpec ::= "disjoint" ;
 
 
 ExtCodeAnnotKeyWord.    IsACSLDeclOrCodeAnnot ::= EXT_CODE_ANNOT ;
 ExtGlobalKeyWord.       IsACSLDeclOrCodeAnnot ::= EXT_GLOBAL ;
 ExtGlobalBlockKeyWord.  IsACSLDeclOrCodeAnnot ::= EXT_GLOBAL_BLOCK ;
-AssumesKeyWord.         IsACSLDeclOrCodeAnnot ::= "Assumes" ;
+AssumesKeyWord.         IsACSLDeclOrCodeAnnot ::= "assumes" ;
 AssertKeyWord.          IsACSLDeclOrCodeAnnot ::= "assert" ;
 CheckKeyWord.           IsACSLDeclOrCodeAnnot ::= "check" ;
 AdmitKeyWord.           IsACSLDeclOrCodeAnnot ::= "admit" ;
@@ -1632,7 +1632,7 @@ SliceKeyWord.           IsACSLDeclOrCodeAnnot ::= "slice" ;
 TypeKeyWord.            IsACSLDeclOrCodeAnnot ::= "type" ;
 ModelKeyWord.           IsACSLDeclOrCodeAnnot ::= "model" ;
 AxiomKeyWord.           IsACSLDeclOrCodeAnnot ::= "axiom" ;
-VariantKeyWord.         IsACSLDeclOrCodeAnnot ::= "Variant" ;
+VariantKeyWord.         IsACSLDeclOrCodeAnnot ::= "variant" ;
 AxiomaticKeyWord.       IsACSLDeclOrCodeAnnot ::= "axiomatic" ;
 
 
@@ -1640,7 +1640,7 @@ IntegerKeyWord.    IsACSLTypename ::= "integer" ;
 RealKeyWord.       IsACSLTypename ::= "real" ;
 
 
-ContractKeyWord.    IsExtSpec ::= "Contract" ;
+ContractKeyWord.    IsExtSpec ::= "contract" ;
 FunctionKeyWord.    IsExtSpec ::= "function" ;
 ModuleKeyWord.      IsExtSpec ::= "module" ;
 IncludeKeyWord.     IsExtSpec ::= "include" ;
@@ -1656,7 +1656,7 @@ ACSLSpecKeyWord.            Keyword ::= IsACSLSpec ;                  --non_logi
 ACSLDeclCodeAnnotKeyWord.   Keyword ::= IsACSLDeclOrCodeAnnot ;    --non_logic_keyword
 
 SlashAllocableKeyWord.      BSKeyword ::= "\\allocable" ;
-SlashAllocationKeyWord.     BSKeyword ::= "\\Allocation" ;
+SlashAllocationKeyWord.     BSKeyword ::= "\\allocation" ;
 SlashAutomaticKeyWord.      BSKeyword ::= "\\automatic" ;
 SlashAtKeyWord.             BSKeyword ::= "\\at" ;
 SlashBaseAddrKeyWord.       BSKeyword ::= "\\base_addr" ;

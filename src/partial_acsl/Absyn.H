@@ -24,6 +24,9 @@ typedef std::string RBRACE;
 typedef std::string CONST;
 typedef std::string RESTRICT;
 typedef std::string VOLATILE;
+typedef std::string BLOCKATTRIBUTE;
+typedef std::string LBRACKET;
+typedef std::string RBRACKET;
 
 
 /********************   Forward Declarations    ********************/
@@ -32,7 +35,6 @@ class Program;
 class Globals;
 class Global;
 class FunctionDef;
-class Block;
 class FunctionDefStart;
 class DeclSpecList;
 class DeclSpecListNoNamed;
@@ -53,6 +55,19 @@ class InitDeclarator;
 class StructDeclList;
 class FieldDecl;
 class Attribute;
+class Block;
+class BlockAttrs;
+class BlockElement;
+class Statement;
+class Attr;
+class BasicAttribute;
+class AnnotatedStmt;
+class ElsePart;
+class OptExpression;
+class Expression;
+class AssignExpr;
+class Constant;
+class TypeName;
 class AProgram;
 class NoGlobals;
 class SimpleGlobals;
@@ -60,7 +75,6 @@ class SemiColonGlobals;
 class GlobalsDeclataion;
 class GlobalsFunctionDef;
 class SimpleFunctionDef;
-class ABlock;
 class FunctionDefStartDeclarator;
 class DeclSpecTypeSpec;
 class DeclSpecTypeSpecNext;
@@ -107,10 +121,123 @@ class SemicolonStructDecl;
 class SpecFieldDeclStructDecl;
 class FieldDeclDeclarator;
 class AttributeConst;
+class ABlock;
+class NoBlockAttrs;
+class SomeBlockAttrs;
+class DeclarationElement;
+class StatementElement;
+class SemicolonStatement;
+class ExprsStatement;
+class BlockStatement;
+class IfStatement;
+class SwitchStatement;
+class WhileStatement;
+class CaseStatement;
+class CaseSliceStatement;
+class DefaultStatement;
+class EmptyReturnStatement;
+class BreakStatement;
+class ContinueStatement;
+class AnAttr;
+class TernaryCond;
+class Or;
+class And;
+class BitOr;
+class Xor;
+class BitAnd;
+class EqualEqual;
+class NotEqual;
+class Less;
+class Greater;
+class LessEqual;
+class GreaterEqual;
+class LeftShiftOp;
+class RightShiftOp;
+class AddOp;
+class SubOp;
+class MultOp;
+class DivOp;
+class ModOp;
+class PlusUnaryAttr;
+class MinusUnaryAttr;
+class MultUnaryAttr;
+class AmpUnaryAttr;
+class NotUnaryAttr;
+class TildeUnaryAttr;
+class FuncationCall;
+class ProcedureCall;
+class ArrowAttr;
+class DotAttr;
+class ArrayAttr;
+class BasicAttr;
+class BasicAttrConsInt;
+class BasicAttrConsFloat;
+class AnnotatedStatement;
+class NoElsePart;
+class SimpleElsePart;
+class NoExpression;
+class SomeExpression;
+class AssignmentExpr;
+class EqAssignExpr;
+class PlusEqAssignExpr;
+class MinusEqAssignExpr;
+class MultEqAssignExpr;
+class DivEqAssignExpr;
+class ModEqAssignExpr;
+class AndEqAssignExpr;
+class OrEqAssignExpr;
+class XorEqAssignExpr;
+class LeftShiftEqAssignExpr;
+class RightShiftEqAssignExpr;
+class TernaryCondExpr;
+class OrExpr;
+class AndExpr;
+class BitOrExpr;
+class BitXorExpr;
+class BitAndExpr;
+class EqExpr;
+class NotEqExpr;
+class LessExpr;
+class GreaterExpr;
+class LessEqualExpr;
+class GreaterEqualExpr;
+class LeftShiftExpr;
+class RightShiftExpr;
+class PlusExpr;
+class MinusExpr;
+class MulsExpr;
+class DivExpr;
+class ModExpr;
+class CastExpr;
+class UnaryExprPlusPlus;
+class UnaryExprMinusMinus;
+class UnaryExprPlus;
+class UnaryExprMinus;
+class UnaryExprMult;
+class UnaryExprAmp;
+class UnaryExprNot;
+class UnaryExprTilde;
+class UnaryExprAddress;
+class DotPostfixExpression;
+class ArrowPostfixExpression;
+class PlusPlusPostfixExpression;
+class MinusMinusPostfixExpression;
+class IdentifierPrimaryExpression;
+class ConstantPrimaryExpressin;
+class CommaExpressionPrimaryExpressin;
+class BlockPrimaryExpressin;
+class ConstantInt;
+class ConstantFloat;
+class ConstantChar;
+class TypeNameDeclSpecList;
 class ListParameterDecl;
 class ListInitDeclaratorAttr;
 class ListFieldDecl;
 class ListAttribute;
+class ListBlockElement;
+class ListAttr;
+class ListBasicAttribute;
+class ListExpression;
 
 
 /********************   Visitor Interfaces    ********************/
@@ -122,7 +249,6 @@ public:
   virtual void visitGlobals(Globals *p) = 0;
   virtual void visitGlobal(Global *p) = 0;
   virtual void visitFunctionDef(FunctionDef *p) = 0;
-  virtual void visitBlock(Block *p) = 0;
   virtual void visitFunctionDefStart(FunctionDefStart *p) = 0;
   virtual void visitDeclSpecList(DeclSpecList *p) = 0;
   virtual void visitDeclSpecListNoNamed(DeclSpecListNoNamed *p) = 0;
@@ -143,6 +269,19 @@ public:
   virtual void visitStructDeclList(StructDeclList *p) = 0;
   virtual void visitFieldDecl(FieldDecl *p) = 0;
   virtual void visitAttribute(Attribute *p) = 0;
+  virtual void visitBlock(Block *p) = 0;
+  virtual void visitBlockAttrs(BlockAttrs *p) = 0;
+  virtual void visitBlockElement(BlockElement *p) = 0;
+  virtual void visitStatement(Statement *p) = 0;
+  virtual void visitAttr(Attr *p) = 0;
+  virtual void visitBasicAttribute(BasicAttribute *p) = 0;
+  virtual void visitAnnotatedStmt(AnnotatedStmt *p) = 0;
+  virtual void visitElsePart(ElsePart *p) = 0;
+  virtual void visitOptExpression(OptExpression *p) = 0;
+  virtual void visitExpression(Expression *p) = 0;
+  virtual void visitAssignExpr(AssignExpr *p) = 0;
+  virtual void visitConstant(Constant *p) = 0;
+  virtual void visitTypeName(TypeName *p) = 0;
   virtual void visitAProgram(AProgram *p) = 0;
   virtual void visitNoGlobals(NoGlobals *p) = 0;
   virtual void visitSimpleGlobals(SimpleGlobals *p) = 0;
@@ -150,7 +289,6 @@ public:
   virtual void visitGlobalsDeclataion(GlobalsDeclataion *p) = 0;
   virtual void visitGlobalsFunctionDef(GlobalsFunctionDef *p) = 0;
   virtual void visitSimpleFunctionDef(SimpleFunctionDef *p) = 0;
-  virtual void visitABlock(ABlock *p) = 0;
   virtual void visitFunctionDefStartDeclarator(FunctionDefStartDeclarator *p) = 0;
   virtual void visitDeclSpecTypeSpec(DeclSpecTypeSpec *p) = 0;
   virtual void visitDeclSpecTypeSpecNext(DeclSpecTypeSpecNext *p) = 0;
@@ -197,10 +335,123 @@ public:
   virtual void visitSpecFieldDeclStructDecl(SpecFieldDeclStructDecl *p) = 0;
   virtual void visitFieldDeclDeclarator(FieldDeclDeclarator *p) = 0;
   virtual void visitAttributeConst(AttributeConst *p) = 0;
+  virtual void visitABlock(ABlock *p) = 0;
+  virtual void visitNoBlockAttrs(NoBlockAttrs *p) = 0;
+  virtual void visitSomeBlockAttrs(SomeBlockAttrs *p) = 0;
+  virtual void visitDeclarationElement(DeclarationElement *p) = 0;
+  virtual void visitStatementElement(StatementElement *p) = 0;
+  virtual void visitSemicolonStatement(SemicolonStatement *p) = 0;
+  virtual void visitExprsStatement(ExprsStatement *p) = 0;
+  virtual void visitBlockStatement(BlockStatement *p) = 0;
+  virtual void visitIfStatement(IfStatement *p) = 0;
+  virtual void visitSwitchStatement(SwitchStatement *p) = 0;
+  virtual void visitWhileStatement(WhileStatement *p) = 0;
+  virtual void visitCaseStatement(CaseStatement *p) = 0;
+  virtual void visitCaseSliceStatement(CaseSliceStatement *p) = 0;
+  virtual void visitDefaultStatement(DefaultStatement *p) = 0;
+  virtual void visitEmptyReturnStatement(EmptyReturnStatement *p) = 0;
+  virtual void visitBreakStatement(BreakStatement *p) = 0;
+  virtual void visitContinueStatement(ContinueStatement *p) = 0;
+  virtual void visitAnAttr(AnAttr *p) = 0;
+  virtual void visitTernaryCond(TernaryCond *p) = 0;
+  virtual void visitOr(Or *p) = 0;
+  virtual void visitAnd(And *p) = 0;
+  virtual void visitBitOr(BitOr *p) = 0;
+  virtual void visitXor(Xor *p) = 0;
+  virtual void visitBitAnd(BitAnd *p) = 0;
+  virtual void visitEqualEqual(EqualEqual *p) = 0;
+  virtual void visitNotEqual(NotEqual *p) = 0;
+  virtual void visitLess(Less *p) = 0;
+  virtual void visitGreater(Greater *p) = 0;
+  virtual void visitLessEqual(LessEqual *p) = 0;
+  virtual void visitGreaterEqual(GreaterEqual *p) = 0;
+  virtual void visitLeftShiftOp(LeftShiftOp *p) = 0;
+  virtual void visitRightShiftOp(RightShiftOp *p) = 0;
+  virtual void visitAddOp(AddOp *p) = 0;
+  virtual void visitSubOp(SubOp *p) = 0;
+  virtual void visitMultOp(MultOp *p) = 0;
+  virtual void visitDivOp(DivOp *p) = 0;
+  virtual void visitModOp(ModOp *p) = 0;
+  virtual void visitPlusUnaryAttr(PlusUnaryAttr *p) = 0;
+  virtual void visitMinusUnaryAttr(MinusUnaryAttr *p) = 0;
+  virtual void visitMultUnaryAttr(MultUnaryAttr *p) = 0;
+  virtual void visitAmpUnaryAttr(AmpUnaryAttr *p) = 0;
+  virtual void visitNotUnaryAttr(NotUnaryAttr *p) = 0;
+  virtual void visitTildeUnaryAttr(TildeUnaryAttr *p) = 0;
+  virtual void visitFuncationCall(FuncationCall *p) = 0;
+  virtual void visitProcedureCall(ProcedureCall *p) = 0;
+  virtual void visitArrowAttr(ArrowAttr *p) = 0;
+  virtual void visitDotAttr(DotAttr *p) = 0;
+  virtual void visitArrayAttr(ArrayAttr *p) = 0;
+  virtual void visitBasicAttr(BasicAttr *p) = 0;
+  virtual void visitBasicAttrConsInt(BasicAttrConsInt *p) = 0;
+  virtual void visitBasicAttrConsFloat(BasicAttrConsFloat *p) = 0;
+  virtual void visitAnnotatedStatement(AnnotatedStatement *p) = 0;
+  virtual void visitNoElsePart(NoElsePart *p) = 0;
+  virtual void visitSimpleElsePart(SimpleElsePart *p) = 0;
+  virtual void visitNoExpression(NoExpression *p) = 0;
+  virtual void visitSomeExpression(SomeExpression *p) = 0;
+  virtual void visitAssignmentExpr(AssignmentExpr *p) = 0;
+  virtual void visitEqAssignExpr(EqAssignExpr *p) = 0;
+  virtual void visitPlusEqAssignExpr(PlusEqAssignExpr *p) = 0;
+  virtual void visitMinusEqAssignExpr(MinusEqAssignExpr *p) = 0;
+  virtual void visitMultEqAssignExpr(MultEqAssignExpr *p) = 0;
+  virtual void visitDivEqAssignExpr(DivEqAssignExpr *p) = 0;
+  virtual void visitModEqAssignExpr(ModEqAssignExpr *p) = 0;
+  virtual void visitAndEqAssignExpr(AndEqAssignExpr *p) = 0;
+  virtual void visitOrEqAssignExpr(OrEqAssignExpr *p) = 0;
+  virtual void visitXorEqAssignExpr(XorEqAssignExpr *p) = 0;
+  virtual void visitLeftShiftEqAssignExpr(LeftShiftEqAssignExpr *p) = 0;
+  virtual void visitRightShiftEqAssignExpr(RightShiftEqAssignExpr *p) = 0;
+  virtual void visitTernaryCondExpr(TernaryCondExpr *p) = 0;
+  virtual void visitOrExpr(OrExpr *p) = 0;
+  virtual void visitAndExpr(AndExpr *p) = 0;
+  virtual void visitBitOrExpr(BitOrExpr *p) = 0;
+  virtual void visitBitXorExpr(BitXorExpr *p) = 0;
+  virtual void visitBitAndExpr(BitAndExpr *p) = 0;
+  virtual void visitEqExpr(EqExpr *p) = 0;
+  virtual void visitNotEqExpr(NotEqExpr *p) = 0;
+  virtual void visitLessExpr(LessExpr *p) = 0;
+  virtual void visitGreaterExpr(GreaterExpr *p) = 0;
+  virtual void visitLessEqualExpr(LessEqualExpr *p) = 0;
+  virtual void visitGreaterEqualExpr(GreaterEqualExpr *p) = 0;
+  virtual void visitLeftShiftExpr(LeftShiftExpr *p) = 0;
+  virtual void visitRightShiftExpr(RightShiftExpr *p) = 0;
+  virtual void visitPlusExpr(PlusExpr *p) = 0;
+  virtual void visitMinusExpr(MinusExpr *p) = 0;
+  virtual void visitMulsExpr(MulsExpr *p) = 0;
+  virtual void visitDivExpr(DivExpr *p) = 0;
+  virtual void visitModExpr(ModExpr *p) = 0;
+  virtual void visitCastExpr(CastExpr *p) = 0;
+  virtual void visitUnaryExprPlusPlus(UnaryExprPlusPlus *p) = 0;
+  virtual void visitUnaryExprMinusMinus(UnaryExprMinusMinus *p) = 0;
+  virtual void visitUnaryExprPlus(UnaryExprPlus *p) = 0;
+  virtual void visitUnaryExprMinus(UnaryExprMinus *p) = 0;
+  virtual void visitUnaryExprMult(UnaryExprMult *p) = 0;
+  virtual void visitUnaryExprAmp(UnaryExprAmp *p) = 0;
+  virtual void visitUnaryExprNot(UnaryExprNot *p) = 0;
+  virtual void visitUnaryExprTilde(UnaryExprTilde *p) = 0;
+  virtual void visitUnaryExprAddress(UnaryExprAddress *p) = 0;
+  virtual void visitDotPostfixExpression(DotPostfixExpression *p) = 0;
+  virtual void visitArrowPostfixExpression(ArrowPostfixExpression *p) = 0;
+  virtual void visitPlusPlusPostfixExpression(PlusPlusPostfixExpression *p) = 0;
+  virtual void visitMinusMinusPostfixExpression(MinusMinusPostfixExpression *p) = 0;
+  virtual void visitIdentifierPrimaryExpression(IdentifierPrimaryExpression *p) = 0;
+  virtual void visitConstantPrimaryExpressin(ConstantPrimaryExpressin *p) = 0;
+  virtual void visitCommaExpressionPrimaryExpressin(CommaExpressionPrimaryExpressin *p) = 0;
+  virtual void visitBlockPrimaryExpressin(BlockPrimaryExpressin *p) = 0;
+  virtual void visitConstantInt(ConstantInt *p) = 0;
+  virtual void visitConstantFloat(ConstantFloat *p) = 0;
+  virtual void visitConstantChar(ConstantChar *p) = 0;
+  virtual void visitTypeNameDeclSpecList(TypeNameDeclSpecList *p) = 0;
   virtual void visitListParameterDecl(ListParameterDecl *p) = 0;
   virtual void visitListInitDeclaratorAttr(ListInitDeclaratorAttr *p) = 0;
   virtual void visitListFieldDecl(ListFieldDecl *p) = 0;
   virtual void visitListAttribute(ListAttribute *p) = 0;
+  virtual void visitListBlockElement(ListBlockElement *p) = 0;
+  virtual void visitListAttr(ListAttr *p) = 0;
+  virtual void visitListBasicAttribute(ListBasicAttribute *p) = 0;
+  virtual void visitListExpression(ListExpression *p) = 0;
 
 
   virtual void visitInteger(Integer x) = 0;
@@ -214,6 +465,9 @@ public:
   virtual void visitCONST(CONST x) = 0;
   virtual void visitRESTRICT(RESTRICT x) = 0;
   virtual void visitVOLATILE(VOLATILE x) = 0;
+  virtual void visitBLOCKATTRIBUTE(BLOCKATTRIBUTE x) = 0;
+  virtual void visitLBRACKET(LBRACKET x) = 0;
+  virtual void visitRBRACKET(RBRACKET x) = 0;
 
 };
 
@@ -253,13 +507,6 @@ class FunctionDef : public Visitable
 {
 public:
   virtual FunctionDef *clone() const = 0;
-  int line_number, char_number;
-};
-
-class Block : public Visitable
-{
-public:
-  virtual Block *clone() const = 0;
   int line_number, char_number;
 };
 
@@ -403,6 +650,97 @@ public:
   int line_number, char_number;
 };
 
+class Block : public Visitable
+{
+public:
+  virtual Block *clone() const = 0;
+  int line_number, char_number;
+};
+
+class BlockAttrs : public Visitable
+{
+public:
+  virtual BlockAttrs *clone() const = 0;
+  int line_number, char_number;
+};
+
+class BlockElement : public Visitable
+{
+public:
+  virtual BlockElement *clone() const = 0;
+  int line_number, char_number;
+};
+
+class Statement : public Visitable
+{
+public:
+  virtual Statement *clone() const = 0;
+  int line_number, char_number;
+};
+
+class Attr : public Visitable
+{
+public:
+  virtual Attr *clone() const = 0;
+  int line_number, char_number;
+};
+
+class BasicAttribute : public Visitable
+{
+public:
+  virtual BasicAttribute *clone() const = 0;
+  int line_number, char_number;
+};
+
+class AnnotatedStmt : public Visitable
+{
+public:
+  virtual AnnotatedStmt *clone() const = 0;
+  int line_number, char_number;
+};
+
+class ElsePart : public Visitable
+{
+public:
+  virtual ElsePart *clone() const = 0;
+  int line_number, char_number;
+};
+
+class OptExpression : public Visitable
+{
+public:
+  virtual OptExpression *clone() const = 0;
+  int line_number, char_number;
+};
+
+class Expression : public Visitable
+{
+public:
+  virtual Expression *clone() const = 0;
+  int line_number, char_number;
+};
+
+class AssignExpr : public Visitable
+{
+public:
+  virtual AssignExpr *clone() const = 0;
+  int line_number, char_number;
+};
+
+class Constant : public Visitable
+{
+public:
+  virtual Constant *clone() const = 0;
+  int line_number, char_number;
+};
+
+class TypeName : public Visitable
+{
+public:
+  virtual TypeName *clone() const = 0;
+  int line_number, char_number;
+};
+
 
 
 class AProgram : public Program
@@ -502,21 +840,6 @@ public:
   virtual void accept(Visitor *v);
   virtual SimpleFunctionDef *clone() const;
   void swap(SimpleFunctionDef &);
-};
-
-class ABlock : public Block
-{
-public:
-  LBRACE lbrace_;
-  RBRACE rbrace_;
-
-  ABlock(const ABlock &);
-  ABlock &operator=(const ABlock &);
-  ABlock(LBRACE p1, RBRACE p2);
-  ~ABlock();
-  virtual void accept(Visitor *v);
-  virtual ABlock *clone() const;
-  void swap(ABlock &);
 };
 
 class FunctionDefStartDeclarator : public FunctionDefStart
@@ -1168,6 +1491,1597 @@ public:
   void swap(AttributeConst &);
 };
 
+class ABlock : public Block
+{
+public:
+  LBRACE lbrace_;
+  BlockAttrs *blockattrs_;
+  ListBlockElement *listblockelement_;
+  RBRACE rbrace_;
+
+  ABlock(const ABlock &);
+  ABlock &operator=(const ABlock &);
+  ABlock(LBRACE p1, BlockAttrs *p2, ListBlockElement *p3, RBRACE p4);
+  ~ABlock();
+  virtual void accept(Visitor *v);
+  virtual ABlock *clone() const;
+  void swap(ABlock &);
+};
+
+class NoBlockAttrs : public BlockAttrs
+{
+public:
+
+  NoBlockAttrs(const NoBlockAttrs &);
+  NoBlockAttrs &operator=(const NoBlockAttrs &);
+  NoBlockAttrs();
+  ~NoBlockAttrs();
+  virtual void accept(Visitor *v);
+  virtual NoBlockAttrs *clone() const;
+  void swap(NoBlockAttrs &);
+};
+
+class SomeBlockAttrs : public BlockAttrs
+{
+public:
+  BLOCKATTRIBUTE blockattribute_;
+  ListAttr *listattr_;
+
+  SomeBlockAttrs(const SomeBlockAttrs &);
+  SomeBlockAttrs &operator=(const SomeBlockAttrs &);
+  SomeBlockAttrs(BLOCKATTRIBUTE p1, ListAttr *p2);
+  ~SomeBlockAttrs();
+  virtual void accept(Visitor *v);
+  virtual SomeBlockAttrs *clone() const;
+  void swap(SomeBlockAttrs &);
+};
+
+class DeclarationElement : public BlockElement
+{
+public:
+  Declaration *declaration_;
+
+  DeclarationElement(const DeclarationElement &);
+  DeclarationElement &operator=(const DeclarationElement &);
+  DeclarationElement(Declaration *p1);
+  ~DeclarationElement();
+  virtual void accept(Visitor *v);
+  virtual DeclarationElement *clone() const;
+  void swap(DeclarationElement &);
+};
+
+class StatementElement : public BlockElement
+{
+public:
+  Statement *statement_;
+
+  StatementElement(const StatementElement &);
+  StatementElement &operator=(const StatementElement &);
+  StatementElement(Statement *p1);
+  ~StatementElement();
+  virtual void accept(Visitor *v);
+  virtual StatementElement *clone() const;
+  void swap(StatementElement &);
+};
+
+class SemicolonStatement : public Statement
+{
+public:
+
+  SemicolonStatement(const SemicolonStatement &);
+  SemicolonStatement &operator=(const SemicolonStatement &);
+  SemicolonStatement();
+  ~SemicolonStatement();
+  virtual void accept(Visitor *v);
+  virtual SemicolonStatement *clone() const;
+  void swap(SemicolonStatement &);
+};
+
+class ExprsStatement : public Statement
+{
+public:
+  ListExpression *listexpression_;
+
+  ExprsStatement(const ExprsStatement &);
+  ExprsStatement &operator=(const ExprsStatement &);
+  ExprsStatement(ListExpression *p1);
+  ~ExprsStatement();
+  virtual void accept(Visitor *v);
+  virtual ExprsStatement *clone() const;
+  void swap(ExprsStatement &);
+};
+
+class BlockStatement : public Statement
+{
+public:
+  Block *block_;
+
+  BlockStatement(const BlockStatement &);
+  BlockStatement &operator=(const BlockStatement &);
+  BlockStatement(Block *p1);
+  ~BlockStatement();
+  virtual void accept(Visitor *v);
+  virtual BlockStatement *clone() const;
+  void swap(BlockStatement &);
+};
+
+class IfStatement : public Statement
+{
+public:
+  ListExpression *listexpression_;
+  AnnotatedStmt *annotatedstmt_;
+  ElsePart *elsepart_;
+
+  IfStatement(const IfStatement &);
+  IfStatement &operator=(const IfStatement &);
+  IfStatement(ListExpression *p1, AnnotatedStmt *p2, ElsePart *p3);
+  ~IfStatement();
+  virtual void accept(Visitor *v);
+  virtual IfStatement *clone() const;
+  void swap(IfStatement &);
+};
+
+class SwitchStatement : public Statement
+{
+public:
+  ListExpression *listexpression_;
+  AnnotatedStmt *annotatedstmt_;
+
+  SwitchStatement(const SwitchStatement &);
+  SwitchStatement &operator=(const SwitchStatement &);
+  SwitchStatement(ListExpression *p1, AnnotatedStmt *p2);
+  ~SwitchStatement();
+  virtual void accept(Visitor *v);
+  virtual SwitchStatement *clone() const;
+  void swap(SwitchStatement &);
+};
+
+class WhileStatement : public Statement
+{
+public:
+  ListExpression *listexpression_;
+  AnnotatedStmt *annotatedstmt_;
+
+  WhileStatement(const WhileStatement &);
+  WhileStatement &operator=(const WhileStatement &);
+  WhileStatement(ListExpression *p1, AnnotatedStmt *p2);
+  ~WhileStatement();
+  virtual void accept(Visitor *v);
+  virtual WhileStatement *clone() const;
+  void swap(WhileStatement &);
+};
+
+class CaseStatement : public Statement
+{
+public:
+  Expression *expression_;
+  AnnotatedStmt *annotatedstmt_;
+
+  CaseStatement(const CaseStatement &);
+  CaseStatement &operator=(const CaseStatement &);
+  CaseStatement(Expression *p1, AnnotatedStmt *p2);
+  ~CaseStatement();
+  virtual void accept(Visitor *v);
+  virtual CaseStatement *clone() const;
+  void swap(CaseStatement &);
+};
+
+class CaseSliceStatement : public Statement
+{
+public:
+  Expression *expression_1;
+  Expression *expression_2;
+  AnnotatedStmt *annotatedstmt_;
+
+  CaseSliceStatement(const CaseSliceStatement &);
+  CaseSliceStatement &operator=(const CaseSliceStatement &);
+  CaseSliceStatement(Expression *p1, Expression *p2, AnnotatedStmt *p3);
+  ~CaseSliceStatement();
+  virtual void accept(Visitor *v);
+  virtual CaseSliceStatement *clone() const;
+  void swap(CaseSliceStatement &);
+};
+
+class DefaultStatement : public Statement
+{
+public:
+  AnnotatedStmt *annotatedstmt_;
+
+  DefaultStatement(const DefaultStatement &);
+  DefaultStatement &operator=(const DefaultStatement &);
+  DefaultStatement(AnnotatedStmt *p1);
+  ~DefaultStatement();
+  virtual void accept(Visitor *v);
+  virtual DefaultStatement *clone() const;
+  void swap(DefaultStatement &);
+};
+
+class EmptyReturnStatement : public Statement
+{
+public:
+
+  EmptyReturnStatement(const EmptyReturnStatement &);
+  EmptyReturnStatement &operator=(const EmptyReturnStatement &);
+  EmptyReturnStatement();
+  ~EmptyReturnStatement();
+  virtual void accept(Visitor *v);
+  virtual EmptyReturnStatement *clone() const;
+  void swap(EmptyReturnStatement &);
+};
+
+class BreakStatement : public Statement
+{
+public:
+
+  BreakStatement(const BreakStatement &);
+  BreakStatement &operator=(const BreakStatement &);
+  BreakStatement();
+  ~BreakStatement();
+  virtual void accept(Visitor *v);
+  virtual BreakStatement *clone() const;
+  void swap(BreakStatement &);
+};
+
+class ContinueStatement : public Statement
+{
+public:
+
+  ContinueStatement(const ContinueStatement &);
+  ContinueStatement &operator=(const ContinueStatement &);
+  ContinueStatement();
+  ~ContinueStatement();
+  virtual void accept(Visitor *v);
+  virtual ContinueStatement *clone() const;
+  void swap(ContinueStatement &);
+};
+
+class AnAttr : public Attr
+{
+public:
+  Attr *attr_1;
+  Attr *attr_2;
+
+  AnAttr(const AnAttr &);
+  AnAttr &operator=(const AnAttr &);
+  AnAttr(Attr *p1, Attr *p2);
+  ~AnAttr();
+  virtual void accept(Visitor *v);
+  virtual AnAttr *clone() const;
+  void swap(AnAttr &);
+};
+
+class TernaryCond : public Attr
+{
+public:
+  Attr *attr_1;
+  Attr *attr_2;
+  Attr *attr_3;
+
+  TernaryCond(const TernaryCond &);
+  TernaryCond &operator=(const TernaryCond &);
+  TernaryCond(Attr *p1, Attr *p2, Attr *p3);
+  ~TernaryCond();
+  virtual void accept(Visitor *v);
+  virtual TernaryCond *clone() const;
+  void swap(TernaryCond &);
+};
+
+class Or : public Attr
+{
+public:
+  Attr *attr_1;
+  Attr *attr_2;
+
+  Or(const Or &);
+  Or &operator=(const Or &);
+  Or(Attr *p1, Attr *p2);
+  ~Or();
+  virtual void accept(Visitor *v);
+  virtual Or *clone() const;
+  void swap(Or &);
+};
+
+class And : public Attr
+{
+public:
+  Attr *attr_1;
+  Attr *attr_2;
+
+  And(const And &);
+  And &operator=(const And &);
+  And(Attr *p1, Attr *p2);
+  ~And();
+  virtual void accept(Visitor *v);
+  virtual And *clone() const;
+  void swap(And &);
+};
+
+class BitOr : public Attr
+{
+public:
+  Attr *attr_1;
+  Attr *attr_2;
+
+  BitOr(const BitOr &);
+  BitOr &operator=(const BitOr &);
+  BitOr(Attr *p1, Attr *p2);
+  ~BitOr();
+  virtual void accept(Visitor *v);
+  virtual BitOr *clone() const;
+  void swap(BitOr &);
+};
+
+class Xor : public Attr
+{
+public:
+  Attr *attr_1;
+  Attr *attr_2;
+
+  Xor(const Xor &);
+  Xor &operator=(const Xor &);
+  Xor(Attr *p1, Attr *p2);
+  ~Xor();
+  virtual void accept(Visitor *v);
+  virtual Xor *clone() const;
+  void swap(Xor &);
+};
+
+class BitAnd : public Attr
+{
+public:
+  Attr *attr_1;
+  Attr *attr_2;
+
+  BitAnd(const BitAnd &);
+  BitAnd &operator=(const BitAnd &);
+  BitAnd(Attr *p1, Attr *p2);
+  ~BitAnd();
+  virtual void accept(Visitor *v);
+  virtual BitAnd *clone() const;
+  void swap(BitAnd &);
+};
+
+class EqualEqual : public Attr
+{
+public:
+  Attr *attr_1;
+  Attr *attr_2;
+
+  EqualEqual(const EqualEqual &);
+  EqualEqual &operator=(const EqualEqual &);
+  EqualEqual(Attr *p1, Attr *p2);
+  ~EqualEqual();
+  virtual void accept(Visitor *v);
+  virtual EqualEqual *clone() const;
+  void swap(EqualEqual &);
+};
+
+class NotEqual : public Attr
+{
+public:
+  Attr *attr_1;
+  Attr *attr_2;
+
+  NotEqual(const NotEqual &);
+  NotEqual &operator=(const NotEqual &);
+  NotEqual(Attr *p1, Attr *p2);
+  ~NotEqual();
+  virtual void accept(Visitor *v);
+  virtual NotEqual *clone() const;
+  void swap(NotEqual &);
+};
+
+class Less : public Attr
+{
+public:
+  Attr *attr_1;
+  Attr *attr_2;
+
+  Less(const Less &);
+  Less &operator=(const Less &);
+  Less(Attr *p1, Attr *p2);
+  ~Less();
+  virtual void accept(Visitor *v);
+  virtual Less *clone() const;
+  void swap(Less &);
+};
+
+class Greater : public Attr
+{
+public:
+  Attr *attr_1;
+  Attr *attr_2;
+
+  Greater(const Greater &);
+  Greater &operator=(const Greater &);
+  Greater(Attr *p1, Attr *p2);
+  ~Greater();
+  virtual void accept(Visitor *v);
+  virtual Greater *clone() const;
+  void swap(Greater &);
+};
+
+class LessEqual : public Attr
+{
+public:
+  Attr *attr_1;
+  Attr *attr_2;
+
+  LessEqual(const LessEqual &);
+  LessEqual &operator=(const LessEqual &);
+  LessEqual(Attr *p1, Attr *p2);
+  ~LessEqual();
+  virtual void accept(Visitor *v);
+  virtual LessEqual *clone() const;
+  void swap(LessEqual &);
+};
+
+class GreaterEqual : public Attr
+{
+public:
+  Attr *attr_1;
+  Attr *attr_2;
+
+  GreaterEqual(const GreaterEqual &);
+  GreaterEqual &operator=(const GreaterEqual &);
+  GreaterEqual(Attr *p1, Attr *p2);
+  ~GreaterEqual();
+  virtual void accept(Visitor *v);
+  virtual GreaterEqual *clone() const;
+  void swap(GreaterEqual &);
+};
+
+class LeftShiftOp : public Attr
+{
+public:
+  Attr *attr_1;
+  Attr *attr_2;
+
+  LeftShiftOp(const LeftShiftOp &);
+  LeftShiftOp &operator=(const LeftShiftOp &);
+  LeftShiftOp(Attr *p1, Attr *p2);
+  ~LeftShiftOp();
+  virtual void accept(Visitor *v);
+  virtual LeftShiftOp *clone() const;
+  void swap(LeftShiftOp &);
+};
+
+class RightShiftOp : public Attr
+{
+public:
+  Attr *attr_1;
+  Attr *attr_2;
+
+  RightShiftOp(const RightShiftOp &);
+  RightShiftOp &operator=(const RightShiftOp &);
+  RightShiftOp(Attr *p1, Attr *p2);
+  ~RightShiftOp();
+  virtual void accept(Visitor *v);
+  virtual RightShiftOp *clone() const;
+  void swap(RightShiftOp &);
+};
+
+class AddOp : public Attr
+{
+public:
+  Attr *attr_1;
+  Attr *attr_2;
+
+  AddOp(const AddOp &);
+  AddOp &operator=(const AddOp &);
+  AddOp(Attr *p1, Attr *p2);
+  ~AddOp();
+  virtual void accept(Visitor *v);
+  virtual AddOp *clone() const;
+  void swap(AddOp &);
+};
+
+class SubOp : public Attr
+{
+public:
+  Attr *attr_1;
+  Attr *attr_2;
+
+  SubOp(const SubOp &);
+  SubOp &operator=(const SubOp &);
+  SubOp(Attr *p1, Attr *p2);
+  ~SubOp();
+  virtual void accept(Visitor *v);
+  virtual SubOp *clone() const;
+  void swap(SubOp &);
+};
+
+class MultOp : public Attr
+{
+public:
+  Attr *attr_1;
+  Attr *attr_2;
+
+  MultOp(const MultOp &);
+  MultOp &operator=(const MultOp &);
+  MultOp(Attr *p1, Attr *p2);
+  ~MultOp();
+  virtual void accept(Visitor *v);
+  virtual MultOp *clone() const;
+  void swap(MultOp &);
+};
+
+class DivOp : public Attr
+{
+public:
+  Attr *attr_1;
+  Attr *attr_2;
+
+  DivOp(const DivOp &);
+  DivOp &operator=(const DivOp &);
+  DivOp(Attr *p1, Attr *p2);
+  ~DivOp();
+  virtual void accept(Visitor *v);
+  virtual DivOp *clone() const;
+  void swap(DivOp &);
+};
+
+class ModOp : public Attr
+{
+public:
+  Attr *attr_1;
+  Attr *attr_2;
+
+  ModOp(const ModOp &);
+  ModOp &operator=(const ModOp &);
+  ModOp(Attr *p1, Attr *p2);
+  ~ModOp();
+  virtual void accept(Visitor *v);
+  virtual ModOp *clone() const;
+  void swap(ModOp &);
+};
+
+class PlusUnaryAttr : public Attr
+{
+public:
+  Attr *attr_;
+
+  PlusUnaryAttr(const PlusUnaryAttr &);
+  PlusUnaryAttr &operator=(const PlusUnaryAttr &);
+  PlusUnaryAttr(Attr *p1);
+  ~PlusUnaryAttr();
+  virtual void accept(Visitor *v);
+  virtual PlusUnaryAttr *clone() const;
+  void swap(PlusUnaryAttr &);
+};
+
+class MinusUnaryAttr : public Attr
+{
+public:
+  Attr *attr_;
+
+  MinusUnaryAttr(const MinusUnaryAttr &);
+  MinusUnaryAttr &operator=(const MinusUnaryAttr &);
+  MinusUnaryAttr(Attr *p1);
+  ~MinusUnaryAttr();
+  virtual void accept(Visitor *v);
+  virtual MinusUnaryAttr *clone() const;
+  void swap(MinusUnaryAttr &);
+};
+
+class MultUnaryAttr : public Attr
+{
+public:
+  Attr *attr_;
+
+  MultUnaryAttr(const MultUnaryAttr &);
+  MultUnaryAttr &operator=(const MultUnaryAttr &);
+  MultUnaryAttr(Attr *p1);
+  ~MultUnaryAttr();
+  virtual void accept(Visitor *v);
+  virtual MultUnaryAttr *clone() const;
+  void swap(MultUnaryAttr &);
+};
+
+class AmpUnaryAttr : public Attr
+{
+public:
+  Attr *attr_;
+
+  AmpUnaryAttr(const AmpUnaryAttr &);
+  AmpUnaryAttr &operator=(const AmpUnaryAttr &);
+  AmpUnaryAttr(Attr *p1);
+  ~AmpUnaryAttr();
+  virtual void accept(Visitor *v);
+  virtual AmpUnaryAttr *clone() const;
+  void swap(AmpUnaryAttr &);
+};
+
+class NotUnaryAttr : public Attr
+{
+public:
+  Attr *attr_;
+
+  NotUnaryAttr(const NotUnaryAttr &);
+  NotUnaryAttr &operator=(const NotUnaryAttr &);
+  NotUnaryAttr(Attr *p1);
+  ~NotUnaryAttr();
+  virtual void accept(Visitor *v);
+  virtual NotUnaryAttr *clone() const;
+  void swap(NotUnaryAttr &);
+};
+
+class TildeUnaryAttr : public Attr
+{
+public:
+  Attr *attr_;
+
+  TildeUnaryAttr(const TildeUnaryAttr &);
+  TildeUnaryAttr &operator=(const TildeUnaryAttr &);
+  TildeUnaryAttr(Attr *p1);
+  ~TildeUnaryAttr();
+  virtual void accept(Visitor *v);
+  virtual TildeUnaryAttr *clone() const;
+  void swap(TildeUnaryAttr &);
+};
+
+class FuncationCall : public Attr
+{
+public:
+  IdOrTypenameAsId *idortypenameasid_;
+  ListAttr *listattr_;
+
+  FuncationCall(const FuncationCall &);
+  FuncationCall &operator=(const FuncationCall &);
+  FuncationCall(IdOrTypenameAsId *p1, ListAttr *p2);
+  ~FuncationCall();
+  virtual void accept(Visitor *v);
+  virtual FuncationCall *clone() const;
+  void swap(FuncationCall &);
+};
+
+class ProcedureCall : public Attr
+{
+public:
+  IdOrTypenameAsId *idortypenameasid_;
+
+  ProcedureCall(const ProcedureCall &);
+  ProcedureCall &operator=(const ProcedureCall &);
+  ProcedureCall(IdOrTypenameAsId *p1);
+  ~ProcedureCall();
+  virtual void accept(Visitor *v);
+  virtual ProcedureCall *clone() const;
+  void swap(ProcedureCall &);
+};
+
+class ArrowAttr : public Attr
+{
+public:
+  Attr *attr_;
+  IdOrTypename *idortypename_;
+
+  ArrowAttr(const ArrowAttr &);
+  ArrowAttr &operator=(const ArrowAttr &);
+  ArrowAttr(Attr *p1, IdOrTypename *p2);
+  ~ArrowAttr();
+  virtual void accept(Visitor *v);
+  virtual ArrowAttr *clone() const;
+  void swap(ArrowAttr &);
+};
+
+class DotAttr : public Attr
+{
+public:
+  Attr *attr_;
+  IdOrTypename *idortypename_;
+
+  DotAttr(const DotAttr &);
+  DotAttr &operator=(const DotAttr &);
+  DotAttr(Attr *p1, IdOrTypename *p2);
+  ~DotAttr();
+  virtual void accept(Visitor *v);
+  virtual DotAttr *clone() const;
+  void swap(DotAttr &);
+};
+
+class ArrayAttr : public Attr
+{
+public:
+  Attr *attr_1;
+  LBRACKET lbracket_;
+  Attr *attr_2;
+  RBRACKET rbracket_;
+
+  ArrayAttr(const ArrayAttr &);
+  ArrayAttr &operator=(const ArrayAttr &);
+  ArrayAttr(Attr *p1, LBRACKET p2, Attr *p3, RBRACKET p4);
+  ~ArrayAttr();
+  virtual void accept(Visitor *v);
+  virtual ArrayAttr *clone() const;
+  void swap(ArrayAttr &);
+};
+
+class BasicAttr : public Attr
+{
+public:
+  BasicAttribute *basicattribute_;
+
+  BasicAttr(const BasicAttr &);
+  BasicAttr &operator=(const BasicAttr &);
+  BasicAttr(BasicAttribute *p1);
+  ~BasicAttr();
+  virtual void accept(Visitor *v);
+  virtual BasicAttr *clone() const;
+  void swap(BasicAttr &);
+};
+
+class BasicAttrConsInt : public BasicAttribute
+{
+public:
+  Integer integer_;
+
+  BasicAttrConsInt(const BasicAttrConsInt &);
+  BasicAttrConsInt &operator=(const BasicAttrConsInt &);
+  BasicAttrConsInt(Integer p1);
+  ~BasicAttrConsInt();
+  virtual void accept(Visitor *v);
+  virtual BasicAttrConsInt *clone() const;
+  void swap(BasicAttrConsInt &);
+};
+
+class BasicAttrConsFloat : public BasicAttribute
+{
+public:
+  Double double_;
+
+  BasicAttrConsFloat(const BasicAttrConsFloat &);
+  BasicAttrConsFloat &operator=(const BasicAttrConsFloat &);
+  BasicAttrConsFloat(Double p1);
+  ~BasicAttrConsFloat();
+  virtual void accept(Visitor *v);
+  virtual BasicAttrConsFloat *clone() const;
+  void swap(BasicAttrConsFloat &);
+};
+
+class AnnotatedStatement : public AnnotatedStmt
+{
+public:
+  Statement *statement_;
+
+  AnnotatedStatement(const AnnotatedStatement &);
+  AnnotatedStatement &operator=(const AnnotatedStatement &);
+  AnnotatedStatement(Statement *p1);
+  ~AnnotatedStatement();
+  virtual void accept(Visitor *v);
+  virtual AnnotatedStatement *clone() const;
+  void swap(AnnotatedStatement &);
+};
+
+class NoElsePart : public ElsePart
+{
+public:
+
+  NoElsePart(const NoElsePart &);
+  NoElsePart &operator=(const NoElsePart &);
+  NoElsePart();
+  ~NoElsePart();
+  virtual void accept(Visitor *v);
+  virtual NoElsePart *clone() const;
+  void swap(NoElsePart &);
+};
+
+class SimpleElsePart : public ElsePart
+{
+public:
+  AnnotatedStmt *annotatedstmt_;
+
+  SimpleElsePart(const SimpleElsePart &);
+  SimpleElsePart &operator=(const SimpleElsePart &);
+  SimpleElsePart(AnnotatedStmt *p1);
+  ~SimpleElsePart();
+  virtual void accept(Visitor *v);
+  virtual SimpleElsePart *clone() const;
+  void swap(SimpleElsePart &);
+};
+
+class NoExpression : public OptExpression
+{
+public:
+
+  NoExpression(const NoExpression &);
+  NoExpression &operator=(const NoExpression &);
+  NoExpression();
+  ~NoExpression();
+  virtual void accept(Visitor *v);
+  virtual NoExpression *clone() const;
+  void swap(NoExpression &);
+};
+
+class SomeExpression : public OptExpression
+{
+public:
+  ListExpression *listexpression_;
+
+  SomeExpression(const SomeExpression &);
+  SomeExpression &operator=(const SomeExpression &);
+  SomeExpression(ListExpression *p1);
+  ~SomeExpression();
+  virtual void accept(Visitor *v);
+  virtual SomeExpression *clone() const;
+  void swap(SomeExpression &);
+};
+
+class AssignmentExpr : public Expression
+{
+public:
+  AssignExpr *assignexpr_;
+
+  AssignmentExpr(const AssignmentExpr &);
+  AssignmentExpr &operator=(const AssignmentExpr &);
+  AssignmentExpr(AssignExpr *p1);
+  ~AssignmentExpr();
+  virtual void accept(Visitor *v);
+  virtual AssignmentExpr *clone() const;
+  void swap(AssignmentExpr &);
+};
+
+class EqAssignExpr : public AssignExpr
+{
+public:
+  AssignExpr *assignexpr_1;
+  AssignExpr *assignexpr_2;
+
+  EqAssignExpr(const EqAssignExpr &);
+  EqAssignExpr &operator=(const EqAssignExpr &);
+  EqAssignExpr(AssignExpr *p1, AssignExpr *p2);
+  ~EqAssignExpr();
+  virtual void accept(Visitor *v);
+  virtual EqAssignExpr *clone() const;
+  void swap(EqAssignExpr &);
+};
+
+class PlusEqAssignExpr : public AssignExpr
+{
+public:
+  AssignExpr *assignexpr_1;
+  AssignExpr *assignexpr_2;
+
+  PlusEqAssignExpr(const PlusEqAssignExpr &);
+  PlusEqAssignExpr &operator=(const PlusEqAssignExpr &);
+  PlusEqAssignExpr(AssignExpr *p1, AssignExpr *p2);
+  ~PlusEqAssignExpr();
+  virtual void accept(Visitor *v);
+  virtual PlusEqAssignExpr *clone() const;
+  void swap(PlusEqAssignExpr &);
+};
+
+class MinusEqAssignExpr : public AssignExpr
+{
+public:
+  AssignExpr *assignexpr_1;
+  AssignExpr *assignexpr_2;
+
+  MinusEqAssignExpr(const MinusEqAssignExpr &);
+  MinusEqAssignExpr &operator=(const MinusEqAssignExpr &);
+  MinusEqAssignExpr(AssignExpr *p1, AssignExpr *p2);
+  ~MinusEqAssignExpr();
+  virtual void accept(Visitor *v);
+  virtual MinusEqAssignExpr *clone() const;
+  void swap(MinusEqAssignExpr &);
+};
+
+class MultEqAssignExpr : public AssignExpr
+{
+public:
+  AssignExpr *assignexpr_1;
+  AssignExpr *assignexpr_2;
+
+  MultEqAssignExpr(const MultEqAssignExpr &);
+  MultEqAssignExpr &operator=(const MultEqAssignExpr &);
+  MultEqAssignExpr(AssignExpr *p1, AssignExpr *p2);
+  ~MultEqAssignExpr();
+  virtual void accept(Visitor *v);
+  virtual MultEqAssignExpr *clone() const;
+  void swap(MultEqAssignExpr &);
+};
+
+class DivEqAssignExpr : public AssignExpr
+{
+public:
+  AssignExpr *assignexpr_1;
+  AssignExpr *assignexpr_2;
+
+  DivEqAssignExpr(const DivEqAssignExpr &);
+  DivEqAssignExpr &operator=(const DivEqAssignExpr &);
+  DivEqAssignExpr(AssignExpr *p1, AssignExpr *p2);
+  ~DivEqAssignExpr();
+  virtual void accept(Visitor *v);
+  virtual DivEqAssignExpr *clone() const;
+  void swap(DivEqAssignExpr &);
+};
+
+class ModEqAssignExpr : public AssignExpr
+{
+public:
+  AssignExpr *assignexpr_1;
+  AssignExpr *assignexpr_2;
+
+  ModEqAssignExpr(const ModEqAssignExpr &);
+  ModEqAssignExpr &operator=(const ModEqAssignExpr &);
+  ModEqAssignExpr(AssignExpr *p1, AssignExpr *p2);
+  ~ModEqAssignExpr();
+  virtual void accept(Visitor *v);
+  virtual ModEqAssignExpr *clone() const;
+  void swap(ModEqAssignExpr &);
+};
+
+class AndEqAssignExpr : public AssignExpr
+{
+public:
+  AssignExpr *assignexpr_1;
+  AssignExpr *assignexpr_2;
+
+  AndEqAssignExpr(const AndEqAssignExpr &);
+  AndEqAssignExpr &operator=(const AndEqAssignExpr &);
+  AndEqAssignExpr(AssignExpr *p1, AssignExpr *p2);
+  ~AndEqAssignExpr();
+  virtual void accept(Visitor *v);
+  virtual AndEqAssignExpr *clone() const;
+  void swap(AndEqAssignExpr &);
+};
+
+class OrEqAssignExpr : public AssignExpr
+{
+public:
+  AssignExpr *assignexpr_1;
+  AssignExpr *assignexpr_2;
+
+  OrEqAssignExpr(const OrEqAssignExpr &);
+  OrEqAssignExpr &operator=(const OrEqAssignExpr &);
+  OrEqAssignExpr(AssignExpr *p1, AssignExpr *p2);
+  ~OrEqAssignExpr();
+  virtual void accept(Visitor *v);
+  virtual OrEqAssignExpr *clone() const;
+  void swap(OrEqAssignExpr &);
+};
+
+class XorEqAssignExpr : public AssignExpr
+{
+public:
+  AssignExpr *assignexpr_1;
+  AssignExpr *assignexpr_2;
+
+  XorEqAssignExpr(const XorEqAssignExpr &);
+  XorEqAssignExpr &operator=(const XorEqAssignExpr &);
+  XorEqAssignExpr(AssignExpr *p1, AssignExpr *p2);
+  ~XorEqAssignExpr();
+  virtual void accept(Visitor *v);
+  virtual XorEqAssignExpr *clone() const;
+  void swap(XorEqAssignExpr &);
+};
+
+class LeftShiftEqAssignExpr : public AssignExpr
+{
+public:
+  AssignExpr *assignexpr_1;
+  AssignExpr *assignexpr_2;
+
+  LeftShiftEqAssignExpr(const LeftShiftEqAssignExpr &);
+  LeftShiftEqAssignExpr &operator=(const LeftShiftEqAssignExpr &);
+  LeftShiftEqAssignExpr(AssignExpr *p1, AssignExpr *p2);
+  ~LeftShiftEqAssignExpr();
+  virtual void accept(Visitor *v);
+  virtual LeftShiftEqAssignExpr *clone() const;
+  void swap(LeftShiftEqAssignExpr &);
+};
+
+class RightShiftEqAssignExpr : public AssignExpr
+{
+public:
+  AssignExpr *assignexpr_1;
+  AssignExpr *assignexpr_2;
+
+  RightShiftEqAssignExpr(const RightShiftEqAssignExpr &);
+  RightShiftEqAssignExpr &operator=(const RightShiftEqAssignExpr &);
+  RightShiftEqAssignExpr(AssignExpr *p1, AssignExpr *p2);
+  ~RightShiftEqAssignExpr();
+  virtual void accept(Visitor *v);
+  virtual RightShiftEqAssignExpr *clone() const;
+  void swap(RightShiftEqAssignExpr &);
+};
+
+class TernaryCondExpr : public AssignExpr
+{
+public:
+  AssignExpr *assignexpr_1;
+  OptExpression *optexpression_;
+  AssignExpr *assignexpr_2;
+
+  TernaryCondExpr(const TernaryCondExpr &);
+  TernaryCondExpr &operator=(const TernaryCondExpr &);
+  TernaryCondExpr(AssignExpr *p1, OptExpression *p2, AssignExpr *p3);
+  ~TernaryCondExpr();
+  virtual void accept(Visitor *v);
+  virtual TernaryCondExpr *clone() const;
+  void swap(TernaryCondExpr &);
+};
+
+class OrExpr : public AssignExpr
+{
+public:
+  AssignExpr *assignexpr_1;
+  AssignExpr *assignexpr_2;
+
+  OrExpr(const OrExpr &);
+  OrExpr &operator=(const OrExpr &);
+  OrExpr(AssignExpr *p1, AssignExpr *p2);
+  ~OrExpr();
+  virtual void accept(Visitor *v);
+  virtual OrExpr *clone() const;
+  void swap(OrExpr &);
+};
+
+class AndExpr : public AssignExpr
+{
+public:
+  AssignExpr *assignexpr_1;
+  AssignExpr *assignexpr_2;
+
+  AndExpr(const AndExpr &);
+  AndExpr &operator=(const AndExpr &);
+  AndExpr(AssignExpr *p1, AssignExpr *p2);
+  ~AndExpr();
+  virtual void accept(Visitor *v);
+  virtual AndExpr *clone() const;
+  void swap(AndExpr &);
+};
+
+class BitOrExpr : public AssignExpr
+{
+public:
+  AssignExpr *assignexpr_1;
+  AssignExpr *assignexpr_2;
+
+  BitOrExpr(const BitOrExpr &);
+  BitOrExpr &operator=(const BitOrExpr &);
+  BitOrExpr(AssignExpr *p1, AssignExpr *p2);
+  ~BitOrExpr();
+  virtual void accept(Visitor *v);
+  virtual BitOrExpr *clone() const;
+  void swap(BitOrExpr &);
+};
+
+class BitXorExpr : public AssignExpr
+{
+public:
+  AssignExpr *assignexpr_1;
+  AssignExpr *assignexpr_2;
+
+  BitXorExpr(const BitXorExpr &);
+  BitXorExpr &operator=(const BitXorExpr &);
+  BitXorExpr(AssignExpr *p1, AssignExpr *p2);
+  ~BitXorExpr();
+  virtual void accept(Visitor *v);
+  virtual BitXorExpr *clone() const;
+  void swap(BitXorExpr &);
+};
+
+class BitAndExpr : public AssignExpr
+{
+public:
+  AssignExpr *assignexpr_1;
+  AssignExpr *assignexpr_2;
+
+  BitAndExpr(const BitAndExpr &);
+  BitAndExpr &operator=(const BitAndExpr &);
+  BitAndExpr(AssignExpr *p1, AssignExpr *p2);
+  ~BitAndExpr();
+  virtual void accept(Visitor *v);
+  virtual BitAndExpr *clone() const;
+  void swap(BitAndExpr &);
+};
+
+class EqExpr : public AssignExpr
+{
+public:
+  AssignExpr *assignexpr_1;
+  AssignExpr *assignexpr_2;
+
+  EqExpr(const EqExpr &);
+  EqExpr &operator=(const EqExpr &);
+  EqExpr(AssignExpr *p1, AssignExpr *p2);
+  ~EqExpr();
+  virtual void accept(Visitor *v);
+  virtual EqExpr *clone() const;
+  void swap(EqExpr &);
+};
+
+class NotEqExpr : public AssignExpr
+{
+public:
+  AssignExpr *assignexpr_1;
+  AssignExpr *assignexpr_2;
+
+  NotEqExpr(const NotEqExpr &);
+  NotEqExpr &operator=(const NotEqExpr &);
+  NotEqExpr(AssignExpr *p1, AssignExpr *p2);
+  ~NotEqExpr();
+  virtual void accept(Visitor *v);
+  virtual NotEqExpr *clone() const;
+  void swap(NotEqExpr &);
+};
+
+class LessExpr : public AssignExpr
+{
+public:
+  AssignExpr *assignexpr_1;
+  AssignExpr *assignexpr_2;
+
+  LessExpr(const LessExpr &);
+  LessExpr &operator=(const LessExpr &);
+  LessExpr(AssignExpr *p1, AssignExpr *p2);
+  ~LessExpr();
+  virtual void accept(Visitor *v);
+  virtual LessExpr *clone() const;
+  void swap(LessExpr &);
+};
+
+class GreaterExpr : public AssignExpr
+{
+public:
+  AssignExpr *assignexpr_1;
+  AssignExpr *assignexpr_2;
+
+  GreaterExpr(const GreaterExpr &);
+  GreaterExpr &operator=(const GreaterExpr &);
+  GreaterExpr(AssignExpr *p1, AssignExpr *p2);
+  ~GreaterExpr();
+  virtual void accept(Visitor *v);
+  virtual GreaterExpr *clone() const;
+  void swap(GreaterExpr &);
+};
+
+class LessEqualExpr : public AssignExpr
+{
+public:
+  AssignExpr *assignexpr_1;
+  AssignExpr *assignexpr_2;
+
+  LessEqualExpr(const LessEqualExpr &);
+  LessEqualExpr &operator=(const LessEqualExpr &);
+  LessEqualExpr(AssignExpr *p1, AssignExpr *p2);
+  ~LessEqualExpr();
+  virtual void accept(Visitor *v);
+  virtual LessEqualExpr *clone() const;
+  void swap(LessEqualExpr &);
+};
+
+class GreaterEqualExpr : public AssignExpr
+{
+public:
+  AssignExpr *assignexpr_1;
+  AssignExpr *assignexpr_2;
+
+  GreaterEqualExpr(const GreaterEqualExpr &);
+  GreaterEqualExpr &operator=(const GreaterEqualExpr &);
+  GreaterEqualExpr(AssignExpr *p1, AssignExpr *p2);
+  ~GreaterEqualExpr();
+  virtual void accept(Visitor *v);
+  virtual GreaterEqualExpr *clone() const;
+  void swap(GreaterEqualExpr &);
+};
+
+class LeftShiftExpr : public AssignExpr
+{
+public:
+  AssignExpr *assignexpr_1;
+  AssignExpr *assignexpr_2;
+
+  LeftShiftExpr(const LeftShiftExpr &);
+  LeftShiftExpr &operator=(const LeftShiftExpr &);
+  LeftShiftExpr(AssignExpr *p1, AssignExpr *p2);
+  ~LeftShiftExpr();
+  virtual void accept(Visitor *v);
+  virtual LeftShiftExpr *clone() const;
+  void swap(LeftShiftExpr &);
+};
+
+class RightShiftExpr : public AssignExpr
+{
+public:
+  AssignExpr *assignexpr_1;
+  AssignExpr *assignexpr_2;
+
+  RightShiftExpr(const RightShiftExpr &);
+  RightShiftExpr &operator=(const RightShiftExpr &);
+  RightShiftExpr(AssignExpr *p1, AssignExpr *p2);
+  ~RightShiftExpr();
+  virtual void accept(Visitor *v);
+  virtual RightShiftExpr *clone() const;
+  void swap(RightShiftExpr &);
+};
+
+class PlusExpr : public AssignExpr
+{
+public:
+  AssignExpr *assignexpr_1;
+  AssignExpr *assignexpr_2;
+
+  PlusExpr(const PlusExpr &);
+  PlusExpr &operator=(const PlusExpr &);
+  PlusExpr(AssignExpr *p1, AssignExpr *p2);
+  ~PlusExpr();
+  virtual void accept(Visitor *v);
+  virtual PlusExpr *clone() const;
+  void swap(PlusExpr &);
+};
+
+class MinusExpr : public AssignExpr
+{
+public:
+  AssignExpr *assignexpr_1;
+  AssignExpr *assignexpr_2;
+
+  MinusExpr(const MinusExpr &);
+  MinusExpr &operator=(const MinusExpr &);
+  MinusExpr(AssignExpr *p1, AssignExpr *p2);
+  ~MinusExpr();
+  virtual void accept(Visitor *v);
+  virtual MinusExpr *clone() const;
+  void swap(MinusExpr &);
+};
+
+class MulsExpr : public AssignExpr
+{
+public:
+  AssignExpr *assignexpr_1;
+  AssignExpr *assignexpr_2;
+
+  MulsExpr(const MulsExpr &);
+  MulsExpr &operator=(const MulsExpr &);
+  MulsExpr(AssignExpr *p1, AssignExpr *p2);
+  ~MulsExpr();
+  virtual void accept(Visitor *v);
+  virtual MulsExpr *clone() const;
+  void swap(MulsExpr &);
+};
+
+class DivExpr : public AssignExpr
+{
+public:
+  AssignExpr *assignexpr_1;
+  AssignExpr *assignexpr_2;
+
+  DivExpr(const DivExpr &);
+  DivExpr &operator=(const DivExpr &);
+  DivExpr(AssignExpr *p1, AssignExpr *p2);
+  ~DivExpr();
+  virtual void accept(Visitor *v);
+  virtual DivExpr *clone() const;
+  void swap(DivExpr &);
+};
+
+class ModExpr : public AssignExpr
+{
+public:
+  AssignExpr *assignexpr_1;
+  AssignExpr *assignexpr_2;
+
+  ModExpr(const ModExpr &);
+  ModExpr &operator=(const ModExpr &);
+  ModExpr(AssignExpr *p1, AssignExpr *p2);
+  ~ModExpr();
+  virtual void accept(Visitor *v);
+  virtual ModExpr *clone() const;
+  void swap(ModExpr &);
+};
+
+class CastExpr : public AssignExpr
+{
+public:
+  TypeName *typename_;
+  AssignExpr *assignexpr_;
+
+  CastExpr(const CastExpr &);
+  CastExpr &operator=(const CastExpr &);
+  CastExpr(TypeName *p1, AssignExpr *p2);
+  ~CastExpr();
+  virtual void accept(Visitor *v);
+  virtual CastExpr *clone() const;
+  void swap(CastExpr &);
+};
+
+class UnaryExprPlusPlus : public AssignExpr
+{
+public:
+  AssignExpr *assignexpr_;
+
+  UnaryExprPlusPlus(const UnaryExprPlusPlus &);
+  UnaryExprPlusPlus &operator=(const UnaryExprPlusPlus &);
+  UnaryExprPlusPlus(AssignExpr *p1);
+  ~UnaryExprPlusPlus();
+  virtual void accept(Visitor *v);
+  virtual UnaryExprPlusPlus *clone() const;
+  void swap(UnaryExprPlusPlus &);
+};
+
+class UnaryExprMinusMinus : public AssignExpr
+{
+public:
+  AssignExpr *assignexpr_;
+
+  UnaryExprMinusMinus(const UnaryExprMinusMinus &);
+  UnaryExprMinusMinus &operator=(const UnaryExprMinusMinus &);
+  UnaryExprMinusMinus(AssignExpr *p1);
+  ~UnaryExprMinusMinus();
+  virtual void accept(Visitor *v);
+  virtual UnaryExprMinusMinus *clone() const;
+  void swap(UnaryExprMinusMinus &);
+};
+
+class UnaryExprPlus : public AssignExpr
+{
+public:
+  AssignExpr *assignexpr_;
+
+  UnaryExprPlus(const UnaryExprPlus &);
+  UnaryExprPlus &operator=(const UnaryExprPlus &);
+  UnaryExprPlus(AssignExpr *p1);
+  ~UnaryExprPlus();
+  virtual void accept(Visitor *v);
+  virtual UnaryExprPlus *clone() const;
+  void swap(UnaryExprPlus &);
+};
+
+class UnaryExprMinus : public AssignExpr
+{
+public:
+  AssignExpr *assignexpr_;
+
+  UnaryExprMinus(const UnaryExprMinus &);
+  UnaryExprMinus &operator=(const UnaryExprMinus &);
+  UnaryExprMinus(AssignExpr *p1);
+  ~UnaryExprMinus();
+  virtual void accept(Visitor *v);
+  virtual UnaryExprMinus *clone() const;
+  void swap(UnaryExprMinus &);
+};
+
+class UnaryExprMult : public AssignExpr
+{
+public:
+  AssignExpr *assignexpr_;
+
+  UnaryExprMult(const UnaryExprMult &);
+  UnaryExprMult &operator=(const UnaryExprMult &);
+  UnaryExprMult(AssignExpr *p1);
+  ~UnaryExprMult();
+  virtual void accept(Visitor *v);
+  virtual UnaryExprMult *clone() const;
+  void swap(UnaryExprMult &);
+};
+
+class UnaryExprAmp : public AssignExpr
+{
+public:
+  AssignExpr *assignexpr_;
+
+  UnaryExprAmp(const UnaryExprAmp &);
+  UnaryExprAmp &operator=(const UnaryExprAmp &);
+  UnaryExprAmp(AssignExpr *p1);
+  ~UnaryExprAmp();
+  virtual void accept(Visitor *v);
+  virtual UnaryExprAmp *clone() const;
+  void swap(UnaryExprAmp &);
+};
+
+class UnaryExprNot : public AssignExpr
+{
+public:
+  AssignExpr *assignexpr_;
+
+  UnaryExprNot(const UnaryExprNot &);
+  UnaryExprNot &operator=(const UnaryExprNot &);
+  UnaryExprNot(AssignExpr *p1);
+  ~UnaryExprNot();
+  virtual void accept(Visitor *v);
+  virtual UnaryExprNot *clone() const;
+  void swap(UnaryExprNot &);
+};
+
+class UnaryExprTilde : public AssignExpr
+{
+public:
+  AssignExpr *assignexpr_;
+
+  UnaryExprTilde(const UnaryExprTilde &);
+  UnaryExprTilde &operator=(const UnaryExprTilde &);
+  UnaryExprTilde(AssignExpr *p1);
+  ~UnaryExprTilde();
+  virtual void accept(Visitor *v);
+  virtual UnaryExprTilde *clone() const;
+  void swap(UnaryExprTilde &);
+};
+
+class UnaryExprAddress : public AssignExpr
+{
+public:
+  IdOrTypenameAsId *idortypenameasid_;
+
+  UnaryExprAddress(const UnaryExprAddress &);
+  UnaryExprAddress &operator=(const UnaryExprAddress &);
+  UnaryExprAddress(IdOrTypenameAsId *p1);
+  ~UnaryExprAddress();
+  virtual void accept(Visitor *v);
+  virtual UnaryExprAddress *clone() const;
+  void swap(UnaryExprAddress &);
+};
+
+class DotPostfixExpression : public AssignExpr
+{
+public:
+  AssignExpr *assignexpr_;
+  IdOrTypename *idortypename_;
+
+  DotPostfixExpression(const DotPostfixExpression &);
+  DotPostfixExpression &operator=(const DotPostfixExpression &);
+  DotPostfixExpression(AssignExpr *p1, IdOrTypename *p2);
+  ~DotPostfixExpression();
+  virtual void accept(Visitor *v);
+  virtual DotPostfixExpression *clone() const;
+  void swap(DotPostfixExpression &);
+};
+
+class ArrowPostfixExpression : public AssignExpr
+{
+public:
+  AssignExpr *assignexpr_;
+  IdOrTypename *idortypename_;
+
+  ArrowPostfixExpression(const ArrowPostfixExpression &);
+  ArrowPostfixExpression &operator=(const ArrowPostfixExpression &);
+  ArrowPostfixExpression(AssignExpr *p1, IdOrTypename *p2);
+  ~ArrowPostfixExpression();
+  virtual void accept(Visitor *v);
+  virtual ArrowPostfixExpression *clone() const;
+  void swap(ArrowPostfixExpression &);
+};
+
+class PlusPlusPostfixExpression : public AssignExpr
+{
+public:
+  AssignExpr *assignexpr_;
+
+  PlusPlusPostfixExpression(const PlusPlusPostfixExpression &);
+  PlusPlusPostfixExpression &operator=(const PlusPlusPostfixExpression &);
+  PlusPlusPostfixExpression(AssignExpr *p1);
+  ~PlusPlusPostfixExpression();
+  virtual void accept(Visitor *v);
+  virtual PlusPlusPostfixExpression *clone() const;
+  void swap(PlusPlusPostfixExpression &);
+};
+
+class MinusMinusPostfixExpression : public AssignExpr
+{
+public:
+  AssignExpr *assignexpr_;
+
+  MinusMinusPostfixExpression(const MinusMinusPostfixExpression &);
+  MinusMinusPostfixExpression &operator=(const MinusMinusPostfixExpression &);
+  MinusMinusPostfixExpression(AssignExpr *p1);
+  ~MinusMinusPostfixExpression();
+  virtual void accept(Visitor *v);
+  virtual MinusMinusPostfixExpression *clone() const;
+  void swap(MinusMinusPostfixExpression &);
+};
+
+class IdentifierPrimaryExpression : public AssignExpr
+{
+public:
+  Ident ident_;
+
+  IdentifierPrimaryExpression(const IdentifierPrimaryExpression &);
+  IdentifierPrimaryExpression &operator=(const IdentifierPrimaryExpression &);
+  IdentifierPrimaryExpression(Ident p1);
+  ~IdentifierPrimaryExpression();
+  virtual void accept(Visitor *v);
+  virtual IdentifierPrimaryExpression *clone() const;
+  void swap(IdentifierPrimaryExpression &);
+};
+
+class ConstantPrimaryExpressin : public AssignExpr
+{
+public:
+  Constant *constant_;
+
+  ConstantPrimaryExpressin(const ConstantPrimaryExpressin &);
+  ConstantPrimaryExpressin &operator=(const ConstantPrimaryExpressin &);
+  ConstantPrimaryExpressin(Constant *p1);
+  ~ConstantPrimaryExpressin();
+  virtual void accept(Visitor *v);
+  virtual ConstantPrimaryExpressin *clone() const;
+  void swap(ConstantPrimaryExpressin &);
+};
+
+class CommaExpressionPrimaryExpressin : public AssignExpr
+{
+public:
+  ListExpression *listexpression_;
+
+  CommaExpressionPrimaryExpressin(const CommaExpressionPrimaryExpressin &);
+  CommaExpressionPrimaryExpressin &operator=(const CommaExpressionPrimaryExpressin &);
+  CommaExpressionPrimaryExpressin(ListExpression *p1);
+  ~CommaExpressionPrimaryExpressin();
+  virtual void accept(Visitor *v);
+  virtual CommaExpressionPrimaryExpressin *clone() const;
+  void swap(CommaExpressionPrimaryExpressin &);
+};
+
+class BlockPrimaryExpressin : public AssignExpr
+{
+public:
+  Block *block_;
+
+  BlockPrimaryExpressin(const BlockPrimaryExpressin &);
+  BlockPrimaryExpressin &operator=(const BlockPrimaryExpressin &);
+  BlockPrimaryExpressin(Block *p1);
+  ~BlockPrimaryExpressin();
+  virtual void accept(Visitor *v);
+  virtual BlockPrimaryExpressin *clone() const;
+  void swap(BlockPrimaryExpressin &);
+};
+
+class ConstantInt : public Constant
+{
+public:
+  Integer integer_;
+
+  ConstantInt(const ConstantInt &);
+  ConstantInt &operator=(const ConstantInt &);
+  ConstantInt(Integer p1);
+  ~ConstantInt();
+  virtual void accept(Visitor *v);
+  virtual ConstantInt *clone() const;
+  void swap(ConstantInt &);
+};
+
+class ConstantFloat : public Constant
+{
+public:
+  Double double_;
+
+  ConstantFloat(const ConstantFloat &);
+  ConstantFloat &operator=(const ConstantFloat &);
+  ConstantFloat(Double p1);
+  ~ConstantFloat();
+  virtual void accept(Visitor *v);
+  virtual ConstantFloat *clone() const;
+  void swap(ConstantFloat &);
+};
+
+class ConstantChar : public Constant
+{
+public:
+  Char char_;
+
+  ConstantChar(const ConstantChar &);
+  ConstantChar &operator=(const ConstantChar &);
+  ConstantChar(Char p1);
+  ~ConstantChar();
+  virtual void accept(Visitor *v);
+  virtual ConstantChar *clone() const;
+  void swap(ConstantChar &);
+};
+
+class TypeNameDeclSpecList : public TypeName
+{
+public:
+  DeclSpecList *declspeclist_;
+
+  TypeNameDeclSpecList(const TypeNameDeclSpecList &);
+  TypeNameDeclSpecList &operator=(const TypeNameDeclSpecList &);
+  TypeNameDeclSpecList(DeclSpecList *p1);
+  ~TypeNameDeclSpecList();
+  virtual void accept(Visitor *v);
+  virtual TypeNameDeclSpecList *clone() const;
+  void swap(TypeNameDeclSpecList &);
+};
+
 
 
 class ListParameterDecl : public Visitable, public std::vector<ParameterDecl*>
@@ -1205,6 +3119,42 @@ public:
 };
 
 ListAttribute* consListAttribute(Attribute* x, ListAttribute* xs);
+
+class ListBlockElement : public Visitable, public std::vector<BlockElement*>
+{
+public:
+  virtual void accept(Visitor *v);
+  virtual ListBlockElement *clone() const;
+};
+
+ListBlockElement* consListBlockElement(BlockElement* x, ListBlockElement* xs);
+
+class ListAttr : public Visitable, public std::vector<Attr*>
+{
+public:
+  virtual void accept(Visitor *v);
+  virtual ListAttr *clone() const;
+};
+
+ListAttr* consListAttr(Attr* x, ListAttr* xs);
+
+class ListBasicAttribute : public Visitable, public std::vector<BasicAttribute*>
+{
+public:
+  virtual void accept(Visitor *v);
+  virtual ListBasicAttribute *clone() const;
+};
+
+ListBasicAttribute* consListBasicAttribute(BasicAttribute* x, ListBasicAttribute* xs);
+
+class ListExpression : public Visitable, public std::vector<Expression*>
+{
+public:
+  virtual void accept(Visitor *v);
+  virtual ListExpression *clone() const;
+};
+
+ListExpression* consListExpression(Expression* x, ListExpression* xs);
 
 
 

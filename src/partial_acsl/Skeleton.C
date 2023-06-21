@@ -15,7 +15,6 @@ void Skeleton::visitProgram(Program *t) {} //abstract class
 void Skeleton::visitGlobals(Globals *t) {} //abstract class
 void Skeleton::visitGlobal(Global *t) {} //abstract class
 void Skeleton::visitFunctionDef(FunctionDef *t) {} //abstract class
-void Skeleton::visitBlock(Block *t) {} //abstract class
 void Skeleton::visitFunctionDefStart(FunctionDefStart *t) {} //abstract class
 void Skeleton::visitDeclSpecList(DeclSpecList *t) {} //abstract class
 void Skeleton::visitDeclSpecListNoNamed(DeclSpecListNoNamed *t) {} //abstract class
@@ -36,6 +35,19 @@ void Skeleton::visitInitDeclarator(InitDeclarator *t) {} //abstract class
 void Skeleton::visitStructDeclList(StructDeclList *t) {} //abstract class
 void Skeleton::visitFieldDecl(FieldDecl *t) {} //abstract class
 void Skeleton::visitAttribute(Attribute *t) {} //abstract class
+void Skeleton::visitBlock(Block *t) {} //abstract class
+void Skeleton::visitBlockAttrs(BlockAttrs *t) {} //abstract class
+void Skeleton::visitBlockElement(BlockElement *t) {} //abstract class
+void Skeleton::visitStatement(Statement *t) {} //abstract class
+void Skeleton::visitAttr(Attr *t) {} //abstract class
+void Skeleton::visitBasicAttribute(BasicAttribute *t) {} //abstract class
+void Skeleton::visitAnnotatedStmt(AnnotatedStmt *t) {} //abstract class
+void Skeleton::visitElsePart(ElsePart *t) {} //abstract class
+void Skeleton::visitOptExpression(OptExpression *t) {} //abstract class
+void Skeleton::visitExpression(Expression *t) {} //abstract class
+void Skeleton::visitAssignExpr(AssignExpr *t) {} //abstract class
+void Skeleton::visitConstant(Constant *t) {} //abstract class
+void Skeleton::visitTypeName(TypeName *t) {} //abstract class
 
 void Skeleton::visitAProgram(AProgram *a_program)
 {
@@ -91,15 +103,6 @@ void Skeleton::visitSimpleFunctionDef(SimpleFunctionDef *simple_function_def)
 
   if (simple_function_def->functiondefstart_) simple_function_def->functiondefstart_->accept(this);
   if (simple_function_def->block_) simple_function_def->block_->accept(this);
-
-}
-
-void Skeleton::visitABlock(ABlock *a_block)
-{
-  /* Code For ABlock Goes Here */
-
-  visitLBRACE(a_block->lbrace_);
-  visitRBRACE(a_block->rbrace_);
 
 }
 
@@ -476,6 +479,943 @@ void Skeleton::visitAttributeConst(AttributeConst *attribute_const)
 
 }
 
+void Skeleton::visitABlock(ABlock *a_block)
+{
+  /* Code For ABlock Goes Here */
+
+  visitLBRACE(a_block->lbrace_);
+  if (a_block->blockattrs_) a_block->blockattrs_->accept(this);
+  if (a_block->listblockelement_) a_block->listblockelement_->accept(this);
+  visitRBRACE(a_block->rbrace_);
+
+}
+
+void Skeleton::visitNoBlockAttrs(NoBlockAttrs *no_block_attrs)
+{
+  /* Code For NoBlockAttrs Goes Here */
+
+
+}
+
+void Skeleton::visitSomeBlockAttrs(SomeBlockAttrs *some_block_attrs)
+{
+  /* Code For SomeBlockAttrs Goes Here */
+
+  visitBLOCKATTRIBUTE(some_block_attrs->blockattribute_);
+  if (some_block_attrs->listattr_) some_block_attrs->listattr_->accept(this);
+
+}
+
+void Skeleton::visitDeclarationElement(DeclarationElement *declaration_element)
+{
+  /* Code For DeclarationElement Goes Here */
+
+  if (declaration_element->declaration_) declaration_element->declaration_->accept(this);
+
+}
+
+void Skeleton::visitStatementElement(StatementElement *statement_element)
+{
+  /* Code For StatementElement Goes Here */
+
+  if (statement_element->statement_) statement_element->statement_->accept(this);
+
+}
+
+void Skeleton::visitSemicolonStatement(SemicolonStatement *semicolon_statement)
+{
+  /* Code For SemicolonStatement Goes Here */
+
+
+}
+
+void Skeleton::visitExprsStatement(ExprsStatement *exprs_statement)
+{
+  /* Code For ExprsStatement Goes Here */
+
+  if (exprs_statement->listexpression_) exprs_statement->listexpression_->accept(this);
+
+}
+
+void Skeleton::visitBlockStatement(BlockStatement *block_statement)
+{
+  /* Code For BlockStatement Goes Here */
+
+  if (block_statement->block_) block_statement->block_->accept(this);
+
+}
+
+void Skeleton::visitIfStatement(IfStatement *if_statement)
+{
+  /* Code For IfStatement Goes Here */
+
+  if (if_statement->listexpression_) if_statement->listexpression_->accept(this);
+  if (if_statement->annotatedstmt_) if_statement->annotatedstmt_->accept(this);
+  if (if_statement->elsepart_) if_statement->elsepart_->accept(this);
+
+}
+
+void Skeleton::visitSwitchStatement(SwitchStatement *switch_statement)
+{
+  /* Code For SwitchStatement Goes Here */
+
+  if (switch_statement->listexpression_) switch_statement->listexpression_->accept(this);
+  if (switch_statement->annotatedstmt_) switch_statement->annotatedstmt_->accept(this);
+
+}
+
+void Skeleton::visitWhileStatement(WhileStatement *while_statement)
+{
+  /* Code For WhileStatement Goes Here */
+
+  if (while_statement->listexpression_) while_statement->listexpression_->accept(this);
+  if (while_statement->annotatedstmt_) while_statement->annotatedstmt_->accept(this);
+
+}
+
+void Skeleton::visitCaseStatement(CaseStatement *case_statement)
+{
+  /* Code For CaseStatement Goes Here */
+
+  if (case_statement->expression_) case_statement->expression_->accept(this);
+  if (case_statement->annotatedstmt_) case_statement->annotatedstmt_->accept(this);
+
+}
+
+void Skeleton::visitCaseSliceStatement(CaseSliceStatement *case_slice_statement)
+{
+  /* Code For CaseSliceStatement Goes Here */
+
+  if (case_slice_statement->expression_1) case_slice_statement->expression_1->accept(this);
+  if (case_slice_statement->expression_2) case_slice_statement->expression_2->accept(this);
+  if (case_slice_statement->annotatedstmt_) case_slice_statement->annotatedstmt_->accept(this);
+
+}
+
+void Skeleton::visitDefaultStatement(DefaultStatement *default_statement)
+{
+  /* Code For DefaultStatement Goes Here */
+
+  if (default_statement->annotatedstmt_) default_statement->annotatedstmt_->accept(this);
+
+}
+
+void Skeleton::visitEmptyReturnStatement(EmptyReturnStatement *empty_return_statement)
+{
+  /* Code For EmptyReturnStatement Goes Here */
+
+
+}
+
+void Skeleton::visitBreakStatement(BreakStatement *break_statement)
+{
+  /* Code For BreakStatement Goes Here */
+
+
+}
+
+void Skeleton::visitContinueStatement(ContinueStatement *continue_statement)
+{
+  /* Code For ContinueStatement Goes Here */
+
+
+}
+
+void Skeleton::visitAnAttr(AnAttr *an_attr)
+{
+  /* Code For AnAttr Goes Here */
+
+  if (an_attr->attr_1) an_attr->attr_1->accept(this);
+  if (an_attr->attr_2) an_attr->attr_2->accept(this);
+
+}
+
+void Skeleton::visitTernaryCond(TernaryCond *ternary_cond)
+{
+  /* Code For TernaryCond Goes Here */
+
+  if (ternary_cond->attr_1) ternary_cond->attr_1->accept(this);
+  if (ternary_cond->attr_2) ternary_cond->attr_2->accept(this);
+  if (ternary_cond->attr_3) ternary_cond->attr_3->accept(this);
+
+}
+
+void Skeleton::visitOr(Or *or_)
+{
+  /* Code For Or Goes Here */
+
+  if (or_->attr_1) or_->attr_1->accept(this);
+  if (or_->attr_2) or_->attr_2->accept(this);
+
+}
+
+void Skeleton::visitAnd(And *and_)
+{
+  /* Code For And Goes Here */
+
+  if (and_->attr_1) and_->attr_1->accept(this);
+  if (and_->attr_2) and_->attr_2->accept(this);
+
+}
+
+void Skeleton::visitBitOr(BitOr *bit_or)
+{
+  /* Code For BitOr Goes Here */
+
+  if (bit_or->attr_1) bit_or->attr_1->accept(this);
+  if (bit_or->attr_2) bit_or->attr_2->accept(this);
+
+}
+
+void Skeleton::visitXor(Xor *xor_)
+{
+  /* Code For Xor Goes Here */
+
+  if (xor_->attr_1) xor_->attr_1->accept(this);
+  if (xor_->attr_2) xor_->attr_2->accept(this);
+
+}
+
+void Skeleton::visitBitAnd(BitAnd *bit_and)
+{
+  /* Code For BitAnd Goes Here */
+
+  if (bit_and->attr_1) bit_and->attr_1->accept(this);
+  if (bit_and->attr_2) bit_and->attr_2->accept(this);
+
+}
+
+void Skeleton::visitEqualEqual(EqualEqual *equal_equal)
+{
+  /* Code For EqualEqual Goes Here */
+
+  if (equal_equal->attr_1) equal_equal->attr_1->accept(this);
+  if (equal_equal->attr_2) equal_equal->attr_2->accept(this);
+
+}
+
+void Skeleton::visitNotEqual(NotEqual *not_equal)
+{
+  /* Code For NotEqual Goes Here */
+
+  if (not_equal->attr_1) not_equal->attr_1->accept(this);
+  if (not_equal->attr_2) not_equal->attr_2->accept(this);
+
+}
+
+void Skeleton::visitLess(Less *less)
+{
+  /* Code For Less Goes Here */
+
+  if (less->attr_1) less->attr_1->accept(this);
+  if (less->attr_2) less->attr_2->accept(this);
+
+}
+
+void Skeleton::visitGreater(Greater *greater)
+{
+  /* Code For Greater Goes Here */
+
+  if (greater->attr_1) greater->attr_1->accept(this);
+  if (greater->attr_2) greater->attr_2->accept(this);
+
+}
+
+void Skeleton::visitLessEqual(LessEqual *less_equal)
+{
+  /* Code For LessEqual Goes Here */
+
+  if (less_equal->attr_1) less_equal->attr_1->accept(this);
+  if (less_equal->attr_2) less_equal->attr_2->accept(this);
+
+}
+
+void Skeleton::visitGreaterEqual(GreaterEqual *greater_equal)
+{
+  /* Code For GreaterEqual Goes Here */
+
+  if (greater_equal->attr_1) greater_equal->attr_1->accept(this);
+  if (greater_equal->attr_2) greater_equal->attr_2->accept(this);
+
+}
+
+void Skeleton::visitLeftShiftOp(LeftShiftOp *left_shift_op)
+{
+  /* Code For LeftShiftOp Goes Here */
+
+  if (left_shift_op->attr_1) left_shift_op->attr_1->accept(this);
+  if (left_shift_op->attr_2) left_shift_op->attr_2->accept(this);
+
+}
+
+void Skeleton::visitRightShiftOp(RightShiftOp *right_shift_op)
+{
+  /* Code For RightShiftOp Goes Here */
+
+  if (right_shift_op->attr_1) right_shift_op->attr_1->accept(this);
+  if (right_shift_op->attr_2) right_shift_op->attr_2->accept(this);
+
+}
+
+void Skeleton::visitAddOp(AddOp *add_op)
+{
+  /* Code For AddOp Goes Here */
+
+  if (add_op->attr_1) add_op->attr_1->accept(this);
+  if (add_op->attr_2) add_op->attr_2->accept(this);
+
+}
+
+void Skeleton::visitSubOp(SubOp *sub_op)
+{
+  /* Code For SubOp Goes Here */
+
+  if (sub_op->attr_1) sub_op->attr_1->accept(this);
+  if (sub_op->attr_2) sub_op->attr_2->accept(this);
+
+}
+
+void Skeleton::visitMultOp(MultOp *mult_op)
+{
+  /* Code For MultOp Goes Here */
+
+  if (mult_op->attr_1) mult_op->attr_1->accept(this);
+  if (mult_op->attr_2) mult_op->attr_2->accept(this);
+
+}
+
+void Skeleton::visitDivOp(DivOp *div_op)
+{
+  /* Code For DivOp Goes Here */
+
+  if (div_op->attr_1) div_op->attr_1->accept(this);
+  if (div_op->attr_2) div_op->attr_2->accept(this);
+
+}
+
+void Skeleton::visitModOp(ModOp *mod_op)
+{
+  /* Code For ModOp Goes Here */
+
+  if (mod_op->attr_1) mod_op->attr_1->accept(this);
+  if (mod_op->attr_2) mod_op->attr_2->accept(this);
+
+}
+
+void Skeleton::visitPlusUnaryAttr(PlusUnaryAttr *plus_unary_attr)
+{
+  /* Code For PlusUnaryAttr Goes Here */
+
+  if (plus_unary_attr->attr_) plus_unary_attr->attr_->accept(this);
+
+}
+
+void Skeleton::visitMinusUnaryAttr(MinusUnaryAttr *minus_unary_attr)
+{
+  /* Code For MinusUnaryAttr Goes Here */
+
+  if (minus_unary_attr->attr_) minus_unary_attr->attr_->accept(this);
+
+}
+
+void Skeleton::visitMultUnaryAttr(MultUnaryAttr *mult_unary_attr)
+{
+  /* Code For MultUnaryAttr Goes Here */
+
+  if (mult_unary_attr->attr_) mult_unary_attr->attr_->accept(this);
+
+}
+
+void Skeleton::visitAmpUnaryAttr(AmpUnaryAttr *amp_unary_attr)
+{
+  /* Code For AmpUnaryAttr Goes Here */
+
+  if (amp_unary_attr->attr_) amp_unary_attr->attr_->accept(this);
+
+}
+
+void Skeleton::visitNotUnaryAttr(NotUnaryAttr *not_unary_attr)
+{
+  /* Code For NotUnaryAttr Goes Here */
+
+  if (not_unary_attr->attr_) not_unary_attr->attr_->accept(this);
+
+}
+
+void Skeleton::visitTildeUnaryAttr(TildeUnaryAttr *tilde_unary_attr)
+{
+  /* Code For TildeUnaryAttr Goes Here */
+
+  if (tilde_unary_attr->attr_) tilde_unary_attr->attr_->accept(this);
+
+}
+
+void Skeleton::visitFuncationCall(FuncationCall *funcation_call)
+{
+  /* Code For FuncationCall Goes Here */
+
+  if (funcation_call->idortypenameasid_) funcation_call->idortypenameasid_->accept(this);
+  if (funcation_call->listattr_) funcation_call->listattr_->accept(this);
+
+}
+
+void Skeleton::visitProcedureCall(ProcedureCall *procedure_call)
+{
+  /* Code For ProcedureCall Goes Here */
+
+  if (procedure_call->idortypenameasid_) procedure_call->idortypenameasid_->accept(this);
+
+}
+
+void Skeleton::visitArrowAttr(ArrowAttr *arrow_attr)
+{
+  /* Code For ArrowAttr Goes Here */
+
+  if (arrow_attr->attr_) arrow_attr->attr_->accept(this);
+  if (arrow_attr->idortypename_) arrow_attr->idortypename_->accept(this);
+
+}
+
+void Skeleton::visitDotAttr(DotAttr *dot_attr)
+{
+  /* Code For DotAttr Goes Here */
+
+  if (dot_attr->attr_) dot_attr->attr_->accept(this);
+  if (dot_attr->idortypename_) dot_attr->idortypename_->accept(this);
+
+}
+
+void Skeleton::visitArrayAttr(ArrayAttr *array_attr)
+{
+  /* Code For ArrayAttr Goes Here */
+
+  if (array_attr->attr_1) array_attr->attr_1->accept(this);
+  visitLBRACKET(array_attr->lbracket_);
+  if (array_attr->attr_2) array_attr->attr_2->accept(this);
+  visitRBRACKET(array_attr->rbracket_);
+
+}
+
+void Skeleton::visitBasicAttr(BasicAttr *basic_attr)
+{
+  /* Code For BasicAttr Goes Here */
+
+  if (basic_attr->basicattribute_) basic_attr->basicattribute_->accept(this);
+
+}
+
+void Skeleton::visitBasicAttrConsInt(BasicAttrConsInt *basic_attr_cons_int)
+{
+  /* Code For BasicAttrConsInt Goes Here */
+
+  visitInteger(basic_attr_cons_int->integer_);
+
+}
+
+void Skeleton::visitBasicAttrConsFloat(BasicAttrConsFloat *basic_attr_cons_float)
+{
+  /* Code For BasicAttrConsFloat Goes Here */
+
+  visitDouble(basic_attr_cons_float->double_);
+
+}
+
+void Skeleton::visitAnnotatedStatement(AnnotatedStatement *annotated_statement)
+{
+  /* Code For AnnotatedStatement Goes Here */
+
+  if (annotated_statement->statement_) annotated_statement->statement_->accept(this);
+
+}
+
+void Skeleton::visitNoElsePart(NoElsePart *no_else_part)
+{
+  /* Code For NoElsePart Goes Here */
+
+
+}
+
+void Skeleton::visitSimpleElsePart(SimpleElsePart *simple_else_part)
+{
+  /* Code For SimpleElsePart Goes Here */
+
+  if (simple_else_part->annotatedstmt_) simple_else_part->annotatedstmt_->accept(this);
+
+}
+
+void Skeleton::visitNoExpression(NoExpression *no_expression)
+{
+  /* Code For NoExpression Goes Here */
+
+
+}
+
+void Skeleton::visitSomeExpression(SomeExpression *some_expression)
+{
+  /* Code For SomeExpression Goes Here */
+
+  if (some_expression->listexpression_) some_expression->listexpression_->accept(this);
+
+}
+
+void Skeleton::visitAssignmentExpr(AssignmentExpr *assignment_expr)
+{
+  /* Code For AssignmentExpr Goes Here */
+
+  if (assignment_expr->assignexpr_) assignment_expr->assignexpr_->accept(this);
+
+}
+
+void Skeleton::visitEqAssignExpr(EqAssignExpr *eq_assign_expr)
+{
+  /* Code For EqAssignExpr Goes Here */
+
+  if (eq_assign_expr->assignexpr_1) eq_assign_expr->assignexpr_1->accept(this);
+  if (eq_assign_expr->assignexpr_2) eq_assign_expr->assignexpr_2->accept(this);
+
+}
+
+void Skeleton::visitPlusEqAssignExpr(PlusEqAssignExpr *plus_eq_assign_expr)
+{
+  /* Code For PlusEqAssignExpr Goes Here */
+
+  if (plus_eq_assign_expr->assignexpr_1) plus_eq_assign_expr->assignexpr_1->accept(this);
+  if (plus_eq_assign_expr->assignexpr_2) plus_eq_assign_expr->assignexpr_2->accept(this);
+
+}
+
+void Skeleton::visitMinusEqAssignExpr(MinusEqAssignExpr *minus_eq_assign_expr)
+{
+  /* Code For MinusEqAssignExpr Goes Here */
+
+  if (minus_eq_assign_expr->assignexpr_1) minus_eq_assign_expr->assignexpr_1->accept(this);
+  if (minus_eq_assign_expr->assignexpr_2) minus_eq_assign_expr->assignexpr_2->accept(this);
+
+}
+
+void Skeleton::visitMultEqAssignExpr(MultEqAssignExpr *mult_eq_assign_expr)
+{
+  /* Code For MultEqAssignExpr Goes Here */
+
+  if (mult_eq_assign_expr->assignexpr_1) mult_eq_assign_expr->assignexpr_1->accept(this);
+  if (mult_eq_assign_expr->assignexpr_2) mult_eq_assign_expr->assignexpr_2->accept(this);
+
+}
+
+void Skeleton::visitDivEqAssignExpr(DivEqAssignExpr *div_eq_assign_expr)
+{
+  /* Code For DivEqAssignExpr Goes Here */
+
+  if (div_eq_assign_expr->assignexpr_1) div_eq_assign_expr->assignexpr_1->accept(this);
+  if (div_eq_assign_expr->assignexpr_2) div_eq_assign_expr->assignexpr_2->accept(this);
+
+}
+
+void Skeleton::visitModEqAssignExpr(ModEqAssignExpr *mod_eq_assign_expr)
+{
+  /* Code For ModEqAssignExpr Goes Here */
+
+  if (mod_eq_assign_expr->assignexpr_1) mod_eq_assign_expr->assignexpr_1->accept(this);
+  if (mod_eq_assign_expr->assignexpr_2) mod_eq_assign_expr->assignexpr_2->accept(this);
+
+}
+
+void Skeleton::visitAndEqAssignExpr(AndEqAssignExpr *and_eq_assign_expr)
+{
+  /* Code For AndEqAssignExpr Goes Here */
+
+  if (and_eq_assign_expr->assignexpr_1) and_eq_assign_expr->assignexpr_1->accept(this);
+  if (and_eq_assign_expr->assignexpr_2) and_eq_assign_expr->assignexpr_2->accept(this);
+
+}
+
+void Skeleton::visitOrEqAssignExpr(OrEqAssignExpr *or_eq_assign_expr)
+{
+  /* Code For OrEqAssignExpr Goes Here */
+
+  if (or_eq_assign_expr->assignexpr_1) or_eq_assign_expr->assignexpr_1->accept(this);
+  if (or_eq_assign_expr->assignexpr_2) or_eq_assign_expr->assignexpr_2->accept(this);
+
+}
+
+void Skeleton::visitXorEqAssignExpr(XorEqAssignExpr *xor_eq_assign_expr)
+{
+  /* Code For XorEqAssignExpr Goes Here */
+
+  if (xor_eq_assign_expr->assignexpr_1) xor_eq_assign_expr->assignexpr_1->accept(this);
+  if (xor_eq_assign_expr->assignexpr_2) xor_eq_assign_expr->assignexpr_2->accept(this);
+
+}
+
+void Skeleton::visitLeftShiftEqAssignExpr(LeftShiftEqAssignExpr *left_shift_eq_assign_expr)
+{
+  /* Code For LeftShiftEqAssignExpr Goes Here */
+
+  if (left_shift_eq_assign_expr->assignexpr_1) left_shift_eq_assign_expr->assignexpr_1->accept(this);
+  if (left_shift_eq_assign_expr->assignexpr_2) left_shift_eq_assign_expr->assignexpr_2->accept(this);
+
+}
+
+void Skeleton::visitRightShiftEqAssignExpr(RightShiftEqAssignExpr *right_shift_eq_assign_expr)
+{
+  /* Code For RightShiftEqAssignExpr Goes Here */
+
+  if (right_shift_eq_assign_expr->assignexpr_1) right_shift_eq_assign_expr->assignexpr_1->accept(this);
+  if (right_shift_eq_assign_expr->assignexpr_2) right_shift_eq_assign_expr->assignexpr_2->accept(this);
+
+}
+
+void Skeleton::visitTernaryCondExpr(TernaryCondExpr *ternary_cond_expr)
+{
+  /* Code For TernaryCondExpr Goes Here */
+
+  if (ternary_cond_expr->assignexpr_1) ternary_cond_expr->assignexpr_1->accept(this);
+  if (ternary_cond_expr->optexpression_) ternary_cond_expr->optexpression_->accept(this);
+  if (ternary_cond_expr->assignexpr_2) ternary_cond_expr->assignexpr_2->accept(this);
+
+}
+
+void Skeleton::visitOrExpr(OrExpr *or_expr)
+{
+  /* Code For OrExpr Goes Here */
+
+  if (or_expr->assignexpr_1) or_expr->assignexpr_1->accept(this);
+  if (or_expr->assignexpr_2) or_expr->assignexpr_2->accept(this);
+
+}
+
+void Skeleton::visitAndExpr(AndExpr *and_expr)
+{
+  /* Code For AndExpr Goes Here */
+
+  if (and_expr->assignexpr_1) and_expr->assignexpr_1->accept(this);
+  if (and_expr->assignexpr_2) and_expr->assignexpr_2->accept(this);
+
+}
+
+void Skeleton::visitBitOrExpr(BitOrExpr *bit_or_expr)
+{
+  /* Code For BitOrExpr Goes Here */
+
+  if (bit_or_expr->assignexpr_1) bit_or_expr->assignexpr_1->accept(this);
+  if (bit_or_expr->assignexpr_2) bit_or_expr->assignexpr_2->accept(this);
+
+}
+
+void Skeleton::visitBitXorExpr(BitXorExpr *bit_xor_expr)
+{
+  /* Code For BitXorExpr Goes Here */
+
+  if (bit_xor_expr->assignexpr_1) bit_xor_expr->assignexpr_1->accept(this);
+  if (bit_xor_expr->assignexpr_2) bit_xor_expr->assignexpr_2->accept(this);
+
+}
+
+void Skeleton::visitBitAndExpr(BitAndExpr *bit_and_expr)
+{
+  /* Code For BitAndExpr Goes Here */
+
+  if (bit_and_expr->assignexpr_1) bit_and_expr->assignexpr_1->accept(this);
+  if (bit_and_expr->assignexpr_2) bit_and_expr->assignexpr_2->accept(this);
+
+}
+
+void Skeleton::visitEqExpr(EqExpr *eq_expr)
+{
+  /* Code For EqExpr Goes Here */
+
+  if (eq_expr->assignexpr_1) eq_expr->assignexpr_1->accept(this);
+  if (eq_expr->assignexpr_2) eq_expr->assignexpr_2->accept(this);
+
+}
+
+void Skeleton::visitNotEqExpr(NotEqExpr *not_eq_expr)
+{
+  /* Code For NotEqExpr Goes Here */
+
+  if (not_eq_expr->assignexpr_1) not_eq_expr->assignexpr_1->accept(this);
+  if (not_eq_expr->assignexpr_2) not_eq_expr->assignexpr_2->accept(this);
+
+}
+
+void Skeleton::visitLessExpr(LessExpr *less_expr)
+{
+  /* Code For LessExpr Goes Here */
+
+  if (less_expr->assignexpr_1) less_expr->assignexpr_1->accept(this);
+  if (less_expr->assignexpr_2) less_expr->assignexpr_2->accept(this);
+
+}
+
+void Skeleton::visitGreaterExpr(GreaterExpr *greater_expr)
+{
+  /* Code For GreaterExpr Goes Here */
+
+  if (greater_expr->assignexpr_1) greater_expr->assignexpr_1->accept(this);
+  if (greater_expr->assignexpr_2) greater_expr->assignexpr_2->accept(this);
+
+}
+
+void Skeleton::visitLessEqualExpr(LessEqualExpr *less_equal_expr)
+{
+  /* Code For LessEqualExpr Goes Here */
+
+  if (less_equal_expr->assignexpr_1) less_equal_expr->assignexpr_1->accept(this);
+  if (less_equal_expr->assignexpr_2) less_equal_expr->assignexpr_2->accept(this);
+
+}
+
+void Skeleton::visitGreaterEqualExpr(GreaterEqualExpr *greater_equal_expr)
+{
+  /* Code For GreaterEqualExpr Goes Here */
+
+  if (greater_equal_expr->assignexpr_1) greater_equal_expr->assignexpr_1->accept(this);
+  if (greater_equal_expr->assignexpr_2) greater_equal_expr->assignexpr_2->accept(this);
+
+}
+
+void Skeleton::visitLeftShiftExpr(LeftShiftExpr *left_shift_expr)
+{
+  /* Code For LeftShiftExpr Goes Here */
+
+  if (left_shift_expr->assignexpr_1) left_shift_expr->assignexpr_1->accept(this);
+  if (left_shift_expr->assignexpr_2) left_shift_expr->assignexpr_2->accept(this);
+
+}
+
+void Skeleton::visitRightShiftExpr(RightShiftExpr *right_shift_expr)
+{
+  /* Code For RightShiftExpr Goes Here */
+
+  if (right_shift_expr->assignexpr_1) right_shift_expr->assignexpr_1->accept(this);
+  if (right_shift_expr->assignexpr_2) right_shift_expr->assignexpr_2->accept(this);
+
+}
+
+void Skeleton::visitPlusExpr(PlusExpr *plus_expr)
+{
+  /* Code For PlusExpr Goes Here */
+
+  if (plus_expr->assignexpr_1) plus_expr->assignexpr_1->accept(this);
+  if (plus_expr->assignexpr_2) plus_expr->assignexpr_2->accept(this);
+
+}
+
+void Skeleton::visitMinusExpr(MinusExpr *minus_expr)
+{
+  /* Code For MinusExpr Goes Here */
+
+  if (minus_expr->assignexpr_1) minus_expr->assignexpr_1->accept(this);
+  if (minus_expr->assignexpr_2) minus_expr->assignexpr_2->accept(this);
+
+}
+
+void Skeleton::visitMulsExpr(MulsExpr *muls_expr)
+{
+  /* Code For MulsExpr Goes Here */
+
+  if (muls_expr->assignexpr_1) muls_expr->assignexpr_1->accept(this);
+  if (muls_expr->assignexpr_2) muls_expr->assignexpr_2->accept(this);
+
+}
+
+void Skeleton::visitDivExpr(DivExpr *div_expr)
+{
+  /* Code For DivExpr Goes Here */
+
+  if (div_expr->assignexpr_1) div_expr->assignexpr_1->accept(this);
+  if (div_expr->assignexpr_2) div_expr->assignexpr_2->accept(this);
+
+}
+
+void Skeleton::visitModExpr(ModExpr *mod_expr)
+{
+  /* Code For ModExpr Goes Here */
+
+  if (mod_expr->assignexpr_1) mod_expr->assignexpr_1->accept(this);
+  if (mod_expr->assignexpr_2) mod_expr->assignexpr_2->accept(this);
+
+}
+
+void Skeleton::visitCastExpr(CastExpr *cast_expr)
+{
+  /* Code For CastExpr Goes Here */
+
+  if (cast_expr->typename_) cast_expr->typename_->accept(this);
+  if (cast_expr->assignexpr_) cast_expr->assignexpr_->accept(this);
+
+}
+
+void Skeleton::visitUnaryExprPlusPlus(UnaryExprPlusPlus *unary_expr_plus_plus)
+{
+  /* Code For UnaryExprPlusPlus Goes Here */
+
+  if (unary_expr_plus_plus->assignexpr_) unary_expr_plus_plus->assignexpr_->accept(this);
+
+}
+
+void Skeleton::visitUnaryExprMinusMinus(UnaryExprMinusMinus *unary_expr_minus_minus)
+{
+  /* Code For UnaryExprMinusMinus Goes Here */
+
+  if (unary_expr_minus_minus->assignexpr_) unary_expr_minus_minus->assignexpr_->accept(this);
+
+}
+
+void Skeleton::visitUnaryExprPlus(UnaryExprPlus *unary_expr_plus)
+{
+  /* Code For UnaryExprPlus Goes Here */
+
+  if (unary_expr_plus->assignexpr_) unary_expr_plus->assignexpr_->accept(this);
+
+}
+
+void Skeleton::visitUnaryExprMinus(UnaryExprMinus *unary_expr_minus)
+{
+  /* Code For UnaryExprMinus Goes Here */
+
+  if (unary_expr_minus->assignexpr_) unary_expr_minus->assignexpr_->accept(this);
+
+}
+
+void Skeleton::visitUnaryExprMult(UnaryExprMult *unary_expr_mult)
+{
+  /* Code For UnaryExprMult Goes Here */
+
+  if (unary_expr_mult->assignexpr_) unary_expr_mult->assignexpr_->accept(this);
+
+}
+
+void Skeleton::visitUnaryExprAmp(UnaryExprAmp *unary_expr_amp)
+{
+  /* Code For UnaryExprAmp Goes Here */
+
+  if (unary_expr_amp->assignexpr_) unary_expr_amp->assignexpr_->accept(this);
+
+}
+
+void Skeleton::visitUnaryExprNot(UnaryExprNot *unary_expr_not)
+{
+  /* Code For UnaryExprNot Goes Here */
+
+  if (unary_expr_not->assignexpr_) unary_expr_not->assignexpr_->accept(this);
+
+}
+
+void Skeleton::visitUnaryExprTilde(UnaryExprTilde *unary_expr_tilde)
+{
+  /* Code For UnaryExprTilde Goes Here */
+
+  if (unary_expr_tilde->assignexpr_) unary_expr_tilde->assignexpr_->accept(this);
+
+}
+
+void Skeleton::visitUnaryExprAddress(UnaryExprAddress *unary_expr_address)
+{
+  /* Code For UnaryExprAddress Goes Here */
+
+  if (unary_expr_address->idortypenameasid_) unary_expr_address->idortypenameasid_->accept(this);
+
+}
+
+void Skeleton::visitDotPostfixExpression(DotPostfixExpression *dot_postfix_expression)
+{
+  /* Code For DotPostfixExpression Goes Here */
+
+  if (dot_postfix_expression->assignexpr_) dot_postfix_expression->assignexpr_->accept(this);
+  if (dot_postfix_expression->idortypename_) dot_postfix_expression->idortypename_->accept(this);
+
+}
+
+void Skeleton::visitArrowPostfixExpression(ArrowPostfixExpression *arrow_postfix_expression)
+{
+  /* Code For ArrowPostfixExpression Goes Here */
+
+  if (arrow_postfix_expression->assignexpr_) arrow_postfix_expression->assignexpr_->accept(this);
+  if (arrow_postfix_expression->idortypename_) arrow_postfix_expression->idortypename_->accept(this);
+
+}
+
+void Skeleton::visitPlusPlusPostfixExpression(PlusPlusPostfixExpression *plus_plus_postfix_expression)
+{
+  /* Code For PlusPlusPostfixExpression Goes Here */
+
+  if (plus_plus_postfix_expression->assignexpr_) plus_plus_postfix_expression->assignexpr_->accept(this);
+
+}
+
+void Skeleton::visitMinusMinusPostfixExpression(MinusMinusPostfixExpression *minus_minus_postfix_expression)
+{
+  /* Code For MinusMinusPostfixExpression Goes Here */
+
+  if (minus_minus_postfix_expression->assignexpr_) minus_minus_postfix_expression->assignexpr_->accept(this);
+
+}
+
+void Skeleton::visitIdentifierPrimaryExpression(IdentifierPrimaryExpression *identifier_primary_expression)
+{
+  /* Code For IdentifierPrimaryExpression Goes Here */
+
+  visitIdent(identifier_primary_expression->ident_);
+
+}
+
+void Skeleton::visitConstantPrimaryExpressin(ConstantPrimaryExpressin *constant_primary_expressin)
+{
+  /* Code For ConstantPrimaryExpressin Goes Here */
+
+  if (constant_primary_expressin->constant_) constant_primary_expressin->constant_->accept(this);
+
+}
+
+void Skeleton::visitCommaExpressionPrimaryExpressin(CommaExpressionPrimaryExpressin *comma_expression_primary_expressin)
+{
+  /* Code For CommaExpressionPrimaryExpressin Goes Here */
+
+  if (comma_expression_primary_expressin->listexpression_) comma_expression_primary_expressin->listexpression_->accept(this);
+
+}
+
+void Skeleton::visitBlockPrimaryExpressin(BlockPrimaryExpressin *block_primary_expressin)
+{
+  /* Code For BlockPrimaryExpressin Goes Here */
+
+  if (block_primary_expressin->block_) block_primary_expressin->block_->accept(this);
+
+}
+
+void Skeleton::visitConstantInt(ConstantInt *constant_int)
+{
+  /* Code For ConstantInt Goes Here */
+
+  visitInteger(constant_int->integer_);
+
+}
+
+void Skeleton::visitConstantFloat(ConstantFloat *constant_float)
+{
+  /* Code For ConstantFloat Goes Here */
+
+  visitDouble(constant_float->double_);
+
+}
+
+void Skeleton::visitConstantChar(ConstantChar *constant_char)
+{
+  /* Code For ConstantChar Goes Here */
+
+  visitChar(constant_char->char_);
+
+}
+
+void Skeleton::visitTypeNameDeclSpecList(TypeNameDeclSpecList *type_name_decl_spec_list)
+{
+  /* Code For TypeNameDeclSpecList Goes Here */
+
+  if (type_name_decl_spec_list->declspeclist_) type_name_decl_spec_list->declspeclist_->accept(this);
+
+}
+
 
 void Skeleton::visitListParameterDecl(ListParameterDecl *list_parameter_decl)
 {
@@ -504,6 +1444,38 @@ void Skeleton::visitListFieldDecl(ListFieldDecl *list_field_decl)
 void Skeleton::visitListAttribute(ListAttribute *list_attribute)
 {
   for (ListAttribute::iterator i = list_attribute->begin() ; i != list_attribute->end() ; ++i)
+  {
+    (*i)->accept(this);
+  }
+}
+
+void Skeleton::visitListBlockElement(ListBlockElement *list_block_element)
+{
+  for (ListBlockElement::iterator i = list_block_element->begin() ; i != list_block_element->end() ; ++i)
+  {
+    (*i)->accept(this);
+  }
+}
+
+void Skeleton::visitListAttr(ListAttr *list_attr)
+{
+  for (ListAttr::iterator i = list_attr->begin() ; i != list_attr->end() ; ++i)
+  {
+    (*i)->accept(this);
+  }
+}
+
+void Skeleton::visitListBasicAttribute(ListBasicAttribute *list_basic_attribute)
+{
+  for (ListBasicAttribute::iterator i = list_basic_attribute->begin() ; i != list_basic_attribute->end() ; ++i)
+  {
+    (*i)->accept(this);
+  }
+}
+
+void Skeleton::visitListExpression(ListExpression *list_expression)
+{
+  for (ListExpression::iterator i = list_expression->begin() ; i != list_expression->end() ; ++i)
   {
     (*i)->accept(this);
   }
@@ -563,6 +1535,21 @@ void Skeleton::visitRESTRICT(RESTRICT x)
 void Skeleton::visitVOLATILE(VOLATILE x)
 {
   /* Code for VOLATILE Goes Here */
+}
+
+void Skeleton::visitBLOCKATTRIBUTE(BLOCKATTRIBUTE x)
+{
+  /* Code for BLOCKATTRIBUTE Goes Here */
+}
+
+void Skeleton::visitLBRACKET(LBRACKET x)
+{
+  /* Code for LBRACKET Goes Here */
+}
+
+void Skeleton::visitRBRACKET(RBRACKET x)
+{
+  /* Code for RBRACKET Goes Here */
 }
 
 
