@@ -37,11 +37,10 @@ class PrintAbsyn : public Visitor
   char *print(Visitable *v);
 
   void visitProgram(Program *p); /* abstract class */
-  void visitAProgram(AProgram *p);
+  void visitAnnotProgram(AnnotProgram *p);
+  void visitAnnotationProgram(AnnotationProgram *p);
   void visitAnnot(Annot *p); /* abstract class */
   void visitCodeAnnot(CodeAnnot *p);
-  void visitListAnnot(ListAnnot *p);
-  void iterListAnnot(ListAnnot::const_iterator i, ListAnnot::const_iterator j);
   void visitCode_Annot(Code_Annot *p); /* abstract class */
   void visitCodeAnnotContract(CodeAnnotContract *p);
   void visitContract(Contract *p); /* abstract class */
@@ -53,26 +52,6 @@ class PrintAbsyn : public Visitor
   void visitSimpleRequires(SimpleRequires *p);
   void visitCheckRequires(CheckRequires *p);
   void visitAdimtRequires(AdimtRequires *p);
-  void visitClauseKW(ClauseKW *p); /* abstract class */
-  void visitAdmitRequiresClause(AdmitRequiresClause *p);
-  void visitAdmitInvariantClause(AdmitInvariantClause *p);
-  void visitAdmitLemmaClause(AdmitLemmaClause *p);
-  void visitAdmitLoopClause(AdmitLoopClause *p);
-  void visitCheckRequiresClause(CheckRequiresClause *p);
-  void visitCheckInvariantClause(CheckInvariantClause *p);
-  void visitCheckLemmaClause(CheckLemmaClause *p);
-  void visitCheckLoopClause(CheckLoopClause *p);
-  void visitRequiresClause(RequiresClause *p);
-  void visitAssumesClause(AssumesClause *p);
-  void visitAssignsClause(AssignsClause *p);
-  void visitPostCondClause(PostCondClause *p);
-  void visitDecreasesClause(DecreasesClause *p);
-  void visitBehaviorClause(BehaviorClause *p);
-  void visitAllocatesClause(AllocatesClause *p);
-  void visitFreesClause(FreesClause *p);
-  void visitCompleteClause(CompleteClause *p);
-  void visitDisjointClause(DisjointClause *p);
-  void visitEmptyClauseKW(EmptyClauseKW *p);
   void visitTerminates(Terminates *p); /* abstract class */
   void visitNoTerminate(NoTerminate *p);
   void visitDecreases(Decreases *p); /* abstract class */
@@ -82,28 +61,29 @@ class PrintAbsyn : public Visitor
   void visitSomeSimpleClauses(SomeSimpleClauses *p);
   void visitNESimpleClauses(NESimpleClauses *p); /* abstract class */
   void visitPostCondSimpleClauses(PostCondSimpleClauses *p);
+  void visitAssignsSimpleClauses(AssignsSimpleClauses *p);
+  void visitAssigns(Assigns *p); /* abstract class */
+  void visitAssignZone(AssignZone *p);
+  void visitAssignZoneFromZone(AssignZoneFromZone *p);
+  void visitZones(Zones *p); /* abstract class */
+  void visitSomeZone(SomeZone *p);
+  void visitNoZone(NoZone *p);
   void visitBehaviors(Behaviors *p); /* abstract class */
   void visitNoBehaviors(NoBehaviors *p);
   void visitCompleteOrDisjoint(CompleteOrDisjoint *p); /* abstract class */
   void visitNoComplDisj(NoComplDisj *p);
   void visitLexpr(Lexpr *p); /* abstract class */
-  void visitNoLexpr(NoLexpr *p);
   void visitImplLexpr(ImplLexpr *p);
   void visitIffLexpr(IffLexpr *p);
   void visitOrLexpr(OrLexpr *p);
   void visitAndLexpr(AndLexpr *p);
   void visitHatHatLexpr(HatHatLexpr *p);
-  void visitAmpLexpr(AmpLexpr *p);
-  void visitPipeLexpr(PipeLexpr *p);
-  void visitHatLexpr(HatLexpr *p);
-  void visitBimpliesLexpr(BimpliesLexpr *p);
-  void visitBiffLexpr(BiffLexpr *p);
-  void visitInLexpr(InLexpr *p);
-  void visitTernaryLexpr(TernaryLexpr *p);
   void visitRelationLexpr(RelationLexpr *p);
-  void visitNotLexprInner(NotLexprInner *p);
+  void visitBinderLexpr(BinderLexpr *p);
+  void visitNotBinderLexpr(NotBinderLexpr *p);
   void visitTrueLexpr(TrueLexpr *p);
   void visitFalseLexpr(FalseLexpr *p);
+  void visitValidLexpr(ValidLexpr *p);
   void visitAutomaticLexpr(AutomaticLexpr *p);
   void visitDynamicLexpr(DynamicLexpr *p);
   void visitRegisterLexpr(RegisterLexpr *p);
@@ -115,26 +95,13 @@ class PrintAbsyn : public Visitor
   void visitLexprStringConst(LexprStringConst *p);
   void visitAddLexpr(AddLexpr *p);
   void visitSubtrLexpr(SubtrLexpr *p);
-  void visitMultLexpr(MultLexpr *p);
-  void visitDivLexpr(DivLexpr *p);
-  void visitModLexpr(ModLexpr *p);
-  void visitStarHatLexpr(StarHatLexpr *p);
+  void visitSquaresRangeLexpr(SquaresRangeLexpr *p);
   void visitSquaresLexpr(SquaresLexpr *p);
-  void visitMinusLexpr(MinusLexpr *p);
-  void visitPlusLexpr(PlusLexpr *p);
-  void visitTildeLexpr(TildeLexpr *p);
-  void visitStarLexpr(StarLexpr *p);
-  void visitAmpUnaryLexpr(AmpUnaryLexpr *p);
-  void visitSizeOfLexpr(SizeOfLexpr *p);
-  void visitOldLexpr(OldLexpr *p);
-  void visitResultLexpr(ResultLexpr *p);
   void visitSeparatedLexpr(SeparatedLexpr *p);
   void visitFullIdParenLexpr(FullIdParenLexpr *p);
   void visitFullId(FullId *p);
   void visitPiLexpr(PiLexpr *p);
-  void visitLessLessLexpr(LessLessLexpr *p);
-  void visitGreaterGreaterLexpr(GreaterGreaterLexpr *p);
-  void visitTypeOfLexpr(TypeOfLexpr *p);
+  void visitParenRangeLexpr(ParenRangeLexpr *p);
   void visitListLexpr(ListLexpr *p);
   void iterListLexpr(ListLexpr::const_iterator i, ListLexpr::const_iterator j);
   void visitLexprRelInner(LexprRelInner *p); /* abstract class */
@@ -148,6 +115,49 @@ class PrintAbsyn : public Visitor
   void visitGreaterEqRel(GreaterEqRel *p);
   void visitEqRel(EqRel *p);
   void visitNotEqRel(NotEqRel *p);
+  void visitLexprBinder(LexprBinder *p); /* abstract class */
+  void visitForallBinderLexpr(ForallBinderLexpr *p);
+  void visitExistBinderLexpr(ExistBinderLexpr *p);
+  void visitLambdaBinderLexpr(LambdaBinderLexpr *p);
+  void visitBinders(Binders *p); /* abstract class */
+  void visitTheBinders(TheBinders *p);
+  void visitTypeSpecOFTYPENAME(TypeSpecOFTYPENAME *p); /* abstract class */
+  void visitTypeSpecTYPENAME(TypeSpecTYPENAME *p);
+  void visitTypeSpecSimpleFromTypenameTypeSpec(TypeSpecSimpleFromTypenameTypeSpec *p);
+  void visitBindersReentrance(BindersReentrance *p); /* abstract class */
+  void visitBindersReentranceDeclSpec(BindersReentranceDeclSpec *p);
+  void visitBindersReentranceVarSpec(BindersReentranceVarSpec *p);
+  void visitListBindersReentrance(ListBindersReentrance *p);
+  void iterListBindersReentrance(ListBindersReentrance::const_iterator i, ListBindersReentrance::const_iterator j);
+  void visitVarSpec(VarSpec *p); /* abstract class */
+  void visitStartVarSpec(StartVarSpec *p);
+  void visitSimpleSpec(SimpleSpec *p);
+  void visitArraySpec(ArraySpec *p);
+  void visitStars(Stars *p); /* abstract class */
+  void visitStar(Star *p);
+  void visitListStars(ListStars *p);
+  void iterListStars(ListStars::const_iterator i, ListStars::const_iterator j);
+  void visitArraySize(ArraySize *p); /* abstract class */
+  void visitIntConstArraySize(IntConstArraySize *p);
+  void visitSomeArraySize(SomeArraySize *p);
+  void visitNoSize(NoSize *p);
+  void visitOptLabel(OptLabel *p); /* abstract class */
+  void visitOptLabelOne(OptLabelOne *p);
+  void visitOptLabelTwo(OptLabelTwo *p);
+  void visitOptLabelList(OptLabelList *p); /* abstract class */
+  void visitNoLableList(NoLableList *p);
+  void visitLableList(LableList *p);
+  void visitLabelName(LabelName *p); /* abstract class */
+  void visitLableName(LableName *p);
+  void visitListLabelName(ListLabelName *p);
+  void iterListLabelName(ListLabelName::const_iterator i, ListLabelName::const_iterator j);
+  void visitRange(Range *p); /* abstract class */
+  void visitLexprRange(LexprRange *p);
+  void visitLexprOption(LexprOption *p); /* abstract class */
+  void visitNoLexprOption(NoLexprOption *p);
+  void visitSomeLexprOption(SomeLexprOption *p);
+  void visitAnyIdentifier(AnyIdentifier *p); /* abstract class */
+  void visitSimpleIdentifierAny(SimpleIdentifierAny *p);
   void visitPostCond(PostCond *p); /* abstract class */
   void visitEnsuresKeyWord(EnsuresKeyWord *p);
   void visitExitsKeyWord(ExitsKeyWord *p);
@@ -170,6 +180,38 @@ class PrintAbsyn : public Visitor
   void iterListFullIdentifier(ListFullIdentifier::const_iterator i, ListFullIdentifier::const_iterator j);
   void visitIdentifier(Identifier *p); /* abstract class */
   void visitIdentifierIdent(IdentifierIdent *p);
+  void visitTypeSpecSimple(TypeSpecSimple *p); /* abstract class */
+  void visitTypeSpecSimpleIntegerKeyWord(TypeSpecSimpleIntegerKeyWord *p);
+  void visitTypeSpecSimpleRealKeyWord(TypeSpecSimpleRealKeyWord *p);
+  void visitTypeSpecSimpleBooleanKeyWord(TypeSpecSimpleBooleanKeyWord *p);
+  void visitTypeSpecSimpleVoidKeyWord(TypeSpecSimpleVoidKeyWord *p);
+  void visitTypeSpecSimpleBoolKeyWord(TypeSpecSimpleBoolKeyWord *p);
+  void visitTypeSpecSimpleCharKeyWord(TypeSpecSimpleCharKeyWord *p);
+  void visitTypeSpecSimpleIntKeyWord(TypeSpecSimpleIntKeyWord *p);
+  void visitTypeSpecSimpleDoubleKeyWord(TypeSpecSimpleDoubleKeyWord *p);
+  void visitTypeSpecSimpleLongDoubleKeyWord(TypeSpecSimpleLongDoubleKeyWord *p);
+  void visitLogicPTreeAnnot(LogicPTreeAnnot *p); /* abstract class */
+  void visitAnAnnotation(AnAnnotation *p);
+  void visitAnnotation(Annotation *p); /* abstract class */
+  void visitLoopAnnotation(LoopAnnotation *p);
+  void visitLoopAnnotStack(LoopAnnotStack *p); /* abstract class */
+  void visitLoopAnnotStackInvariant(LoopAnnotStackInvariant *p);
+  void visitLoopAnnotStackEffects(LoopAnnotStackEffects *p);
+  void visitLoopAnnotStackVariant(LoopAnnotStackVariant *p);
+  void visitLoopAnnotOpt(LoopAnnotOpt *p); /* abstract class */
+  void visitNoLoopAnnot(NoLoopAnnot *p);
+  void visitSomeLoopAnnot(SomeLoopAnnot *p);
+  void visitLoopInvariant(LoopInvariant *p); /* abstract class */
+  void visitSimpleLoopInvariant(SimpleLoopInvariant *p);
+  void visitCheckLoopInvariant(CheckLoopInvariant *p);
+  void visitAdmitLoopInvariant(AdmitLoopInvariant *p);
+  void visitLoopVariant(LoopVariant *p); /* abstract class */
+  void visitSimpleLoopVariant(SimpleLoopVariant *p);
+  void visitLoopEffects(LoopEffects *p); /* abstract class */
+  void visitLoopAssigns(LoopAssigns *p);
+  void visitVariant(Variant *p); /* abstract class */
+  void visitForVariant(ForVariant *p);
+  void visitLexprVariant(LexprVariant *p);
 
   void visitInteger(Integer i);
   void visitDouble(Double d);
@@ -239,11 +281,10 @@ class ShowAbsyn : public Visitor
   char *show(Visitable *v);
 
   void visitProgram(Program *p); /* abstract class */
-  void visitAProgram(AProgram *p);
+  void visitAnnotProgram(AnnotProgram *p);
+  void visitAnnotationProgram(AnnotationProgram *p);
   void visitAnnot(Annot *p); /* abstract class */
   void visitCodeAnnot(CodeAnnot *p);
-  void visitListAnnot(ListAnnot *p);
-  void iterListAnnot(ListAnnot::const_iterator i, ListAnnot::const_iterator j);
   void visitCode_Annot(Code_Annot *p); /* abstract class */
   void visitCodeAnnotContract(CodeAnnotContract *p);
   void visitContract(Contract *p); /* abstract class */
@@ -255,26 +296,6 @@ class ShowAbsyn : public Visitor
   void visitSimpleRequires(SimpleRequires *p);
   void visitCheckRequires(CheckRequires *p);
   void visitAdimtRequires(AdimtRequires *p);
-  void visitClauseKW(ClauseKW *p); /* abstract class */
-  void visitAdmitRequiresClause(AdmitRequiresClause *p);
-  void visitAdmitInvariantClause(AdmitInvariantClause *p);
-  void visitAdmitLemmaClause(AdmitLemmaClause *p);
-  void visitAdmitLoopClause(AdmitLoopClause *p);
-  void visitCheckRequiresClause(CheckRequiresClause *p);
-  void visitCheckInvariantClause(CheckInvariantClause *p);
-  void visitCheckLemmaClause(CheckLemmaClause *p);
-  void visitCheckLoopClause(CheckLoopClause *p);
-  void visitRequiresClause(RequiresClause *p);
-  void visitAssumesClause(AssumesClause *p);
-  void visitAssignsClause(AssignsClause *p);
-  void visitPostCondClause(PostCondClause *p);
-  void visitDecreasesClause(DecreasesClause *p);
-  void visitBehaviorClause(BehaviorClause *p);
-  void visitAllocatesClause(AllocatesClause *p);
-  void visitFreesClause(FreesClause *p);
-  void visitCompleteClause(CompleteClause *p);
-  void visitDisjointClause(DisjointClause *p);
-  void visitEmptyClauseKW(EmptyClauseKW *p);
   void visitTerminates(Terminates *p); /* abstract class */
   void visitNoTerminate(NoTerminate *p);
   void visitDecreases(Decreases *p); /* abstract class */
@@ -284,28 +305,29 @@ class ShowAbsyn : public Visitor
   void visitSomeSimpleClauses(SomeSimpleClauses *p);
   void visitNESimpleClauses(NESimpleClauses *p); /* abstract class */
   void visitPostCondSimpleClauses(PostCondSimpleClauses *p);
+  void visitAssignsSimpleClauses(AssignsSimpleClauses *p);
+  void visitAssigns(Assigns *p); /* abstract class */
+  void visitAssignZone(AssignZone *p);
+  void visitAssignZoneFromZone(AssignZoneFromZone *p);
+  void visitZones(Zones *p); /* abstract class */
+  void visitSomeZone(SomeZone *p);
+  void visitNoZone(NoZone *p);
   void visitBehaviors(Behaviors *p); /* abstract class */
   void visitNoBehaviors(NoBehaviors *p);
   void visitCompleteOrDisjoint(CompleteOrDisjoint *p); /* abstract class */
   void visitNoComplDisj(NoComplDisj *p);
   void visitLexpr(Lexpr *p); /* abstract class */
-  void visitNoLexpr(NoLexpr *p);
   void visitImplLexpr(ImplLexpr *p);
   void visitIffLexpr(IffLexpr *p);
   void visitOrLexpr(OrLexpr *p);
   void visitAndLexpr(AndLexpr *p);
   void visitHatHatLexpr(HatHatLexpr *p);
-  void visitAmpLexpr(AmpLexpr *p);
-  void visitPipeLexpr(PipeLexpr *p);
-  void visitHatLexpr(HatLexpr *p);
-  void visitBimpliesLexpr(BimpliesLexpr *p);
-  void visitBiffLexpr(BiffLexpr *p);
-  void visitInLexpr(InLexpr *p);
-  void visitTernaryLexpr(TernaryLexpr *p);
   void visitRelationLexpr(RelationLexpr *p);
-  void visitNotLexprInner(NotLexprInner *p);
+  void visitBinderLexpr(BinderLexpr *p);
+  void visitNotBinderLexpr(NotBinderLexpr *p);
   void visitTrueLexpr(TrueLexpr *p);
   void visitFalseLexpr(FalseLexpr *p);
+  void visitValidLexpr(ValidLexpr *p);
   void visitAutomaticLexpr(AutomaticLexpr *p);
   void visitDynamicLexpr(DynamicLexpr *p);
   void visitRegisterLexpr(RegisterLexpr *p);
@@ -317,26 +339,13 @@ class ShowAbsyn : public Visitor
   void visitLexprStringConst(LexprStringConst *p);
   void visitAddLexpr(AddLexpr *p);
   void visitSubtrLexpr(SubtrLexpr *p);
-  void visitMultLexpr(MultLexpr *p);
-  void visitDivLexpr(DivLexpr *p);
-  void visitModLexpr(ModLexpr *p);
-  void visitStarHatLexpr(StarHatLexpr *p);
+  void visitSquaresRangeLexpr(SquaresRangeLexpr *p);
   void visitSquaresLexpr(SquaresLexpr *p);
-  void visitMinusLexpr(MinusLexpr *p);
-  void visitPlusLexpr(PlusLexpr *p);
-  void visitTildeLexpr(TildeLexpr *p);
-  void visitStarLexpr(StarLexpr *p);
-  void visitAmpUnaryLexpr(AmpUnaryLexpr *p);
-  void visitSizeOfLexpr(SizeOfLexpr *p);
-  void visitOldLexpr(OldLexpr *p);
-  void visitResultLexpr(ResultLexpr *p);
   void visitSeparatedLexpr(SeparatedLexpr *p);
   void visitFullIdParenLexpr(FullIdParenLexpr *p);
   void visitFullId(FullId *p);
   void visitPiLexpr(PiLexpr *p);
-  void visitLessLessLexpr(LessLessLexpr *p);
-  void visitGreaterGreaterLexpr(GreaterGreaterLexpr *p);
-  void visitTypeOfLexpr(TypeOfLexpr *p);
+  void visitParenRangeLexpr(ParenRangeLexpr *p);
   void visitListLexpr(ListLexpr *p);
   void iterListLexpr(ListLexpr::const_iterator i, ListLexpr::const_iterator j);
   void visitLexprRelInner(LexprRelInner *p); /* abstract class */
@@ -350,6 +359,49 @@ class ShowAbsyn : public Visitor
   void visitGreaterEqRel(GreaterEqRel *p);
   void visitEqRel(EqRel *p);
   void visitNotEqRel(NotEqRel *p);
+  void visitLexprBinder(LexprBinder *p); /* abstract class */
+  void visitForallBinderLexpr(ForallBinderLexpr *p);
+  void visitExistBinderLexpr(ExistBinderLexpr *p);
+  void visitLambdaBinderLexpr(LambdaBinderLexpr *p);
+  void visitBinders(Binders *p); /* abstract class */
+  void visitTheBinders(TheBinders *p);
+  void visitTypeSpecOFTYPENAME(TypeSpecOFTYPENAME *p); /* abstract class */
+  void visitTypeSpecTYPENAME(TypeSpecTYPENAME *p);
+  void visitTypeSpecSimpleFromTypenameTypeSpec(TypeSpecSimpleFromTypenameTypeSpec *p);
+  void visitBindersReentrance(BindersReentrance *p); /* abstract class */
+  void visitBindersReentranceDeclSpec(BindersReentranceDeclSpec *p);
+  void visitBindersReentranceVarSpec(BindersReentranceVarSpec *p);
+  void visitListBindersReentrance(ListBindersReentrance *p);
+  void iterListBindersReentrance(ListBindersReentrance::const_iterator i, ListBindersReentrance::const_iterator j);
+  void visitVarSpec(VarSpec *p); /* abstract class */
+  void visitStartVarSpec(StartVarSpec *p);
+  void visitSimpleSpec(SimpleSpec *p);
+  void visitArraySpec(ArraySpec *p);
+  void visitStars(Stars *p); /* abstract class */
+  void visitStar(Star *p);
+  void visitListStars(ListStars *p);
+  void iterListStars(ListStars::const_iterator i, ListStars::const_iterator j);
+  void visitArraySize(ArraySize *p); /* abstract class */
+  void visitIntConstArraySize(IntConstArraySize *p);
+  void visitSomeArraySize(SomeArraySize *p);
+  void visitNoSize(NoSize *p);
+  void visitOptLabel(OptLabel *p); /* abstract class */
+  void visitOptLabelOne(OptLabelOne *p);
+  void visitOptLabelTwo(OptLabelTwo *p);
+  void visitOptLabelList(OptLabelList *p); /* abstract class */
+  void visitNoLableList(NoLableList *p);
+  void visitLableList(LableList *p);
+  void visitLabelName(LabelName *p); /* abstract class */
+  void visitLableName(LableName *p);
+  void visitListLabelName(ListLabelName *p);
+  void iterListLabelName(ListLabelName::const_iterator i, ListLabelName::const_iterator j);
+  void visitRange(Range *p); /* abstract class */
+  void visitLexprRange(LexprRange *p);
+  void visitLexprOption(LexprOption *p); /* abstract class */
+  void visitNoLexprOption(NoLexprOption *p);
+  void visitSomeLexprOption(SomeLexprOption *p);
+  void visitAnyIdentifier(AnyIdentifier *p); /* abstract class */
+  void visitSimpleIdentifierAny(SimpleIdentifierAny *p);
   void visitPostCond(PostCond *p); /* abstract class */
   void visitEnsuresKeyWord(EnsuresKeyWord *p);
   void visitExitsKeyWord(ExitsKeyWord *p);
@@ -372,6 +424,38 @@ class ShowAbsyn : public Visitor
   void iterListFullIdentifier(ListFullIdentifier::const_iterator i, ListFullIdentifier::const_iterator j);
   void visitIdentifier(Identifier *p); /* abstract class */
   void visitIdentifierIdent(IdentifierIdent *p);
+  void visitTypeSpecSimple(TypeSpecSimple *p); /* abstract class */
+  void visitTypeSpecSimpleIntegerKeyWord(TypeSpecSimpleIntegerKeyWord *p);
+  void visitTypeSpecSimpleRealKeyWord(TypeSpecSimpleRealKeyWord *p);
+  void visitTypeSpecSimpleBooleanKeyWord(TypeSpecSimpleBooleanKeyWord *p);
+  void visitTypeSpecSimpleVoidKeyWord(TypeSpecSimpleVoidKeyWord *p);
+  void visitTypeSpecSimpleBoolKeyWord(TypeSpecSimpleBoolKeyWord *p);
+  void visitTypeSpecSimpleCharKeyWord(TypeSpecSimpleCharKeyWord *p);
+  void visitTypeSpecSimpleIntKeyWord(TypeSpecSimpleIntKeyWord *p);
+  void visitTypeSpecSimpleDoubleKeyWord(TypeSpecSimpleDoubleKeyWord *p);
+  void visitTypeSpecSimpleLongDoubleKeyWord(TypeSpecSimpleLongDoubleKeyWord *p);
+  void visitLogicPTreeAnnot(LogicPTreeAnnot *p); /* abstract class */
+  void visitAnAnnotation(AnAnnotation *p);
+  void visitAnnotation(Annotation *p); /* abstract class */
+  void visitLoopAnnotation(LoopAnnotation *p);
+  void visitLoopAnnotStack(LoopAnnotStack *p); /* abstract class */
+  void visitLoopAnnotStackInvariant(LoopAnnotStackInvariant *p);
+  void visitLoopAnnotStackEffects(LoopAnnotStackEffects *p);
+  void visitLoopAnnotStackVariant(LoopAnnotStackVariant *p);
+  void visitLoopAnnotOpt(LoopAnnotOpt *p); /* abstract class */
+  void visitNoLoopAnnot(NoLoopAnnot *p);
+  void visitSomeLoopAnnot(SomeLoopAnnot *p);
+  void visitLoopInvariant(LoopInvariant *p); /* abstract class */
+  void visitSimpleLoopInvariant(SimpleLoopInvariant *p);
+  void visitCheckLoopInvariant(CheckLoopInvariant *p);
+  void visitAdmitLoopInvariant(AdmitLoopInvariant *p);
+  void visitLoopVariant(LoopVariant *p); /* abstract class */
+  void visitSimpleLoopVariant(SimpleLoopVariant *p);
+  void visitLoopEffects(LoopEffects *p); /* abstract class */
+  void visitLoopAssigns(LoopAssigns *p);
+  void visitVariant(Variant *p); /* abstract class */
+  void visitForVariant(ForVariant *p);
+  void visitLexprVariant(LexprVariant *p);
 
   void visitInteger(Integer i);
   void visitDouble(Double d);

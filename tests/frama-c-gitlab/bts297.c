@@ -7,5 +7,6 @@ int abrupt (int x) {
         if (x){
           x++;
         };
+        break;
       };
 };

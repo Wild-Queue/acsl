@@ -28,20 +28,44 @@ class Code_Annot;
 class Contract;
 class Requires;
 class NERequires;
-class ClauseKW;
 class Terminates;
 class Decreases;
 class SimpleClauses;
 class NESimpleClauses;
+class Assigns;
+class Zones;
 class Behaviors;
 class CompleteOrDisjoint;
 class Lexpr;
 class LexprRelInner;
 class Relation;
+class LexprBinder;
+class Binders;
+class TypeSpecOFTYPENAME;
+class BindersReentrance;
+class VarSpec;
+class Stars;
+class ArraySize;
+class OptLabel;
+class OptLabelList;
+class LabelName;
+class Range;
+class LexprOption;
+class AnyIdentifier;
 class PostCond;
 class FullIdentifier;
 class Identifier;
-class AProgram;
+class TypeSpecSimple;
+class LogicPTreeAnnot;
+class Annotation;
+class LoopAnnotStack;
+class LoopAnnotOpt;
+class LoopInvariant;
+class LoopVariant;
+class LoopEffects;
+class Variant;
+class AnnotProgram;
+class AnnotationProgram;
 class CodeAnnot;
 class CodeAnnotContract;
 class SimpleContract;
@@ -50,45 +74,23 @@ class SomeRequires;
 class SimpleRequires;
 class CheckRequires;
 class AdimtRequires;
-class AdmitRequiresClause;
-class AdmitInvariantClause;
-class AdmitLemmaClause;
-class AdmitLoopClause;
-class CheckRequiresClause;
-class CheckInvariantClause;
-class CheckLemmaClause;
-class CheckLoopClause;
-class RequiresClause;
-class AssumesClause;
-class AssignsClause;
-class PostCondClause;
-class DecreasesClause;
-class BehaviorClause;
-class AllocatesClause;
-class FreesClause;
-class CompleteClause;
-class DisjointClause;
-class EmptyClauseKW;
 class NoTerminate;
 class NoDecreases;
 class NoSimpleClauses;
 class SomeSimpleClauses;
 class PostCondSimpleClauses;
+class AssignsSimpleClauses;
+class AssignZone;
+class AssignZoneFromZone;
+class SomeZone;
+class NoZone;
 class NoBehaviors;
 class NoComplDisj;
-class NoLexpr;
 class ImplLexpr;
 class IffLexpr;
 class OrLexpr;
 class AndLexpr;
 class HatHatLexpr;
-class AmpLexpr;
-class PipeLexpr;
-class HatLexpr;
-class BimpliesLexpr;
-class BiffLexpr;
-class InLexpr;
-class TernaryLexpr;
 class RelationLexpr;
 class RelInnerLexpr;
 class LessRel;
@@ -97,9 +99,26 @@ class LessEqRel;
 class GreaterEqRel;
 class EqRel;
 class NotEqRel;
-class NotLexprInner;
+class BinderLexpr;
+class NotBinderLexpr;
+class ForallBinderLexpr;
+class ExistBinderLexpr;
+class LambdaBinderLexpr;
+class TheBinders;
+class TypeSpecTYPENAME;
+class TypeSpecSimpleFromTypenameTypeSpec;
+class BindersReentranceDeclSpec;
+class BindersReentranceVarSpec;
+class StartVarSpec;
+class Star;
+class SimpleSpec;
+class ArraySpec;
+class IntConstArraySize;
+class SomeArraySize;
+class NoSize;
 class TrueLexpr;
 class FalseLexpr;
+class ValidLexpr;
 class AutomaticLexpr;
 class DynamicLexpr;
 class RegisterLexpr;
@@ -111,26 +130,22 @@ class LexprFloatConst;
 class LexprStringConst;
 class AddLexpr;
 class SubtrLexpr;
-class MultLexpr;
-class DivLexpr;
-class ModLexpr;
-class StarHatLexpr;
+class SquaresRangeLexpr;
 class SquaresLexpr;
-class MinusLexpr;
-class PlusLexpr;
-class TildeLexpr;
-class StarLexpr;
-class AmpUnaryLexpr;
-class SizeOfLexpr;
-class OldLexpr;
-class ResultLexpr;
 class SeparatedLexpr;
 class FullIdParenLexpr;
 class FullId;
 class PiLexpr;
-class LessLessLexpr;
-class GreaterGreaterLexpr;
-class TypeOfLexpr;
+class ParenRangeLexpr;
+class OptLabelOne;
+class OptLabelTwo;
+class NoLableList;
+class LableList;
+class LableName;
+class LexprRange;
+class NoLexprOption;
+class SomeLexprOption;
+class SimpleIdentifierAny;
 class EnsuresKeyWord;
 class ExitsKeyWord;
 class BreaksKeyWord;
@@ -148,9 +163,34 @@ class AdmitContinuesKeyWord;
 class AdmitReturnsKeyWord;
 class SimpleIdentifierFull;
 class IdentifierIdent;
-class ListAnnot;
+class TypeSpecSimpleIntegerKeyWord;
+class TypeSpecSimpleRealKeyWord;
+class TypeSpecSimpleBooleanKeyWord;
+class TypeSpecSimpleVoidKeyWord;
+class TypeSpecSimpleBoolKeyWord;
+class TypeSpecSimpleCharKeyWord;
+class TypeSpecSimpleIntKeyWord;
+class TypeSpecSimpleDoubleKeyWord;
+class TypeSpecSimpleLongDoubleKeyWord;
+class AnAnnotation;
+class LoopAnnotation;
+class LoopAnnotStackInvariant;
+class LoopAnnotStackEffects;
+class LoopAnnotStackVariant;
+class NoLoopAnnot;
+class SomeLoopAnnot;
+class SimpleLoopInvariant;
+class CheckLoopInvariant;
+class AdmitLoopInvariant;
+class SimpleLoopVariant;
+class LoopAssigns;
+class ForVariant;
+class LexprVariant;
 class ListLexpr;
 class ListLexprRelInner;
+class ListBindersReentrance;
+class ListStars;
+class ListLabelName;
 class ListFullIdentifier;
 
 
@@ -165,20 +205,44 @@ public:
   virtual void visitContract(Contract *p) = 0;
   virtual void visitRequires(Requires *p) = 0;
   virtual void visitNERequires(NERequires *p) = 0;
-  virtual void visitClauseKW(ClauseKW *p) = 0;
   virtual void visitTerminates(Terminates *p) = 0;
   virtual void visitDecreases(Decreases *p) = 0;
   virtual void visitSimpleClauses(SimpleClauses *p) = 0;
   virtual void visitNESimpleClauses(NESimpleClauses *p) = 0;
+  virtual void visitAssigns(Assigns *p) = 0;
+  virtual void visitZones(Zones *p) = 0;
   virtual void visitBehaviors(Behaviors *p) = 0;
   virtual void visitCompleteOrDisjoint(CompleteOrDisjoint *p) = 0;
   virtual void visitLexpr(Lexpr *p) = 0;
   virtual void visitLexprRelInner(LexprRelInner *p) = 0;
   virtual void visitRelation(Relation *p) = 0;
+  virtual void visitLexprBinder(LexprBinder *p) = 0;
+  virtual void visitBinders(Binders *p) = 0;
+  virtual void visitTypeSpecOFTYPENAME(TypeSpecOFTYPENAME *p) = 0;
+  virtual void visitBindersReentrance(BindersReentrance *p) = 0;
+  virtual void visitVarSpec(VarSpec *p) = 0;
+  virtual void visitStars(Stars *p) = 0;
+  virtual void visitArraySize(ArraySize *p) = 0;
+  virtual void visitOptLabel(OptLabel *p) = 0;
+  virtual void visitOptLabelList(OptLabelList *p) = 0;
+  virtual void visitLabelName(LabelName *p) = 0;
+  virtual void visitRange(Range *p) = 0;
+  virtual void visitLexprOption(LexprOption *p) = 0;
+  virtual void visitAnyIdentifier(AnyIdentifier *p) = 0;
   virtual void visitPostCond(PostCond *p) = 0;
   virtual void visitFullIdentifier(FullIdentifier *p) = 0;
   virtual void visitIdentifier(Identifier *p) = 0;
-  virtual void visitAProgram(AProgram *p) = 0;
+  virtual void visitTypeSpecSimple(TypeSpecSimple *p) = 0;
+  virtual void visitLogicPTreeAnnot(LogicPTreeAnnot *p) = 0;
+  virtual void visitAnnotation(Annotation *p) = 0;
+  virtual void visitLoopAnnotStack(LoopAnnotStack *p) = 0;
+  virtual void visitLoopAnnotOpt(LoopAnnotOpt *p) = 0;
+  virtual void visitLoopInvariant(LoopInvariant *p) = 0;
+  virtual void visitLoopVariant(LoopVariant *p) = 0;
+  virtual void visitLoopEffects(LoopEffects *p) = 0;
+  virtual void visitVariant(Variant *p) = 0;
+  virtual void visitAnnotProgram(AnnotProgram *p) = 0;
+  virtual void visitAnnotationProgram(AnnotationProgram *p) = 0;
   virtual void visitCodeAnnot(CodeAnnot *p) = 0;
   virtual void visitCodeAnnotContract(CodeAnnotContract *p) = 0;
   virtual void visitSimpleContract(SimpleContract *p) = 0;
@@ -187,45 +251,23 @@ public:
   virtual void visitSimpleRequires(SimpleRequires *p) = 0;
   virtual void visitCheckRequires(CheckRequires *p) = 0;
   virtual void visitAdimtRequires(AdimtRequires *p) = 0;
-  virtual void visitAdmitRequiresClause(AdmitRequiresClause *p) = 0;
-  virtual void visitAdmitInvariantClause(AdmitInvariantClause *p) = 0;
-  virtual void visitAdmitLemmaClause(AdmitLemmaClause *p) = 0;
-  virtual void visitAdmitLoopClause(AdmitLoopClause *p) = 0;
-  virtual void visitCheckRequiresClause(CheckRequiresClause *p) = 0;
-  virtual void visitCheckInvariantClause(CheckInvariantClause *p) = 0;
-  virtual void visitCheckLemmaClause(CheckLemmaClause *p) = 0;
-  virtual void visitCheckLoopClause(CheckLoopClause *p) = 0;
-  virtual void visitRequiresClause(RequiresClause *p) = 0;
-  virtual void visitAssumesClause(AssumesClause *p) = 0;
-  virtual void visitAssignsClause(AssignsClause *p) = 0;
-  virtual void visitPostCondClause(PostCondClause *p) = 0;
-  virtual void visitDecreasesClause(DecreasesClause *p) = 0;
-  virtual void visitBehaviorClause(BehaviorClause *p) = 0;
-  virtual void visitAllocatesClause(AllocatesClause *p) = 0;
-  virtual void visitFreesClause(FreesClause *p) = 0;
-  virtual void visitCompleteClause(CompleteClause *p) = 0;
-  virtual void visitDisjointClause(DisjointClause *p) = 0;
-  virtual void visitEmptyClauseKW(EmptyClauseKW *p) = 0;
   virtual void visitNoTerminate(NoTerminate *p) = 0;
   virtual void visitNoDecreases(NoDecreases *p) = 0;
   virtual void visitNoSimpleClauses(NoSimpleClauses *p) = 0;
   virtual void visitSomeSimpleClauses(SomeSimpleClauses *p) = 0;
   virtual void visitPostCondSimpleClauses(PostCondSimpleClauses *p) = 0;
+  virtual void visitAssignsSimpleClauses(AssignsSimpleClauses *p) = 0;
+  virtual void visitAssignZone(AssignZone *p) = 0;
+  virtual void visitAssignZoneFromZone(AssignZoneFromZone *p) = 0;
+  virtual void visitSomeZone(SomeZone *p) = 0;
+  virtual void visitNoZone(NoZone *p) = 0;
   virtual void visitNoBehaviors(NoBehaviors *p) = 0;
   virtual void visitNoComplDisj(NoComplDisj *p) = 0;
-  virtual void visitNoLexpr(NoLexpr *p) = 0;
   virtual void visitImplLexpr(ImplLexpr *p) = 0;
   virtual void visitIffLexpr(IffLexpr *p) = 0;
   virtual void visitOrLexpr(OrLexpr *p) = 0;
   virtual void visitAndLexpr(AndLexpr *p) = 0;
   virtual void visitHatHatLexpr(HatHatLexpr *p) = 0;
-  virtual void visitAmpLexpr(AmpLexpr *p) = 0;
-  virtual void visitPipeLexpr(PipeLexpr *p) = 0;
-  virtual void visitHatLexpr(HatLexpr *p) = 0;
-  virtual void visitBimpliesLexpr(BimpliesLexpr *p) = 0;
-  virtual void visitBiffLexpr(BiffLexpr *p) = 0;
-  virtual void visitInLexpr(InLexpr *p) = 0;
-  virtual void visitTernaryLexpr(TernaryLexpr *p) = 0;
   virtual void visitRelationLexpr(RelationLexpr *p) = 0;
   virtual void visitRelInnerLexpr(RelInnerLexpr *p) = 0;
   virtual void visitLessRel(LessRel *p) = 0;
@@ -234,9 +276,26 @@ public:
   virtual void visitGreaterEqRel(GreaterEqRel *p) = 0;
   virtual void visitEqRel(EqRel *p) = 0;
   virtual void visitNotEqRel(NotEqRel *p) = 0;
-  virtual void visitNotLexprInner(NotLexprInner *p) = 0;
+  virtual void visitBinderLexpr(BinderLexpr *p) = 0;
+  virtual void visitNotBinderLexpr(NotBinderLexpr *p) = 0;
+  virtual void visitForallBinderLexpr(ForallBinderLexpr *p) = 0;
+  virtual void visitExistBinderLexpr(ExistBinderLexpr *p) = 0;
+  virtual void visitLambdaBinderLexpr(LambdaBinderLexpr *p) = 0;
+  virtual void visitTheBinders(TheBinders *p) = 0;
+  virtual void visitTypeSpecTYPENAME(TypeSpecTYPENAME *p) = 0;
+  virtual void visitTypeSpecSimpleFromTypenameTypeSpec(TypeSpecSimpleFromTypenameTypeSpec *p) = 0;
+  virtual void visitBindersReentranceDeclSpec(BindersReentranceDeclSpec *p) = 0;
+  virtual void visitBindersReentranceVarSpec(BindersReentranceVarSpec *p) = 0;
+  virtual void visitStartVarSpec(StartVarSpec *p) = 0;
+  virtual void visitStar(Star *p) = 0;
+  virtual void visitSimpleSpec(SimpleSpec *p) = 0;
+  virtual void visitArraySpec(ArraySpec *p) = 0;
+  virtual void visitIntConstArraySize(IntConstArraySize *p) = 0;
+  virtual void visitSomeArraySize(SomeArraySize *p) = 0;
+  virtual void visitNoSize(NoSize *p) = 0;
   virtual void visitTrueLexpr(TrueLexpr *p) = 0;
   virtual void visitFalseLexpr(FalseLexpr *p) = 0;
+  virtual void visitValidLexpr(ValidLexpr *p) = 0;
   virtual void visitAutomaticLexpr(AutomaticLexpr *p) = 0;
   virtual void visitDynamicLexpr(DynamicLexpr *p) = 0;
   virtual void visitRegisterLexpr(RegisterLexpr *p) = 0;
@@ -248,26 +307,22 @@ public:
   virtual void visitLexprStringConst(LexprStringConst *p) = 0;
   virtual void visitAddLexpr(AddLexpr *p) = 0;
   virtual void visitSubtrLexpr(SubtrLexpr *p) = 0;
-  virtual void visitMultLexpr(MultLexpr *p) = 0;
-  virtual void visitDivLexpr(DivLexpr *p) = 0;
-  virtual void visitModLexpr(ModLexpr *p) = 0;
-  virtual void visitStarHatLexpr(StarHatLexpr *p) = 0;
+  virtual void visitSquaresRangeLexpr(SquaresRangeLexpr *p) = 0;
   virtual void visitSquaresLexpr(SquaresLexpr *p) = 0;
-  virtual void visitMinusLexpr(MinusLexpr *p) = 0;
-  virtual void visitPlusLexpr(PlusLexpr *p) = 0;
-  virtual void visitTildeLexpr(TildeLexpr *p) = 0;
-  virtual void visitStarLexpr(StarLexpr *p) = 0;
-  virtual void visitAmpUnaryLexpr(AmpUnaryLexpr *p) = 0;
-  virtual void visitSizeOfLexpr(SizeOfLexpr *p) = 0;
-  virtual void visitOldLexpr(OldLexpr *p) = 0;
-  virtual void visitResultLexpr(ResultLexpr *p) = 0;
   virtual void visitSeparatedLexpr(SeparatedLexpr *p) = 0;
   virtual void visitFullIdParenLexpr(FullIdParenLexpr *p) = 0;
   virtual void visitFullId(FullId *p) = 0;
   virtual void visitPiLexpr(PiLexpr *p) = 0;
-  virtual void visitLessLessLexpr(LessLessLexpr *p) = 0;
-  virtual void visitGreaterGreaterLexpr(GreaterGreaterLexpr *p) = 0;
-  virtual void visitTypeOfLexpr(TypeOfLexpr *p) = 0;
+  virtual void visitParenRangeLexpr(ParenRangeLexpr *p) = 0;
+  virtual void visitOptLabelOne(OptLabelOne *p) = 0;
+  virtual void visitOptLabelTwo(OptLabelTwo *p) = 0;
+  virtual void visitNoLableList(NoLableList *p) = 0;
+  virtual void visitLableList(LableList *p) = 0;
+  virtual void visitLableName(LableName *p) = 0;
+  virtual void visitLexprRange(LexprRange *p) = 0;
+  virtual void visitNoLexprOption(NoLexprOption *p) = 0;
+  virtual void visitSomeLexprOption(SomeLexprOption *p) = 0;
+  virtual void visitSimpleIdentifierAny(SimpleIdentifierAny *p) = 0;
   virtual void visitEnsuresKeyWord(EnsuresKeyWord *p) = 0;
   virtual void visitExitsKeyWord(ExitsKeyWord *p) = 0;
   virtual void visitBreaksKeyWord(BreaksKeyWord *p) = 0;
@@ -285,9 +340,34 @@ public:
   virtual void visitAdmitReturnsKeyWord(AdmitReturnsKeyWord *p) = 0;
   virtual void visitSimpleIdentifierFull(SimpleIdentifierFull *p) = 0;
   virtual void visitIdentifierIdent(IdentifierIdent *p) = 0;
-  virtual void visitListAnnot(ListAnnot *p) = 0;
+  virtual void visitTypeSpecSimpleIntegerKeyWord(TypeSpecSimpleIntegerKeyWord *p) = 0;
+  virtual void visitTypeSpecSimpleRealKeyWord(TypeSpecSimpleRealKeyWord *p) = 0;
+  virtual void visitTypeSpecSimpleBooleanKeyWord(TypeSpecSimpleBooleanKeyWord *p) = 0;
+  virtual void visitTypeSpecSimpleVoidKeyWord(TypeSpecSimpleVoidKeyWord *p) = 0;
+  virtual void visitTypeSpecSimpleBoolKeyWord(TypeSpecSimpleBoolKeyWord *p) = 0;
+  virtual void visitTypeSpecSimpleCharKeyWord(TypeSpecSimpleCharKeyWord *p) = 0;
+  virtual void visitTypeSpecSimpleIntKeyWord(TypeSpecSimpleIntKeyWord *p) = 0;
+  virtual void visitTypeSpecSimpleDoubleKeyWord(TypeSpecSimpleDoubleKeyWord *p) = 0;
+  virtual void visitTypeSpecSimpleLongDoubleKeyWord(TypeSpecSimpleLongDoubleKeyWord *p) = 0;
+  virtual void visitAnAnnotation(AnAnnotation *p) = 0;
+  virtual void visitLoopAnnotation(LoopAnnotation *p) = 0;
+  virtual void visitLoopAnnotStackInvariant(LoopAnnotStackInvariant *p) = 0;
+  virtual void visitLoopAnnotStackEffects(LoopAnnotStackEffects *p) = 0;
+  virtual void visitLoopAnnotStackVariant(LoopAnnotStackVariant *p) = 0;
+  virtual void visitNoLoopAnnot(NoLoopAnnot *p) = 0;
+  virtual void visitSomeLoopAnnot(SomeLoopAnnot *p) = 0;
+  virtual void visitSimpleLoopInvariant(SimpleLoopInvariant *p) = 0;
+  virtual void visitCheckLoopInvariant(CheckLoopInvariant *p) = 0;
+  virtual void visitAdmitLoopInvariant(AdmitLoopInvariant *p) = 0;
+  virtual void visitSimpleLoopVariant(SimpleLoopVariant *p) = 0;
+  virtual void visitLoopAssigns(LoopAssigns *p) = 0;
+  virtual void visitForVariant(ForVariant *p) = 0;
+  virtual void visitLexprVariant(LexprVariant *p) = 0;
   virtual void visitListLexpr(ListLexpr *p) = 0;
   virtual void visitListLexprRelInner(ListLexprRelInner *p) = 0;
+  virtual void visitListBindersReentrance(ListBindersReentrance *p) = 0;
+  virtual void visitListStars(ListStars *p) = 0;
+  virtual void visitListLabelName(ListLabelName *p) = 0;
   virtual void visitListFullIdentifier(ListFullIdentifier *p) = 0;
 
 
@@ -352,13 +432,6 @@ public:
   int line_number, char_number;
 };
 
-class ClauseKW : public Visitable
-{
-public:
-  virtual ClauseKW *clone() const = 0;
-  int line_number, char_number;
-};
-
 class Terminates : public Visitable
 {
 public:
@@ -384,6 +457,20 @@ class NESimpleClauses : public Visitable
 {
 public:
   virtual NESimpleClauses *clone() const = 0;
+  int line_number, char_number;
+};
+
+class Assigns : public Visitable
+{
+public:
+  virtual Assigns *clone() const = 0;
+  int line_number, char_number;
+};
+
+class Zones : public Visitable
+{
+public:
+  virtual Zones *clone() const = 0;
   int line_number, char_number;
 };
 
@@ -422,6 +509,97 @@ public:
   int line_number, char_number;
 };
 
+class LexprBinder : public Visitable
+{
+public:
+  virtual LexprBinder *clone() const = 0;
+  int line_number, char_number;
+};
+
+class Binders : public Visitable
+{
+public:
+  virtual Binders *clone() const = 0;
+  int line_number, char_number;
+};
+
+class TypeSpecOFTYPENAME : public Visitable
+{
+public:
+  virtual TypeSpecOFTYPENAME *clone() const = 0;
+  int line_number, char_number;
+};
+
+class BindersReentrance : public Visitable
+{
+public:
+  virtual BindersReentrance *clone() const = 0;
+  int line_number, char_number;
+};
+
+class VarSpec : public Visitable
+{
+public:
+  virtual VarSpec *clone() const = 0;
+  int line_number, char_number;
+};
+
+class Stars : public Visitable
+{
+public:
+  virtual Stars *clone() const = 0;
+  int line_number, char_number;
+};
+
+class ArraySize : public Visitable
+{
+public:
+  virtual ArraySize *clone() const = 0;
+  int line_number, char_number;
+};
+
+class OptLabel : public Visitable
+{
+public:
+  virtual OptLabel *clone() const = 0;
+  int line_number, char_number;
+};
+
+class OptLabelList : public Visitable
+{
+public:
+  virtual OptLabelList *clone() const = 0;
+  int line_number, char_number;
+};
+
+class LabelName : public Visitable
+{
+public:
+  virtual LabelName *clone() const = 0;
+  int line_number, char_number;
+};
+
+class Range : public Visitable
+{
+public:
+  virtual Range *clone() const = 0;
+  int line_number, char_number;
+};
+
+class LexprOption : public Visitable
+{
+public:
+  virtual LexprOption *clone() const = 0;
+  int line_number, char_number;
+};
+
+class AnyIdentifier : public Visitable
+{
+public:
+  virtual AnyIdentifier *clone() const = 0;
+  int line_number, char_number;
+};
+
 class PostCond : public Visitable
 {
 public:
@@ -443,20 +621,97 @@ public:
   int line_number, char_number;
 };
 
+class TypeSpecSimple : public Visitable
+{
+public:
+  virtual TypeSpecSimple *clone() const = 0;
+  int line_number, char_number;
+};
+
+class LogicPTreeAnnot : public Visitable
+{
+public:
+  virtual LogicPTreeAnnot *clone() const = 0;
+  int line_number, char_number;
+};
+
+class Annotation : public Visitable
+{
+public:
+  virtual Annotation *clone() const = 0;
+  int line_number, char_number;
+};
+
+class LoopAnnotStack : public Visitable
+{
+public:
+  virtual LoopAnnotStack *clone() const = 0;
+  int line_number, char_number;
+};
+
+class LoopAnnotOpt : public Visitable
+{
+public:
+  virtual LoopAnnotOpt *clone() const = 0;
+  int line_number, char_number;
+};
+
+class LoopInvariant : public Visitable
+{
+public:
+  virtual LoopInvariant *clone() const = 0;
+  int line_number, char_number;
+};
+
+class LoopVariant : public Visitable
+{
+public:
+  virtual LoopVariant *clone() const = 0;
+  int line_number, char_number;
+};
+
+class LoopEffects : public Visitable
+{
+public:
+  virtual LoopEffects *clone() const = 0;
+  int line_number, char_number;
+};
+
+class Variant : public Visitable
+{
+public:
+  virtual Variant *clone() const = 0;
+  int line_number, char_number;
+};
 
 
-class AProgram : public Program
+
+class AnnotProgram : public Program
 {
 public:
   Annot *annot_;
 
-  AProgram(const AProgram &);
-  AProgram &operator=(const AProgram &);
-  AProgram(Annot *p1);
-  ~AProgram();
+  AnnotProgram(const AnnotProgram &);
+  AnnotProgram &operator=(const AnnotProgram &);
+  AnnotProgram(Annot *p1);
+  ~AnnotProgram();
   virtual void accept(Visitor *v);
-  virtual AProgram *clone() const;
-  void swap(AProgram &);
+  virtual AnnotProgram *clone() const;
+  void swap(AnnotProgram &);
+};
+
+class AnnotationProgram : public Program
+{
+public:
+  LogicPTreeAnnot *logicptreeannot_;
+
+  AnnotationProgram(const AnnotationProgram &);
+  AnnotationProgram &operator=(const AnnotationProgram &);
+  AnnotationProgram(LogicPTreeAnnot *p1);
+  ~AnnotationProgram();
+  virtual void accept(Visitor *v);
+  virtual AnnotationProgram *clone() const;
+  void swap(AnnotationProgram &);
 };
 
 class CodeAnnot : public Annot
@@ -578,254 +833,6 @@ public:
   void swap(AdimtRequires &);
 };
 
-class AdmitRequiresClause : public ClauseKW
-{
-public:
-
-  AdmitRequiresClause(const AdmitRequiresClause &);
-  AdmitRequiresClause &operator=(const AdmitRequiresClause &);
-  AdmitRequiresClause();
-  ~AdmitRequiresClause();
-  virtual void accept(Visitor *v);
-  virtual AdmitRequiresClause *clone() const;
-  void swap(AdmitRequiresClause &);
-};
-
-class AdmitInvariantClause : public ClauseKW
-{
-public:
-
-  AdmitInvariantClause(const AdmitInvariantClause &);
-  AdmitInvariantClause &operator=(const AdmitInvariantClause &);
-  AdmitInvariantClause();
-  ~AdmitInvariantClause();
-  virtual void accept(Visitor *v);
-  virtual AdmitInvariantClause *clone() const;
-  void swap(AdmitInvariantClause &);
-};
-
-class AdmitLemmaClause : public ClauseKW
-{
-public:
-
-  AdmitLemmaClause(const AdmitLemmaClause &);
-  AdmitLemmaClause &operator=(const AdmitLemmaClause &);
-  AdmitLemmaClause();
-  ~AdmitLemmaClause();
-  virtual void accept(Visitor *v);
-  virtual AdmitLemmaClause *clone() const;
-  void swap(AdmitLemmaClause &);
-};
-
-class AdmitLoopClause : public ClauseKW
-{
-public:
-
-  AdmitLoopClause(const AdmitLoopClause &);
-  AdmitLoopClause &operator=(const AdmitLoopClause &);
-  AdmitLoopClause();
-  ~AdmitLoopClause();
-  virtual void accept(Visitor *v);
-  virtual AdmitLoopClause *clone() const;
-  void swap(AdmitLoopClause &);
-};
-
-class CheckRequiresClause : public ClauseKW
-{
-public:
-
-  CheckRequiresClause(const CheckRequiresClause &);
-  CheckRequiresClause &operator=(const CheckRequiresClause &);
-  CheckRequiresClause();
-  ~CheckRequiresClause();
-  virtual void accept(Visitor *v);
-  virtual CheckRequiresClause *clone() const;
-  void swap(CheckRequiresClause &);
-};
-
-class CheckInvariantClause : public ClauseKW
-{
-public:
-
-  CheckInvariantClause(const CheckInvariantClause &);
-  CheckInvariantClause &operator=(const CheckInvariantClause &);
-  CheckInvariantClause();
-  ~CheckInvariantClause();
-  virtual void accept(Visitor *v);
-  virtual CheckInvariantClause *clone() const;
-  void swap(CheckInvariantClause &);
-};
-
-class CheckLemmaClause : public ClauseKW
-{
-public:
-
-  CheckLemmaClause(const CheckLemmaClause &);
-  CheckLemmaClause &operator=(const CheckLemmaClause &);
-  CheckLemmaClause();
-  ~CheckLemmaClause();
-  virtual void accept(Visitor *v);
-  virtual CheckLemmaClause *clone() const;
-  void swap(CheckLemmaClause &);
-};
-
-class CheckLoopClause : public ClauseKW
-{
-public:
-
-  CheckLoopClause(const CheckLoopClause &);
-  CheckLoopClause &operator=(const CheckLoopClause &);
-  CheckLoopClause();
-  ~CheckLoopClause();
-  virtual void accept(Visitor *v);
-  virtual CheckLoopClause *clone() const;
-  void swap(CheckLoopClause &);
-};
-
-class RequiresClause : public ClauseKW
-{
-public:
-
-  RequiresClause(const RequiresClause &);
-  RequiresClause &operator=(const RequiresClause &);
-  RequiresClause();
-  ~RequiresClause();
-  virtual void accept(Visitor *v);
-  virtual RequiresClause *clone() const;
-  void swap(RequiresClause &);
-};
-
-class AssumesClause : public ClauseKW
-{
-public:
-
-  AssumesClause(const AssumesClause &);
-  AssumesClause &operator=(const AssumesClause &);
-  AssumesClause();
-  ~AssumesClause();
-  virtual void accept(Visitor *v);
-  virtual AssumesClause *clone() const;
-  void swap(AssumesClause &);
-};
-
-class AssignsClause : public ClauseKW
-{
-public:
-
-  AssignsClause(const AssignsClause &);
-  AssignsClause &operator=(const AssignsClause &);
-  AssignsClause();
-  ~AssignsClause();
-  virtual void accept(Visitor *v);
-  virtual AssignsClause *clone() const;
-  void swap(AssignsClause &);
-};
-
-class PostCondClause : public ClauseKW
-{
-public:
-  PostCond *postcond_;
-
-  PostCondClause(const PostCondClause &);
-  PostCondClause &operator=(const PostCondClause &);
-  PostCondClause(PostCond *p1);
-  ~PostCondClause();
-  virtual void accept(Visitor *v);
-  virtual PostCondClause *clone() const;
-  void swap(PostCondClause &);
-};
-
-class DecreasesClause : public ClauseKW
-{
-public:
-
-  DecreasesClause(const DecreasesClause &);
-  DecreasesClause &operator=(const DecreasesClause &);
-  DecreasesClause();
-  ~DecreasesClause();
-  virtual void accept(Visitor *v);
-  virtual DecreasesClause *clone() const;
-  void swap(DecreasesClause &);
-};
-
-class BehaviorClause : public ClauseKW
-{
-public:
-
-  BehaviorClause(const BehaviorClause &);
-  BehaviorClause &operator=(const BehaviorClause &);
-  BehaviorClause();
-  ~BehaviorClause();
-  virtual void accept(Visitor *v);
-  virtual BehaviorClause *clone() const;
-  void swap(BehaviorClause &);
-};
-
-class AllocatesClause : public ClauseKW
-{
-public:
-
-  AllocatesClause(const AllocatesClause &);
-  AllocatesClause &operator=(const AllocatesClause &);
-  AllocatesClause();
-  ~AllocatesClause();
-  virtual void accept(Visitor *v);
-  virtual AllocatesClause *clone() const;
-  void swap(AllocatesClause &);
-};
-
-class FreesClause : public ClauseKW
-{
-public:
-
-  FreesClause(const FreesClause &);
-  FreesClause &operator=(const FreesClause &);
-  FreesClause();
-  ~FreesClause();
-  virtual void accept(Visitor *v);
-  virtual FreesClause *clone() const;
-  void swap(FreesClause &);
-};
-
-class CompleteClause : public ClauseKW
-{
-public:
-
-  CompleteClause(const CompleteClause &);
-  CompleteClause &operator=(const CompleteClause &);
-  CompleteClause();
-  ~CompleteClause();
-  virtual void accept(Visitor *v);
-  virtual CompleteClause *clone() const;
-  void swap(CompleteClause &);
-};
-
-class DisjointClause : public ClauseKW
-{
-public:
-
-  DisjointClause(const DisjointClause &);
-  DisjointClause &operator=(const DisjointClause &);
-  DisjointClause();
-  ~DisjointClause();
-  virtual void accept(Visitor *v);
-  virtual DisjointClause *clone() const;
-  void swap(DisjointClause &);
-};
-
-class EmptyClauseKW : public ClauseKW
-{
-public:
-
-  EmptyClauseKW(const EmptyClauseKW &);
-  EmptyClauseKW &operator=(const EmptyClauseKW &);
-  EmptyClauseKW();
-  ~EmptyClauseKW();
-  virtual void accept(Visitor *v);
-  virtual EmptyClauseKW *clone() const;
-  void swap(EmptyClauseKW &);
-};
-
 class NoTerminate : public Terminates
 {
 public:
@@ -895,6 +902,77 @@ public:
   void swap(PostCondSimpleClauses &);
 };
 
+class AssignsSimpleClauses : public NESimpleClauses
+{
+public:
+  Assigns *assigns_;
+  SimpleClauses *simpleclauses_;
+
+  AssignsSimpleClauses(const AssignsSimpleClauses &);
+  AssignsSimpleClauses &operator=(const AssignsSimpleClauses &);
+  AssignsSimpleClauses(Assigns *p1, SimpleClauses *p2);
+  ~AssignsSimpleClauses();
+  virtual void accept(Visitor *v);
+  virtual AssignsSimpleClauses *clone() const;
+  void swap(AssignsSimpleClauses &);
+};
+
+class AssignZone : public Assigns
+{
+public:
+  Zones *zones_;
+
+  AssignZone(const AssignZone &);
+  AssignZone &operator=(const AssignZone &);
+  AssignZone(Zones *p1);
+  ~AssignZone();
+  virtual void accept(Visitor *v);
+  virtual AssignZone *clone() const;
+  void swap(AssignZone &);
+};
+
+class AssignZoneFromZone : public Assigns
+{
+public:
+  ListLexpr *listlexpr_;
+  Zones *zones_;
+
+  AssignZoneFromZone(const AssignZoneFromZone &);
+  AssignZoneFromZone &operator=(const AssignZoneFromZone &);
+  AssignZoneFromZone(ListLexpr *p1, Zones *p2);
+  ~AssignZoneFromZone();
+  virtual void accept(Visitor *v);
+  virtual AssignZoneFromZone *clone() const;
+  void swap(AssignZoneFromZone &);
+};
+
+class SomeZone : public Zones
+{
+public:
+  ListLexpr *listlexpr_;
+
+  SomeZone(const SomeZone &);
+  SomeZone &operator=(const SomeZone &);
+  SomeZone(ListLexpr *p1);
+  ~SomeZone();
+  virtual void accept(Visitor *v);
+  virtual SomeZone *clone() const;
+  void swap(SomeZone &);
+};
+
+class NoZone : public Zones
+{
+public:
+
+  NoZone(const NoZone &);
+  NoZone &operator=(const NoZone &);
+  NoZone();
+  ~NoZone();
+  virtual void accept(Visitor *v);
+  virtual NoZone *clone() const;
+  void swap(NoZone &);
+};
+
 class NoBehaviors : public Behaviors
 {
 public:
@@ -919,19 +997,6 @@ public:
   virtual void accept(Visitor *v);
   virtual NoComplDisj *clone() const;
   void swap(NoComplDisj &);
-};
-
-class NoLexpr : public Lexpr
-{
-public:
-
-  NoLexpr(const NoLexpr &);
-  NoLexpr &operator=(const NoLexpr &);
-  NoLexpr();
-  ~NoLexpr();
-  virtual void accept(Visitor *v);
-  virtual NoLexpr *clone() const;
-  void swap(NoLexpr &);
 };
 
 class ImplLexpr : public Lexpr
@@ -1009,112 +1074,6 @@ public:
   void swap(HatHatLexpr &);
 };
 
-class AmpLexpr : public Lexpr
-{
-public:
-  Lexpr *lexpr_1;
-  Lexpr *lexpr_2;
-
-  AmpLexpr(const AmpLexpr &);
-  AmpLexpr &operator=(const AmpLexpr &);
-  AmpLexpr(Lexpr *p1, Lexpr *p2);
-  ~AmpLexpr();
-  virtual void accept(Visitor *v);
-  virtual AmpLexpr *clone() const;
-  void swap(AmpLexpr &);
-};
-
-class PipeLexpr : public Lexpr
-{
-public:
-  Lexpr *lexpr_1;
-  Lexpr *lexpr_2;
-
-  PipeLexpr(const PipeLexpr &);
-  PipeLexpr &operator=(const PipeLexpr &);
-  PipeLexpr(Lexpr *p1, Lexpr *p2);
-  ~PipeLexpr();
-  virtual void accept(Visitor *v);
-  virtual PipeLexpr *clone() const;
-  void swap(PipeLexpr &);
-};
-
-class HatLexpr : public Lexpr
-{
-public:
-  Lexpr *lexpr_1;
-  Lexpr *lexpr_2;
-
-  HatLexpr(const HatLexpr &);
-  HatLexpr &operator=(const HatLexpr &);
-  HatLexpr(Lexpr *p1, Lexpr *p2);
-  ~HatLexpr();
-  virtual void accept(Visitor *v);
-  virtual HatLexpr *clone() const;
-  void swap(HatLexpr &);
-};
-
-class BimpliesLexpr : public Lexpr
-{
-public:
-  Lexpr *lexpr_1;
-  Lexpr *lexpr_2;
-
-  BimpliesLexpr(const BimpliesLexpr &);
-  BimpliesLexpr &operator=(const BimpliesLexpr &);
-  BimpliesLexpr(Lexpr *p1, Lexpr *p2);
-  ~BimpliesLexpr();
-  virtual void accept(Visitor *v);
-  virtual BimpliesLexpr *clone() const;
-  void swap(BimpliesLexpr &);
-};
-
-class BiffLexpr : public Lexpr
-{
-public:
-  Lexpr *lexpr_1;
-  Lexpr *lexpr_2;
-
-  BiffLexpr(const BiffLexpr &);
-  BiffLexpr &operator=(const BiffLexpr &);
-  BiffLexpr(Lexpr *p1, Lexpr *p2);
-  ~BiffLexpr();
-  virtual void accept(Visitor *v);
-  virtual BiffLexpr *clone() const;
-  void swap(BiffLexpr &);
-};
-
-class InLexpr : public Lexpr
-{
-public:
-  Lexpr *lexpr_1;
-  Lexpr *lexpr_2;
-
-  InLexpr(const InLexpr &);
-  InLexpr &operator=(const InLexpr &);
-  InLexpr(Lexpr *p1, Lexpr *p2);
-  ~InLexpr();
-  virtual void accept(Visitor *v);
-  virtual InLexpr *clone() const;
-  void swap(InLexpr &);
-};
-
-class TernaryLexpr : public Lexpr
-{
-public:
-  Lexpr *lexpr_1;
-  Lexpr *lexpr_2;
-  Lexpr *lexpr_3;
-
-  TernaryLexpr(const TernaryLexpr &);
-  TernaryLexpr &operator=(const TernaryLexpr &);
-  TernaryLexpr(Lexpr *p1, Lexpr *p2, Lexpr *p3);
-  ~TernaryLexpr();
-  virtual void accept(Visitor *v);
-  virtual TernaryLexpr *clone() const;
-  void swap(TernaryLexpr &);
-};
-
 class RelationLexpr : public Lexpr
 {
 public:
@@ -1132,18 +1091,32 @@ public:
   void swap(RelationLexpr &);
 };
 
-class NotLexprInner : public Lexpr
+class BinderLexpr : public Lexpr
 {
 public:
-  Lexpr *lexpr_;
+  LexprBinder *lexprbinder_;
 
-  NotLexprInner(const NotLexprInner &);
-  NotLexprInner &operator=(const NotLexprInner &);
-  NotLexprInner(Lexpr *p1);
-  ~NotLexprInner();
+  BinderLexpr(const BinderLexpr &);
+  BinderLexpr &operator=(const BinderLexpr &);
+  BinderLexpr(LexprBinder *p1);
+  ~BinderLexpr();
   virtual void accept(Visitor *v);
-  virtual NotLexprInner *clone() const;
-  void swap(NotLexprInner &);
+  virtual BinderLexpr *clone() const;
+  void swap(BinderLexpr &);
+};
+
+class NotBinderLexpr : public Lexpr
+{
+public:
+  LexprBinder *lexprbinder_;
+
+  NotBinderLexpr(const NotBinderLexpr &);
+  NotBinderLexpr &operator=(const NotBinderLexpr &);
+  NotBinderLexpr(LexprBinder *p1);
+  ~NotBinderLexpr();
+  virtual void accept(Visitor *v);
+  virtual NotBinderLexpr *clone() const;
+  void swap(NotBinderLexpr &);
 };
 
 class TrueLexpr : public Lexpr
@@ -1170,6 +1143,21 @@ public:
   virtual void accept(Visitor *v);
   virtual FalseLexpr *clone() const;
   void swap(FalseLexpr &);
+};
+
+class ValidLexpr : public Lexpr
+{
+public:
+  OptLabel *optlabel_;
+  Lexpr *lexpr_;
+
+  ValidLexpr(const ValidLexpr &);
+  ValidLexpr &operator=(const ValidLexpr &);
+  ValidLexpr(OptLabel *p1, Lexpr *p2);
+  ~ValidLexpr();
+  virtual void accept(Visitor *v);
+  virtual ValidLexpr *clone() const;
+  void swap(ValidLexpr &);
 };
 
 class AutomaticLexpr : public Lexpr
@@ -1322,64 +1310,19 @@ public:
   void swap(SubtrLexpr &);
 };
 
-class MultLexpr : public Lexpr
+class SquaresRangeLexpr : public Lexpr
 {
 public:
-  Lexpr *lexpr_1;
-  Lexpr *lexpr_2;
+  Lexpr *lexpr_;
+  Range *range_;
 
-  MultLexpr(const MultLexpr &);
-  MultLexpr &operator=(const MultLexpr &);
-  MultLexpr(Lexpr *p1, Lexpr *p2);
-  ~MultLexpr();
+  SquaresRangeLexpr(const SquaresRangeLexpr &);
+  SquaresRangeLexpr &operator=(const SquaresRangeLexpr &);
+  SquaresRangeLexpr(Lexpr *p1, Range *p2);
+  ~SquaresRangeLexpr();
   virtual void accept(Visitor *v);
-  virtual MultLexpr *clone() const;
-  void swap(MultLexpr &);
-};
-
-class DivLexpr : public Lexpr
-{
-public:
-  Lexpr *lexpr_1;
-  Lexpr *lexpr_2;
-
-  DivLexpr(const DivLexpr &);
-  DivLexpr &operator=(const DivLexpr &);
-  DivLexpr(Lexpr *p1, Lexpr *p2);
-  ~DivLexpr();
-  virtual void accept(Visitor *v);
-  virtual DivLexpr *clone() const;
-  void swap(DivLexpr &);
-};
-
-class ModLexpr : public Lexpr
-{
-public:
-  Lexpr *lexpr_1;
-  Lexpr *lexpr_2;
-
-  ModLexpr(const ModLexpr &);
-  ModLexpr &operator=(const ModLexpr &);
-  ModLexpr(Lexpr *p1, Lexpr *p2);
-  ~ModLexpr();
-  virtual void accept(Visitor *v);
-  virtual ModLexpr *clone() const;
-  void swap(ModLexpr &);
-};
-
-class StarHatLexpr : public Lexpr
-{
-public:
-  Lexpr *lexpr_1;
-  Lexpr *lexpr_2;
-
-  StarHatLexpr(const StarHatLexpr &);
-  StarHatLexpr &operator=(const StarHatLexpr &);
-  StarHatLexpr(Lexpr *p1, Lexpr *p2);
-  ~StarHatLexpr();
-  virtual void accept(Visitor *v);
-  virtual StarHatLexpr *clone() const;
-  void swap(StarHatLexpr &);
+  virtual SquaresRangeLexpr *clone() const;
+  void swap(SquaresRangeLexpr &);
 };
 
 class SquaresLexpr : public Lexpr
@@ -1395,117 +1338,6 @@ public:
   virtual void accept(Visitor *v);
   virtual SquaresLexpr *clone() const;
   void swap(SquaresLexpr &);
-};
-
-class MinusLexpr : public Lexpr
-{
-public:
-  Lexpr *lexpr_;
-
-  MinusLexpr(const MinusLexpr &);
-  MinusLexpr &operator=(const MinusLexpr &);
-  MinusLexpr(Lexpr *p1);
-  ~MinusLexpr();
-  virtual void accept(Visitor *v);
-  virtual MinusLexpr *clone() const;
-  void swap(MinusLexpr &);
-};
-
-class PlusLexpr : public Lexpr
-{
-public:
-  Lexpr *lexpr_;
-
-  PlusLexpr(const PlusLexpr &);
-  PlusLexpr &operator=(const PlusLexpr &);
-  PlusLexpr(Lexpr *p1);
-  ~PlusLexpr();
-  virtual void accept(Visitor *v);
-  virtual PlusLexpr *clone() const;
-  void swap(PlusLexpr &);
-};
-
-class TildeLexpr : public Lexpr
-{
-public:
-  Lexpr *lexpr_;
-
-  TildeLexpr(const TildeLexpr &);
-  TildeLexpr &operator=(const TildeLexpr &);
-  TildeLexpr(Lexpr *p1);
-  ~TildeLexpr();
-  virtual void accept(Visitor *v);
-  virtual TildeLexpr *clone() const;
-  void swap(TildeLexpr &);
-};
-
-class StarLexpr : public Lexpr
-{
-public:
-  Lexpr *lexpr_;
-
-  StarLexpr(const StarLexpr &);
-  StarLexpr &operator=(const StarLexpr &);
-  StarLexpr(Lexpr *p1);
-  ~StarLexpr();
-  virtual void accept(Visitor *v);
-  virtual StarLexpr *clone() const;
-  void swap(StarLexpr &);
-};
-
-class AmpUnaryLexpr : public Lexpr
-{
-public:
-  Lexpr *lexpr_;
-
-  AmpUnaryLexpr(const AmpUnaryLexpr &);
-  AmpUnaryLexpr &operator=(const AmpUnaryLexpr &);
-  AmpUnaryLexpr(Lexpr *p1);
-  ~AmpUnaryLexpr();
-  virtual void accept(Visitor *v);
-  virtual AmpUnaryLexpr *clone() const;
-  void swap(AmpUnaryLexpr &);
-};
-
-class SizeOfLexpr : public Lexpr
-{
-public:
-  Lexpr *lexpr_;
-
-  SizeOfLexpr(const SizeOfLexpr &);
-  SizeOfLexpr &operator=(const SizeOfLexpr &);
-  SizeOfLexpr(Lexpr *p1);
-  ~SizeOfLexpr();
-  virtual void accept(Visitor *v);
-  virtual SizeOfLexpr *clone() const;
-  void swap(SizeOfLexpr &);
-};
-
-class OldLexpr : public Lexpr
-{
-public:
-  Lexpr *lexpr_;
-
-  OldLexpr(const OldLexpr &);
-  OldLexpr &operator=(const OldLexpr &);
-  OldLexpr(Lexpr *p1);
-  ~OldLexpr();
-  virtual void accept(Visitor *v);
-  virtual OldLexpr *clone() const;
-  void swap(OldLexpr &);
-};
-
-class ResultLexpr : public Lexpr
-{
-public:
-
-  ResultLexpr(const ResultLexpr &);
-  ResultLexpr &operator=(const ResultLexpr &);
-  ResultLexpr();
-  ~ResultLexpr();
-  virtual void accept(Visitor *v);
-  virtual ResultLexpr *clone() const;
-  void swap(ResultLexpr &);
 };
 
 class SeparatedLexpr : public Lexpr
@@ -1564,48 +1396,18 @@ public:
   void swap(PiLexpr &);
 };
 
-class LessLessLexpr : public Lexpr
+class ParenRangeLexpr : public Lexpr
 {
 public:
-  Lexpr *lexpr_1;
-  Lexpr *lexpr_2;
+  Range *range_;
 
-  LessLessLexpr(const LessLessLexpr &);
-  LessLessLexpr &operator=(const LessLessLexpr &);
-  LessLessLexpr(Lexpr *p1, Lexpr *p2);
-  ~LessLessLexpr();
+  ParenRangeLexpr(const ParenRangeLexpr &);
+  ParenRangeLexpr &operator=(const ParenRangeLexpr &);
+  ParenRangeLexpr(Range *p1);
+  ~ParenRangeLexpr();
   virtual void accept(Visitor *v);
-  virtual LessLessLexpr *clone() const;
-  void swap(LessLessLexpr &);
-};
-
-class GreaterGreaterLexpr : public Lexpr
-{
-public:
-  Lexpr *lexpr_1;
-  Lexpr *lexpr_2;
-
-  GreaterGreaterLexpr(const GreaterGreaterLexpr &);
-  GreaterGreaterLexpr &operator=(const GreaterGreaterLexpr &);
-  GreaterGreaterLexpr(Lexpr *p1, Lexpr *p2);
-  ~GreaterGreaterLexpr();
-  virtual void accept(Visitor *v);
-  virtual GreaterGreaterLexpr *clone() const;
-  void swap(GreaterGreaterLexpr &);
-};
-
-class TypeOfLexpr : public Lexpr
-{
-public:
-  Lexpr *lexpr_;
-
-  TypeOfLexpr(const TypeOfLexpr &);
-  TypeOfLexpr &operator=(const TypeOfLexpr &);
-  TypeOfLexpr(Lexpr *p1);
-  ~TypeOfLexpr();
-  virtual void accept(Visitor *v);
-  virtual TypeOfLexpr *clone() const;
-  void swap(TypeOfLexpr &);
+  virtual ParenRangeLexpr *clone() const;
+  void swap(ParenRangeLexpr &);
 };
 
 class RelInnerLexpr : public LexprRelInner
@@ -1699,6 +1501,347 @@ public:
   virtual void accept(Visitor *v);
   virtual NotEqRel *clone() const;
   void swap(NotEqRel &);
+};
+
+class ForallBinderLexpr : public LexprBinder
+{
+public:
+  Binders *binders_;
+  Lexpr *lexpr_;
+
+  ForallBinderLexpr(const ForallBinderLexpr &);
+  ForallBinderLexpr &operator=(const ForallBinderLexpr &);
+  ForallBinderLexpr(Binders *p1, Lexpr *p2);
+  ~ForallBinderLexpr();
+  virtual void accept(Visitor *v);
+  virtual ForallBinderLexpr *clone() const;
+  void swap(ForallBinderLexpr &);
+};
+
+class ExistBinderLexpr : public LexprBinder
+{
+public:
+  Binders *binders_;
+  Lexpr *lexpr_;
+
+  ExistBinderLexpr(const ExistBinderLexpr &);
+  ExistBinderLexpr &operator=(const ExistBinderLexpr &);
+  ExistBinderLexpr(Binders *p1, Lexpr *p2);
+  ~ExistBinderLexpr();
+  virtual void accept(Visitor *v);
+  virtual ExistBinderLexpr *clone() const;
+  void swap(ExistBinderLexpr &);
+};
+
+class LambdaBinderLexpr : public LexprBinder
+{
+public:
+  Binders *binders_;
+  Lexpr *lexpr_;
+
+  LambdaBinderLexpr(const LambdaBinderLexpr &);
+  LambdaBinderLexpr &operator=(const LambdaBinderLexpr &);
+  LambdaBinderLexpr(Binders *p1, Lexpr *p2);
+  ~LambdaBinderLexpr();
+  virtual void accept(Visitor *v);
+  virtual LambdaBinderLexpr *clone() const;
+  void swap(LambdaBinderLexpr &);
+};
+
+class TheBinders : public Binders
+{
+public:
+  TypeSpecOFTYPENAME *typespecoftypename_;
+  VarSpec *varspec_;
+  ListBindersReentrance *listbindersreentrance_;
+
+  TheBinders(const TheBinders &);
+  TheBinders &operator=(const TheBinders &);
+  TheBinders(TypeSpecOFTYPENAME *p1, VarSpec *p2, ListBindersReentrance *p3);
+  ~TheBinders();
+  virtual void accept(Visitor *v);
+  virtual TheBinders *clone() const;
+  void swap(TheBinders &);
+};
+
+class TypeSpecTYPENAME : public TypeSpecOFTYPENAME
+{
+public:
+  Ident ident_;
+
+  TypeSpecTYPENAME(const TypeSpecTYPENAME &);
+  TypeSpecTYPENAME &operator=(const TypeSpecTYPENAME &);
+  TypeSpecTYPENAME(Ident p1);
+  ~TypeSpecTYPENAME();
+  virtual void accept(Visitor *v);
+  virtual TypeSpecTYPENAME *clone() const;
+  void swap(TypeSpecTYPENAME &);
+};
+
+class TypeSpecSimpleFromTypenameTypeSpec : public TypeSpecOFTYPENAME
+{
+public:
+  TypeSpecSimple *typespecsimple_;
+
+  TypeSpecSimpleFromTypenameTypeSpec(const TypeSpecSimpleFromTypenameTypeSpec &);
+  TypeSpecSimpleFromTypenameTypeSpec &operator=(const TypeSpecSimpleFromTypenameTypeSpec &);
+  TypeSpecSimpleFromTypenameTypeSpec(TypeSpecSimple *p1);
+  ~TypeSpecSimpleFromTypenameTypeSpec();
+  virtual void accept(Visitor *v);
+  virtual TypeSpecSimpleFromTypenameTypeSpec *clone() const;
+  void swap(TypeSpecSimpleFromTypenameTypeSpec &);
+};
+
+class BindersReentranceDeclSpec : public BindersReentrance
+{
+public:
+  TypeSpecOFTYPENAME *typespecoftypename_;
+  VarSpec *varspec_;
+
+  BindersReentranceDeclSpec(const BindersReentranceDeclSpec &);
+  BindersReentranceDeclSpec &operator=(const BindersReentranceDeclSpec &);
+  BindersReentranceDeclSpec(TypeSpecOFTYPENAME *p1, VarSpec *p2);
+  ~BindersReentranceDeclSpec();
+  virtual void accept(Visitor *v);
+  virtual BindersReentranceDeclSpec *clone() const;
+  void swap(BindersReentranceDeclSpec &);
+};
+
+class BindersReentranceVarSpec : public BindersReentrance
+{
+public:
+  VarSpec *varspec_;
+
+  BindersReentranceVarSpec(const BindersReentranceVarSpec &);
+  BindersReentranceVarSpec &operator=(const BindersReentranceVarSpec &);
+  BindersReentranceVarSpec(VarSpec *p1);
+  ~BindersReentranceVarSpec();
+  virtual void accept(Visitor *v);
+  virtual BindersReentranceVarSpec *clone() const;
+  void swap(BindersReentranceVarSpec &);
+};
+
+class StartVarSpec : public VarSpec
+{
+public:
+  ListStars *liststars_;
+  VarSpec *varspec_;
+
+  StartVarSpec(const StartVarSpec &);
+  StartVarSpec &operator=(const StartVarSpec &);
+  StartVarSpec(ListStars *p1, VarSpec *p2);
+  ~StartVarSpec();
+  virtual void accept(Visitor *v);
+  virtual StartVarSpec *clone() const;
+  void swap(StartVarSpec &);
+};
+
+class SimpleSpec : public VarSpec
+{
+public:
+  FullIdentifier *fullidentifier_;
+
+  SimpleSpec(const SimpleSpec &);
+  SimpleSpec &operator=(const SimpleSpec &);
+  SimpleSpec(FullIdentifier *p1);
+  ~SimpleSpec();
+  virtual void accept(Visitor *v);
+  virtual SimpleSpec *clone() const;
+  void swap(SimpleSpec &);
+};
+
+class ArraySpec : public VarSpec
+{
+public:
+  VarSpec *varspec_;
+  ArraySize *arraysize_;
+
+  ArraySpec(const ArraySpec &);
+  ArraySpec &operator=(const ArraySpec &);
+  ArraySpec(VarSpec *p1, ArraySize *p2);
+  ~ArraySpec();
+  virtual void accept(Visitor *v);
+  virtual ArraySpec *clone() const;
+  void swap(ArraySpec &);
+};
+
+class Star : public Stars
+{
+public:
+
+  Star(const Star &);
+  Star &operator=(const Star &);
+  Star();
+  ~Star();
+  virtual void accept(Visitor *v);
+  virtual Star *clone() const;
+  void swap(Star &);
+};
+
+class IntConstArraySize : public ArraySize
+{
+public:
+  Integer integer_;
+
+  IntConstArraySize(const IntConstArraySize &);
+  IntConstArraySize &operator=(const IntConstArraySize &);
+  IntConstArraySize(Integer p1);
+  ~IntConstArraySize();
+  virtual void accept(Visitor *v);
+  virtual IntConstArraySize *clone() const;
+  void swap(IntConstArraySize &);
+};
+
+class SomeArraySize : public ArraySize
+{
+public:
+  FullIdentifier *fullidentifier_;
+
+  SomeArraySize(const SomeArraySize &);
+  SomeArraySize &operator=(const SomeArraySize &);
+  SomeArraySize(FullIdentifier *p1);
+  ~SomeArraySize();
+  virtual void accept(Visitor *v);
+  virtual SomeArraySize *clone() const;
+  void swap(SomeArraySize &);
+};
+
+class NoSize : public ArraySize
+{
+public:
+
+  NoSize(const NoSize &);
+  NoSize &operator=(const NoSize &);
+  NoSize();
+  ~NoSize();
+  virtual void accept(Visitor *v);
+  virtual NoSize *clone() const;
+  void swap(NoSize &);
+};
+
+class OptLabelOne : public OptLabel
+{
+public:
+  OptLabelList *optlabellist_;
+
+  OptLabelOne(const OptLabelOne &);
+  OptLabelOne &operator=(const OptLabelOne &);
+  OptLabelOne(OptLabelList *p1);
+  ~OptLabelOne();
+  virtual void accept(Visitor *v);
+  virtual OptLabelOne *clone() const;
+  void swap(OptLabelOne &);
+};
+
+class OptLabelTwo : public OptLabel
+{
+public:
+  OptLabelList *optlabellist_;
+
+  OptLabelTwo(const OptLabelTwo &);
+  OptLabelTwo &operator=(const OptLabelTwo &);
+  OptLabelTwo(OptLabelList *p1);
+  ~OptLabelTwo();
+  virtual void accept(Visitor *v);
+  virtual OptLabelTwo *clone() const;
+  void swap(OptLabelTwo &);
+};
+
+class NoLableList : public OptLabelList
+{
+public:
+
+  NoLableList(const NoLableList &);
+  NoLableList &operator=(const NoLableList &);
+  NoLableList();
+  ~NoLableList();
+  virtual void accept(Visitor *v);
+  virtual NoLableList *clone() const;
+  void swap(NoLableList &);
+};
+
+class LableList : public OptLabelList
+{
+public:
+  ListLabelName *listlabelname_;
+
+  LableList(const LableList &);
+  LableList &operator=(const LableList &);
+  LableList(ListLabelName *p1);
+  ~LableList();
+  virtual void accept(Visitor *v);
+  virtual LableList *clone() const;
+  void swap(LableList &);
+};
+
+class LableName : public LabelName
+{
+public:
+  AnyIdentifier *anyidentifier_;
+
+  LableName(const LableName &);
+  LableName &operator=(const LableName &);
+  LableName(AnyIdentifier *p1);
+  ~LableName();
+  virtual void accept(Visitor *v);
+  virtual LableName *clone() const;
+  void swap(LableName &);
+};
+
+class LexprRange : public Range
+{
+public:
+  LexprOption *lexproption_1;
+  LexprOption *lexproption_2;
+
+  LexprRange(const LexprRange &);
+  LexprRange &operator=(const LexprRange &);
+  LexprRange(LexprOption *p1, LexprOption *p2);
+  ~LexprRange();
+  virtual void accept(Visitor *v);
+  virtual LexprRange *clone() const;
+  void swap(LexprRange &);
+};
+
+class NoLexprOption : public LexprOption
+{
+public:
+
+  NoLexprOption(const NoLexprOption &);
+  NoLexprOption &operator=(const NoLexprOption &);
+  NoLexprOption();
+  ~NoLexprOption();
+  virtual void accept(Visitor *v);
+  virtual NoLexprOption *clone() const;
+  void swap(NoLexprOption &);
+};
+
+class SomeLexprOption : public LexprOption
+{
+public:
+  Lexpr *lexpr_;
+
+  SomeLexprOption(const SomeLexprOption &);
+  SomeLexprOption &operator=(const SomeLexprOption &);
+  SomeLexprOption(Lexpr *p1);
+  ~SomeLexprOption();
+  virtual void accept(Visitor *v);
+  virtual SomeLexprOption *clone() const;
+  void swap(SomeLexprOption &);
+};
+
+class SimpleIdentifierAny : public AnyIdentifier
+{
+public:
+  Identifier *identifier_;
+
+  SimpleIdentifierAny(const SimpleIdentifierAny &);
+  SimpleIdentifierAny &operator=(const SimpleIdentifierAny &);
+  SimpleIdentifierAny(Identifier *p1);
+  ~SimpleIdentifierAny();
+  virtual void accept(Visitor *v);
+  virtual SimpleIdentifierAny *clone() const;
+  void swap(SimpleIdentifierAny &);
 };
 
 class EnsuresKeyWord : public PostCond
@@ -1924,16 +2067,323 @@ public:
   void swap(IdentifierIdent &);
 };
 
-
-
-class ListAnnot : public Visitable, public std::vector<Annot*>
+class TypeSpecSimpleIntegerKeyWord : public TypeSpecSimple
 {
 public:
+
+  TypeSpecSimpleIntegerKeyWord(const TypeSpecSimpleIntegerKeyWord &);
+  TypeSpecSimpleIntegerKeyWord &operator=(const TypeSpecSimpleIntegerKeyWord &);
+  TypeSpecSimpleIntegerKeyWord();
+  ~TypeSpecSimpleIntegerKeyWord();
   virtual void accept(Visitor *v);
-  virtual ListAnnot *clone() const;
+  virtual TypeSpecSimpleIntegerKeyWord *clone() const;
+  void swap(TypeSpecSimpleIntegerKeyWord &);
 };
 
-ListAnnot* consListAnnot(Annot* x, ListAnnot* xs);
+class TypeSpecSimpleRealKeyWord : public TypeSpecSimple
+{
+public:
+
+  TypeSpecSimpleRealKeyWord(const TypeSpecSimpleRealKeyWord &);
+  TypeSpecSimpleRealKeyWord &operator=(const TypeSpecSimpleRealKeyWord &);
+  TypeSpecSimpleRealKeyWord();
+  ~TypeSpecSimpleRealKeyWord();
+  virtual void accept(Visitor *v);
+  virtual TypeSpecSimpleRealKeyWord *clone() const;
+  void swap(TypeSpecSimpleRealKeyWord &);
+};
+
+class TypeSpecSimpleBooleanKeyWord : public TypeSpecSimple
+{
+public:
+
+  TypeSpecSimpleBooleanKeyWord(const TypeSpecSimpleBooleanKeyWord &);
+  TypeSpecSimpleBooleanKeyWord &operator=(const TypeSpecSimpleBooleanKeyWord &);
+  TypeSpecSimpleBooleanKeyWord();
+  ~TypeSpecSimpleBooleanKeyWord();
+  virtual void accept(Visitor *v);
+  virtual TypeSpecSimpleBooleanKeyWord *clone() const;
+  void swap(TypeSpecSimpleBooleanKeyWord &);
+};
+
+class TypeSpecSimpleVoidKeyWord : public TypeSpecSimple
+{
+public:
+
+  TypeSpecSimpleVoidKeyWord(const TypeSpecSimpleVoidKeyWord &);
+  TypeSpecSimpleVoidKeyWord &operator=(const TypeSpecSimpleVoidKeyWord &);
+  TypeSpecSimpleVoidKeyWord();
+  ~TypeSpecSimpleVoidKeyWord();
+  virtual void accept(Visitor *v);
+  virtual TypeSpecSimpleVoidKeyWord *clone() const;
+  void swap(TypeSpecSimpleVoidKeyWord &);
+};
+
+class TypeSpecSimpleBoolKeyWord : public TypeSpecSimple
+{
+public:
+
+  TypeSpecSimpleBoolKeyWord(const TypeSpecSimpleBoolKeyWord &);
+  TypeSpecSimpleBoolKeyWord &operator=(const TypeSpecSimpleBoolKeyWord &);
+  TypeSpecSimpleBoolKeyWord();
+  ~TypeSpecSimpleBoolKeyWord();
+  virtual void accept(Visitor *v);
+  virtual TypeSpecSimpleBoolKeyWord *clone() const;
+  void swap(TypeSpecSimpleBoolKeyWord &);
+};
+
+class TypeSpecSimpleCharKeyWord : public TypeSpecSimple
+{
+public:
+
+  TypeSpecSimpleCharKeyWord(const TypeSpecSimpleCharKeyWord &);
+  TypeSpecSimpleCharKeyWord &operator=(const TypeSpecSimpleCharKeyWord &);
+  TypeSpecSimpleCharKeyWord();
+  ~TypeSpecSimpleCharKeyWord();
+  virtual void accept(Visitor *v);
+  virtual TypeSpecSimpleCharKeyWord *clone() const;
+  void swap(TypeSpecSimpleCharKeyWord &);
+};
+
+class TypeSpecSimpleIntKeyWord : public TypeSpecSimple
+{
+public:
+
+  TypeSpecSimpleIntKeyWord(const TypeSpecSimpleIntKeyWord &);
+  TypeSpecSimpleIntKeyWord &operator=(const TypeSpecSimpleIntKeyWord &);
+  TypeSpecSimpleIntKeyWord();
+  ~TypeSpecSimpleIntKeyWord();
+  virtual void accept(Visitor *v);
+  virtual TypeSpecSimpleIntKeyWord *clone() const;
+  void swap(TypeSpecSimpleIntKeyWord &);
+};
+
+class TypeSpecSimpleDoubleKeyWord : public TypeSpecSimple
+{
+public:
+
+  TypeSpecSimpleDoubleKeyWord(const TypeSpecSimpleDoubleKeyWord &);
+  TypeSpecSimpleDoubleKeyWord &operator=(const TypeSpecSimpleDoubleKeyWord &);
+  TypeSpecSimpleDoubleKeyWord();
+  ~TypeSpecSimpleDoubleKeyWord();
+  virtual void accept(Visitor *v);
+  virtual TypeSpecSimpleDoubleKeyWord *clone() const;
+  void swap(TypeSpecSimpleDoubleKeyWord &);
+};
+
+class TypeSpecSimpleLongDoubleKeyWord : public TypeSpecSimple
+{
+public:
+
+  TypeSpecSimpleLongDoubleKeyWord(const TypeSpecSimpleLongDoubleKeyWord &);
+  TypeSpecSimpleLongDoubleKeyWord &operator=(const TypeSpecSimpleLongDoubleKeyWord &);
+  TypeSpecSimpleLongDoubleKeyWord();
+  ~TypeSpecSimpleLongDoubleKeyWord();
+  virtual void accept(Visitor *v);
+  virtual TypeSpecSimpleLongDoubleKeyWord *clone() const;
+  void swap(TypeSpecSimpleLongDoubleKeyWord &);
+};
+
+class AnAnnotation : public LogicPTreeAnnot
+{
+public:
+  Annotation *annotation_;
+
+  AnAnnotation(const AnAnnotation &);
+  AnAnnotation &operator=(const AnAnnotation &);
+  AnAnnotation(Annotation *p1);
+  ~AnAnnotation();
+  virtual void accept(Visitor *v);
+  virtual AnAnnotation *clone() const;
+  void swap(AnAnnotation &);
+};
+
+class LoopAnnotation : public Annotation
+{
+public:
+  LoopAnnotStack *loopannotstack_;
+
+  LoopAnnotation(const LoopAnnotation &);
+  LoopAnnotation &operator=(const LoopAnnotation &);
+  LoopAnnotation(LoopAnnotStack *p1);
+  ~LoopAnnotation();
+  virtual void accept(Visitor *v);
+  virtual LoopAnnotation *clone() const;
+  void swap(LoopAnnotation &);
+};
+
+class LoopAnnotStackInvariant : public LoopAnnotStack
+{
+public:
+  LoopInvariant *loopinvariant_;
+  LoopAnnotOpt *loopannotopt_;
+
+  LoopAnnotStackInvariant(const LoopAnnotStackInvariant &);
+  LoopAnnotStackInvariant &operator=(const LoopAnnotStackInvariant &);
+  LoopAnnotStackInvariant(LoopInvariant *p1, LoopAnnotOpt *p2);
+  ~LoopAnnotStackInvariant();
+  virtual void accept(Visitor *v);
+  virtual LoopAnnotStackInvariant *clone() const;
+  void swap(LoopAnnotStackInvariant &);
+};
+
+class LoopAnnotStackEffects : public LoopAnnotStack
+{
+public:
+  LoopEffects *loopeffects_;
+  LoopAnnotOpt *loopannotopt_;
+
+  LoopAnnotStackEffects(const LoopAnnotStackEffects &);
+  LoopAnnotStackEffects &operator=(const LoopAnnotStackEffects &);
+  LoopAnnotStackEffects(LoopEffects *p1, LoopAnnotOpt *p2);
+  ~LoopAnnotStackEffects();
+  virtual void accept(Visitor *v);
+  virtual LoopAnnotStackEffects *clone() const;
+  void swap(LoopAnnotStackEffects &);
+};
+
+class LoopAnnotStackVariant : public LoopAnnotStack
+{
+public:
+  LoopVariant *loopvariant_;
+  LoopAnnotOpt *loopannotopt_;
+
+  LoopAnnotStackVariant(const LoopAnnotStackVariant &);
+  LoopAnnotStackVariant &operator=(const LoopAnnotStackVariant &);
+  LoopAnnotStackVariant(LoopVariant *p1, LoopAnnotOpt *p2);
+  ~LoopAnnotStackVariant();
+  virtual void accept(Visitor *v);
+  virtual LoopAnnotStackVariant *clone() const;
+  void swap(LoopAnnotStackVariant &);
+};
+
+class NoLoopAnnot : public LoopAnnotOpt
+{
+public:
+
+  NoLoopAnnot(const NoLoopAnnot &);
+  NoLoopAnnot &operator=(const NoLoopAnnot &);
+  NoLoopAnnot();
+  ~NoLoopAnnot();
+  virtual void accept(Visitor *v);
+  virtual NoLoopAnnot *clone() const;
+  void swap(NoLoopAnnot &);
+};
+
+class SomeLoopAnnot : public LoopAnnotOpt
+{
+public:
+  LoopAnnotStack *loopannotstack_;
+
+  SomeLoopAnnot(const SomeLoopAnnot &);
+  SomeLoopAnnot &operator=(const SomeLoopAnnot &);
+  SomeLoopAnnot(LoopAnnotStack *p1);
+  ~SomeLoopAnnot();
+  virtual void accept(Visitor *v);
+  virtual SomeLoopAnnot *clone() const;
+  void swap(SomeLoopAnnot &);
+};
+
+class SimpleLoopInvariant : public LoopInvariant
+{
+public:
+  Lexpr *lexpr_;
+
+  SimpleLoopInvariant(const SimpleLoopInvariant &);
+  SimpleLoopInvariant &operator=(const SimpleLoopInvariant &);
+  SimpleLoopInvariant(Lexpr *p1);
+  ~SimpleLoopInvariant();
+  virtual void accept(Visitor *v);
+  virtual SimpleLoopInvariant *clone() const;
+  void swap(SimpleLoopInvariant &);
+};
+
+class CheckLoopInvariant : public LoopInvariant
+{
+public:
+  Lexpr *lexpr_;
+
+  CheckLoopInvariant(const CheckLoopInvariant &);
+  CheckLoopInvariant &operator=(const CheckLoopInvariant &);
+  CheckLoopInvariant(Lexpr *p1);
+  ~CheckLoopInvariant();
+  virtual void accept(Visitor *v);
+  virtual CheckLoopInvariant *clone() const;
+  void swap(CheckLoopInvariant &);
+};
+
+class AdmitLoopInvariant : public LoopInvariant
+{
+public:
+  Lexpr *lexpr_;
+
+  AdmitLoopInvariant(const AdmitLoopInvariant &);
+  AdmitLoopInvariant &operator=(const AdmitLoopInvariant &);
+  AdmitLoopInvariant(Lexpr *p1);
+  ~AdmitLoopInvariant();
+  virtual void accept(Visitor *v);
+  virtual AdmitLoopInvariant *clone() const;
+  void swap(AdmitLoopInvariant &);
+};
+
+class SimpleLoopVariant : public LoopVariant
+{
+public:
+  Variant *variant_;
+
+  SimpleLoopVariant(const SimpleLoopVariant &);
+  SimpleLoopVariant &operator=(const SimpleLoopVariant &);
+  SimpleLoopVariant(Variant *p1);
+  ~SimpleLoopVariant();
+  virtual void accept(Visitor *v);
+  virtual SimpleLoopVariant *clone() const;
+  void swap(SimpleLoopVariant &);
+};
+
+class LoopAssigns : public LoopEffects
+{
+public:
+  Assigns *assigns_;
+
+  LoopAssigns(const LoopAssigns &);
+  LoopAssigns &operator=(const LoopAssigns &);
+  LoopAssigns(Assigns *p1);
+  ~LoopAssigns();
+  virtual void accept(Visitor *v);
+  virtual LoopAssigns *clone() const;
+  void swap(LoopAssigns &);
+};
+
+class ForVariant : public Variant
+{
+public:
+  Lexpr *lexpr_;
+  AnyIdentifier *anyidentifier_;
+
+  ForVariant(const ForVariant &);
+  ForVariant &operator=(const ForVariant &);
+  ForVariant(Lexpr *p1, AnyIdentifier *p2);
+  ~ForVariant();
+  virtual void accept(Visitor *v);
+  virtual ForVariant *clone() const;
+  void swap(ForVariant &);
+};
+
+class LexprVariant : public Variant
+{
+public:
+  Lexpr *lexpr_;
+
+  LexprVariant(const LexprVariant &);
+  LexprVariant &operator=(const LexprVariant &);
+  LexprVariant(Lexpr *p1);
+  ~LexprVariant();
+  virtual void accept(Visitor *v);
+  virtual LexprVariant *clone() const;
+  void swap(LexprVariant &);
+};
+
+
 
 class ListLexpr : public Visitable, public std::vector<Lexpr*>
 {
@@ -1952,6 +2402,33 @@ public:
 };
 
 ListLexprRelInner* consListLexprRelInner(LexprRelInner* x, ListLexprRelInner* xs);
+
+class ListBindersReentrance : public Visitable, public std::vector<BindersReentrance*>
+{
+public:
+  virtual void accept(Visitor *v);
+  virtual ListBindersReentrance *clone() const;
+};
+
+ListBindersReentrance* consListBindersReentrance(BindersReentrance* x, ListBindersReentrance* xs);
+
+class ListStars : public Visitable, public std::vector<Stars*>
+{
+public:
+  virtual void accept(Visitor *v);
+  virtual ListStars *clone() const;
+};
+
+ListStars* consListStars(Stars* x, ListStars* xs);
+
+class ListLabelName : public Visitable, public std::vector<LabelName*>
+{
+public:
+  virtual void accept(Visitor *v);
+  virtual ListLabelName *clone() const;
+};
+
+ListLabelName* consListLabelName(LabelName* x, ListLabelName* xs);
 
 class ListFullIdentifier : public Visitable, public std::vector<FullIdentifier*>
 {

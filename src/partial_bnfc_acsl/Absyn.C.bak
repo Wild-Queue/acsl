@@ -647,6 +647,230 @@ PostCondSimpleClauses *PostCondSimpleClauses::clone() const
 
 
 
+/********************   AssignsSimpleClauses    ********************/
+AssignsSimpleClauses::AssignsSimpleClauses(Assigns *p1, SimpleClauses *p2)
+{
+  assigns_ = p1;
+  simpleclauses_ = p2;
+
+}
+
+AssignsSimpleClauses::AssignsSimpleClauses(const AssignsSimpleClauses & other)
+{
+  assigns_ = other.assigns_->clone();
+  simpleclauses_ = other.simpleclauses_->clone();
+
+}
+
+AssignsSimpleClauses &AssignsSimpleClauses::operator=(const AssignsSimpleClauses & other)
+{
+  AssignsSimpleClauses tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void AssignsSimpleClauses::swap(AssignsSimpleClauses & other)
+{
+  std::swap(assigns_, other.assigns_);
+  std::swap(simpleclauses_, other.simpleclauses_);
+
+}
+
+AssignsSimpleClauses::~AssignsSimpleClauses()
+{
+  delete(assigns_);
+  delete(simpleclauses_);
+
+}
+
+void AssignsSimpleClauses::accept(Visitor *v)
+{
+  v->visitAssignsSimpleClauses(this);
+}
+
+AssignsSimpleClauses *AssignsSimpleClauses::clone() const
+{
+  return new AssignsSimpleClauses(*this);
+}
+
+
+
+/********************   AssignZone    ********************/
+AssignZone::AssignZone(Zones *p1)
+{
+  zones_ = p1;
+
+}
+
+AssignZone::AssignZone(const AssignZone & other)
+{
+  zones_ = other.zones_->clone();
+
+}
+
+AssignZone &AssignZone::operator=(const AssignZone & other)
+{
+  AssignZone tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void AssignZone::swap(AssignZone & other)
+{
+  std::swap(zones_, other.zones_);
+
+}
+
+AssignZone::~AssignZone()
+{
+  delete(zones_);
+
+}
+
+void AssignZone::accept(Visitor *v)
+{
+  v->visitAssignZone(this);
+}
+
+AssignZone *AssignZone::clone() const
+{
+  return new AssignZone(*this);
+}
+
+
+
+/********************   AssignZoneFromZone    ********************/
+AssignZoneFromZone::AssignZoneFromZone(ListLexpr *p1, Zones *p2)
+{
+  listlexpr_ = p1;
+  zones_ = p2;
+
+}
+
+AssignZoneFromZone::AssignZoneFromZone(const AssignZoneFromZone & other)
+{
+  listlexpr_ = other.listlexpr_->clone();
+  zones_ = other.zones_->clone();
+
+}
+
+AssignZoneFromZone &AssignZoneFromZone::operator=(const AssignZoneFromZone & other)
+{
+  AssignZoneFromZone tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void AssignZoneFromZone::swap(AssignZoneFromZone & other)
+{
+  std::swap(listlexpr_, other.listlexpr_);
+  std::swap(zones_, other.zones_);
+
+}
+
+AssignZoneFromZone::~AssignZoneFromZone()
+{
+  delete(listlexpr_);
+  delete(zones_);
+
+}
+
+void AssignZoneFromZone::accept(Visitor *v)
+{
+  v->visitAssignZoneFromZone(this);
+}
+
+AssignZoneFromZone *AssignZoneFromZone::clone() const
+{
+  return new AssignZoneFromZone(*this);
+}
+
+
+
+/********************   SomeZone    ********************/
+SomeZone::SomeZone(ListLexpr *p1)
+{
+  listlexpr_ = p1;
+
+}
+
+SomeZone::SomeZone(const SomeZone & other)
+{
+  listlexpr_ = other.listlexpr_->clone();
+
+}
+
+SomeZone &SomeZone::operator=(const SomeZone & other)
+{
+  SomeZone tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void SomeZone::swap(SomeZone & other)
+{
+  std::swap(listlexpr_, other.listlexpr_);
+
+}
+
+SomeZone::~SomeZone()
+{
+  delete(listlexpr_);
+
+}
+
+void SomeZone::accept(Visitor *v)
+{
+  v->visitSomeZone(this);
+}
+
+SomeZone *SomeZone::clone() const
+{
+  return new SomeZone(*this);
+}
+
+
+
+/********************   NoZone    ********************/
+NoZone::NoZone()
+{
+
+}
+
+NoZone::NoZone(const NoZone & other)
+{
+
+}
+
+NoZone &NoZone::operator=(const NoZone & other)
+{
+  NoZone tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void NoZone::swap(NoZone & other)
+{
+
+}
+
+NoZone::~NoZone()
+{
+
+}
+
+void NoZone::accept(Visitor *v)
+{
+  v->visitNoZone(this);
+}
+
+NoZone *NoZone::clone() const
+{
+  return new NoZone(*this);
+}
+
+
+
 /********************   NoBehaviors    ********************/
 NoBehaviors::NoBehaviors()
 {
@@ -723,46 +947,6 @@ void NoComplDisj::accept(Visitor *v)
 NoComplDisj *NoComplDisj::clone() const
 {
   return new NoComplDisj(*this);
-}
-
-
-
-/********************   NoLexpr    ********************/
-NoLexpr::NoLexpr()
-{
-
-}
-
-NoLexpr::NoLexpr(const NoLexpr & other)
-{
-
-}
-
-NoLexpr &NoLexpr::operator=(const NoLexpr & other)
-{
-  NoLexpr tmp(other);
-  swap(tmp);
-  return *this;
-}
-
-void NoLexpr::swap(NoLexpr & other)
-{
-
-}
-
-NoLexpr::~NoLexpr()
-{
-
-}
-
-void NoLexpr::accept(Visitor *v)
-{
-  v->visitNoLexpr(this);
-}
-
-NoLexpr *NoLexpr::clone() const
-{
-  return new NoLexpr(*this);
 }
 
 
@@ -1007,346 +1191,6 @@ HatHatLexpr *HatHatLexpr::clone() const
 
 
 
-/********************   AmpLexpr    ********************/
-AmpLexpr::AmpLexpr(Lexpr *p1, Lexpr *p2)
-{
-  lexpr_1 = p1;
-  lexpr_2 = p2;
-
-}
-
-AmpLexpr::AmpLexpr(const AmpLexpr & other)
-{
-  lexpr_1 = other.lexpr_1->clone();
-  lexpr_2 = other.lexpr_2->clone();
-
-}
-
-AmpLexpr &AmpLexpr::operator=(const AmpLexpr & other)
-{
-  AmpLexpr tmp(other);
-  swap(tmp);
-  return *this;
-}
-
-void AmpLexpr::swap(AmpLexpr & other)
-{
-  std::swap(lexpr_1, other.lexpr_1);
-  std::swap(lexpr_2, other.lexpr_2);
-
-}
-
-AmpLexpr::~AmpLexpr()
-{
-  delete(lexpr_1);
-  delete(lexpr_2);
-
-}
-
-void AmpLexpr::accept(Visitor *v)
-{
-  v->visitAmpLexpr(this);
-}
-
-AmpLexpr *AmpLexpr::clone() const
-{
-  return new AmpLexpr(*this);
-}
-
-
-
-/********************   PipeLexpr    ********************/
-PipeLexpr::PipeLexpr(Lexpr *p1, Lexpr *p2)
-{
-  lexpr_1 = p1;
-  lexpr_2 = p2;
-
-}
-
-PipeLexpr::PipeLexpr(const PipeLexpr & other)
-{
-  lexpr_1 = other.lexpr_1->clone();
-  lexpr_2 = other.lexpr_2->clone();
-
-}
-
-PipeLexpr &PipeLexpr::operator=(const PipeLexpr & other)
-{
-  PipeLexpr tmp(other);
-  swap(tmp);
-  return *this;
-}
-
-void PipeLexpr::swap(PipeLexpr & other)
-{
-  std::swap(lexpr_1, other.lexpr_1);
-  std::swap(lexpr_2, other.lexpr_2);
-
-}
-
-PipeLexpr::~PipeLexpr()
-{
-  delete(lexpr_1);
-  delete(lexpr_2);
-
-}
-
-void PipeLexpr::accept(Visitor *v)
-{
-  v->visitPipeLexpr(this);
-}
-
-PipeLexpr *PipeLexpr::clone() const
-{
-  return new PipeLexpr(*this);
-}
-
-
-
-/********************   HatLexpr    ********************/
-HatLexpr::HatLexpr(Lexpr *p1, Lexpr *p2)
-{
-  lexpr_1 = p1;
-  lexpr_2 = p2;
-
-}
-
-HatLexpr::HatLexpr(const HatLexpr & other)
-{
-  lexpr_1 = other.lexpr_1->clone();
-  lexpr_2 = other.lexpr_2->clone();
-
-}
-
-HatLexpr &HatLexpr::operator=(const HatLexpr & other)
-{
-  HatLexpr tmp(other);
-  swap(tmp);
-  return *this;
-}
-
-void HatLexpr::swap(HatLexpr & other)
-{
-  std::swap(lexpr_1, other.lexpr_1);
-  std::swap(lexpr_2, other.lexpr_2);
-
-}
-
-HatLexpr::~HatLexpr()
-{
-  delete(lexpr_1);
-  delete(lexpr_2);
-
-}
-
-void HatLexpr::accept(Visitor *v)
-{
-  v->visitHatLexpr(this);
-}
-
-HatLexpr *HatLexpr::clone() const
-{
-  return new HatLexpr(*this);
-}
-
-
-
-/********************   BimpliesLexpr    ********************/
-BimpliesLexpr::BimpliesLexpr(Lexpr *p1, Lexpr *p2)
-{
-  lexpr_1 = p1;
-  lexpr_2 = p2;
-
-}
-
-BimpliesLexpr::BimpliesLexpr(const BimpliesLexpr & other)
-{
-  lexpr_1 = other.lexpr_1->clone();
-  lexpr_2 = other.lexpr_2->clone();
-
-}
-
-BimpliesLexpr &BimpliesLexpr::operator=(const BimpliesLexpr & other)
-{
-  BimpliesLexpr tmp(other);
-  swap(tmp);
-  return *this;
-}
-
-void BimpliesLexpr::swap(BimpliesLexpr & other)
-{
-  std::swap(lexpr_1, other.lexpr_1);
-  std::swap(lexpr_2, other.lexpr_2);
-
-}
-
-BimpliesLexpr::~BimpliesLexpr()
-{
-  delete(lexpr_1);
-  delete(lexpr_2);
-
-}
-
-void BimpliesLexpr::accept(Visitor *v)
-{
-  v->visitBimpliesLexpr(this);
-}
-
-BimpliesLexpr *BimpliesLexpr::clone() const
-{
-  return new BimpliesLexpr(*this);
-}
-
-
-
-/********************   BiffLexpr    ********************/
-BiffLexpr::BiffLexpr(Lexpr *p1, Lexpr *p2)
-{
-  lexpr_1 = p1;
-  lexpr_2 = p2;
-
-}
-
-BiffLexpr::BiffLexpr(const BiffLexpr & other)
-{
-  lexpr_1 = other.lexpr_1->clone();
-  lexpr_2 = other.lexpr_2->clone();
-
-}
-
-BiffLexpr &BiffLexpr::operator=(const BiffLexpr & other)
-{
-  BiffLexpr tmp(other);
-  swap(tmp);
-  return *this;
-}
-
-void BiffLexpr::swap(BiffLexpr & other)
-{
-  std::swap(lexpr_1, other.lexpr_1);
-  std::swap(lexpr_2, other.lexpr_2);
-
-}
-
-BiffLexpr::~BiffLexpr()
-{
-  delete(lexpr_1);
-  delete(lexpr_2);
-
-}
-
-void BiffLexpr::accept(Visitor *v)
-{
-  v->visitBiffLexpr(this);
-}
-
-BiffLexpr *BiffLexpr::clone() const
-{
-  return new BiffLexpr(*this);
-}
-
-
-
-/********************   InLexpr    ********************/
-InLexpr::InLexpr(Lexpr *p1, Lexpr *p2)
-{
-  lexpr_1 = p1;
-  lexpr_2 = p2;
-
-}
-
-InLexpr::InLexpr(const InLexpr & other)
-{
-  lexpr_1 = other.lexpr_1->clone();
-  lexpr_2 = other.lexpr_2->clone();
-
-}
-
-InLexpr &InLexpr::operator=(const InLexpr & other)
-{
-  InLexpr tmp(other);
-  swap(tmp);
-  return *this;
-}
-
-void InLexpr::swap(InLexpr & other)
-{
-  std::swap(lexpr_1, other.lexpr_1);
-  std::swap(lexpr_2, other.lexpr_2);
-
-}
-
-InLexpr::~InLexpr()
-{
-  delete(lexpr_1);
-  delete(lexpr_2);
-
-}
-
-void InLexpr::accept(Visitor *v)
-{
-  v->visitInLexpr(this);
-}
-
-InLexpr *InLexpr::clone() const
-{
-  return new InLexpr(*this);
-}
-
-
-
-/********************   TernaryLexpr    ********************/
-TernaryLexpr::TernaryLexpr(Lexpr *p1, Lexpr *p2, Lexpr *p3)
-{
-  lexpr_1 = p1;
-  lexpr_2 = p2;
-  lexpr_3 = p3;
-
-}
-
-TernaryLexpr::TernaryLexpr(const TernaryLexpr & other)
-{
-  lexpr_1 = other.lexpr_1->clone();
-  lexpr_2 = other.lexpr_2->clone();
-  lexpr_3 = other.lexpr_3->clone();
-
-}
-
-TernaryLexpr &TernaryLexpr::operator=(const TernaryLexpr & other)
-{
-  TernaryLexpr tmp(other);
-  swap(tmp);
-  return *this;
-}
-
-void TernaryLexpr::swap(TernaryLexpr & other)
-{
-  std::swap(lexpr_1, other.lexpr_1);
-  std::swap(lexpr_2, other.lexpr_2);
-  std::swap(lexpr_3, other.lexpr_3);
-
-}
-
-TernaryLexpr::~TernaryLexpr()
-{
-  delete(lexpr_1);
-  delete(lexpr_2);
-  delete(lexpr_3);
-
-}
-
-void TernaryLexpr::accept(Visitor *v)
-{
-  v->visitTernaryLexpr(this);
-}
-
-TernaryLexpr *TernaryLexpr::clone() const
-{
-  return new TernaryLexpr(*this);
-}
-
-
-
 /********************   RelationLexpr    ********************/
 RelationLexpr::RelationLexpr(Lexpr *p1, ListLexprRelInner *p2, Relation *p3, Lexpr *p4)
 {
@@ -1403,46 +1247,90 @@ RelationLexpr *RelationLexpr::clone() const
 
 
 
-/********************   NotLexprInner    ********************/
-NotLexprInner::NotLexprInner(Lexpr *p1)
+/********************   BinderLexpr    ********************/
+BinderLexpr::BinderLexpr(LexprBinder *p1)
 {
-  lexpr_ = p1;
+  lexprbinder_ = p1;
 
 }
 
-NotLexprInner::NotLexprInner(const NotLexprInner & other)
+BinderLexpr::BinderLexpr(const BinderLexpr & other)
 {
-  lexpr_ = other.lexpr_->clone();
+  lexprbinder_ = other.lexprbinder_->clone();
 
 }
 
-NotLexprInner &NotLexprInner::operator=(const NotLexprInner & other)
+BinderLexpr &BinderLexpr::operator=(const BinderLexpr & other)
 {
-  NotLexprInner tmp(other);
+  BinderLexpr tmp(other);
   swap(tmp);
   return *this;
 }
 
-void NotLexprInner::swap(NotLexprInner & other)
+void BinderLexpr::swap(BinderLexpr & other)
 {
-  std::swap(lexpr_, other.lexpr_);
+  std::swap(lexprbinder_, other.lexprbinder_);
 
 }
 
-NotLexprInner::~NotLexprInner()
+BinderLexpr::~BinderLexpr()
 {
-  delete(lexpr_);
+  delete(lexprbinder_);
 
 }
 
-void NotLexprInner::accept(Visitor *v)
+void BinderLexpr::accept(Visitor *v)
 {
-  v->visitNotLexprInner(this);
+  v->visitBinderLexpr(this);
 }
 
-NotLexprInner *NotLexprInner::clone() const
+BinderLexpr *BinderLexpr::clone() const
 {
-  return new NotLexprInner(*this);
+  return new BinderLexpr(*this);
+}
+
+
+
+/********************   NotBinderLexpr    ********************/
+NotBinderLexpr::NotBinderLexpr(LexprBinder *p1)
+{
+  lexprbinder_ = p1;
+
+}
+
+NotBinderLexpr::NotBinderLexpr(const NotBinderLexpr & other)
+{
+  lexprbinder_ = other.lexprbinder_->clone();
+
+}
+
+NotBinderLexpr &NotBinderLexpr::operator=(const NotBinderLexpr & other)
+{
+  NotBinderLexpr tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void NotBinderLexpr::swap(NotBinderLexpr & other)
+{
+  std::swap(lexprbinder_, other.lexprbinder_);
+
+}
+
+NotBinderLexpr::~NotBinderLexpr()
+{
+  delete(lexprbinder_);
+
+}
+
+void NotBinderLexpr::accept(Visitor *v)
+{
+  v->visitNotBinderLexpr(this);
+}
+
+NotBinderLexpr *NotBinderLexpr::clone() const
+{
+  return new NotBinderLexpr(*this);
 }
 
 
@@ -1523,6 +1411,54 @@ void FalseLexpr::accept(Visitor *v)
 FalseLexpr *FalseLexpr::clone() const
 {
   return new FalseLexpr(*this);
+}
+
+
+
+/********************   ValidLexpr    ********************/
+ValidLexpr::ValidLexpr(OptLabel *p1, Lexpr *p2)
+{
+  optlabel_ = p1;
+  lexpr_ = p2;
+
+}
+
+ValidLexpr::ValidLexpr(const ValidLexpr & other)
+{
+  optlabel_ = other.optlabel_->clone();
+  lexpr_ = other.lexpr_->clone();
+
+}
+
+ValidLexpr &ValidLexpr::operator=(const ValidLexpr & other)
+{
+  ValidLexpr tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void ValidLexpr::swap(ValidLexpr & other)
+{
+  std::swap(optlabel_, other.optlabel_);
+  std::swap(lexpr_, other.lexpr_);
+
+}
+
+ValidLexpr::~ValidLexpr()
+{
+  delete(optlabel_);
+  delete(lexpr_);
+
+}
+
+void ValidLexpr::accept(Visitor *v)
+{
+  v->visitValidLexpr(this);
+}
+
+ValidLexpr *ValidLexpr::clone() const
+{
+  return new ValidLexpr(*this);
 }
 
 
@@ -1992,194 +1928,50 @@ SubtrLexpr *SubtrLexpr::clone() const
 
 
 
-/********************   MultLexpr    ********************/
-MultLexpr::MultLexpr(Lexpr *p1, Lexpr *p2)
+/********************   SquaresRangeLexpr    ********************/
+SquaresRangeLexpr::SquaresRangeLexpr(Lexpr *p1, Range *p2)
 {
-  lexpr_1 = p1;
-  lexpr_2 = p2;
+  lexpr_ = p1;
+  range_ = p2;
 
 }
 
-MultLexpr::MultLexpr(const MultLexpr & other)
+SquaresRangeLexpr::SquaresRangeLexpr(const SquaresRangeLexpr & other)
 {
-  lexpr_1 = other.lexpr_1->clone();
-  lexpr_2 = other.lexpr_2->clone();
+  lexpr_ = other.lexpr_->clone();
+  range_ = other.range_->clone();
 
 }
 
-MultLexpr &MultLexpr::operator=(const MultLexpr & other)
+SquaresRangeLexpr &SquaresRangeLexpr::operator=(const SquaresRangeLexpr & other)
 {
-  MultLexpr tmp(other);
+  SquaresRangeLexpr tmp(other);
   swap(tmp);
   return *this;
 }
 
-void MultLexpr::swap(MultLexpr & other)
+void SquaresRangeLexpr::swap(SquaresRangeLexpr & other)
 {
-  std::swap(lexpr_1, other.lexpr_1);
-  std::swap(lexpr_2, other.lexpr_2);
+  std::swap(lexpr_, other.lexpr_);
+  std::swap(range_, other.range_);
 
 }
 
-MultLexpr::~MultLexpr()
+SquaresRangeLexpr::~SquaresRangeLexpr()
 {
-  delete(lexpr_1);
-  delete(lexpr_2);
+  delete(lexpr_);
+  delete(range_);
 
 }
 
-void MultLexpr::accept(Visitor *v)
+void SquaresRangeLexpr::accept(Visitor *v)
 {
-  v->visitMultLexpr(this);
+  v->visitSquaresRangeLexpr(this);
 }
 
-MultLexpr *MultLexpr::clone() const
+SquaresRangeLexpr *SquaresRangeLexpr::clone() const
 {
-  return new MultLexpr(*this);
-}
-
-
-
-/********************   DivLexpr    ********************/
-DivLexpr::DivLexpr(Lexpr *p1, Lexpr *p2)
-{
-  lexpr_1 = p1;
-  lexpr_2 = p2;
-
-}
-
-DivLexpr::DivLexpr(const DivLexpr & other)
-{
-  lexpr_1 = other.lexpr_1->clone();
-  lexpr_2 = other.lexpr_2->clone();
-
-}
-
-DivLexpr &DivLexpr::operator=(const DivLexpr & other)
-{
-  DivLexpr tmp(other);
-  swap(tmp);
-  return *this;
-}
-
-void DivLexpr::swap(DivLexpr & other)
-{
-  std::swap(lexpr_1, other.lexpr_1);
-  std::swap(lexpr_2, other.lexpr_2);
-
-}
-
-DivLexpr::~DivLexpr()
-{
-  delete(lexpr_1);
-  delete(lexpr_2);
-
-}
-
-void DivLexpr::accept(Visitor *v)
-{
-  v->visitDivLexpr(this);
-}
-
-DivLexpr *DivLexpr::clone() const
-{
-  return new DivLexpr(*this);
-}
-
-
-
-/********************   ModLexpr    ********************/
-ModLexpr::ModLexpr(Lexpr *p1, Lexpr *p2)
-{
-  lexpr_1 = p1;
-  lexpr_2 = p2;
-
-}
-
-ModLexpr::ModLexpr(const ModLexpr & other)
-{
-  lexpr_1 = other.lexpr_1->clone();
-  lexpr_2 = other.lexpr_2->clone();
-
-}
-
-ModLexpr &ModLexpr::operator=(const ModLexpr & other)
-{
-  ModLexpr tmp(other);
-  swap(tmp);
-  return *this;
-}
-
-void ModLexpr::swap(ModLexpr & other)
-{
-  std::swap(lexpr_1, other.lexpr_1);
-  std::swap(lexpr_2, other.lexpr_2);
-
-}
-
-ModLexpr::~ModLexpr()
-{
-  delete(lexpr_1);
-  delete(lexpr_2);
-
-}
-
-void ModLexpr::accept(Visitor *v)
-{
-  v->visitModLexpr(this);
-}
-
-ModLexpr *ModLexpr::clone() const
-{
-  return new ModLexpr(*this);
-}
-
-
-
-/********************   StarHatLexpr    ********************/
-StarHatLexpr::StarHatLexpr(Lexpr *p1, Lexpr *p2)
-{
-  lexpr_1 = p1;
-  lexpr_2 = p2;
-
-}
-
-StarHatLexpr::StarHatLexpr(const StarHatLexpr & other)
-{
-  lexpr_1 = other.lexpr_1->clone();
-  lexpr_2 = other.lexpr_2->clone();
-
-}
-
-StarHatLexpr &StarHatLexpr::operator=(const StarHatLexpr & other)
-{
-  StarHatLexpr tmp(other);
-  swap(tmp);
-  return *this;
-}
-
-void StarHatLexpr::swap(StarHatLexpr & other)
-{
-  std::swap(lexpr_1, other.lexpr_1);
-  std::swap(lexpr_2, other.lexpr_2);
-
-}
-
-StarHatLexpr::~StarHatLexpr()
-{
-  delete(lexpr_1);
-  delete(lexpr_2);
-
-}
-
-void StarHatLexpr::accept(Visitor *v)
-{
-  v->visitStarHatLexpr(this);
-}
-
-StarHatLexpr *StarHatLexpr::clone() const
-{
-  return new StarHatLexpr(*this);
+  return new SquaresRangeLexpr(*this);
 }
 
 
@@ -2228,354 +2020,6 @@ void SquaresLexpr::accept(Visitor *v)
 SquaresLexpr *SquaresLexpr::clone() const
 {
   return new SquaresLexpr(*this);
-}
-
-
-
-/********************   MinusLexpr    ********************/
-MinusLexpr::MinusLexpr(Lexpr *p1)
-{
-  lexpr_ = p1;
-
-}
-
-MinusLexpr::MinusLexpr(const MinusLexpr & other)
-{
-  lexpr_ = other.lexpr_->clone();
-
-}
-
-MinusLexpr &MinusLexpr::operator=(const MinusLexpr & other)
-{
-  MinusLexpr tmp(other);
-  swap(tmp);
-  return *this;
-}
-
-void MinusLexpr::swap(MinusLexpr & other)
-{
-  std::swap(lexpr_, other.lexpr_);
-
-}
-
-MinusLexpr::~MinusLexpr()
-{
-  delete(lexpr_);
-
-}
-
-void MinusLexpr::accept(Visitor *v)
-{
-  v->visitMinusLexpr(this);
-}
-
-MinusLexpr *MinusLexpr::clone() const
-{
-  return new MinusLexpr(*this);
-}
-
-
-
-/********************   PlusLexpr    ********************/
-PlusLexpr::PlusLexpr(Lexpr *p1)
-{
-  lexpr_ = p1;
-
-}
-
-PlusLexpr::PlusLexpr(const PlusLexpr & other)
-{
-  lexpr_ = other.lexpr_->clone();
-
-}
-
-PlusLexpr &PlusLexpr::operator=(const PlusLexpr & other)
-{
-  PlusLexpr tmp(other);
-  swap(tmp);
-  return *this;
-}
-
-void PlusLexpr::swap(PlusLexpr & other)
-{
-  std::swap(lexpr_, other.lexpr_);
-
-}
-
-PlusLexpr::~PlusLexpr()
-{
-  delete(lexpr_);
-
-}
-
-void PlusLexpr::accept(Visitor *v)
-{
-  v->visitPlusLexpr(this);
-}
-
-PlusLexpr *PlusLexpr::clone() const
-{
-  return new PlusLexpr(*this);
-}
-
-
-
-/********************   TildeLexpr    ********************/
-TildeLexpr::TildeLexpr(Lexpr *p1)
-{
-  lexpr_ = p1;
-
-}
-
-TildeLexpr::TildeLexpr(const TildeLexpr & other)
-{
-  lexpr_ = other.lexpr_->clone();
-
-}
-
-TildeLexpr &TildeLexpr::operator=(const TildeLexpr & other)
-{
-  TildeLexpr tmp(other);
-  swap(tmp);
-  return *this;
-}
-
-void TildeLexpr::swap(TildeLexpr & other)
-{
-  std::swap(lexpr_, other.lexpr_);
-
-}
-
-TildeLexpr::~TildeLexpr()
-{
-  delete(lexpr_);
-
-}
-
-void TildeLexpr::accept(Visitor *v)
-{
-  v->visitTildeLexpr(this);
-}
-
-TildeLexpr *TildeLexpr::clone() const
-{
-  return new TildeLexpr(*this);
-}
-
-
-
-/********************   StarLexpr    ********************/
-StarLexpr::StarLexpr(Lexpr *p1)
-{
-  lexpr_ = p1;
-
-}
-
-StarLexpr::StarLexpr(const StarLexpr & other)
-{
-  lexpr_ = other.lexpr_->clone();
-
-}
-
-StarLexpr &StarLexpr::operator=(const StarLexpr & other)
-{
-  StarLexpr tmp(other);
-  swap(tmp);
-  return *this;
-}
-
-void StarLexpr::swap(StarLexpr & other)
-{
-  std::swap(lexpr_, other.lexpr_);
-
-}
-
-StarLexpr::~StarLexpr()
-{
-  delete(lexpr_);
-
-}
-
-void StarLexpr::accept(Visitor *v)
-{
-  v->visitStarLexpr(this);
-}
-
-StarLexpr *StarLexpr::clone() const
-{
-  return new StarLexpr(*this);
-}
-
-
-
-/********************   AmpUnaryLexpr    ********************/
-AmpUnaryLexpr::AmpUnaryLexpr(Lexpr *p1)
-{
-  lexpr_ = p1;
-
-}
-
-AmpUnaryLexpr::AmpUnaryLexpr(const AmpUnaryLexpr & other)
-{
-  lexpr_ = other.lexpr_->clone();
-
-}
-
-AmpUnaryLexpr &AmpUnaryLexpr::operator=(const AmpUnaryLexpr & other)
-{
-  AmpUnaryLexpr tmp(other);
-  swap(tmp);
-  return *this;
-}
-
-void AmpUnaryLexpr::swap(AmpUnaryLexpr & other)
-{
-  std::swap(lexpr_, other.lexpr_);
-
-}
-
-AmpUnaryLexpr::~AmpUnaryLexpr()
-{
-  delete(lexpr_);
-
-}
-
-void AmpUnaryLexpr::accept(Visitor *v)
-{
-  v->visitAmpUnaryLexpr(this);
-}
-
-AmpUnaryLexpr *AmpUnaryLexpr::clone() const
-{
-  return new AmpUnaryLexpr(*this);
-}
-
-
-
-/********************   SizeOfLexpr    ********************/
-SizeOfLexpr::SizeOfLexpr(Lexpr *p1)
-{
-  lexpr_ = p1;
-
-}
-
-SizeOfLexpr::SizeOfLexpr(const SizeOfLexpr & other)
-{
-  lexpr_ = other.lexpr_->clone();
-
-}
-
-SizeOfLexpr &SizeOfLexpr::operator=(const SizeOfLexpr & other)
-{
-  SizeOfLexpr tmp(other);
-  swap(tmp);
-  return *this;
-}
-
-void SizeOfLexpr::swap(SizeOfLexpr & other)
-{
-  std::swap(lexpr_, other.lexpr_);
-
-}
-
-SizeOfLexpr::~SizeOfLexpr()
-{
-  delete(lexpr_);
-
-}
-
-void SizeOfLexpr::accept(Visitor *v)
-{
-  v->visitSizeOfLexpr(this);
-}
-
-SizeOfLexpr *SizeOfLexpr::clone() const
-{
-  return new SizeOfLexpr(*this);
-}
-
-
-
-/********************   OldLexpr    ********************/
-OldLexpr::OldLexpr(Lexpr *p1)
-{
-  lexpr_ = p1;
-
-}
-
-OldLexpr::OldLexpr(const OldLexpr & other)
-{
-  lexpr_ = other.lexpr_->clone();
-
-}
-
-OldLexpr &OldLexpr::operator=(const OldLexpr & other)
-{
-  OldLexpr tmp(other);
-  swap(tmp);
-  return *this;
-}
-
-void OldLexpr::swap(OldLexpr & other)
-{
-  std::swap(lexpr_, other.lexpr_);
-
-}
-
-OldLexpr::~OldLexpr()
-{
-  delete(lexpr_);
-
-}
-
-void OldLexpr::accept(Visitor *v)
-{
-  v->visitOldLexpr(this);
-}
-
-OldLexpr *OldLexpr::clone() const
-{
-  return new OldLexpr(*this);
-}
-
-
-
-/********************   ResultLexpr    ********************/
-ResultLexpr::ResultLexpr()
-{
-
-}
-
-ResultLexpr::ResultLexpr(const ResultLexpr & other)
-{
-
-}
-
-ResultLexpr &ResultLexpr::operator=(const ResultLexpr & other)
-{
-  ResultLexpr tmp(other);
-  swap(tmp);
-  return *this;
-}
-
-void ResultLexpr::swap(ResultLexpr & other)
-{
-
-}
-
-ResultLexpr::~ResultLexpr()
-{
-
-}
-
-void ResultLexpr::accept(Visitor *v)
-{
-  v->visitResultLexpr(this);
-}
-
-ResultLexpr *ResultLexpr::clone() const
-{
-  return new ResultLexpr(*this);
 }
 
 
@@ -2756,142 +2200,46 @@ PiLexpr *PiLexpr::clone() const
 
 
 
-/********************   LessLessLexpr    ********************/
-LessLessLexpr::LessLessLexpr(Lexpr *p1, Lexpr *p2)
+/********************   ParenRangeLexpr    ********************/
+ParenRangeLexpr::ParenRangeLexpr(Range *p1)
 {
-  lexpr_1 = p1;
-  lexpr_2 = p2;
+  range_ = p1;
 
 }
 
-LessLessLexpr::LessLessLexpr(const LessLessLexpr & other)
+ParenRangeLexpr::ParenRangeLexpr(const ParenRangeLexpr & other)
 {
-  lexpr_1 = other.lexpr_1->clone();
-  lexpr_2 = other.lexpr_2->clone();
+  range_ = other.range_->clone();
 
 }
 
-LessLessLexpr &LessLessLexpr::operator=(const LessLessLexpr & other)
+ParenRangeLexpr &ParenRangeLexpr::operator=(const ParenRangeLexpr & other)
 {
-  LessLessLexpr tmp(other);
+  ParenRangeLexpr tmp(other);
   swap(tmp);
   return *this;
 }
 
-void LessLessLexpr::swap(LessLessLexpr & other)
+void ParenRangeLexpr::swap(ParenRangeLexpr & other)
 {
-  std::swap(lexpr_1, other.lexpr_1);
-  std::swap(lexpr_2, other.lexpr_2);
+  std::swap(range_, other.range_);
 
 }
 
-LessLessLexpr::~LessLessLexpr()
+ParenRangeLexpr::~ParenRangeLexpr()
 {
-  delete(lexpr_1);
-  delete(lexpr_2);
+  delete(range_);
 
 }
 
-void LessLessLexpr::accept(Visitor *v)
+void ParenRangeLexpr::accept(Visitor *v)
 {
-  v->visitLessLessLexpr(this);
+  v->visitParenRangeLexpr(this);
 }
 
-LessLessLexpr *LessLessLexpr::clone() const
+ParenRangeLexpr *ParenRangeLexpr::clone() const
 {
-  return new LessLessLexpr(*this);
-}
-
-
-
-/********************   GreaterGreaterLexpr    ********************/
-GreaterGreaterLexpr::GreaterGreaterLexpr(Lexpr *p1, Lexpr *p2)
-{
-  lexpr_1 = p1;
-  lexpr_2 = p2;
-
-}
-
-GreaterGreaterLexpr::GreaterGreaterLexpr(const GreaterGreaterLexpr & other)
-{
-  lexpr_1 = other.lexpr_1->clone();
-  lexpr_2 = other.lexpr_2->clone();
-
-}
-
-GreaterGreaterLexpr &GreaterGreaterLexpr::operator=(const GreaterGreaterLexpr & other)
-{
-  GreaterGreaterLexpr tmp(other);
-  swap(tmp);
-  return *this;
-}
-
-void GreaterGreaterLexpr::swap(GreaterGreaterLexpr & other)
-{
-  std::swap(lexpr_1, other.lexpr_1);
-  std::swap(lexpr_2, other.lexpr_2);
-
-}
-
-GreaterGreaterLexpr::~GreaterGreaterLexpr()
-{
-  delete(lexpr_1);
-  delete(lexpr_2);
-
-}
-
-void GreaterGreaterLexpr::accept(Visitor *v)
-{
-  v->visitGreaterGreaterLexpr(this);
-}
-
-GreaterGreaterLexpr *GreaterGreaterLexpr::clone() const
-{
-  return new GreaterGreaterLexpr(*this);
-}
-
-
-
-/********************   TypeOfLexpr    ********************/
-TypeOfLexpr::TypeOfLexpr(Lexpr *p1)
-{
-  lexpr_ = p1;
-
-}
-
-TypeOfLexpr::TypeOfLexpr(const TypeOfLexpr & other)
-{
-  lexpr_ = other.lexpr_->clone();
-
-}
-
-TypeOfLexpr &TypeOfLexpr::operator=(const TypeOfLexpr & other)
-{
-  TypeOfLexpr tmp(other);
-  swap(tmp);
-  return *this;
-}
-
-void TypeOfLexpr::swap(TypeOfLexpr & other)
-{
-  std::swap(lexpr_, other.lexpr_);
-
-}
-
-TypeOfLexpr::~TypeOfLexpr()
-{
-  delete(lexpr_);
-
-}
-
-void TypeOfLexpr::accept(Visitor *v)
-{
-  v->visitTypeOfLexpr(this);
-}
-
-TypeOfLexpr *TypeOfLexpr::clone() const
-{
-  return new TypeOfLexpr(*this);
+  return new ParenRangeLexpr(*this);
 }
 
 
@@ -3180,6 +2528,1080 @@ void NotEqRel::accept(Visitor *v)
 NotEqRel *NotEqRel::clone() const
 {
   return new NotEqRel(*this);
+}
+
+
+
+/********************   ForallBinderLexpr    ********************/
+ForallBinderLexpr::ForallBinderLexpr(Binders *p1, Lexpr *p2)
+{
+  binders_ = p1;
+  lexpr_ = p2;
+
+}
+
+ForallBinderLexpr::ForallBinderLexpr(const ForallBinderLexpr & other)
+{
+  binders_ = other.binders_->clone();
+  lexpr_ = other.lexpr_->clone();
+
+}
+
+ForallBinderLexpr &ForallBinderLexpr::operator=(const ForallBinderLexpr & other)
+{
+  ForallBinderLexpr tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void ForallBinderLexpr::swap(ForallBinderLexpr & other)
+{
+  std::swap(binders_, other.binders_);
+  std::swap(lexpr_, other.lexpr_);
+
+}
+
+ForallBinderLexpr::~ForallBinderLexpr()
+{
+  delete(binders_);
+  delete(lexpr_);
+
+}
+
+void ForallBinderLexpr::accept(Visitor *v)
+{
+  v->visitForallBinderLexpr(this);
+}
+
+ForallBinderLexpr *ForallBinderLexpr::clone() const
+{
+  return new ForallBinderLexpr(*this);
+}
+
+
+
+/********************   ExistBinderLexpr    ********************/
+ExistBinderLexpr::ExistBinderLexpr(Binders *p1, Lexpr *p2)
+{
+  binders_ = p1;
+  lexpr_ = p2;
+
+}
+
+ExistBinderLexpr::ExistBinderLexpr(const ExistBinderLexpr & other)
+{
+  binders_ = other.binders_->clone();
+  lexpr_ = other.lexpr_->clone();
+
+}
+
+ExistBinderLexpr &ExistBinderLexpr::operator=(const ExistBinderLexpr & other)
+{
+  ExistBinderLexpr tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void ExistBinderLexpr::swap(ExistBinderLexpr & other)
+{
+  std::swap(binders_, other.binders_);
+  std::swap(lexpr_, other.lexpr_);
+
+}
+
+ExistBinderLexpr::~ExistBinderLexpr()
+{
+  delete(binders_);
+  delete(lexpr_);
+
+}
+
+void ExistBinderLexpr::accept(Visitor *v)
+{
+  v->visitExistBinderLexpr(this);
+}
+
+ExistBinderLexpr *ExistBinderLexpr::clone() const
+{
+  return new ExistBinderLexpr(*this);
+}
+
+
+
+/********************   LambdaBinderLexpr    ********************/
+LambdaBinderLexpr::LambdaBinderLexpr(Binders *p1, Lexpr *p2)
+{
+  binders_ = p1;
+  lexpr_ = p2;
+
+}
+
+LambdaBinderLexpr::LambdaBinderLexpr(const LambdaBinderLexpr & other)
+{
+  binders_ = other.binders_->clone();
+  lexpr_ = other.lexpr_->clone();
+
+}
+
+LambdaBinderLexpr &LambdaBinderLexpr::operator=(const LambdaBinderLexpr & other)
+{
+  LambdaBinderLexpr tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void LambdaBinderLexpr::swap(LambdaBinderLexpr & other)
+{
+  std::swap(binders_, other.binders_);
+  std::swap(lexpr_, other.lexpr_);
+
+}
+
+LambdaBinderLexpr::~LambdaBinderLexpr()
+{
+  delete(binders_);
+  delete(lexpr_);
+
+}
+
+void LambdaBinderLexpr::accept(Visitor *v)
+{
+  v->visitLambdaBinderLexpr(this);
+}
+
+LambdaBinderLexpr *LambdaBinderLexpr::clone() const
+{
+  return new LambdaBinderLexpr(*this);
+}
+
+
+
+/********************   TheBinders    ********************/
+TheBinders::TheBinders(TypeSpecOFTYPENAME *p1, VarSpec *p2, ListBindersReentrance *p3)
+{
+  typespecoftypename_ = p1;
+  varspec_ = p2;
+  listbindersreentrance_ = p3;
+
+}
+
+TheBinders::TheBinders(const TheBinders & other)
+{
+  typespecoftypename_ = other.typespecoftypename_->clone();
+  varspec_ = other.varspec_->clone();
+  listbindersreentrance_ = other.listbindersreentrance_->clone();
+
+}
+
+TheBinders &TheBinders::operator=(const TheBinders & other)
+{
+  TheBinders tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void TheBinders::swap(TheBinders & other)
+{
+  std::swap(typespecoftypename_, other.typespecoftypename_);
+  std::swap(varspec_, other.varspec_);
+  std::swap(listbindersreentrance_, other.listbindersreentrance_);
+
+}
+
+TheBinders::~TheBinders()
+{
+  delete(typespecoftypename_);
+  delete(varspec_);
+  delete(listbindersreentrance_);
+
+}
+
+void TheBinders::accept(Visitor *v)
+{
+  v->visitTheBinders(this);
+}
+
+TheBinders *TheBinders::clone() const
+{
+  return new TheBinders(*this);
+}
+
+
+
+/********************   TypeSpecTYPENAME    ********************/
+TypeSpecTYPENAME::TypeSpecTYPENAME(Ident p1)
+{
+  ident_ = p1;
+
+}
+
+TypeSpecTYPENAME::TypeSpecTYPENAME(const TypeSpecTYPENAME & other)
+{
+  ident_ = other.ident_;
+
+}
+
+TypeSpecTYPENAME &TypeSpecTYPENAME::operator=(const TypeSpecTYPENAME & other)
+{
+  TypeSpecTYPENAME tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void TypeSpecTYPENAME::swap(TypeSpecTYPENAME & other)
+{
+  std::swap(ident_, other.ident_);
+
+}
+
+TypeSpecTYPENAME::~TypeSpecTYPENAME()
+{
+
+}
+
+void TypeSpecTYPENAME::accept(Visitor *v)
+{
+  v->visitTypeSpecTYPENAME(this);
+}
+
+TypeSpecTYPENAME *TypeSpecTYPENAME::clone() const
+{
+  return new TypeSpecTYPENAME(*this);
+}
+
+
+
+/********************   TypeSpecSimpleFromTypenameTypeSpec    ********************/
+TypeSpecSimpleFromTypenameTypeSpec::TypeSpecSimpleFromTypenameTypeSpec(TypeSpecSimple *p1)
+{
+  typespecsimple_ = p1;
+
+}
+
+TypeSpecSimpleFromTypenameTypeSpec::TypeSpecSimpleFromTypenameTypeSpec(const TypeSpecSimpleFromTypenameTypeSpec & other)
+{
+  typespecsimple_ = other.typespecsimple_->clone();
+
+}
+
+TypeSpecSimpleFromTypenameTypeSpec &TypeSpecSimpleFromTypenameTypeSpec::operator=(const TypeSpecSimpleFromTypenameTypeSpec & other)
+{
+  TypeSpecSimpleFromTypenameTypeSpec tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void TypeSpecSimpleFromTypenameTypeSpec::swap(TypeSpecSimpleFromTypenameTypeSpec & other)
+{
+  std::swap(typespecsimple_, other.typespecsimple_);
+
+}
+
+TypeSpecSimpleFromTypenameTypeSpec::~TypeSpecSimpleFromTypenameTypeSpec()
+{
+  delete(typespecsimple_);
+
+}
+
+void TypeSpecSimpleFromTypenameTypeSpec::accept(Visitor *v)
+{
+  v->visitTypeSpecSimpleFromTypenameTypeSpec(this);
+}
+
+TypeSpecSimpleFromTypenameTypeSpec *TypeSpecSimpleFromTypenameTypeSpec::clone() const
+{
+  return new TypeSpecSimpleFromTypenameTypeSpec(*this);
+}
+
+
+
+/********************   BindersReentranceDeclSpec    ********************/
+BindersReentranceDeclSpec::BindersReentranceDeclSpec(TypeSpecOFTYPENAME *p1, VarSpec *p2)
+{
+  typespecoftypename_ = p1;
+  varspec_ = p2;
+
+}
+
+BindersReentranceDeclSpec::BindersReentranceDeclSpec(const BindersReentranceDeclSpec & other)
+{
+  typespecoftypename_ = other.typespecoftypename_->clone();
+  varspec_ = other.varspec_->clone();
+
+}
+
+BindersReentranceDeclSpec &BindersReentranceDeclSpec::operator=(const BindersReentranceDeclSpec & other)
+{
+  BindersReentranceDeclSpec tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void BindersReentranceDeclSpec::swap(BindersReentranceDeclSpec & other)
+{
+  std::swap(typespecoftypename_, other.typespecoftypename_);
+  std::swap(varspec_, other.varspec_);
+
+}
+
+BindersReentranceDeclSpec::~BindersReentranceDeclSpec()
+{
+  delete(typespecoftypename_);
+  delete(varspec_);
+
+}
+
+void BindersReentranceDeclSpec::accept(Visitor *v)
+{
+  v->visitBindersReentranceDeclSpec(this);
+}
+
+BindersReentranceDeclSpec *BindersReentranceDeclSpec::clone() const
+{
+  return new BindersReentranceDeclSpec(*this);
+}
+
+
+
+/********************   BindersReentranceVarSpec    ********************/
+BindersReentranceVarSpec::BindersReentranceVarSpec(VarSpec *p1)
+{
+  varspec_ = p1;
+
+}
+
+BindersReentranceVarSpec::BindersReentranceVarSpec(const BindersReentranceVarSpec & other)
+{
+  varspec_ = other.varspec_->clone();
+
+}
+
+BindersReentranceVarSpec &BindersReentranceVarSpec::operator=(const BindersReentranceVarSpec & other)
+{
+  BindersReentranceVarSpec tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void BindersReentranceVarSpec::swap(BindersReentranceVarSpec & other)
+{
+  std::swap(varspec_, other.varspec_);
+
+}
+
+BindersReentranceVarSpec::~BindersReentranceVarSpec()
+{
+  delete(varspec_);
+
+}
+
+void BindersReentranceVarSpec::accept(Visitor *v)
+{
+  v->visitBindersReentranceVarSpec(this);
+}
+
+BindersReentranceVarSpec *BindersReentranceVarSpec::clone() const
+{
+  return new BindersReentranceVarSpec(*this);
+}
+
+
+
+/********************   StartVarSpec    ********************/
+StartVarSpec::StartVarSpec(ListStars *p1, VarSpec *p2)
+{
+  liststars_ = p1;
+  varspec_ = p2;
+
+}
+
+StartVarSpec::StartVarSpec(const StartVarSpec & other)
+{
+  liststars_ = other.liststars_->clone();
+  varspec_ = other.varspec_->clone();
+
+}
+
+StartVarSpec &StartVarSpec::operator=(const StartVarSpec & other)
+{
+  StartVarSpec tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void StartVarSpec::swap(StartVarSpec & other)
+{
+  std::swap(liststars_, other.liststars_);
+  std::swap(varspec_, other.varspec_);
+
+}
+
+StartVarSpec::~StartVarSpec()
+{
+  delete(liststars_);
+  delete(varspec_);
+
+}
+
+void StartVarSpec::accept(Visitor *v)
+{
+  v->visitStartVarSpec(this);
+}
+
+StartVarSpec *StartVarSpec::clone() const
+{
+  return new StartVarSpec(*this);
+}
+
+
+
+/********************   SimpleSpec    ********************/
+SimpleSpec::SimpleSpec(FullIdentifier *p1)
+{
+  fullidentifier_ = p1;
+
+}
+
+SimpleSpec::SimpleSpec(const SimpleSpec & other)
+{
+  fullidentifier_ = other.fullidentifier_->clone();
+
+}
+
+SimpleSpec &SimpleSpec::operator=(const SimpleSpec & other)
+{
+  SimpleSpec tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void SimpleSpec::swap(SimpleSpec & other)
+{
+  std::swap(fullidentifier_, other.fullidentifier_);
+
+}
+
+SimpleSpec::~SimpleSpec()
+{
+  delete(fullidentifier_);
+
+}
+
+void SimpleSpec::accept(Visitor *v)
+{
+  v->visitSimpleSpec(this);
+}
+
+SimpleSpec *SimpleSpec::clone() const
+{
+  return new SimpleSpec(*this);
+}
+
+
+
+/********************   ArraySpec    ********************/
+ArraySpec::ArraySpec(VarSpec *p1, ArraySize *p2)
+{
+  varspec_ = p1;
+  arraysize_ = p2;
+
+}
+
+ArraySpec::ArraySpec(const ArraySpec & other)
+{
+  varspec_ = other.varspec_->clone();
+  arraysize_ = other.arraysize_->clone();
+
+}
+
+ArraySpec &ArraySpec::operator=(const ArraySpec & other)
+{
+  ArraySpec tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void ArraySpec::swap(ArraySpec & other)
+{
+  std::swap(varspec_, other.varspec_);
+  std::swap(arraysize_, other.arraysize_);
+
+}
+
+ArraySpec::~ArraySpec()
+{
+  delete(varspec_);
+  delete(arraysize_);
+
+}
+
+void ArraySpec::accept(Visitor *v)
+{
+  v->visitArraySpec(this);
+}
+
+ArraySpec *ArraySpec::clone() const
+{
+  return new ArraySpec(*this);
+}
+
+
+
+/********************   Star    ********************/
+Star::Star()
+{
+
+}
+
+Star::Star(const Star & other)
+{
+
+}
+
+Star &Star::operator=(const Star & other)
+{
+  Star tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void Star::swap(Star & other)
+{
+
+}
+
+Star::~Star()
+{
+
+}
+
+void Star::accept(Visitor *v)
+{
+  v->visitStar(this);
+}
+
+Star *Star::clone() const
+{
+  return new Star(*this);
+}
+
+
+
+/********************   IntConstArraySize    ********************/
+IntConstArraySize::IntConstArraySize(Integer p1)
+{
+  integer_ = p1;
+
+}
+
+IntConstArraySize::IntConstArraySize(const IntConstArraySize & other)
+{
+  integer_ = other.integer_;
+
+}
+
+IntConstArraySize &IntConstArraySize::operator=(const IntConstArraySize & other)
+{
+  IntConstArraySize tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void IntConstArraySize::swap(IntConstArraySize & other)
+{
+  std::swap(integer_, other.integer_);
+
+}
+
+IntConstArraySize::~IntConstArraySize()
+{
+
+}
+
+void IntConstArraySize::accept(Visitor *v)
+{
+  v->visitIntConstArraySize(this);
+}
+
+IntConstArraySize *IntConstArraySize::clone() const
+{
+  return new IntConstArraySize(*this);
+}
+
+
+
+/********************   SomeArraySize    ********************/
+SomeArraySize::SomeArraySize(FullIdentifier *p1)
+{
+  fullidentifier_ = p1;
+
+}
+
+SomeArraySize::SomeArraySize(const SomeArraySize & other)
+{
+  fullidentifier_ = other.fullidentifier_->clone();
+
+}
+
+SomeArraySize &SomeArraySize::operator=(const SomeArraySize & other)
+{
+  SomeArraySize tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void SomeArraySize::swap(SomeArraySize & other)
+{
+  std::swap(fullidentifier_, other.fullidentifier_);
+
+}
+
+SomeArraySize::~SomeArraySize()
+{
+  delete(fullidentifier_);
+
+}
+
+void SomeArraySize::accept(Visitor *v)
+{
+  v->visitSomeArraySize(this);
+}
+
+SomeArraySize *SomeArraySize::clone() const
+{
+  return new SomeArraySize(*this);
+}
+
+
+
+/********************   NoSize    ********************/
+NoSize::NoSize()
+{
+
+}
+
+NoSize::NoSize(const NoSize & other)
+{
+
+}
+
+NoSize &NoSize::operator=(const NoSize & other)
+{
+  NoSize tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void NoSize::swap(NoSize & other)
+{
+
+}
+
+NoSize::~NoSize()
+{
+
+}
+
+void NoSize::accept(Visitor *v)
+{
+  v->visitNoSize(this);
+}
+
+NoSize *NoSize::clone() const
+{
+  return new NoSize(*this);
+}
+
+
+
+/********************   OptLabelOne    ********************/
+OptLabelOne::OptLabelOne(OptLabelList *p1)
+{
+  optlabellist_ = p1;
+
+}
+
+OptLabelOne::OptLabelOne(const OptLabelOne & other)
+{
+  optlabellist_ = other.optlabellist_->clone();
+
+}
+
+OptLabelOne &OptLabelOne::operator=(const OptLabelOne & other)
+{
+  OptLabelOne tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void OptLabelOne::swap(OptLabelOne & other)
+{
+  std::swap(optlabellist_, other.optlabellist_);
+
+}
+
+OptLabelOne::~OptLabelOne()
+{
+  delete(optlabellist_);
+
+}
+
+void OptLabelOne::accept(Visitor *v)
+{
+  v->visitOptLabelOne(this);
+}
+
+OptLabelOne *OptLabelOne::clone() const
+{
+  return new OptLabelOne(*this);
+}
+
+
+
+/********************   OptLabelTwo    ********************/
+OptLabelTwo::OptLabelTwo(OptLabelList *p1)
+{
+  optlabellist_ = p1;
+
+}
+
+OptLabelTwo::OptLabelTwo(const OptLabelTwo & other)
+{
+  optlabellist_ = other.optlabellist_->clone();
+
+}
+
+OptLabelTwo &OptLabelTwo::operator=(const OptLabelTwo & other)
+{
+  OptLabelTwo tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void OptLabelTwo::swap(OptLabelTwo & other)
+{
+  std::swap(optlabellist_, other.optlabellist_);
+
+}
+
+OptLabelTwo::~OptLabelTwo()
+{
+  delete(optlabellist_);
+
+}
+
+void OptLabelTwo::accept(Visitor *v)
+{
+  v->visitOptLabelTwo(this);
+}
+
+OptLabelTwo *OptLabelTwo::clone() const
+{
+  return new OptLabelTwo(*this);
+}
+
+
+
+/********************   NoLableList    ********************/
+NoLableList::NoLableList()
+{
+
+}
+
+NoLableList::NoLableList(const NoLableList & other)
+{
+
+}
+
+NoLableList &NoLableList::operator=(const NoLableList & other)
+{
+  NoLableList tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void NoLableList::swap(NoLableList & other)
+{
+
+}
+
+NoLableList::~NoLableList()
+{
+
+}
+
+void NoLableList::accept(Visitor *v)
+{
+  v->visitNoLableList(this);
+}
+
+NoLableList *NoLableList::clone() const
+{
+  return new NoLableList(*this);
+}
+
+
+
+/********************   LableList    ********************/
+LableList::LableList(ListLabelName *p1)
+{
+  listlabelname_ = p1;
+
+}
+
+LableList::LableList(const LableList & other)
+{
+  listlabelname_ = other.listlabelname_->clone();
+
+}
+
+LableList &LableList::operator=(const LableList & other)
+{
+  LableList tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void LableList::swap(LableList & other)
+{
+  std::swap(listlabelname_, other.listlabelname_);
+
+}
+
+LableList::~LableList()
+{
+  delete(listlabelname_);
+
+}
+
+void LableList::accept(Visitor *v)
+{
+  v->visitLableList(this);
+}
+
+LableList *LableList::clone() const
+{
+  return new LableList(*this);
+}
+
+
+
+/********************   LableName    ********************/
+LableName::LableName(AnyIdentifier *p1)
+{
+  anyidentifier_ = p1;
+
+}
+
+LableName::LableName(const LableName & other)
+{
+  anyidentifier_ = other.anyidentifier_->clone();
+
+}
+
+LableName &LableName::operator=(const LableName & other)
+{
+  LableName tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void LableName::swap(LableName & other)
+{
+  std::swap(anyidentifier_, other.anyidentifier_);
+
+}
+
+LableName::~LableName()
+{
+  delete(anyidentifier_);
+
+}
+
+void LableName::accept(Visitor *v)
+{
+  v->visitLableName(this);
+}
+
+LableName *LableName::clone() const
+{
+  return new LableName(*this);
+}
+
+
+
+/********************   LexprRange    ********************/
+LexprRange::LexprRange(LexprOption *p1, LexprOption *p2)
+{
+  lexproption_1 = p1;
+  lexproption_2 = p2;
+
+}
+
+LexprRange::LexprRange(const LexprRange & other)
+{
+  lexproption_1 = other.lexproption_1->clone();
+  lexproption_2 = other.lexproption_2->clone();
+
+}
+
+LexprRange &LexprRange::operator=(const LexprRange & other)
+{
+  LexprRange tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void LexprRange::swap(LexprRange & other)
+{
+  std::swap(lexproption_1, other.lexproption_1);
+  std::swap(lexproption_2, other.lexproption_2);
+
+}
+
+LexprRange::~LexprRange()
+{
+  delete(lexproption_1);
+  delete(lexproption_2);
+
+}
+
+void LexprRange::accept(Visitor *v)
+{
+  v->visitLexprRange(this);
+}
+
+LexprRange *LexprRange::clone() const
+{
+  return new LexprRange(*this);
+}
+
+
+
+/********************   NoLexprOption    ********************/
+NoLexprOption::NoLexprOption()
+{
+
+}
+
+NoLexprOption::NoLexprOption(const NoLexprOption & other)
+{
+
+}
+
+NoLexprOption &NoLexprOption::operator=(const NoLexprOption & other)
+{
+  NoLexprOption tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void NoLexprOption::swap(NoLexprOption & other)
+{
+
+}
+
+NoLexprOption::~NoLexprOption()
+{
+
+}
+
+void NoLexprOption::accept(Visitor *v)
+{
+  v->visitNoLexprOption(this);
+}
+
+NoLexprOption *NoLexprOption::clone() const
+{
+  return new NoLexprOption(*this);
+}
+
+
+
+/********************   SomeLexprOption    ********************/
+SomeLexprOption::SomeLexprOption(Lexpr *p1)
+{
+  lexpr_ = p1;
+
+}
+
+SomeLexprOption::SomeLexprOption(const SomeLexprOption & other)
+{
+  lexpr_ = other.lexpr_->clone();
+
+}
+
+SomeLexprOption &SomeLexprOption::operator=(const SomeLexprOption & other)
+{
+  SomeLexprOption tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void SomeLexprOption::swap(SomeLexprOption & other)
+{
+  std::swap(lexpr_, other.lexpr_);
+
+}
+
+SomeLexprOption::~SomeLexprOption()
+{
+  delete(lexpr_);
+
+}
+
+void SomeLexprOption::accept(Visitor *v)
+{
+  v->visitSomeLexprOption(this);
+}
+
+SomeLexprOption *SomeLexprOption::clone() const
+{
+  return new SomeLexprOption(*this);
+}
+
+
+
+/********************   SimpleIdentifierAny    ********************/
+SimpleIdentifierAny::SimpleIdentifierAny(Identifier *p1)
+{
+  identifier_ = p1;
+
+}
+
+SimpleIdentifierAny::SimpleIdentifierAny(const SimpleIdentifierAny & other)
+{
+  identifier_ = other.identifier_->clone();
+
+}
+
+SimpleIdentifierAny &SimpleIdentifierAny::operator=(const SimpleIdentifierAny & other)
+{
+  SimpleIdentifierAny tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void SimpleIdentifierAny::swap(SimpleIdentifierAny & other)
+{
+  std::swap(identifier_, other.identifier_);
+
+}
+
+SimpleIdentifierAny::~SimpleIdentifierAny()
+{
+  delete(identifier_);
+
+}
+
+void SimpleIdentifierAny::accept(Visitor *v)
+{
+  v->visitSimpleIdentifierAny(this);
+}
+
+SimpleIdentifierAny *SimpleIdentifierAny::clone() const
+{
+  return new SimpleIdentifierAny(*this);
 }
 
 
@@ -3871,23 +4293,365 @@ IdentifierIdent *IdentifierIdent::clone() const
 
 
 
-
-/********************   ListAnnot    ********************/
-
-void ListAnnot::accept(Visitor *v)
+/********************   TypeSpecSimpleIntegerKeyWord    ********************/
+TypeSpecSimpleIntegerKeyWord::TypeSpecSimpleIntegerKeyWord()
 {
-  v->visitListAnnot(this);
+
 }
 
-ListAnnot *ListAnnot::clone() const
+TypeSpecSimpleIntegerKeyWord::TypeSpecSimpleIntegerKeyWord(const TypeSpecSimpleIntegerKeyWord & other)
 {
-  return new ListAnnot(*this);
+
 }
 
-ListAnnot* consListAnnot(Annot* x, ListAnnot* xs) {
-  xs->insert(xs->begin(), x);
-  return xs;
+TypeSpecSimpleIntegerKeyWord &TypeSpecSimpleIntegerKeyWord::operator=(const TypeSpecSimpleIntegerKeyWord & other)
+{
+  TypeSpecSimpleIntegerKeyWord tmp(other);
+  swap(tmp);
+  return *this;
 }
+
+void TypeSpecSimpleIntegerKeyWord::swap(TypeSpecSimpleIntegerKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleIntegerKeyWord::~TypeSpecSimpleIntegerKeyWord()
+{
+
+}
+
+void TypeSpecSimpleIntegerKeyWord::accept(Visitor *v)
+{
+  v->visitTypeSpecSimpleIntegerKeyWord(this);
+}
+
+TypeSpecSimpleIntegerKeyWord *TypeSpecSimpleIntegerKeyWord::clone() const
+{
+  return new TypeSpecSimpleIntegerKeyWord(*this);
+}
+
+
+
+/********************   TypeSpecSimpleRealKeyWord    ********************/
+TypeSpecSimpleRealKeyWord::TypeSpecSimpleRealKeyWord()
+{
+
+}
+
+TypeSpecSimpleRealKeyWord::TypeSpecSimpleRealKeyWord(const TypeSpecSimpleRealKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleRealKeyWord &TypeSpecSimpleRealKeyWord::operator=(const TypeSpecSimpleRealKeyWord & other)
+{
+  TypeSpecSimpleRealKeyWord tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void TypeSpecSimpleRealKeyWord::swap(TypeSpecSimpleRealKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleRealKeyWord::~TypeSpecSimpleRealKeyWord()
+{
+
+}
+
+void TypeSpecSimpleRealKeyWord::accept(Visitor *v)
+{
+  v->visitTypeSpecSimpleRealKeyWord(this);
+}
+
+TypeSpecSimpleRealKeyWord *TypeSpecSimpleRealKeyWord::clone() const
+{
+  return new TypeSpecSimpleRealKeyWord(*this);
+}
+
+
+
+/********************   TypeSpecSimpleBooleanKeyWord    ********************/
+TypeSpecSimpleBooleanKeyWord::TypeSpecSimpleBooleanKeyWord()
+{
+
+}
+
+TypeSpecSimpleBooleanKeyWord::TypeSpecSimpleBooleanKeyWord(const TypeSpecSimpleBooleanKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleBooleanKeyWord &TypeSpecSimpleBooleanKeyWord::operator=(const TypeSpecSimpleBooleanKeyWord & other)
+{
+  TypeSpecSimpleBooleanKeyWord tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void TypeSpecSimpleBooleanKeyWord::swap(TypeSpecSimpleBooleanKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleBooleanKeyWord::~TypeSpecSimpleBooleanKeyWord()
+{
+
+}
+
+void TypeSpecSimpleBooleanKeyWord::accept(Visitor *v)
+{
+  v->visitTypeSpecSimpleBooleanKeyWord(this);
+}
+
+TypeSpecSimpleBooleanKeyWord *TypeSpecSimpleBooleanKeyWord::clone() const
+{
+  return new TypeSpecSimpleBooleanKeyWord(*this);
+}
+
+
+
+/********************   TypeSpecSimpleVoidKeyWord    ********************/
+TypeSpecSimpleVoidKeyWord::TypeSpecSimpleVoidKeyWord()
+{
+
+}
+
+TypeSpecSimpleVoidKeyWord::TypeSpecSimpleVoidKeyWord(const TypeSpecSimpleVoidKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleVoidKeyWord &TypeSpecSimpleVoidKeyWord::operator=(const TypeSpecSimpleVoidKeyWord & other)
+{
+  TypeSpecSimpleVoidKeyWord tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void TypeSpecSimpleVoidKeyWord::swap(TypeSpecSimpleVoidKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleVoidKeyWord::~TypeSpecSimpleVoidKeyWord()
+{
+
+}
+
+void TypeSpecSimpleVoidKeyWord::accept(Visitor *v)
+{
+  v->visitTypeSpecSimpleVoidKeyWord(this);
+}
+
+TypeSpecSimpleVoidKeyWord *TypeSpecSimpleVoidKeyWord::clone() const
+{
+  return new TypeSpecSimpleVoidKeyWord(*this);
+}
+
+
+
+/********************   TypeSpecSimpleBoolKeyWord    ********************/
+TypeSpecSimpleBoolKeyWord::TypeSpecSimpleBoolKeyWord()
+{
+
+}
+
+TypeSpecSimpleBoolKeyWord::TypeSpecSimpleBoolKeyWord(const TypeSpecSimpleBoolKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleBoolKeyWord &TypeSpecSimpleBoolKeyWord::operator=(const TypeSpecSimpleBoolKeyWord & other)
+{
+  TypeSpecSimpleBoolKeyWord tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void TypeSpecSimpleBoolKeyWord::swap(TypeSpecSimpleBoolKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleBoolKeyWord::~TypeSpecSimpleBoolKeyWord()
+{
+
+}
+
+void TypeSpecSimpleBoolKeyWord::accept(Visitor *v)
+{
+  v->visitTypeSpecSimpleBoolKeyWord(this);
+}
+
+TypeSpecSimpleBoolKeyWord *TypeSpecSimpleBoolKeyWord::clone() const
+{
+  return new TypeSpecSimpleBoolKeyWord(*this);
+}
+
+
+
+/********************   TypeSpecSimpleCharKeyWord    ********************/
+TypeSpecSimpleCharKeyWord::TypeSpecSimpleCharKeyWord()
+{
+
+}
+
+TypeSpecSimpleCharKeyWord::TypeSpecSimpleCharKeyWord(const TypeSpecSimpleCharKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleCharKeyWord &TypeSpecSimpleCharKeyWord::operator=(const TypeSpecSimpleCharKeyWord & other)
+{
+  TypeSpecSimpleCharKeyWord tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void TypeSpecSimpleCharKeyWord::swap(TypeSpecSimpleCharKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleCharKeyWord::~TypeSpecSimpleCharKeyWord()
+{
+
+}
+
+void TypeSpecSimpleCharKeyWord::accept(Visitor *v)
+{
+  v->visitTypeSpecSimpleCharKeyWord(this);
+}
+
+TypeSpecSimpleCharKeyWord *TypeSpecSimpleCharKeyWord::clone() const
+{
+  return new TypeSpecSimpleCharKeyWord(*this);
+}
+
+
+
+/********************   TypeSpecSimpleIntKeyWord    ********************/
+TypeSpecSimpleIntKeyWord::TypeSpecSimpleIntKeyWord()
+{
+
+}
+
+TypeSpecSimpleIntKeyWord::TypeSpecSimpleIntKeyWord(const TypeSpecSimpleIntKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleIntKeyWord &TypeSpecSimpleIntKeyWord::operator=(const TypeSpecSimpleIntKeyWord & other)
+{
+  TypeSpecSimpleIntKeyWord tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void TypeSpecSimpleIntKeyWord::swap(TypeSpecSimpleIntKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleIntKeyWord::~TypeSpecSimpleIntKeyWord()
+{
+
+}
+
+void TypeSpecSimpleIntKeyWord::accept(Visitor *v)
+{
+  v->visitTypeSpecSimpleIntKeyWord(this);
+}
+
+TypeSpecSimpleIntKeyWord *TypeSpecSimpleIntKeyWord::clone() const
+{
+  return new TypeSpecSimpleIntKeyWord(*this);
+}
+
+
+
+/********************   TypeSpecSimpleDoubleKeyWord    ********************/
+TypeSpecSimpleDoubleKeyWord::TypeSpecSimpleDoubleKeyWord()
+{
+
+}
+
+TypeSpecSimpleDoubleKeyWord::TypeSpecSimpleDoubleKeyWord(const TypeSpecSimpleDoubleKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleDoubleKeyWord &TypeSpecSimpleDoubleKeyWord::operator=(const TypeSpecSimpleDoubleKeyWord & other)
+{
+  TypeSpecSimpleDoubleKeyWord tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void TypeSpecSimpleDoubleKeyWord::swap(TypeSpecSimpleDoubleKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleDoubleKeyWord::~TypeSpecSimpleDoubleKeyWord()
+{
+
+}
+
+void TypeSpecSimpleDoubleKeyWord::accept(Visitor *v)
+{
+  v->visitTypeSpecSimpleDoubleKeyWord(this);
+}
+
+TypeSpecSimpleDoubleKeyWord *TypeSpecSimpleDoubleKeyWord::clone() const
+{
+  return new TypeSpecSimpleDoubleKeyWord(*this);
+}
+
+
+
+/********************   TypeSpecSimpleLongDoubleKeyWord    ********************/
+TypeSpecSimpleLongDoubleKeyWord::TypeSpecSimpleLongDoubleKeyWord()
+{
+
+}
+
+TypeSpecSimpleLongDoubleKeyWord::TypeSpecSimpleLongDoubleKeyWord(const TypeSpecSimpleLongDoubleKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleLongDoubleKeyWord &TypeSpecSimpleLongDoubleKeyWord::operator=(const TypeSpecSimpleLongDoubleKeyWord & other)
+{
+  TypeSpecSimpleLongDoubleKeyWord tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void TypeSpecSimpleLongDoubleKeyWord::swap(TypeSpecSimpleLongDoubleKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleLongDoubleKeyWord::~TypeSpecSimpleLongDoubleKeyWord()
+{
+
+}
+
+void TypeSpecSimpleLongDoubleKeyWord::accept(Visitor *v)
+{
+  v->visitTypeSpecSimpleLongDoubleKeyWord(this);
+}
+
+TypeSpecSimpleLongDoubleKeyWord *TypeSpecSimpleLongDoubleKeyWord::clone() const
+{
+  return new TypeSpecSimpleLongDoubleKeyWord(*this);
+}
+
+
 
 
 /********************   ListLexpr    ********************/
@@ -3921,6 +4685,60 @@ ListLexprRelInner *ListLexprRelInner::clone() const
 }
 
 ListLexprRelInner* consListLexprRelInner(LexprRelInner* x, ListLexprRelInner* xs) {
+  xs->insert(xs->begin(), x);
+  return xs;
+}
+
+
+/********************   ListBindersReentrance    ********************/
+
+void ListBindersReentrance::accept(Visitor *v)
+{
+  v->visitListBindersReentrance(this);
+}
+
+ListBindersReentrance *ListBindersReentrance::clone() const
+{
+  return new ListBindersReentrance(*this);
+}
+
+ListBindersReentrance* consListBindersReentrance(BindersReentrance* x, ListBindersReentrance* xs) {
+  xs->insert(xs->begin(), x);
+  return xs;
+}
+
+
+/********************   ListStars    ********************/
+
+void ListStars::accept(Visitor *v)
+{
+  v->visitListStars(this);
+}
+
+ListStars *ListStars::clone() const
+{
+  return new ListStars(*this);
+}
+
+ListStars* consListStars(Stars* x, ListStars* xs) {
+  xs->insert(xs->begin(), x);
+  return xs;
+}
+
+
+/********************   ListLabelName    ********************/
+
+void ListLabelName::accept(Visitor *v)
+{
+  v->visitListLabelName(this);
+}
+
+ListLabelName *ListLabelName::clone() const
+{
+  return new ListLabelName(*this);
+}
+
+ListLabelName* consListLabelName(LabelName* x, ListLabelName* xs) {
   xs->insert(xs->begin(), x);
   return xs;
 }

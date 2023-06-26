@@ -39,7 +39,7 @@
 # define YY_PARTIAL_ACSL_BISON_H_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
-# define YYDEBUG 0
+# define YYDEBUG 1
 #endif
 #if YYDEBUG
 extern int partial_acsldebug;
@@ -104,33 +104,35 @@ extern int partial_acsldebug;
     _KW_double = 305,              /* _KW_double  */
     _KW_else = 306,                /* _KW_else  */
     _KW_float = 307,               /* _KW_float  */
-    _KW_if = 308,                  /* _KW_if  */
-    _KW_int = 309,                 /* _KW_int  */
-    _KW_long = 310,                /* _KW_long  */
-    _KW_return = 311,              /* _KW_return  */
-    _KW_short = 312,               /* _KW_short  */
-    _KW_struct = 313,              /* _KW_struct  */
-    _KW_switch = 314,              /* _KW_switch  */
-    _KW_unsigned = 315,            /* _KW_unsigned  */
-    _KW_void = 316,                /* _KW_void  */
-    _KW_while = 317,               /* _KW_while  */
-    _BAR = 318,                    /* _BAR  */
-    _BAREQ = 319,                  /* _BAREQ  */
-    _DBAR = 320,                   /* _DBAR  */
-    _TILDE = 321,                  /* _TILDE  */
-    T_BLOCKATTRIBUTE = 322,        /* T_BLOCKATTRIBUTE  */
-    T_CONST = 323,                 /* T_CONST  */
-    T_LBRACE = 324,                /* T_LBRACE  */
-    T_LBRACKET = 325,              /* T_LBRACKET  */
-    T_RBRACE = 326,                /* T_RBRACE  */
-    T_RBRACKET = 327,              /* T_RBRACKET  */
-    T_RESTRICT = 328,              /* T_RESTRICT  */
-    T_SIGNED = 329,                /* T_SIGNED  */
-    T_VOLATILE = 330,              /* T_VOLATILE  */
-    _CHAR_ = 331,                  /* _CHAR_  */
-    _INTEGER_ = 332,               /* _INTEGER_  */
-    _DOUBLE_ = 333,                /* _DOUBLE_  */
-    _IDENT_ = 334                  /* _IDENT_  */
+    _KW_for = 308,                 /* _KW_for  */
+    _KW_if = 309,                  /* _KW_if  */
+    _KW_int = 310,                 /* _KW_int  */
+    _KW_long = 311,                /* _KW_long  */
+    _KW_return = 312,              /* _KW_return  */
+    _KW_short = 313,               /* _KW_short  */
+    _KW_59 = 314,                  /* _KW_59  */
+    _KW_struct = 315,              /* _KW_struct  */
+    _KW_switch = 316,              /* _KW_switch  */
+    _KW_unsigned = 317,            /* _KW_unsigned  */
+    _KW_void = 318,                /* _KW_void  */
+    _KW_while = 319,               /* _KW_while  */
+    _BAR = 320,                    /* _BAR  */
+    _BAREQ = 321,                  /* _BAREQ  */
+    _DBAR = 322,                   /* _DBAR  */
+    _TILDE = 323,                  /* _TILDE  */
+    T_BLOCKATTRIBUTE = 324,        /* T_BLOCKATTRIBUTE  */
+    T_CONST = 325,                 /* T_CONST  */
+    T_LBRACE = 326,                /* T_LBRACE  */
+    T_LBRACKET = 327,              /* T_LBRACKET  */
+    T_RBRACE = 328,                /* T_RBRACE  */
+    T_RBRACKET = 329,              /* T_RBRACKET  */
+    T_RESTRICT = 330,              /* T_RESTRICT  */
+    T_SIGNED = 331,                /* T_SIGNED  */
+    T_VOLATILE = 332,              /* T_VOLATILE  */
+    _CHAR_ = 333,                  /* _CHAR_  */
+    _INTEGER_ = 334,               /* _INTEGER_  */
+    _DOUBLE_ = 335,                /* _DOUBLE_  */
+    _IDENT_ = 336                  /* _IDENT_  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -178,10 +180,10 @@ union YYSTYPE
   partial_acsl::BlockElement* blockelement_;
   partial_acsl::ListBlockElement* listblockelement_;
   partial_acsl::Statement* statement_;
+  partial_acsl::ForClause* forclause_;
   partial_acsl::Attr* attr_;
   partial_acsl::ListAttr* listattr_;
   partial_acsl::BasicAttribute* basicattribute_;
-  partial_acsl::ListBasicAttribute* listbasicattribute_;
   partial_acsl::AnnotatedStmt* annotatedstmt_;
   partial_acsl::ElsePart* elsepart_;
   partial_acsl::OptExpression* optexpression_;
@@ -191,7 +193,7 @@ union YYSTYPE
   partial_acsl::Constant* constant_;
   partial_acsl::TypeName* typename_;
 
-#line 195 "Bison.H"
+#line 197 "Bison.H"
 
 };
 typedef union YYSTYPE YYSTYPE;

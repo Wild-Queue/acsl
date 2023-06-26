@@ -66,6 +66,7 @@ TypeSpecBoolKeyWord.                TypeSpec ::= "_Bool" ;
 TypeSpecShortKeyWord.               TypeSpec ::= "short" ;
 TypeSpecInt32KeyWord.               TypeSpec ::= "__int32" ;
 TypeSpecIntKeyWord.                 TypeSpec ::= "int" ;
+TypeSpecSizeTKeyWord.                 TypeSpec ::= "size_t" ;
 TypeSpecLongKeyWord.                TypeSpec ::= "long" ;
 TypeSpecInt64KeyWord.               TypeSpec ::= "__int64" ;
 TypeSpecFloatKeyWord.               TypeSpec ::= "float" ;
@@ -88,7 +89,7 @@ StructBraces.                       TypeSpec ::= "struct" LBRACE StructDeclList 
 --EnumBraces.                 TypeSpec ::= "enum" LBRACE [Enumerator] MaybeComma RBRACE ;
 --EnumJustAttrIdBraces.       TypeSpec ::= "enum" [JustAttribute] IdOrTypename LBRACE [Enumerator] MaybeComma RBRACE ;
 --EnumJustAttrBraces.         TypeSpec ::= "enum" [JustAttribute] LBRACE [Enumerator] MaybeComma RBRACE ;
---NamedTypeTypeSpec.          TypeSpec ::= NAMEDTYPE ;
+--NamedTypeTypeSpec.          TypeSpec ::= Ident ;
 --TypeOfExpression.           TypeSpec ::= TYPEOF "(" Expression ")" ;
 --TypeOfTypeName.             TypeSpec ::= TYPEOF "(" TypeName ")" ;
 
@@ -201,12 +202,13 @@ SwitchStatement.            Statement ::= "switch" "(" [Expression] ")" Annotate
 WhileStatement.             Statement ::= "while" "(" [Expression] ")" AnnotatedStmt ;
 --DoWhileStatement.           Statement ::= OptLoopAnnotations "do" AnnotatedStmt "while" "(" [Expression] ")" ";" ;
 --ForStatement.               Statement ::= OptLoopAnnotations "for" "(" ForClause OptExpression ";" OptExpression ")" AnnotatedStmt ;
+ForStatement.               Statement ::= "for" "(" ForClause OptExpression ";" OptExpression ")" AnnotatedStmt ;
 --ColonStatement.             Statement ::= IdOrTypenameAsId ":" [AttributeNocv] AnnotatedStmt ;
 CaseStatement.              Statement ::= "case" Expression ":" AnnotatedStmt ;
 CaseSliceStatement.         Statement ::= "case" Expression "..." Expression ":" AnnotatedStmt ;
 DefaultStatement.           Statement ::= "default" ":" AnnotatedStmt ;
 EmptyReturnStatement.       Statement ::= "return" ";" ;
---ReturnStatement.            Statement ::= "return" [Expression] ";" ;
+ReturnStatement.            Statement ::= "return" [Expression] ";" ;
 BreakStatement.             Statement ::= "break" ";" ;
 ContinueStatement.          Statement ::= "continue" ";" ;
 --GotoStatement.              Statement ::= "goto" IdOrTypenameAsId ";" ;
@@ -217,6 +219,8 @@ ContinueStatement.          Statement ::= "continue" ";" ;
 --TryExceptStatement.         Statement ::= "__try" Block "__except" "(" [Expression] ")" Block ;
 --TryFinallyStatement.        Statement ::= "__try" Block "__finally" Block ;
 
+ForClauseExpression.    ForClause ::= OptExpression ";" ;
+ForClauseDeclaration.   ForClause ::= Declaration ;
 
 _.          Attr ::= Attr1 ;
 AnAttr.     Attr ::= Attr1 "=" Attr1 ;
@@ -291,7 +295,7 @@ _.                  Attr14 ::= "(" Attr ")" ;
 BasicAttrConsInt.   BasicAttribute ::= Integer ;
 BasicAttrConsFloat. BasicAttribute ::= Double ;
 --BasicAttrVar.       BasicAttribute ::= VarAttr ;
-separator nonempty BasicAttribute "" ;
+--separator nonempty BasicAttribute "" ;
 
 
 --AnnotatedStatement.     AnnotatedStmt ::= [Annot] Statement ;
@@ -382,7 +386,7 @@ UnaryExprTilde.             AssignExpr13 ::= "~" AssignExpr12 ;
 UnaryExprAddress.           AssignExpr13 ::= "&&" IdOrTypenameAsId ;
 
 _.                                      AssignExpr14 ::= AssignExpr15 ;
---BracketsPostfixExpression.              AssignExpr14 ::= AssignExpr14 LBRACKET [Expression] RBRACKET ;
+BracketsPostfixExpression.              AssignExpr14 ::= AssignExpr14 LBRACKET [Expression] RBRACKET ;
 --ArgumentsPostfixExpression.             AssignExpr14 ::= AssignExpr14 "(" Arguments ")" GhostArgumentsOpt ;
 --BuiltinVaArgPostfixExpression.          AssignExpr14 ::= "__builtin_va_arg" "(" Expression "," TypeName ")" ;
 --BuiltinTypesCompatPostfixExpression.    AssignExpr14 ::= "__builtin_types_compatible_p" "(" TypeName "," TypeName ")" ;

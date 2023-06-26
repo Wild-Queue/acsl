@@ -17,25 +17,56 @@ void Skeleton::visitCode_Annot(Code_Annot *t) {} //abstract class
 void Skeleton::visitContract(Contract *t) {} //abstract class
 void Skeleton::visitRequires(Requires *t) {} //abstract class
 void Skeleton::visitNERequires(NERequires *t) {} //abstract class
-void Skeleton::visitClauseKW(ClauseKW *t) {} //abstract class
 void Skeleton::visitTerminates(Terminates *t) {} //abstract class
 void Skeleton::visitDecreases(Decreases *t) {} //abstract class
 void Skeleton::visitSimpleClauses(SimpleClauses *t) {} //abstract class
 void Skeleton::visitNESimpleClauses(NESimpleClauses *t) {} //abstract class
+void Skeleton::visitAssigns(Assigns *t) {} //abstract class
+void Skeleton::visitZones(Zones *t) {} //abstract class
 void Skeleton::visitBehaviors(Behaviors *t) {} //abstract class
 void Skeleton::visitCompleteOrDisjoint(CompleteOrDisjoint *t) {} //abstract class
 void Skeleton::visitLexpr(Lexpr *t) {} //abstract class
 void Skeleton::visitLexprRelInner(LexprRelInner *t) {} //abstract class
 void Skeleton::visitRelation(Relation *t) {} //abstract class
+void Skeleton::visitLexprBinder(LexprBinder *t) {} //abstract class
+void Skeleton::visitBinders(Binders *t) {} //abstract class
+void Skeleton::visitTypeSpecOFTYPENAME(TypeSpecOFTYPENAME *t) {} //abstract class
+void Skeleton::visitBindersReentrance(BindersReentrance *t) {} //abstract class
+void Skeleton::visitVarSpec(VarSpec *t) {} //abstract class
+void Skeleton::visitStars(Stars *t) {} //abstract class
+void Skeleton::visitArraySize(ArraySize *t) {} //abstract class
+void Skeleton::visitOptLabel(OptLabel *t) {} //abstract class
+void Skeleton::visitOptLabelList(OptLabelList *t) {} //abstract class
+void Skeleton::visitLabelName(LabelName *t) {} //abstract class
+void Skeleton::visitRange(Range *t) {} //abstract class
+void Skeleton::visitLexprOption(LexprOption *t) {} //abstract class
+void Skeleton::visitAnyIdentifier(AnyIdentifier *t) {} //abstract class
 void Skeleton::visitPostCond(PostCond *t) {} //abstract class
 void Skeleton::visitFullIdentifier(FullIdentifier *t) {} //abstract class
 void Skeleton::visitIdentifier(Identifier *t) {} //abstract class
+void Skeleton::visitTypeSpecSimple(TypeSpecSimple *t) {} //abstract class
+void Skeleton::visitLogicPTreeAnnot(LogicPTreeAnnot *t) {} //abstract class
+void Skeleton::visitAnnotation(Annotation *t) {} //abstract class
+void Skeleton::visitLoopAnnotStack(LoopAnnotStack *t) {} //abstract class
+void Skeleton::visitLoopAnnotOpt(LoopAnnotOpt *t) {} //abstract class
+void Skeleton::visitLoopInvariant(LoopInvariant *t) {} //abstract class
+void Skeleton::visitLoopVariant(LoopVariant *t) {} //abstract class
+void Skeleton::visitLoopEffects(LoopEffects *t) {} //abstract class
+void Skeleton::visitVariant(Variant *t) {} //abstract class
 
-void Skeleton::visitAProgram(AProgram *a_program)
+void Skeleton::visitAnnotProgram(AnnotProgram *annot_program)
 {
-  /* Code For AProgram Goes Here */
+  /* Code For AnnotProgram Goes Here */
 
-  if (a_program->annot_) a_program->annot_->accept(this);
+  if (annot_program->annot_) annot_program->annot_->accept(this);
+
+}
+
+void Skeleton::visitAnnotationProgram(AnnotationProgram *annotation_program)
+{
+  /* Code For AnnotationProgram Goes Here */
+
+  if (annotation_program->logicptreeannot_) annotation_program->logicptreeannot_->accept(this);
 
 }
 
@@ -110,140 +141,6 @@ void Skeleton::visitAdimtRequires(AdimtRequires *adimt_requires)
 
 }
 
-void Skeleton::visitAdmitRequiresClause(AdmitRequiresClause *admit_requires_clause)
-{
-  /* Code For AdmitRequiresClause Goes Here */
-
-
-}
-
-void Skeleton::visitAdmitInvariantClause(AdmitInvariantClause *admit_invariant_clause)
-{
-  /* Code For AdmitInvariantClause Goes Here */
-
-
-}
-
-void Skeleton::visitAdmitLemmaClause(AdmitLemmaClause *admit_lemma_clause)
-{
-  /* Code For AdmitLemmaClause Goes Here */
-
-
-}
-
-void Skeleton::visitAdmitLoopClause(AdmitLoopClause *admit_loop_clause)
-{
-  /* Code For AdmitLoopClause Goes Here */
-
-
-}
-
-void Skeleton::visitCheckRequiresClause(CheckRequiresClause *check_requires_clause)
-{
-  /* Code For CheckRequiresClause Goes Here */
-
-
-}
-
-void Skeleton::visitCheckInvariantClause(CheckInvariantClause *check_invariant_clause)
-{
-  /* Code For CheckInvariantClause Goes Here */
-
-
-}
-
-void Skeleton::visitCheckLemmaClause(CheckLemmaClause *check_lemma_clause)
-{
-  /* Code For CheckLemmaClause Goes Here */
-
-
-}
-
-void Skeleton::visitCheckLoopClause(CheckLoopClause *check_loop_clause)
-{
-  /* Code For CheckLoopClause Goes Here */
-
-
-}
-
-void Skeleton::visitRequiresClause(RequiresClause *requires_clause)
-{
-  /* Code For RequiresClause Goes Here */
-
-
-}
-
-void Skeleton::visitAssumesClause(AssumesClause *assumes_clause)
-{
-  /* Code For AssumesClause Goes Here */
-
-
-}
-
-void Skeleton::visitAssignsClause(AssignsClause *assigns_clause)
-{
-  /* Code For AssignsClause Goes Here */
-
-
-}
-
-void Skeleton::visitPostCondClause(PostCondClause *post_cond_clause)
-{
-  /* Code For PostCondClause Goes Here */
-
-  if (post_cond_clause->postcond_) post_cond_clause->postcond_->accept(this);
-
-}
-
-void Skeleton::visitDecreasesClause(DecreasesClause *decreases_clause)
-{
-  /* Code For DecreasesClause Goes Here */
-
-
-}
-
-void Skeleton::visitBehaviorClause(BehaviorClause *behavior_clause)
-{
-  /* Code For BehaviorClause Goes Here */
-
-
-}
-
-void Skeleton::visitAllocatesClause(AllocatesClause *allocates_clause)
-{
-  /* Code For AllocatesClause Goes Here */
-
-
-}
-
-void Skeleton::visitFreesClause(FreesClause *frees_clause)
-{
-  /* Code For FreesClause Goes Here */
-
-
-}
-
-void Skeleton::visitCompleteClause(CompleteClause *complete_clause)
-{
-  /* Code For CompleteClause Goes Here */
-
-
-}
-
-void Skeleton::visitDisjointClause(DisjointClause *disjoint_clause)
-{
-  /* Code For DisjointClause Goes Here */
-
-
-}
-
-void Skeleton::visitEmptyClauseKW(EmptyClauseKW *empty_clause_kw)
-{
-  /* Code For EmptyClauseKW Goes Here */
-
-
-}
-
 void Skeleton::visitNoTerminate(NoTerminate *no_terminate)
 {
   /* Code For NoTerminate Goes Here */
@@ -283,6 +180,47 @@ void Skeleton::visitPostCondSimpleClauses(PostCondSimpleClauses *post_cond_simpl
 
 }
 
+void Skeleton::visitAssignsSimpleClauses(AssignsSimpleClauses *assigns_simple_clauses)
+{
+  /* Code For AssignsSimpleClauses Goes Here */
+
+  if (assigns_simple_clauses->assigns_) assigns_simple_clauses->assigns_->accept(this);
+  if (assigns_simple_clauses->simpleclauses_) assigns_simple_clauses->simpleclauses_->accept(this);
+
+}
+
+void Skeleton::visitAssignZone(AssignZone *assign_zone)
+{
+  /* Code For AssignZone Goes Here */
+
+  if (assign_zone->zones_) assign_zone->zones_->accept(this);
+
+}
+
+void Skeleton::visitAssignZoneFromZone(AssignZoneFromZone *assign_zone_from_zone)
+{
+  /* Code For AssignZoneFromZone Goes Here */
+
+  if (assign_zone_from_zone->listlexpr_) assign_zone_from_zone->listlexpr_->accept(this);
+  if (assign_zone_from_zone->zones_) assign_zone_from_zone->zones_->accept(this);
+
+}
+
+void Skeleton::visitSomeZone(SomeZone *some_zone)
+{
+  /* Code For SomeZone Goes Here */
+
+  if (some_zone->listlexpr_) some_zone->listlexpr_->accept(this);
+
+}
+
+void Skeleton::visitNoZone(NoZone *no_zone)
+{
+  /* Code For NoZone Goes Here */
+
+
+}
+
 void Skeleton::visitNoBehaviors(NoBehaviors *no_behaviors)
 {
   /* Code For NoBehaviors Goes Here */
@@ -293,13 +231,6 @@ void Skeleton::visitNoBehaviors(NoBehaviors *no_behaviors)
 void Skeleton::visitNoComplDisj(NoComplDisj *no_compl_disj)
 {
   /* Code For NoComplDisj Goes Here */
-
-
-}
-
-void Skeleton::visitNoLexpr(NoLexpr *no_lexpr)
-{
-  /* Code For NoLexpr Goes Here */
 
 
 }
@@ -349,70 +280,6 @@ void Skeleton::visitHatHatLexpr(HatHatLexpr *hat_hat_lexpr)
 
 }
 
-void Skeleton::visitAmpLexpr(AmpLexpr *amp_lexpr)
-{
-  /* Code For AmpLexpr Goes Here */
-
-  if (amp_lexpr->lexpr_1) amp_lexpr->lexpr_1->accept(this);
-  if (amp_lexpr->lexpr_2) amp_lexpr->lexpr_2->accept(this);
-
-}
-
-void Skeleton::visitPipeLexpr(PipeLexpr *pipe_lexpr)
-{
-  /* Code For PipeLexpr Goes Here */
-
-  if (pipe_lexpr->lexpr_1) pipe_lexpr->lexpr_1->accept(this);
-  if (pipe_lexpr->lexpr_2) pipe_lexpr->lexpr_2->accept(this);
-
-}
-
-void Skeleton::visitHatLexpr(HatLexpr *hat_lexpr)
-{
-  /* Code For HatLexpr Goes Here */
-
-  if (hat_lexpr->lexpr_1) hat_lexpr->lexpr_1->accept(this);
-  if (hat_lexpr->lexpr_2) hat_lexpr->lexpr_2->accept(this);
-
-}
-
-void Skeleton::visitBimpliesLexpr(BimpliesLexpr *bimplies_lexpr)
-{
-  /* Code For BimpliesLexpr Goes Here */
-
-  if (bimplies_lexpr->lexpr_1) bimplies_lexpr->lexpr_1->accept(this);
-  if (bimplies_lexpr->lexpr_2) bimplies_lexpr->lexpr_2->accept(this);
-
-}
-
-void Skeleton::visitBiffLexpr(BiffLexpr *biff_lexpr)
-{
-  /* Code For BiffLexpr Goes Here */
-
-  if (biff_lexpr->lexpr_1) biff_lexpr->lexpr_1->accept(this);
-  if (biff_lexpr->lexpr_2) biff_lexpr->lexpr_2->accept(this);
-
-}
-
-void Skeleton::visitInLexpr(InLexpr *in_lexpr)
-{
-  /* Code For InLexpr Goes Here */
-
-  if (in_lexpr->lexpr_1) in_lexpr->lexpr_1->accept(this);
-  if (in_lexpr->lexpr_2) in_lexpr->lexpr_2->accept(this);
-
-}
-
-void Skeleton::visitTernaryLexpr(TernaryLexpr *ternary_lexpr)
-{
-  /* Code For TernaryLexpr Goes Here */
-
-  if (ternary_lexpr->lexpr_1) ternary_lexpr->lexpr_1->accept(this);
-  if (ternary_lexpr->lexpr_2) ternary_lexpr->lexpr_2->accept(this);
-  if (ternary_lexpr->lexpr_3) ternary_lexpr->lexpr_3->accept(this);
-
-}
-
 void Skeleton::visitRelationLexpr(RelationLexpr *relation_lexpr)
 {
   /* Code For RelationLexpr Goes Here */
@@ -424,11 +291,19 @@ void Skeleton::visitRelationLexpr(RelationLexpr *relation_lexpr)
 
 }
 
-void Skeleton::visitNotLexprInner(NotLexprInner *not_lexpr_inner)
+void Skeleton::visitBinderLexpr(BinderLexpr *binder_lexpr)
 {
-  /* Code For NotLexprInner Goes Here */
+  /* Code For BinderLexpr Goes Here */
 
-  if (not_lexpr_inner->lexpr_) not_lexpr_inner->lexpr_->accept(this);
+  if (binder_lexpr->lexprbinder_) binder_lexpr->lexprbinder_->accept(this);
+
+}
+
+void Skeleton::visitNotBinderLexpr(NotBinderLexpr *not_binder_lexpr)
+{
+  /* Code For NotBinderLexpr Goes Here */
+
+  if (not_binder_lexpr->lexprbinder_) not_binder_lexpr->lexprbinder_->accept(this);
 
 }
 
@@ -443,6 +318,15 @@ void Skeleton::visitFalseLexpr(FalseLexpr *false_lexpr)
 {
   /* Code For FalseLexpr Goes Here */
 
+
+}
+
+void Skeleton::visitValidLexpr(ValidLexpr *valid_lexpr)
+{
+  /* Code For ValidLexpr Goes Here */
+
+  if (valid_lexpr->optlabel_) valid_lexpr->optlabel_->accept(this);
+  if (valid_lexpr->lexpr_) valid_lexpr->lexpr_->accept(this);
 
 }
 
@@ -530,39 +414,12 @@ void Skeleton::visitSubtrLexpr(SubtrLexpr *subtr_lexpr)
 
 }
 
-void Skeleton::visitMultLexpr(MultLexpr *mult_lexpr)
+void Skeleton::visitSquaresRangeLexpr(SquaresRangeLexpr *squares_range_lexpr)
 {
-  /* Code For MultLexpr Goes Here */
+  /* Code For SquaresRangeLexpr Goes Here */
 
-  if (mult_lexpr->lexpr_1) mult_lexpr->lexpr_1->accept(this);
-  if (mult_lexpr->lexpr_2) mult_lexpr->lexpr_2->accept(this);
-
-}
-
-void Skeleton::visitDivLexpr(DivLexpr *div_lexpr)
-{
-  /* Code For DivLexpr Goes Here */
-
-  if (div_lexpr->lexpr_1) div_lexpr->lexpr_1->accept(this);
-  if (div_lexpr->lexpr_2) div_lexpr->lexpr_2->accept(this);
-
-}
-
-void Skeleton::visitModLexpr(ModLexpr *mod_lexpr)
-{
-  /* Code For ModLexpr Goes Here */
-
-  if (mod_lexpr->lexpr_1) mod_lexpr->lexpr_1->accept(this);
-  if (mod_lexpr->lexpr_2) mod_lexpr->lexpr_2->accept(this);
-
-}
-
-void Skeleton::visitStarHatLexpr(StarHatLexpr *star_hat_lexpr)
-{
-  /* Code For StarHatLexpr Goes Here */
-
-  if (star_hat_lexpr->lexpr_1) star_hat_lexpr->lexpr_1->accept(this);
-  if (star_hat_lexpr->lexpr_2) star_hat_lexpr->lexpr_2->accept(this);
+  if (squares_range_lexpr->lexpr_) squares_range_lexpr->lexpr_->accept(this);
+  if (squares_range_lexpr->range_) squares_range_lexpr->range_->accept(this);
 
 }
 
@@ -572,69 +429,6 @@ void Skeleton::visitSquaresLexpr(SquaresLexpr *squares_lexpr)
 
   if (squares_lexpr->lexpr_1) squares_lexpr->lexpr_1->accept(this);
   if (squares_lexpr->lexpr_2) squares_lexpr->lexpr_2->accept(this);
-
-}
-
-void Skeleton::visitMinusLexpr(MinusLexpr *minus_lexpr)
-{
-  /* Code For MinusLexpr Goes Here */
-
-  if (minus_lexpr->lexpr_) minus_lexpr->lexpr_->accept(this);
-
-}
-
-void Skeleton::visitPlusLexpr(PlusLexpr *plus_lexpr)
-{
-  /* Code For PlusLexpr Goes Here */
-
-  if (plus_lexpr->lexpr_) plus_lexpr->lexpr_->accept(this);
-
-}
-
-void Skeleton::visitTildeLexpr(TildeLexpr *tilde_lexpr)
-{
-  /* Code For TildeLexpr Goes Here */
-
-  if (tilde_lexpr->lexpr_) tilde_lexpr->lexpr_->accept(this);
-
-}
-
-void Skeleton::visitStarLexpr(StarLexpr *star_lexpr)
-{
-  /* Code For StarLexpr Goes Here */
-
-  if (star_lexpr->lexpr_) star_lexpr->lexpr_->accept(this);
-
-}
-
-void Skeleton::visitAmpUnaryLexpr(AmpUnaryLexpr *amp_unary_lexpr)
-{
-  /* Code For AmpUnaryLexpr Goes Here */
-
-  if (amp_unary_lexpr->lexpr_) amp_unary_lexpr->lexpr_->accept(this);
-
-}
-
-void Skeleton::visitSizeOfLexpr(SizeOfLexpr *size_of_lexpr)
-{
-  /* Code For SizeOfLexpr Goes Here */
-
-  if (size_of_lexpr->lexpr_) size_of_lexpr->lexpr_->accept(this);
-
-}
-
-void Skeleton::visitOldLexpr(OldLexpr *old_lexpr)
-{
-  /* Code For OldLexpr Goes Here */
-
-  if (old_lexpr->lexpr_) old_lexpr->lexpr_->accept(this);
-
-}
-
-void Skeleton::visitResultLexpr(ResultLexpr *result_lexpr)
-{
-  /* Code For ResultLexpr Goes Here */
-
 
 }
 
@@ -670,29 +464,11 @@ void Skeleton::visitPiLexpr(PiLexpr *pi_lexpr)
 
 }
 
-void Skeleton::visitLessLessLexpr(LessLessLexpr *less_less_lexpr)
+void Skeleton::visitParenRangeLexpr(ParenRangeLexpr *paren_range_lexpr)
 {
-  /* Code For LessLessLexpr Goes Here */
+  /* Code For ParenRangeLexpr Goes Here */
 
-  if (less_less_lexpr->lexpr_1) less_less_lexpr->lexpr_1->accept(this);
-  if (less_less_lexpr->lexpr_2) less_less_lexpr->lexpr_2->accept(this);
-
-}
-
-void Skeleton::visitGreaterGreaterLexpr(GreaterGreaterLexpr *greater_greater_lexpr)
-{
-  /* Code For GreaterGreaterLexpr Goes Here */
-
-  if (greater_greater_lexpr->lexpr_1) greater_greater_lexpr->lexpr_1->accept(this);
-  if (greater_greater_lexpr->lexpr_2) greater_greater_lexpr->lexpr_2->accept(this);
-
-}
-
-void Skeleton::visitTypeOfLexpr(TypeOfLexpr *type_of_lexpr)
-{
-  /* Code For TypeOfLexpr Goes Here */
-
-  if (type_of_lexpr->lexpr_) type_of_lexpr->lexpr_->accept(this);
+  if (paren_range_lexpr->range_) paren_range_lexpr->range_->accept(this);
 
 }
 
@@ -744,6 +520,203 @@ void Skeleton::visitNotEqRel(NotEqRel *not_eq_rel)
 {
   /* Code For NotEqRel Goes Here */
 
+
+}
+
+void Skeleton::visitForallBinderLexpr(ForallBinderLexpr *forall_binder_lexpr)
+{
+  /* Code For ForallBinderLexpr Goes Here */
+
+  if (forall_binder_lexpr->binders_) forall_binder_lexpr->binders_->accept(this);
+  if (forall_binder_lexpr->lexpr_) forall_binder_lexpr->lexpr_->accept(this);
+
+}
+
+void Skeleton::visitExistBinderLexpr(ExistBinderLexpr *exist_binder_lexpr)
+{
+  /* Code For ExistBinderLexpr Goes Here */
+
+  if (exist_binder_lexpr->binders_) exist_binder_lexpr->binders_->accept(this);
+  if (exist_binder_lexpr->lexpr_) exist_binder_lexpr->lexpr_->accept(this);
+
+}
+
+void Skeleton::visitLambdaBinderLexpr(LambdaBinderLexpr *lambda_binder_lexpr)
+{
+  /* Code For LambdaBinderLexpr Goes Here */
+
+  if (lambda_binder_lexpr->binders_) lambda_binder_lexpr->binders_->accept(this);
+  if (lambda_binder_lexpr->lexpr_) lambda_binder_lexpr->lexpr_->accept(this);
+
+}
+
+void Skeleton::visitTheBinders(TheBinders *the_binders)
+{
+  /* Code For TheBinders Goes Here */
+
+  if (the_binders->typespecoftypename_) the_binders->typespecoftypename_->accept(this);
+  if (the_binders->varspec_) the_binders->varspec_->accept(this);
+  if (the_binders->listbindersreentrance_) the_binders->listbindersreentrance_->accept(this);
+
+}
+
+void Skeleton::visitTypeSpecTYPENAME(TypeSpecTYPENAME *type_spec_typename)
+{
+  /* Code For TypeSpecTYPENAME Goes Here */
+
+  visitIdent(type_spec_typename->ident_);
+
+}
+
+void Skeleton::visitTypeSpecSimpleFromTypenameTypeSpec(TypeSpecSimpleFromTypenameTypeSpec *type_spec_simple_from_typename_type_spec)
+{
+  /* Code For TypeSpecSimpleFromTypenameTypeSpec Goes Here */
+
+  if (type_spec_simple_from_typename_type_spec->typespecsimple_) type_spec_simple_from_typename_type_spec->typespecsimple_->accept(this);
+
+}
+
+void Skeleton::visitBindersReentranceDeclSpec(BindersReentranceDeclSpec *binders_reentrance_decl_spec)
+{
+  /* Code For BindersReentranceDeclSpec Goes Here */
+
+  if (binders_reentrance_decl_spec->typespecoftypename_) binders_reentrance_decl_spec->typespecoftypename_->accept(this);
+  if (binders_reentrance_decl_spec->varspec_) binders_reentrance_decl_spec->varspec_->accept(this);
+
+}
+
+void Skeleton::visitBindersReentranceVarSpec(BindersReentranceVarSpec *binders_reentrance_var_spec)
+{
+  /* Code For BindersReentranceVarSpec Goes Here */
+
+  if (binders_reentrance_var_spec->varspec_) binders_reentrance_var_spec->varspec_->accept(this);
+
+}
+
+void Skeleton::visitStartVarSpec(StartVarSpec *start_var_spec)
+{
+  /* Code For StartVarSpec Goes Here */
+
+  if (start_var_spec->liststars_) start_var_spec->liststars_->accept(this);
+  if (start_var_spec->varspec_) start_var_spec->varspec_->accept(this);
+
+}
+
+void Skeleton::visitSimpleSpec(SimpleSpec *simple_spec)
+{
+  /* Code For SimpleSpec Goes Here */
+
+  if (simple_spec->fullidentifier_) simple_spec->fullidentifier_->accept(this);
+
+}
+
+void Skeleton::visitArraySpec(ArraySpec *array_spec)
+{
+  /* Code For ArraySpec Goes Here */
+
+  if (array_spec->varspec_) array_spec->varspec_->accept(this);
+  if (array_spec->arraysize_) array_spec->arraysize_->accept(this);
+
+}
+
+void Skeleton::visitStar(Star *star)
+{
+  /* Code For Star Goes Here */
+
+
+}
+
+void Skeleton::visitIntConstArraySize(IntConstArraySize *int_const_array_size)
+{
+  /* Code For IntConstArraySize Goes Here */
+
+  visitInteger(int_const_array_size->integer_);
+
+}
+
+void Skeleton::visitSomeArraySize(SomeArraySize *some_array_size)
+{
+  /* Code For SomeArraySize Goes Here */
+
+  if (some_array_size->fullidentifier_) some_array_size->fullidentifier_->accept(this);
+
+}
+
+void Skeleton::visitNoSize(NoSize *no_size)
+{
+  /* Code For NoSize Goes Here */
+
+
+}
+
+void Skeleton::visitOptLabelOne(OptLabelOne *opt_label_one)
+{
+  /* Code For OptLabelOne Goes Here */
+
+  if (opt_label_one->optlabellist_) opt_label_one->optlabellist_->accept(this);
+
+}
+
+void Skeleton::visitOptLabelTwo(OptLabelTwo *opt_label_two)
+{
+  /* Code For OptLabelTwo Goes Here */
+
+  if (opt_label_two->optlabellist_) opt_label_two->optlabellist_->accept(this);
+
+}
+
+void Skeleton::visitNoLableList(NoLableList *no_lable_list)
+{
+  /* Code For NoLableList Goes Here */
+
+
+}
+
+void Skeleton::visitLableList(LableList *lable_list)
+{
+  /* Code For LableList Goes Here */
+
+  if (lable_list->listlabelname_) lable_list->listlabelname_->accept(this);
+
+}
+
+void Skeleton::visitLableName(LableName *lable_name)
+{
+  /* Code For LableName Goes Here */
+
+  if (lable_name->anyidentifier_) lable_name->anyidentifier_->accept(this);
+
+}
+
+void Skeleton::visitLexprRange(LexprRange *lexpr_range)
+{
+  /* Code For LexprRange Goes Here */
+
+  if (lexpr_range->lexproption_1) lexpr_range->lexproption_1->accept(this);
+  if (lexpr_range->lexproption_2) lexpr_range->lexproption_2->accept(this);
+
+}
+
+void Skeleton::visitNoLexprOption(NoLexprOption *no_lexpr_option)
+{
+  /* Code For NoLexprOption Goes Here */
+
+
+}
+
+void Skeleton::visitSomeLexprOption(SomeLexprOption *some_lexpr_option)
+{
+  /* Code For SomeLexprOption Goes Here */
+
+  if (some_lexpr_option->lexpr_) some_lexpr_option->lexpr_->accept(this);
+
+}
+
+void Skeleton::visitSimpleIdentifierAny(SimpleIdentifierAny *simple_identifier_any)
+{
+  /* Code For SimpleIdentifierAny Goes Here */
+
+  if (simple_identifier_any->identifier_) simple_identifier_any->identifier_->accept(this);
 
 }
 
@@ -868,14 +841,184 @@ void Skeleton::visitIdentifierIdent(IdentifierIdent *identifier_ident)
 
 }
 
-
-void Skeleton::visitListAnnot(ListAnnot *list_annot)
+void Skeleton::visitTypeSpecSimpleIntegerKeyWord(TypeSpecSimpleIntegerKeyWord *type_spec_simple_integer_key_word)
 {
-  for (ListAnnot::iterator i = list_annot->begin() ; i != list_annot->end() ; ++i)
-  {
-    (*i)->accept(this);
-  }
+  /* Code For TypeSpecSimpleIntegerKeyWord Goes Here */
+
+
 }
+
+void Skeleton::visitTypeSpecSimpleRealKeyWord(TypeSpecSimpleRealKeyWord *type_spec_simple_real_key_word)
+{
+  /* Code For TypeSpecSimpleRealKeyWord Goes Here */
+
+
+}
+
+void Skeleton::visitTypeSpecSimpleBooleanKeyWord(TypeSpecSimpleBooleanKeyWord *type_spec_simple_boolean_key_word)
+{
+  /* Code For TypeSpecSimpleBooleanKeyWord Goes Here */
+
+
+}
+
+void Skeleton::visitTypeSpecSimpleVoidKeyWord(TypeSpecSimpleVoidKeyWord *type_spec_simple_void_key_word)
+{
+  /* Code For TypeSpecSimpleVoidKeyWord Goes Here */
+
+
+}
+
+void Skeleton::visitTypeSpecSimpleBoolKeyWord(TypeSpecSimpleBoolKeyWord *type_spec_simple_bool_key_word)
+{
+  /* Code For TypeSpecSimpleBoolKeyWord Goes Here */
+
+
+}
+
+void Skeleton::visitTypeSpecSimpleCharKeyWord(TypeSpecSimpleCharKeyWord *type_spec_simple_char_key_word)
+{
+  /* Code For TypeSpecSimpleCharKeyWord Goes Here */
+
+
+}
+
+void Skeleton::visitTypeSpecSimpleIntKeyWord(TypeSpecSimpleIntKeyWord *type_spec_simple_int_key_word)
+{
+  /* Code For TypeSpecSimpleIntKeyWord Goes Here */
+
+
+}
+
+void Skeleton::visitTypeSpecSimpleDoubleKeyWord(TypeSpecSimpleDoubleKeyWord *type_spec_simple_double_key_word)
+{
+  /* Code For TypeSpecSimpleDoubleKeyWord Goes Here */
+
+
+}
+
+void Skeleton::visitTypeSpecSimpleLongDoubleKeyWord(TypeSpecSimpleLongDoubleKeyWord *type_spec_simple_long_double_key_word)
+{
+  /* Code For TypeSpecSimpleLongDoubleKeyWord Goes Here */
+
+
+}
+
+void Skeleton::visitAnAnnotation(AnAnnotation *an_annotation)
+{
+  /* Code For AnAnnotation Goes Here */
+
+  if (an_annotation->annotation_) an_annotation->annotation_->accept(this);
+
+}
+
+void Skeleton::visitLoopAnnotation(LoopAnnotation *loop_annotation)
+{
+  /* Code For LoopAnnotation Goes Here */
+
+  if (loop_annotation->loopannotstack_) loop_annotation->loopannotstack_->accept(this);
+
+}
+
+void Skeleton::visitLoopAnnotStackInvariant(LoopAnnotStackInvariant *loop_annot_stack_invariant)
+{
+  /* Code For LoopAnnotStackInvariant Goes Here */
+
+  if (loop_annot_stack_invariant->loopinvariant_) loop_annot_stack_invariant->loopinvariant_->accept(this);
+  if (loop_annot_stack_invariant->loopannotopt_) loop_annot_stack_invariant->loopannotopt_->accept(this);
+
+}
+
+void Skeleton::visitLoopAnnotStackEffects(LoopAnnotStackEffects *loop_annot_stack_effects)
+{
+  /* Code For LoopAnnotStackEffects Goes Here */
+
+  if (loop_annot_stack_effects->loopeffects_) loop_annot_stack_effects->loopeffects_->accept(this);
+  if (loop_annot_stack_effects->loopannotopt_) loop_annot_stack_effects->loopannotopt_->accept(this);
+
+}
+
+void Skeleton::visitLoopAnnotStackVariant(LoopAnnotStackVariant *loop_annot_stack_variant)
+{
+  /* Code For LoopAnnotStackVariant Goes Here */
+
+  if (loop_annot_stack_variant->loopvariant_) loop_annot_stack_variant->loopvariant_->accept(this);
+  if (loop_annot_stack_variant->loopannotopt_) loop_annot_stack_variant->loopannotopt_->accept(this);
+
+}
+
+void Skeleton::visitNoLoopAnnot(NoLoopAnnot *no_loop_annot)
+{
+  /* Code For NoLoopAnnot Goes Here */
+
+
+}
+
+void Skeleton::visitSomeLoopAnnot(SomeLoopAnnot *some_loop_annot)
+{
+  /* Code For SomeLoopAnnot Goes Here */
+
+  if (some_loop_annot->loopannotstack_) some_loop_annot->loopannotstack_->accept(this);
+
+}
+
+void Skeleton::visitSimpleLoopInvariant(SimpleLoopInvariant *simple_loop_invariant)
+{
+  /* Code For SimpleLoopInvariant Goes Here */
+
+  if (simple_loop_invariant->lexpr_) simple_loop_invariant->lexpr_->accept(this);
+
+}
+
+void Skeleton::visitCheckLoopInvariant(CheckLoopInvariant *check_loop_invariant)
+{
+  /* Code For CheckLoopInvariant Goes Here */
+
+  if (check_loop_invariant->lexpr_) check_loop_invariant->lexpr_->accept(this);
+
+}
+
+void Skeleton::visitAdmitLoopInvariant(AdmitLoopInvariant *admit_loop_invariant)
+{
+  /* Code For AdmitLoopInvariant Goes Here */
+
+  if (admit_loop_invariant->lexpr_) admit_loop_invariant->lexpr_->accept(this);
+
+}
+
+void Skeleton::visitSimpleLoopVariant(SimpleLoopVariant *simple_loop_variant)
+{
+  /* Code For SimpleLoopVariant Goes Here */
+
+  if (simple_loop_variant->variant_) simple_loop_variant->variant_->accept(this);
+
+}
+
+void Skeleton::visitLoopAssigns(LoopAssigns *loop_assigns)
+{
+  /* Code For LoopAssigns Goes Here */
+
+  if (loop_assigns->assigns_) loop_assigns->assigns_->accept(this);
+
+}
+
+void Skeleton::visitForVariant(ForVariant *for_variant)
+{
+  /* Code For ForVariant Goes Here */
+
+  if (for_variant->lexpr_) for_variant->lexpr_->accept(this);
+  if (for_variant->anyidentifier_) for_variant->anyidentifier_->accept(this);
+
+}
+
+void Skeleton::visitLexprVariant(LexprVariant *lexpr_variant)
+{
+  /* Code For LexprVariant Goes Here */
+
+  if (lexpr_variant->lexpr_) lexpr_variant->lexpr_->accept(this);
+
+}
+
 
 void Skeleton::visitListLexpr(ListLexpr *list_lexpr)
 {
@@ -888,6 +1031,30 @@ void Skeleton::visitListLexpr(ListLexpr *list_lexpr)
 void Skeleton::visitListLexprRelInner(ListLexprRelInner *list_lexpr_rel_inner)
 {
   for (ListLexprRelInner::iterator i = list_lexpr_rel_inner->begin() ; i != list_lexpr_rel_inner->end() ; ++i)
+  {
+    (*i)->accept(this);
+  }
+}
+
+void Skeleton::visitListBindersReentrance(ListBindersReentrance *list_binders_reentrance)
+{
+  for (ListBindersReentrance::iterator i = list_binders_reentrance->begin() ; i != list_binders_reentrance->end() ; ++i)
+  {
+    (*i)->accept(this);
+  }
+}
+
+void Skeleton::visitListStars(ListStars *list_stars)
+{
+  for (ListStars::iterator i = list_stars->begin() ; i != list_stars->end() ; ++i)
+  {
+    (*i)->accept(this);
+  }
+}
+
+void Skeleton::visitListLabelName(ListLabelName *list_label_name)
+{
+  for (ListLabelName::iterator i = list_label_name->begin() ; i != list_label_name->end() ; ++i)
   {
     (*i)->accept(this);
   }

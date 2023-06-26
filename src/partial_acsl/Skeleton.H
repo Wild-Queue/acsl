@@ -39,6 +39,7 @@ public:
   void visitBlockAttrs(BlockAttrs *p);
   void visitBlockElement(BlockElement *p);
   void visitStatement(Statement *p);
+  void visitForClause(ForClause *p);
   void visitAttr(Attr *p);
   void visitBasicAttribute(BasicAttribute *p);
   void visitAnnotatedStmt(AnnotatedStmt *p);
@@ -66,6 +67,7 @@ public:
   void visitTypeSpecShortKeyWord(TypeSpecShortKeyWord *p);
   void visitTypeSpecInt32KeyWord(TypeSpecInt32KeyWord *p);
   void visitTypeSpecIntKeyWord(TypeSpecIntKeyWord *p);
+  void visitTypeSpecSizeTKeyWord(TypeSpecSizeTKeyWord *p);
   void visitTypeSpecLongKeyWord(TypeSpecLongKeyWord *p);
   void visitTypeSpecInt64KeyWord(TypeSpecInt64KeyWord *p);
   void visitTypeSpecFloatKeyWord(TypeSpecFloatKeyWord *p);
@@ -112,12 +114,16 @@ public:
   void visitIfStatement(IfStatement *p);
   void visitSwitchStatement(SwitchStatement *p);
   void visitWhileStatement(WhileStatement *p);
+  void visitForStatement(ForStatement *p);
   void visitCaseStatement(CaseStatement *p);
   void visitCaseSliceStatement(CaseSliceStatement *p);
   void visitDefaultStatement(DefaultStatement *p);
   void visitEmptyReturnStatement(EmptyReturnStatement *p);
+  void visitReturnStatement(ReturnStatement *p);
   void visitBreakStatement(BreakStatement *p);
   void visitContinueStatement(ContinueStatement *p);
+  void visitForClauseExpression(ForClauseExpression *p);
+  void visitForClauseDeclaration(ForClauseDeclaration *p);
   void visitAnAttr(AnAttr *p);
   void visitTernaryCond(TernaryCond *p);
   void visitOr(Or *p);
@@ -198,6 +204,7 @@ public:
   void visitUnaryExprNot(UnaryExprNot *p);
   void visitUnaryExprTilde(UnaryExprTilde *p);
   void visitUnaryExprAddress(UnaryExprAddress *p);
+  void visitBracketsPostfixExpression(BracketsPostfixExpression *p);
   void visitDotPostfixExpression(DotPostfixExpression *p);
   void visitArrowPostfixExpression(ArrowPostfixExpression *p);
   void visitPlusPlusPostfixExpression(PlusPlusPostfixExpression *p);
@@ -216,7 +223,6 @@ public:
   void visitListAttribute(ListAttribute *p);
   void visitListBlockElement(ListBlockElement *p);
   void visitListAttr(ListAttr *p);
-  void visitListBasicAttribute(ListBasicAttribute *p);
   void visitListExpression(ListExpression *p);
 
   void visitInteger(Integer x);

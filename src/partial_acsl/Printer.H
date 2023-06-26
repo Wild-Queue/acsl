@@ -62,6 +62,7 @@ class PrintAbsyn : public Visitor
   void visitTypeSpecShortKeyWord(TypeSpecShortKeyWord *p);
   void visitTypeSpecInt32KeyWord(TypeSpecInt32KeyWord *p);
   void visitTypeSpecIntKeyWord(TypeSpecIntKeyWord *p);
+  void visitTypeSpecSizeTKeyWord(TypeSpecSizeTKeyWord *p);
   void visitTypeSpecLongKeyWord(TypeSpecLongKeyWord *p);
   void visitTypeSpecInt64KeyWord(TypeSpecInt64KeyWord *p);
   void visitTypeSpecFloatKeyWord(TypeSpecFloatKeyWord *p);
@@ -138,12 +139,17 @@ class PrintAbsyn : public Visitor
   void visitIfStatement(IfStatement *p);
   void visitSwitchStatement(SwitchStatement *p);
   void visitWhileStatement(WhileStatement *p);
+  void visitForStatement(ForStatement *p);
   void visitCaseStatement(CaseStatement *p);
   void visitCaseSliceStatement(CaseSliceStatement *p);
   void visitDefaultStatement(DefaultStatement *p);
   void visitEmptyReturnStatement(EmptyReturnStatement *p);
+  void visitReturnStatement(ReturnStatement *p);
   void visitBreakStatement(BreakStatement *p);
   void visitContinueStatement(ContinueStatement *p);
+  void visitForClause(ForClause *p); /* abstract class */
+  void visitForClauseExpression(ForClauseExpression *p);
+  void visitForClauseDeclaration(ForClauseDeclaration *p);
   void visitAttr(Attr *p); /* abstract class */
   void visitAnAttr(AnAttr *p);
   void visitTernaryCond(TernaryCond *p);
@@ -182,8 +188,6 @@ class PrintAbsyn : public Visitor
   void visitBasicAttribute(BasicAttribute *p); /* abstract class */
   void visitBasicAttrConsInt(BasicAttrConsInt *p);
   void visitBasicAttrConsFloat(BasicAttrConsFloat *p);
-  void visitListBasicAttribute(ListBasicAttribute *p);
-  void iterListBasicAttribute(ListBasicAttribute::const_iterator i, ListBasicAttribute::const_iterator j);
   void visitAnnotatedStmt(AnnotatedStmt *p); /* abstract class */
   void visitAnnotatedStatement(AnnotatedStatement *p);
   void visitElsePart(ElsePart *p); /* abstract class */
@@ -237,6 +241,7 @@ class PrintAbsyn : public Visitor
   void visitUnaryExprNot(UnaryExprNot *p);
   void visitUnaryExprTilde(UnaryExprTilde *p);
   void visitUnaryExprAddress(UnaryExprAddress *p);
+  void visitBracketsPostfixExpression(BracketsPostfixExpression *p);
   void visitDotPostfixExpression(DotPostfixExpression *p);
   void visitArrowPostfixExpression(ArrowPostfixExpression *p);
   void visitPlusPlusPostfixExpression(PlusPlusPostfixExpression *p);
@@ -354,6 +359,7 @@ class ShowAbsyn : public Visitor
   void visitTypeSpecShortKeyWord(TypeSpecShortKeyWord *p);
   void visitTypeSpecInt32KeyWord(TypeSpecInt32KeyWord *p);
   void visitTypeSpecIntKeyWord(TypeSpecIntKeyWord *p);
+  void visitTypeSpecSizeTKeyWord(TypeSpecSizeTKeyWord *p);
   void visitTypeSpecLongKeyWord(TypeSpecLongKeyWord *p);
   void visitTypeSpecInt64KeyWord(TypeSpecInt64KeyWord *p);
   void visitTypeSpecFloatKeyWord(TypeSpecFloatKeyWord *p);
@@ -430,12 +436,17 @@ class ShowAbsyn : public Visitor
   void visitIfStatement(IfStatement *p);
   void visitSwitchStatement(SwitchStatement *p);
   void visitWhileStatement(WhileStatement *p);
+  void visitForStatement(ForStatement *p);
   void visitCaseStatement(CaseStatement *p);
   void visitCaseSliceStatement(CaseSliceStatement *p);
   void visitDefaultStatement(DefaultStatement *p);
   void visitEmptyReturnStatement(EmptyReturnStatement *p);
+  void visitReturnStatement(ReturnStatement *p);
   void visitBreakStatement(BreakStatement *p);
   void visitContinueStatement(ContinueStatement *p);
+  void visitForClause(ForClause *p); /* abstract class */
+  void visitForClauseExpression(ForClauseExpression *p);
+  void visitForClauseDeclaration(ForClauseDeclaration *p);
   void visitAttr(Attr *p); /* abstract class */
   void visitAnAttr(AnAttr *p);
   void visitTernaryCond(TernaryCond *p);
@@ -474,8 +485,6 @@ class ShowAbsyn : public Visitor
   void visitBasicAttribute(BasicAttribute *p); /* abstract class */
   void visitBasicAttrConsInt(BasicAttrConsInt *p);
   void visitBasicAttrConsFloat(BasicAttrConsFloat *p);
-  void visitListBasicAttribute(ListBasicAttribute *p);
-  void iterListBasicAttribute(ListBasicAttribute::const_iterator i, ListBasicAttribute::const_iterator j);
   void visitAnnotatedStmt(AnnotatedStmt *p); /* abstract class */
   void visitAnnotatedStatement(AnnotatedStatement *p);
   void visitElsePart(ElsePart *p); /* abstract class */
@@ -529,6 +538,7 @@ class ShowAbsyn : public Visitor
   void visitUnaryExprNot(UnaryExprNot *p);
   void visitUnaryExprTilde(UnaryExprTilde *p);
   void visitUnaryExprAddress(UnaryExprAddress *p);
+  void visitBracketsPostfixExpression(BracketsPostfixExpression *p);
   void visitDotPostfixExpression(DotPostfixExpression *p);
   void visitArrowPostfixExpression(ArrowPostfixExpression *p);
   void visitPlusPlusPostfixExpression(PlusPlusPostfixExpression *p);

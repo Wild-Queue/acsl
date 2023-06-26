@@ -57,76 +57,70 @@ extern int partial_bnfc_acsldebug;
     _ERROR_ = 258,                 /* _ERROR_  */
     _BANG = 259,                   /* _BANG  */
     _BANGEQ = 260,                 /* _BANGEQ  */
-    _PERCENT = 261,                /* _PERCENT  */
-    _AMP = 262,                    /* _AMP  */
-    _DAMP = 263,                   /* _DAMP  */
-    _LPAREN = 264,                 /* _LPAREN  */
-    _RPAREN = 265,                 /* _RPAREN  */
-    _STAR = 266,                   /* _STAR  */
-    _SYMB_35 = 267,                /* _SYMB_35  */
-    _PLUS = 268,                   /* _PLUS  */
-    _COMMA = 269,                  /* _COMMA  */
-    _MINUS = 270,                  /* _MINUS  */
-    _SYMB_9 = 271,                 /* _SYMB_9  */
-    _SLASH = 272,                  /* _SLASH  */
-    _COLON = 273,                  /* _COLON  */
-    _SEMI = 274,                   /* _SEMI  */
-    _LT = 275,                     /* _LT  */
-    _SYMB_10 = 276,                /* _SYMB_10  */
-    _DLT = 277,                    /* _DLT  */
-    _LDARROW = 278,                /* _LDARROW  */
-    _SYMB_2 = 279,                 /* _SYMB_2  */
-    _DEQ = 280,                    /* _DEQ  */
-    _SYMB_1 = 281,                 /* _SYMB_1  */
-    _GT = 282,                     /* _GT  */
-    _GTEQ = 283,                   /* _GTEQ  */
-    _DGT = 284,                    /* _DGT  */
-    _QUESTION = 285,               /* _QUESTION  */
-    _LBRACK = 286,                 /* _LBRACK  */
-    _SYMB_24 = 287,                /* _SYMB_24  */
-    _SYMB_25 = 288,                /* _SYMB_25  */
-    _SYMB_23 = 289,                /* _SYMB_23  */
-    _SYMB_11 = 290,                /* _SYMB_11  */
-    _SYMB_29 = 291,                /* _SYMB_29  */
-    _SYMB_41 = 292,                /* _SYMB_41  */
-    _SYMB_44 = 293,                /* _SYMB_44  */
-    _SYMB_26 = 294,                /* _SYMB_26  */
-    _SYMB_42 = 295,                /* _SYMB_42  */
-    _SYMB_43 = 296,                /* _SYMB_43  */
-    _SYMB_27 = 297,                /* _SYMB_27  */
-    _SYMB_22 = 298,                /* _SYMB_22  */
-    _SYMB_47 = 299,                /* _SYMB_47  */
-    _SYMB_28 = 300,                /* _SYMB_28  */
-    _RBRACK = 301,                 /* _RBRACK  */
-    _CARET = 302,                  /* _CARET  */
-    _DCARET = 303,                 /* _DCARET  */
-    _KW_admit = 304,               /* _KW_admit  */
-    _KW_allocates = 305,           /* _KW_allocates  */
-    _KW_assigns = 306,             /* _KW_assigns  */
-    _KW_assumes = 307,             /* _KW_assumes  */
-    _KW_behavior = 308,            /* _KW_behavior  */
-    _KW_breaks = 309,              /* _KW_breaks  */
-    _KW_check = 310,               /* _KW_check  */
-    _KW_complete = 311,            /* _KW_complete  */
-    _KW_continues = 312,           /* _KW_continues  */
-    _KW_decreases = 313,           /* _KW_decreases  */
-    _KW_disjoint = 314,            /* _KW_disjoint  */
-    _KW_ensures = 315,             /* _KW_ensures  */
-    _KW_exits = 316,               /* _KW_exits  */
-    _KW_frees = 317,               /* _KW_frees  */
-    _KW_invariant = 318,           /* _KW_invariant  */
-    _KW_lemma = 319,               /* _KW_lemma  */
-    _KW_loop = 320,                /* _KW_loop  */
-    _KW_requires = 321,            /* _KW_requires  */
-    _KW_returns = 322,             /* _KW_returns  */
-    _KW_sizeof = 323,              /* _KW_sizeof  */
-    _BAR = 324,                    /* _BAR  */
-    _DBAR = 325,                   /* _DBAR  */
-    _TILDE = 326,                  /* _TILDE  */
-    _STRING_ = 327,                /* _STRING_  */
-    _INTEGER_ = 328,               /* _INTEGER_  */
-    _DOUBLE_ = 329,                /* _DOUBLE_  */
-    _IDENT_ = 330                  /* _IDENT_  */
+    _DAMP = 261,                   /* _DAMP  */
+    _LPAREN = 262,                 /* _LPAREN  */
+    _RPAREN = 263,                 /* _RPAREN  */
+    _STAR = 264,                   /* _STAR  */
+    _PLUS = 265,                   /* _PLUS  */
+    _COMMA = 266,                  /* _COMMA  */
+    _MINUS = 267,                  /* _MINUS  */
+    _DDOT = 268,                   /* _DDOT  */
+    _SEMI = 269,                   /* _SEMI  */
+    _LT = 270,                     /* _LT  */
+    _LDARROW = 271,                /* _LDARROW  */
+    _SYMB_4 = 272,                 /* _SYMB_4  */
+    _DEQ = 273,                    /* _DEQ  */
+    _SYMB_3 = 274,                 /* _SYMB_3  */
+    _GT = 275,                     /* _GT  */
+    _GTEQ = 276,                   /* _GTEQ  */
+    _LBRACK = 277,                 /* _LBRACK  */
+    _SYMB_27 = 278,                /* _SYMB_27  */
+    _SYMB_28 = 279,                /* _SYMB_28  */
+    _SYMB_17 = 280,                /* _SYMB_17  */
+    _SYMB_25 = 281,                /* _SYMB_25  */
+    _SYMB_16 = 282,                /* _SYMB_16  */
+    _SYMB_1 = 283,                 /* _SYMB_1  */
+    _SYMB_18 = 284,                /* _SYMB_18  */
+    _SYMB_2 = 285,                 /* _SYMB_2  */
+    _SYMB_32 = 286,                /* _SYMB_32  */
+    _SYMB_36 = 287,                /* _SYMB_36  */
+    _SYMB_29 = 288,                /* _SYMB_29  */
+    _SYMB_35 = 289,                /* _SYMB_35  */
+    _SYMB_30 = 290,                /* _SYMB_30  */
+    _SYMB_24 = 291,                /* _SYMB_24  */
+    _SYMB_31 = 292,                /* _SYMB_31  */
+    _SYMB_26 = 293,                /* _SYMB_26  */
+    _RBRACK = 294,                 /* _RBRACK  */
+    _DCARET = 295,                 /* _DCARET  */
+    _SYMB_40 = 296,                /* _SYMB_40  */
+    _KW_admit = 297,               /* _KW_admit  */
+    _KW_assigns = 298,             /* _KW_assigns  */
+    _KW_boolean = 299,             /* _KW_boolean  */
+    _KW_breaks = 300,              /* _KW_breaks  */
+    _KW_char = 301,                /* _KW_char  */
+    _KW_check = 302,               /* _KW_check  */
+    _KW_continues = 303,           /* _KW_continues  */
+    _KW_double = 304,              /* _KW_double  */
+    _KW_ensures = 305,             /* _KW_ensures  */
+    _KW_exits = 306,               /* _KW_exits  */
+    _KW_for = 307,                 /* _KW_for  */
+    _KW_int = 308,                 /* _KW_int  */
+    _KW_integer = 309,             /* _KW_integer  */
+    _KW_invariant = 310,           /* _KW_invariant  */
+    _KW_long = 311,                /* _KW_long  */
+    _KW_loop = 312,                /* _KW_loop  */
+    _KW_real = 313,                /* _KW_real  */
+    _KW_requires = 314,            /* _KW_requires  */
+    _KW_returns = 315,             /* _KW_returns  */
+    _KW_variant = 316,             /* _KW_variant  */
+    _KW_void = 317,                /* _KW_void  */
+    _LBRACE = 318,                 /* _LBRACE  */
+    _DBAR = 319,                   /* _DBAR  */
+    _RBRACE = 320,                 /* _RBRACE  */
+    _STRING_ = 321,                /* _STRING_  */
+    _INTEGER_ = 322,               /* _INTEGER_  */
+    _DOUBLE_ = 323,                /* _DOUBLE_  */
+    _IDENT_ = 324                  /* _IDENT_  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -143,16 +137,16 @@ union YYSTYPE
   char*  _string;
   partial_bnfc_acsl::Program* program_;
   partial_bnfc_acsl::Annot* annot_;
-  partial_bnfc_acsl::ListAnnot* listannot_;
   partial_bnfc_acsl::Code_Annot* code_annot_;
   partial_bnfc_acsl::Contract* contract_;
   partial_bnfc_acsl::Requires* requires_;
   partial_bnfc_acsl::NERequires* nerequires_;
-  partial_bnfc_acsl::ClauseKW* clausekw_;
   partial_bnfc_acsl::Terminates* terminates_;
   partial_bnfc_acsl::Decreases* decreases_;
   partial_bnfc_acsl::SimpleClauses* simpleclauses_;
   partial_bnfc_acsl::NESimpleClauses* nesimpleclauses_;
+  partial_bnfc_acsl::Assigns* assigns_;
+  partial_bnfc_acsl::Zones* zones_;
   partial_bnfc_acsl::Behaviors* behaviors_;
   partial_bnfc_acsl::CompleteOrDisjoint* completeordisjoint_;
   partial_bnfc_acsl::Lexpr* lexpr_;
@@ -160,12 +154,37 @@ union YYSTYPE
   partial_bnfc_acsl::LexprRelInner* lexprrelinner_;
   partial_bnfc_acsl::ListLexprRelInner* listlexprrelinner_;
   partial_bnfc_acsl::Relation* relation_;
+  partial_bnfc_acsl::LexprBinder* lexprbinder_;
+  partial_bnfc_acsl::Binders* binders_;
+  partial_bnfc_acsl::TypeSpecOFTYPENAME* typespecoftypename_;
+  partial_bnfc_acsl::BindersReentrance* bindersreentrance_;
+  partial_bnfc_acsl::ListBindersReentrance* listbindersreentrance_;
+  partial_bnfc_acsl::VarSpec* varspec_;
+  partial_bnfc_acsl::Stars* stars_;
+  partial_bnfc_acsl::ListStars* liststars_;
+  partial_bnfc_acsl::ArraySize* arraysize_;
+  partial_bnfc_acsl::OptLabel* optlabel_;
+  partial_bnfc_acsl::OptLabelList* optlabellist_;
+  partial_bnfc_acsl::LabelName* labelname_;
+  partial_bnfc_acsl::ListLabelName* listlabelname_;
+  partial_bnfc_acsl::Range* range_;
+  partial_bnfc_acsl::LexprOption* lexproption_;
+  partial_bnfc_acsl::AnyIdentifier* anyidentifier_;
   partial_bnfc_acsl::PostCond* postcond_;
   partial_bnfc_acsl::FullIdentifier* fullidentifier_;
   partial_bnfc_acsl::ListFullIdentifier* listfullidentifier_;
   partial_bnfc_acsl::Identifier* identifier_;
+  partial_bnfc_acsl::TypeSpecSimple* typespecsimple_;
+  partial_bnfc_acsl::LogicPTreeAnnot* logicptreeannot_;
+  partial_bnfc_acsl::Annotation* annotation_;
+  partial_bnfc_acsl::LoopAnnotStack* loopannotstack_;
+  partial_bnfc_acsl::LoopAnnotOpt* loopannotopt_;
+  partial_bnfc_acsl::LoopInvariant* loopinvariant_;
+  partial_bnfc_acsl::LoopVariant* loopvariant_;
+  partial_bnfc_acsl::LoopEffects* loopeffects_;
+  partial_bnfc_acsl::Variant* variant_;
 
-#line 169 "Bison.H"
+#line 188 "Bison.H"
 
 };
 typedef union YYSTYPE YYSTYPE;

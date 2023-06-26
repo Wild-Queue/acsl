@@ -791,6 +791,46 @@ TypeSpecIntKeyWord *TypeSpecIntKeyWord::clone() const
 
 
 
+/********************   TypeSpecSizeTKeyWord    ********************/
+TypeSpecSizeTKeyWord::TypeSpecSizeTKeyWord()
+{
+
+}
+
+TypeSpecSizeTKeyWord::TypeSpecSizeTKeyWord(const TypeSpecSizeTKeyWord & other)
+{
+
+}
+
+TypeSpecSizeTKeyWord &TypeSpecSizeTKeyWord::operator=(const TypeSpecSizeTKeyWord & other)
+{
+  TypeSpecSizeTKeyWord tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void TypeSpecSizeTKeyWord::swap(TypeSpecSizeTKeyWord & other)
+{
+
+}
+
+TypeSpecSizeTKeyWord::~TypeSpecSizeTKeyWord()
+{
+
+}
+
+void TypeSpecSizeTKeyWord::accept(Visitor *v)
+{
+  v->visitTypeSpecSizeTKeyWord(this);
+}
+
+TypeSpecSizeTKeyWord *TypeSpecSizeTKeyWord::clone() const
+{
+  return new TypeSpecSizeTKeyWord(*this);
+}
+
+
+
 /********************   TypeSpecLongKeyWord    ********************/
 TypeSpecLongKeyWord::TypeSpecLongKeyWord()
 {
@@ -2861,6 +2901,62 @@ WhileStatement *WhileStatement::clone() const
 
 
 
+/********************   ForStatement    ********************/
+ForStatement::ForStatement(ForClause *p1, OptExpression *p2, OptExpression *p3, AnnotatedStmt *p4)
+{
+  forclause_ = p1;
+  optexpression_1 = p2;
+  optexpression_2 = p3;
+  annotatedstmt_ = p4;
+
+}
+
+ForStatement::ForStatement(const ForStatement & other)
+{
+  forclause_ = other.forclause_->clone();
+  optexpression_1 = other.optexpression_1->clone();
+  optexpression_2 = other.optexpression_2->clone();
+  annotatedstmt_ = other.annotatedstmt_->clone();
+
+}
+
+ForStatement &ForStatement::operator=(const ForStatement & other)
+{
+  ForStatement tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void ForStatement::swap(ForStatement & other)
+{
+  std::swap(forclause_, other.forclause_);
+  std::swap(optexpression_1, other.optexpression_1);
+  std::swap(optexpression_2, other.optexpression_2);
+  std::swap(annotatedstmt_, other.annotatedstmt_);
+
+}
+
+ForStatement::~ForStatement()
+{
+  delete(forclause_);
+  delete(optexpression_1);
+  delete(optexpression_2);
+  delete(annotatedstmt_);
+
+}
+
+void ForStatement::accept(Visitor *v)
+{
+  v->visitForStatement(this);
+}
+
+ForStatement *ForStatement::clone() const
+{
+  return new ForStatement(*this);
+}
+
+
+
 /********************   CaseStatement    ********************/
 CaseStatement::CaseStatement(Expression *p1, AnnotatedStmt *p2)
 {
@@ -3045,6 +3141,50 @@ EmptyReturnStatement *EmptyReturnStatement::clone() const
 
 
 
+/********************   ReturnStatement    ********************/
+ReturnStatement::ReturnStatement(ListExpression *p1)
+{
+  listexpression_ = p1;
+
+}
+
+ReturnStatement::ReturnStatement(const ReturnStatement & other)
+{
+  listexpression_ = other.listexpression_->clone();
+
+}
+
+ReturnStatement &ReturnStatement::operator=(const ReturnStatement & other)
+{
+  ReturnStatement tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void ReturnStatement::swap(ReturnStatement & other)
+{
+  std::swap(listexpression_, other.listexpression_);
+
+}
+
+ReturnStatement::~ReturnStatement()
+{
+  delete(listexpression_);
+
+}
+
+void ReturnStatement::accept(Visitor *v)
+{
+  v->visitReturnStatement(this);
+}
+
+ReturnStatement *ReturnStatement::clone() const
+{
+  return new ReturnStatement(*this);
+}
+
+
+
 /********************   BreakStatement    ********************/
 BreakStatement::BreakStatement()
 {
@@ -3121,6 +3261,94 @@ void ContinueStatement::accept(Visitor *v)
 ContinueStatement *ContinueStatement::clone() const
 {
   return new ContinueStatement(*this);
+}
+
+
+
+/********************   ForClauseExpression    ********************/
+ForClauseExpression::ForClauseExpression(OptExpression *p1)
+{
+  optexpression_ = p1;
+
+}
+
+ForClauseExpression::ForClauseExpression(const ForClauseExpression & other)
+{
+  optexpression_ = other.optexpression_->clone();
+
+}
+
+ForClauseExpression &ForClauseExpression::operator=(const ForClauseExpression & other)
+{
+  ForClauseExpression tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void ForClauseExpression::swap(ForClauseExpression & other)
+{
+  std::swap(optexpression_, other.optexpression_);
+
+}
+
+ForClauseExpression::~ForClauseExpression()
+{
+  delete(optexpression_);
+
+}
+
+void ForClauseExpression::accept(Visitor *v)
+{
+  v->visitForClauseExpression(this);
+}
+
+ForClauseExpression *ForClauseExpression::clone() const
+{
+  return new ForClauseExpression(*this);
+}
+
+
+
+/********************   ForClauseDeclaration    ********************/
+ForClauseDeclaration::ForClauseDeclaration(Declaration *p1)
+{
+  declaration_ = p1;
+
+}
+
+ForClauseDeclaration::ForClauseDeclaration(const ForClauseDeclaration & other)
+{
+  declaration_ = other.declaration_->clone();
+
+}
+
+ForClauseDeclaration &ForClauseDeclaration::operator=(const ForClauseDeclaration & other)
+{
+  ForClauseDeclaration tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void ForClauseDeclaration::swap(ForClauseDeclaration & other)
+{
+  std::swap(declaration_, other.declaration_);
+
+}
+
+ForClauseDeclaration::~ForClauseDeclaration()
+{
+  delete(declaration_);
+
+}
+
+void ForClauseDeclaration::accept(Visitor *v)
+{
+  v->visitForClauseDeclaration(this);
+}
+
+ForClauseDeclaration *ForClauseDeclaration::clone() const
+{
+  return new ForClauseDeclaration(*this);
 }
 
 
@@ -6869,6 +7097,60 @@ UnaryExprAddress *UnaryExprAddress::clone() const
 
 
 
+/********************   BracketsPostfixExpression    ********************/
+BracketsPostfixExpression::BracketsPostfixExpression(AssignExpr *p1, LBRACKET p2, ListExpression *p3, RBRACKET p4)
+{
+  assignexpr_ = p1;
+  lbracket_ = p2;
+  listexpression_ = p3;
+  rbracket_ = p4;
+
+}
+
+BracketsPostfixExpression::BracketsPostfixExpression(const BracketsPostfixExpression & other)
+{
+  assignexpr_ = other.assignexpr_->clone();
+  lbracket_ = other.lbracket_;
+  listexpression_ = other.listexpression_->clone();
+  rbracket_ = other.rbracket_;
+
+}
+
+BracketsPostfixExpression &BracketsPostfixExpression::operator=(const BracketsPostfixExpression & other)
+{
+  BracketsPostfixExpression tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void BracketsPostfixExpression::swap(BracketsPostfixExpression & other)
+{
+  std::swap(assignexpr_, other.assignexpr_);
+  std::swap(lbracket_, other.lbracket_);
+  std::swap(listexpression_, other.listexpression_);
+  std::swap(rbracket_, other.rbracket_);
+
+}
+
+BracketsPostfixExpression::~BracketsPostfixExpression()
+{
+  delete(assignexpr_);
+  delete(listexpression_);
+
+}
+
+void BracketsPostfixExpression::accept(Visitor *v)
+{
+  v->visitBracketsPostfixExpression(this);
+}
+
+BracketsPostfixExpression *BracketsPostfixExpression::clone() const
+{
+  return new BracketsPostfixExpression(*this);
+}
+
+
+
 /********************   DotPostfixExpression    ********************/
 DotPostfixExpression::DotPostfixExpression(AssignExpr *p1, IdOrTypename *p2)
 {
@@ -7505,24 +7787,6 @@ ListAttr *ListAttr::clone() const
 }
 
 ListAttr* consListAttr(Attr* x, ListAttr* xs) {
-  xs->insert(xs->begin(), x);
-  return xs;
-}
-
-
-/********************   ListBasicAttribute    ********************/
-
-void ListBasicAttribute::accept(Visitor *v)
-{
-  v->visitListBasicAttribute(this);
-}
-
-ListBasicAttribute *ListBasicAttribute::clone() const
-{
-  return new ListBasicAttribute(*this);
-}
-
-ListBasicAttribute* consListBasicAttribute(BasicAttribute* x, ListBasicAttribute* xs) {
   xs->insert(xs->begin(), x);
   return xs;
 }

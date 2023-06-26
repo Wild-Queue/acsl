@@ -59,6 +59,7 @@ class Block;
 class BlockAttrs;
 class BlockElement;
 class Statement;
+class ForClause;
 class Attr;
 class BasicAttribute;
 class AnnotatedStmt;
@@ -86,6 +87,7 @@ class TypeSpecBoolKeyWord;
 class TypeSpecShortKeyWord;
 class TypeSpecInt32KeyWord;
 class TypeSpecIntKeyWord;
+class TypeSpecSizeTKeyWord;
 class TypeSpecLongKeyWord;
 class TypeSpecInt64KeyWord;
 class TypeSpecFloatKeyWord;
@@ -132,12 +134,16 @@ class BlockStatement;
 class IfStatement;
 class SwitchStatement;
 class WhileStatement;
+class ForStatement;
 class CaseStatement;
 class CaseSliceStatement;
 class DefaultStatement;
 class EmptyReturnStatement;
+class ReturnStatement;
 class BreakStatement;
 class ContinueStatement;
+class ForClauseExpression;
+class ForClauseDeclaration;
 class AnAttr;
 class TernaryCond;
 class Or;
@@ -218,6 +224,7 @@ class UnaryExprAmp;
 class UnaryExprNot;
 class UnaryExprTilde;
 class UnaryExprAddress;
+class BracketsPostfixExpression;
 class DotPostfixExpression;
 class ArrowPostfixExpression;
 class PlusPlusPostfixExpression;
@@ -236,7 +243,6 @@ class ListFieldDecl;
 class ListAttribute;
 class ListBlockElement;
 class ListAttr;
-class ListBasicAttribute;
 class ListExpression;
 
 
@@ -273,6 +279,7 @@ public:
   virtual void visitBlockAttrs(BlockAttrs *p) = 0;
   virtual void visitBlockElement(BlockElement *p) = 0;
   virtual void visitStatement(Statement *p) = 0;
+  virtual void visitForClause(ForClause *p) = 0;
   virtual void visitAttr(Attr *p) = 0;
   virtual void visitBasicAttribute(BasicAttribute *p) = 0;
   virtual void visitAnnotatedStmt(AnnotatedStmt *p) = 0;
@@ -300,6 +307,7 @@ public:
   virtual void visitTypeSpecShortKeyWord(TypeSpecShortKeyWord *p) = 0;
   virtual void visitTypeSpecInt32KeyWord(TypeSpecInt32KeyWord *p) = 0;
   virtual void visitTypeSpecIntKeyWord(TypeSpecIntKeyWord *p) = 0;
+  virtual void visitTypeSpecSizeTKeyWord(TypeSpecSizeTKeyWord *p) = 0;
   virtual void visitTypeSpecLongKeyWord(TypeSpecLongKeyWord *p) = 0;
   virtual void visitTypeSpecInt64KeyWord(TypeSpecInt64KeyWord *p) = 0;
   virtual void visitTypeSpecFloatKeyWord(TypeSpecFloatKeyWord *p) = 0;
@@ -346,12 +354,16 @@ public:
   virtual void visitIfStatement(IfStatement *p) = 0;
   virtual void visitSwitchStatement(SwitchStatement *p) = 0;
   virtual void visitWhileStatement(WhileStatement *p) = 0;
+  virtual void visitForStatement(ForStatement *p) = 0;
   virtual void visitCaseStatement(CaseStatement *p) = 0;
   virtual void visitCaseSliceStatement(CaseSliceStatement *p) = 0;
   virtual void visitDefaultStatement(DefaultStatement *p) = 0;
   virtual void visitEmptyReturnStatement(EmptyReturnStatement *p) = 0;
+  virtual void visitReturnStatement(ReturnStatement *p) = 0;
   virtual void visitBreakStatement(BreakStatement *p) = 0;
   virtual void visitContinueStatement(ContinueStatement *p) = 0;
+  virtual void visitForClauseExpression(ForClauseExpression *p) = 0;
+  virtual void visitForClauseDeclaration(ForClauseDeclaration *p) = 0;
   virtual void visitAnAttr(AnAttr *p) = 0;
   virtual void visitTernaryCond(TernaryCond *p) = 0;
   virtual void visitOr(Or *p) = 0;
@@ -432,6 +444,7 @@ public:
   virtual void visitUnaryExprNot(UnaryExprNot *p) = 0;
   virtual void visitUnaryExprTilde(UnaryExprTilde *p) = 0;
   virtual void visitUnaryExprAddress(UnaryExprAddress *p) = 0;
+  virtual void visitBracketsPostfixExpression(BracketsPostfixExpression *p) = 0;
   virtual void visitDotPostfixExpression(DotPostfixExpression *p) = 0;
   virtual void visitArrowPostfixExpression(ArrowPostfixExpression *p) = 0;
   virtual void visitPlusPlusPostfixExpression(PlusPlusPostfixExpression *p) = 0;
@@ -450,7 +463,6 @@ public:
   virtual void visitListAttribute(ListAttribute *p) = 0;
   virtual void visitListBlockElement(ListBlockElement *p) = 0;
   virtual void visitListAttr(ListAttr *p) = 0;
-  virtual void visitListBasicAttribute(ListBasicAttribute *p) = 0;
   virtual void visitListExpression(ListExpression *p) = 0;
 
 
@@ -675,6 +687,13 @@ class Statement : public Visitable
 {
 public:
   virtual Statement *clone() const = 0;
+  int line_number, char_number;
+};
+
+class ForClause : public Visitable
+{
+public:
+  virtual ForClause *clone() const = 0;
   int line_number, char_number;
 };
 
@@ -991,6 +1010,19 @@ public:
   virtual void accept(Visitor *v);
   virtual TypeSpecIntKeyWord *clone() const;
   void swap(TypeSpecIntKeyWord &);
+};
+
+class TypeSpecSizeTKeyWord : public TypeSpec
+{
+public:
+
+  TypeSpecSizeTKeyWord(const TypeSpecSizeTKeyWord &);
+  TypeSpecSizeTKeyWord &operator=(const TypeSpecSizeTKeyWord &);
+  TypeSpecSizeTKeyWord();
+  ~TypeSpecSizeTKeyWord();
+  virtual void accept(Visitor *v);
+  virtual TypeSpecSizeTKeyWord *clone() const;
+  void swap(TypeSpecSizeTKeyWord &);
 };
 
 class TypeSpecLongKeyWord : public TypeSpec
@@ -1651,6 +1683,23 @@ public:
   void swap(WhileStatement &);
 };
 
+class ForStatement : public Statement
+{
+public:
+  ForClause *forclause_;
+  OptExpression *optexpression_1;
+  OptExpression *optexpression_2;
+  AnnotatedStmt *annotatedstmt_;
+
+  ForStatement(const ForStatement &);
+  ForStatement &operator=(const ForStatement &);
+  ForStatement(ForClause *p1, OptExpression *p2, OptExpression *p3, AnnotatedStmt *p4);
+  ~ForStatement();
+  virtual void accept(Visitor *v);
+  virtual ForStatement *clone() const;
+  void swap(ForStatement &);
+};
+
 class CaseStatement : public Statement
 {
 public:
@@ -1709,6 +1758,20 @@ public:
   void swap(EmptyReturnStatement &);
 };
 
+class ReturnStatement : public Statement
+{
+public:
+  ListExpression *listexpression_;
+
+  ReturnStatement(const ReturnStatement &);
+  ReturnStatement &operator=(const ReturnStatement &);
+  ReturnStatement(ListExpression *p1);
+  ~ReturnStatement();
+  virtual void accept(Visitor *v);
+  virtual ReturnStatement *clone() const;
+  void swap(ReturnStatement &);
+};
+
 class BreakStatement : public Statement
 {
 public:
@@ -1733,6 +1796,34 @@ public:
   virtual void accept(Visitor *v);
   virtual ContinueStatement *clone() const;
   void swap(ContinueStatement &);
+};
+
+class ForClauseExpression : public ForClause
+{
+public:
+  OptExpression *optexpression_;
+
+  ForClauseExpression(const ForClauseExpression &);
+  ForClauseExpression &operator=(const ForClauseExpression &);
+  ForClauseExpression(OptExpression *p1);
+  ~ForClauseExpression();
+  virtual void accept(Visitor *v);
+  virtual ForClauseExpression *clone() const;
+  void swap(ForClauseExpression &);
+};
+
+class ForClauseDeclaration : public ForClause
+{
+public:
+  Declaration *declaration_;
+
+  ForClauseDeclaration(const ForClauseDeclaration &);
+  ForClauseDeclaration &operator=(const ForClauseDeclaration &);
+  ForClauseDeclaration(Declaration *p1);
+  ~ForClauseDeclaration();
+  virtual void accept(Visitor *v);
+  virtual ForClauseDeclaration *clone() const;
+  void swap(ForClauseDeclaration &);
 };
 
 class AnAttr : public Attr
@@ -2912,6 +3003,23 @@ public:
   void swap(UnaryExprAddress &);
 };
 
+class BracketsPostfixExpression : public AssignExpr
+{
+public:
+  AssignExpr *assignexpr_;
+  LBRACKET lbracket_;
+  ListExpression *listexpression_;
+  RBRACKET rbracket_;
+
+  BracketsPostfixExpression(const BracketsPostfixExpression &);
+  BracketsPostfixExpression &operator=(const BracketsPostfixExpression &);
+  BracketsPostfixExpression(AssignExpr *p1, LBRACKET p2, ListExpression *p3, RBRACKET p4);
+  ~BracketsPostfixExpression();
+  virtual void accept(Visitor *v);
+  virtual BracketsPostfixExpression *clone() const;
+  void swap(BracketsPostfixExpression &);
+};
+
 class DotPostfixExpression : public AssignExpr
 {
 public:
@@ -3137,15 +3245,6 @@ public:
 };
 
 ListAttr* consListAttr(Attr* x, ListAttr* xs);
-
-class ListBasicAttribute : public Visitable, public std::vector<BasicAttribute*>
-{
-public:
-  virtual void accept(Visitor *v);
-  virtual ListBasicAttribute *clone() const;
-};
-
-ListBasicAttribute* consListBasicAttribute(BasicAttribute* x, ListBasicAttribute* xs);
 
 class ListExpression : public Visitable, public std::vector<Expression*>
 {

@@ -39,6 +39,7 @@ void Skeleton::visitBlock(Block *t) {} //abstract class
 void Skeleton::visitBlockAttrs(BlockAttrs *t) {} //abstract class
 void Skeleton::visitBlockElement(BlockElement *t) {} //abstract class
 void Skeleton::visitStatement(Statement *t) {} //abstract class
+void Skeleton::visitForClause(ForClause *t) {} //abstract class
 void Skeleton::visitAttr(Attr *t) {} //abstract class
 void Skeleton::visitBasicAttribute(BasicAttribute *t) {} //abstract class
 void Skeleton::visitAnnotatedStmt(AnnotatedStmt *t) {} //abstract class
@@ -187,6 +188,13 @@ void Skeleton::visitTypeSpecInt32KeyWord(TypeSpecInt32KeyWord *type_spec_int_key
 void Skeleton::visitTypeSpecIntKeyWord(TypeSpecIntKeyWord *type_spec_int_key_word)
 {
   /* Code For TypeSpecIntKeyWord Goes Here */
+
+
+}
+
+void Skeleton::visitTypeSpecSizeTKeyWord(TypeSpecSizeTKeyWord *type_spec_size_t_key_word)
+{
+  /* Code For TypeSpecSizeTKeyWord Goes Here */
 
 
 }
@@ -573,6 +581,17 @@ void Skeleton::visitWhileStatement(WhileStatement *while_statement)
 
 }
 
+void Skeleton::visitForStatement(ForStatement *for_statement)
+{
+  /* Code For ForStatement Goes Here */
+
+  if (for_statement->forclause_) for_statement->forclause_->accept(this);
+  if (for_statement->optexpression_1) for_statement->optexpression_1->accept(this);
+  if (for_statement->optexpression_2) for_statement->optexpression_2->accept(this);
+  if (for_statement->annotatedstmt_) for_statement->annotatedstmt_->accept(this);
+
+}
+
 void Skeleton::visitCaseStatement(CaseStatement *case_statement)
 {
   /* Code For CaseStatement Goes Here */
@@ -607,6 +626,14 @@ void Skeleton::visitEmptyReturnStatement(EmptyReturnStatement *empty_return_stat
 
 }
 
+void Skeleton::visitReturnStatement(ReturnStatement *return_statement)
+{
+  /* Code For ReturnStatement Goes Here */
+
+  if (return_statement->listexpression_) return_statement->listexpression_->accept(this);
+
+}
+
 void Skeleton::visitBreakStatement(BreakStatement *break_statement)
 {
   /* Code For BreakStatement Goes Here */
@@ -618,6 +645,22 @@ void Skeleton::visitContinueStatement(ContinueStatement *continue_statement)
 {
   /* Code For ContinueStatement Goes Here */
 
+
+}
+
+void Skeleton::visitForClauseExpression(ForClauseExpression *for_clause_expression)
+{
+  /* Code For ForClauseExpression Goes Here */
+
+  if (for_clause_expression->optexpression_) for_clause_expression->optexpression_->accept(this);
+
+}
+
+void Skeleton::visitForClauseDeclaration(ForClauseDeclaration *for_clause_declaration)
+{
+  /* Code For ForClauseDeclaration Goes Here */
+
+  if (for_clause_declaration->declaration_) for_clause_declaration->declaration_->accept(this);
 
 }
 
@@ -1318,6 +1361,17 @@ void Skeleton::visitUnaryExprAddress(UnaryExprAddress *unary_expr_address)
 
 }
 
+void Skeleton::visitBracketsPostfixExpression(BracketsPostfixExpression *brackets_postfix_expression)
+{
+  /* Code For BracketsPostfixExpression Goes Here */
+
+  if (brackets_postfix_expression->assignexpr_) brackets_postfix_expression->assignexpr_->accept(this);
+  visitLBRACKET(brackets_postfix_expression->lbracket_);
+  if (brackets_postfix_expression->listexpression_) brackets_postfix_expression->listexpression_->accept(this);
+  visitRBRACKET(brackets_postfix_expression->rbracket_);
+
+}
+
 void Skeleton::visitDotPostfixExpression(DotPostfixExpression *dot_postfix_expression)
 {
   /* Code For DotPostfixExpression Goes Here */
@@ -1460,14 +1514,6 @@ void Skeleton::visitListBlockElement(ListBlockElement *list_block_element)
 void Skeleton::visitListAttr(ListAttr *list_attr)
 {
   for (ListAttr::iterator i = list_attr->begin() ; i != list_attr->end() ; ++i)
-  {
-    (*i)->accept(this);
-  }
-}
-
-void Skeleton::visitListBasicAttribute(ListBasicAttribute *list_basic_attribute)
-{
-  for (ListBasicAttribute::iterator i = list_basic_attribute->begin() ; i != list_basic_attribute->end() ; ++i)
   {
     (*i)->accept(this);
   }

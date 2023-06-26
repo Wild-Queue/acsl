@@ -137,12 +137,23 @@ char *PrintAbsyn::print(Visitable *v)
 
 void PrintAbsyn::visitProgram(Program *p) {} //abstract class
 
-void PrintAbsyn::visitAProgram(AProgram *p)
+void PrintAbsyn::visitAnnotProgram(AnnotProgram *p)
 {
   int oldi = _i_;
   if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
 
   _i_ = 0; p->annot_->accept(this);
+
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitAnnotationProgram(AnnotationProgram *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+  _i_ = 0; p->logicptreeannot_->accept(this);
 
   if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
   _i_ = oldi;
@@ -159,19 +170,6 @@ void PrintAbsyn::visitCodeAnnot(CodeAnnot *p)
 
   if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
   _i_ = oldi;
-}
-
-void PrintAbsyn::visitListAnnot(ListAnnot *listannot)
-{
-  iterListAnnot(listannot->begin(), listannot->end());
-}
-
-void PrintAbsyn::iterListAnnot(ListAnnot::const_iterator i, ListAnnot::const_iterator j)
-{
-  if (i == j) return;
-  { /* cons */
-    (*i)->accept(this); iterListAnnot(i+1, j);
-  }
 }
 
 void PrintAbsyn::visitCode_Annot(Code_Annot *p) {} //abstract class
@@ -274,224 +272,6 @@ void PrintAbsyn::visitAdimtRequires(AdimtRequires *p)
   _i_ = oldi;
 }
 
-void PrintAbsyn::visitClauseKW(ClauseKW *p) {} //abstract class
-
-void PrintAbsyn::visitAdmitRequiresClause(AdmitRequiresClause *p)
-{
-  int oldi = _i_;
-  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
-
-  render("admit");
-  render("requires");
-
-  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
-  _i_ = oldi;
-}
-
-void PrintAbsyn::visitAdmitInvariantClause(AdmitInvariantClause *p)
-{
-  int oldi = _i_;
-  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
-
-  render("admit");
-  render("invariant");
-
-  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
-  _i_ = oldi;
-}
-
-void PrintAbsyn::visitAdmitLemmaClause(AdmitLemmaClause *p)
-{
-  int oldi = _i_;
-  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
-
-  render("admit");
-  render("lemma");
-
-  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
-  _i_ = oldi;
-}
-
-void PrintAbsyn::visitAdmitLoopClause(AdmitLoopClause *p)
-{
-  int oldi = _i_;
-  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
-
-  render("admit");
-  render("loop");
-
-  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
-  _i_ = oldi;
-}
-
-void PrintAbsyn::visitCheckRequiresClause(CheckRequiresClause *p)
-{
-  int oldi = _i_;
-  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
-
-  render("check");
-  render("requires");
-
-  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
-  _i_ = oldi;
-}
-
-void PrintAbsyn::visitCheckInvariantClause(CheckInvariantClause *p)
-{
-  int oldi = _i_;
-  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
-
-  render("check");
-  render("invariant");
-
-  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
-  _i_ = oldi;
-}
-
-void PrintAbsyn::visitCheckLemmaClause(CheckLemmaClause *p)
-{
-  int oldi = _i_;
-  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
-
-  render("check");
-  render("lemma");
-
-  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
-  _i_ = oldi;
-}
-
-void PrintAbsyn::visitCheckLoopClause(CheckLoopClause *p)
-{
-  int oldi = _i_;
-  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
-
-  render("check");
-  render("loop");
-
-  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
-  _i_ = oldi;
-}
-
-void PrintAbsyn::visitRequiresClause(RequiresClause *p)
-{
-  int oldi = _i_;
-  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
-
-  render("requires");
-
-  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
-  _i_ = oldi;
-}
-
-void PrintAbsyn::visitAssumesClause(AssumesClause *p)
-{
-  int oldi = _i_;
-  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
-
-  render("assumes");
-
-  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
-  _i_ = oldi;
-}
-
-void PrintAbsyn::visitAssignsClause(AssignsClause *p)
-{
-  int oldi = _i_;
-  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
-
-  render("assigns");
-
-  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
-  _i_ = oldi;
-}
-
-void PrintAbsyn::visitPostCondClause(PostCondClause *p)
-{
-  int oldi = _i_;
-  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
-
-  _i_ = 0; p->postcond_->accept(this);
-
-  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
-  _i_ = oldi;
-}
-
-void PrintAbsyn::visitDecreasesClause(DecreasesClause *p)
-{
-  int oldi = _i_;
-  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
-
-  render("decreases");
-
-  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
-  _i_ = oldi;
-}
-
-void PrintAbsyn::visitBehaviorClause(BehaviorClause *p)
-{
-  int oldi = _i_;
-  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
-
-  render("behavior");
-
-  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
-  _i_ = oldi;
-}
-
-void PrintAbsyn::visitAllocatesClause(AllocatesClause *p)
-{
-  int oldi = _i_;
-  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
-
-  render("allocates");
-
-  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
-  _i_ = oldi;
-}
-
-void PrintAbsyn::visitFreesClause(FreesClause *p)
-{
-  int oldi = _i_;
-  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
-
-  render("frees");
-
-  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
-  _i_ = oldi;
-}
-
-void PrintAbsyn::visitCompleteClause(CompleteClause *p)
-{
-  int oldi = _i_;
-  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
-
-  render("complete");
-
-  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
-  _i_ = oldi;
-}
-
-void PrintAbsyn::visitDisjointClause(DisjointClause *p)
-{
-  int oldi = _i_;
-  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
-
-  render("disjoint");
-
-  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
-  _i_ = oldi;
-}
-
-void PrintAbsyn::visitEmptyClauseKW(EmptyClauseKW *p)
-{
-  int oldi = _i_;
-  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
-
-
-  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
-  _i_ = oldi;
-}
-
 void PrintAbsyn::visitTerminates(Terminates *p) {} //abstract class
 
 void PrintAbsyn::visitNoTerminate(NoTerminate *p)
@@ -555,6 +335,70 @@ void PrintAbsyn::visitPostCondSimpleClauses(PostCondSimpleClauses *p)
   _i_ = oldi;
 }
 
+void PrintAbsyn::visitAssignsSimpleClauses(AssignsSimpleClauses *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+  render("assigns");
+  _i_ = 0; p->assigns_->accept(this);
+  render(';');
+  _i_ = 0; p->simpleclauses_->accept(this);
+
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitAssigns(Assigns *p) {} //abstract class
+
+void PrintAbsyn::visitAssignZone(AssignZone *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+  _i_ = 0; p->zones_->accept(this);
+
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitAssignZoneFromZone(AssignZoneFromZone *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+  _i_ = 0; visitListLexpr(p->listlexpr_);
+  render("\\from");
+  _i_ = 0; p->zones_->accept(this);
+
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitZones(Zones *p) {} //abstract class
+
+void PrintAbsyn::visitSomeZone(SomeZone *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+  _i_ = 0; visitListLexpr(p->listlexpr_);
+
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitNoZone(NoZone *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+  render("\\nothing");
+
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
 void PrintAbsyn::visitBehaviors(Behaviors *p) {} //abstract class
 
 void PrintAbsyn::visitNoBehaviors(NoBehaviors *p)
@@ -580,16 +424,6 @@ void PrintAbsyn::visitNoComplDisj(NoComplDisj *p)
 }
 
 void PrintAbsyn::visitLexpr(Lexpr *p) {} //abstract class
-
-void PrintAbsyn::visitNoLexpr(NoLexpr *p)
-{
-  int oldi = _i_;
-  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
-
-
-  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
-  _i_ = oldi;
-}
 
 void PrintAbsyn::visitImplLexpr(ImplLexpr *p)
 {
@@ -656,99 +490,6 @@ void PrintAbsyn::visitHatHatLexpr(HatHatLexpr *p)
   _i_ = oldi;
 }
 
-void PrintAbsyn::visitAmpLexpr(AmpLexpr *p)
-{
-  int oldi = _i_;
-  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
-
-  _i_ = 0; p->lexpr_1->accept(this);
-  render('&');
-  _i_ = 1; p->lexpr_2->accept(this);
-
-  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
-  _i_ = oldi;
-}
-
-void PrintAbsyn::visitPipeLexpr(PipeLexpr *p)
-{
-  int oldi = _i_;
-  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
-
-  _i_ = 0; p->lexpr_1->accept(this);
-  render('|');
-  _i_ = 1; p->lexpr_2->accept(this);
-
-  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
-  _i_ = oldi;
-}
-
-void PrintAbsyn::visitHatLexpr(HatLexpr *p)
-{
-  int oldi = _i_;
-  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
-
-  _i_ = 0; p->lexpr_1->accept(this);
-  render('^');
-  _i_ = 1; p->lexpr_2->accept(this);
-
-  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
-  _i_ = oldi;
-}
-
-void PrintAbsyn::visitBimpliesLexpr(BimpliesLexpr *p)
-{
-  int oldi = _i_;
-  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
-
-  _i_ = 0; p->lexpr_1->accept(this);
-  render("-->");
-  _i_ = 1; p->lexpr_2->accept(this);
-
-  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
-  _i_ = oldi;
-}
-
-void PrintAbsyn::visitBiffLexpr(BiffLexpr *p)
-{
-  int oldi = _i_;
-  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
-
-  _i_ = 0; p->lexpr_1->accept(this);
-  render("<-->");
-  _i_ = 1; p->lexpr_2->accept(this);
-
-  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
-  _i_ = oldi;
-}
-
-void PrintAbsyn::visitInLexpr(InLexpr *p)
-{
-  int oldi = _i_;
-  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
-
-  _i_ = 0; p->lexpr_1->accept(this);
-  render("\\in");
-  _i_ = 1; p->lexpr_2->accept(this);
-
-  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
-  _i_ = oldi;
-}
-
-void PrintAbsyn::visitTernaryLexpr(TernaryLexpr *p)
-{
-  int oldi = _i_;
-  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
-
-  _i_ = 0; p->lexpr_1->accept(this);
-  render('?');
-  _i_ = 0; p->lexpr_2->accept(this);
-  render(':');
-  _i_ = 0; p->lexpr_3->accept(this);
-
-  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
-  _i_ = oldi;
-}
-
 void PrintAbsyn::visitRelationLexpr(RelationLexpr *p)
 {
   int oldi = _i_;
@@ -763,15 +504,26 @@ void PrintAbsyn::visitRelationLexpr(RelationLexpr *p)
   _i_ = oldi;
 }
 
-void PrintAbsyn::visitNotLexprInner(NotLexprInner *p)
+void PrintAbsyn::visitBinderLexpr(BinderLexpr *p)
 {
   int oldi = _i_;
-  if (oldi > 3) render(PARTIAL_BNFC_ACSL__L_PAREN);
+  if (oldi > 2) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+  _i_ = 0; p->lexprbinder_->accept(this);
+
+  if (oldi > 2) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitNotBinderLexpr(NotBinderLexpr *p)
+{
+  int oldi = _i_;
+  if (oldi > 2) render(PARTIAL_BNFC_ACSL__L_PAREN);
 
   render('!');
-  _i_ = 3; p->lexpr_->accept(this);
+  _i_ = 0; p->lexprbinder_->accept(this);
 
-  if (oldi > 3) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  if (oldi > 2) render(PARTIAL_BNFC_ACSL__R_PAREN);
   _i_ = oldi;
 }
 
@@ -792,6 +544,21 @@ void PrintAbsyn::visitFalseLexpr(FalseLexpr *p)
   if (oldi > 3) render(PARTIAL_BNFC_ACSL__L_PAREN);
 
   render("\\false");
+
+  if (oldi > 3) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitValidLexpr(ValidLexpr *p)
+{
+  int oldi = _i_;
+  if (oldi > 3) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+  render("\\valid");
+  _i_ = 1; p->optlabel_->accept(this);
+  render('(');
+  _i_ = 0; p->lexpr_->accept(this);
+  render(')');
 
   if (oldi > 3) render(PARTIAL_BNFC_ACSL__R_PAREN);
   _i_ = oldi;
@@ -922,53 +689,15 @@ void PrintAbsyn::visitSubtrLexpr(SubtrLexpr *p)
   _i_ = oldi;
 }
 
-void PrintAbsyn::visitMultLexpr(MultLexpr *p)
+void PrintAbsyn::visitSquaresRangeLexpr(SquaresRangeLexpr *p)
 {
   int oldi = _i_;
   if (oldi > 3) render(PARTIAL_BNFC_ACSL__L_PAREN);
 
-  _i_ = 3; p->lexpr_1->accept(this);
-  render('*');
-  _i_ = 3; p->lexpr_2->accept(this);
-
-  if (oldi > 3) render(PARTIAL_BNFC_ACSL__R_PAREN);
-  _i_ = oldi;
-}
-
-void PrintAbsyn::visitDivLexpr(DivLexpr *p)
-{
-  int oldi = _i_;
-  if (oldi > 3) render(PARTIAL_BNFC_ACSL__L_PAREN);
-
-  _i_ = 3; p->lexpr_1->accept(this);
-  render('/');
-  _i_ = 3; p->lexpr_2->accept(this);
-
-  if (oldi > 3) render(PARTIAL_BNFC_ACSL__R_PAREN);
-  _i_ = oldi;
-}
-
-void PrintAbsyn::visitModLexpr(ModLexpr *p)
-{
-  int oldi = _i_;
-  if (oldi > 3) render(PARTIAL_BNFC_ACSL__L_PAREN);
-
-  _i_ = 3; p->lexpr_1->accept(this);
-  render('%');
-  _i_ = 3; p->lexpr_2->accept(this);
-
-  if (oldi > 3) render(PARTIAL_BNFC_ACSL__R_PAREN);
-  _i_ = oldi;
-}
-
-void PrintAbsyn::visitStarHatLexpr(StarHatLexpr *p)
-{
-  int oldi = _i_;
-  if (oldi > 3) render(PARTIAL_BNFC_ACSL__L_PAREN);
-
-  _i_ = 3; p->lexpr_1->accept(this);
-  render("*^");
-  _i_ = 3; p->lexpr_2->accept(this);
+  _i_ = 3; p->lexpr_->accept(this);
+  render('[');
+  _i_ = 0; p->range_->accept(this);
+  render(']');
 
   if (oldi > 3) render(PARTIAL_BNFC_ACSL__R_PAREN);
   _i_ = oldi;
@@ -983,105 +712,6 @@ void PrintAbsyn::visitSquaresLexpr(SquaresLexpr *p)
   render('[');
   _i_ = 0; p->lexpr_2->accept(this);
   render(']');
-
-  if (oldi > 3) render(PARTIAL_BNFC_ACSL__R_PAREN);
-  _i_ = oldi;
-}
-
-void PrintAbsyn::visitMinusLexpr(MinusLexpr *p)
-{
-  int oldi = _i_;
-  if (oldi > 3) render(PARTIAL_BNFC_ACSL__L_PAREN);
-
-  render('-');
-  _i_ = 3; p->lexpr_->accept(this);
-
-  if (oldi > 3) render(PARTIAL_BNFC_ACSL__R_PAREN);
-  _i_ = oldi;
-}
-
-void PrintAbsyn::visitPlusLexpr(PlusLexpr *p)
-{
-  int oldi = _i_;
-  if (oldi > 3) render(PARTIAL_BNFC_ACSL__L_PAREN);
-
-  render('+');
-  _i_ = 3; p->lexpr_->accept(this);
-
-  if (oldi > 3) render(PARTIAL_BNFC_ACSL__R_PAREN);
-  _i_ = oldi;
-}
-
-void PrintAbsyn::visitTildeLexpr(TildeLexpr *p)
-{
-  int oldi = _i_;
-  if (oldi > 3) render(PARTIAL_BNFC_ACSL__L_PAREN);
-
-  render('~');
-  _i_ = 3; p->lexpr_->accept(this);
-
-  if (oldi > 3) render(PARTIAL_BNFC_ACSL__R_PAREN);
-  _i_ = oldi;
-}
-
-void PrintAbsyn::visitStarLexpr(StarLexpr *p)
-{
-  int oldi = _i_;
-  if (oldi > 3) render(PARTIAL_BNFC_ACSL__L_PAREN);
-
-  render('*');
-  _i_ = 3; p->lexpr_->accept(this);
-
-  if (oldi > 3) render(PARTIAL_BNFC_ACSL__R_PAREN);
-  _i_ = oldi;
-}
-
-void PrintAbsyn::visitAmpUnaryLexpr(AmpUnaryLexpr *p)
-{
-  int oldi = _i_;
-  if (oldi > 3) render(PARTIAL_BNFC_ACSL__L_PAREN);
-
-  render('&');
-  _i_ = 3; p->lexpr_->accept(this);
-
-  if (oldi > 3) render(PARTIAL_BNFC_ACSL__R_PAREN);
-  _i_ = oldi;
-}
-
-void PrintAbsyn::visitSizeOfLexpr(SizeOfLexpr *p)
-{
-  int oldi = _i_;
-  if (oldi > 3) render(PARTIAL_BNFC_ACSL__L_PAREN);
-
-  render("sizeof");
-  render('(');
-  _i_ = 0; p->lexpr_->accept(this);
-  render(')');
-
-  if (oldi > 3) render(PARTIAL_BNFC_ACSL__R_PAREN);
-  _i_ = oldi;
-}
-
-void PrintAbsyn::visitOldLexpr(OldLexpr *p)
-{
-  int oldi = _i_;
-  if (oldi > 3) render(PARTIAL_BNFC_ACSL__L_PAREN);
-
-  render("\\old");
-  render('(');
-  _i_ = 0; p->lexpr_->accept(this);
-  render(')');
-
-  if (oldi > 3) render(PARTIAL_BNFC_ACSL__R_PAREN);
-  _i_ = oldi;
-}
-
-void PrintAbsyn::visitResultLexpr(ResultLexpr *p)
-{
-  int oldi = _i_;
-  if (oldi > 3) render(PARTIAL_BNFC_ACSL__L_PAREN);
-
-  render("\\result");
 
   if (oldi > 3) render(PARTIAL_BNFC_ACSL__R_PAREN);
   _i_ = oldi;
@@ -1137,40 +767,13 @@ void PrintAbsyn::visitPiLexpr(PiLexpr *p)
   _i_ = oldi;
 }
 
-void PrintAbsyn::visitLessLessLexpr(LessLessLexpr *p)
+void PrintAbsyn::visitParenRangeLexpr(ParenRangeLexpr *p)
 {
   int oldi = _i_;
   if (oldi > 3) render(PARTIAL_BNFC_ACSL__L_PAREN);
 
-  _i_ = 3; p->lexpr_1->accept(this);
-  render(">>");
-  _i_ = 3; p->lexpr_2->accept(this);
-
-  if (oldi > 3) render(PARTIAL_BNFC_ACSL__R_PAREN);
-  _i_ = oldi;
-}
-
-void PrintAbsyn::visitGreaterGreaterLexpr(GreaterGreaterLexpr *p)
-{
-  int oldi = _i_;
-  if (oldi > 3) render(PARTIAL_BNFC_ACSL__L_PAREN);
-
-  _i_ = 3; p->lexpr_1->accept(this);
-  render("<<");
-  _i_ = 3; p->lexpr_2->accept(this);
-
-  if (oldi > 3) render(PARTIAL_BNFC_ACSL__R_PAREN);
-  _i_ = oldi;
-}
-
-void PrintAbsyn::visitTypeOfLexpr(TypeOfLexpr *p)
-{
-  int oldi = _i_;
-  if (oldi > 3) render(PARTIAL_BNFC_ACSL__L_PAREN);
-
-  render("\\typeof");
   render('(');
-  _i_ = 0; p->lexpr_->accept(this);
+  _i_ = 0; p->range_->accept(this);
   render(')');
 
   if (oldi > 3) render(PARTIAL_BNFC_ACSL__R_PAREN);
@@ -1285,6 +888,364 @@ void PrintAbsyn::visitNotEqRel(NotEqRel *p)
   if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
 
   render("!=");
+
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitLexprBinder(LexprBinder *p) {} //abstract class
+
+void PrintAbsyn::visitForallBinderLexpr(ForallBinderLexpr *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+  render("\\forall");
+  _i_ = 0; p->binders_->accept(this);
+  render(';');
+  _i_ = 0; p->lexpr_->accept(this);
+
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitExistBinderLexpr(ExistBinderLexpr *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+  render("\\exists");
+  _i_ = 0; p->binders_->accept(this);
+  render(';');
+  _i_ = 0; p->lexpr_->accept(this);
+
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitLambdaBinderLexpr(LambdaBinderLexpr *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+  render("\\lambda");
+  _i_ = 0; p->binders_->accept(this);
+  render(';');
+  _i_ = 0; p->lexpr_->accept(this);
+
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitBinders(Binders *p) {} //abstract class
+
+void PrintAbsyn::visitTheBinders(TheBinders *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+  _i_ = 0; p->typespecoftypename_->accept(this);
+  _i_ = 0; p->varspec_->accept(this);
+  _i_ = 0; visitListBindersReentrance(p->listbindersreentrance_);
+
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitTypeSpecOFTYPENAME(TypeSpecOFTYPENAME *p) {} //abstract class
+
+void PrintAbsyn::visitTypeSpecTYPENAME(TypeSpecTYPENAME *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+  visitIdent(p->ident_);
+
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitTypeSpecSimpleFromTypenameTypeSpec(TypeSpecSimpleFromTypenameTypeSpec *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+  _i_ = 0; p->typespecsimple_->accept(this);
+
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitBindersReentrance(BindersReentrance *p) {} //abstract class
+
+void PrintAbsyn::visitBindersReentranceDeclSpec(BindersReentranceDeclSpec *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+  render(',');
+  _i_ = 0; p->typespecoftypename_->accept(this);
+  _i_ = 0; p->varspec_->accept(this);
+
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitBindersReentranceVarSpec(BindersReentranceVarSpec *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+  render(',');
+  _i_ = 0; p->varspec_->accept(this);
+
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitListBindersReentrance(ListBindersReentrance *listbindersreentrance)
+{
+  iterListBindersReentrance(listbindersreentrance->begin(), listbindersreentrance->end());
+}
+
+void PrintAbsyn::iterListBindersReentrance(ListBindersReentrance::const_iterator i, ListBindersReentrance::const_iterator j)
+{
+  if (i == j) return;
+  { /* cons */
+    (*i)->accept(this); iterListBindersReentrance(i+1, j);
+  }
+}
+
+void PrintAbsyn::visitVarSpec(VarSpec *p) {} //abstract class
+
+void PrintAbsyn::visitStartVarSpec(StartVarSpec *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+  _i_ = 0; visitListStars(p->liststars_);
+  _i_ = 1; p->varspec_->accept(this);
+
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitSimpleSpec(SimpleSpec *p)
+{
+  int oldi = _i_;
+  if (oldi > 1) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+  _i_ = 0; p->fullidentifier_->accept(this);
+
+  if (oldi > 1) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitArraySpec(ArraySpec *p)
+{
+  int oldi = _i_;
+  if (oldi > 1) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+  _i_ = 1; p->varspec_->accept(this);
+  render('[');
+  _i_ = 0; p->arraysize_->accept(this);
+  render(']');
+
+  if (oldi > 1) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitStars(Stars *p) {} //abstract class
+
+void PrintAbsyn::visitStar(Star *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+  render('*');
+
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitListStars(ListStars *liststars)
+{
+  iterListStars(liststars->begin(), liststars->end());
+}
+
+void PrintAbsyn::iterListStars(ListStars::const_iterator i, ListStars::const_iterator j)
+{
+  if (i == j) return;
+  if (i == j-1)
+  { /* last */
+    (*i)->accept(this);
+  }
+  else
+  { /* cons */
+    (*i)->accept(this); iterListStars(i+1, j);
+  }
+}
+
+void PrintAbsyn::visitArraySize(ArraySize *p) {} //abstract class
+
+void PrintAbsyn::visitIntConstArraySize(IntConstArraySize *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+  visitInteger(p->integer_);
+
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitSomeArraySize(SomeArraySize *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+  _i_ = 0; p->fullidentifier_->accept(this);
+
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitNoSize(NoSize *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitOptLabel(OptLabel *p) {} //abstract class
+
+void PrintAbsyn::visitOptLabelOne(OptLabelOne *p)
+{
+  int oldi = _i_;
+  if (oldi > 1) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+  _i_ = 0; p->optlabellist_->accept(this);
+
+  if (oldi > 1) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitOptLabelTwo(OptLabelTwo *p)
+{
+  int oldi = _i_;
+  if (oldi > 2) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+  _i_ = 0; p->optlabellist_->accept(this);
+
+  if (oldi > 2) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitOptLabelList(OptLabelList *p) {} //abstract class
+
+void PrintAbsyn::visitNoLableList(NoLableList *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitLableList(LableList *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+  render('{');
+  _i_ = 0; visitListLabelName(p->listlabelname_);
+  render('}');
+
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitLabelName(LabelName *p) {} //abstract class
+
+void PrintAbsyn::visitLableName(LableName *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+  _i_ = 0; p->anyidentifier_->accept(this);
+
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitListLabelName(ListLabelName *listlabelname)
+{
+  iterListLabelName(listlabelname->begin(), listlabelname->end());
+}
+
+void PrintAbsyn::iterListLabelName(ListLabelName::const_iterator i, ListLabelName::const_iterator j)
+{
+  if (i == j) return;
+  if (i == j-1)
+  { /* last */
+    (*i)->accept(this);
+  }
+  else
+  { /* cons */
+    (*i)->accept(this); render(','); iterListLabelName(i+1, j);
+  }
+}
+
+void PrintAbsyn::visitRange(Range *p) {} //abstract class
+
+void PrintAbsyn::visitLexprRange(LexprRange *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+  _i_ = 0; p->lexproption_1->accept(this);
+  render("..");
+  _i_ = 0; p->lexproption_2->accept(this);
+
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitLexprOption(LexprOption *p) {} //abstract class
+
+void PrintAbsyn::visitNoLexprOption(NoLexprOption *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitSomeLexprOption(SomeLexprOption *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+  _i_ = 0; p->lexpr_->accept(this);
+
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitAnyIdentifier(AnyIdentifier *p) {} //abstract class
+
+void PrintAbsyn::visitSimpleIdentifierAny(SimpleIdentifierAny *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+  _i_ = 0; p->identifier_->accept(this);
 
   if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
   _i_ = oldi;
@@ -1511,6 +1472,299 @@ void PrintAbsyn::visitIdentifierIdent(IdentifierIdent *p)
   _i_ = oldi;
 }
 
+void PrintAbsyn::visitTypeSpecSimple(TypeSpecSimple *p) {} //abstract class
+
+void PrintAbsyn::visitTypeSpecSimpleIntegerKeyWord(TypeSpecSimpleIntegerKeyWord *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+  render("integer");
+
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitTypeSpecSimpleRealKeyWord(TypeSpecSimpleRealKeyWord *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+  render("real");
+
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitTypeSpecSimpleBooleanKeyWord(TypeSpecSimpleBooleanKeyWord *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+  render("boolean");
+
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitTypeSpecSimpleVoidKeyWord(TypeSpecSimpleVoidKeyWord *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+  render("void");
+
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitTypeSpecSimpleBoolKeyWord(TypeSpecSimpleBoolKeyWord *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+  render("_Bool");
+
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitTypeSpecSimpleCharKeyWord(TypeSpecSimpleCharKeyWord *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+  render("char");
+
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitTypeSpecSimpleIntKeyWord(TypeSpecSimpleIntKeyWord *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+  render("int");
+
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitTypeSpecSimpleDoubleKeyWord(TypeSpecSimpleDoubleKeyWord *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+  render("double");
+
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitTypeSpecSimpleLongDoubleKeyWord(TypeSpecSimpleLongDoubleKeyWord *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+  render("long");
+  render("double");
+
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitLogicPTreeAnnot(LogicPTreeAnnot *p) {} //abstract class
+
+void PrintAbsyn::visitAnAnnotation(AnAnnotation *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+  _i_ = 0; p->annotation_->accept(this);
+
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitAnnotation(Annotation *p) {} //abstract class
+
+void PrintAbsyn::visitLoopAnnotation(LoopAnnotation *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+  _i_ = 0; p->loopannotstack_->accept(this);
+
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitLoopAnnotStack(LoopAnnotStack *p) {} //abstract class
+
+void PrintAbsyn::visitLoopAnnotStackInvariant(LoopAnnotStackInvariant *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+  _i_ = 0; p->loopinvariant_->accept(this);
+  _i_ = 0; p->loopannotopt_->accept(this);
+
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitLoopAnnotStackEffects(LoopAnnotStackEffects *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+  _i_ = 0; p->loopeffects_->accept(this);
+  _i_ = 0; p->loopannotopt_->accept(this);
+
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitLoopAnnotStackVariant(LoopAnnotStackVariant *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+  _i_ = 0; p->loopvariant_->accept(this);
+  _i_ = 0; p->loopannotopt_->accept(this);
+
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitLoopAnnotOpt(LoopAnnotOpt *p) {} //abstract class
+
+void PrintAbsyn::visitNoLoopAnnot(NoLoopAnnot *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitSomeLoopAnnot(SomeLoopAnnot *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+  _i_ = 0; p->loopannotstack_->accept(this);
+
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitLoopInvariant(LoopInvariant *p) {} //abstract class
+
+void PrintAbsyn::visitSimpleLoopInvariant(SimpleLoopInvariant *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+  render("loop");
+  render("invariant");
+  _i_ = 0; p->lexpr_->accept(this);
+  render(';');
+
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitCheckLoopInvariant(CheckLoopInvariant *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+  render("check");
+  render("loop");
+  render("invariant");
+  _i_ = 0; p->lexpr_->accept(this);
+  render(';');
+
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitAdmitLoopInvariant(AdmitLoopInvariant *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+  render("admit");
+  render("loop");
+  render("invariant");
+  _i_ = 0; p->lexpr_->accept(this);
+  render(';');
+
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitLoopVariant(LoopVariant *p) {} //abstract class
+
+void PrintAbsyn::visitSimpleLoopVariant(SimpleLoopVariant *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+  render("loop");
+  render("variant");
+  _i_ = 0; p->variant_->accept(this);
+  render(';');
+
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitLoopEffects(LoopEffects *p) {} //abstract class
+
+void PrintAbsyn::visitLoopAssigns(LoopAssigns *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+  render("loop");
+  render("assigns");
+  _i_ = 0; p->assigns_->accept(this);
+  render(';');
+
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitVariant(Variant *p) {} //abstract class
+
+void PrintAbsyn::visitForVariant(ForVariant *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+  _i_ = 0; p->lexpr_->accept(this);
+  render("for");
+  _i_ = 0; p->anyidentifier_->accept(this);
+
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitLexprVariant(LexprVariant *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__L_PAREN);
+
+  _i_ = 0; p->lexpr_->accept(this);
+
+  if (oldi > 0) render(PARTIAL_BNFC_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
 void PrintAbsyn::visitInteger(Integer i)
 {
   char tmp[20];
@@ -1564,13 +1818,23 @@ char *ShowAbsyn::show(Visitable *v)
 
 void ShowAbsyn::visitProgram(Program *p) {} //abstract class
 
-void ShowAbsyn::visitAProgram(AProgram *p)
+void ShowAbsyn::visitAnnotProgram(AnnotProgram *p)
 {
   bufAppend('(');
-  bufAppend("AProgram");
+  bufAppend("AnnotProgram");
   bufAppend(' ');
   bufAppend('[');
   if (p->annot_)  p->annot_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitAnnotationProgram(AnnotationProgram *p)
+{
+  bufAppend('(');
+  bufAppend("AnnotationProgram");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->logicptreeannot_)  p->logicptreeannot_->accept(this);
   bufAppend(']');
   bufAppend(')');
 }
@@ -1586,15 +1850,6 @@ void ShowAbsyn::visitCodeAnnot(CodeAnnot *p)
   bufAppend(']');
   bufAppend(')');
 }
-void ShowAbsyn::visitListAnnot(ListAnnot *listannot)
-{
-  for (ListAnnot::const_iterator i = listannot->begin() ; i != listannot->end() ; ++i)
-  {
-    (*i)->accept(this);
-    if (i != listannot->end() - 1) bufAppend(", ");
-  }
-}
-
 void ShowAbsyn::visitCode_Annot(Code_Annot *p) {} //abstract class
 
 void ShowAbsyn::visitCodeAnnotContract(CodeAnnotContract *p)
@@ -1699,90 +1954,6 @@ void ShowAbsyn::visitAdimtRequires(AdimtRequires *p)
   bufAppend(']');
   bufAppend(')');
 }
-void ShowAbsyn::visitClauseKW(ClauseKW *p) {} //abstract class
-
-void ShowAbsyn::visitAdmitRequiresClause(AdmitRequiresClause *p)
-{
-  bufAppend("AdmitRequiresClause");
-}
-void ShowAbsyn::visitAdmitInvariantClause(AdmitInvariantClause *p)
-{
-  bufAppend("AdmitInvariantClause");
-}
-void ShowAbsyn::visitAdmitLemmaClause(AdmitLemmaClause *p)
-{
-  bufAppend("AdmitLemmaClause");
-}
-void ShowAbsyn::visitAdmitLoopClause(AdmitLoopClause *p)
-{
-  bufAppend("AdmitLoopClause");
-}
-void ShowAbsyn::visitCheckRequiresClause(CheckRequiresClause *p)
-{
-  bufAppend("CheckRequiresClause");
-}
-void ShowAbsyn::visitCheckInvariantClause(CheckInvariantClause *p)
-{
-  bufAppend("CheckInvariantClause");
-}
-void ShowAbsyn::visitCheckLemmaClause(CheckLemmaClause *p)
-{
-  bufAppend("CheckLemmaClause");
-}
-void ShowAbsyn::visitCheckLoopClause(CheckLoopClause *p)
-{
-  bufAppend("CheckLoopClause");
-}
-void ShowAbsyn::visitRequiresClause(RequiresClause *p)
-{
-  bufAppend("RequiresClause");
-}
-void ShowAbsyn::visitAssumesClause(AssumesClause *p)
-{
-  bufAppend("AssumesClause");
-}
-void ShowAbsyn::visitAssignsClause(AssignsClause *p)
-{
-  bufAppend("AssignsClause");
-}
-void ShowAbsyn::visitPostCondClause(PostCondClause *p)
-{
-  bufAppend('(');
-  bufAppend("PostCondClause");
-  bufAppend(' ');
-  bufAppend('[');
-  if (p->postcond_)  p->postcond_->accept(this);
-  bufAppend(']');
-  bufAppend(')');
-}
-void ShowAbsyn::visitDecreasesClause(DecreasesClause *p)
-{
-  bufAppend("DecreasesClause");
-}
-void ShowAbsyn::visitBehaviorClause(BehaviorClause *p)
-{
-  bufAppend("BehaviorClause");
-}
-void ShowAbsyn::visitAllocatesClause(AllocatesClause *p)
-{
-  bufAppend("AllocatesClause");
-}
-void ShowAbsyn::visitFreesClause(FreesClause *p)
-{
-  bufAppend("FreesClause");
-}
-void ShowAbsyn::visitCompleteClause(CompleteClause *p)
-{
-  bufAppend("CompleteClause");
-}
-void ShowAbsyn::visitDisjointClause(DisjointClause *p)
-{
-  bufAppend("DisjointClause");
-}
-void ShowAbsyn::visitEmptyClauseKW(EmptyClauseKW *p)
-{
-  bufAppend("EmptyClauseKW");
-}
 void ShowAbsyn::visitTerminates(Terminates *p) {} //abstract class
 
 void ShowAbsyn::visitNoTerminate(NoTerminate *p)
@@ -1831,6 +2002,62 @@ void ShowAbsyn::visitPostCondSimpleClauses(PostCondSimpleClauses *p)
   bufAppend(']');
   bufAppend(')');
 }
+void ShowAbsyn::visitAssignsSimpleClauses(AssignsSimpleClauses *p)
+{
+  bufAppend('(');
+  bufAppend("AssignsSimpleClauses");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->assigns_)  p->assigns_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->simpleclauses_)  p->simpleclauses_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitAssigns(Assigns *p) {} //abstract class
+
+void ShowAbsyn::visitAssignZone(AssignZone *p)
+{
+  bufAppend('(');
+  bufAppend("AssignZone");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->zones_)  p->zones_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitAssignZoneFromZone(AssignZoneFromZone *p)
+{
+  bufAppend('(');
+  bufAppend("AssignZoneFromZone");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->listlexpr_)  p->listlexpr_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->zones_)  p->zones_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitZones(Zones *p) {} //abstract class
+
+void ShowAbsyn::visitSomeZone(SomeZone *p)
+{
+  bufAppend('(');
+  bufAppend("SomeZone");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->listlexpr_)  p->listlexpr_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitNoZone(NoZone *p)
+{
+  bufAppend("NoZone");
+}
 void ShowAbsyn::visitBehaviors(Behaviors *p) {} //abstract class
 
 void ShowAbsyn::visitNoBehaviors(NoBehaviors *p)
@@ -1845,10 +2072,6 @@ void ShowAbsyn::visitNoComplDisj(NoComplDisj *p)
 }
 void ShowAbsyn::visitLexpr(Lexpr *p) {} //abstract class
 
-void ShowAbsyn::visitNoLexpr(NoLexpr *p)
-{
-  bufAppend("NoLexpr");
-}
 void ShowAbsyn::visitImplLexpr(ImplLexpr *p)
 {
   bufAppend('(');
@@ -1899,78 +2122,6 @@ void ShowAbsyn::visitHatHatLexpr(HatHatLexpr *p)
   p->lexpr_2->accept(this);
   bufAppend(')');
 }
-void ShowAbsyn::visitAmpLexpr(AmpLexpr *p)
-{
-  bufAppend('(');
-  bufAppend("AmpLexpr");
-  bufAppend(' ');
-  p->lexpr_1->accept(this);
-  bufAppend(' ');
-  p->lexpr_2->accept(this);
-  bufAppend(')');
-}
-void ShowAbsyn::visitPipeLexpr(PipeLexpr *p)
-{
-  bufAppend('(');
-  bufAppend("PipeLexpr");
-  bufAppend(' ');
-  p->lexpr_1->accept(this);
-  bufAppend(' ');
-  p->lexpr_2->accept(this);
-  bufAppend(')');
-}
-void ShowAbsyn::visitHatLexpr(HatLexpr *p)
-{
-  bufAppend('(');
-  bufAppend("HatLexpr");
-  bufAppend(' ');
-  p->lexpr_1->accept(this);
-  bufAppend(' ');
-  p->lexpr_2->accept(this);
-  bufAppend(')');
-}
-void ShowAbsyn::visitBimpliesLexpr(BimpliesLexpr *p)
-{
-  bufAppend('(');
-  bufAppend("BimpliesLexpr");
-  bufAppend(' ');
-  p->lexpr_1->accept(this);
-  bufAppend(' ');
-  p->lexpr_2->accept(this);
-  bufAppend(')');
-}
-void ShowAbsyn::visitBiffLexpr(BiffLexpr *p)
-{
-  bufAppend('(');
-  bufAppend("BiffLexpr");
-  bufAppend(' ');
-  p->lexpr_1->accept(this);
-  bufAppend(' ');
-  p->lexpr_2->accept(this);
-  bufAppend(')');
-}
-void ShowAbsyn::visitInLexpr(InLexpr *p)
-{
-  bufAppend('(');
-  bufAppend("InLexpr");
-  bufAppend(' ');
-  p->lexpr_1->accept(this);
-  bufAppend(' ');
-  p->lexpr_2->accept(this);
-  bufAppend(')');
-}
-void ShowAbsyn::visitTernaryLexpr(TernaryLexpr *p)
-{
-  bufAppend('(');
-  bufAppend("TernaryLexpr");
-  bufAppend(' ');
-  p->lexpr_1->accept(this);
-  bufAppend(' ');
-  p->lexpr_2->accept(this);
-  bufAppend(' ');
-  p->lexpr_3->accept(this);
-  bufAppend(')');
-}
 void ShowAbsyn::visitRelationLexpr(RelationLexpr *p)
 {
   bufAppend('(');
@@ -1989,13 +2140,23 @@ void ShowAbsyn::visitRelationLexpr(RelationLexpr *p)
   p->lexpr_2->accept(this);
   bufAppend(')');
 }
-void ShowAbsyn::visitNotLexprInner(NotLexprInner *p)
+void ShowAbsyn::visitBinderLexpr(BinderLexpr *p)
 {
   bufAppend('(');
-  bufAppend("NotLexprInner");
+  bufAppend("BinderLexpr");
   bufAppend(' ');
   bufAppend('[');
-  if (p->lexpr_)  p->lexpr_->accept(this);
+  if (p->lexprbinder_)  p->lexprbinder_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitNotBinderLexpr(NotBinderLexpr *p)
+{
+  bufAppend('(');
+  bufAppend("NotBinderLexpr");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->lexprbinder_)  p->lexprbinder_->accept(this);
   bufAppend(']');
   bufAppend(')');
 }
@@ -2006,6 +2167,21 @@ void ShowAbsyn::visitTrueLexpr(TrueLexpr *p)
 void ShowAbsyn::visitFalseLexpr(FalseLexpr *p)
 {
   bufAppend("FalseLexpr");
+}
+void ShowAbsyn::visitValidLexpr(ValidLexpr *p)
+{
+  bufAppend('(');
+  bufAppend("ValidLexpr");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->optlabel_)  p->optlabel_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->lexpr_)  p->lexpr_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend(')');
 }
 void ShowAbsyn::visitAutomaticLexpr(AutomaticLexpr *p)
 {
@@ -2075,44 +2251,19 @@ void ShowAbsyn::visitSubtrLexpr(SubtrLexpr *p)
   p->lexpr_2->accept(this);
   bufAppend(')');
 }
-void ShowAbsyn::visitMultLexpr(MultLexpr *p)
+void ShowAbsyn::visitSquaresRangeLexpr(SquaresRangeLexpr *p)
 {
   bufAppend('(');
-  bufAppend("MultLexpr");
+  bufAppend("SquaresRangeLexpr");
   bufAppend(' ');
-  p->lexpr_1->accept(this);
+  bufAppend('[');
+  if (p->lexpr_)  p->lexpr_->accept(this);
+  bufAppend(']');
   bufAppend(' ');
-  p->lexpr_2->accept(this);
-  bufAppend(')');
-}
-void ShowAbsyn::visitDivLexpr(DivLexpr *p)
-{
-  bufAppend('(');
-  bufAppend("DivLexpr");
+  bufAppend('[');
+  if (p->range_)  p->range_->accept(this);
+  bufAppend(']');
   bufAppend(' ');
-  p->lexpr_1->accept(this);
-  bufAppend(' ');
-  p->lexpr_2->accept(this);
-  bufAppend(')');
-}
-void ShowAbsyn::visitModLexpr(ModLexpr *p)
-{
-  bufAppend('(');
-  bufAppend("ModLexpr");
-  bufAppend(' ');
-  p->lexpr_1->accept(this);
-  bufAppend(' ');
-  p->lexpr_2->accept(this);
-  bufAppend(')');
-}
-void ShowAbsyn::visitStarHatLexpr(StarHatLexpr *p)
-{
-  bufAppend('(');
-  bufAppend("StarHatLexpr");
-  bufAppend(' ');
-  p->lexpr_1->accept(this);
-  bufAppend(' ');
-  p->lexpr_2->accept(this);
   bufAppend(')');
 }
 void ShowAbsyn::visitSquaresLexpr(SquaresLexpr *p)
@@ -2125,82 +2276,6 @@ void ShowAbsyn::visitSquaresLexpr(SquaresLexpr *p)
   p->lexpr_2->accept(this);
   bufAppend(' ');
   bufAppend(')');
-}
-void ShowAbsyn::visitMinusLexpr(MinusLexpr *p)
-{
-  bufAppend('(');
-  bufAppend("MinusLexpr");
-  bufAppend(' ');
-  bufAppend('[');
-  if (p->lexpr_)  p->lexpr_->accept(this);
-  bufAppend(']');
-  bufAppend(')');
-}
-void ShowAbsyn::visitPlusLexpr(PlusLexpr *p)
-{
-  bufAppend('(');
-  bufAppend("PlusLexpr");
-  bufAppend(' ');
-  bufAppend('[');
-  if (p->lexpr_)  p->lexpr_->accept(this);
-  bufAppend(']');
-  bufAppend(')');
-}
-void ShowAbsyn::visitTildeLexpr(TildeLexpr *p)
-{
-  bufAppend('(');
-  bufAppend("TildeLexpr");
-  bufAppend(' ');
-  bufAppend('[');
-  if (p->lexpr_)  p->lexpr_->accept(this);
-  bufAppend(']');
-  bufAppend(')');
-}
-void ShowAbsyn::visitStarLexpr(StarLexpr *p)
-{
-  bufAppend('(');
-  bufAppend("StarLexpr");
-  bufAppend(' ');
-  bufAppend('[');
-  if (p->lexpr_)  p->lexpr_->accept(this);
-  bufAppend(']');
-  bufAppend(')');
-}
-void ShowAbsyn::visitAmpUnaryLexpr(AmpUnaryLexpr *p)
-{
-  bufAppend('(');
-  bufAppend("AmpUnaryLexpr");
-  bufAppend(' ');
-  bufAppend('[');
-  if (p->lexpr_)  p->lexpr_->accept(this);
-  bufAppend(']');
-  bufAppend(')');
-}
-void ShowAbsyn::visitSizeOfLexpr(SizeOfLexpr *p)
-{
-  bufAppend('(');
-  bufAppend("SizeOfLexpr");
-  bufAppend(' ');
-  bufAppend('[');
-  if (p->lexpr_)  p->lexpr_->accept(this);
-  bufAppend(']');
-  bufAppend(' ');
-  bufAppend(')');
-}
-void ShowAbsyn::visitOldLexpr(OldLexpr *p)
-{
-  bufAppend('(');
-  bufAppend("OldLexpr");
-  bufAppend(' ');
-  bufAppend('[');
-  if (p->lexpr_)  p->lexpr_->accept(this);
-  bufAppend(']');
-  bufAppend(' ');
-  bufAppend(')');
-}
-void ShowAbsyn::visitResultLexpr(ResultLexpr *p)
-{
-  bufAppend("ResultLexpr");
 }
 void ShowAbsyn::visitSeparatedLexpr(SeparatedLexpr *p)
 {
@@ -2242,33 +2317,13 @@ void ShowAbsyn::visitPiLexpr(PiLexpr *p)
 {
   bufAppend("PiLexpr");
 }
-void ShowAbsyn::visitLessLessLexpr(LessLessLexpr *p)
+void ShowAbsyn::visitParenRangeLexpr(ParenRangeLexpr *p)
 {
   bufAppend('(');
-  bufAppend("LessLessLexpr");
-  bufAppend(' ');
-  p->lexpr_1->accept(this);
-  bufAppend(' ');
-  p->lexpr_2->accept(this);
-  bufAppend(')');
-}
-void ShowAbsyn::visitGreaterGreaterLexpr(GreaterGreaterLexpr *p)
-{
-  bufAppend('(');
-  bufAppend("GreaterGreaterLexpr");
-  bufAppend(' ');
-  p->lexpr_1->accept(this);
-  bufAppend(' ');
-  p->lexpr_2->accept(this);
-  bufAppend(')');
-}
-void ShowAbsyn::visitTypeOfLexpr(TypeOfLexpr *p)
-{
-  bufAppend('(');
-  bufAppend("TypeOfLexpr");
+  bufAppend("ParenRangeLexpr");
   bufAppend(' ');
   bufAppend('[');
-  if (p->lexpr_)  p->lexpr_->accept(this);
+  if (p->range_)  p->range_->accept(this);
   bufAppend(']');
   bufAppend(' ');
   bufAppend(')');
@@ -2332,6 +2387,305 @@ void ShowAbsyn::visitEqRel(EqRel *p)
 void ShowAbsyn::visitNotEqRel(NotEqRel *p)
 {
   bufAppend("NotEqRel");
+}
+void ShowAbsyn::visitLexprBinder(LexprBinder *p) {} //abstract class
+
+void ShowAbsyn::visitForallBinderLexpr(ForallBinderLexpr *p)
+{
+  bufAppend('(');
+  bufAppend("ForallBinderLexpr");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->binders_)  p->binders_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->lexpr_)  p->lexpr_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitExistBinderLexpr(ExistBinderLexpr *p)
+{
+  bufAppend('(');
+  bufAppend("ExistBinderLexpr");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->binders_)  p->binders_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->lexpr_)  p->lexpr_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitLambdaBinderLexpr(LambdaBinderLexpr *p)
+{
+  bufAppend('(');
+  bufAppend("LambdaBinderLexpr");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->binders_)  p->binders_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->lexpr_)  p->lexpr_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitBinders(Binders *p) {} //abstract class
+
+void ShowAbsyn::visitTheBinders(TheBinders *p)
+{
+  bufAppend('(');
+  bufAppend("TheBinders");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->typespecoftypename_)  p->typespecoftypename_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->varspec_)  p->varspec_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->listbindersreentrance_)  p->listbindersreentrance_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitTypeSpecOFTYPENAME(TypeSpecOFTYPENAME *p) {} //abstract class
+
+void ShowAbsyn::visitTypeSpecTYPENAME(TypeSpecTYPENAME *p)
+{
+  bufAppend('(');
+  bufAppend("TypeSpecTYPENAME");
+  bufAppend(' ');
+  visitIdent(p->ident_);
+  bufAppend(')');
+}
+void ShowAbsyn::visitTypeSpecSimpleFromTypenameTypeSpec(TypeSpecSimpleFromTypenameTypeSpec *p)
+{
+  bufAppend('(');
+  bufAppend("TypeSpecSimpleFromTypenameTypeSpec");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->typespecsimple_)  p->typespecsimple_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitBindersReentrance(BindersReentrance *p) {} //abstract class
+
+void ShowAbsyn::visitBindersReentranceDeclSpec(BindersReentranceDeclSpec *p)
+{
+  bufAppend('(');
+  bufAppend("BindersReentranceDeclSpec");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->typespecoftypename_)  p->typespecoftypename_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->varspec_)  p->varspec_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitBindersReentranceVarSpec(BindersReentranceVarSpec *p)
+{
+  bufAppend('(');
+  bufAppend("BindersReentranceVarSpec");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->varspec_)  p->varspec_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitListBindersReentrance(ListBindersReentrance *listbindersreentrance)
+{
+  for (ListBindersReentrance::const_iterator i = listbindersreentrance->begin() ; i != listbindersreentrance->end() ; ++i)
+  {
+    (*i)->accept(this);
+    if (i != listbindersreentrance->end() - 1) bufAppend(", ");
+  }
+}
+
+void ShowAbsyn::visitVarSpec(VarSpec *p) {} //abstract class
+
+void ShowAbsyn::visitStartVarSpec(StartVarSpec *p)
+{
+  bufAppend('(');
+  bufAppend("StartVarSpec");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->liststars_)  p->liststars_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->varspec_)  p->varspec_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitSimpleSpec(SimpleSpec *p)
+{
+  bufAppend('(');
+  bufAppend("SimpleSpec");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->fullidentifier_)  p->fullidentifier_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitArraySpec(ArraySpec *p)
+{
+  bufAppend('(');
+  bufAppend("ArraySpec");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->varspec_)  p->varspec_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->arraysize_)  p->arraysize_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend(')');
+}
+void ShowAbsyn::visitStars(Stars *p) {} //abstract class
+
+void ShowAbsyn::visitStar(Star *p)
+{
+  bufAppend("Star");
+}
+void ShowAbsyn::visitListStars(ListStars *liststars)
+{
+  for (ListStars::const_iterator i = liststars->begin() ; i != liststars->end() ; ++i)
+  {
+    (*i)->accept(this);
+    if (i != liststars->end() - 1) bufAppend(", ");
+  }
+}
+
+void ShowAbsyn::visitArraySize(ArraySize *p) {} //abstract class
+
+void ShowAbsyn::visitIntConstArraySize(IntConstArraySize *p)
+{
+  bufAppend('(');
+  bufAppend("IntConstArraySize");
+  bufAppend(' ');
+  visitInteger(p->integer_);
+  bufAppend(')');
+}
+void ShowAbsyn::visitSomeArraySize(SomeArraySize *p)
+{
+  bufAppend('(');
+  bufAppend("SomeArraySize");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->fullidentifier_)  p->fullidentifier_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitNoSize(NoSize *p)
+{
+  bufAppend("NoSize");
+}
+void ShowAbsyn::visitOptLabel(OptLabel *p) {} //abstract class
+
+void ShowAbsyn::visitOptLabelOne(OptLabelOne *p)
+{
+  bufAppend('(');
+  bufAppend("OptLabelOne");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->optlabellist_)  p->optlabellist_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitOptLabelTwo(OptLabelTwo *p)
+{
+  bufAppend('(');
+  bufAppend("OptLabelTwo");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->optlabellist_)  p->optlabellist_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitOptLabelList(OptLabelList *p) {} //abstract class
+
+void ShowAbsyn::visitNoLableList(NoLableList *p)
+{
+  bufAppend("NoLableList");
+}
+void ShowAbsyn::visitLableList(LableList *p)
+{
+  bufAppend('(');
+  bufAppend("LableList");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->listlabelname_)  p->listlabelname_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend(')');
+}
+void ShowAbsyn::visitLabelName(LabelName *p) {} //abstract class
+
+void ShowAbsyn::visitLableName(LableName *p)
+{
+  bufAppend('(');
+  bufAppend("LableName");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->anyidentifier_)  p->anyidentifier_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitListLabelName(ListLabelName *listlabelname)
+{
+  for (ListLabelName::const_iterator i = listlabelname->begin() ; i != listlabelname->end() ; ++i)
+  {
+    (*i)->accept(this);
+    if (i != listlabelname->end() - 1) bufAppend(", ");
+  }
+}
+
+void ShowAbsyn::visitRange(Range *p) {} //abstract class
+
+void ShowAbsyn::visitLexprRange(LexprRange *p)
+{
+  bufAppend('(');
+  bufAppend("LexprRange");
+  bufAppend(' ');
+  p->lexproption_1->accept(this);
+  bufAppend(' ');
+  p->lexproption_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitLexprOption(LexprOption *p) {} //abstract class
+
+void ShowAbsyn::visitNoLexprOption(NoLexprOption *p)
+{
+  bufAppend("NoLexprOption");
+}
+void ShowAbsyn::visitSomeLexprOption(SomeLexprOption *p)
+{
+  bufAppend('(');
+  bufAppend("SomeLexprOption");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->lexpr_)  p->lexpr_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitAnyIdentifier(AnyIdentifier *p) {} //abstract class
+
+void ShowAbsyn::visitSimpleIdentifierAny(SimpleIdentifierAny *p)
+{
+  bufAppend('(');
+  bufAppend("SimpleIdentifierAny");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->identifier_)  p->identifier_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
 }
 void ShowAbsyn::visitPostCond(PostCond *p) {} //abstract class
 
@@ -2424,6 +2778,215 @@ void ShowAbsyn::visitIdentifierIdent(IdentifierIdent *p)
   bufAppend("IdentifierIdent");
   bufAppend(' ');
   visitIdent(p->ident_);
+  bufAppend(')');
+}
+void ShowAbsyn::visitTypeSpecSimple(TypeSpecSimple *p) {} //abstract class
+
+void ShowAbsyn::visitTypeSpecSimpleIntegerKeyWord(TypeSpecSimpleIntegerKeyWord *p)
+{
+  bufAppend("TypeSpecSimpleIntegerKeyWord");
+}
+void ShowAbsyn::visitTypeSpecSimpleRealKeyWord(TypeSpecSimpleRealKeyWord *p)
+{
+  bufAppend("TypeSpecSimpleRealKeyWord");
+}
+void ShowAbsyn::visitTypeSpecSimpleBooleanKeyWord(TypeSpecSimpleBooleanKeyWord *p)
+{
+  bufAppend("TypeSpecSimpleBooleanKeyWord");
+}
+void ShowAbsyn::visitTypeSpecSimpleVoidKeyWord(TypeSpecSimpleVoidKeyWord *p)
+{
+  bufAppend("TypeSpecSimpleVoidKeyWord");
+}
+void ShowAbsyn::visitTypeSpecSimpleBoolKeyWord(TypeSpecSimpleBoolKeyWord *p)
+{
+  bufAppend("TypeSpecSimpleBoolKeyWord");
+}
+void ShowAbsyn::visitTypeSpecSimpleCharKeyWord(TypeSpecSimpleCharKeyWord *p)
+{
+  bufAppend("TypeSpecSimpleCharKeyWord");
+}
+void ShowAbsyn::visitTypeSpecSimpleIntKeyWord(TypeSpecSimpleIntKeyWord *p)
+{
+  bufAppend("TypeSpecSimpleIntKeyWord");
+}
+void ShowAbsyn::visitTypeSpecSimpleDoubleKeyWord(TypeSpecSimpleDoubleKeyWord *p)
+{
+  bufAppend("TypeSpecSimpleDoubleKeyWord");
+}
+void ShowAbsyn::visitTypeSpecSimpleLongDoubleKeyWord(TypeSpecSimpleLongDoubleKeyWord *p)
+{
+  bufAppend("TypeSpecSimpleLongDoubleKeyWord");
+}
+void ShowAbsyn::visitLogicPTreeAnnot(LogicPTreeAnnot *p) {} //abstract class
+
+void ShowAbsyn::visitAnAnnotation(AnAnnotation *p)
+{
+  bufAppend('(');
+  bufAppend("AnAnnotation");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->annotation_)  p->annotation_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitAnnotation(Annotation *p) {} //abstract class
+
+void ShowAbsyn::visitLoopAnnotation(LoopAnnotation *p)
+{
+  bufAppend('(');
+  bufAppend("LoopAnnotation");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->loopannotstack_)  p->loopannotstack_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitLoopAnnotStack(LoopAnnotStack *p) {} //abstract class
+
+void ShowAbsyn::visitLoopAnnotStackInvariant(LoopAnnotStackInvariant *p)
+{
+  bufAppend('(');
+  bufAppend("LoopAnnotStackInvariant");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->loopinvariant_)  p->loopinvariant_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->loopannotopt_)  p->loopannotopt_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitLoopAnnotStackEffects(LoopAnnotStackEffects *p)
+{
+  bufAppend('(');
+  bufAppend("LoopAnnotStackEffects");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->loopeffects_)  p->loopeffects_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->loopannotopt_)  p->loopannotopt_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitLoopAnnotStackVariant(LoopAnnotStackVariant *p)
+{
+  bufAppend('(');
+  bufAppend("LoopAnnotStackVariant");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->loopvariant_)  p->loopvariant_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->loopannotopt_)  p->loopannotopt_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitLoopAnnotOpt(LoopAnnotOpt *p) {} //abstract class
+
+void ShowAbsyn::visitNoLoopAnnot(NoLoopAnnot *p)
+{
+  bufAppend("NoLoopAnnot");
+}
+void ShowAbsyn::visitSomeLoopAnnot(SomeLoopAnnot *p)
+{
+  bufAppend('(');
+  bufAppend("SomeLoopAnnot");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->loopannotstack_)  p->loopannotstack_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitLoopInvariant(LoopInvariant *p) {} //abstract class
+
+void ShowAbsyn::visitSimpleLoopInvariant(SimpleLoopInvariant *p)
+{
+  bufAppend('(');
+  bufAppend("SimpleLoopInvariant");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->lexpr_)  p->lexpr_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend(')');
+}
+void ShowAbsyn::visitCheckLoopInvariant(CheckLoopInvariant *p)
+{
+  bufAppend('(');
+  bufAppend("CheckLoopInvariant");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->lexpr_)  p->lexpr_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend(')');
+}
+void ShowAbsyn::visitAdmitLoopInvariant(AdmitLoopInvariant *p)
+{
+  bufAppend('(');
+  bufAppend("AdmitLoopInvariant");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->lexpr_)  p->lexpr_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend(')');
+}
+void ShowAbsyn::visitLoopVariant(LoopVariant *p) {} //abstract class
+
+void ShowAbsyn::visitSimpleLoopVariant(SimpleLoopVariant *p)
+{
+  bufAppend('(');
+  bufAppend("SimpleLoopVariant");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->variant_)  p->variant_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend(')');
+}
+void ShowAbsyn::visitLoopEffects(LoopEffects *p) {} //abstract class
+
+void ShowAbsyn::visitLoopAssigns(LoopAssigns *p)
+{
+  bufAppend('(');
+  bufAppend("LoopAssigns");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->assigns_)  p->assigns_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend(')');
+}
+void ShowAbsyn::visitVariant(Variant *p) {} //abstract class
+
+void ShowAbsyn::visitForVariant(ForVariant *p)
+{
+  bufAppend('(');
+  bufAppend("ForVariant");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->lexpr_)  p->lexpr_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->anyidentifier_)  p->anyidentifier_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitLexprVariant(LexprVariant *p)
+{
+  bufAppend('(');
+  bufAppend("LexprVariant");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->lexpr_)  p->lexpr_->accept(this);
+  bufAppend(']');
   bufAppend(')');
 }
 void ShowAbsyn::visitInteger(Integer i)

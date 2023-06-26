@@ -354,6 +354,17 @@ void PrintAbsyn::visitTypeSpecIntKeyWord(TypeSpecIntKeyWord *p)
   _i_ = oldi;
 }
 
+void PrintAbsyn::visitTypeSpecSizeTKeyWord(TypeSpecSizeTKeyWord *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_ACSL__L_PAREN);
+
+  render("size_t");
+
+  if (oldi > 0) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
 void PrintAbsyn::visitTypeSpecLongKeyWord(TypeSpecLongKeyWord *p)
 {
   int oldi = _i_;
@@ -1030,6 +1041,24 @@ void PrintAbsyn::visitWhileStatement(WhileStatement *p)
   _i_ = oldi;
 }
 
+void PrintAbsyn::visitForStatement(ForStatement *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_ACSL__L_PAREN);
+
+  render("for");
+  render('(');
+  _i_ = 0; p->forclause_->accept(this);
+  _i_ = 0; p->optexpression_1->accept(this);
+  render(';');
+  _i_ = 0; p->optexpression_2->accept(this);
+  render(')');
+  _i_ = 0; p->annotatedstmt_->accept(this);
+
+  if (oldi > 0) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
 void PrintAbsyn::visitCaseStatement(CaseStatement *p)
 {
   int oldi = _i_;
@@ -1085,6 +1114,19 @@ void PrintAbsyn::visitEmptyReturnStatement(EmptyReturnStatement *p)
   _i_ = oldi;
 }
 
+void PrintAbsyn::visitReturnStatement(ReturnStatement *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_ACSL__L_PAREN);
+
+  render("return");
+  _i_ = 0; visitListExpression(p->listexpression_);
+  render(';');
+
+  if (oldi > 0) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
 void PrintAbsyn::visitBreakStatement(BreakStatement *p)
 {
   int oldi = _i_;
@@ -1104,6 +1146,31 @@ void PrintAbsyn::visitContinueStatement(ContinueStatement *p)
 
   render("continue");
   render(';');
+
+  if (oldi > 0) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitForClause(ForClause *p) {} //abstract class
+
+void PrintAbsyn::visitForClauseExpression(ForClauseExpression *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 0; p->optexpression_->accept(this);
+  render(';');
+
+  if (oldi > 0) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitForClauseDeclaration(ForClauseDeclaration *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 0; p->declaration_->accept(this);
 
   if (oldi > 0) render(PARTIAL_ACSL__R_PAREN);
   _i_ = oldi;
@@ -1563,24 +1630,6 @@ void PrintAbsyn::visitBasicAttrConsFloat(BasicAttrConsFloat *p)
 
   if (oldi > 0) render(PARTIAL_ACSL__R_PAREN);
   _i_ = oldi;
-}
-
-void PrintAbsyn::visitListBasicAttribute(ListBasicAttribute *listbasicattribute)
-{
-  iterListBasicAttribute(listbasicattribute->begin(), listbasicattribute->end());
-}
-
-void PrintAbsyn::iterListBasicAttribute(ListBasicAttribute::const_iterator i, ListBasicAttribute::const_iterator j)
-{
-  if (i == j) return;
-  if (i == j-1)
-  { /* last */
-    (*i)->accept(this);
-  }
-  else
-  { /* cons */
-    (*i)->accept(this); iterListBasicAttribute(i+1, j);
-  }
 }
 
 void PrintAbsyn::visitAnnotatedStmt(AnnotatedStmt *p) {} //abstract class
@@ -2190,6 +2239,20 @@ void PrintAbsyn::visitUnaryExprAddress(UnaryExprAddress *p)
   _i_ = oldi;
 }
 
+void PrintAbsyn::visitBracketsPostfixExpression(BracketsPostfixExpression *p)
+{
+  int oldi = _i_;
+  if (oldi > 14) render(PARTIAL_ACSL__L_PAREN);
+
+  _i_ = 14; p->assignexpr_->accept(this);
+  visitLBRACKET(p->lbracket_);
+  _i_ = 0; visitListExpression(p->listexpression_);
+  visitRBRACKET(p->rbracket_);
+
+  if (oldi > 14) render(PARTIAL_ACSL__R_PAREN);
+  _i_ = oldi;
+}
+
 void PrintAbsyn::visitDotPostfixExpression(DotPostfixExpression *p)
 {
   int oldi = _i_;
@@ -2614,6 +2677,10 @@ void ShowAbsyn::visitTypeSpecInt32KeyWord(TypeSpecInt32KeyWord *p)
 void ShowAbsyn::visitTypeSpecIntKeyWord(TypeSpecIntKeyWord *p)
 {
   bufAppend("TypeSpecIntKeyWord");
+}
+void ShowAbsyn::visitTypeSpecSizeTKeyWord(TypeSpecSizeTKeyWord *p)
+{
+  bufAppend("TypeSpecSizeTKeyWord");
 }
 void ShowAbsyn::visitTypeSpecLongKeyWord(TypeSpecLongKeyWord *p)
 {
@@ -3179,6 +3246,24 @@ void ShowAbsyn::visitWhileStatement(WhileStatement *p)
   bufAppend(']');
   bufAppend(')');
 }
+void ShowAbsyn::visitForStatement(ForStatement *p)
+{
+  bufAppend('(');
+  bufAppend("ForStatement");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->forclause_)  p->forclause_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  p->optexpression_1->accept(this);
+  bufAppend(' ');
+  p->optexpression_2->accept(this);
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->annotatedstmt_)  p->annotatedstmt_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
 void ShowAbsyn::visitCaseStatement(CaseStatement *p)
 {
   bufAppend('(');
@@ -3221,6 +3306,17 @@ void ShowAbsyn::visitEmptyReturnStatement(EmptyReturnStatement *p)
 {
   bufAppend("EmptyReturnStatement");
 }
+void ShowAbsyn::visitReturnStatement(ReturnStatement *p)
+{
+  bufAppend('(');
+  bufAppend("ReturnStatement");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->listexpression_)  p->listexpression_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend(')');
+}
 void ShowAbsyn::visitBreakStatement(BreakStatement *p)
 {
   bufAppend("BreakStatement");
@@ -3228,6 +3324,29 @@ void ShowAbsyn::visitBreakStatement(BreakStatement *p)
 void ShowAbsyn::visitContinueStatement(ContinueStatement *p)
 {
   bufAppend("ContinueStatement");
+}
+void ShowAbsyn::visitForClause(ForClause *p) {} //abstract class
+
+void ShowAbsyn::visitForClauseExpression(ForClauseExpression *p)
+{
+  bufAppend('(');
+  bufAppend("ForClauseExpression");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->optexpression_)  p->optexpression_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend(')');
+}
+void ShowAbsyn::visitForClauseDeclaration(ForClauseDeclaration *p)
+{
+  bufAppend('(');
+  bufAppend("ForClauseDeclaration");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->declaration_)  p->declaration_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
 }
 void ShowAbsyn::visitAttr(Attr *p) {} //abstract class
 
@@ -3598,15 +3717,6 @@ void ShowAbsyn::visitBasicAttrConsFloat(BasicAttrConsFloat *p)
   visitDouble(p->double_);
   bufAppend(')');
 }
-void ShowAbsyn::visitListBasicAttribute(ListBasicAttribute *listbasicattribute)
-{
-  for (ListBasicAttribute::const_iterator i = listbasicattribute->begin() ; i != listbasicattribute->end() ; ++i)
-  {
-    (*i)->accept(this);
-    if (i != listbasicattribute->end() - 1) bufAppend(", ");
-  }
-}
-
 void ShowAbsyn::visitAnnotatedStmt(AnnotatedStmt *p) {} //abstract class
 
 void ShowAbsyn::visitAnnotatedStatement(AnnotatedStatement *p)
@@ -4080,6 +4190,24 @@ void ShowAbsyn::visitUnaryExprAddress(UnaryExprAddress *p)
   bufAppend('[');
   if (p->idortypenameasid_)  p->idortypenameasid_->accept(this);
   bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitBracketsPostfixExpression(BracketsPostfixExpression *p)
+{
+  bufAppend('(');
+  bufAppend("BracketsPostfixExpression");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->assignexpr_)  p->assignexpr_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  visitLBRACKET(p->lbracket_);
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->listexpression_)  p->listexpression_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  visitRBRACKET(p->rbracket_);
   bufAppend(')');
 }
 void ShowAbsyn::visitDotPostfixExpression(DotPostfixExpression *p)

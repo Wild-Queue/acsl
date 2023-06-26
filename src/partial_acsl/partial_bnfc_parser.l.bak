@@ -35,7 +35,7 @@ CAPITAL [A-Z]
 SMALL [a-z]
 DIGIT [0-9]
 IDENT [a-zA-Z0-9'_]
-%START CHAR CHARESC CHAREND STRING ESCAPED
+%START CHAR CHARESC CHAREND STRING ESCAPED COMMENT
 
 %%  /* Rules. */
 
@@ -92,6 +92,7 @@ IDENT [a-zA-Z0-9'_]
 <INITIAL>"double"      	 return _KW_double;
 <INITIAL>"else"      	 return _KW_else;
 <INITIAL>"float"      	 return _KW_float;
+<INITIAL>"for"      	 return _KW_for;
 <INITIAL>"if"      	 return _KW_if;
 <INITIAL>"int"      	 return _KW_int;
 <INITIAL>"long"      	 return _KW_long;
@@ -103,7 +104,11 @@ IDENT [a-zA-Z0-9'_]
 <INITIAL>"void"      	 return _KW_void;
 <INITIAL>"while"      	 return _KW_while;
 
-
+<INITIAL>"//"[^\n]* /* skip */; /* BNFC: comment "//" */
+<INITIAL>"/*" BEGIN COMMENT;
+<COMMENT>"*/" BEGIN INITIAL;
+<COMMENT>.    /* skip */;
+<COMMENT>[\n] /* skip */;
 
 <INITIAL>\_\_signed\_\_|signed|\_\_signed    	 yylval->_string = strdup(yytext); return T_SIGNED;
 <INITIAL>\<\%|\{    	 yylval->_string = strdup(yytext); return T_LBRACE;

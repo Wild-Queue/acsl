@@ -92,11 +92,13 @@ IDENT [a-zA-Z0-9'_]
 <INITIAL>"double"      	 return _KW_double;
 <INITIAL>"else"      	 return _KW_else;
 <INITIAL>"float"      	 return _KW_float;
+<INITIAL>"for"      	 return _KW_for;
 <INITIAL>"if"      	 return _KW_if;
 <INITIAL>"int"      	 return _KW_int;
 <INITIAL>"long"      	 return _KW_long;
 <INITIAL>"return"      	 return _KW_return;
 <INITIAL>"short"      	 return _KW_short;
+<INITIAL>"size_t"      	 return _KW_59;
 <INITIAL>"struct"      	 return _KW_struct;
 <INITIAL>"switch"      	 return _KW_switch;
 <INITIAL>"unsigned"      	 return _KW_unsigned;
