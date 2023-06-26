@@ -41,80 +41,170 @@ class PrintAbsyn : public Visitor
   void visitGlobals(Globals *p); /* abstract class */
   void visitNoGlobals(NoGlobals *p);
   void visitSimpleGlobals(SimpleGlobals *p);
-  void visitAGhostGlobals(AGhostGlobals *p);
   void visitSemiColonGlobals(SemiColonGlobals *p);
-  void visitGhostGlobals(GhostGlobals *p); /* abstract class */
-  void visitGhostGlobalsDeclataion(GhostGlobalsDeclataion *p);
-  void visitGhostGlobalsFunctionDef(GhostGlobalsFunctionDef *p);
-  void visitGhostGlobalsRGhost(GhostGlobalsRGhost *p);
   void visitGlobal(Global *p); /* abstract class */
-  void visitGlobalDecl(GlobalDecl *p);
   void visitGlobalsDeclataion(GlobalsDeclataion *p);
   void visitGlobalsFunctionDef(GlobalsFunctionDef *p);
-  void visitExternGlobalDeclataion(ExternGlobalDeclataion *p);
-  void visitExternGlobalPar(ExternGlobalPar *p);
-  void visitAsmGlobal(AsmGlobal *p);
-  void visitPragmaGlobal(PragmaGlobal *p);
-  void visitGlobalOldStyle(GlobalOldStyle *p);
-  void visitGlobalEmptyOldStyle(GlobalEmptyOldStyle *p);
-  void visitIdOrTypenameAsId(IdOrTypenameAsId *p); /* abstract class */
-  void visitIdOrTypenameAsIdIdentifier(IdOrTypenameAsIdIdentifier *p);
-  void visitIdOrTypenameAsIdNamedType(IdOrTypenameAsIdNamedType *p);
+  void visitFunctionDef(FunctionDef *p); /* abstract class */
+  void visitSimpleFunctionDef(SimpleFunctionDef *p);
+  void visitFunctionDefSpec(FunctionDefSpec *p);
+  void visitFunctionDefStart(FunctionDefStart *p); /* abstract class */
+  void visitFunctionDefStartDeclarator(FunctionDefStartDeclarator *p);
+  void visitDeclSpecList(DeclSpecList *p); /* abstract class */
+  void visitDeclSpecTypeSpec(DeclSpecTypeSpec *p);
+  void visitDeclSpecTypeSpecNext(DeclSpecTypeSpecNext *p);
+  void visitDeclSpecListNoNamed(DeclSpecListNoNamed *p); /* abstract class */
+  void visitDeclSpecNoNamedTypeSpec(DeclSpecNoNamedTypeSpec *p);
+  void visitDeclSpecNoNamedTypeSpecNext(DeclSpecNoNamedTypeSpecNext *p);
+  void visitTypeSpec(TypeSpec *p); /* abstract class */
+  void visitTypeSpecVoidKeyWord(TypeSpecVoidKeyWord *p);
+  void visitTypeSpecCharKeyWord(TypeSpecCharKeyWord *p);
+  void visitTypeSpecBoolKeyWord(TypeSpecBoolKeyWord *p);
+  void visitTypeSpecShortKeyWord(TypeSpecShortKeyWord *p);
+  void visitTypeSpecInt32KeyWord(TypeSpecInt32KeyWord *p);
+  void visitTypeSpecIntKeyWord(TypeSpecIntKeyWord *p);
+  void visitTypeSpecSizeTKeyWord(TypeSpecSizeTKeyWord *p);
+  void visitTypeSpecLongKeyWord(TypeSpecLongKeyWord *p);
+  void visitTypeSpecInt64KeyWord(TypeSpecInt64KeyWord *p);
+  void visitTypeSpecFloatKeyWord(TypeSpecFloatKeyWord *p);
+  void visitTypeSpecDoubleKeyWord(TypeSpecDoubleKeyWord *p);
+  void visitTypeSpecSignedKeyWord(TypeSpecSignedKeyWord *p);
+  void visitTypeSpecUnsignedKeyWord(TypeSpecUnsignedKeyWord *p);
+  void visitStructId(StructId *p);
+  void visitStructIdBraces(StructIdBraces *p);
+  void visitStructBraces(StructBraces *p);
+  void visitDeclarator(Declarator *p); /* abstract class */
+  void visitADeclarator(ADeclarator *p);
+  void visitPointerOpt(PointerOpt *p); /* abstract class */
+  void visitNoPointer(NoPointer *p);
+  void visitSomePointer(SomePointer *p);
+  void visitDirectDecl(DirectDecl *p); /* abstract class */
+  void visitDirectDeclIdTypename(DirectDeclIdTypename *p);
+  void visitDirectDeclGhostParam(DirectDeclGhostParam *p);
+  void visitDirectDeclGhostRestParParam(DirectDeclGhostRestParParam *p);
+  void visitAttributesWithAsm(AttributesWithAsm *p); /* abstract class */
+  void visitEmptyAttrWithASM(EmptyAttrWithASM *p);
+  void visitRestParList(RestParList *p); /* abstract class */
+  void visitSimpleParameterDecl(SimpleParameterDecl *p);
+  void visitParameterDecl(ParameterDecl *p); /* abstract class */
+  void visitParameterDeclSpecDeclarator(ParameterDeclSpecDeclarator *p);
+  void visitParameterDeclSpec(ParameterDeclSpec *p);
+  void visitParameterDeclPar(ParameterDeclPar *p);
+  void visitListParameterDecl(ListParameterDecl *p);
+  void iterListParameterDecl(ListParameterDecl::const_iterator i, ListParameterDecl::const_iterator j);
+  void visitGhostParameterOpt(GhostParameterOpt *p); /* abstract class */
+  void visitNoGhostParameter(NoGhostParameter *p);
   void visitIdOrTypename(IdOrTypename *p); /* abstract class */
   void visitIdTypename(IdTypename *p);
-  void visitMaybeComma(MaybeComma *p); /* abstract class */
-  void visitNoComa(NoComa *p);
-  void visitComa(Coma *p);
+  void visitIdOrTypenameAsId(IdOrTypenameAsId *p); /* abstract class */
+  void visitIdOrTypenameAsIdIdentifier(IdOrTypenameAsIdIdentifier *p);
+  void visitDeclaration(Declaration *p); /* abstract class */
+  void visitDeclSpecInitDecl(DeclSpecInitDecl *p);
+  void visitDeclSpec(DeclSpec *p);
+  void visitSpecDeclSpecInitDecl(SpecDeclSpecInitDecl *p);
+  void visitSpecDeclSpec(SpecDeclSpec *p);
+  void visitDeclAndInitDeclAttrList(DeclAndInitDeclAttrList *p); /* abstract class */
+  void visitInitDeclaration(InitDeclaration *p);
+  void visitInitDeclarationWithAttr(InitDeclarationWithAttr *p);
+  void visitInitDeclaratorAttr(InitDeclaratorAttr *p); /* abstract class */
+  void visitInitDeclaratorAttribute(InitDeclaratorAttribute *p);
+  void visitListInitDeclaratorAttr(ListInitDeclaratorAttr *p);
+  void iterListInitDeclaratorAttr(ListInitDeclaratorAttr::const_iterator i, ListInitDeclaratorAttr::const_iterator j);
+  void visitInitDeclarator(InitDeclarator *p); /* abstract class */
+  void visitSimpleInitDeclarator(SimpleInitDeclarator *p);
+  void visitStructDeclList(StructDeclList *p); /* abstract class */
+  void visitEmptyStructDecl(EmptyStructDecl *p);
+  void visitDeclSpecStructDecl(DeclSpecStructDecl *p);
+  void visitSemicolonStructDecl(SemicolonStructDecl *p);
+  void visitSpecFieldDeclStructDecl(SpecFieldDeclStructDecl *p);
+  void visitFieldDecl(FieldDecl *p); /* abstract class */
+  void visitFieldDeclDeclarator(FieldDeclDeclarator *p);
+  void visitListFieldDecl(ListFieldDecl *p);
+  void iterListFieldDecl(ListFieldDecl::const_iterator i, ListFieldDecl::const_iterator j);
+  void visitAttribute(Attribute *p); /* abstract class */
+  void visitAttributeConst(AttributeConst *p);
+  void visitListAttribute(ListAttribute *p);
+  void iterListAttribute(ListAttribute::const_iterator i, ListAttribute::const_iterator j);
+  void visitBlock(Block *p); /* abstract class */
+  void visitABlock(ABlock *p);
+  void visitBlockAttrs(BlockAttrs *p); /* abstract class */
+  void visitNoBlockAttrs(NoBlockAttrs *p);
+  void visitSomeBlockAttrs(SomeBlockAttrs *p);
+  void visitBlockElement(BlockElement *p); /* abstract class */
+  void visitDeclarationElement(DeclarationElement *p);
+  void visitStatementElement(StatementElement *p);
+  void visitListBlockElement(ListBlockElement *p);
+  void iterListBlockElement(ListBlockElement::const_iterator i, ListBlockElement::const_iterator j);
+  void visitStatement(Statement *p); /* abstract class */
+  void visitSemicolonStatement(SemicolonStatement *p);
+  void visitSpecStatement(SpecStatement *p);
+  void visitExprsStatement(ExprsStatement *p);
+  void visitBlockStatement(BlockStatement *p);
+  void visitIfStatement(IfStatement *p);
+  void visitSwitchStatement(SwitchStatement *p);
+  void visitWhileStatement(WhileStatement *p);
+  void visitForStatement(ForStatement *p);
+  void visitCaseStatement(CaseStatement *p);
+  void visitCaseSliceStatement(CaseSliceStatement *p);
+  void visitDefaultStatement(DefaultStatement *p);
+  void visitEmptyReturnStatement(EmptyReturnStatement *p);
+  void visitReturnStatement(ReturnStatement *p);
+  void visitBreakStatement(BreakStatement *p);
+  void visitContinueStatement(ContinueStatement *p);
+  void visitForClause(ForClause *p); /* abstract class */
+  void visitForClauseExpression(ForClauseExpression *p);
+  void visitForClauseDeclaration(ForClauseDeclaration *p);
+  void visitAttr(Attr *p); /* abstract class */
+  void visitAnAttr(AnAttr *p);
+  void visitTernaryCond(TernaryCond *p);
+  void visitOr(Or *p);
+  void visitAnd(And *p);
+  void visitBitOr(BitOr *p);
+  void visitXor(Xor *p);
+  void visitBitAnd(BitAnd *p);
+  void visitEqualEqual(EqualEqual *p);
+  void visitNotEqual(NotEqual *p);
+  void visitLess(Less *p);
+  void visitGreater(Greater *p);
+  void visitLessEqual(LessEqual *p);
+  void visitGreaterEqual(GreaterEqual *p);
+  void visitLeftShiftOp(LeftShiftOp *p);
+  void visitRightShiftOp(RightShiftOp *p);
+  void visitAddOp(AddOp *p);
+  void visitSubOp(SubOp *p);
+  void visitMultOp(MultOp *p);
+  void visitDivOp(DivOp *p);
+  void visitModOp(ModOp *p);
+  void visitPlusUnaryAttr(PlusUnaryAttr *p);
+  void visitMinusUnaryAttr(MinusUnaryAttr *p);
+  void visitMultUnaryAttr(MultUnaryAttr *p);
+  void visitAmpUnaryAttr(AmpUnaryAttr *p);
+  void visitNotUnaryAttr(NotUnaryAttr *p);
+  void visitTildeUnaryAttr(TildeUnaryAttr *p);
+  void visitFuncationCall(FuncationCall *p);
+  void visitProcedureCall(ProcedureCall *p);
+  void visitArrowAttr(ArrowAttr *p);
+  void visitDotAttr(DotAttr *p);
+  void visitArrayAttr(ArrayAttr *p);
+  void visitBasicAttr(BasicAttr *p);
+  void visitListAttr(ListAttr *p);
+  void iterListAttr(ListAttr::const_iterator i, ListAttr::const_iterator j);
+  void visitBasicAttribute(BasicAttribute *p); /* abstract class */
+  void visitBasicAttrConsInt(BasicAttrConsInt *p);
+  void visitBasicAttrConsFloat(BasicAttrConsFloat *p);
+  void visitAnnotatedStmt(AnnotatedStmt *p); /* abstract class */
+  void visitAnnotatedStatement(AnnotatedStatement *p);
+  void visitElsePart(ElsePart *p); /* abstract class */
+  void visitNoElsePart(NoElsePart *p);
+  void visitSimpleElsePart(SimpleElsePart *p);
+  void visitOptExpression(OptExpression *p); /* abstract class */
+  void visitNoExpression(NoExpression *p);
+  void visitSomeExpression(SomeExpression *p);
+  void visitExpression(Expression *p); /* abstract class */
+  void visitAssignmentExpr(AssignmentExpr *p);
+  void visitListExpression(ListExpression *p);
+  void iterListExpression(ListExpression::const_iterator i, ListExpression::const_iterator j);
   void visitAssignExpr(AssignExpr *p); /* abstract class */
-  void visitIdentifierPrimaryExpression(IdentifierPrimaryExpression *p);
-  void visitConstantPrimaryExpressin(ConstantPrimaryExpressin *p);
-  void visitCommaExpressionPrimaryExpressin(CommaExpressionPrimaryExpressin *p);
-  void visitBlockPrimaryExpressin(BlockPrimaryExpressin *p);
-  void visitGenericAssociationPrimaryExpressin(GenericAssociationPrimaryExpressin *p);
-  void visitGenericPrimaryExpressin(GenericPrimaryExpressin *p);
-  void visitBracketsPostfixExpression(BracketsPostfixExpression *p);
-  void visitArgumentsPostfixExpression(ArgumentsPostfixExpression *p);
-  void visitBuiltinVaArgPostfixExpression(BuiltinVaArgPostfixExpression *p);
-  void visitBuiltinTypesCompatPostfixExpression(BuiltinTypesCompatPostfixExpression *p);
-  void visitBuiltinOffsetOfPostfixExpression(BuiltinOffsetOfPostfixExpression *p);
-  void visitDotPostfixExpression(DotPostfixExpression *p);
-  void visitArrowPostfixExpression(ArrowPostfixExpression *p);
-  void visitPlusPlusPostfixExpression(PlusPlusPostfixExpression *p);
-  void visitMinusMinusPostfixExpression(MinusMinusPostfixExpression *p);
-  void visitConstructorPostfixExpression(ConstructorPostfixExpression *p);
-  void visitUnaryExprPlusPlus(UnaryExprPlusPlus *p);
-  void visitUnaryExprMinusMinus(UnaryExprMinusMinus *p);
-  void visitUnaryExprSizeOf(UnaryExprSizeOf *p);
-  void visitUnaryExprSizeOfTypeName(UnaryExprSizeOfTypeName *p);
-  void visitUnaryExprAlignOfUnaryExpr(UnaryExprAlignOfUnaryExpr *p);
-  void visitUnaryExprAlignOfTypeName(UnaryExprAlignOfTypeName *p);
-  void visitUnaryExprPlus(UnaryExprPlus *p);
-  void visitUnaryExprMinus(UnaryExprMinus *p);
-  void visitUnaryExprMult(UnaryExprMult *p);
-  void visitUnaryExprAmp(UnaryExprAmp *p);
-  void visitUnaryExprNot(UnaryExprNot *p);
-  void visitUnaryExprTilde(UnaryExprTilde *p);
-  void visitUnaryExprAddress(UnaryExprAddress *p);
-  void visitCastExpr(CastExpr *p);
-  void visitMulsExpr(MulsExpr *p);
-  void visitDivExpr(DivExpr *p);
-  void visitModExpr(ModExpr *p);
-  void visitPlusExpr(PlusExpr *p);
-  void visitMinusExpr(MinusExpr *p);
-  void visitLeftShiftExpr(LeftShiftExpr *p);
-  void visitRightShiftExpr(RightShiftExpr *p);
-  void visitLessExpr(LessExpr *p);
-  void visitGreaterExpr(GreaterExpr *p);
-  void visitLessEqualExpr(LessEqualExpr *p);
-  void visitGreaterEqualExpr(GreaterEqualExpr *p);
-  void visitEqExpr(EqExpr *p);
-  void visitNotEqExpr(NotEqExpr *p);
-  void visitBitAndExpr(BitAndExpr *p);
-  void visitBitXorExpr(BitXorExpr *p);
-  void visitBitOrExpr(BitOrExpr *p);
-  void visitAndExpr(AndExpr *p);
-  void visitOrExpr(OrExpr *p);
-  void visitTernaryCondExpr(TernaryCondExpr *p);
   void visitEqAssignExpr(EqAssignExpr *p);
   void visitPlusEqAssignExpr(PlusEqAssignExpr *p);
   void visitMinusEqAssignExpr(MinusEqAssignExpr *p);
@@ -126,474 +216,98 @@ class PrintAbsyn : public Visitor
   void visitXorEqAssignExpr(XorEqAssignExpr *p);
   void visitLeftShiftEqAssignExpr(LeftShiftEqAssignExpr *p);
   void visitRightShiftEqAssignExpr(RightShiftEqAssignExpr *p);
-  void visitOffsetofMemberDesignator(OffsetofMemberDesignator *p); /* abstract class */
-  void visitIdTypenameOffsetMembetDesignator(IdTypenameOffsetMembetDesignator *p);
-  void visitDotOffsetMembetDesignator(DotOffsetMembetDesignator *p);
-  void visitBracketsOffsetMembetDesignator(BracketsOffsetMembetDesignator *p);
-  void visitExpression(Expression *p); /* abstract class */
-  void visitAssignmentExpr(AssignmentExpr *p);
+  void visitTernaryCondExpr(TernaryCondExpr *p);
+  void visitOrExpr(OrExpr *p);
+  void visitAndExpr(AndExpr *p);
+  void visitBitOrExpr(BitOrExpr *p);
+  void visitBitXorExpr(BitXorExpr *p);
+  void visitBitAndExpr(BitAndExpr *p);
+  void visitEqExpr(EqExpr *p);
+  void visitNotEqExpr(NotEqExpr *p);
+  void visitLessExpr(LessExpr *p);
+  void visitGreaterExpr(GreaterExpr *p);
+  void visitLessEqualExpr(LessEqualExpr *p);
+  void visitGreaterEqualExpr(GreaterEqualExpr *p);
+  void visitLeftShiftExpr(LeftShiftExpr *p);
+  void visitRightShiftExpr(RightShiftExpr *p);
+  void visitPlusExpr(PlusExpr *p);
+  void visitMinusExpr(MinusExpr *p);
+  void visitMulsExpr(MulsExpr *p);
+  void visitDivExpr(DivExpr *p);
+  void visitModExpr(ModExpr *p);
+  void visitCastExpr(CastExpr *p);
+  void visitUnaryExprPlusPlus(UnaryExprPlusPlus *p);
+  void visitUnaryExprMinusMinus(UnaryExprMinusMinus *p);
+  void visitUnaryExprPlus(UnaryExprPlus *p);
+  void visitUnaryExprMinus(UnaryExprMinus *p);
+  void visitUnaryExprMult(UnaryExprMult *p);
+  void visitUnaryExprAmp(UnaryExprAmp *p);
+  void visitUnaryExprNot(UnaryExprNot *p);
+  void visitUnaryExprTilde(UnaryExprTilde *p);
+  void visitUnaryExprAddress(UnaryExprAddress *p);
+  void visitBracketsPostfixExpression(BracketsPostfixExpression *p);
+  void visitDotPostfixExpression(DotPostfixExpression *p);
+  void visitArrowPostfixExpression(ArrowPostfixExpression *p);
+  void visitPlusPlusPostfixExpression(PlusPlusPostfixExpression *p);
+  void visitMinusMinusPostfixExpression(MinusMinusPostfixExpression *p);
+  void visitIdentifierPrimaryExpression(IdentifierPrimaryExpression *p);
+  void visitConstantPrimaryExpressin(ConstantPrimaryExpressin *p);
+  void visitCommaExpressionPrimaryExpressin(CommaExpressionPrimaryExpressin *p);
+  void visitBlockPrimaryExpressin(BlockPrimaryExpressin *p);
   void visitConstant(Constant *p); /* abstract class */
   void visitConstantInt(ConstantInt *p);
   void visitConstantFloat(ConstantFloat *p);
   void visitConstantChar(ConstantChar *p);
-  void visitConstantWChar(ConstantWChar *p);
-  void visitConstantString(ConstantString *p);
-  void visitConstantWString(ConstantWString *p);
-  void visitStringConstant(StringConstant *p); /* abstract class */
-  void visitStringConst(StringConst *p);
-  void visitWStringList(WStringList *p); /* abstract class */
-  void visitLastConstantWString(LastConstantWString *p);
-  void visitOneStringWithList(OneStringWithList *p);
-  void visitWStringWithList(WStringWithList *p);
-  void visitLatersConstantWString(LatersConstantWString *p);
-  void visitOneString(OneString *p); /* abstract class */
-  void visitSimpleConstantString(SimpleConstantString *p);
-  void visitFunctionConstantString(FunctionConstantString *p);
-  void visitPrettyFunctionConstantString(PrettyFunctionConstantString *p);
-  void visitListOneString(ListOneString *p);
-  void iterListOneString(ListOneString::const_iterator i, ListOneString::const_iterator j);
-  void visitInitExpression(InitExpression *p); /* abstract class */
-  void visitSimpleExpression(SimpleExpression *p);
-  void visitBracesExpression(BracesExpression *p);
-  void visitInitializerListOpt(InitializerListOpt *p); /* abstract class */
-  void visitEmptyInitializerList(EmptyInitializerList *p);
-  void visitInitializerList(InitializerList *p);
-  void visitInitializerListComma(InitializerListComma *p);
-  void visitInitializerSingle(InitializerSingle *p); /* abstract class */
-  void visitInitializerDesignator(InitializerDesignator *p);
-  void visitInitializerGCCDesignator(InitializerGCCDesignator *p);
-  void visitEmptyInitializer(EmptyInitializer *p);
-  void visitListInitializerSingle(ListInitializerSingle *p);
-  void iterListInitializerSingle(ListInitializerSingle::const_iterator i, ListInitializerSingle::const_iterator j);
-  void visitEqOpt(EqOpt *p); /* abstract class */
-  void visitEquationSign(EquationSign *p);
-  void visitNoEquationSign(NoEquationSign *p);
-  void visitInitDesignators(InitDesignators *p); /* abstract class */
-  void visitDotInitDesignator(DotInitDesignator *p);
-  void visitBracketsInitDesignator(BracketsInitDesignator *p);
-  void visitBracketsSliceInitDesignator(BracketsSliceInitDesignator *p);
-  void visitInitDesignatorsOpt(InitDesignatorsOpt *p); /* abstract class */
-  void visitNoInitDesignator(NoInitDesignator *p);
-  void visitSomeInitDesignator(SomeInitDesignator *p);
-  void visitGhostArgumentsOpt(GhostArgumentsOpt *p); /* abstract class */
-  void visitNoGhostArguments(NoGhostArguments *p);
-  void visitSomeGhostArguments(SomeGhostArguments *p);
-  void visitArguments(Arguments *p); /* abstract class */
-  void visitNoArguments(NoArguments *p);
-  void visitSomeArguments(SomeArguments *p);
-  void visitOptExpression(OptExpression *p); /* abstract class */
-  void visitNoExpression(NoExpression *p);
-  void visitSomeExpression(SomeExpression *p);
-  void visitListExpression(ListExpression *p);
-  void iterListExpression(ListExpression::const_iterator i, ListExpression::const_iterator j);
-  void visitCommaExpressionOpt(CommaExpressionOpt *p); /* abstract class */
-  void visitNoCommaExpression(NoCommaExpression *p);
-  void visitSomeCommaExpression(SomeCommaExpression *p);
-  void visitBlock(Block *p); /* abstract class */
-  void visitABlock(ABlock *p);
-  void visitBlockAttrs(BlockAttrs *p); /* abstract class */
-  void visitNoBlockAttrs(NoBlockAttrs *p);
-  void visitSomeBlockAttrs(SomeBlockAttrs *p);
-  void visitBlockElement(BlockElement *p); /* abstract class */
-  void visitDeclarationElement(DeclarationElement *p);
-  void visitStatementElement(StatementElement *p);
-  void visitPragmaElement(PragmaElement *p);
-  void visitListBlockElement(ListBlockElement *p);
-  void iterListBlockElement(ListBlockElement::const_iterator i, ListBlockElement::const_iterator j);
+  void visitTypeName(TypeName *p); /* abstract class */
+  void visitTypeNameDeclSpecList(TypeNameDeclSpecList *p);
+  void visitACSLProgram(ACSLProgram *p); /* abstract class */
+  void visitAnnotProgram(AnnotProgram *p);
+  void visitAnnotationProgram(AnnotationProgram *p);
   void visitAnnot(Annot *p); /* abstract class */
   void visitCodeAnnot(CodeAnnot *p);
-  void visitGhostAnnot(GhostAnnot *p);
-  void visitListAnnot(ListAnnot *p);
-  void iterListAnnot(ListAnnot::const_iterator i, ListAnnot::const_iterator j);
-  void visitLocalLabel(LocalLabel *p); /* abstract class */
-  void visitLocalLable(LocalLable *p);
-  void visitListLocalLabel(ListLocalLabel *p);
-  void iterListLocalLabel(ListLocalLabel::const_iterator i, ListLocalLabel::const_iterator j);
-  void visitLocalLabelName(LocalLabelName *p); /* abstract class */
-  void visitALocalLabelName(ALocalLabelName *p);
-  void visitListLocalLabelName(ListLocalLabelName *p);
-  void iterListLocalLabelName(ListLocalLabelName::const_iterator i, ListLocalLabelName::const_iterator j);
-  void visitAnnotatedStmt(AnnotatedStmt *p); /* abstract class */
-  void visitAnnotatedStatement(AnnotatedStatement *p);
-  void visitElsePart(ElsePart *p); /* abstract class */
-  void visitNoElsePart(NoElsePart *p);
-  void visitSimpleElsePart(SimpleElsePart *p);
-  void visitSimpleGhostElsePart(SimpleGhostElsePart *p);
-  void visitGhostElsePart(GhostElsePart *p);
-  void visitStatement(Statement *p); /* abstract class */
-  void visitSemicolonStatement(SemicolonStatement *p);
-  void visitSpecStatement(SpecStatement *p);
-  void visitExprsStatement(ExprsStatement *p);
-  void visitBlockStatement(BlockStatement *p);
-  void visitIfStatement(IfStatement *p);
-  void visitSwitchStatement(SwitchStatement *p);
-  void visitWhileStatement(WhileStatement *p);
-  void visitDoWhileStatement(DoWhileStatement *p);
-  void visitForStatement(ForStatement *p);
-  void visitColonStatement(ColonStatement *p);
-  void visitCaseStatement(CaseStatement *p);
-  void visitCaseSliceStatement(CaseSliceStatement *p);
-  void visitDefaultStatement(DefaultStatement *p);
-  void visitEmptyReturnStatement(EmptyReturnStatement *p);
-  void visitReturnStatement(ReturnStatement *p);
-  void visitBreakStatement(BreakStatement *p);
-  void visitContinueStatement(ContinueStatement *p);
-  void visitGotoStatement(GotoStatement *p);
-  void visitStarGotoStatement(StarGotoStatement *p);
-  void visitAsmGotoAsmattrStatement(AsmGotoAsmattrStatement *p);
-  void visitAsmAsmattrStatement(AsmAsmattrStatement *p);
-  void visitAsmStatement(AsmStatement *p);
-  void visitTryExceptStatement(TryExceptStatement *p);
-  void visitTryFinallyStatement(TryFinallyStatement *p);
-  void visitOptLoopAnnotations(OptLoopAnnotations *p); /* abstract class */
-  void visitNoLoopAnnotations(NoLoopAnnotations *p);
-  void visitSomeLoopAnnotations(SomeLoopAnnotations *p);
-  void visitForClause(ForClause *p); /* abstract class */
-  void visitForClauseExpression(ForClauseExpression *p);
-  void visitForClauseDeclaration(ForClauseDeclaration *p);
-  void visitGhostParameterOpt(GhostParameterOpt *p); /* abstract class */
-  void visitNoGhostParameter(NoGhostParameter *p);
-  void visitSomeGhostParameter(SomeGhostParameter *p);
-  void visitDeclaration(Declaration *p); /* abstract class */
-  void visitDeclSpecInitDecl(DeclSpecInitDecl *p);
-  void visitDeclSpec(DeclSpec *p);
-  void visitSpecDeclSpecInitDecl(SpecDeclSpecInitDecl *p);
-  void visitSpecDeclSpec(SpecDeclSpec *p);
-  void visitStaticAssertDecl(StaticAssertDecl *p);
-  void visitStaticAssertDeclStringConst(StaticAssertDeclStringConst *p);
-  void visitGenericAssociation(GenericAssociation *p); /* abstract class */
-  void visitColonGenericAssociation(ColonGenericAssociation *p);
-  void visitDefaultGenericAssociation(DefaultGenericAssociation *p);
-  void visitListGenericAssociation(ListGenericAssociation *p);
-  void iterListGenericAssociation(ListGenericAssociation::const_iterator i, ListGenericAssociation::const_iterator j);
-  void visitDeclAndInitDeclAttrList(DeclAndInitDeclAttrList *p); /* abstract class */
-  void visitInitDeclaration(InitDeclaration *p);
-  void visitInitDeclarationWithAttr(InitDeclarationWithAttr *p);
-  void visitInitDeclaratorAttr(InitDeclaratorAttr *p); /* abstract class */
-  void visitInitDeclaratorAttribute(InitDeclaratorAttribute *p);
-  void visitListInitDeclaratorAttr(ListInitDeclaratorAttr *p);
-  void iterListInitDeclaratorAttr(ListInitDeclaratorAttr::const_iterator i, ListInitDeclaratorAttr::const_iterator j);
-  void visitInitDeclarator(InitDeclarator *p); /* abstract class */
-  void visitSimpleInitDeclarator(SimpleInitDeclarator *p);
-  void visitInitDeclaratorExpression(InitDeclaratorExpression *p);
-  void visitDeclSpecWOType(DeclSpecWOType *p); /* abstract class */
-  void visitDeclSpecWOTypeTypedefKeyWord(DeclSpecWOTypeTypedefKeyWord *p);
-  void visitDeclSpecWOTypeExternKeyWord(DeclSpecWOTypeExternKeyWord *p);
-  void visitDeclSpecWOTypeStaticKeyWord(DeclSpecWOTypeStaticKeyWord *p);
-  void visitDeclSpecWOTypeAutoKeyWord(DeclSpecWOTypeAutoKeyWord *p);
-  void visitDeclSpecWOTypeRegisterKeyWord(DeclSpecWOTypeRegisterKeyWord *p);
-  void visitDeclSpecWOTypeInlineKeyWord(DeclSpecWOTypeInlineKeyWord *p);
-  void visitDeclSpecWOTypeNoReturnKeyWord(DeclSpecWOTypeNoReturnKeyWord *p);
-  void visitDeclSpecWOTypeDeclSpecCVSpec(DeclSpecWOTypeDeclSpecCVSpec *p);
-  void visitDeclSpecWOTypeDeclSpecAtribNOCV(DeclSpecWOTypeDeclSpecAtribNOCV *p);
-  void visitDeclSpecList(DeclSpecList *p); /* abstract class */
-  void visitDeclSpecWoType(DeclSpecWoType *p);
-  void visitDeclSpecWoTypeNext(DeclSpecWoTypeNext *p);
-  void visitDeclSpecTypeSpec(DeclSpecTypeSpec *p);
-  void visitDeclSpecTypeSpecNext(DeclSpecTypeSpecNext *p);
-  void visitDeclSpecListNoNamed(DeclSpecListNoNamed *p); /* abstract class */
-  void visitDeclSpecNoNamedWOType(DeclSpecNoNamedWOType *p);
-  void visitDeclSpecNoNamedWOTypeNext(DeclSpecNoNamedWOTypeNext *p);
-  void visitDeclSpecNoNamedTypeSpec(DeclSpecNoNamedTypeSpec *p);
-  void visitDeclSpecNoNamedTypeSpecNext(DeclSpecNoNamedTypeSpecNext *p);
-  void visitTypeSpec(TypeSpec *p); /* abstract class */
-  void visitTypeSpecVoidKeyWord(TypeSpecVoidKeyWord *p);
-  void visitTypeSpecCharKeyWord(TypeSpecCharKeyWord *p);
-  void visitTypeSpecBoolKeyWord(TypeSpecBoolKeyWord *p);
-  void visitTypeSpecShortKeyWord(TypeSpecShortKeyWord *p);
-  void visitTypeSpecInt32KeyWord(TypeSpecInt32KeyWord *p);
-  void visitTypeSpecIntKeyWord(TypeSpecIntKeyWord *p);
-  void visitTypeSpecLongKeyWord(TypeSpecLongKeyWord *p);
-  void visitTypeSpecInt64KeyWord(TypeSpecInt64KeyWord *p);
-  void visitTypeSpecFloatKeyWord(TypeSpecFloatKeyWord *p);
-  void visitTypeSpecDoubleKeyWord(TypeSpecDoubleKeyWord *p);
-  void visitTypeSpecSignedKeyWord(TypeSpecSignedKeyWord *p);
-  void visitTypeSpecUnsignedKeyWord(TypeSpecUnsignedKeyWord *p);
-  void visitStructId(StructId *p);
-  void visitStructJustAttr(StructJustAttr *p);
-  void visitStructIdBraces(StructIdBraces *p);
-  void visitStructBraces(StructBraces *p);
-  void visitStructJustAttrIdBraces(StructJustAttrIdBraces *p);
-  void visitStructJustAttrBraces(StructJustAttrBraces *p);
-  void visitUnionId(UnionId *p);
-  void visitUnionIdBraces(UnionIdBraces *p);
-  void visitUnionBraces(UnionBraces *p);
-  void visitUnionJustAttrIdBraces(UnionJustAttrIdBraces *p);
-  void visitUnionJustAttrBraces(UnionJustAttrBraces *p);
-  void visitEnumId(EnumId *p);
-  void visitEnumIdBraces(EnumIdBraces *p);
-  void visitEnumBraces(EnumBraces *p);
-  void visitEnumJustAttrIdBraces(EnumJustAttrIdBraces *p);
-  void visitEnumJustAttrBraces(EnumJustAttrBraces *p);
-  void visitNamedTypeTypeSpec(NamedTypeTypeSpec *p);
-  void visitTypeOfExpression(TypeOfExpression *p);
-  void visitTypeOfTypeName(TypeOfTypeName *p);
-  void visitStructDeclList(StructDeclList *p); /* abstract class */
-  void visitEmptyStructDecl(EmptyStructDecl *p);
-  void visitDeclSpecStructDecl(DeclSpecStructDecl *p);
-  void visitSemicolonStructDecl(SemicolonStructDecl *p);
-  void visitSpecFieldDeclStructDecl(SpecFieldDeclStructDecl *p);
-  void visitPragmaStructDecl(PragmaStructDecl *p);
-  void visitStaticAssertStructDecl(StaticAssertStructDecl *p);
-  void visitStaticAssertStructDeclNext(StaticAssertStructDeclNext *p);
-  void visitStaticAssertDeclaration(StaticAssertDeclaration *p); /* abstract class */
-  void visitStaticAssert(StaticAssert *p);
-  void visitStaticAssertStringConst(StaticAssertStringConst *p);
-  void visitFieldDecl(FieldDecl *p); /* abstract class */
-  void visitFieldDeclDeclarator(FieldDeclDeclarator *p);
-  void visitFieldDeclDeclaratorColon(FieldDeclDeclaratorColon *p);
-  void visitFieldDeclColonExpression(FieldDeclColonExpression *p);
-  void visitListFieldDecl(ListFieldDecl *p);
-  void iterListFieldDecl(ListFieldDecl::const_iterator i, ListFieldDecl::const_iterator j);
-  void visitEnumerator(Enumerator *p); /* abstract class */
-  void visitIdentEnumerator(IdentEnumerator *p);
-  void visitIdentAssignExpr(IdentAssignExpr *p);
-  void visitListEnumerator(ListEnumerator *p);
-  void iterListEnumerator(ListEnumerator::const_iterator i, ListEnumerator::const_iterator j);
-  void visitDeclarator(Declarator *p); /* abstract class */
-  void visitADeclarator(ADeclarator *p);
-  void visitListDeclarator(ListDeclarator *p);
-  void iterListDeclarator(ListDeclarator::const_iterator i, ListDeclarator::const_iterator j);
-  void visitAttributesOrStatic(AttributesOrStatic *p); /* abstract class */
-  void visitAttributesCommaExpression(AttributesCommaExpression *p);
-  void visitAttributesStaticExpression(AttributesStaticExpression *p);
-  void visitStaticAttributesExpression(StaticAttributesExpression *p);
-  void visitDirectDecl(DirectDecl *p); /* abstract class */
-  void visitDirectDeclIdTypename(DirectDeclIdTypename *p);
-  void visitDirectDeclAttrDecl(DirectDeclAttrDecl *p);
-  void visitDirectDeclAttrStatic(DirectDeclAttrStatic *p);
-  void visitDirectDeclGhostParam(DirectDeclGhostParam *p);
-  void visitDirectDeclGhostRestParParam(DirectDeclGhostRestParParam *p);
-  void visitRestParList(RestParList *p); /* abstract class */
-  void visitSimpleParameterDecl(SimpleParameterDecl *p);
-  void visitDotDotDotParameterDecl(DotDotDotParameterDecl *p);
-  void visitParameterDecl(ParameterDecl *p); /* abstract class */
-  void visitParameterDeclSpecDeclarator(ParameterDeclSpecDeclarator *p);
-  void visitParameterDeclSpecAbstract(ParameterDeclSpecAbstract *p);
-  void visitParameterDeclSpec(ParameterDeclSpec *p);
-  void visitParameterDeclPar(ParameterDeclPar *p);
-  void visitListParameterDecl(ListParameterDecl *p);
-  void iterListParameterDecl(ListParameterDecl::const_iterator i, ListParameterDecl::const_iterator j);
-  void visitDirectOldProtoDecl(DirectOldProtoDecl *p); /* abstract class */
-  void visitOldDirectProtoDecl(OldDirectProtoDecl *p);
-  void visitListIdent(ListIdent *p);
-  void iterListIdent(ListIdent::const_iterator i, ListIdent::const_iterator j);
-  void visitOldPardefList(OldPardefList *p); /* abstract class */
-  void visitEmptyOldPardefList(EmptyOldPardefList *p);
-  void visitDotDotDotOldPardefList(DotDotDotOldPardefList *p);
-  void visitSimpleOldPardefList(SimpleOldPardefList *p);
-  void visitOldPardef(OldPardef *p); /* abstract class */
-  void visitOldParDef(OldParDef *p);
-  void visitListOldPardef(ListOldPardef *p);
-  void iterListOldPardef(ListOldPardef::const_iterator i, ListOldPardef::const_iterator j);
-  void visitPointerOpt(PointerOpt *p); /* abstract class */
-  void visitNoPointer(NoPointer *p);
-  void visitSomePointer(SomePointer *p);
-  void visitTypeName(TypeName *p); /* abstract class */
-  void visitTypeNameAbstractDecl(TypeNameAbstractDecl *p);
-  void visitTypeNameDeclSpecList(TypeNameDeclSpecList *p);
-  void visitAbstractDecl(AbstractDecl *p); /* abstract class */
-  void visitAbstractDeclAttr(AbstractDeclAttr *p);
-  void visitAbstractDeclPointer(AbstractDeclPointer *p);
-  void visitAbsDirectDecl(AbsDirectDecl *p); /* abstract class */
-  void visitAbsDirectDeclPar(AbsDirectDeclPar *p);
-  void visitAbsDirectDeclBreckets(AbsDirectDeclBreckets *p);
-  void visitAbsDirectDeclRestPar(AbsDirectDeclRestPar *p);
-  void visitAbsDirectDeclNoRestPar(AbsDirectDeclNoRestPar *p);
-  void visitAbsDirectDeclOpt(AbsDirectDeclOpt *p); /* abstract class */
-  void visitSomeAbsDirectDecl(SomeAbsDirectDecl *p);
-  void visitNoAbsDirectDecl(NoAbsDirectDecl *p);
-  void visitFunctionDef(FunctionDef *p); /* abstract class */
-  void visitFunctionDefSpec(FunctionDefSpec *p);
-  void visitSimpleFunctionDef(SimpleFunctionDef *p);
-  void visitFunctionDefStart(FunctionDefStart *p); /* abstract class */
-  void visitFunctionDefStartDeclarator(FunctionDefStartDeclarator *p);
-  void visitFunctionDefStartOldProtoDecl(FunctionDefStartOldProtoDecl *p);
-  void visitFunctionDefStartReatParGhostParameter(FunctionDefStartReatParGhostParameter *p);
-  void visitFunctionDefStartOldPardef(FunctionDefStartOldPardef *p);
-  void visitFunctionDefStartGhostParameter(FunctionDefStartGhostParameter *p);
-  void visitCVSpec(CVSpec *p); /* abstract class */
-  void visitCVSpecConstKeyWord(CVSpecConstKeyWord *p);
-  void visitCVSpecVolatileKeyWord(CVSpecVolatileKeyWord *p);
-  void visitCVSpecRestrictKeyWord(CVSpecRestrictKeyWord *p);
-  void visitCVSpecGhostKeyWord(CVSpecGhostKeyWord *p);
-  void visitCVSpecAttribute_annotKeyWord(CVSpecAttribute_annotKeyWord *p);
-  void visitAttributesWithAsm(AttributesWithAsm *p); /* abstract class */
-  void visitEmptyAttrWithASM(EmptyAttrWithASM *p);
-  void visitListAttrWithASM(ListAttrWithASM *p);
-  void visitListASMAttrWithASM(ListASMAttrWithASM *p);
-  void visitASMAttrWithASM(ASMAttrWithASM *p);
-  void visitAttributeNocv(AttributeNocv *p); /* abstract class */
-  void visitAttributeAttrNocv(AttributeAttrNocv *p);
-  void visitDeclspecAttrNocv(DeclspecAttrNocv *p);
-  void visitMsattrAttrNocv(MsattrAttrNocv *p);
-  void visitThreadAttrNocv(ThreadAttrNocv *p);
-  void visitThreadLocalAttrNocv(ThreadLocalAttrNocv *p);
-  void visitListAttributeNocv(ListAttributeNocv *p);
-  void iterListAttributeNocv(ListAttributeNocv::const_iterator i, ListAttributeNocv::const_iterator j);
-  void visitAttribute(Attribute *p); /* abstract class */
-  void visitAttributeNoCV(AttributeNoCV *p);
-  void visitAttributeConst(AttributeConst *p);
-  void visitAttributeRestrict(AttributeRestrict *p);
-  void visitAttributeVolatile(AttributeVolatile *p);
-  void visitAttributeGhost(AttributeGhost *p);
-  void visitAttributeAttributeAnnot(AttributeAttributeAnnot *p);
-  void visitListAttribute(ListAttribute *p);
-  void iterListAttribute(ListAttribute::const_iterator i, ListAttribute::const_iterator j);
-  void visitJustAttribute(JustAttribute *p); /* abstract class */
-  void visitAttributeJustAttribute(AttributeJustAttribute *p);
-  void visitDeclspecJustAttribute(DeclspecJustAttribute *p);
-  void visitListJustAttribute(ListJustAttribute *p);
-  void iterListJustAttribute(ListJustAttribute::const_iterator i, ListJustAttribute::const_iterator j);
-  void visitPragma(Pragma *p); /* abstract class */
-  void visitSimplePragma(SimplePragma *p);
-  void visitAttrPragma(AttrPragma *p);
-  void visitAttrPragmaSeparated(AttrPragmaSeparated *p);
-  void visitPragmaKeyrod(PragmaKeyrod *p);
-  void visitVarAttr(VarAttr *p); /* abstract class */
-  void visitIdentifierVarAttr(IdentifierVarAttr *p);
-  void visitNamedTypeVarAttr(NamedTypeVarAttr *p);
-  void visitDefaultVarAttr(DefaultVarAttr *p);
-  void visitConstVarAttr(ConstVarAttr *p);
-  void visitVolatileVarAttr(VolatileVarAttr *p);
-  void visitContIntVarAttr(ContIntVarAttr *p);
-  void visitBasicAttribute(BasicAttribute *p); /* abstract class */
-  void visitBasicAttrConsInt(BasicAttrConsInt *p);
-  void visitBasicAttrConsFloat(BasicAttrConsFloat *p);
-  void visitBasicAttrVar(BasicAttrVar *p);
-  void visitListBasicAttribute(ListBasicAttribute *p);
-  void iterListBasicAttribute(ListBasicAttribute::const_iterator i, ListBasicAttribute::const_iterator j);
-  void visitParameterAttrListNE(ParameterAttrListNE *p); /* abstract class */
-  void visitParameterBasicAttr(ParameterBasicAttr *p);
-  void visitParameterBasicAttrStringConst(ParameterBasicAttrStringConst *p);
-  void visitParameterBasicAttrStringConstNext(ParameterBasicAttrStringConstNext *p);
-  void visitParamAttrListNE(ParamAttrListNE *p); /* abstract class */
-  void visitParamAttrList(ParamAttrList *p);
-  void visitParamStringConstant(ParamStringConstant *p);
-  void visitAttr(Attr *p); /* abstract class */
-  void visitBasicAttr(BasicAttr *p);
-  void visitAttrStringConstant(AttrStringConstant *p);
-  void visitFuncationCall(FuncationCall *p);
-  void visitProcedureCall(ProcedureCall *p);
-  void visitBasicPostfix(BasicPostfix *p);
-  void visitArrowAttr(ArrowAttr *p);
-  void visitDotAttr(DotAttr *p);
-  void visitArrayAttr(ArrayAttr *p);
-  void visitSizeOfAttrUnary(SizeOfAttrUnary *p);
-  void visitSizeOfAttrTypeName(SizeOfAttrTypeName *p);
-  void visitAlignOfAttrUnary(AlignOfAttrUnary *p);
-  void visitAlignOfAttrTypeName(AlignOfAttrTypeName *p);
-  void visitPlusUnaryAttr(PlusUnaryAttr *p);
-  void visitMinusUnaryAttr(MinusUnaryAttr *p);
-  void visitMultUnaryAttr(MultUnaryAttr *p);
-  void visitAmpUnaryAttr(AmpUnaryAttr *p);
-  void visitNotUnaryAttr(NotUnaryAttr *p);
-  void visitTildeUnaryAttr(TildeUnaryAttr *p);
-  void visitMultOp(MultOp *p);
-  void visitDivOp(DivOp *p);
-  void visitModOp(ModOp *p);
-  void visitAddOp(AddOp *p);
-  void visitSubOp(SubOp *p);
-  void visitLeftShiftOp(LeftShiftOp *p);
-  void visitRightShiftOp(RightShiftOp *p);
-  void visitLess(Less *p);
-  void visitGreater(Greater *p);
-  void visitLessEqual(LessEqual *p);
-  void visitGreaterEqual(GreaterEqual *p);
-  void visitEqualEqual(EqualEqual *p);
-  void visitNotEqual(NotEqual *p);
-  void visitBitAnd(BitAnd *p);
-  void visitXor(Xor *p);
-  void visitBitOr(BitOr *p);
-  void visitAnd(And *p);
-  void visitOr(Or *p);
-  void visitTernaryCond(TernaryCond *p);
-  void visitAnAttr(AnAttr *p);
-  void visitListAttr(ListAttr *p);
-  void iterListAttr(ListAttr::const_iterator i, ListAttr::const_iterator j);
-  void visitAttrTest(AttrTest *p); /* abstract class */
-  void visitAvoidShiftReduce(AvoidShiftReduce *p);
-  void visitAttrList(AttrList *p); /* abstract class */
-  void visitEmptyAtrList(EmptyAtrList *p);
-  void visitAtrList(AtrList *p);
-  void visitAsmattr(Asmattr *p); /* abstract class */
-  void visitVolatileKeyWrod(VolatileKeyWrod *p);
-  void visitConstKeyWrod(ConstKeyWrod *p);
-  void visitListAsmattr(ListAsmattr *p);
-  void iterListAsmattr(ListAsmattr::const_iterator i, ListAsmattr::const_iterator j);
-  void visitAsmoutputs(Asmoutputs *p); /* abstract class */
-  void visitNoAsmoutputs(NoAsmoutputs *p);
-  void visitSomeAsmoutputs(SomeAsmoutputs *p);
-  void visitAsmoperands(Asmoperands *p); /* abstract class */
-  void visitNoAsmoperands(NoAsmoperands *p);
-  void visitSomeAsmoperands(SomeAsmoperands *p);
-  void visitAsmoperand(Asmoperand *p); /* abstract class */
-  void visitAsmOperand(AsmOperand *p);
-  void visitListAsmoperand(ListAsmoperand *p);
-  void iterListAsmoperand(ListAsmoperand::const_iterator i, ListAsmoperand::const_iterator j);
-  void visitAsminputs(Asminputs *p); /* abstract class */
-  void visitNoAsminputs(NoAsminputs *p);
-  void visitSomeAsminputs(SomeAsminputs *p);
-  void visitAsmopname(Asmopname *p); /* abstract class */
-  void visitNoAsmopname(NoAsmopname *p);
-  void visitSomeAsmopname(SomeAsmopname *p);
-  void visitAsmclobber(Asmclobber *p); /* abstract class */
-  void visitNoAsmclobber(NoAsmclobber *p);
-  void visitColonAsmclobber(ColonAsmclobber *p);
-  void visitColonStringAsmclobber(ColonStringAsmclobber *p);
-  void visitListStringConstant(ListStringConstant *p);
-  void iterListStringConstant(ListStringConstant::const_iterator i, ListStringConstant::const_iterator j);
-  void visitAsmlabels(Asmlabels *p); /* abstract class */
-  void visitNoAsmlabels(NoAsmlabels *p);
-  void visitSomeAsmlabels(SomeAsmlabels *p);
-  void visitLexprEOF(LexprEOF *p); /* abstract class */
-  void visitLexprEof(LexprEof *p);
-  void visitLexprList(LexprList *p); /* abstract class */
-  void visitEmptyLexprList(EmptyLexprList *p);
-  void visitNonEmptyLexprList(NonEmptyLexprList *p);
-  void visitListLexpr(ListLexpr *p);
-  void iterListLexpr(ListLexpr::const_iterator i, ListLexpr::const_iterator j);
-  void visitLexprOption(LexprOption *p); /* abstract class */
-  void visitNoLexprOption(NoLexprOption *p);
-  void visitSomeLexprOption(SomeLexprOption *p);
+  void visitCode_Annot(Code_Annot *p); /* abstract class */
+  void visitCodeAnnotContract(CodeAnnotContract *p);
+  void visitContract(Contract *p); /* abstract class */
+  void visitSimpleContract(SimpleContract *p);
+  void visitRequires(Requires *p); /* abstract class */
+  void visitNoRequires(NoRequires *p);
+  void visitSomeRequires(SomeRequires *p);
+  void visitNERequires(NERequires *p); /* abstract class */
+  void visitSimpleRequires(SimpleRequires *p);
+  void visitCheckRequires(CheckRequires *p);
+  void visitAdimtRequires(AdimtRequires *p);
+  void visitTerminates(Terminates *p); /* abstract class */
+  void visitNoTerminate(NoTerminate *p);
+  void visitDecreases(Decreases *p); /* abstract class */
+  void visitNoDecreases(NoDecreases *p);
+  void visitSimpleClauses(SimpleClauses *p); /* abstract class */
+  void visitNoSimpleClauses(NoSimpleClauses *p);
+  void visitSomeSimpleClauses(SomeSimpleClauses *p);
+  void visitNESimpleClauses(NESimpleClauses *p); /* abstract class */
+  void visitPostCondSimpleClauses(PostCondSimpleClauses *p);
+  void visitAssignsSimpleClauses(AssignsSimpleClauses *p);
+  void visitAssigns(Assigns *p); /* abstract class */
+  void visitAssignZone(AssignZone *p);
+  void visitAssignZoneFromZone(AssignZoneFromZone *p);
+  void visitZones(Zones *p); /* abstract class */
+  void visitSomeZone(SomeZone *p);
+  void visitNoZone(NoZone *p);
+  void visitBehaviors(Behaviors *p); /* abstract class */
+  void visitNoBehaviors(NoBehaviors *p);
+  void visitCompleteOrDisjoint(CompleteOrDisjoint *p); /* abstract class */
+  void visitNoComplDisj(NoComplDisj *p);
   void visitLexpr(Lexpr *p); /* abstract class */
-  void visitNoLexpr(NoLexpr *p);
   void visitImplLexpr(ImplLexpr *p);
   void visitIffLexpr(IffLexpr *p);
   void visitOrLexpr(OrLexpr *p);
   void visitAndLexpr(AndLexpr *p);
   void visitHatHatLexpr(HatHatLexpr *p);
-  void visitAmpLexpr(AmpLexpr *p);
-  void visitPipeLexpr(PipeLexpr *p);
-  void visitHatLexpr(HatLexpr *p);
-  void visitBimpliesLexpr(BimpliesLexpr *p);
-  void visitBiffLexpr(BiffLexpr *p);
-  void visitInLexpr(InLexpr *p);
-  void visitTernaryLexpr(TernaryLexpr *p);
-  void visitIdAssignLexpr(IdAssignLexpr *p);
-  void visitStrAssignLexpr(StrAssignLexpr *p);
   void visitRelationLexpr(RelationLexpr *p);
   void visitBinderLexpr(BinderLexpr *p);
   void visitNotBinderLexpr(NotBinderLexpr *p);
-  void visitStringLexpr(StringLexpr *p);
-  void visitNotLexprInner(NotLexprInner *p);
   void visitTrueLexpr(TrueLexpr *p);
   void visitFalseLexpr(FalseLexpr *p);
-  void visitPointerLexpr(PointerLexpr *p);
   void visitValidLexpr(ValidLexpr *p);
-  void visitValidReadLexpr(ValidReadLexpr *p);
-  void visitValidFuncLexpr(ValidFuncLexpr *p);
-  void visitValidIndxLexpr(ValidIndxLexpr *p);
-  void visitValidRangeLexpr(ValidRangeLexpr *p);
-  void visitInitializedLexpr(InitializedLexpr *p);
-  void visitDanglingLexpr(DanglingLexpr *p);
-  void visitFreshLexpr(FreshLexpr *p);
-  void visitBaseAddrLexpr(BaseAddrLexpr *p);
-  void visitBlockLengthLexpr(BlockLengthLexpr *p);
-  void visitOffsetLexpr(OffsetLexpr *p);
-  void visitAllocableLexpr(AllocableLexpr *p);
-  void visitFreeableLexpr(FreeableLexpr *p);
-  void visitAllocationLexpr(AllocationLexpr *p);
   void visitAutomaticLexpr(AutomaticLexpr *p);
   void visitDynamicLexpr(DynamicLexpr *p);
   void visitRegisterLexpr(RegisterLexpr *p);
@@ -603,55 +317,17 @@ class PrintAbsyn : public Visitor
   void visitLexprIntConst(LexprIntConst *p);
   void visitLexprFloatConst(LexprFloatConst *p);
   void visitLexprStringConst(LexprStringConst *p);
-  void visitLexprWStringConst(LexprWStringConst *p);
   void visitAddLexpr(AddLexpr *p);
   void visitSubtrLexpr(SubtrLexpr *p);
-  void visitMultLexpr(MultLexpr *p);
-  void visitDivLexpr(DivLexpr *p);
-  void visitModLexpr(ModLexpr *p);
-  void visitStarHatLexpr(StarHatLexpr *p);
-  void visitArrowLexpr(ArrowLexpr *p);
-  void visitDotLexpr(DotLexpr *p);
   void visitSquaresRangeLexpr(SquaresRangeLexpr *p);
   void visitSquaresLexpr(SquaresLexpr *p);
-  void visitSquaresPipeLexpr(SquaresPipeLexpr *p);
-  void visitMinusLexpr(MinusLexpr *p);
-  void visitPlusLexpr(PlusLexpr *p);
-  void visitTildeLexpr(TildeLexpr *p);
-  void visitStarLexpr(StarLexpr *p);
-  void visitAmpUnaryLexpr(AmpUnaryLexpr *p);
-  void visitSizeOfLexpr(SizeOfLexpr *p);
-  void visitSizeOfLogicTypeLexpr(SizeOfLogicTypeLexpr *p);
-  void visitOldLexpr(OldLexpr *p);
-  void visitAtLexpr(AtLexpr *p);
-  void visitResultLexpr(ResultLexpr *p);
   void visitSeparatedLexpr(SeparatedLexpr *p);
   void visitFullIdParenLexpr(FullIdParenLexpr *p);
-  void visitFullIdBraceParenLexpr(FullIdBraceParenLexpr *p);
-  void visitFullIdBracesLexpr(FullIdBracesLexpr *p);
   void visitFullId(FullId *p);
   void visitPiLexpr(PiLexpr *p);
-  void visitLessLessLexpr(LessLessLexpr *p);
-  void visitGreaterGreaterLexpr(GreaterGreaterLexpr *p);
   void visitParenRangeLexpr(ParenRangeLexpr *p);
-  void visitCastLexpr(CastLexpr *p);
-  void visitTypeOfLexpr(TypeOfLexpr *p);
-  void visitTypeLexpr(TypeLexpr *p);
-  void visitTypeWithStarsLexpr(TypeWithStarsLexpr *p);
-  void visitEmptyLexpr(EmptyLexpr *p);
-  void visitUnionLexpr(UnionLexpr *p);
-  void visitInterLexpr(InterLexpr *p);
-  void visitBraceLexprList(BraceLexprList *p);
-  void visitBraceBinderLexpr(BraceBinderLexpr *p);
-  void visitBraceBinderLexprLexpr(BraceBinderLexprLexpr *p);
-  void visitFieldInitLexpr(FieldInitLexpr *p);
-  void visitArrayInitLexpr(ArrayInitLexpr *p);
-  void visitUpdateBraceLexpr(UpdateBraceLexpr *p);
-  void visitLexprBinder(LexprBinder *p); /* abstract class */
-  void visitLetBinderLexpr(LetBinderLexpr *p);
-  void visitForallBinderLexpr(ForallBinderLexpr *p);
-  void visitExistBinderLexpr(ExistBinderLexpr *p);
-  void visitLambdaBinderLexpr(LambdaBinderLexpr *p);
+  void visitListLexpr(ListLexpr *p);
+  void iterListLexpr(ListLexpr::const_iterator i, ListLexpr::const_iterator j);
   void visitLexprRelInner(LexprRelInner *p); /* abstract class */
   void visitRelInnerLexpr(RelInnerLexpr *p);
   void visitListLexprRelInner(ListLexprRelInner *p);
@@ -663,33 +339,15 @@ class PrintAbsyn : public Visitor
   void visitGreaterEqRel(GreaterEqRel *p);
   void visitEqRel(EqRel *p);
   void visitNotEqRel(NotEqRel *p);
-  void visitEQUALRel(EQUALRel *p);
-  void visitListSTRING_LITERAL(ListSTRING_LITERAL *p);
-  void iterListSTRING_LITERAL(ListSTRING_LITERAL::const_iterator i, ListSTRING_LITERAL::const_iterator j);
-  void visitRange(Range *p); /* abstract class */
-  void visitLexprRange(LexprRange *p);
-  void visitFieldInitElt(FieldInitElt *p); /* abstract class */
-  void visitAFieldInitElt(AFieldInitElt *p);
-  void visitListFieldInitElt(ListFieldInitElt *p);
-  void iterListFieldInitElt(ListFieldInitElt::const_iterator i, ListFieldInitElt::const_iterator j);
-  void visitArrayInitElt(ArrayInitElt *p); /* abstract class */
-  void visitAnArrayInitElt(AnArrayInitElt *p);
-  void visitArrayInitRangeElt(ArrayInitRangeElt *p);
-  void visitListArrayInitElt(ListArrayInitElt *p);
-  void iterListArrayInitElt(ListArrayInitElt::const_iterator i, ListArrayInitElt::const_iterator j);
-  void visitUpdateElt(UpdateElt *p); /* abstract class */
-  void visitAnUpdateElt(AnUpdateElt *p);
-  void visitUpdateEltWith(UpdateEltWith *p);
-  void visitListUpdateElt(ListUpdateElt *p);
-  void iterListUpdateElt(ListUpdateElt::const_iterator i, ListUpdateElt::const_iterator j);
-  void visitPathElt(PathElt *p); /* abstract class */
-  void visitFieldElt(FieldElt *p);
-  void visitArrayElt(ArrayElt *p);
-  void visitArrayRangeElt(ArrayRangeElt *p);
-  void visitListPathElt(ListPathElt *p);
-  void iterListPathElt(ListPathElt::const_iterator i, ListPathElt::const_iterator j);
+  void visitLexprBinder(LexprBinder *p); /* abstract class */
+  void visitForallBinderLexpr(ForallBinderLexpr *p);
+  void visitExistBinderLexpr(ExistBinderLexpr *p);
+  void visitLambdaBinderLexpr(LambdaBinderLexpr *p);
   void visitBinders(Binders *p); /* abstract class */
   void visitTheBinders(TheBinders *p);
+  void visitTypeSpecOFTYPENAME(TypeSpecOFTYPENAME *p); /* abstract class */
+  void visitTypeSpecTYPENAME(TypeSpecTYPENAME *p);
+  void visitTypeSpecSimpleFromTypenameTypeSpec(TypeSpecSimpleFromTypenameTypeSpec *p);
   void visitBindersReentrance(BindersReentrance *p); /* abstract class */
   void visitBindersReentranceDeclSpec(BindersReentranceDeclSpec *p);
   void visitBindersReentranceVarSpec(BindersReentranceVarSpec *p);
@@ -699,490 +357,14 @@ class PrintAbsyn : public Visitor
   void visitStartVarSpec(StartVarSpec *p);
   void visitSimpleSpec(SimpleSpec *p);
   void visitArraySpec(ArraySpec *p);
-  void visitFunctionSpec(FunctionSpec *p);
-  void visitArraySize(ArraySize *p); /* abstract class */
-  void visitIntConstArraySize(IntConstArraySize *p);
-  void visitSomeArraySize(SomeArraySize *p);
-  void visitNoSize(NoSize *p);
-  void visitAbsParamTypeList(AbsParamTypeList *p); /* abstract class */
-  void visitEmptyTypeParam(EmptyTypeParam *p);
-  void visitSomeTypeParam(SomeTypeParam *p);
-  void visitInfTypeParam(InfTypeParam *p);
-  void visitAbsParam(AbsParam *p); /* abstract class */
-  void visitAbsParamsElement(AbsParamsElement *p);
-  void visitListAbsParam(ListAbsParam *p);
-  void iterListAbsParam(ListAbsParam::const_iterator i, ListAbsParam::const_iterator j);
-  void visitParameter(Parameter *p); /* abstract class */
-  void visitPrartemer(Prartemer *p);
-  void visitListParameter(ListParameter *p);
-  void iterListParameter(ListParameter::const_iterator i, ListParameter::const_iterator j);
-  void visitLogicTypeGenOFTYPENAME(LogicTypeGenOFTYPENAME *p); /* abstract class */
-  void visitLogicTypeGenTypemane(LogicTypeGenTypemane *p);
-  void visitListLogicTypeGenOFTYPENAME(ListLogicTypeGenOFTYPENAME *p);
-  void iterListLogicTypeGenOFTYPENAME(ListLogicTypeGenOFTYPENAME::const_iterator i, ListLogicTypeGenOFTYPENAME::const_iterator j);
-  void visitLogicTypeGenOFIdentifierOrTypename(LogicTypeGenOFIdentifierOrTypename *p); /* abstract class */
-  void visitLogicTypeGenIdOrTypename(LogicTypeGenIdOrTypename *p);
-  void visitListLogicTypeGenOFIdentifierOrTypename(ListLogicTypeGenOFIdentifierOrTypename *p);
-  void iterListLogicTypeGenOFIdentifierOrTypename(ListLogicTypeGenOFIdentifierOrTypename::const_iterator i, ListLogicTypeGenOFIdentifierOrTypename::const_iterator j);
-  void visitCV(CV *p); /* abstract class */
-  void visitConstCV(ConstCV *p);
-  void visitVolatileCV(VolatileCV *p);
-  void visitGhostCV(GhostCV *p);
-  void visitListCV(ListCV *p);
-  void iterListCV(ListCV::const_iterator i, ListCV::const_iterator j);
-  void visitTypeSpecCVOFTYPENAME(TypeSpecCVOFTYPENAME *p); /* abstract class */
-  void visitTypeSpecCVTypename(TypeSpecCVTypename *p);
-  void visitCastLogicType(CastLogicType *p); /* abstract class */
-  void visitAnCastLogicType(AnCastLogicType *p);
-  void visitLogicRtType(LogicRtType *p); /* abstract class */
-  void visitLogicRTType(LogicRTType *p);
-  void visitAbsSpecOption(AbsSpecOption *p); /* abstract class */
-  void visitNoAbsSpec(NoAbsSpec *p);
-  void visitSomeAbsSpec(SomeAbsSpec *p);
-  void visitAbsSpecCVOption(AbsSpecCVOption *p); /* abstract class */
-  void visitNoAbsSpecCV(NoAbsSpecCV *p);
-  void visitSomeAbsSpecCV(SomeAbsSpecCV *p);
-  void visitAbsSpec(AbsSpec *p); /* abstract class */
-  void visitAbsSpecTabs(AbsSpecTabs *p);
-  void visitAbsSpecStars(AbsSpecStars *p);
-  void visitAbsSpecStarsTabs(AbsSpecStarsTabs *p);
-  void visitAbsSpecBitsStars(AbsSpecBitsStars *p);
-  void visitAbsSpecBitsStarsTabs(AbsSpecBitsStarsTabs *p);
-  void visitAbsSpecBitsTabs(AbsSpecBitsTabs *p);
-  void visitAbsSpecBits(AbsSpecBits *p);
-  void visitAbsSpecBitsParams(AbsSpecBitsParams *p);
-  void visitAbsSpecCV(AbsSpecCV *p); /* abstract class */
-  void visitAbsSpecCVTabs(AbsSpecCVTabs *p);
-  void visitAbsSpecCVStars(AbsSpecCVStars *p);
-  void visitAbsSpecCVStarsTabs(AbsSpecCVStarsTabs *p);
-  void visitAbsSpecCVBitsStars(AbsSpecCVBitsStars *p);
-  void visitAbsSpecCVBitsStarsTabs(AbsSpecCVBitsStarsTabs *p);
-  void visitAbsSpecCVBitsTabs(AbsSpecCVBitsTabs *p);
-  void visitAbsSpecCVBits(AbsSpecCVBits *p);
-  void visitAbsSpecBitsCVParams(AbsSpecBitsCVParams *p);
   void visitStars(Stars *p); /* abstract class */
   void visitStar(Star *p);
   void visitListStars(ListStars *p);
   void iterListStars(ListStars::const_iterator i, ListStars::const_iterator j);
-  void visitStarsCV(StarsCV *p); /* abstract class */
-  void visitStarCV(StarCV *p);
-  void visitStarCVWithCV(StarCVWithCV *p);
-  void visitListStarsCV(ListStarsCV *p);
-  void iterListStarsCV(ListStarsCV::const_iterator i, ListStarsCV::const_iterator j);
-  void visitTabs(Tabs *p); /* abstract class */
-  void visitTab(Tab *p);
-  void visitListTabs(ListTabs *p);
-  void iterListTabs(ListTabs::const_iterator i, ListTabs::const_iterator j);
-  void visitTypeSpecSimple(TypeSpecSimple *p); /* abstract class */
-  void visitTypeSpecSimpleIntegerKeyWord(TypeSpecSimpleIntegerKeyWord *p);
-  void visitTypeSpecSimpleRealKeyWord(TypeSpecSimpleRealKeyWord *p);
-  void visitTypeSpecSimpleBooleanKeyWord(TypeSpecSimpleBooleanKeyWord *p);
-  void visitTypeSpecSimpleVoidKeyWord(TypeSpecSimpleVoidKeyWord *p);
-  void visitTypeSpecSimpleBoolKeyWord(TypeSpecSimpleBoolKeyWord *p);
-  void visitTypeSpecSimpleCharKeyWord(TypeSpecSimpleCharKeyWord *p);
-  void visitTypeSpecSimpleSignedCharKeyWord(TypeSpecSimpleSignedCharKeyWord *p);
-  void visitTypeSpecSimpleUnsignedCharKeyWord(TypeSpecSimpleUnsignedCharKeyWord *p);
-  void visitTypeSpecSimpleIntKeyWord(TypeSpecSimpleIntKeyWord *p);
-  void visitTypeSpecSimpleSignedIntKeyWord(TypeSpecSimpleSignedIntKeyWord *p);
-  void visitTypeSpecSimpleUnsignedIntKeyWord(TypeSpecSimpleUnsignedIntKeyWord *p);
-  void visitTypeSpecSimpleUnsignedKeyWord(TypeSpecSimpleUnsignedKeyWord *p);
-  void visitTypeSpecSimpleShortKeyWord(TypeSpecSimpleShortKeyWord *p);
-  void visitTypeSpecSimpleSignedShortKeyWord(TypeSpecSimpleSignedShortKeyWord *p);
-  void visitTypeSpecSimpleUnsignedShortKeyWord(TypeSpecSimpleUnsignedShortKeyWord *p);
-  void visitTypeSpecSimpleShortIntKeyWord(TypeSpecSimpleShortIntKeyWord *p);
-  void visitTypeSpecSimpleSignedShortIntKeyWord(TypeSpecSimpleSignedShortIntKeyWord *p);
-  void visitTypeSpecSimpleUnsignedShortIntKeyWord(TypeSpecSimpleUnsignedShortIntKeyWord *p);
-  void visitTypeSpecSimpleLongKeyWord(TypeSpecSimpleLongKeyWord *p);
-  void visitTypeSpecSimpleSignedLongKeyWord(TypeSpecSimpleSignedLongKeyWord *p);
-  void visitTypeSpecSimpleUnsignedLongKeyWord(TypeSpecSimpleUnsignedLongKeyWord *p);
-  void visitTypeSpecSimpleSignedLongIntKeyWord(TypeSpecSimpleSignedLongIntKeyWord *p);
-  void visitTypeSpecSimpleLongIntKeyWord(TypeSpecSimpleLongIntKeyWord *p);
-  void visitTypeSpecSimpleUnsignedLongIntKeyWord(TypeSpecSimpleUnsignedLongIntKeyWord *p);
-  void visitTypeSpecSimpleLongLongKeyWord(TypeSpecSimpleLongLongKeyWord *p);
-  void visitTypeSpecSimpleSignedLongLongKeyWord(TypeSpecSimpleSignedLongLongKeyWord *p);
-  void visitTypeSpecSimpleUnsignedLongLongKeyWord(TypeSpecSimpleUnsignedLongLongKeyWord *p);
-  void visitTypeSpecSimpleLongLongIntKeyWord(TypeSpecSimpleLongLongIntKeyWord *p);
-  void visitTypeSpecSimpleSignedLongLongIntKeyWord(TypeSpecSimpleSignedLongLongIntKeyWord *p);
-  void visitTypeSpecSimpleUnsignedLongLongIntKeyWord(TypeSpecSimpleUnsignedLongLongIntKeyWord *p);
-  void visitTypeSpecSimpleFloatKeyWord(TypeSpecSimpleFloatKeyWord *p);
-  void visitTypeSpecSimpleDoubleKeyWord(TypeSpecSimpleDoubleKeyWord *p);
-  void visitTypeSpecSimpleLongDoubleKeyWord(TypeSpecSimpleLongDoubleKeyWord *p);
-  void visitTypeSpecSimpleStruct(TypeSpecSimpleStruct *p);
-  void visitTypeSpecSimpleEnum(TypeSpecSimpleEnum *p);
-  void visitTypeSpecSimpleUnion(TypeSpecSimpleUnion *p);
-  void visitTypeSpecOFTYPENAME(TypeSpecOFTYPENAME *p); /* abstract class */
-  void visitTypeSpecTYPENAME(TypeSpecTYPENAME *p);
-  void visitTypeSpecTYPENAMELogicTypeGen(TypeSpecTYPENAMELogicTypeGen *p);
-  void visitTypeSpecSimpleFromTypenameTypeSpec(TypeSpecSimpleFromTypenameTypeSpec *p);
-  void visitTypeSpecOFIdentifierOrTypename(TypeSpecOFIdentifierOrTypename *p); /* abstract class */
-  void visitTypeSpecIdentifierOrTypename(TypeSpecIdentifierOrTypename *p);
-  void visitTypeSpecIdentifierOrTypenameAngles(TypeSpecIdentifierOrTypenameAngles *p);
-  void visitTypeSpecSimpleFromIdTypenameTypeSpec(TypeSpecSimpleFromIdTypenameTypeSpec *p);
-  void visitFullIdentifier(FullIdentifier *p); /* abstract class */
-  void visitSimpleIdentifierFull(SimpleIdentifierFull *p);
-  void visitAdmitKeyWordFullIdent(AdmitKeyWordFullIdent *p);
-  void visitAllocatesKeyWordFullIdent(AllocatesKeyWordFullIdent *p);
-  void visitAssertKeyWordFullIdent(AssertKeyWordFullIdent *p);
-  void visitAssignsKeyWordFullIdent(AssignsKeyWordFullIdent *p);
-  void visitAssumesKeyWordFullIdent(AssumesKeyWordFullIdent *p);
-  void visitAtKeyWordFullIdent(AtKeyWordFullIdent *p);
-  void visitAxiomKeyWordFullIdent(AxiomKeyWordFullIdent *p);
-  void visitAxiomaticKeyWordFullIdent(AxiomaticKeyWordFullIdent *p);
-  void visitBehaviorKeyWordFullIdent(BehaviorKeyWordFullIdent *p);
-  void visitBreaksKeyWordFullIdent(BreaksKeyWordFullIdent *p);
-  void visitCheckKeyWordFullIdent(CheckKeyWordFullIdent *p);
-  void visitCompleteKeyWordFullIdent(CompleteKeyWordFullIdent *p);
-  void visitContinuesKeyWordFullIdent(ContinuesKeyWordFullIdent *p);
-  void visitContractKeyWordFullIdent(ContractKeyWordFullIdent *p);
-  void visitDecreasesKeyWordFullIdent(DecreasesKeyWordFullIdent *p);
-  void visitDisjointKeyWordFullIdent(DisjointKeyWordFullIdent *p);
-  void visitEnsuresKeyWordFullIdent(EnsuresKeyWordFullIdent *p);
-  void visitExitsKeyWordFullIdent(ExitsKeyWordFullIdent *p);
-  void visitFreesKeyWordFullIdent(FreesKeyWordFullIdent *p);
-  void visitFunctionKeyWordFullIdent(FunctionKeyWordFullIdent *p);
-  void visitGlobalKeyWordFullIdent(GlobalKeyWordFullIdent *p);
-  void visitImpactKeyWordFullIdent(ImpactKeyWordFullIdent *p);
-  void visitInductiveKeyWordFullIdent(InductiveKeyWordFullIdent *p);
-  void visitIncludeKeyWordFullIdent(IncludeKeyWordFullIdent *p);
-  void visitInvariantKeyWordFullIdent(InvariantKeyWordFullIdent *p);
-  void visitLemmaKeyWordFullIdent(LemmaKeyWordFullIdent *p);
-  void visitLetKeyWordFullIdent(LetKeyWordFullIdent *p);
-  void visitLogicKeyWordFullIdent(LogicKeyWordFullIdent *p);
-  void visitLoopKeyWordFullIdent(LoopKeyWordFullIdent *p);
-  void visitModelKeyWordFullIdent(ModelKeyWordFullIdent *p);
-  void visitModuleKeyWordFullIdent(ModuleKeyWordFullIdent *p);
-  void visitPragmaKeyWordFullIdent(PragmaKeyWordFullIdent *p);
-  void visitPredicateKeyWordFullIdent(PredicateKeyWordFullIdent *p);
-  void visitRequiresKeyWordFullIdent(RequiresKeyWordFullIdent *p);
-  void visitReturnsKeyWordFullIdent(ReturnsKeyWordFullIdent *p);
-  void visitSliceKeyWordFullIdent(SliceKeyWordFullIdent *p);
-  void visitTerminatesKeyWordFullIdent(TerminatesKeyWordFullIdent *p);
-  void visitTypeKeyWordFullIdent(TypeKeyWordFullIdent *p);
-  void visitVariantKeyWordFullIdent(VariantKeyWordFullIdent *p);
-  void visitIdentExtCodeAnnotFullIdent(IdentExtCodeAnnotFullIdent *p);
-  void visitIdentExtContractFullIdent(IdentExtContractFullIdent *p);
-  void visitIdentExtGlobalFullIdent(IdentExtGlobalFullIdent *p);
-  void visitIdentExtGlobalBlockFullIdent(IdentExtGlobalBlockFullIdent *p);
-  void visitListFullIdentifier(ListFullIdentifier *p);
-  void iterListFullIdentifier(ListFullIdentifier::const_iterator i, ListFullIdentifier::const_iterator j);
-  void visitExtSpec(ExtSpec *p); /* abstract class */
-  void visitExrSpec(ExrSpec *p);
-  void visitExtGlobalClausesOpt(ExtGlobalClausesOpt *p); /* abstract class */
-  void visitEmptyExtGlobalClauses(EmptyExtGlobalClauses *p);
-  void visitSomeExtGlobalClauses(SomeExtGlobalClauses *p);
-  void visitExtGlobalClause(ExtGlobalClause *p); /* abstract class */
-  void visitDeclClause(DeclClause *p);
-  void visitLetClause(LetClause *p);
-  void visitGlobalLetClause(GlobalLetClause *p);
-  void visitIncludeClause(IncludeClause *p);
-  void visitListExtGlobalClause(ListExtGlobalClause *p);
-  void iterListExtGlobalClause(ListExtGlobalClause::const_iterator i, ListExtGlobalClause::const_iterator j);
-  void visitExtGlobalSpecsOpt(ExtGlobalSpecsOpt *p); /* abstract class */
-  void visitEmptyExtGlobalSpecs(EmptyExtGlobalSpecs *p);
-  void visitSomeExtGlobalSpecs(SomeExtGlobalSpecs *p);
-  void visitExtGlobalSpec(ExtGlobalSpec *p); /* abstract class */
-  void visitExtGlobalSpecClauseModule(ExtGlobalSpecClauseModule *p);
-  void visitExtGlobalSpecModule(ExtGlobalSpecModule *p);
-  void visitExtGlobalSpecClause(ExtGlobalSpecClause *p);
-  void visitExtGlobalSpecSimple(ExtGlobalSpecSimple *p);
-  void visitListExtGlobalSpec(ListExtGlobalSpec *p);
-  void iterListExtGlobalSpec(ListExtGlobalSpec::const_iterator i, ListExtGlobalSpec::const_iterator j);
-  void visitExtModuleSpecsOpt(ExtModuleSpecsOpt *p); /* abstract class */
-  void visitEmptyExtModuleSpecs(EmptyExtModuleSpecs *p);
-  void visitListExtModuleSpecs(ListExtModuleSpecs *p);
-  void visitFunSpecExtModuleSpecs(FunSpecExtModuleSpecs *p);
-  void visitFunSpecWithListModules(FunSpecWithListModules *p);
-  void visitExtModuleSpec(ExtModuleSpec *p); /* abstract class */
-  void visitAnExtModuleSpec(AnExtModuleSpec *p);
-  void visitListExtModuleSpec(ListExtModuleSpec *p);
-  void iterListExtModuleSpec(ListExtModuleSpec::const_iterator i, ListExtModuleSpec::const_iterator j);
-  void visitExtFunctionSpecsOpt(ExtFunctionSpecsOpt *p); /* abstract class */
-  void visitNoExtFunctionSpecs(NoExtFunctionSpecs *p);
-  void visitSomeExtFunctionSpecs(SomeExtFunctionSpecs *p);
-  void visitExtFunctionSpecs(ExtFunctionSpecs *p); /* abstract class */
-  void visitAtMarkup(AtMarkup *p);
-  void visitListFunctionSpecs(ListFunctionSpecs *p);
-  void visitListFunctionSpecsAtMarkup(ListFunctionSpecsAtMarkup *p);
-  void visitExtFunctionSpec(ExtFunctionSpec *p); /* abstract class */
-  void visitAnExtGlobalClause(AnExtGlobalClause *p);
-  void visitAnExtFunSpec(AnExtFunSpec *p);
-  void visitListExtFunctionSpec(ListExtFunctionSpec *p);
-  void iterListExtFunctionSpec(ListExtFunctionSpec::const_iterator i, ListExtFunctionSpec::const_iterator j);
-  void visitExtFunSpec(ExtFunSpec *p); /* abstract class */
-  void visitFunSpecAtAnnotation(FunSpecAtAnnotation *p);
-  void visitFunSpecAtContract(FunSpecAtContract *p);
-  void visitFunSpecContract(FunSpecContract *p);
-  void visitListExtFunSpec(ListExtFunSpec *p);
-  void iterListExtFunSpec(ListExtFunSpec::const_iterator i, ListExtFunSpec::const_iterator j);
-  void visitExtIdentifierOpt(ExtIdentifierOpt *p); /* abstract class */
-  void visitExtIdentifierEmpty(ExtIdentifierEmpty *p);
-  void visitExtIdentifierSome(ExtIdentifierSome *p);
-  void visitStmtMarkup(StmtMarkup *p); /* abstract class */
-  void visitMarkupStmtIdentifier(MarkupStmtIdentifier *p);
-  void visitMarkupIntConstant(MarkupIntConstant *p);
-  void visitListStmtMarkup(ListStmtMarkup *p);
-  void iterListStmtMarkup(ListStmtMarkup::const_iterator i, ListStmtMarkup::const_iterator j);
-  void visitSpec(Spec *p); /* abstract class */
-  void visitSpecConstract(SpecConstract *p);
-  void visitContract(Contract *p); /* abstract class */
-  void visitSimpleContract(SimpleContract *p);
-  void visitTerminatesRequiresContract(TerminatesRequiresContract *p);
-  void visitDecreasesRequiresContract(DecreasesRequiresContract *p);
-  void visitDecreasesTerminatesContract(DecreasesTerminatesContract *p);
-  void visitClausesRequiresContract(ClausesRequiresContract *p);
-  void visitClausesTerminatesContract(ClausesTerminatesContract *p);
-  void visitClausesDecreasesContract(ClausesDecreasesContract *p);
-  void visitBehaviorsTerminatesContract(BehaviorsTerminatesContract *p);
-  void visitBehaviorsDecreasesContract(BehaviorsDecreasesContract *p);
-  void visitComplDisjRequiresContract(ComplDisjRequiresContract *p);
-  void visitComplDisjTerminatesContract(ComplDisjTerminatesContract *p);
-  void visitComplDisjDecreasesContract(ComplDisjDecreasesContract *p);
-  void visitComplDisjBehaviorContract(ComplDisjBehaviorContract *p);
-  void visitComplDisjAssignsContract(ComplDisjAssignsContract *p);
-  void visitComplDisjAllocatesContract(ComplDisjAllocatesContract *p);
-  void visitComplDisjFreesContract(ComplDisjFreesContract *p);
-  void visitComplDisjPostCondContract(ComplDisjPostCondContract *p);
-  void visitClauseKW(ClauseKW *p); /* abstract class */
-  void visitAdmitRequiresClause(AdmitRequiresClause *p);
-  void visitAdmitInvariantClause(AdmitInvariantClause *p);
-  void visitAdmitLemmaClause(AdmitLemmaClause *p);
-  void visitAdmitLoopClause(AdmitLoopClause *p);
-  void visitCheckRequiresClause(CheckRequiresClause *p);
-  void visitCheckInvariantClause(CheckInvariantClause *p);
-  void visitCheckLemmaClause(CheckLemmaClause *p);
-  void visitCheckLoopClause(CheckLoopClause *p);
-  void visitRequiresClause(RequiresClause *p);
-  void visitAssumesClause(AssumesClause *p);
-  void visitAssignsClause(AssignsClause *p);
-  void visitPostCondClause(PostCondClause *p);
-  void visitDecreasesClause(DecreasesClause *p);
-  void visitBehaviorClause(BehaviorClause *p);
-  void visitAllocatesClause(AllocatesClause *p);
-  void visitFreesClause(FreesClause *p);
-  void visitCompleteClause(CompleteClause *p);
-  void visitDisjointClause(DisjointClause *p);
-  void visitClauseExtConstract(ClauseExtConstract *p);
-  void visitEmptyClauseKW(EmptyClauseKW *p);
-  void visitRequires(Requires *p); /* abstract class */
-  void visitNoRequires(NoRequires *p);
-  void visitSomeRequires(SomeRequires *p);
-  void visitNERequires(NERequires *p); /* abstract class */
-  void visitSimpleRequires(SimpleRequires *p);
-  void visitCheckRequires(CheckRequires *p);
-  void visitAdimtRequires(AdimtRequires *p);
-  void visitClauseSimpleRequires(ClauseSimpleRequires *p);
-  void visitClauseCheckRequires(ClauseCheckRequires *p);
-  void visitClauseAdimtRequires(ClauseAdimtRequires *p);
-  void visitTerminates(Terminates *p); /* abstract class */
-  void visitNoTerminate(NoTerminate *p);
-  void visitSomeTerminate(SomeTerminate *p);
-  void visitNETerminates(NETerminates *p); /* abstract class */
-  void visitSimpleTerminates(SimpleTerminates *p);
-  void visitClauseTerminates(ClauseTerminates *p);
-  void visitDecreases(Decreases *p); /* abstract class */
-  void visitNoDecreases(NoDecreases *p);
-  void visitSomeDecreases(SomeDecreases *p);
-  void visitNEDecreases(NEDecreases *p); /* abstract class */
-  void visitSimpleDecreases(SimpleDecreases *p);
-  void visitClauseDecreases(ClauseDecreases *p);
-  void visitVariant(Variant *p); /* abstract class */
-  void visitForVariant(ForVariant *p);
-  void visitLexprVariant(LexprVariant *p);
-  void visitSimpleClauses(SimpleClauses *p); /* abstract class */
-  void visitNoSimpleClauses(NoSimpleClauses *p);
-  void visitSomeSimpleClauses(SomeSimpleClauses *p);
-  void visitAllocation(Allocation *p); /* abstract class */
-  void visitAllocatesZones(AllocatesZones *p);
-  void visitFreesZones(FreesZones *p);
-  void visitNESimpleClauses(NESimpleClauses *p); /* abstract class */
-  void visitPostCondSimpleClauses(PostCondSimpleClauses *p);
-  void visitAllocationSimpleClauses(AllocationSimpleClauses *p);
-  void visitAssignsSimpleClauses(AssignsSimpleClauses *p);
-  void visitExtContractSimpleClauses(ExtContractSimpleClauses *p);
-  void visitClausesPostCondSimpleClauses(ClausesPostCondSimpleClauses *p);
-  void visitClausesAllocationSimpleClauses(ClausesAllocationSimpleClauses *p);
-  void visitClausesAssignsSimpleClauses(ClausesAssignsSimpleClauses *p);
-  void visitExtConClausestractSimpleClauses(ExtConClausestractSimpleClauses *p);
-  void visitExtensionContent(ExtensionContent *p); /* abstract class */
-  void visitNoExtensionContent(NoExtensionContent *p);
-  void visitSomeExtensionContent(SomeExtensionContent *p);
-  void visitBehaviors(Behaviors *p); /* abstract class */
-  void visitNoBehaviors(NoBehaviors *p);
-  void visitSomeBehaviors(SomeBehaviors *p);
-  void visitNEBehaviors(NEBehaviors *p); /* abstract class */
-  void visitTheBehaviors(TheBehaviors *p);
-  void visitBehaviorBody(BehaviorBody *p); /* abstract class */
-  void visitSimpleClausesBehavior(SimpleClausesBehavior *p);
-  void visitRequiresAssumes(RequiresAssumes *p);
-  void visitSimpleClausesAssumes(SimpleClausesAssumes *p);
-  void visitRequiresRequires(RequiresRequires *p);
-  void visitAssumes(Assumes *p); /* abstract class */
-  void visitNoAssumes(NoAssumes *p);
-  void visitSimpleAssumes(SimpleAssumes *p);
-  void visitClauseAssumes(ClauseAssumes *p);
-  void visitCompleteOrDisjoint(CompleteOrDisjoint *p); /* abstract class */
-  void visitNoComplDisj(NoComplDisj *p);
-  void visitSomeComplDisj(SomeComplDisj *p);
-  void visitNECompleteOrDisjoint(NECompleteOrDisjoint *p); /* abstract class */
-  void visitCompleteBehavior(CompleteBehavior *p);
-  void visitDisjointBehavior(DisjointBehavior *p);
-  void visitCompleteBehaviorClause(CompleteBehaviorClause *p);
-  void visitDisjointBehaviorClause(DisjointBehaviorClause *p);
-  void visitAssigns(Assigns *p); /* abstract class */
-  void visitAssignZone(AssignZone *p);
-  void visitAssignZoneFromZone(AssignZoneFromZone *p);
-  void visitZones(Zones *p); /* abstract class */
-  void visitSomeZone(SomeZone *p);
-  void visitNoZone(NoZone *p);
-  void visitLogicPTreeAnnot(LogicPTreeAnnot *p); /* abstract class */
-  void visitAnAnnotation(AnAnnotation *p);
-  void visitACSLSpec(ACSLSpec *p);
-  void visitAnnotDecl(AnnotDecl *p);
-  void visitListLogicPTreeAnnot(ListLogicPTreeAnnot *p);
-  void iterListLogicPTreeAnnot(ListLogicPTreeAnnot::const_iterator i, ListLogicPTreeAnnot::const_iterator j);
-  void visitAnnotation(Annotation *p); /* abstract class */
-  void visitLoopAnnotation(LoopAnnotation *p);
-  void visitForContractAnnotation(ForContractAnnotation *p);
-  void visitForCodeAnnotation(ForCodeAnnotation *p);
-  void visitSimplePragmaOrCodeAnnotation(SimplePragmaOrCodeAnnotation *p);
-  void visitPragmaOrCodeAnnotationBeg(PragmaOrCodeAnnotationBeg *p);
-  void visitIdentifierAnnotation(IdentifierAnnotation *p);
-  void visitGhostAnnotation(GhostAnnotation *p);
-  void visitLoopAnnotStack(LoopAnnotStack *p); /* abstract class */
-  void visitLoopAnnotStackInvariant(LoopAnnotStackInvariant *p);
-  void visitLoopAnnotStackEffects(LoopAnnotStackEffects *p);
-  void visitLoopAnnotStackAllocation(LoopAnnotStackAllocation *p);
-  void visitLoopAnnotStackForBehavior(LoopAnnotStackForBehavior *p);
-  void visitLoopAnnotStackVariant(LoopAnnotStackVariant *p);
-  void visitLoopAnnotStackPragma(LoopAnnotStackPragma *p);
-  void visitLoopAnnotStackGrammarExten(LoopAnnotStackGrammarExten *p);
-  void visitLoopAnnotOpt(LoopAnnotOpt *p); /* abstract class */
-  void visitNoLoopAnnot(NoLoopAnnot *p);
-  void visitSomeLoopAnnot(SomeLoopAnnot *p);
-  void visitLoopEffects(LoopEffects *p); /* abstract class */
-  void visitLoopAssigns(LoopAssigns *p);
-  void visitLoopAllocation(LoopAllocation *p); /* abstract class */
-  void visitSimpleLoopAllocation(SimpleLoopAllocation *p);
-  void visitLoopInvariant(LoopInvariant *p); /* abstract class */
-  void visitSimpleLoopInvariant(SimpleLoopInvariant *p);
-  void visitCheckLoopInvariant(CheckLoopInvariant *p);
-  void visitAdmitLoopInvariant(AdmitLoopInvariant *p);
-  void visitLoopVariant(LoopVariant *p); /* abstract class */
-  void visitSimpleLoopVariant(SimpleLoopVariant *p);
-  void visitLoopGrammarExtension(LoopGrammarExtension *p); /* abstract class */
-  void visitSimpleLoopGrammarExten(SimpleLoopGrammarExten *p);
-  void visitLoopPragma(LoopPragma *p); /* abstract class */
-  void visitPragmaLoop(PragmaLoop *p);
-  void visitBegPragmaOrCodeAnnotation(BegPragmaOrCodeAnnotation *p); /* abstract class */
-  void visitImpactKeyWordBegPragma(ImpactKeyWordBegPragma *p);
-  void visitSliceKeyWordBegPragma(SliceKeyWordBegPragma *p);
-  void visitForKeyWordBegPragma(ForKeyWordBegPragma *p);
-  void visitAssertKeyWordBegPragma(AssertKeyWordBegPragma *p);
-  void visitCheckKeyWordBegPragma(CheckKeyWordBegPragma *p);
-  void visitAdmitKeyWordBegPragma(AdmitKeyWordBegPragma *p);
-  void visitInvariantKeyWordBegPragma(InvariantKeyWordBegPragma *p);
-  void visitCheckInvariantKeyWordBegPragma(CheckInvariantKeyWordBegPragma *p);
-  void visitAdmitInvariantKeyWordBegPragma(AdmitInvariantKeyWordBegPragma *p);
-  void visitCheckLoopKeyWordBegPragma(CheckLoopKeyWordBegPragma *p);
-  void visitAdmitLoopKeyWordBegPragma(AdmitLoopKeyWordBegPragma *p);
-  void visitBegExtCodeAnnotBegPragma(BegExtCodeAnnotBegPragma *p);
-  void visitPragmaOrCodeAnnotation(PragmaOrCodeAnnotation *p); /* abstract class */
-  void visitPragmaCodeAnnotSlice(PragmaCodeAnnotSlice *p);
-  void visitPragmaCodeAnnotImpact(PragmaCodeAnnotImpact *p);
-  void visitPragmaOrCodeAnnotCodeAnnot(PragmaOrCodeAnnotCodeAnnot *p);
-  void visitCodeAnnotation(CodeAnnotation *p); /* abstract class */
-  void visitAssertCodeAnnot(AssertCodeAnnot *p);
-  void visitCheckCodeAnnot(CheckCodeAnnot *p);
-  void visitAdmitCodeAnnot(AdmitCodeAnnot *p);
-  void visitInvariantCodeAnnot(InvariantCodeAnnot *p);
-  void visitCheckInvariantCodeAnnot(CheckInvariantCodeAnnot *p);
-  void visitAdmitInvariantCodeAnnot(AdmitInvariantCodeAnnot *p);
-  void visitExtCodeAnnotCodeAnnot(ExtCodeAnnotCodeAnnot *p);
-  void visitSlicePragma(SlicePragma *p); /* abstract class */
-  void visitPragmaSliceLexpr(PragmaSliceLexpr *p);
-  void visitPragmaSlice(PragmaSlice *p);
-  void visitImpactPragma(ImpactPragma *p); /* abstract class */
-  void visitImpactPragmaLexpr(ImpactPragmaLexpr *p);
-  void visitAnImpactPragma(AnImpactPragma *p);
-  void visitDecl(Decl *p); /* abstract class */
-  void visitDeclGlobalInvariant(DeclGlobalInvariant *p);
-  void visitDeclVolatile(DeclVolatile *p);
-  void visitDeclTypeAnnot(DeclTypeAnnot *p);
-  void visitDeclModelAnnot(DeclModelAnnot *p);
-  void visitDeclLogicDef(DeclLogicDef *p);
-  void visitDeclExt(DeclExt *p);
-  void visitDeclDeprecatedLogic(DeclDeprecatedLogic *p);
-  void visitListDecl(ListDecl *p);
-  void iterListDecl(ListDecl::const_iterator i, ListDecl::const_iterator j);
-  void visitExtDecl(ExtDecl *p); /* abstract class */
-  void visitExtGlobalDecl(ExtGlobalDecl *p);
-  void visitExtGlobalBlockDecl(ExtGlobalBlockDecl *p);
-  void visitListExtDecl(ListExtDecl *p);
-  void iterListExtDecl(ListExtDecl::const_iterator i, ListExtDecl::const_iterator j);
-  void visitVolatileOpt(VolatileOpt *p); /* abstract class */
-  void visitReadVolotile(ReadVolotile *p);
-  void visitWriteVolotile(WriteVolotile *p);
-  void visitListVolatileOpt(ListVolatileOpt *p);
-  void iterListVolatileOpt(ListVolatileOpt::const_iterator i, ListVolatileOpt::const_iterator j);
-  void visitTypeAnnot(TypeAnnot *p); /* abstract class */
-  void visitTypeInvariant(TypeInvariant *p);
-  void visitOptSemicolon(OptSemicolon *p); /* abstract class */
-  void visitNoSemicolon(NoSemicolon *p);
-  void visitSemicolon(Semicolon *p);
-  void visitModelAnnot(ModelAnnot *p); /* abstract class */
-  void visitModelAnnotation(ModelAnnotation *p);
-  void visitPolyIdType(PolyIdType *p); /* abstract class */
-  void visitSimplePolyIdType(SimplePolyIdType *p);
-  void visitPolyIdTypeAngles(PolyIdTypeAngles *p);
-  void visitPolyId(PolyId *p); /* abstract class */
-  void visitPolyTypeId(PolyTypeId *p);
-  void visitPolyIdTypeSquares(PolyIdTypeSquares *p);
-  void visitPolyIdTypeSquaresAngles(PolyIdTypeSquaresAngles *p);
-  void visitOptParameters(OptParameters *p); /* abstract class */
-  void visitNoParameters(NoParameters *p);
-  void visitSomeParameters(SomeParameters *p);
-  void visitParameters(Parameters *p); /* abstract class */
-  void visitAParameters(AParameters *p);
-  void visitLogicDef(LogicDef *p); /* abstract class */
-  void visitSimpleLogicDef(SimpleLogicDef *p);
-  void visitPredicateLogicDef(PredicateLogicDef *p);
-  void visitInductiveLogicDef(InductiveLogicDef *p);
-  void visitLemmaLogicDef(LemmaLogicDef *p);
-  void visitCheckLemmaLogicDef(CheckLemmaLogicDef *p);
-  void visitAdmitLemmaLogicDef(AdmitLemmaLogicDef *p);
-  void visitAxiomaticLogicDef(AxiomaticLogicDef *p);
-  void visitTypeLogicDef(TypeLogicDef *p);
-  void visitDeprecatedLogicDecl(DeprecatedLogicDecl *p); /* abstract class */
-  void visitSimpleDeprecatedLogicDecl(SimpleDeprecatedLogicDecl *p);
-  void visitPredicateDeprecatedLogicDecl(PredicateDeprecatedLogicDecl *p);
-  void visitTypeDeprecatedLogicDecl(TypeDeprecatedLogicDecl *p);
-  void visitAxiomDeprecatedLogicDecl(AxiomDeprecatedLogicDecl *p);
-  void visitLogicDecl(LogicDecl *p); /* abstract class */
-  void visitLocidDeclDef(LocidDeclDef *p);
-  void visitSimpleLogicDecl(SimpleLogicDecl *p);
-  void visitPredicateLogicDecl(PredicateLogicDecl *p);
-  void visitTypeLogicDecl(TypeLogicDecl *p);
-  void visitAxiomLogicDecl(AxiomLogicDecl *p);
-  void visitListLogicDecl(ListLogicDecl *p);
-  void iterListLogicDecl(ListLogicDecl::const_iterator i, ListLogicDecl::const_iterator j);
-  void visitReadsClause(ReadsClause *p); /* abstract class */
-  void visitNoReadsClause(NoReadsClause *p);
-  void visitSomeReadsClause(SomeReadsClause *p);
-  void visitTypedef(Typedef *p); /* abstract class */
-  void visitListOfDatacons(ListOfDatacons *p);
-  void visitTypedefLogicTypeGen(TypedefLogicTypeGen *p);
-  void visitDataconsWithSeparator(DataconsWithSeparator *p); /* abstract class */
-  void visitSimpleDataCons(SimpleDataCons *p);
-  void visitDataConsWithPipe(DataConsWithPipe *p);
-  void visitListDataconsWithSeparator(ListDataconsWithSeparator *p);
-  void iterListDataconsWithSeparator(ListDataconsWithSeparator::const_iterator i, ListDataconsWithSeparator::const_iterator j);
-  void visitDatacons(Datacons *p); /* abstract class */
-  void visitDataConsFullIdentifier(DataConsFullIdentifier *p);
-  void visitDataConsFullIdentifierFun(DataConsFullIdentifierFun *p);
-  void visitIndcase(Indcase *p); /* abstract class */
-  void visitIndCase(IndCase *p);
-  void visitListIndcase(ListIndcase *p);
-  void iterListIndcase(ListIndcase::const_iterator i, ListIndcase::const_iterator j);
+  void visitArraySize(ArraySize *p); /* abstract class */
+  void visitIntConstArraySize(IntConstArraySize *p);
+  void visitSomeArraySize(SomeArraySize *p);
+  void visitNoSize(NoSize *p);
   void visitOptLabel(OptLabel *p); /* abstract class */
   void visitOptLabelOne(OptLabelOne *p);
   void visitOptLabelTwo(OptLabelTwo *p);
@@ -1193,60 +375,13 @@ class PrintAbsyn : public Visitor
   void visitLableName(LableName *p);
   void visitListLabelName(ListLabelName *p);
   void iterListLabelName(ListLabelName::const_iterator i, ListLabelName::const_iterator j);
-  void visitBehaviorNameList(BehaviorNameList *p); /* abstract class */
-  void visitEmptyBehaviorNameList(EmptyBehaviorNameList *p);
-  void visitAnBehaviorNameList(AnBehaviorNameList *p);
-  void visitBehaviorName(BehaviorName *p); /* abstract class */
-  void visitBehaviorNameAnyIdent(BehaviorNameAnyIdent *p);
-  void visitListBehaviorName(ListBehaviorName *p);
-  void iterListBehaviorName(ListBehaviorName::const_iterator i, ListBehaviorName::const_iterator j);
+  void visitRange(Range *p); /* abstract class */
+  void visitLexprRange(LexprRange *p);
+  void visitLexprOption(LexprOption *p); /* abstract class */
+  void visitNoLexprOption(NoLexprOption *p);
+  void visitSomeLexprOption(SomeLexprOption *p);
   void visitAnyIdentifier(AnyIdentifier *p); /* abstract class */
   void visitSimpleIdentifierAny(SimpleIdentifierAny *p);
-  void visitACSLTypenameIdentifier(ACSLTypenameIdentifier *p);
-  void visitTypenameIdentifier(TypenameIdentifier *p);
-  void visitKeywordIdentifier(KeywordIdentifier *p);
-  void visitIdentifierOrTypename(IdentifierOrTypename *p); /* abstract class */
-  void visitTypename(Typename *p);
-  void visitAnFullIdentifier(AnFullIdentifier *p);
-  void visitIdentifierOrTypenameFull(IdentifierOrTypenameFull *p); /* abstract class */
-  void visitACSLTypename(ACSLTypename *p);
-  void visitAnIdentifierOrTypename(AnIdentifierOrTypename *p);
-  void visitListIdentifierOrTypenameFull(ListIdentifierOrTypenameFull *p);
-  void iterListIdentifierOrTypenameFull(ListIdentifierOrTypenameFull::const_iterator i, ListIdentifierOrTypenameFull::const_iterator j);
-  void visitIdentifier(Identifier *p); /* abstract class */
-  void visitIdentifierIdent(IdentifierIdent *p);
-  void visitBehaviorsKeyWord(BehaviorsKeyWord *p);
-  void visitLabelKeyWord(LabelKeyWord *p);
-  void visitReadsKeyWord(ReadsKeyWord *p);
-  void visitWritesKeyWord(WritesKeyWord *p);
-  void visitBoundedVar(BoundedVar *p); /* abstract class */
-  void visitBoendedVarFullIdentifier(BoendedVarFullIdentifier *p);
-  void visitBoendedVarACSLTypename(BoendedVarACSLTypename *p);
-  void visitBoendedVarTypename(BoendedVarTypename *p);
-  void visitCKeyword(CKeyword *p); /* abstract class */
-  void visitCharKeyWord(CharKeyWord *p);
-  void visitBooleanKeyWord(BooleanKeyWord *p);
-  void visitBoolKeyWord(BoolKeyWord *p);
-  void visitConstKeyWord(ConstKeyWord *p);
-  void visitDoubleKeyWord(DoubleKeyWord *p);
-  void visitEnumKeyWord(EnumKeyWord *p);
-  void visitElseKeyWord(ElseKeyWord *p);
-  void visitFloatKeyWord(FloatKeyWord *p);
-  void visitIfKeyWord(IfKeyWord *p);
-  void visitIntKeyWord(IntKeyWord *p);
-  void visitLongKeyWord(LongKeyWord *p);
-  void visitShortKeyWord(ShortKeyWord *p);
-  void visitSignedKeyWord(SignedKeyWord *p);
-  void visitSizeofKeyWord(SizeofKeyWord *p);
-  void visitStaticKeyWord(StaticKeyWord *p);
-  void visitStructKeyWord(StructKeyWord *p);
-  void visitUnionKeyWord(UnionKeyWord *p);
-  void visitUnsignedKeyWord(UnsignedKeyWord *p);
-  void visitVoidKeyWord(VoidKeyWord *p);
-  void visitACSLCKeyword(ACSLCKeyword *p); /* abstract class */
-  void visitCaseKeyWord(CaseKeyWord *p);
-  void visitForKeyWord(ForKeyWord *p);
-  void visitVolatileKeyWord(VolatileKeyWord *p);
   void visitPostCond(PostCond *p); /* abstract class */
   void visitEnsuresKeyWord(EnsuresKeyWord *p);
   void visitExitsKeyWord(ExitsKeyWord *p);
@@ -1263,196 +398,59 @@ class PrintAbsyn : public Visitor
   void visitAdmitBreaksKeyWord(AdmitBreaksKeyWord *p);
   void visitAdmitContinuesKeyWord(AdmitContinuesKeyWord *p);
   void visitAdmitReturnsKeyWord(AdmitReturnsKeyWord *p);
-  void visitIsACSLSpec(IsACSLSpec *p); /* abstract class */
-  void visitPostCondKeyWord(PostCondKeyWord *p);
-  void visitExtContractKeyWord(ExtContractKeyWord *p);
-  void visitAssignsKeyWord(AssignsKeyWord *p);
-  void visitAllocatesKeyWord(AllocatesKeyWord *p);
-  void visitFreesKeyWord(FreesKeyWord *p);
-  void visitBehaviorKeyWord(BehaviorKeyWord *p);
-  void visitRequiresKeyWord(RequiresKeyWord *p);
-  void visitCheckRequiresKeyWord(CheckRequiresKeyWord *p);
-  void visitAdmitRequiresKeyWord(AdmitRequiresKeyWord *p);
-  void visitTerminatesKeyWord(TerminatesKeyWord *p);
-  void visitCompleteKeyWord(CompleteKeyWord *p);
-  void visitDecreasesKeyWord(DecreasesKeyWord *p);
-  void visitDisjointKeyWord(DisjointKeyWord *p);
-  void visitIsACSLDeclOrCodeAnnot(IsACSLDeclOrCodeAnnot *p); /* abstract class */
-  void visitExtCodeAnnotKeyWord(ExtCodeAnnotKeyWord *p);
-  void visitExtGlobalKeyWord(ExtGlobalKeyWord *p);
-  void visitExtGlobalBlockKeyWord(ExtGlobalBlockKeyWord *p);
-  void visitAssumesKeyWord(AssumesKeyWord *p);
-  void visitAssertKeyWord(AssertKeyWord *p);
-  void visitCheckKeyWord(CheckKeyWord *p);
-  void visitAdmitKeyWord(AdmitKeyWord *p);
-  void visitGlobalKeyWord(GlobalKeyWord *p);
-  void visitImpactKeyWord(ImpactKeyWord *p);
-  void visitInductiveKeyWord(InductiveKeyWord *p);
-  void visitInvariantKeyWord(InvariantKeyWord *p);
-  void visitAdmitInvariantKeyWord(AdmitInvariantKeyWord *p);
-  void visitCheckInvariantKeyWord(CheckInvariantKeyWord *p);
-  void visitLemmaKeyWord(LemmaKeyWord *p);
-  void visitAdmitLemmaKeyWord(AdmitLemmaKeyWord *p);
-  void visitCheckLemmaKeyWord(CheckLemmaKeyWord *p);
-  void visitLoopKeyWord(LoopKeyWord *p);
-  void visitAdmitLoopKeyWord(AdmitLoopKeyWord *p);
-  void visitCheckLoopKeyWord(CheckLoopKeyWord *p);
-  void visitPragmaKeyWord(PragmaKeyWord *p);
-  void visitPredicateKeyWord(PredicateKeyWord *p);
-  void visitSliceKeyWord(SliceKeyWord *p);
-  void visitTypeKeyWord(TypeKeyWord *p);
-  void visitModelKeyWord(ModelKeyWord *p);
-  void visitAxiomKeyWord(AxiomKeyWord *p);
-  void visitVariantKeyWord(VariantKeyWord *p);
-  void visitAxiomaticKeyWord(AxiomaticKeyWord *p);
-  void visitIsACSLTypename(IsACSLTypename *p); /* abstract class */
-  void visitIntegerKeyWord(IntegerKeyWord *p);
-  void visitRealKeyWord(RealKeyWord *p);
-  void visitIsExtSpec(IsExtSpec *p); /* abstract class */
-  void visitContractKeyWord(ContractKeyWord *p);
-  void visitFunctionKeyWord(FunctionKeyWord *p);
-  void visitModuleKeyWord(ModuleKeyWord *p);
-  void visitIncludeKeyWord(IncludeKeyWord *p);
-  void visitAtKeyWord(AtKeyWord *p);
-  void visitLetKeyWord(LetKeyWord *p);
-  void visitKeyword(Keyword *p); /* abstract class */
-  void visitLogicKeyWord(LogicKeyWord *p);
-  void visitCKeyWord(CKeyWord *p);
-  void visitACSLCKeyWord(ACSLCKeyWord *p);
-  void visitExtSpecKeyWord(ExtSpecKeyWord *p);
-  void visitACSLSpecKeyWord(ACSLSpecKeyWord *p);
-  void visitACSLDeclCodeAnnotKeyWord(ACSLDeclCodeAnnotKeyWord *p);
-  void visitBSKeyword(BSKeyword *p); /* abstract class */
-  void visitSlashAllocableKeyWord(SlashAllocableKeyWord *p);
-  void visitSlashAllocationKeyWord(SlashAllocationKeyWord *p);
-  void visitSlashAutomaticKeyWord(SlashAutomaticKeyWord *p);
-  void visitSlashAtKeyWord(SlashAtKeyWord *p);
-  void visitSlashBaseAddrKeyWord(SlashBaseAddrKeyWord *p);
-  void visitSlashBlockLengthKeyWord(SlashBlockLengthKeyWord *p);
-  void visitSlashGhostKeyWord(SlashGhostKeyWord *p);
-  void visitSlashDynamicKeyWord(SlashDynamicKeyWord *p);
-  void visitSlashEmptyKeyWord(SlashEmptyKeyWord *p);
-  void visitSlashFalseKeyWord(SlashFalseKeyWord *p);
-  void visitSlashForallKeyWord(SlashForallKeyWord *p);
-  void visitSlashFreeableKeyWord(SlashFreeableKeyWord *p);
-  void visitSlashFreshKeyWord(SlashFreshKeyWord *p);
-  void visitSlashFromKeyWord(SlashFromKeyWord *p);
-  void visitSlashInterKeyWord(SlashInterKeyWord *p);
-  void visitSlashLambdaKeyWord(SlashLambdaKeyWord *p);
-  void visitSlashLetKeyWord(SlashLetKeyWord *p);
-  void visitSlashNothingKeyWord(SlashNothingKeyWord *p);
-  void visitSlashNullKeyWord(SlashNullKeyWord *p);
-  void visitSlashOldKeyWord(SlashOldKeyWord *p);
-  void visitSlashOffsetKeyWord(SlashOffsetKeyWord *p);
-  void visitSlashRegisterKeyWord(SlashRegisterKeyWord *p);
-  void visitSlashResultKeyWord(SlashResultKeyWord *p);
-  void visitSlashSeparatedKeyWord(SlashSeparatedKeyWord *p);
-  void visitSlashTrueKeyWord(SlashTrueKeyWord *p);
-  void visitSlashTypeKeyWord(SlashTypeKeyWord *p);
-  void visitSlashTypeofKeyWord(SlashTypeofKeyWord *p);
-  void visitSlashUnionKeyWord(SlashUnionKeyWord *p);
-  void visitSlashUnallocatedKeyWord(SlashUnallocatedKeyWord *p);
-  void visitSlashObjectPointerKeyWord(SlashObjectPointerKeyWord *p);
-  void visitSlashValidKeyWord(SlashValidKeyWord *p);
-  void visitSlashValidIndexKeyWord(SlashValidIndexKeyWord *p);
-  void visitSlashValidRangeKeyWord(SlashValidRangeKeyWord *p);
-  void visitSlashValidReadKeyWord(SlashValidReadKeyWord *p);
-  void visitSlashValidFunctionKeyWord(SlashValidFunctionKeyWord *p);
-  void visitSlashInitializedKeyWord(SlashInitializedKeyWord *p);
-  void visitSlashDanglingKeyWord(SlashDanglingKeyWord *p);
-  void visitSlashWithKeyWord(SlashWithKeyWord *p);
-  void visitWildcard(Wildcard *p); /* abstract class */
-  void visitWildCardAnyIdent(WildCardAnyIdent *p);
-  void visitWildCardBSKeyWord(WildCardBSKeyWord *p);
-  void visitWildcardAmp(WildcardAmp *p);
-  void visitWildcardAnd(WildcardAnd *p);
-  void visitWildcardArrow(WildcardArrow *p);
-  void visitWildcardBIff(WildcardBIff *p);
-  void visitWildcardBImplicate(WildcardBImplicate *p);
-  void visitWildcardColon(WildcardColon *p);
-  void visitWildcardColonColon(WildcardColonColon *p);
-  void visitWildcardComma(WildcardComma *p);
-  void visitWildcardIntConstant(WildcardIntConstant *p);
-  void visitWildcardFloatConstant(WildcardFloatConstant *p);
-  void visitWildcardStringConstant(WildcardStringConstant *p);
-  void visitWildcardWstringConstant(WildcardWstringConstant *p);
-  void visitWildcardDollar(WildcardDollar *p);
-  void visitWildcardDot(WildcardDot *p);
-  void visitWildcardDotDot(WildcardDotDot *p);
-  void visitWildcardDotDotDot(WildcardDotDotDot *p);
-  void visitWildcardEQ(WildcardEQ *p);
-  void visitWildcardEqual(WildcardEqual *p);
-  void visitWildcardExistsKeyWord(WildcardExistsKeyWord *p);
-  void visitWildcardGreaterEq(WildcardGreaterEq *p);
-  void visitWildcardGhostKeyWord(WildcardGhostKeyWord *p);
-  void visitWildcardGreater(WildcardGreater *p);
-  void visitWildcardGreaterGreater(WildcardGreaterGreater *p);
-  void visitWildcardHat(WildcardHat *p);
-  void visitWildcardHatHat(WildcardHatHat *p);
-  void visitWildcardIff(WildcardIff *p);
-  void visitWildcardImplicate(WildcardImplicate *p);
-  void visitWildcardLeftBrace(WildcardLeftBrace *p);
-  void visitWildcardLessEq(WildcardLessEq *p);
-  void visitWildcardLeftPar(WildcardLeftPar *p);
-  void visitWildcardLeftSquare(WildcardLeftSquare *p);
-  void visitWildcardLeftSquarePipe(WildcardLeftSquarePipe *p);
-  void visitWildcardLess(WildcardLess *p);
-  void visitWildcardLessLess(WildcardLessLess *p);
-  void visitWildcardMinus(WildcardMinus *p);
-  void visitWildcardNotEq(WildcardNotEq *p);
-  void visitWildcardNot(WildcardNot *p);
-  void visitWildcardPipePipe(WildcardPipePipe *p);
-  void visitWildcardMod(WildcardMod *p);
-  void visitWildcardPiKeyWord(WildcardPiKeyWord *p);
-  void visitWildcardPipe(WildcardPipe *p);
-  void visitWildcardPlus(WildcardPlus *p);
-  void visitWildcardQuestion(WildcardQuestion *p);
-  void visitWildcardRightBrace(WildcardRightBrace *p);
-  void visitWildcardRightPar(WildcardRightPar *p);
-  void visitWildcardRightSquare(WildcardRightSquare *p);
-  void visitWildcardRightSquarePipe(WildcardRightSquarePipe *p);
-  void visitWildcardSemiColon(WildcardSemiColon *p);
-  void visitWildcardDivide(WildcardDivide *p);
-  void visitWildcardMult(WildcardMult *p);
-  void visitWildcardMultHat(WildcardMultHat *p);
-  void visitWildcardStringLiteral(WildcardStringLiteral *p);
-  void visitWildcardTildeKeyWord(WildcardTildeKeyWord *p);
-  void visitWildcardInKeyWord(WildcardInKeyWord *p);
-  void visitListWildcard(ListWildcard *p);
-  void iterListWildcard(ListWildcard::const_iterator i, ListWildcard::const_iterator j);
+  void visitFullIdentifier(FullIdentifier *p); /* abstract class */
+  void visitSimpleIdentifierFull(SimpleIdentifierFull *p);
+  void visitListFullIdentifier(ListFullIdentifier *p);
+  void iterListFullIdentifier(ListFullIdentifier::const_iterator i, ListFullIdentifier::const_iterator j);
+  void visitIdentifier(Identifier *p); /* abstract class */
+  void visitIdentifierIdent(IdentifierIdent *p);
+  void visitTypeSpecSimple(TypeSpecSimple *p); /* abstract class */
+  void visitTypeSpecSimpleIntegerKeyWord(TypeSpecSimpleIntegerKeyWord *p);
+  void visitTypeSpecSimpleRealKeyWord(TypeSpecSimpleRealKeyWord *p);
+  void visitTypeSpecSimpleBooleanKeyWord(TypeSpecSimpleBooleanKeyWord *p);
+  void visitTypeSpecSimpleVoidKeyWord(TypeSpecSimpleVoidKeyWord *p);
+  void visitTypeSpecSimpleBoolKeyWord(TypeSpecSimpleBoolKeyWord *p);
+  void visitTypeSpecSimpleCharKeyWord(TypeSpecSimpleCharKeyWord *p);
+  void visitTypeSpecSimpleIntKeyWord(TypeSpecSimpleIntKeyWord *p);
+  void visitTypeSpecSimpleDoubleKeyWord(TypeSpecSimpleDoubleKeyWord *p);
+  void visitTypeSpecSimpleLongDoubleKeyWord(TypeSpecSimpleLongDoubleKeyWord *p);
+  void visitLogicPTreeAnnot(LogicPTreeAnnot *p); /* abstract class */
+  void visitAnAnnotation(AnAnnotation *p);
+  void visitAnnotation(Annotation *p); /* abstract class */
+  void visitLoopAnnotation(LoopAnnotation *p);
+  void visitLoopAnnotStack(LoopAnnotStack *p); /* abstract class */
+  void visitLoopAnnotStackInvariant(LoopAnnotStackInvariant *p);
+  void visitLoopAnnotStackEffects(LoopAnnotStackEffects *p);
+  void visitLoopAnnotStackVariant(LoopAnnotStackVariant *p);
+  void visitLoopAnnotOpt(LoopAnnotOpt *p); /* abstract class */
+  void visitNoLoopAnnot(NoLoopAnnot *p);
+  void visitSomeLoopAnnot(SomeLoopAnnot *p);
+  void visitLoopInvariant(LoopInvariant *p); /* abstract class */
+  void visitSimpleLoopInvariant(SimpleLoopInvariant *p);
+  void visitCheckLoopInvariant(CheckLoopInvariant *p);
+  void visitAdmitLoopInvariant(AdmitLoopInvariant *p);
+  void visitLoopVariant(LoopVariant *p); /* abstract class */
+  void visitSimpleLoopVariant(SimpleLoopVariant *p);
+  void visitLoopEffects(LoopEffects *p); /* abstract class */
+  void visitLoopAssigns(LoopAssigns *p);
+  void visitVariant(Variant *p); /* abstract class */
+  void visitForVariant(ForVariant *p);
+  void visitLexprVariant(LexprVariant *p);
 
   void visitInteger(Integer i);
   void visitDouble(Double d);
   void visitChar(Char c);
   void visitString(String s);
   void visitIdent(String s);
-  void visitNAMEDTYPE(String s);
-  void visitCST_WCHAR(String s);
-  void visitCST_WSTRING(String s);
+  void visitSIGNED(String s);
   void visitLBRACE(String s);
   void visitRBRACE(String s);
+  void visitCONST(String s);
+  void visitRESTRICT(String s);
+  void visitVOLATILE(String s);
+  void visitBLOCKATTRIBUTE(String s);
   void visitLBRACKET(String s);
   void visitRBRACKET(String s);
-  void visitRGHOST(String s);
-  void visitASM(String s);
-  void visitALIGNOF(String s);
-  void visitATTRIBUTE(String s);
-  void visitBLOCKATTRIBUTE(String s);
-  void visitCONST(String s);
-  void visitFUNCTION__(String s);
-  void visitMSATTR(String s);
-  void visitRESTRICT(String s);
-  void visitSIGNED(String s);
-  void visitVOLATILE(String s);
-  void visitINLINE(String s);
-  void visitTYPEOF(String s);
-  void visitEXT_GLOBAL(String s);
-  void visitEXT_GLOBAL_BLOCK(String s);
-  void visitEXT_CODE_ANNOT(String s);
-  void visitEXT_CONTRACT(String s);
-  void visitSTRING_LITERAL(String s);
-  void visitWSTRING_CONSTANT(String s);
-  void visitTYPENAME(String s);
  protected:
   char *buf_;
   size_t cur_, buf_size;
@@ -1520,80 +518,170 @@ class ShowAbsyn : public Visitor
   void visitGlobals(Globals *p); /* abstract class */
   void visitNoGlobals(NoGlobals *p);
   void visitSimpleGlobals(SimpleGlobals *p);
-  void visitAGhostGlobals(AGhostGlobals *p);
   void visitSemiColonGlobals(SemiColonGlobals *p);
-  void visitGhostGlobals(GhostGlobals *p); /* abstract class */
-  void visitGhostGlobalsDeclataion(GhostGlobalsDeclataion *p);
-  void visitGhostGlobalsFunctionDef(GhostGlobalsFunctionDef *p);
-  void visitGhostGlobalsRGhost(GhostGlobalsRGhost *p);
   void visitGlobal(Global *p); /* abstract class */
-  void visitGlobalDecl(GlobalDecl *p);
   void visitGlobalsDeclataion(GlobalsDeclataion *p);
   void visitGlobalsFunctionDef(GlobalsFunctionDef *p);
-  void visitExternGlobalDeclataion(ExternGlobalDeclataion *p);
-  void visitExternGlobalPar(ExternGlobalPar *p);
-  void visitAsmGlobal(AsmGlobal *p);
-  void visitPragmaGlobal(PragmaGlobal *p);
-  void visitGlobalOldStyle(GlobalOldStyle *p);
-  void visitGlobalEmptyOldStyle(GlobalEmptyOldStyle *p);
-  void visitIdOrTypenameAsId(IdOrTypenameAsId *p); /* abstract class */
-  void visitIdOrTypenameAsIdIdentifier(IdOrTypenameAsIdIdentifier *p);
-  void visitIdOrTypenameAsIdNamedType(IdOrTypenameAsIdNamedType *p);
+  void visitFunctionDef(FunctionDef *p); /* abstract class */
+  void visitSimpleFunctionDef(SimpleFunctionDef *p);
+  void visitFunctionDefSpec(FunctionDefSpec *p);
+  void visitFunctionDefStart(FunctionDefStart *p); /* abstract class */
+  void visitFunctionDefStartDeclarator(FunctionDefStartDeclarator *p);
+  void visitDeclSpecList(DeclSpecList *p); /* abstract class */
+  void visitDeclSpecTypeSpec(DeclSpecTypeSpec *p);
+  void visitDeclSpecTypeSpecNext(DeclSpecTypeSpecNext *p);
+  void visitDeclSpecListNoNamed(DeclSpecListNoNamed *p); /* abstract class */
+  void visitDeclSpecNoNamedTypeSpec(DeclSpecNoNamedTypeSpec *p);
+  void visitDeclSpecNoNamedTypeSpecNext(DeclSpecNoNamedTypeSpecNext *p);
+  void visitTypeSpec(TypeSpec *p); /* abstract class */
+  void visitTypeSpecVoidKeyWord(TypeSpecVoidKeyWord *p);
+  void visitTypeSpecCharKeyWord(TypeSpecCharKeyWord *p);
+  void visitTypeSpecBoolKeyWord(TypeSpecBoolKeyWord *p);
+  void visitTypeSpecShortKeyWord(TypeSpecShortKeyWord *p);
+  void visitTypeSpecInt32KeyWord(TypeSpecInt32KeyWord *p);
+  void visitTypeSpecIntKeyWord(TypeSpecIntKeyWord *p);
+  void visitTypeSpecSizeTKeyWord(TypeSpecSizeTKeyWord *p);
+  void visitTypeSpecLongKeyWord(TypeSpecLongKeyWord *p);
+  void visitTypeSpecInt64KeyWord(TypeSpecInt64KeyWord *p);
+  void visitTypeSpecFloatKeyWord(TypeSpecFloatKeyWord *p);
+  void visitTypeSpecDoubleKeyWord(TypeSpecDoubleKeyWord *p);
+  void visitTypeSpecSignedKeyWord(TypeSpecSignedKeyWord *p);
+  void visitTypeSpecUnsignedKeyWord(TypeSpecUnsignedKeyWord *p);
+  void visitStructId(StructId *p);
+  void visitStructIdBraces(StructIdBraces *p);
+  void visitStructBraces(StructBraces *p);
+  void visitDeclarator(Declarator *p); /* abstract class */
+  void visitADeclarator(ADeclarator *p);
+  void visitPointerOpt(PointerOpt *p); /* abstract class */
+  void visitNoPointer(NoPointer *p);
+  void visitSomePointer(SomePointer *p);
+  void visitDirectDecl(DirectDecl *p); /* abstract class */
+  void visitDirectDeclIdTypename(DirectDeclIdTypename *p);
+  void visitDirectDeclGhostParam(DirectDeclGhostParam *p);
+  void visitDirectDeclGhostRestParParam(DirectDeclGhostRestParParam *p);
+  void visitAttributesWithAsm(AttributesWithAsm *p); /* abstract class */
+  void visitEmptyAttrWithASM(EmptyAttrWithASM *p);
+  void visitRestParList(RestParList *p); /* abstract class */
+  void visitSimpleParameterDecl(SimpleParameterDecl *p);
+  void visitParameterDecl(ParameterDecl *p); /* abstract class */
+  void visitParameterDeclSpecDeclarator(ParameterDeclSpecDeclarator *p);
+  void visitParameterDeclSpec(ParameterDeclSpec *p);
+  void visitParameterDeclPar(ParameterDeclPar *p);
+  void visitListParameterDecl(ListParameterDecl *p);
+  void iterListParameterDecl(ListParameterDecl::const_iterator i, ListParameterDecl::const_iterator j);
+  void visitGhostParameterOpt(GhostParameterOpt *p); /* abstract class */
+  void visitNoGhostParameter(NoGhostParameter *p);
   void visitIdOrTypename(IdOrTypename *p); /* abstract class */
   void visitIdTypename(IdTypename *p);
-  void visitMaybeComma(MaybeComma *p); /* abstract class */
-  void visitNoComa(NoComa *p);
-  void visitComa(Coma *p);
+  void visitIdOrTypenameAsId(IdOrTypenameAsId *p); /* abstract class */
+  void visitIdOrTypenameAsIdIdentifier(IdOrTypenameAsIdIdentifier *p);
+  void visitDeclaration(Declaration *p); /* abstract class */
+  void visitDeclSpecInitDecl(DeclSpecInitDecl *p);
+  void visitDeclSpec(DeclSpec *p);
+  void visitSpecDeclSpecInitDecl(SpecDeclSpecInitDecl *p);
+  void visitSpecDeclSpec(SpecDeclSpec *p);
+  void visitDeclAndInitDeclAttrList(DeclAndInitDeclAttrList *p); /* abstract class */
+  void visitInitDeclaration(InitDeclaration *p);
+  void visitInitDeclarationWithAttr(InitDeclarationWithAttr *p);
+  void visitInitDeclaratorAttr(InitDeclaratorAttr *p); /* abstract class */
+  void visitInitDeclaratorAttribute(InitDeclaratorAttribute *p);
+  void visitListInitDeclaratorAttr(ListInitDeclaratorAttr *p);
+  void iterListInitDeclaratorAttr(ListInitDeclaratorAttr::const_iterator i, ListInitDeclaratorAttr::const_iterator j);
+  void visitInitDeclarator(InitDeclarator *p); /* abstract class */
+  void visitSimpleInitDeclarator(SimpleInitDeclarator *p);
+  void visitStructDeclList(StructDeclList *p); /* abstract class */
+  void visitEmptyStructDecl(EmptyStructDecl *p);
+  void visitDeclSpecStructDecl(DeclSpecStructDecl *p);
+  void visitSemicolonStructDecl(SemicolonStructDecl *p);
+  void visitSpecFieldDeclStructDecl(SpecFieldDeclStructDecl *p);
+  void visitFieldDecl(FieldDecl *p); /* abstract class */
+  void visitFieldDeclDeclarator(FieldDeclDeclarator *p);
+  void visitListFieldDecl(ListFieldDecl *p);
+  void iterListFieldDecl(ListFieldDecl::const_iterator i, ListFieldDecl::const_iterator j);
+  void visitAttribute(Attribute *p); /* abstract class */
+  void visitAttributeConst(AttributeConst *p);
+  void visitListAttribute(ListAttribute *p);
+  void iterListAttribute(ListAttribute::const_iterator i, ListAttribute::const_iterator j);
+  void visitBlock(Block *p); /* abstract class */
+  void visitABlock(ABlock *p);
+  void visitBlockAttrs(BlockAttrs *p); /* abstract class */
+  void visitNoBlockAttrs(NoBlockAttrs *p);
+  void visitSomeBlockAttrs(SomeBlockAttrs *p);
+  void visitBlockElement(BlockElement *p); /* abstract class */
+  void visitDeclarationElement(DeclarationElement *p);
+  void visitStatementElement(StatementElement *p);
+  void visitListBlockElement(ListBlockElement *p);
+  void iterListBlockElement(ListBlockElement::const_iterator i, ListBlockElement::const_iterator j);
+  void visitStatement(Statement *p); /* abstract class */
+  void visitSemicolonStatement(SemicolonStatement *p);
+  void visitSpecStatement(SpecStatement *p);
+  void visitExprsStatement(ExprsStatement *p);
+  void visitBlockStatement(BlockStatement *p);
+  void visitIfStatement(IfStatement *p);
+  void visitSwitchStatement(SwitchStatement *p);
+  void visitWhileStatement(WhileStatement *p);
+  void visitForStatement(ForStatement *p);
+  void visitCaseStatement(CaseStatement *p);
+  void visitCaseSliceStatement(CaseSliceStatement *p);
+  void visitDefaultStatement(DefaultStatement *p);
+  void visitEmptyReturnStatement(EmptyReturnStatement *p);
+  void visitReturnStatement(ReturnStatement *p);
+  void visitBreakStatement(BreakStatement *p);
+  void visitContinueStatement(ContinueStatement *p);
+  void visitForClause(ForClause *p); /* abstract class */
+  void visitForClauseExpression(ForClauseExpression *p);
+  void visitForClauseDeclaration(ForClauseDeclaration *p);
+  void visitAttr(Attr *p); /* abstract class */
+  void visitAnAttr(AnAttr *p);
+  void visitTernaryCond(TernaryCond *p);
+  void visitOr(Or *p);
+  void visitAnd(And *p);
+  void visitBitOr(BitOr *p);
+  void visitXor(Xor *p);
+  void visitBitAnd(BitAnd *p);
+  void visitEqualEqual(EqualEqual *p);
+  void visitNotEqual(NotEqual *p);
+  void visitLess(Less *p);
+  void visitGreater(Greater *p);
+  void visitLessEqual(LessEqual *p);
+  void visitGreaterEqual(GreaterEqual *p);
+  void visitLeftShiftOp(LeftShiftOp *p);
+  void visitRightShiftOp(RightShiftOp *p);
+  void visitAddOp(AddOp *p);
+  void visitSubOp(SubOp *p);
+  void visitMultOp(MultOp *p);
+  void visitDivOp(DivOp *p);
+  void visitModOp(ModOp *p);
+  void visitPlusUnaryAttr(PlusUnaryAttr *p);
+  void visitMinusUnaryAttr(MinusUnaryAttr *p);
+  void visitMultUnaryAttr(MultUnaryAttr *p);
+  void visitAmpUnaryAttr(AmpUnaryAttr *p);
+  void visitNotUnaryAttr(NotUnaryAttr *p);
+  void visitTildeUnaryAttr(TildeUnaryAttr *p);
+  void visitFuncationCall(FuncationCall *p);
+  void visitProcedureCall(ProcedureCall *p);
+  void visitArrowAttr(ArrowAttr *p);
+  void visitDotAttr(DotAttr *p);
+  void visitArrayAttr(ArrayAttr *p);
+  void visitBasicAttr(BasicAttr *p);
+  void visitListAttr(ListAttr *p);
+  void iterListAttr(ListAttr::const_iterator i, ListAttr::const_iterator j);
+  void visitBasicAttribute(BasicAttribute *p); /* abstract class */
+  void visitBasicAttrConsInt(BasicAttrConsInt *p);
+  void visitBasicAttrConsFloat(BasicAttrConsFloat *p);
+  void visitAnnotatedStmt(AnnotatedStmt *p); /* abstract class */
+  void visitAnnotatedStatement(AnnotatedStatement *p);
+  void visitElsePart(ElsePart *p); /* abstract class */
+  void visitNoElsePart(NoElsePart *p);
+  void visitSimpleElsePart(SimpleElsePart *p);
+  void visitOptExpression(OptExpression *p); /* abstract class */
+  void visitNoExpression(NoExpression *p);
+  void visitSomeExpression(SomeExpression *p);
+  void visitExpression(Expression *p); /* abstract class */
+  void visitAssignmentExpr(AssignmentExpr *p);
+  void visitListExpression(ListExpression *p);
+  void iterListExpression(ListExpression::const_iterator i, ListExpression::const_iterator j);
   void visitAssignExpr(AssignExpr *p); /* abstract class */
-  void visitIdentifierPrimaryExpression(IdentifierPrimaryExpression *p);
-  void visitConstantPrimaryExpressin(ConstantPrimaryExpressin *p);
-  void visitCommaExpressionPrimaryExpressin(CommaExpressionPrimaryExpressin *p);
-  void visitBlockPrimaryExpressin(BlockPrimaryExpressin *p);
-  void visitGenericAssociationPrimaryExpressin(GenericAssociationPrimaryExpressin *p);
-  void visitGenericPrimaryExpressin(GenericPrimaryExpressin *p);
-  void visitBracketsPostfixExpression(BracketsPostfixExpression *p);
-  void visitArgumentsPostfixExpression(ArgumentsPostfixExpression *p);
-  void visitBuiltinVaArgPostfixExpression(BuiltinVaArgPostfixExpression *p);
-  void visitBuiltinTypesCompatPostfixExpression(BuiltinTypesCompatPostfixExpression *p);
-  void visitBuiltinOffsetOfPostfixExpression(BuiltinOffsetOfPostfixExpression *p);
-  void visitDotPostfixExpression(DotPostfixExpression *p);
-  void visitArrowPostfixExpression(ArrowPostfixExpression *p);
-  void visitPlusPlusPostfixExpression(PlusPlusPostfixExpression *p);
-  void visitMinusMinusPostfixExpression(MinusMinusPostfixExpression *p);
-  void visitConstructorPostfixExpression(ConstructorPostfixExpression *p);
-  void visitUnaryExprPlusPlus(UnaryExprPlusPlus *p);
-  void visitUnaryExprMinusMinus(UnaryExprMinusMinus *p);
-  void visitUnaryExprSizeOf(UnaryExprSizeOf *p);
-  void visitUnaryExprSizeOfTypeName(UnaryExprSizeOfTypeName *p);
-  void visitUnaryExprAlignOfUnaryExpr(UnaryExprAlignOfUnaryExpr *p);
-  void visitUnaryExprAlignOfTypeName(UnaryExprAlignOfTypeName *p);
-  void visitUnaryExprPlus(UnaryExprPlus *p);
-  void visitUnaryExprMinus(UnaryExprMinus *p);
-  void visitUnaryExprMult(UnaryExprMult *p);
-  void visitUnaryExprAmp(UnaryExprAmp *p);
-  void visitUnaryExprNot(UnaryExprNot *p);
-  void visitUnaryExprTilde(UnaryExprTilde *p);
-  void visitUnaryExprAddress(UnaryExprAddress *p);
-  void visitCastExpr(CastExpr *p);
-  void visitMulsExpr(MulsExpr *p);
-  void visitDivExpr(DivExpr *p);
-  void visitModExpr(ModExpr *p);
-  void visitPlusExpr(PlusExpr *p);
-  void visitMinusExpr(MinusExpr *p);
-  void visitLeftShiftExpr(LeftShiftExpr *p);
-  void visitRightShiftExpr(RightShiftExpr *p);
-  void visitLessExpr(LessExpr *p);
-  void visitGreaterExpr(GreaterExpr *p);
-  void visitLessEqualExpr(LessEqualExpr *p);
-  void visitGreaterEqualExpr(GreaterEqualExpr *p);
-  void visitEqExpr(EqExpr *p);
-  void visitNotEqExpr(NotEqExpr *p);
-  void visitBitAndExpr(BitAndExpr *p);
-  void visitBitXorExpr(BitXorExpr *p);
-  void visitBitOrExpr(BitOrExpr *p);
-  void visitAndExpr(AndExpr *p);
-  void visitOrExpr(OrExpr *p);
-  void visitTernaryCondExpr(TernaryCondExpr *p);
   void visitEqAssignExpr(EqAssignExpr *p);
   void visitPlusEqAssignExpr(PlusEqAssignExpr *p);
   void visitMinusEqAssignExpr(MinusEqAssignExpr *p);
@@ -1605,474 +693,98 @@ class ShowAbsyn : public Visitor
   void visitXorEqAssignExpr(XorEqAssignExpr *p);
   void visitLeftShiftEqAssignExpr(LeftShiftEqAssignExpr *p);
   void visitRightShiftEqAssignExpr(RightShiftEqAssignExpr *p);
-  void visitOffsetofMemberDesignator(OffsetofMemberDesignator *p); /* abstract class */
-  void visitIdTypenameOffsetMembetDesignator(IdTypenameOffsetMembetDesignator *p);
-  void visitDotOffsetMembetDesignator(DotOffsetMembetDesignator *p);
-  void visitBracketsOffsetMembetDesignator(BracketsOffsetMembetDesignator *p);
-  void visitExpression(Expression *p); /* abstract class */
-  void visitAssignmentExpr(AssignmentExpr *p);
+  void visitTernaryCondExpr(TernaryCondExpr *p);
+  void visitOrExpr(OrExpr *p);
+  void visitAndExpr(AndExpr *p);
+  void visitBitOrExpr(BitOrExpr *p);
+  void visitBitXorExpr(BitXorExpr *p);
+  void visitBitAndExpr(BitAndExpr *p);
+  void visitEqExpr(EqExpr *p);
+  void visitNotEqExpr(NotEqExpr *p);
+  void visitLessExpr(LessExpr *p);
+  void visitGreaterExpr(GreaterExpr *p);
+  void visitLessEqualExpr(LessEqualExpr *p);
+  void visitGreaterEqualExpr(GreaterEqualExpr *p);
+  void visitLeftShiftExpr(LeftShiftExpr *p);
+  void visitRightShiftExpr(RightShiftExpr *p);
+  void visitPlusExpr(PlusExpr *p);
+  void visitMinusExpr(MinusExpr *p);
+  void visitMulsExpr(MulsExpr *p);
+  void visitDivExpr(DivExpr *p);
+  void visitModExpr(ModExpr *p);
+  void visitCastExpr(CastExpr *p);
+  void visitUnaryExprPlusPlus(UnaryExprPlusPlus *p);
+  void visitUnaryExprMinusMinus(UnaryExprMinusMinus *p);
+  void visitUnaryExprPlus(UnaryExprPlus *p);
+  void visitUnaryExprMinus(UnaryExprMinus *p);
+  void visitUnaryExprMult(UnaryExprMult *p);
+  void visitUnaryExprAmp(UnaryExprAmp *p);
+  void visitUnaryExprNot(UnaryExprNot *p);
+  void visitUnaryExprTilde(UnaryExprTilde *p);
+  void visitUnaryExprAddress(UnaryExprAddress *p);
+  void visitBracketsPostfixExpression(BracketsPostfixExpression *p);
+  void visitDotPostfixExpression(DotPostfixExpression *p);
+  void visitArrowPostfixExpression(ArrowPostfixExpression *p);
+  void visitPlusPlusPostfixExpression(PlusPlusPostfixExpression *p);
+  void visitMinusMinusPostfixExpression(MinusMinusPostfixExpression *p);
+  void visitIdentifierPrimaryExpression(IdentifierPrimaryExpression *p);
+  void visitConstantPrimaryExpressin(ConstantPrimaryExpressin *p);
+  void visitCommaExpressionPrimaryExpressin(CommaExpressionPrimaryExpressin *p);
+  void visitBlockPrimaryExpressin(BlockPrimaryExpressin *p);
   void visitConstant(Constant *p); /* abstract class */
   void visitConstantInt(ConstantInt *p);
   void visitConstantFloat(ConstantFloat *p);
   void visitConstantChar(ConstantChar *p);
-  void visitConstantWChar(ConstantWChar *p);
-  void visitConstantString(ConstantString *p);
-  void visitConstantWString(ConstantWString *p);
-  void visitStringConstant(StringConstant *p); /* abstract class */
-  void visitStringConst(StringConst *p);
-  void visitWStringList(WStringList *p); /* abstract class */
-  void visitLastConstantWString(LastConstantWString *p);
-  void visitOneStringWithList(OneStringWithList *p);
-  void visitWStringWithList(WStringWithList *p);
-  void visitLatersConstantWString(LatersConstantWString *p);
-  void visitOneString(OneString *p); /* abstract class */
-  void visitSimpleConstantString(SimpleConstantString *p);
-  void visitFunctionConstantString(FunctionConstantString *p);
-  void visitPrettyFunctionConstantString(PrettyFunctionConstantString *p);
-  void visitListOneString(ListOneString *p);
-  void iterListOneString(ListOneString::const_iterator i, ListOneString::const_iterator j);
-  void visitInitExpression(InitExpression *p); /* abstract class */
-  void visitSimpleExpression(SimpleExpression *p);
-  void visitBracesExpression(BracesExpression *p);
-  void visitInitializerListOpt(InitializerListOpt *p); /* abstract class */
-  void visitEmptyInitializerList(EmptyInitializerList *p);
-  void visitInitializerList(InitializerList *p);
-  void visitInitializerListComma(InitializerListComma *p);
-  void visitInitializerSingle(InitializerSingle *p); /* abstract class */
-  void visitInitializerDesignator(InitializerDesignator *p);
-  void visitInitializerGCCDesignator(InitializerGCCDesignator *p);
-  void visitEmptyInitializer(EmptyInitializer *p);
-  void visitListInitializerSingle(ListInitializerSingle *p);
-  void iterListInitializerSingle(ListInitializerSingle::const_iterator i, ListInitializerSingle::const_iterator j);
-  void visitEqOpt(EqOpt *p); /* abstract class */
-  void visitEquationSign(EquationSign *p);
-  void visitNoEquationSign(NoEquationSign *p);
-  void visitInitDesignators(InitDesignators *p); /* abstract class */
-  void visitDotInitDesignator(DotInitDesignator *p);
-  void visitBracketsInitDesignator(BracketsInitDesignator *p);
-  void visitBracketsSliceInitDesignator(BracketsSliceInitDesignator *p);
-  void visitInitDesignatorsOpt(InitDesignatorsOpt *p); /* abstract class */
-  void visitNoInitDesignator(NoInitDesignator *p);
-  void visitSomeInitDesignator(SomeInitDesignator *p);
-  void visitGhostArgumentsOpt(GhostArgumentsOpt *p); /* abstract class */
-  void visitNoGhostArguments(NoGhostArguments *p);
-  void visitSomeGhostArguments(SomeGhostArguments *p);
-  void visitArguments(Arguments *p); /* abstract class */
-  void visitNoArguments(NoArguments *p);
-  void visitSomeArguments(SomeArguments *p);
-  void visitOptExpression(OptExpression *p); /* abstract class */
-  void visitNoExpression(NoExpression *p);
-  void visitSomeExpression(SomeExpression *p);
-  void visitListExpression(ListExpression *p);
-  void iterListExpression(ListExpression::const_iterator i, ListExpression::const_iterator j);
-  void visitCommaExpressionOpt(CommaExpressionOpt *p); /* abstract class */
-  void visitNoCommaExpression(NoCommaExpression *p);
-  void visitSomeCommaExpression(SomeCommaExpression *p);
-  void visitBlock(Block *p); /* abstract class */
-  void visitABlock(ABlock *p);
-  void visitBlockAttrs(BlockAttrs *p); /* abstract class */
-  void visitNoBlockAttrs(NoBlockAttrs *p);
-  void visitSomeBlockAttrs(SomeBlockAttrs *p);
-  void visitBlockElement(BlockElement *p); /* abstract class */
-  void visitDeclarationElement(DeclarationElement *p);
-  void visitStatementElement(StatementElement *p);
-  void visitPragmaElement(PragmaElement *p);
-  void visitListBlockElement(ListBlockElement *p);
-  void iterListBlockElement(ListBlockElement::const_iterator i, ListBlockElement::const_iterator j);
+  void visitTypeName(TypeName *p); /* abstract class */
+  void visitTypeNameDeclSpecList(TypeNameDeclSpecList *p);
+  void visitACSLProgram(ACSLProgram *p); /* abstract class */
+  void visitAnnotProgram(AnnotProgram *p);
+  void visitAnnotationProgram(AnnotationProgram *p);
   void visitAnnot(Annot *p); /* abstract class */
   void visitCodeAnnot(CodeAnnot *p);
-  void visitGhostAnnot(GhostAnnot *p);
-  void visitListAnnot(ListAnnot *p);
-  void iterListAnnot(ListAnnot::const_iterator i, ListAnnot::const_iterator j);
-  void visitLocalLabel(LocalLabel *p); /* abstract class */
-  void visitLocalLable(LocalLable *p);
-  void visitListLocalLabel(ListLocalLabel *p);
-  void iterListLocalLabel(ListLocalLabel::const_iterator i, ListLocalLabel::const_iterator j);
-  void visitLocalLabelName(LocalLabelName *p); /* abstract class */
-  void visitALocalLabelName(ALocalLabelName *p);
-  void visitListLocalLabelName(ListLocalLabelName *p);
-  void iterListLocalLabelName(ListLocalLabelName::const_iterator i, ListLocalLabelName::const_iterator j);
-  void visitAnnotatedStmt(AnnotatedStmt *p); /* abstract class */
-  void visitAnnotatedStatement(AnnotatedStatement *p);
-  void visitElsePart(ElsePart *p); /* abstract class */
-  void visitNoElsePart(NoElsePart *p);
-  void visitSimpleElsePart(SimpleElsePart *p);
-  void visitSimpleGhostElsePart(SimpleGhostElsePart *p);
-  void visitGhostElsePart(GhostElsePart *p);
-  void visitStatement(Statement *p); /* abstract class */
-  void visitSemicolonStatement(SemicolonStatement *p);
-  void visitSpecStatement(SpecStatement *p);
-  void visitExprsStatement(ExprsStatement *p);
-  void visitBlockStatement(BlockStatement *p);
-  void visitIfStatement(IfStatement *p);
-  void visitSwitchStatement(SwitchStatement *p);
-  void visitWhileStatement(WhileStatement *p);
-  void visitDoWhileStatement(DoWhileStatement *p);
-  void visitForStatement(ForStatement *p);
-  void visitColonStatement(ColonStatement *p);
-  void visitCaseStatement(CaseStatement *p);
-  void visitCaseSliceStatement(CaseSliceStatement *p);
-  void visitDefaultStatement(DefaultStatement *p);
-  void visitEmptyReturnStatement(EmptyReturnStatement *p);
-  void visitReturnStatement(ReturnStatement *p);
-  void visitBreakStatement(BreakStatement *p);
-  void visitContinueStatement(ContinueStatement *p);
-  void visitGotoStatement(GotoStatement *p);
-  void visitStarGotoStatement(StarGotoStatement *p);
-  void visitAsmGotoAsmattrStatement(AsmGotoAsmattrStatement *p);
-  void visitAsmAsmattrStatement(AsmAsmattrStatement *p);
-  void visitAsmStatement(AsmStatement *p);
-  void visitTryExceptStatement(TryExceptStatement *p);
-  void visitTryFinallyStatement(TryFinallyStatement *p);
-  void visitOptLoopAnnotations(OptLoopAnnotations *p); /* abstract class */
-  void visitNoLoopAnnotations(NoLoopAnnotations *p);
-  void visitSomeLoopAnnotations(SomeLoopAnnotations *p);
-  void visitForClause(ForClause *p); /* abstract class */
-  void visitForClauseExpression(ForClauseExpression *p);
-  void visitForClauseDeclaration(ForClauseDeclaration *p);
-  void visitGhostParameterOpt(GhostParameterOpt *p); /* abstract class */
-  void visitNoGhostParameter(NoGhostParameter *p);
-  void visitSomeGhostParameter(SomeGhostParameter *p);
-  void visitDeclaration(Declaration *p); /* abstract class */
-  void visitDeclSpecInitDecl(DeclSpecInitDecl *p);
-  void visitDeclSpec(DeclSpec *p);
-  void visitSpecDeclSpecInitDecl(SpecDeclSpecInitDecl *p);
-  void visitSpecDeclSpec(SpecDeclSpec *p);
-  void visitStaticAssertDecl(StaticAssertDecl *p);
-  void visitStaticAssertDeclStringConst(StaticAssertDeclStringConst *p);
-  void visitGenericAssociation(GenericAssociation *p); /* abstract class */
-  void visitColonGenericAssociation(ColonGenericAssociation *p);
-  void visitDefaultGenericAssociation(DefaultGenericAssociation *p);
-  void visitListGenericAssociation(ListGenericAssociation *p);
-  void iterListGenericAssociation(ListGenericAssociation::const_iterator i, ListGenericAssociation::const_iterator j);
-  void visitDeclAndInitDeclAttrList(DeclAndInitDeclAttrList *p); /* abstract class */
-  void visitInitDeclaration(InitDeclaration *p);
-  void visitInitDeclarationWithAttr(InitDeclarationWithAttr *p);
-  void visitInitDeclaratorAttr(InitDeclaratorAttr *p); /* abstract class */
-  void visitInitDeclaratorAttribute(InitDeclaratorAttribute *p);
-  void visitListInitDeclaratorAttr(ListInitDeclaratorAttr *p);
-  void iterListInitDeclaratorAttr(ListInitDeclaratorAttr::const_iterator i, ListInitDeclaratorAttr::const_iterator j);
-  void visitInitDeclarator(InitDeclarator *p); /* abstract class */
-  void visitSimpleInitDeclarator(SimpleInitDeclarator *p);
-  void visitInitDeclaratorExpression(InitDeclaratorExpression *p);
-  void visitDeclSpecWOType(DeclSpecWOType *p); /* abstract class */
-  void visitDeclSpecWOTypeTypedefKeyWord(DeclSpecWOTypeTypedefKeyWord *p);
-  void visitDeclSpecWOTypeExternKeyWord(DeclSpecWOTypeExternKeyWord *p);
-  void visitDeclSpecWOTypeStaticKeyWord(DeclSpecWOTypeStaticKeyWord *p);
-  void visitDeclSpecWOTypeAutoKeyWord(DeclSpecWOTypeAutoKeyWord *p);
-  void visitDeclSpecWOTypeRegisterKeyWord(DeclSpecWOTypeRegisterKeyWord *p);
-  void visitDeclSpecWOTypeInlineKeyWord(DeclSpecWOTypeInlineKeyWord *p);
-  void visitDeclSpecWOTypeNoReturnKeyWord(DeclSpecWOTypeNoReturnKeyWord *p);
-  void visitDeclSpecWOTypeDeclSpecCVSpec(DeclSpecWOTypeDeclSpecCVSpec *p);
-  void visitDeclSpecWOTypeDeclSpecAtribNOCV(DeclSpecWOTypeDeclSpecAtribNOCV *p);
-  void visitDeclSpecList(DeclSpecList *p); /* abstract class */
-  void visitDeclSpecWoType(DeclSpecWoType *p);
-  void visitDeclSpecWoTypeNext(DeclSpecWoTypeNext *p);
-  void visitDeclSpecTypeSpec(DeclSpecTypeSpec *p);
-  void visitDeclSpecTypeSpecNext(DeclSpecTypeSpecNext *p);
-  void visitDeclSpecListNoNamed(DeclSpecListNoNamed *p); /* abstract class */
-  void visitDeclSpecNoNamedWOType(DeclSpecNoNamedWOType *p);
-  void visitDeclSpecNoNamedWOTypeNext(DeclSpecNoNamedWOTypeNext *p);
-  void visitDeclSpecNoNamedTypeSpec(DeclSpecNoNamedTypeSpec *p);
-  void visitDeclSpecNoNamedTypeSpecNext(DeclSpecNoNamedTypeSpecNext *p);
-  void visitTypeSpec(TypeSpec *p); /* abstract class */
-  void visitTypeSpecVoidKeyWord(TypeSpecVoidKeyWord *p);
-  void visitTypeSpecCharKeyWord(TypeSpecCharKeyWord *p);
-  void visitTypeSpecBoolKeyWord(TypeSpecBoolKeyWord *p);
-  void visitTypeSpecShortKeyWord(TypeSpecShortKeyWord *p);
-  void visitTypeSpecInt32KeyWord(TypeSpecInt32KeyWord *p);
-  void visitTypeSpecIntKeyWord(TypeSpecIntKeyWord *p);
-  void visitTypeSpecLongKeyWord(TypeSpecLongKeyWord *p);
-  void visitTypeSpecInt64KeyWord(TypeSpecInt64KeyWord *p);
-  void visitTypeSpecFloatKeyWord(TypeSpecFloatKeyWord *p);
-  void visitTypeSpecDoubleKeyWord(TypeSpecDoubleKeyWord *p);
-  void visitTypeSpecSignedKeyWord(TypeSpecSignedKeyWord *p);
-  void visitTypeSpecUnsignedKeyWord(TypeSpecUnsignedKeyWord *p);
-  void visitStructId(StructId *p);
-  void visitStructJustAttr(StructJustAttr *p);
-  void visitStructIdBraces(StructIdBraces *p);
-  void visitStructBraces(StructBraces *p);
-  void visitStructJustAttrIdBraces(StructJustAttrIdBraces *p);
-  void visitStructJustAttrBraces(StructJustAttrBraces *p);
-  void visitUnionId(UnionId *p);
-  void visitUnionIdBraces(UnionIdBraces *p);
-  void visitUnionBraces(UnionBraces *p);
-  void visitUnionJustAttrIdBraces(UnionJustAttrIdBraces *p);
-  void visitUnionJustAttrBraces(UnionJustAttrBraces *p);
-  void visitEnumId(EnumId *p);
-  void visitEnumIdBraces(EnumIdBraces *p);
-  void visitEnumBraces(EnumBraces *p);
-  void visitEnumJustAttrIdBraces(EnumJustAttrIdBraces *p);
-  void visitEnumJustAttrBraces(EnumJustAttrBraces *p);
-  void visitNamedTypeTypeSpec(NamedTypeTypeSpec *p);
-  void visitTypeOfExpression(TypeOfExpression *p);
-  void visitTypeOfTypeName(TypeOfTypeName *p);
-  void visitStructDeclList(StructDeclList *p); /* abstract class */
-  void visitEmptyStructDecl(EmptyStructDecl *p);
-  void visitDeclSpecStructDecl(DeclSpecStructDecl *p);
-  void visitSemicolonStructDecl(SemicolonStructDecl *p);
-  void visitSpecFieldDeclStructDecl(SpecFieldDeclStructDecl *p);
-  void visitPragmaStructDecl(PragmaStructDecl *p);
-  void visitStaticAssertStructDecl(StaticAssertStructDecl *p);
-  void visitStaticAssertStructDeclNext(StaticAssertStructDeclNext *p);
-  void visitStaticAssertDeclaration(StaticAssertDeclaration *p); /* abstract class */
-  void visitStaticAssert(StaticAssert *p);
-  void visitStaticAssertStringConst(StaticAssertStringConst *p);
-  void visitFieldDecl(FieldDecl *p); /* abstract class */
-  void visitFieldDeclDeclarator(FieldDeclDeclarator *p);
-  void visitFieldDeclDeclaratorColon(FieldDeclDeclaratorColon *p);
-  void visitFieldDeclColonExpression(FieldDeclColonExpression *p);
-  void visitListFieldDecl(ListFieldDecl *p);
-  void iterListFieldDecl(ListFieldDecl::const_iterator i, ListFieldDecl::const_iterator j);
-  void visitEnumerator(Enumerator *p); /* abstract class */
-  void visitIdentEnumerator(IdentEnumerator *p);
-  void visitIdentAssignExpr(IdentAssignExpr *p);
-  void visitListEnumerator(ListEnumerator *p);
-  void iterListEnumerator(ListEnumerator::const_iterator i, ListEnumerator::const_iterator j);
-  void visitDeclarator(Declarator *p); /* abstract class */
-  void visitADeclarator(ADeclarator *p);
-  void visitListDeclarator(ListDeclarator *p);
-  void iterListDeclarator(ListDeclarator::const_iterator i, ListDeclarator::const_iterator j);
-  void visitAttributesOrStatic(AttributesOrStatic *p); /* abstract class */
-  void visitAttributesCommaExpression(AttributesCommaExpression *p);
-  void visitAttributesStaticExpression(AttributesStaticExpression *p);
-  void visitStaticAttributesExpression(StaticAttributesExpression *p);
-  void visitDirectDecl(DirectDecl *p); /* abstract class */
-  void visitDirectDeclIdTypename(DirectDeclIdTypename *p);
-  void visitDirectDeclAttrDecl(DirectDeclAttrDecl *p);
-  void visitDirectDeclAttrStatic(DirectDeclAttrStatic *p);
-  void visitDirectDeclGhostParam(DirectDeclGhostParam *p);
-  void visitDirectDeclGhostRestParParam(DirectDeclGhostRestParParam *p);
-  void visitRestParList(RestParList *p); /* abstract class */
-  void visitSimpleParameterDecl(SimpleParameterDecl *p);
-  void visitDotDotDotParameterDecl(DotDotDotParameterDecl *p);
-  void visitParameterDecl(ParameterDecl *p); /* abstract class */
-  void visitParameterDeclSpecDeclarator(ParameterDeclSpecDeclarator *p);
-  void visitParameterDeclSpecAbstract(ParameterDeclSpecAbstract *p);
-  void visitParameterDeclSpec(ParameterDeclSpec *p);
-  void visitParameterDeclPar(ParameterDeclPar *p);
-  void visitListParameterDecl(ListParameterDecl *p);
-  void iterListParameterDecl(ListParameterDecl::const_iterator i, ListParameterDecl::const_iterator j);
-  void visitDirectOldProtoDecl(DirectOldProtoDecl *p); /* abstract class */
-  void visitOldDirectProtoDecl(OldDirectProtoDecl *p);
-  void visitListIdent(ListIdent *p);
-  void iterListIdent(ListIdent::const_iterator i, ListIdent::const_iterator j);
-  void visitOldPardefList(OldPardefList *p); /* abstract class */
-  void visitEmptyOldPardefList(EmptyOldPardefList *p);
-  void visitDotDotDotOldPardefList(DotDotDotOldPardefList *p);
-  void visitSimpleOldPardefList(SimpleOldPardefList *p);
-  void visitOldPardef(OldPardef *p); /* abstract class */
-  void visitOldParDef(OldParDef *p);
-  void visitListOldPardef(ListOldPardef *p);
-  void iterListOldPardef(ListOldPardef::const_iterator i, ListOldPardef::const_iterator j);
-  void visitPointerOpt(PointerOpt *p); /* abstract class */
-  void visitNoPointer(NoPointer *p);
-  void visitSomePointer(SomePointer *p);
-  void visitTypeName(TypeName *p); /* abstract class */
-  void visitTypeNameAbstractDecl(TypeNameAbstractDecl *p);
-  void visitTypeNameDeclSpecList(TypeNameDeclSpecList *p);
-  void visitAbstractDecl(AbstractDecl *p); /* abstract class */
-  void visitAbstractDeclAttr(AbstractDeclAttr *p);
-  void visitAbstractDeclPointer(AbstractDeclPointer *p);
-  void visitAbsDirectDecl(AbsDirectDecl *p); /* abstract class */
-  void visitAbsDirectDeclPar(AbsDirectDeclPar *p);
-  void visitAbsDirectDeclBreckets(AbsDirectDeclBreckets *p);
-  void visitAbsDirectDeclRestPar(AbsDirectDeclRestPar *p);
-  void visitAbsDirectDeclNoRestPar(AbsDirectDeclNoRestPar *p);
-  void visitAbsDirectDeclOpt(AbsDirectDeclOpt *p); /* abstract class */
-  void visitSomeAbsDirectDecl(SomeAbsDirectDecl *p);
-  void visitNoAbsDirectDecl(NoAbsDirectDecl *p);
-  void visitFunctionDef(FunctionDef *p); /* abstract class */
-  void visitFunctionDefSpec(FunctionDefSpec *p);
-  void visitSimpleFunctionDef(SimpleFunctionDef *p);
-  void visitFunctionDefStart(FunctionDefStart *p); /* abstract class */
-  void visitFunctionDefStartDeclarator(FunctionDefStartDeclarator *p);
-  void visitFunctionDefStartOldProtoDecl(FunctionDefStartOldProtoDecl *p);
-  void visitFunctionDefStartReatParGhostParameter(FunctionDefStartReatParGhostParameter *p);
-  void visitFunctionDefStartOldPardef(FunctionDefStartOldPardef *p);
-  void visitFunctionDefStartGhostParameter(FunctionDefStartGhostParameter *p);
-  void visitCVSpec(CVSpec *p); /* abstract class */
-  void visitCVSpecConstKeyWord(CVSpecConstKeyWord *p);
-  void visitCVSpecVolatileKeyWord(CVSpecVolatileKeyWord *p);
-  void visitCVSpecRestrictKeyWord(CVSpecRestrictKeyWord *p);
-  void visitCVSpecGhostKeyWord(CVSpecGhostKeyWord *p);
-  void visitCVSpecAttribute_annotKeyWord(CVSpecAttribute_annotKeyWord *p);
-  void visitAttributesWithAsm(AttributesWithAsm *p); /* abstract class */
-  void visitEmptyAttrWithASM(EmptyAttrWithASM *p);
-  void visitListAttrWithASM(ListAttrWithASM *p);
-  void visitListASMAttrWithASM(ListASMAttrWithASM *p);
-  void visitASMAttrWithASM(ASMAttrWithASM *p);
-  void visitAttributeNocv(AttributeNocv *p); /* abstract class */
-  void visitAttributeAttrNocv(AttributeAttrNocv *p);
-  void visitDeclspecAttrNocv(DeclspecAttrNocv *p);
-  void visitMsattrAttrNocv(MsattrAttrNocv *p);
-  void visitThreadAttrNocv(ThreadAttrNocv *p);
-  void visitThreadLocalAttrNocv(ThreadLocalAttrNocv *p);
-  void visitListAttributeNocv(ListAttributeNocv *p);
-  void iterListAttributeNocv(ListAttributeNocv::const_iterator i, ListAttributeNocv::const_iterator j);
-  void visitAttribute(Attribute *p); /* abstract class */
-  void visitAttributeNoCV(AttributeNoCV *p);
-  void visitAttributeConst(AttributeConst *p);
-  void visitAttributeRestrict(AttributeRestrict *p);
-  void visitAttributeVolatile(AttributeVolatile *p);
-  void visitAttributeGhost(AttributeGhost *p);
-  void visitAttributeAttributeAnnot(AttributeAttributeAnnot *p);
-  void visitListAttribute(ListAttribute *p);
-  void iterListAttribute(ListAttribute::const_iterator i, ListAttribute::const_iterator j);
-  void visitJustAttribute(JustAttribute *p); /* abstract class */
-  void visitAttributeJustAttribute(AttributeJustAttribute *p);
-  void visitDeclspecJustAttribute(DeclspecJustAttribute *p);
-  void visitListJustAttribute(ListJustAttribute *p);
-  void iterListJustAttribute(ListJustAttribute::const_iterator i, ListJustAttribute::const_iterator j);
-  void visitPragma(Pragma *p); /* abstract class */
-  void visitSimplePragma(SimplePragma *p);
-  void visitAttrPragma(AttrPragma *p);
-  void visitAttrPragmaSeparated(AttrPragmaSeparated *p);
-  void visitPragmaKeyrod(PragmaKeyrod *p);
-  void visitVarAttr(VarAttr *p); /* abstract class */
-  void visitIdentifierVarAttr(IdentifierVarAttr *p);
-  void visitNamedTypeVarAttr(NamedTypeVarAttr *p);
-  void visitDefaultVarAttr(DefaultVarAttr *p);
-  void visitConstVarAttr(ConstVarAttr *p);
-  void visitVolatileVarAttr(VolatileVarAttr *p);
-  void visitContIntVarAttr(ContIntVarAttr *p);
-  void visitBasicAttribute(BasicAttribute *p); /* abstract class */
-  void visitBasicAttrConsInt(BasicAttrConsInt *p);
-  void visitBasicAttrConsFloat(BasicAttrConsFloat *p);
-  void visitBasicAttrVar(BasicAttrVar *p);
-  void visitListBasicAttribute(ListBasicAttribute *p);
-  void iterListBasicAttribute(ListBasicAttribute::const_iterator i, ListBasicAttribute::const_iterator j);
-  void visitParameterAttrListNE(ParameterAttrListNE *p); /* abstract class */
-  void visitParameterBasicAttr(ParameterBasicAttr *p);
-  void visitParameterBasicAttrStringConst(ParameterBasicAttrStringConst *p);
-  void visitParameterBasicAttrStringConstNext(ParameterBasicAttrStringConstNext *p);
-  void visitParamAttrListNE(ParamAttrListNE *p); /* abstract class */
-  void visitParamAttrList(ParamAttrList *p);
-  void visitParamStringConstant(ParamStringConstant *p);
-  void visitAttr(Attr *p); /* abstract class */
-  void visitBasicAttr(BasicAttr *p);
-  void visitAttrStringConstant(AttrStringConstant *p);
-  void visitFuncationCall(FuncationCall *p);
-  void visitProcedureCall(ProcedureCall *p);
-  void visitBasicPostfix(BasicPostfix *p);
-  void visitArrowAttr(ArrowAttr *p);
-  void visitDotAttr(DotAttr *p);
-  void visitArrayAttr(ArrayAttr *p);
-  void visitSizeOfAttrUnary(SizeOfAttrUnary *p);
-  void visitSizeOfAttrTypeName(SizeOfAttrTypeName *p);
-  void visitAlignOfAttrUnary(AlignOfAttrUnary *p);
-  void visitAlignOfAttrTypeName(AlignOfAttrTypeName *p);
-  void visitPlusUnaryAttr(PlusUnaryAttr *p);
-  void visitMinusUnaryAttr(MinusUnaryAttr *p);
-  void visitMultUnaryAttr(MultUnaryAttr *p);
-  void visitAmpUnaryAttr(AmpUnaryAttr *p);
-  void visitNotUnaryAttr(NotUnaryAttr *p);
-  void visitTildeUnaryAttr(TildeUnaryAttr *p);
-  void visitMultOp(MultOp *p);
-  void visitDivOp(DivOp *p);
-  void visitModOp(ModOp *p);
-  void visitAddOp(AddOp *p);
-  void visitSubOp(SubOp *p);
-  void visitLeftShiftOp(LeftShiftOp *p);
-  void visitRightShiftOp(RightShiftOp *p);
-  void visitLess(Less *p);
-  void visitGreater(Greater *p);
-  void visitLessEqual(LessEqual *p);
-  void visitGreaterEqual(GreaterEqual *p);
-  void visitEqualEqual(EqualEqual *p);
-  void visitNotEqual(NotEqual *p);
-  void visitBitAnd(BitAnd *p);
-  void visitXor(Xor *p);
-  void visitBitOr(BitOr *p);
-  void visitAnd(And *p);
-  void visitOr(Or *p);
-  void visitTernaryCond(TernaryCond *p);
-  void visitAnAttr(AnAttr *p);
-  void visitListAttr(ListAttr *p);
-  void iterListAttr(ListAttr::const_iterator i, ListAttr::const_iterator j);
-  void visitAttrTest(AttrTest *p); /* abstract class */
-  void visitAvoidShiftReduce(AvoidShiftReduce *p);
-  void visitAttrList(AttrList *p); /* abstract class */
-  void visitEmptyAtrList(EmptyAtrList *p);
-  void visitAtrList(AtrList *p);
-  void visitAsmattr(Asmattr *p); /* abstract class */
-  void visitVolatileKeyWrod(VolatileKeyWrod *p);
-  void visitConstKeyWrod(ConstKeyWrod *p);
-  void visitListAsmattr(ListAsmattr *p);
-  void iterListAsmattr(ListAsmattr::const_iterator i, ListAsmattr::const_iterator j);
-  void visitAsmoutputs(Asmoutputs *p); /* abstract class */
-  void visitNoAsmoutputs(NoAsmoutputs *p);
-  void visitSomeAsmoutputs(SomeAsmoutputs *p);
-  void visitAsmoperands(Asmoperands *p); /* abstract class */
-  void visitNoAsmoperands(NoAsmoperands *p);
-  void visitSomeAsmoperands(SomeAsmoperands *p);
-  void visitAsmoperand(Asmoperand *p); /* abstract class */
-  void visitAsmOperand(AsmOperand *p);
-  void visitListAsmoperand(ListAsmoperand *p);
-  void iterListAsmoperand(ListAsmoperand::const_iterator i, ListAsmoperand::const_iterator j);
-  void visitAsminputs(Asminputs *p); /* abstract class */
-  void visitNoAsminputs(NoAsminputs *p);
-  void visitSomeAsminputs(SomeAsminputs *p);
-  void visitAsmopname(Asmopname *p); /* abstract class */
-  void visitNoAsmopname(NoAsmopname *p);
-  void visitSomeAsmopname(SomeAsmopname *p);
-  void visitAsmclobber(Asmclobber *p); /* abstract class */
-  void visitNoAsmclobber(NoAsmclobber *p);
-  void visitColonAsmclobber(ColonAsmclobber *p);
-  void visitColonStringAsmclobber(ColonStringAsmclobber *p);
-  void visitListStringConstant(ListStringConstant *p);
-  void iterListStringConstant(ListStringConstant::const_iterator i, ListStringConstant::const_iterator j);
-  void visitAsmlabels(Asmlabels *p); /* abstract class */
-  void visitNoAsmlabels(NoAsmlabels *p);
-  void visitSomeAsmlabels(SomeAsmlabels *p);
-  void visitLexprEOF(LexprEOF *p); /* abstract class */
-  void visitLexprEof(LexprEof *p);
-  void visitLexprList(LexprList *p); /* abstract class */
-  void visitEmptyLexprList(EmptyLexprList *p);
-  void visitNonEmptyLexprList(NonEmptyLexprList *p);
-  void visitListLexpr(ListLexpr *p);
-  void iterListLexpr(ListLexpr::const_iterator i, ListLexpr::const_iterator j);
-  void visitLexprOption(LexprOption *p); /* abstract class */
-  void visitNoLexprOption(NoLexprOption *p);
-  void visitSomeLexprOption(SomeLexprOption *p);
+  void visitCode_Annot(Code_Annot *p); /* abstract class */
+  void visitCodeAnnotContract(CodeAnnotContract *p);
+  void visitContract(Contract *p); /* abstract class */
+  void visitSimpleContract(SimpleContract *p);
+  void visitRequires(Requires *p); /* abstract class */
+  void visitNoRequires(NoRequires *p);
+  void visitSomeRequires(SomeRequires *p);
+  void visitNERequires(NERequires *p); /* abstract class */
+  void visitSimpleRequires(SimpleRequires *p);
+  void visitCheckRequires(CheckRequires *p);
+  void visitAdimtRequires(AdimtRequires *p);
+  void visitTerminates(Terminates *p); /* abstract class */
+  void visitNoTerminate(NoTerminate *p);
+  void visitDecreases(Decreases *p); /* abstract class */
+  void visitNoDecreases(NoDecreases *p);
+  void visitSimpleClauses(SimpleClauses *p); /* abstract class */
+  void visitNoSimpleClauses(NoSimpleClauses *p);
+  void visitSomeSimpleClauses(SomeSimpleClauses *p);
+  void visitNESimpleClauses(NESimpleClauses *p); /* abstract class */
+  void visitPostCondSimpleClauses(PostCondSimpleClauses *p);
+  void visitAssignsSimpleClauses(AssignsSimpleClauses *p);
+  void visitAssigns(Assigns *p); /* abstract class */
+  void visitAssignZone(AssignZone *p);
+  void visitAssignZoneFromZone(AssignZoneFromZone *p);
+  void visitZones(Zones *p); /* abstract class */
+  void visitSomeZone(SomeZone *p);
+  void visitNoZone(NoZone *p);
+  void visitBehaviors(Behaviors *p); /* abstract class */
+  void visitNoBehaviors(NoBehaviors *p);
+  void visitCompleteOrDisjoint(CompleteOrDisjoint *p); /* abstract class */
+  void visitNoComplDisj(NoComplDisj *p);
   void visitLexpr(Lexpr *p); /* abstract class */
-  void visitNoLexpr(NoLexpr *p);
   void visitImplLexpr(ImplLexpr *p);
   void visitIffLexpr(IffLexpr *p);
   void visitOrLexpr(OrLexpr *p);
   void visitAndLexpr(AndLexpr *p);
   void visitHatHatLexpr(HatHatLexpr *p);
-  void visitAmpLexpr(AmpLexpr *p);
-  void visitPipeLexpr(PipeLexpr *p);
-  void visitHatLexpr(HatLexpr *p);
-  void visitBimpliesLexpr(BimpliesLexpr *p);
-  void visitBiffLexpr(BiffLexpr *p);
-  void visitInLexpr(InLexpr *p);
-  void visitTernaryLexpr(TernaryLexpr *p);
-  void visitIdAssignLexpr(IdAssignLexpr *p);
-  void visitStrAssignLexpr(StrAssignLexpr *p);
   void visitRelationLexpr(RelationLexpr *p);
   void visitBinderLexpr(BinderLexpr *p);
   void visitNotBinderLexpr(NotBinderLexpr *p);
-  void visitStringLexpr(StringLexpr *p);
-  void visitNotLexprInner(NotLexprInner *p);
   void visitTrueLexpr(TrueLexpr *p);
   void visitFalseLexpr(FalseLexpr *p);
-  void visitPointerLexpr(PointerLexpr *p);
   void visitValidLexpr(ValidLexpr *p);
-  void visitValidReadLexpr(ValidReadLexpr *p);
-  void visitValidFuncLexpr(ValidFuncLexpr *p);
-  void visitValidIndxLexpr(ValidIndxLexpr *p);
-  void visitValidRangeLexpr(ValidRangeLexpr *p);
-  void visitInitializedLexpr(InitializedLexpr *p);
-  void visitDanglingLexpr(DanglingLexpr *p);
-  void visitFreshLexpr(FreshLexpr *p);
-  void visitBaseAddrLexpr(BaseAddrLexpr *p);
-  void visitBlockLengthLexpr(BlockLengthLexpr *p);
-  void visitOffsetLexpr(OffsetLexpr *p);
-  void visitAllocableLexpr(AllocableLexpr *p);
-  void visitFreeableLexpr(FreeableLexpr *p);
-  void visitAllocationLexpr(AllocationLexpr *p);
   void visitAutomaticLexpr(AutomaticLexpr *p);
   void visitDynamicLexpr(DynamicLexpr *p);
   void visitRegisterLexpr(RegisterLexpr *p);
@@ -2082,55 +794,17 @@ class ShowAbsyn : public Visitor
   void visitLexprIntConst(LexprIntConst *p);
   void visitLexprFloatConst(LexprFloatConst *p);
   void visitLexprStringConst(LexprStringConst *p);
-  void visitLexprWStringConst(LexprWStringConst *p);
   void visitAddLexpr(AddLexpr *p);
   void visitSubtrLexpr(SubtrLexpr *p);
-  void visitMultLexpr(MultLexpr *p);
-  void visitDivLexpr(DivLexpr *p);
-  void visitModLexpr(ModLexpr *p);
-  void visitStarHatLexpr(StarHatLexpr *p);
-  void visitArrowLexpr(ArrowLexpr *p);
-  void visitDotLexpr(DotLexpr *p);
   void visitSquaresRangeLexpr(SquaresRangeLexpr *p);
   void visitSquaresLexpr(SquaresLexpr *p);
-  void visitSquaresPipeLexpr(SquaresPipeLexpr *p);
-  void visitMinusLexpr(MinusLexpr *p);
-  void visitPlusLexpr(PlusLexpr *p);
-  void visitTildeLexpr(TildeLexpr *p);
-  void visitStarLexpr(StarLexpr *p);
-  void visitAmpUnaryLexpr(AmpUnaryLexpr *p);
-  void visitSizeOfLexpr(SizeOfLexpr *p);
-  void visitSizeOfLogicTypeLexpr(SizeOfLogicTypeLexpr *p);
-  void visitOldLexpr(OldLexpr *p);
-  void visitAtLexpr(AtLexpr *p);
-  void visitResultLexpr(ResultLexpr *p);
   void visitSeparatedLexpr(SeparatedLexpr *p);
   void visitFullIdParenLexpr(FullIdParenLexpr *p);
-  void visitFullIdBraceParenLexpr(FullIdBraceParenLexpr *p);
-  void visitFullIdBracesLexpr(FullIdBracesLexpr *p);
   void visitFullId(FullId *p);
   void visitPiLexpr(PiLexpr *p);
-  void visitLessLessLexpr(LessLessLexpr *p);
-  void visitGreaterGreaterLexpr(GreaterGreaterLexpr *p);
   void visitParenRangeLexpr(ParenRangeLexpr *p);
-  void visitCastLexpr(CastLexpr *p);
-  void visitTypeOfLexpr(TypeOfLexpr *p);
-  void visitTypeLexpr(TypeLexpr *p);
-  void visitTypeWithStarsLexpr(TypeWithStarsLexpr *p);
-  void visitEmptyLexpr(EmptyLexpr *p);
-  void visitUnionLexpr(UnionLexpr *p);
-  void visitInterLexpr(InterLexpr *p);
-  void visitBraceLexprList(BraceLexprList *p);
-  void visitBraceBinderLexpr(BraceBinderLexpr *p);
-  void visitBraceBinderLexprLexpr(BraceBinderLexprLexpr *p);
-  void visitFieldInitLexpr(FieldInitLexpr *p);
-  void visitArrayInitLexpr(ArrayInitLexpr *p);
-  void visitUpdateBraceLexpr(UpdateBraceLexpr *p);
-  void visitLexprBinder(LexprBinder *p); /* abstract class */
-  void visitLetBinderLexpr(LetBinderLexpr *p);
-  void visitForallBinderLexpr(ForallBinderLexpr *p);
-  void visitExistBinderLexpr(ExistBinderLexpr *p);
-  void visitLambdaBinderLexpr(LambdaBinderLexpr *p);
+  void visitListLexpr(ListLexpr *p);
+  void iterListLexpr(ListLexpr::const_iterator i, ListLexpr::const_iterator j);
   void visitLexprRelInner(LexprRelInner *p); /* abstract class */
   void visitRelInnerLexpr(RelInnerLexpr *p);
   void visitListLexprRelInner(ListLexprRelInner *p);
@@ -2142,33 +816,15 @@ class ShowAbsyn : public Visitor
   void visitGreaterEqRel(GreaterEqRel *p);
   void visitEqRel(EqRel *p);
   void visitNotEqRel(NotEqRel *p);
-  void visitEQUALRel(EQUALRel *p);
-  void visitListSTRING_LITERAL(ListSTRING_LITERAL *p);
-  void iterListSTRING_LITERAL(ListSTRING_LITERAL::const_iterator i, ListSTRING_LITERAL::const_iterator j);
-  void visitRange(Range *p); /* abstract class */
-  void visitLexprRange(LexprRange *p);
-  void visitFieldInitElt(FieldInitElt *p); /* abstract class */
-  void visitAFieldInitElt(AFieldInitElt *p);
-  void visitListFieldInitElt(ListFieldInitElt *p);
-  void iterListFieldInitElt(ListFieldInitElt::const_iterator i, ListFieldInitElt::const_iterator j);
-  void visitArrayInitElt(ArrayInitElt *p); /* abstract class */
-  void visitAnArrayInitElt(AnArrayInitElt *p);
-  void visitArrayInitRangeElt(ArrayInitRangeElt *p);
-  void visitListArrayInitElt(ListArrayInitElt *p);
-  void iterListArrayInitElt(ListArrayInitElt::const_iterator i, ListArrayInitElt::const_iterator j);
-  void visitUpdateElt(UpdateElt *p); /* abstract class */
-  void visitAnUpdateElt(AnUpdateElt *p);
-  void visitUpdateEltWith(UpdateEltWith *p);
-  void visitListUpdateElt(ListUpdateElt *p);
-  void iterListUpdateElt(ListUpdateElt::const_iterator i, ListUpdateElt::const_iterator j);
-  void visitPathElt(PathElt *p); /* abstract class */
-  void visitFieldElt(FieldElt *p);
-  void visitArrayElt(ArrayElt *p);
-  void visitArrayRangeElt(ArrayRangeElt *p);
-  void visitListPathElt(ListPathElt *p);
-  void iterListPathElt(ListPathElt::const_iterator i, ListPathElt::const_iterator j);
+  void visitLexprBinder(LexprBinder *p); /* abstract class */
+  void visitForallBinderLexpr(ForallBinderLexpr *p);
+  void visitExistBinderLexpr(ExistBinderLexpr *p);
+  void visitLambdaBinderLexpr(LambdaBinderLexpr *p);
   void visitBinders(Binders *p); /* abstract class */
   void visitTheBinders(TheBinders *p);
+  void visitTypeSpecOFTYPENAME(TypeSpecOFTYPENAME *p); /* abstract class */
+  void visitTypeSpecTYPENAME(TypeSpecTYPENAME *p);
+  void visitTypeSpecSimpleFromTypenameTypeSpec(TypeSpecSimpleFromTypenameTypeSpec *p);
   void visitBindersReentrance(BindersReentrance *p); /* abstract class */
   void visitBindersReentranceDeclSpec(BindersReentranceDeclSpec *p);
   void visitBindersReentranceVarSpec(BindersReentranceVarSpec *p);
@@ -2178,490 +834,14 @@ class ShowAbsyn : public Visitor
   void visitStartVarSpec(StartVarSpec *p);
   void visitSimpleSpec(SimpleSpec *p);
   void visitArraySpec(ArraySpec *p);
-  void visitFunctionSpec(FunctionSpec *p);
-  void visitArraySize(ArraySize *p); /* abstract class */
-  void visitIntConstArraySize(IntConstArraySize *p);
-  void visitSomeArraySize(SomeArraySize *p);
-  void visitNoSize(NoSize *p);
-  void visitAbsParamTypeList(AbsParamTypeList *p); /* abstract class */
-  void visitEmptyTypeParam(EmptyTypeParam *p);
-  void visitSomeTypeParam(SomeTypeParam *p);
-  void visitInfTypeParam(InfTypeParam *p);
-  void visitAbsParam(AbsParam *p); /* abstract class */
-  void visitAbsParamsElement(AbsParamsElement *p);
-  void visitListAbsParam(ListAbsParam *p);
-  void iterListAbsParam(ListAbsParam::const_iterator i, ListAbsParam::const_iterator j);
-  void visitParameter(Parameter *p); /* abstract class */
-  void visitPrartemer(Prartemer *p);
-  void visitListParameter(ListParameter *p);
-  void iterListParameter(ListParameter::const_iterator i, ListParameter::const_iterator j);
-  void visitLogicTypeGenOFTYPENAME(LogicTypeGenOFTYPENAME *p); /* abstract class */
-  void visitLogicTypeGenTypemane(LogicTypeGenTypemane *p);
-  void visitListLogicTypeGenOFTYPENAME(ListLogicTypeGenOFTYPENAME *p);
-  void iterListLogicTypeGenOFTYPENAME(ListLogicTypeGenOFTYPENAME::const_iterator i, ListLogicTypeGenOFTYPENAME::const_iterator j);
-  void visitLogicTypeGenOFIdentifierOrTypename(LogicTypeGenOFIdentifierOrTypename *p); /* abstract class */
-  void visitLogicTypeGenIdOrTypename(LogicTypeGenIdOrTypename *p);
-  void visitListLogicTypeGenOFIdentifierOrTypename(ListLogicTypeGenOFIdentifierOrTypename *p);
-  void iterListLogicTypeGenOFIdentifierOrTypename(ListLogicTypeGenOFIdentifierOrTypename::const_iterator i, ListLogicTypeGenOFIdentifierOrTypename::const_iterator j);
-  void visitCV(CV *p); /* abstract class */
-  void visitConstCV(ConstCV *p);
-  void visitVolatileCV(VolatileCV *p);
-  void visitGhostCV(GhostCV *p);
-  void visitListCV(ListCV *p);
-  void iterListCV(ListCV::const_iterator i, ListCV::const_iterator j);
-  void visitTypeSpecCVOFTYPENAME(TypeSpecCVOFTYPENAME *p); /* abstract class */
-  void visitTypeSpecCVTypename(TypeSpecCVTypename *p);
-  void visitCastLogicType(CastLogicType *p); /* abstract class */
-  void visitAnCastLogicType(AnCastLogicType *p);
-  void visitLogicRtType(LogicRtType *p); /* abstract class */
-  void visitLogicRTType(LogicRTType *p);
-  void visitAbsSpecOption(AbsSpecOption *p); /* abstract class */
-  void visitNoAbsSpec(NoAbsSpec *p);
-  void visitSomeAbsSpec(SomeAbsSpec *p);
-  void visitAbsSpecCVOption(AbsSpecCVOption *p); /* abstract class */
-  void visitNoAbsSpecCV(NoAbsSpecCV *p);
-  void visitSomeAbsSpecCV(SomeAbsSpecCV *p);
-  void visitAbsSpec(AbsSpec *p); /* abstract class */
-  void visitAbsSpecTabs(AbsSpecTabs *p);
-  void visitAbsSpecStars(AbsSpecStars *p);
-  void visitAbsSpecStarsTabs(AbsSpecStarsTabs *p);
-  void visitAbsSpecBitsStars(AbsSpecBitsStars *p);
-  void visitAbsSpecBitsStarsTabs(AbsSpecBitsStarsTabs *p);
-  void visitAbsSpecBitsTabs(AbsSpecBitsTabs *p);
-  void visitAbsSpecBits(AbsSpecBits *p);
-  void visitAbsSpecBitsParams(AbsSpecBitsParams *p);
-  void visitAbsSpecCV(AbsSpecCV *p); /* abstract class */
-  void visitAbsSpecCVTabs(AbsSpecCVTabs *p);
-  void visitAbsSpecCVStars(AbsSpecCVStars *p);
-  void visitAbsSpecCVStarsTabs(AbsSpecCVStarsTabs *p);
-  void visitAbsSpecCVBitsStars(AbsSpecCVBitsStars *p);
-  void visitAbsSpecCVBitsStarsTabs(AbsSpecCVBitsStarsTabs *p);
-  void visitAbsSpecCVBitsTabs(AbsSpecCVBitsTabs *p);
-  void visitAbsSpecCVBits(AbsSpecCVBits *p);
-  void visitAbsSpecBitsCVParams(AbsSpecBitsCVParams *p);
   void visitStars(Stars *p); /* abstract class */
   void visitStar(Star *p);
   void visitListStars(ListStars *p);
   void iterListStars(ListStars::const_iterator i, ListStars::const_iterator j);
-  void visitStarsCV(StarsCV *p); /* abstract class */
-  void visitStarCV(StarCV *p);
-  void visitStarCVWithCV(StarCVWithCV *p);
-  void visitListStarsCV(ListStarsCV *p);
-  void iterListStarsCV(ListStarsCV::const_iterator i, ListStarsCV::const_iterator j);
-  void visitTabs(Tabs *p); /* abstract class */
-  void visitTab(Tab *p);
-  void visitListTabs(ListTabs *p);
-  void iterListTabs(ListTabs::const_iterator i, ListTabs::const_iterator j);
-  void visitTypeSpecSimple(TypeSpecSimple *p); /* abstract class */
-  void visitTypeSpecSimpleIntegerKeyWord(TypeSpecSimpleIntegerKeyWord *p);
-  void visitTypeSpecSimpleRealKeyWord(TypeSpecSimpleRealKeyWord *p);
-  void visitTypeSpecSimpleBooleanKeyWord(TypeSpecSimpleBooleanKeyWord *p);
-  void visitTypeSpecSimpleVoidKeyWord(TypeSpecSimpleVoidKeyWord *p);
-  void visitTypeSpecSimpleBoolKeyWord(TypeSpecSimpleBoolKeyWord *p);
-  void visitTypeSpecSimpleCharKeyWord(TypeSpecSimpleCharKeyWord *p);
-  void visitTypeSpecSimpleSignedCharKeyWord(TypeSpecSimpleSignedCharKeyWord *p);
-  void visitTypeSpecSimpleUnsignedCharKeyWord(TypeSpecSimpleUnsignedCharKeyWord *p);
-  void visitTypeSpecSimpleIntKeyWord(TypeSpecSimpleIntKeyWord *p);
-  void visitTypeSpecSimpleSignedIntKeyWord(TypeSpecSimpleSignedIntKeyWord *p);
-  void visitTypeSpecSimpleUnsignedIntKeyWord(TypeSpecSimpleUnsignedIntKeyWord *p);
-  void visitTypeSpecSimpleUnsignedKeyWord(TypeSpecSimpleUnsignedKeyWord *p);
-  void visitTypeSpecSimpleShortKeyWord(TypeSpecSimpleShortKeyWord *p);
-  void visitTypeSpecSimpleSignedShortKeyWord(TypeSpecSimpleSignedShortKeyWord *p);
-  void visitTypeSpecSimpleUnsignedShortKeyWord(TypeSpecSimpleUnsignedShortKeyWord *p);
-  void visitTypeSpecSimpleShortIntKeyWord(TypeSpecSimpleShortIntKeyWord *p);
-  void visitTypeSpecSimpleSignedShortIntKeyWord(TypeSpecSimpleSignedShortIntKeyWord *p);
-  void visitTypeSpecSimpleUnsignedShortIntKeyWord(TypeSpecSimpleUnsignedShortIntKeyWord *p);
-  void visitTypeSpecSimpleLongKeyWord(TypeSpecSimpleLongKeyWord *p);
-  void visitTypeSpecSimpleSignedLongKeyWord(TypeSpecSimpleSignedLongKeyWord *p);
-  void visitTypeSpecSimpleUnsignedLongKeyWord(TypeSpecSimpleUnsignedLongKeyWord *p);
-  void visitTypeSpecSimpleSignedLongIntKeyWord(TypeSpecSimpleSignedLongIntKeyWord *p);
-  void visitTypeSpecSimpleLongIntKeyWord(TypeSpecSimpleLongIntKeyWord *p);
-  void visitTypeSpecSimpleUnsignedLongIntKeyWord(TypeSpecSimpleUnsignedLongIntKeyWord *p);
-  void visitTypeSpecSimpleLongLongKeyWord(TypeSpecSimpleLongLongKeyWord *p);
-  void visitTypeSpecSimpleSignedLongLongKeyWord(TypeSpecSimpleSignedLongLongKeyWord *p);
-  void visitTypeSpecSimpleUnsignedLongLongKeyWord(TypeSpecSimpleUnsignedLongLongKeyWord *p);
-  void visitTypeSpecSimpleLongLongIntKeyWord(TypeSpecSimpleLongLongIntKeyWord *p);
-  void visitTypeSpecSimpleSignedLongLongIntKeyWord(TypeSpecSimpleSignedLongLongIntKeyWord *p);
-  void visitTypeSpecSimpleUnsignedLongLongIntKeyWord(TypeSpecSimpleUnsignedLongLongIntKeyWord *p);
-  void visitTypeSpecSimpleFloatKeyWord(TypeSpecSimpleFloatKeyWord *p);
-  void visitTypeSpecSimpleDoubleKeyWord(TypeSpecSimpleDoubleKeyWord *p);
-  void visitTypeSpecSimpleLongDoubleKeyWord(TypeSpecSimpleLongDoubleKeyWord *p);
-  void visitTypeSpecSimpleStruct(TypeSpecSimpleStruct *p);
-  void visitTypeSpecSimpleEnum(TypeSpecSimpleEnum *p);
-  void visitTypeSpecSimpleUnion(TypeSpecSimpleUnion *p);
-  void visitTypeSpecOFTYPENAME(TypeSpecOFTYPENAME *p); /* abstract class */
-  void visitTypeSpecTYPENAME(TypeSpecTYPENAME *p);
-  void visitTypeSpecTYPENAMELogicTypeGen(TypeSpecTYPENAMELogicTypeGen *p);
-  void visitTypeSpecSimpleFromTypenameTypeSpec(TypeSpecSimpleFromTypenameTypeSpec *p);
-  void visitTypeSpecOFIdentifierOrTypename(TypeSpecOFIdentifierOrTypename *p); /* abstract class */
-  void visitTypeSpecIdentifierOrTypename(TypeSpecIdentifierOrTypename *p);
-  void visitTypeSpecIdentifierOrTypenameAngles(TypeSpecIdentifierOrTypenameAngles *p);
-  void visitTypeSpecSimpleFromIdTypenameTypeSpec(TypeSpecSimpleFromIdTypenameTypeSpec *p);
-  void visitFullIdentifier(FullIdentifier *p); /* abstract class */
-  void visitSimpleIdentifierFull(SimpleIdentifierFull *p);
-  void visitAdmitKeyWordFullIdent(AdmitKeyWordFullIdent *p);
-  void visitAllocatesKeyWordFullIdent(AllocatesKeyWordFullIdent *p);
-  void visitAssertKeyWordFullIdent(AssertKeyWordFullIdent *p);
-  void visitAssignsKeyWordFullIdent(AssignsKeyWordFullIdent *p);
-  void visitAssumesKeyWordFullIdent(AssumesKeyWordFullIdent *p);
-  void visitAtKeyWordFullIdent(AtKeyWordFullIdent *p);
-  void visitAxiomKeyWordFullIdent(AxiomKeyWordFullIdent *p);
-  void visitAxiomaticKeyWordFullIdent(AxiomaticKeyWordFullIdent *p);
-  void visitBehaviorKeyWordFullIdent(BehaviorKeyWordFullIdent *p);
-  void visitBreaksKeyWordFullIdent(BreaksKeyWordFullIdent *p);
-  void visitCheckKeyWordFullIdent(CheckKeyWordFullIdent *p);
-  void visitCompleteKeyWordFullIdent(CompleteKeyWordFullIdent *p);
-  void visitContinuesKeyWordFullIdent(ContinuesKeyWordFullIdent *p);
-  void visitContractKeyWordFullIdent(ContractKeyWordFullIdent *p);
-  void visitDecreasesKeyWordFullIdent(DecreasesKeyWordFullIdent *p);
-  void visitDisjointKeyWordFullIdent(DisjointKeyWordFullIdent *p);
-  void visitEnsuresKeyWordFullIdent(EnsuresKeyWordFullIdent *p);
-  void visitExitsKeyWordFullIdent(ExitsKeyWordFullIdent *p);
-  void visitFreesKeyWordFullIdent(FreesKeyWordFullIdent *p);
-  void visitFunctionKeyWordFullIdent(FunctionKeyWordFullIdent *p);
-  void visitGlobalKeyWordFullIdent(GlobalKeyWordFullIdent *p);
-  void visitImpactKeyWordFullIdent(ImpactKeyWordFullIdent *p);
-  void visitInductiveKeyWordFullIdent(InductiveKeyWordFullIdent *p);
-  void visitIncludeKeyWordFullIdent(IncludeKeyWordFullIdent *p);
-  void visitInvariantKeyWordFullIdent(InvariantKeyWordFullIdent *p);
-  void visitLemmaKeyWordFullIdent(LemmaKeyWordFullIdent *p);
-  void visitLetKeyWordFullIdent(LetKeyWordFullIdent *p);
-  void visitLogicKeyWordFullIdent(LogicKeyWordFullIdent *p);
-  void visitLoopKeyWordFullIdent(LoopKeyWordFullIdent *p);
-  void visitModelKeyWordFullIdent(ModelKeyWordFullIdent *p);
-  void visitModuleKeyWordFullIdent(ModuleKeyWordFullIdent *p);
-  void visitPragmaKeyWordFullIdent(PragmaKeyWordFullIdent *p);
-  void visitPredicateKeyWordFullIdent(PredicateKeyWordFullIdent *p);
-  void visitRequiresKeyWordFullIdent(RequiresKeyWordFullIdent *p);
-  void visitReturnsKeyWordFullIdent(ReturnsKeyWordFullIdent *p);
-  void visitSliceKeyWordFullIdent(SliceKeyWordFullIdent *p);
-  void visitTerminatesKeyWordFullIdent(TerminatesKeyWordFullIdent *p);
-  void visitTypeKeyWordFullIdent(TypeKeyWordFullIdent *p);
-  void visitVariantKeyWordFullIdent(VariantKeyWordFullIdent *p);
-  void visitIdentExtCodeAnnotFullIdent(IdentExtCodeAnnotFullIdent *p);
-  void visitIdentExtContractFullIdent(IdentExtContractFullIdent *p);
-  void visitIdentExtGlobalFullIdent(IdentExtGlobalFullIdent *p);
-  void visitIdentExtGlobalBlockFullIdent(IdentExtGlobalBlockFullIdent *p);
-  void visitListFullIdentifier(ListFullIdentifier *p);
-  void iterListFullIdentifier(ListFullIdentifier::const_iterator i, ListFullIdentifier::const_iterator j);
-  void visitExtSpec(ExtSpec *p); /* abstract class */
-  void visitExrSpec(ExrSpec *p);
-  void visitExtGlobalClausesOpt(ExtGlobalClausesOpt *p); /* abstract class */
-  void visitEmptyExtGlobalClauses(EmptyExtGlobalClauses *p);
-  void visitSomeExtGlobalClauses(SomeExtGlobalClauses *p);
-  void visitExtGlobalClause(ExtGlobalClause *p); /* abstract class */
-  void visitDeclClause(DeclClause *p);
-  void visitLetClause(LetClause *p);
-  void visitGlobalLetClause(GlobalLetClause *p);
-  void visitIncludeClause(IncludeClause *p);
-  void visitListExtGlobalClause(ListExtGlobalClause *p);
-  void iterListExtGlobalClause(ListExtGlobalClause::const_iterator i, ListExtGlobalClause::const_iterator j);
-  void visitExtGlobalSpecsOpt(ExtGlobalSpecsOpt *p); /* abstract class */
-  void visitEmptyExtGlobalSpecs(EmptyExtGlobalSpecs *p);
-  void visitSomeExtGlobalSpecs(SomeExtGlobalSpecs *p);
-  void visitExtGlobalSpec(ExtGlobalSpec *p); /* abstract class */
-  void visitExtGlobalSpecClauseModule(ExtGlobalSpecClauseModule *p);
-  void visitExtGlobalSpecModule(ExtGlobalSpecModule *p);
-  void visitExtGlobalSpecClause(ExtGlobalSpecClause *p);
-  void visitExtGlobalSpecSimple(ExtGlobalSpecSimple *p);
-  void visitListExtGlobalSpec(ListExtGlobalSpec *p);
-  void iterListExtGlobalSpec(ListExtGlobalSpec::const_iterator i, ListExtGlobalSpec::const_iterator j);
-  void visitExtModuleSpecsOpt(ExtModuleSpecsOpt *p); /* abstract class */
-  void visitEmptyExtModuleSpecs(EmptyExtModuleSpecs *p);
-  void visitListExtModuleSpecs(ListExtModuleSpecs *p);
-  void visitFunSpecExtModuleSpecs(FunSpecExtModuleSpecs *p);
-  void visitFunSpecWithListModules(FunSpecWithListModules *p);
-  void visitExtModuleSpec(ExtModuleSpec *p); /* abstract class */
-  void visitAnExtModuleSpec(AnExtModuleSpec *p);
-  void visitListExtModuleSpec(ListExtModuleSpec *p);
-  void iterListExtModuleSpec(ListExtModuleSpec::const_iterator i, ListExtModuleSpec::const_iterator j);
-  void visitExtFunctionSpecsOpt(ExtFunctionSpecsOpt *p); /* abstract class */
-  void visitNoExtFunctionSpecs(NoExtFunctionSpecs *p);
-  void visitSomeExtFunctionSpecs(SomeExtFunctionSpecs *p);
-  void visitExtFunctionSpecs(ExtFunctionSpecs *p); /* abstract class */
-  void visitAtMarkup(AtMarkup *p);
-  void visitListFunctionSpecs(ListFunctionSpecs *p);
-  void visitListFunctionSpecsAtMarkup(ListFunctionSpecsAtMarkup *p);
-  void visitExtFunctionSpec(ExtFunctionSpec *p); /* abstract class */
-  void visitAnExtGlobalClause(AnExtGlobalClause *p);
-  void visitAnExtFunSpec(AnExtFunSpec *p);
-  void visitListExtFunctionSpec(ListExtFunctionSpec *p);
-  void iterListExtFunctionSpec(ListExtFunctionSpec::const_iterator i, ListExtFunctionSpec::const_iterator j);
-  void visitExtFunSpec(ExtFunSpec *p); /* abstract class */
-  void visitFunSpecAtAnnotation(FunSpecAtAnnotation *p);
-  void visitFunSpecAtContract(FunSpecAtContract *p);
-  void visitFunSpecContract(FunSpecContract *p);
-  void visitListExtFunSpec(ListExtFunSpec *p);
-  void iterListExtFunSpec(ListExtFunSpec::const_iterator i, ListExtFunSpec::const_iterator j);
-  void visitExtIdentifierOpt(ExtIdentifierOpt *p); /* abstract class */
-  void visitExtIdentifierEmpty(ExtIdentifierEmpty *p);
-  void visitExtIdentifierSome(ExtIdentifierSome *p);
-  void visitStmtMarkup(StmtMarkup *p); /* abstract class */
-  void visitMarkupStmtIdentifier(MarkupStmtIdentifier *p);
-  void visitMarkupIntConstant(MarkupIntConstant *p);
-  void visitListStmtMarkup(ListStmtMarkup *p);
-  void iterListStmtMarkup(ListStmtMarkup::const_iterator i, ListStmtMarkup::const_iterator j);
-  void visitSpec(Spec *p); /* abstract class */
-  void visitSpecConstract(SpecConstract *p);
-  void visitContract(Contract *p); /* abstract class */
-  void visitSimpleContract(SimpleContract *p);
-  void visitTerminatesRequiresContract(TerminatesRequiresContract *p);
-  void visitDecreasesRequiresContract(DecreasesRequiresContract *p);
-  void visitDecreasesTerminatesContract(DecreasesTerminatesContract *p);
-  void visitClausesRequiresContract(ClausesRequiresContract *p);
-  void visitClausesTerminatesContract(ClausesTerminatesContract *p);
-  void visitClausesDecreasesContract(ClausesDecreasesContract *p);
-  void visitBehaviorsTerminatesContract(BehaviorsTerminatesContract *p);
-  void visitBehaviorsDecreasesContract(BehaviorsDecreasesContract *p);
-  void visitComplDisjRequiresContract(ComplDisjRequiresContract *p);
-  void visitComplDisjTerminatesContract(ComplDisjTerminatesContract *p);
-  void visitComplDisjDecreasesContract(ComplDisjDecreasesContract *p);
-  void visitComplDisjBehaviorContract(ComplDisjBehaviorContract *p);
-  void visitComplDisjAssignsContract(ComplDisjAssignsContract *p);
-  void visitComplDisjAllocatesContract(ComplDisjAllocatesContract *p);
-  void visitComplDisjFreesContract(ComplDisjFreesContract *p);
-  void visitComplDisjPostCondContract(ComplDisjPostCondContract *p);
-  void visitClauseKW(ClauseKW *p); /* abstract class */
-  void visitAdmitRequiresClause(AdmitRequiresClause *p);
-  void visitAdmitInvariantClause(AdmitInvariantClause *p);
-  void visitAdmitLemmaClause(AdmitLemmaClause *p);
-  void visitAdmitLoopClause(AdmitLoopClause *p);
-  void visitCheckRequiresClause(CheckRequiresClause *p);
-  void visitCheckInvariantClause(CheckInvariantClause *p);
-  void visitCheckLemmaClause(CheckLemmaClause *p);
-  void visitCheckLoopClause(CheckLoopClause *p);
-  void visitRequiresClause(RequiresClause *p);
-  void visitAssumesClause(AssumesClause *p);
-  void visitAssignsClause(AssignsClause *p);
-  void visitPostCondClause(PostCondClause *p);
-  void visitDecreasesClause(DecreasesClause *p);
-  void visitBehaviorClause(BehaviorClause *p);
-  void visitAllocatesClause(AllocatesClause *p);
-  void visitFreesClause(FreesClause *p);
-  void visitCompleteClause(CompleteClause *p);
-  void visitDisjointClause(DisjointClause *p);
-  void visitClauseExtConstract(ClauseExtConstract *p);
-  void visitEmptyClauseKW(EmptyClauseKW *p);
-  void visitRequires(Requires *p); /* abstract class */
-  void visitNoRequires(NoRequires *p);
-  void visitSomeRequires(SomeRequires *p);
-  void visitNERequires(NERequires *p); /* abstract class */
-  void visitSimpleRequires(SimpleRequires *p);
-  void visitCheckRequires(CheckRequires *p);
-  void visitAdimtRequires(AdimtRequires *p);
-  void visitClauseSimpleRequires(ClauseSimpleRequires *p);
-  void visitClauseCheckRequires(ClauseCheckRequires *p);
-  void visitClauseAdimtRequires(ClauseAdimtRequires *p);
-  void visitTerminates(Terminates *p); /* abstract class */
-  void visitNoTerminate(NoTerminate *p);
-  void visitSomeTerminate(SomeTerminate *p);
-  void visitNETerminates(NETerminates *p); /* abstract class */
-  void visitSimpleTerminates(SimpleTerminates *p);
-  void visitClauseTerminates(ClauseTerminates *p);
-  void visitDecreases(Decreases *p); /* abstract class */
-  void visitNoDecreases(NoDecreases *p);
-  void visitSomeDecreases(SomeDecreases *p);
-  void visitNEDecreases(NEDecreases *p); /* abstract class */
-  void visitSimpleDecreases(SimpleDecreases *p);
-  void visitClauseDecreases(ClauseDecreases *p);
-  void visitVariant(Variant *p); /* abstract class */
-  void visitForVariant(ForVariant *p);
-  void visitLexprVariant(LexprVariant *p);
-  void visitSimpleClauses(SimpleClauses *p); /* abstract class */
-  void visitNoSimpleClauses(NoSimpleClauses *p);
-  void visitSomeSimpleClauses(SomeSimpleClauses *p);
-  void visitAllocation(Allocation *p); /* abstract class */
-  void visitAllocatesZones(AllocatesZones *p);
-  void visitFreesZones(FreesZones *p);
-  void visitNESimpleClauses(NESimpleClauses *p); /* abstract class */
-  void visitPostCondSimpleClauses(PostCondSimpleClauses *p);
-  void visitAllocationSimpleClauses(AllocationSimpleClauses *p);
-  void visitAssignsSimpleClauses(AssignsSimpleClauses *p);
-  void visitExtContractSimpleClauses(ExtContractSimpleClauses *p);
-  void visitClausesPostCondSimpleClauses(ClausesPostCondSimpleClauses *p);
-  void visitClausesAllocationSimpleClauses(ClausesAllocationSimpleClauses *p);
-  void visitClausesAssignsSimpleClauses(ClausesAssignsSimpleClauses *p);
-  void visitExtConClausestractSimpleClauses(ExtConClausestractSimpleClauses *p);
-  void visitExtensionContent(ExtensionContent *p); /* abstract class */
-  void visitNoExtensionContent(NoExtensionContent *p);
-  void visitSomeExtensionContent(SomeExtensionContent *p);
-  void visitBehaviors(Behaviors *p); /* abstract class */
-  void visitNoBehaviors(NoBehaviors *p);
-  void visitSomeBehaviors(SomeBehaviors *p);
-  void visitNEBehaviors(NEBehaviors *p); /* abstract class */
-  void visitTheBehaviors(TheBehaviors *p);
-  void visitBehaviorBody(BehaviorBody *p); /* abstract class */
-  void visitSimpleClausesBehavior(SimpleClausesBehavior *p);
-  void visitRequiresAssumes(RequiresAssumes *p);
-  void visitSimpleClausesAssumes(SimpleClausesAssumes *p);
-  void visitRequiresRequires(RequiresRequires *p);
-  void visitAssumes(Assumes *p); /* abstract class */
-  void visitNoAssumes(NoAssumes *p);
-  void visitSimpleAssumes(SimpleAssumes *p);
-  void visitClauseAssumes(ClauseAssumes *p);
-  void visitCompleteOrDisjoint(CompleteOrDisjoint *p); /* abstract class */
-  void visitNoComplDisj(NoComplDisj *p);
-  void visitSomeComplDisj(SomeComplDisj *p);
-  void visitNECompleteOrDisjoint(NECompleteOrDisjoint *p); /* abstract class */
-  void visitCompleteBehavior(CompleteBehavior *p);
-  void visitDisjointBehavior(DisjointBehavior *p);
-  void visitCompleteBehaviorClause(CompleteBehaviorClause *p);
-  void visitDisjointBehaviorClause(DisjointBehaviorClause *p);
-  void visitAssigns(Assigns *p); /* abstract class */
-  void visitAssignZone(AssignZone *p);
-  void visitAssignZoneFromZone(AssignZoneFromZone *p);
-  void visitZones(Zones *p); /* abstract class */
-  void visitSomeZone(SomeZone *p);
-  void visitNoZone(NoZone *p);
-  void visitLogicPTreeAnnot(LogicPTreeAnnot *p); /* abstract class */
-  void visitAnAnnotation(AnAnnotation *p);
-  void visitACSLSpec(ACSLSpec *p);
-  void visitAnnotDecl(AnnotDecl *p);
-  void visitListLogicPTreeAnnot(ListLogicPTreeAnnot *p);
-  void iterListLogicPTreeAnnot(ListLogicPTreeAnnot::const_iterator i, ListLogicPTreeAnnot::const_iterator j);
-  void visitAnnotation(Annotation *p); /* abstract class */
-  void visitLoopAnnotation(LoopAnnotation *p);
-  void visitForContractAnnotation(ForContractAnnotation *p);
-  void visitForCodeAnnotation(ForCodeAnnotation *p);
-  void visitSimplePragmaOrCodeAnnotation(SimplePragmaOrCodeAnnotation *p);
-  void visitPragmaOrCodeAnnotationBeg(PragmaOrCodeAnnotationBeg *p);
-  void visitIdentifierAnnotation(IdentifierAnnotation *p);
-  void visitGhostAnnotation(GhostAnnotation *p);
-  void visitLoopAnnotStack(LoopAnnotStack *p); /* abstract class */
-  void visitLoopAnnotStackInvariant(LoopAnnotStackInvariant *p);
-  void visitLoopAnnotStackEffects(LoopAnnotStackEffects *p);
-  void visitLoopAnnotStackAllocation(LoopAnnotStackAllocation *p);
-  void visitLoopAnnotStackForBehavior(LoopAnnotStackForBehavior *p);
-  void visitLoopAnnotStackVariant(LoopAnnotStackVariant *p);
-  void visitLoopAnnotStackPragma(LoopAnnotStackPragma *p);
-  void visitLoopAnnotStackGrammarExten(LoopAnnotStackGrammarExten *p);
-  void visitLoopAnnotOpt(LoopAnnotOpt *p); /* abstract class */
-  void visitNoLoopAnnot(NoLoopAnnot *p);
-  void visitSomeLoopAnnot(SomeLoopAnnot *p);
-  void visitLoopEffects(LoopEffects *p); /* abstract class */
-  void visitLoopAssigns(LoopAssigns *p);
-  void visitLoopAllocation(LoopAllocation *p); /* abstract class */
-  void visitSimpleLoopAllocation(SimpleLoopAllocation *p);
-  void visitLoopInvariant(LoopInvariant *p); /* abstract class */
-  void visitSimpleLoopInvariant(SimpleLoopInvariant *p);
-  void visitCheckLoopInvariant(CheckLoopInvariant *p);
-  void visitAdmitLoopInvariant(AdmitLoopInvariant *p);
-  void visitLoopVariant(LoopVariant *p); /* abstract class */
-  void visitSimpleLoopVariant(SimpleLoopVariant *p);
-  void visitLoopGrammarExtension(LoopGrammarExtension *p); /* abstract class */
-  void visitSimpleLoopGrammarExten(SimpleLoopGrammarExten *p);
-  void visitLoopPragma(LoopPragma *p); /* abstract class */
-  void visitPragmaLoop(PragmaLoop *p);
-  void visitBegPragmaOrCodeAnnotation(BegPragmaOrCodeAnnotation *p); /* abstract class */
-  void visitImpactKeyWordBegPragma(ImpactKeyWordBegPragma *p);
-  void visitSliceKeyWordBegPragma(SliceKeyWordBegPragma *p);
-  void visitForKeyWordBegPragma(ForKeyWordBegPragma *p);
-  void visitAssertKeyWordBegPragma(AssertKeyWordBegPragma *p);
-  void visitCheckKeyWordBegPragma(CheckKeyWordBegPragma *p);
-  void visitAdmitKeyWordBegPragma(AdmitKeyWordBegPragma *p);
-  void visitInvariantKeyWordBegPragma(InvariantKeyWordBegPragma *p);
-  void visitCheckInvariantKeyWordBegPragma(CheckInvariantKeyWordBegPragma *p);
-  void visitAdmitInvariantKeyWordBegPragma(AdmitInvariantKeyWordBegPragma *p);
-  void visitCheckLoopKeyWordBegPragma(CheckLoopKeyWordBegPragma *p);
-  void visitAdmitLoopKeyWordBegPragma(AdmitLoopKeyWordBegPragma *p);
-  void visitBegExtCodeAnnotBegPragma(BegExtCodeAnnotBegPragma *p);
-  void visitPragmaOrCodeAnnotation(PragmaOrCodeAnnotation *p); /* abstract class */
-  void visitPragmaCodeAnnotSlice(PragmaCodeAnnotSlice *p);
-  void visitPragmaCodeAnnotImpact(PragmaCodeAnnotImpact *p);
-  void visitPragmaOrCodeAnnotCodeAnnot(PragmaOrCodeAnnotCodeAnnot *p);
-  void visitCodeAnnotation(CodeAnnotation *p); /* abstract class */
-  void visitAssertCodeAnnot(AssertCodeAnnot *p);
-  void visitCheckCodeAnnot(CheckCodeAnnot *p);
-  void visitAdmitCodeAnnot(AdmitCodeAnnot *p);
-  void visitInvariantCodeAnnot(InvariantCodeAnnot *p);
-  void visitCheckInvariantCodeAnnot(CheckInvariantCodeAnnot *p);
-  void visitAdmitInvariantCodeAnnot(AdmitInvariantCodeAnnot *p);
-  void visitExtCodeAnnotCodeAnnot(ExtCodeAnnotCodeAnnot *p);
-  void visitSlicePragma(SlicePragma *p); /* abstract class */
-  void visitPragmaSliceLexpr(PragmaSliceLexpr *p);
-  void visitPragmaSlice(PragmaSlice *p);
-  void visitImpactPragma(ImpactPragma *p); /* abstract class */
-  void visitImpactPragmaLexpr(ImpactPragmaLexpr *p);
-  void visitAnImpactPragma(AnImpactPragma *p);
-  void visitDecl(Decl *p); /* abstract class */
-  void visitDeclGlobalInvariant(DeclGlobalInvariant *p);
-  void visitDeclVolatile(DeclVolatile *p);
-  void visitDeclTypeAnnot(DeclTypeAnnot *p);
-  void visitDeclModelAnnot(DeclModelAnnot *p);
-  void visitDeclLogicDef(DeclLogicDef *p);
-  void visitDeclExt(DeclExt *p);
-  void visitDeclDeprecatedLogic(DeclDeprecatedLogic *p);
-  void visitListDecl(ListDecl *p);
-  void iterListDecl(ListDecl::const_iterator i, ListDecl::const_iterator j);
-  void visitExtDecl(ExtDecl *p); /* abstract class */
-  void visitExtGlobalDecl(ExtGlobalDecl *p);
-  void visitExtGlobalBlockDecl(ExtGlobalBlockDecl *p);
-  void visitListExtDecl(ListExtDecl *p);
-  void iterListExtDecl(ListExtDecl::const_iterator i, ListExtDecl::const_iterator j);
-  void visitVolatileOpt(VolatileOpt *p); /* abstract class */
-  void visitReadVolotile(ReadVolotile *p);
-  void visitWriteVolotile(WriteVolotile *p);
-  void visitListVolatileOpt(ListVolatileOpt *p);
-  void iterListVolatileOpt(ListVolatileOpt::const_iterator i, ListVolatileOpt::const_iterator j);
-  void visitTypeAnnot(TypeAnnot *p); /* abstract class */
-  void visitTypeInvariant(TypeInvariant *p);
-  void visitOptSemicolon(OptSemicolon *p); /* abstract class */
-  void visitNoSemicolon(NoSemicolon *p);
-  void visitSemicolon(Semicolon *p);
-  void visitModelAnnot(ModelAnnot *p); /* abstract class */
-  void visitModelAnnotation(ModelAnnotation *p);
-  void visitPolyIdType(PolyIdType *p); /* abstract class */
-  void visitSimplePolyIdType(SimplePolyIdType *p);
-  void visitPolyIdTypeAngles(PolyIdTypeAngles *p);
-  void visitPolyId(PolyId *p); /* abstract class */
-  void visitPolyTypeId(PolyTypeId *p);
-  void visitPolyIdTypeSquares(PolyIdTypeSquares *p);
-  void visitPolyIdTypeSquaresAngles(PolyIdTypeSquaresAngles *p);
-  void visitOptParameters(OptParameters *p); /* abstract class */
-  void visitNoParameters(NoParameters *p);
-  void visitSomeParameters(SomeParameters *p);
-  void visitParameters(Parameters *p); /* abstract class */
-  void visitAParameters(AParameters *p);
-  void visitLogicDef(LogicDef *p); /* abstract class */
-  void visitSimpleLogicDef(SimpleLogicDef *p);
-  void visitPredicateLogicDef(PredicateLogicDef *p);
-  void visitInductiveLogicDef(InductiveLogicDef *p);
-  void visitLemmaLogicDef(LemmaLogicDef *p);
-  void visitCheckLemmaLogicDef(CheckLemmaLogicDef *p);
-  void visitAdmitLemmaLogicDef(AdmitLemmaLogicDef *p);
-  void visitAxiomaticLogicDef(AxiomaticLogicDef *p);
-  void visitTypeLogicDef(TypeLogicDef *p);
-  void visitDeprecatedLogicDecl(DeprecatedLogicDecl *p); /* abstract class */
-  void visitSimpleDeprecatedLogicDecl(SimpleDeprecatedLogicDecl *p);
-  void visitPredicateDeprecatedLogicDecl(PredicateDeprecatedLogicDecl *p);
-  void visitTypeDeprecatedLogicDecl(TypeDeprecatedLogicDecl *p);
-  void visitAxiomDeprecatedLogicDecl(AxiomDeprecatedLogicDecl *p);
-  void visitLogicDecl(LogicDecl *p); /* abstract class */
-  void visitLocidDeclDef(LocidDeclDef *p);
-  void visitSimpleLogicDecl(SimpleLogicDecl *p);
-  void visitPredicateLogicDecl(PredicateLogicDecl *p);
-  void visitTypeLogicDecl(TypeLogicDecl *p);
-  void visitAxiomLogicDecl(AxiomLogicDecl *p);
-  void visitListLogicDecl(ListLogicDecl *p);
-  void iterListLogicDecl(ListLogicDecl::const_iterator i, ListLogicDecl::const_iterator j);
-  void visitReadsClause(ReadsClause *p); /* abstract class */
-  void visitNoReadsClause(NoReadsClause *p);
-  void visitSomeReadsClause(SomeReadsClause *p);
-  void visitTypedef(Typedef *p); /* abstract class */
-  void visitListOfDatacons(ListOfDatacons *p);
-  void visitTypedefLogicTypeGen(TypedefLogicTypeGen *p);
-  void visitDataconsWithSeparator(DataconsWithSeparator *p); /* abstract class */
-  void visitSimpleDataCons(SimpleDataCons *p);
-  void visitDataConsWithPipe(DataConsWithPipe *p);
-  void visitListDataconsWithSeparator(ListDataconsWithSeparator *p);
-  void iterListDataconsWithSeparator(ListDataconsWithSeparator::const_iterator i, ListDataconsWithSeparator::const_iterator j);
-  void visitDatacons(Datacons *p); /* abstract class */
-  void visitDataConsFullIdentifier(DataConsFullIdentifier *p);
-  void visitDataConsFullIdentifierFun(DataConsFullIdentifierFun *p);
-  void visitIndcase(Indcase *p); /* abstract class */
-  void visitIndCase(IndCase *p);
-  void visitListIndcase(ListIndcase *p);
-  void iterListIndcase(ListIndcase::const_iterator i, ListIndcase::const_iterator j);
+  void visitArraySize(ArraySize *p); /* abstract class */
+  void visitIntConstArraySize(IntConstArraySize *p);
+  void visitSomeArraySize(SomeArraySize *p);
+  void visitNoSize(NoSize *p);
   void visitOptLabel(OptLabel *p); /* abstract class */
   void visitOptLabelOne(OptLabelOne *p);
   void visitOptLabelTwo(OptLabelTwo *p);
@@ -2672,60 +852,13 @@ class ShowAbsyn : public Visitor
   void visitLableName(LableName *p);
   void visitListLabelName(ListLabelName *p);
   void iterListLabelName(ListLabelName::const_iterator i, ListLabelName::const_iterator j);
-  void visitBehaviorNameList(BehaviorNameList *p); /* abstract class */
-  void visitEmptyBehaviorNameList(EmptyBehaviorNameList *p);
-  void visitAnBehaviorNameList(AnBehaviorNameList *p);
-  void visitBehaviorName(BehaviorName *p); /* abstract class */
-  void visitBehaviorNameAnyIdent(BehaviorNameAnyIdent *p);
-  void visitListBehaviorName(ListBehaviorName *p);
-  void iterListBehaviorName(ListBehaviorName::const_iterator i, ListBehaviorName::const_iterator j);
+  void visitRange(Range *p); /* abstract class */
+  void visitLexprRange(LexprRange *p);
+  void visitLexprOption(LexprOption *p); /* abstract class */
+  void visitNoLexprOption(NoLexprOption *p);
+  void visitSomeLexprOption(SomeLexprOption *p);
   void visitAnyIdentifier(AnyIdentifier *p); /* abstract class */
   void visitSimpleIdentifierAny(SimpleIdentifierAny *p);
-  void visitACSLTypenameIdentifier(ACSLTypenameIdentifier *p);
-  void visitTypenameIdentifier(TypenameIdentifier *p);
-  void visitKeywordIdentifier(KeywordIdentifier *p);
-  void visitIdentifierOrTypename(IdentifierOrTypename *p); /* abstract class */
-  void visitTypename(Typename *p);
-  void visitAnFullIdentifier(AnFullIdentifier *p);
-  void visitIdentifierOrTypenameFull(IdentifierOrTypenameFull *p); /* abstract class */
-  void visitACSLTypename(ACSLTypename *p);
-  void visitAnIdentifierOrTypename(AnIdentifierOrTypename *p);
-  void visitListIdentifierOrTypenameFull(ListIdentifierOrTypenameFull *p);
-  void iterListIdentifierOrTypenameFull(ListIdentifierOrTypenameFull::const_iterator i, ListIdentifierOrTypenameFull::const_iterator j);
-  void visitIdentifier(Identifier *p); /* abstract class */
-  void visitIdentifierIdent(IdentifierIdent *p);
-  void visitBehaviorsKeyWord(BehaviorsKeyWord *p);
-  void visitLabelKeyWord(LabelKeyWord *p);
-  void visitReadsKeyWord(ReadsKeyWord *p);
-  void visitWritesKeyWord(WritesKeyWord *p);
-  void visitBoundedVar(BoundedVar *p); /* abstract class */
-  void visitBoendedVarFullIdentifier(BoendedVarFullIdentifier *p);
-  void visitBoendedVarACSLTypename(BoendedVarACSLTypename *p);
-  void visitBoendedVarTypename(BoendedVarTypename *p);
-  void visitCKeyword(CKeyword *p); /* abstract class */
-  void visitCharKeyWord(CharKeyWord *p);
-  void visitBooleanKeyWord(BooleanKeyWord *p);
-  void visitBoolKeyWord(BoolKeyWord *p);
-  void visitConstKeyWord(ConstKeyWord *p);
-  void visitDoubleKeyWord(DoubleKeyWord *p);
-  void visitEnumKeyWord(EnumKeyWord *p);
-  void visitElseKeyWord(ElseKeyWord *p);
-  void visitFloatKeyWord(FloatKeyWord *p);
-  void visitIfKeyWord(IfKeyWord *p);
-  void visitIntKeyWord(IntKeyWord *p);
-  void visitLongKeyWord(LongKeyWord *p);
-  void visitShortKeyWord(ShortKeyWord *p);
-  void visitSignedKeyWord(SignedKeyWord *p);
-  void visitSizeofKeyWord(SizeofKeyWord *p);
-  void visitStaticKeyWord(StaticKeyWord *p);
-  void visitStructKeyWord(StructKeyWord *p);
-  void visitUnionKeyWord(UnionKeyWord *p);
-  void visitUnsignedKeyWord(UnsignedKeyWord *p);
-  void visitVoidKeyWord(VoidKeyWord *p);
-  void visitACSLCKeyword(ACSLCKeyword *p); /* abstract class */
-  void visitCaseKeyWord(CaseKeyWord *p);
-  void visitForKeyWord(ForKeyWord *p);
-  void visitVolatileKeyWord(VolatileKeyWord *p);
   void visitPostCond(PostCond *p); /* abstract class */
   void visitEnsuresKeyWord(EnsuresKeyWord *p);
   void visitExitsKeyWord(ExitsKeyWord *p);
@@ -2742,196 +875,59 @@ class ShowAbsyn : public Visitor
   void visitAdmitBreaksKeyWord(AdmitBreaksKeyWord *p);
   void visitAdmitContinuesKeyWord(AdmitContinuesKeyWord *p);
   void visitAdmitReturnsKeyWord(AdmitReturnsKeyWord *p);
-  void visitIsACSLSpec(IsACSLSpec *p); /* abstract class */
-  void visitPostCondKeyWord(PostCondKeyWord *p);
-  void visitExtContractKeyWord(ExtContractKeyWord *p);
-  void visitAssignsKeyWord(AssignsKeyWord *p);
-  void visitAllocatesKeyWord(AllocatesKeyWord *p);
-  void visitFreesKeyWord(FreesKeyWord *p);
-  void visitBehaviorKeyWord(BehaviorKeyWord *p);
-  void visitRequiresKeyWord(RequiresKeyWord *p);
-  void visitCheckRequiresKeyWord(CheckRequiresKeyWord *p);
-  void visitAdmitRequiresKeyWord(AdmitRequiresKeyWord *p);
-  void visitTerminatesKeyWord(TerminatesKeyWord *p);
-  void visitCompleteKeyWord(CompleteKeyWord *p);
-  void visitDecreasesKeyWord(DecreasesKeyWord *p);
-  void visitDisjointKeyWord(DisjointKeyWord *p);
-  void visitIsACSLDeclOrCodeAnnot(IsACSLDeclOrCodeAnnot *p); /* abstract class */
-  void visitExtCodeAnnotKeyWord(ExtCodeAnnotKeyWord *p);
-  void visitExtGlobalKeyWord(ExtGlobalKeyWord *p);
-  void visitExtGlobalBlockKeyWord(ExtGlobalBlockKeyWord *p);
-  void visitAssumesKeyWord(AssumesKeyWord *p);
-  void visitAssertKeyWord(AssertKeyWord *p);
-  void visitCheckKeyWord(CheckKeyWord *p);
-  void visitAdmitKeyWord(AdmitKeyWord *p);
-  void visitGlobalKeyWord(GlobalKeyWord *p);
-  void visitImpactKeyWord(ImpactKeyWord *p);
-  void visitInductiveKeyWord(InductiveKeyWord *p);
-  void visitInvariantKeyWord(InvariantKeyWord *p);
-  void visitAdmitInvariantKeyWord(AdmitInvariantKeyWord *p);
-  void visitCheckInvariantKeyWord(CheckInvariantKeyWord *p);
-  void visitLemmaKeyWord(LemmaKeyWord *p);
-  void visitAdmitLemmaKeyWord(AdmitLemmaKeyWord *p);
-  void visitCheckLemmaKeyWord(CheckLemmaKeyWord *p);
-  void visitLoopKeyWord(LoopKeyWord *p);
-  void visitAdmitLoopKeyWord(AdmitLoopKeyWord *p);
-  void visitCheckLoopKeyWord(CheckLoopKeyWord *p);
-  void visitPragmaKeyWord(PragmaKeyWord *p);
-  void visitPredicateKeyWord(PredicateKeyWord *p);
-  void visitSliceKeyWord(SliceKeyWord *p);
-  void visitTypeKeyWord(TypeKeyWord *p);
-  void visitModelKeyWord(ModelKeyWord *p);
-  void visitAxiomKeyWord(AxiomKeyWord *p);
-  void visitVariantKeyWord(VariantKeyWord *p);
-  void visitAxiomaticKeyWord(AxiomaticKeyWord *p);
-  void visitIsACSLTypename(IsACSLTypename *p); /* abstract class */
-  void visitIntegerKeyWord(IntegerKeyWord *p);
-  void visitRealKeyWord(RealKeyWord *p);
-  void visitIsExtSpec(IsExtSpec *p); /* abstract class */
-  void visitContractKeyWord(ContractKeyWord *p);
-  void visitFunctionKeyWord(FunctionKeyWord *p);
-  void visitModuleKeyWord(ModuleKeyWord *p);
-  void visitIncludeKeyWord(IncludeKeyWord *p);
-  void visitAtKeyWord(AtKeyWord *p);
-  void visitLetKeyWord(LetKeyWord *p);
-  void visitKeyword(Keyword *p); /* abstract class */
-  void visitLogicKeyWord(LogicKeyWord *p);
-  void visitCKeyWord(CKeyWord *p);
-  void visitACSLCKeyWord(ACSLCKeyWord *p);
-  void visitExtSpecKeyWord(ExtSpecKeyWord *p);
-  void visitACSLSpecKeyWord(ACSLSpecKeyWord *p);
-  void visitACSLDeclCodeAnnotKeyWord(ACSLDeclCodeAnnotKeyWord *p);
-  void visitBSKeyword(BSKeyword *p); /* abstract class */
-  void visitSlashAllocableKeyWord(SlashAllocableKeyWord *p);
-  void visitSlashAllocationKeyWord(SlashAllocationKeyWord *p);
-  void visitSlashAutomaticKeyWord(SlashAutomaticKeyWord *p);
-  void visitSlashAtKeyWord(SlashAtKeyWord *p);
-  void visitSlashBaseAddrKeyWord(SlashBaseAddrKeyWord *p);
-  void visitSlashBlockLengthKeyWord(SlashBlockLengthKeyWord *p);
-  void visitSlashGhostKeyWord(SlashGhostKeyWord *p);
-  void visitSlashDynamicKeyWord(SlashDynamicKeyWord *p);
-  void visitSlashEmptyKeyWord(SlashEmptyKeyWord *p);
-  void visitSlashFalseKeyWord(SlashFalseKeyWord *p);
-  void visitSlashForallKeyWord(SlashForallKeyWord *p);
-  void visitSlashFreeableKeyWord(SlashFreeableKeyWord *p);
-  void visitSlashFreshKeyWord(SlashFreshKeyWord *p);
-  void visitSlashFromKeyWord(SlashFromKeyWord *p);
-  void visitSlashInterKeyWord(SlashInterKeyWord *p);
-  void visitSlashLambdaKeyWord(SlashLambdaKeyWord *p);
-  void visitSlashLetKeyWord(SlashLetKeyWord *p);
-  void visitSlashNothingKeyWord(SlashNothingKeyWord *p);
-  void visitSlashNullKeyWord(SlashNullKeyWord *p);
-  void visitSlashOldKeyWord(SlashOldKeyWord *p);
-  void visitSlashOffsetKeyWord(SlashOffsetKeyWord *p);
-  void visitSlashRegisterKeyWord(SlashRegisterKeyWord *p);
-  void visitSlashResultKeyWord(SlashResultKeyWord *p);
-  void visitSlashSeparatedKeyWord(SlashSeparatedKeyWord *p);
-  void visitSlashTrueKeyWord(SlashTrueKeyWord *p);
-  void visitSlashTypeKeyWord(SlashTypeKeyWord *p);
-  void visitSlashTypeofKeyWord(SlashTypeofKeyWord *p);
-  void visitSlashUnionKeyWord(SlashUnionKeyWord *p);
-  void visitSlashUnallocatedKeyWord(SlashUnallocatedKeyWord *p);
-  void visitSlashObjectPointerKeyWord(SlashObjectPointerKeyWord *p);
-  void visitSlashValidKeyWord(SlashValidKeyWord *p);
-  void visitSlashValidIndexKeyWord(SlashValidIndexKeyWord *p);
-  void visitSlashValidRangeKeyWord(SlashValidRangeKeyWord *p);
-  void visitSlashValidReadKeyWord(SlashValidReadKeyWord *p);
-  void visitSlashValidFunctionKeyWord(SlashValidFunctionKeyWord *p);
-  void visitSlashInitializedKeyWord(SlashInitializedKeyWord *p);
-  void visitSlashDanglingKeyWord(SlashDanglingKeyWord *p);
-  void visitSlashWithKeyWord(SlashWithKeyWord *p);
-  void visitWildcard(Wildcard *p); /* abstract class */
-  void visitWildCardAnyIdent(WildCardAnyIdent *p);
-  void visitWildCardBSKeyWord(WildCardBSKeyWord *p);
-  void visitWildcardAmp(WildcardAmp *p);
-  void visitWildcardAnd(WildcardAnd *p);
-  void visitWildcardArrow(WildcardArrow *p);
-  void visitWildcardBIff(WildcardBIff *p);
-  void visitWildcardBImplicate(WildcardBImplicate *p);
-  void visitWildcardColon(WildcardColon *p);
-  void visitWildcardColonColon(WildcardColonColon *p);
-  void visitWildcardComma(WildcardComma *p);
-  void visitWildcardIntConstant(WildcardIntConstant *p);
-  void visitWildcardFloatConstant(WildcardFloatConstant *p);
-  void visitWildcardStringConstant(WildcardStringConstant *p);
-  void visitWildcardWstringConstant(WildcardWstringConstant *p);
-  void visitWildcardDollar(WildcardDollar *p);
-  void visitWildcardDot(WildcardDot *p);
-  void visitWildcardDotDot(WildcardDotDot *p);
-  void visitWildcardDotDotDot(WildcardDotDotDot *p);
-  void visitWildcardEQ(WildcardEQ *p);
-  void visitWildcardEqual(WildcardEqual *p);
-  void visitWildcardExistsKeyWord(WildcardExistsKeyWord *p);
-  void visitWildcardGreaterEq(WildcardGreaterEq *p);
-  void visitWildcardGhostKeyWord(WildcardGhostKeyWord *p);
-  void visitWildcardGreater(WildcardGreater *p);
-  void visitWildcardGreaterGreater(WildcardGreaterGreater *p);
-  void visitWildcardHat(WildcardHat *p);
-  void visitWildcardHatHat(WildcardHatHat *p);
-  void visitWildcardIff(WildcardIff *p);
-  void visitWildcardImplicate(WildcardImplicate *p);
-  void visitWildcardLeftBrace(WildcardLeftBrace *p);
-  void visitWildcardLessEq(WildcardLessEq *p);
-  void visitWildcardLeftPar(WildcardLeftPar *p);
-  void visitWildcardLeftSquare(WildcardLeftSquare *p);
-  void visitWildcardLeftSquarePipe(WildcardLeftSquarePipe *p);
-  void visitWildcardLess(WildcardLess *p);
-  void visitWildcardLessLess(WildcardLessLess *p);
-  void visitWildcardMinus(WildcardMinus *p);
-  void visitWildcardNotEq(WildcardNotEq *p);
-  void visitWildcardNot(WildcardNot *p);
-  void visitWildcardPipePipe(WildcardPipePipe *p);
-  void visitWildcardMod(WildcardMod *p);
-  void visitWildcardPiKeyWord(WildcardPiKeyWord *p);
-  void visitWildcardPipe(WildcardPipe *p);
-  void visitWildcardPlus(WildcardPlus *p);
-  void visitWildcardQuestion(WildcardQuestion *p);
-  void visitWildcardRightBrace(WildcardRightBrace *p);
-  void visitWildcardRightPar(WildcardRightPar *p);
-  void visitWildcardRightSquare(WildcardRightSquare *p);
-  void visitWildcardRightSquarePipe(WildcardRightSquarePipe *p);
-  void visitWildcardSemiColon(WildcardSemiColon *p);
-  void visitWildcardDivide(WildcardDivide *p);
-  void visitWildcardMult(WildcardMult *p);
-  void visitWildcardMultHat(WildcardMultHat *p);
-  void visitWildcardStringLiteral(WildcardStringLiteral *p);
-  void visitWildcardTildeKeyWord(WildcardTildeKeyWord *p);
-  void visitWildcardInKeyWord(WildcardInKeyWord *p);
-  void visitListWildcard(ListWildcard *p);
-  void iterListWildcard(ListWildcard::const_iterator i, ListWildcard::const_iterator j);
+  void visitFullIdentifier(FullIdentifier *p); /* abstract class */
+  void visitSimpleIdentifierFull(SimpleIdentifierFull *p);
+  void visitListFullIdentifier(ListFullIdentifier *p);
+  void iterListFullIdentifier(ListFullIdentifier::const_iterator i, ListFullIdentifier::const_iterator j);
+  void visitIdentifier(Identifier *p); /* abstract class */
+  void visitIdentifierIdent(IdentifierIdent *p);
+  void visitTypeSpecSimple(TypeSpecSimple *p); /* abstract class */
+  void visitTypeSpecSimpleIntegerKeyWord(TypeSpecSimpleIntegerKeyWord *p);
+  void visitTypeSpecSimpleRealKeyWord(TypeSpecSimpleRealKeyWord *p);
+  void visitTypeSpecSimpleBooleanKeyWord(TypeSpecSimpleBooleanKeyWord *p);
+  void visitTypeSpecSimpleVoidKeyWord(TypeSpecSimpleVoidKeyWord *p);
+  void visitTypeSpecSimpleBoolKeyWord(TypeSpecSimpleBoolKeyWord *p);
+  void visitTypeSpecSimpleCharKeyWord(TypeSpecSimpleCharKeyWord *p);
+  void visitTypeSpecSimpleIntKeyWord(TypeSpecSimpleIntKeyWord *p);
+  void visitTypeSpecSimpleDoubleKeyWord(TypeSpecSimpleDoubleKeyWord *p);
+  void visitTypeSpecSimpleLongDoubleKeyWord(TypeSpecSimpleLongDoubleKeyWord *p);
+  void visitLogicPTreeAnnot(LogicPTreeAnnot *p); /* abstract class */
+  void visitAnAnnotation(AnAnnotation *p);
+  void visitAnnotation(Annotation *p); /* abstract class */
+  void visitLoopAnnotation(LoopAnnotation *p);
+  void visitLoopAnnotStack(LoopAnnotStack *p); /* abstract class */
+  void visitLoopAnnotStackInvariant(LoopAnnotStackInvariant *p);
+  void visitLoopAnnotStackEffects(LoopAnnotStackEffects *p);
+  void visitLoopAnnotStackVariant(LoopAnnotStackVariant *p);
+  void visitLoopAnnotOpt(LoopAnnotOpt *p); /* abstract class */
+  void visitNoLoopAnnot(NoLoopAnnot *p);
+  void visitSomeLoopAnnot(SomeLoopAnnot *p);
+  void visitLoopInvariant(LoopInvariant *p); /* abstract class */
+  void visitSimpleLoopInvariant(SimpleLoopInvariant *p);
+  void visitCheckLoopInvariant(CheckLoopInvariant *p);
+  void visitAdmitLoopInvariant(AdmitLoopInvariant *p);
+  void visitLoopVariant(LoopVariant *p); /* abstract class */
+  void visitSimpleLoopVariant(SimpleLoopVariant *p);
+  void visitLoopEffects(LoopEffects *p); /* abstract class */
+  void visitLoopAssigns(LoopAssigns *p);
+  void visitVariant(Variant *p); /* abstract class */
+  void visitForVariant(ForVariant *p);
+  void visitLexprVariant(LexprVariant *p);
 
   void visitInteger(Integer i);
   void visitDouble(Double d);
   void visitChar(Char c);
   void visitString(String s);
   void visitIdent(String s);
-  void visitNAMEDTYPE(String s);
-  void visitCST_WCHAR(String s);
-  void visitCST_WSTRING(String s);
+  void visitSIGNED(String s);
   void visitLBRACE(String s);
   void visitRBRACE(String s);
+  void visitCONST(String s);
+  void visitRESTRICT(String s);
+  void visitVOLATILE(String s);
+  void visitBLOCKATTRIBUTE(String s);
   void visitLBRACKET(String s);
   void visitRBRACKET(String s);
-  void visitRGHOST(String s);
-  void visitASM(String s);
-  void visitALIGNOF(String s);
-  void visitATTRIBUTE(String s);
-  void visitBLOCKATTRIBUTE(String s);
-  void visitCONST(String s);
-  void visitFUNCTION__(String s);
-  void visitMSATTR(String s);
-  void visitRESTRICT(String s);
-  void visitSIGNED(String s);
-  void visitVOLATILE(String s);
-  void visitINLINE(String s);
-  void visitTYPEOF(String s);
-  void visitEXT_GLOBAL(String s);
-  void visitEXT_GLOBAL_BLOCK(String s);
-  void visitEXT_CODE_ANNOT(String s);
-  void visitEXT_CONTRACT(String s);
-  void visitSTRING_LITERAL(String s);
-  void visitWSTRING_CONSTANT(String s);
-  void visitTYPENAME(String s);
  protected:
   char *buf_;
   size_t cur_, buf_size;

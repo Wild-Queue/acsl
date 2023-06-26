@@ -4,7 +4,7 @@
 
 Located in the file full_bnfc_parser.cf
 
-This grammar contains all the rules found in the frama-c repository
+This grammar combines the rules of partial grammars. Presented as an alternative way of parsing.
 
 To build:
 
@@ -28,7 +28,7 @@ make clean-full-bnfc
 
 Located in the file partial_bnfc_parser.cf
 
-This grammar contains a subset of the full grammar files. This grammar is designed to get rid of conflicts that prevent proper parsing of the files.
+This grammar contains a subset of the full grammar files. This grammar contains rules for parsing code written in C.
 
 To build:
 
@@ -48,6 +48,28 @@ To clean:
 make clean-partial-bnfc
 ```
 
+
+Located in the file partial_bnfc_acsl_parser.cf
+
+This grammar contains a subset of the full grammar files. This grammar contains rules for parsing code written in ACSL.
+
+To build:
+
+```sh
+make build-partial-bnfc-acsl
+```
+
+To run:
+
+```sh
+make run-partial-bnfc-acsl
+```
+
+To clean:
+
+```sh
+make clean-partial-bnfc-acsl
+```
 
 ## References
 
