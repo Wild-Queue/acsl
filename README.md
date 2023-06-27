@@ -71,6 +71,57 @@ To clean:
 make clean-partial-bnfc-acsl
 ```
 
+## C language features
+
+### Main constructs
+
+- [x] Function Declaration
+- [x] Variable Declaration
+- [x] Function Definition
+- [ ] External Declarations
+- [ ] Assembly Embeddings
+- [ ] Abstract Declaration
+- [ ] Static Declaration
+
+### Statement constructions
+
+- [x] if statement
+- [x] switch statement
+- [x] do while statement
+- [x] while statement
+- [x] case statement
+- [x] default statement
+- [x] return statement
+- [x] goto statement
+- [x] break/continue/return statement
+- [ ] Assembly embeddings
+- [x] try-except-finally statement
+
+### Other
+- [ ] Builtin expression
+- [ ] Generic expression
+- [ ] WString Literals expression
+- [ ] Threads
+- [ ] Pragmas
+- [ ] Struct/Union/Enum pre-attributes
+
+## Verification features
+
+- [x] Requires
+- [x] Assigns
+- [x] Ensures
+- [x] Loop invariant
+- [x] Loop Assigns
+- [x] Loop Variant
+- [x] Loop Allocation
+- [ ] Loop Pragma
+- [ ] Ext code annot ?
+- [ ] Ext contract ?
+- [ ] Ext global ?
+- [ ] Ext global block ?
+
+
+
 ## References
 
 The grammar is inspired by the frama-c open repository available at:  
