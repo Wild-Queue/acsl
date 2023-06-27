@@ -18,12 +18,16 @@ void Skeleton::visitFunctionDef(FunctionDef *t) {} //abstract class
 void Skeleton::visitFunctionDefStart(FunctionDefStart *t) {} //abstract class
 void Skeleton::visitDeclSpecList(DeclSpecList *t) {} //abstract class
 void Skeleton::visitDeclSpecListNoNamed(DeclSpecListNoNamed *t) {} //abstract class
+void Skeleton::visitDeclSpecWOType(DeclSpecWOType *t) {} //abstract class
 void Skeleton::visitTypeSpec(TypeSpec *t) {} //abstract class
+void Skeleton::visitEnumerator(Enumerator *t) {} //abstract class
+void Skeleton::visitMaybeComma(MaybeComma *t) {} //abstract class
 void Skeleton::visitDeclarator(Declarator *t) {} //abstract class
 void Skeleton::visitPointerOpt(PointerOpt *t) {} //abstract class
 void Skeleton::visitDirectDecl(DirectDecl *t) {} //abstract class
 void Skeleton::visitAttributesWithAsm(AttributesWithAsm *t) {} //abstract class
 void Skeleton::visitRestParList(RestParList *t) {} //abstract class
+void Skeleton::visitMaybeThreeDots(MaybeThreeDots *t) {} //abstract class
 void Skeleton::visitParameterDecl(ParameterDecl *t) {} //abstract class
 void Skeleton::visitGhostParameterOpt(GhostParameterOpt *t) {} //abstract class
 void Skeleton::visitIdOrTypename(IdOrTypename *t) {} //abstract class
@@ -32,6 +36,7 @@ void Skeleton::visitDeclaration(Declaration *t) {} //abstract class
 void Skeleton::visitDeclAndInitDeclAttrList(DeclAndInitDeclAttrList *t) {} //abstract class
 void Skeleton::visitInitDeclaratorAttr(InitDeclaratorAttr *t) {} //abstract class
 void Skeleton::visitInitDeclarator(InitDeclarator *t) {} //abstract class
+void Skeleton::visitInitExpression(InitExpression *t) {} //abstract class
 void Skeleton::visitStructDeclList(StructDeclList *t) {} //abstract class
 void Skeleton::visitFieldDecl(FieldDecl *t) {} //abstract class
 void Skeleton::visitAttribute(Attribute *t) {} //abstract class
@@ -39,6 +44,7 @@ void Skeleton::visitBlock(Block *t) {} //abstract class
 void Skeleton::visitBlockAttrs(BlockAttrs *t) {} //abstract class
 void Skeleton::visitBlockElement(BlockElement *t) {} //abstract class
 void Skeleton::visitStatement(Statement *t) {} //abstract class
+void Skeleton::visitOptLoopAnnotations(OptLoopAnnotations *t) {} //abstract class
 void Skeleton::visitForClause(ForClause *t) {} //abstract class
 void Skeleton::visitAttr(Attr *t) {} //abstract class
 void Skeleton::visitBasicAttribute(BasicAttribute *t) {} //abstract class
@@ -116,6 +122,23 @@ void Skeleton::visitFunctionDefStartDeclarator(FunctionDefStartDeclarator *funct
 
 }
 
+void Skeleton::visitDeclSpecWoType(DeclSpecWoType *decl_spec_wo_type)
+{
+  /* Code For DeclSpecWoType Goes Here */
+
+  if (decl_spec_wo_type->declspecwotype_) decl_spec_wo_type->declspecwotype_->accept(this);
+
+}
+
+void Skeleton::visitDeclSpecWoTypeNext(DeclSpecWoTypeNext *decl_spec_wo_type_next)
+{
+  /* Code For DeclSpecWoTypeNext Goes Here */
+
+  if (decl_spec_wo_type_next->declspecwotype_) decl_spec_wo_type_next->declspecwotype_->accept(this);
+  if (decl_spec_wo_type_next->declspeclist_) decl_spec_wo_type_next->declspeclist_->accept(this);
+
+}
+
 void Skeleton::visitDeclSpecTypeSpec(DeclSpecTypeSpec *decl_spec_type_spec)
 {
   /* Code For DeclSpecTypeSpec Goes Here */
@@ -133,6 +156,23 @@ void Skeleton::visitDeclSpecTypeSpecNext(DeclSpecTypeSpecNext *decl_spec_type_sp
 
 }
 
+void Skeleton::visitDeclSpecNoNamedWOType(DeclSpecNoNamedWOType *decl_spec_no_named_wo_type)
+{
+  /* Code For DeclSpecNoNamedWOType Goes Here */
+
+  if (decl_spec_no_named_wo_type->declspecwotype_) decl_spec_no_named_wo_type->declspecwotype_->accept(this);
+
+}
+
+void Skeleton::visitDeclSpecNoNamedWOTypeNext(DeclSpecNoNamedWOTypeNext *decl_spec_no_named_wo_type_next)
+{
+  /* Code For DeclSpecNoNamedWOTypeNext Goes Here */
+
+  if (decl_spec_no_named_wo_type_next->declspecwotype_) decl_spec_no_named_wo_type_next->declspecwotype_->accept(this);
+  if (decl_spec_no_named_wo_type_next->declspeclistnonamed_) decl_spec_no_named_wo_type_next->declspeclistnonamed_->accept(this);
+
+}
+
 void Skeleton::visitDeclSpecNoNamedTypeSpec(DeclSpecNoNamedTypeSpec *decl_spec_no_named_type_spec)
 {
   /* Code For DeclSpecNoNamedTypeSpec Goes Here */
@@ -147,6 +187,41 @@ void Skeleton::visitDeclSpecNoNamedTypeSpecNext(DeclSpecNoNamedTypeSpecNext *dec
 
   if (decl_spec_no_named_type_spec_next->typespec_) decl_spec_no_named_type_spec_next->typespec_->accept(this);
   if (decl_spec_no_named_type_spec_next->declspeclistnonamed_) decl_spec_no_named_type_spec_next->declspeclistnonamed_->accept(this);
+
+}
+
+void Skeleton::visitDeclSpecWOTypeTypedefKeyWord(DeclSpecWOTypeTypedefKeyWord *decl_spec_wo_type_typedef_key_word)
+{
+  /* Code For DeclSpecWOTypeTypedefKeyWord Goes Here */
+
+
+}
+
+void Skeleton::visitDeclSpecWOTypeExternKeyWord(DeclSpecWOTypeExternKeyWord *decl_spec_wo_type_extern_key_word)
+{
+  /* Code For DeclSpecWOTypeExternKeyWord Goes Here */
+
+
+}
+
+void Skeleton::visitDeclSpecWOTypeStaticKeyWord(DeclSpecWOTypeStaticKeyWord *decl_spec_wo_type_static_key_word)
+{
+  /* Code For DeclSpecWOTypeStaticKeyWord Goes Here */
+
+
+}
+
+void Skeleton::visitDeclSpecWOTypeAutoKeyWord(DeclSpecWOTypeAutoKeyWord *decl_spec_wo_type_auto_key_word)
+{
+  /* Code For DeclSpecWOTypeAutoKeyWord Goes Here */
+
+
+}
+
+void Skeleton::visitDeclSpecWOTypeRegisterKeyWord(DeclSpecWOTypeRegisterKeyWord *decl_spec_wo_type_register_key_word)
+{
+  /* Code For DeclSpecWOTypeRegisterKeyWord Goes Here */
+
 
 }
 
@@ -255,9 +330,7 @@ void Skeleton::visitStructIdBraces(StructIdBraces *struct_id_braces)
   /* Code For StructIdBraces Goes Here */
 
   if (struct_id_braces->idortypename_) struct_id_braces->idortypename_->accept(this);
-  visitLBRACE(struct_id_braces->lbrace_);
   if (struct_id_braces->structdecllist_) struct_id_braces->structdecllist_->accept(this);
-  visitRBRACE(struct_id_braces->rbrace_);
 
 }
 
@@ -265,9 +338,90 @@ void Skeleton::visitStructBraces(StructBraces *struct_braces)
 {
   /* Code For StructBraces Goes Here */
 
-  visitLBRACE(struct_braces->lbrace_);
   if (struct_braces->structdecllist_) struct_braces->structdecllist_->accept(this);
-  visitRBRACE(struct_braces->rbrace_);
+
+}
+
+void Skeleton::visitUnionId(UnionId *union_id)
+{
+  /* Code For UnionId Goes Here */
+
+  if (union_id->idortypename_) union_id->idortypename_->accept(this);
+
+}
+
+void Skeleton::visitUnionIdBraces(UnionIdBraces *union_id_braces)
+{
+  /* Code For UnionIdBraces Goes Here */
+
+  if (union_id_braces->idortypename_) union_id_braces->idortypename_->accept(this);
+  if (union_id_braces->structdecllist_) union_id_braces->structdecllist_->accept(this);
+
+}
+
+void Skeleton::visitUnionBraces(UnionBraces *union_braces)
+{
+  /* Code For UnionBraces Goes Here */
+
+  if (union_braces->structdecllist_) union_braces->structdecllist_->accept(this);
+
+}
+
+void Skeleton::visitEnumId(EnumId *enum_id)
+{
+  /* Code For EnumId Goes Here */
+
+  if (enum_id->idortypename_) enum_id->idortypename_->accept(this);
+
+}
+
+void Skeleton::visitEnumIdBraces(EnumIdBraces *enum_id_braces)
+{
+  /* Code For EnumIdBraces Goes Here */
+
+  if (enum_id_braces->idortypename_) enum_id_braces->idortypename_->accept(this);
+  if (enum_id_braces->listenumerator_) enum_id_braces->listenumerator_->accept(this);
+  if (enum_id_braces->maybecomma_) enum_id_braces->maybecomma_->accept(this);
+
+}
+
+void Skeleton::visitEnumBraces(EnumBraces *enum_braces)
+{
+  /* Code For EnumBraces Goes Here */
+
+  if (enum_braces->listenumerator_) enum_braces->listenumerator_->accept(this);
+  if (enum_braces->maybecomma_) enum_braces->maybecomma_->accept(this);
+
+}
+
+void Skeleton::visitIdentEnumerator(IdentEnumerator *ident_enumerator)
+{
+  /* Code For IdentEnumerator Goes Here */
+
+  visitIdent(ident_enumerator->ident_);
+
+}
+
+void Skeleton::visitIdentAssignExpr(IdentAssignExpr *ident_assign_expr)
+{
+  /* Code For IdentAssignExpr Goes Here */
+
+  visitIdent(ident_assign_expr->ident_);
+  if (ident_assign_expr->expression_) ident_assign_expr->expression_->accept(this);
+
+}
+
+void Skeleton::visitNoComa(NoComa *no_coma)
+{
+  /* Code For NoComa Goes Here */
+
+
+}
+
+void Skeleton::visitComa(Coma *coma)
+{
+  /* Code For Coma Goes Here */
+
 
 }
 
@@ -336,6 +490,21 @@ void Skeleton::visitSimpleParameterDecl(SimpleParameterDecl *simple_parameter_de
   /* Code For SimpleParameterDecl Goes Here */
 
   if (simple_parameter_decl->listparameterdecl_) simple_parameter_decl->listparameterdecl_->accept(this);
+  if (simple_parameter_decl->maybethreedots_) simple_parameter_decl->maybethreedots_->accept(this);
+
+}
+
+void Skeleton::visitNoThreeDots(NoThreeDots *no_three_dots)
+{
+  /* Code For NoThreeDots Goes Here */
+
+
+}
+
+void Skeleton::visitThreeDots(ThreeDots *three_dots)
+{
+  /* Code For ThreeDots Goes Here */
+
 
 }
 
@@ -353,14 +522,6 @@ void Skeleton::visitParameterDeclSpec(ParameterDeclSpec *parameter_decl_spec)
   /* Code For ParameterDeclSpec Goes Here */
 
   if (parameter_decl_spec->declspeclist_) parameter_decl_spec->declspeclist_->accept(this);
-
-}
-
-void Skeleton::visitParameterDeclPar(ParameterDeclPar *parameter_decl_par)
-{
-  /* Code For ParameterDeclPar Goes Here */
-
-  if (parameter_decl_par->parameterdecl_) parameter_decl_par->parameterdecl_->accept(this);
 
 }
 
@@ -437,6 +598,23 @@ void Skeleton::visitSimpleInitDeclarator(SimpleInitDeclarator *simple_init_decla
 
 }
 
+void Skeleton::visitInitDeclaratorExpression(InitDeclaratorExpression *init_declarator_expression)
+{
+  /* Code For InitDeclaratorExpression Goes Here */
+
+  if (init_declarator_expression->declarator_) init_declarator_expression->declarator_->accept(this);
+  if (init_declarator_expression->initexpression_) init_declarator_expression->initexpression_->accept(this);
+
+}
+
+void Skeleton::visitSimpleExpression(SimpleExpression *simple_expression)
+{
+  /* Code For SimpleExpression Goes Here */
+
+  if (simple_expression->expression_) simple_expression->expression_->accept(this);
+
+}
+
 void Skeleton::visitEmptyStructDecl(EmptyStructDecl *empty_struct_decl)
 {
   /* Code For EmptyStructDecl Goes Here */
@@ -479,6 +657,24 @@ void Skeleton::visitFieldDeclDeclarator(FieldDeclDeclarator *field_decl_declarat
 
 }
 
+void Skeleton::visitFieldDeclDeclaratorColon(FieldDeclDeclaratorColon *field_decl_declarator_colon)
+{
+  /* Code For FieldDeclDeclaratorColon Goes Here */
+
+  if (field_decl_declarator_colon->declarator_) field_decl_declarator_colon->declarator_->accept(this);
+  if (field_decl_declarator_colon->expression_) field_decl_declarator_colon->expression_->accept(this);
+  if (field_decl_declarator_colon->listattribute_) field_decl_declarator_colon->listattribute_->accept(this);
+
+}
+
+void Skeleton::visitFieldDeclColonExpression(FieldDeclColonExpression *field_decl_colon_expression)
+{
+  /* Code For FieldDeclColonExpression Goes Here */
+
+  if (field_decl_colon_expression->expression_) field_decl_colon_expression->expression_->accept(this);
+
+}
+
 void Skeleton::visitAttributeConst(AttributeConst *attribute_const)
 {
   /* Code For AttributeConst Goes Here */
@@ -491,10 +687,8 @@ void Skeleton::visitABlock(ABlock *a_block)
 {
   /* Code For ABlock Goes Here */
 
-  visitLBRACE(a_block->lbrace_);
   if (a_block->blockattrs_) a_block->blockattrs_->accept(this);
   if (a_block->listblockelement_) a_block->listblockelement_->accept(this);
-  visitRBRACE(a_block->rbrace_);
 
 }
 
@@ -576,8 +770,19 @@ void Skeleton::visitWhileStatement(WhileStatement *while_statement)
 {
   /* Code For WhileStatement Goes Here */
 
+  if (while_statement->optloopannotations_) while_statement->optloopannotations_->accept(this);
   if (while_statement->listexpression_) while_statement->listexpression_->accept(this);
   if (while_statement->annotatedstmt_) while_statement->annotatedstmt_->accept(this);
+
+}
+
+void Skeleton::visitDoWhileStatement(DoWhileStatement *do_while_statement)
+{
+  /* Code For DoWhileStatement Goes Here */
+
+  if (do_while_statement->optloopannotations_) do_while_statement->optloopannotations_->accept(this);
+  if (do_while_statement->annotatedstmt_) do_while_statement->annotatedstmt_->accept(this);
+  if (do_while_statement->listexpression_) do_while_statement->listexpression_->accept(this);
 
 }
 
@@ -585,6 +790,7 @@ void Skeleton::visitForStatement(ForStatement *for_statement)
 {
   /* Code For ForStatement Goes Here */
 
+  if (for_statement->optloopannotations_) for_statement->optloopannotations_->accept(this);
   if (for_statement->forclause_) for_statement->forclause_->accept(this);
   if (for_statement->optexpression_1) for_statement->optexpression_1->accept(this);
   if (for_statement->optexpression_2) for_statement->optexpression_2->accept(this);
@@ -644,6 +850,48 @@ void Skeleton::visitBreakStatement(BreakStatement *break_statement)
 void Skeleton::visitContinueStatement(ContinueStatement *continue_statement)
 {
   /* Code For ContinueStatement Goes Here */
+
+
+}
+
+void Skeleton::visitGotoStatement(GotoStatement *goto_statement)
+{
+  /* Code For GotoStatement Goes Here */
+
+  if (goto_statement->idortypenameasid_) goto_statement->idortypenameasid_->accept(this);
+
+}
+
+void Skeleton::visitStarGotoStatement(StarGotoStatement *star_goto_statement)
+{
+  /* Code For StarGotoStatement Goes Here */
+
+  if (star_goto_statement->listexpression_) star_goto_statement->listexpression_->accept(this);
+
+}
+
+void Skeleton::visitTryExceptStatement(TryExceptStatement *try_except_statement)
+{
+  /* Code For TryExceptStatement Goes Here */
+
+  if (try_except_statement->block_1) try_except_statement->block_1->accept(this);
+  if (try_except_statement->listexpression_) try_except_statement->listexpression_->accept(this);
+  if (try_except_statement->block_2) try_except_statement->block_2->accept(this);
+
+}
+
+void Skeleton::visitTryFinallyStatement(TryFinallyStatement *try_finally_statement)
+{
+  /* Code For TryFinallyStatement Goes Here */
+
+  if (try_finally_statement->block_1) try_finally_statement->block_1->accept(this);
+  if (try_finally_statement->block_2) try_finally_statement->block_2->accept(this);
+
+}
+
+void Skeleton::visitNoLoopAnnotations(NoLoopAnnotations *no_loop_annotations)
+{
+  /* Code For NoLoopAnnotations Goes Here */
 
 
 }
@@ -845,6 +1093,40 @@ void Skeleton::visitModOp(ModOp *mod_op)
 
 }
 
+void Skeleton::visitSizeOfAttrUnary(SizeOfAttrUnary *size_of_attr_unary)
+{
+  /* Code For SizeOfAttrUnary Goes Here */
+
+  if (size_of_attr_unary->assignexpr_) size_of_attr_unary->assignexpr_->accept(this);
+
+}
+
+void Skeleton::visitSizeOfAttrTypeName(SizeOfAttrTypeName *size_of_attr_type_name)
+{
+  /* Code For SizeOfAttrTypeName Goes Here */
+
+  if (size_of_attr_type_name->typename_) size_of_attr_type_name->typename_->accept(this);
+
+}
+
+void Skeleton::visitAlignOfAttrUnary(AlignOfAttrUnary *align_of_attr_unary)
+{
+  /* Code For AlignOfAttrUnary Goes Here */
+
+  visitALIGNOF(align_of_attr_unary->alignof_);
+  if (align_of_attr_unary->assignexpr_) align_of_attr_unary->assignexpr_->accept(this);
+
+}
+
+void Skeleton::visitAlignOfAttrTypeName(AlignOfAttrTypeName *align_of_attr_type_name)
+{
+  /* Code For AlignOfAttrTypeName Goes Here */
+
+  visitALIGNOF(align_of_attr_type_name->alignof_);
+  if (align_of_attr_type_name->typename_) align_of_attr_type_name->typename_->accept(this);
+
+}
+
 void Skeleton::visitPlusUnaryAttr(PlusUnaryAttr *plus_unary_attr)
 {
   /* Code For PlusUnaryAttr Goes Here */
@@ -933,9 +1215,7 @@ void Skeleton::visitArrayAttr(ArrayAttr *array_attr)
   /* Code For ArrayAttr Goes Here */
 
   if (array_attr->attr_1) array_attr->attr_1->accept(this);
-  visitLBRACKET(array_attr->lbracket_);
   if (array_attr->attr_2) array_attr->attr_2->accept(this);
-  visitRBRACKET(array_attr->rbracket_);
 
 }
 
@@ -1305,6 +1585,40 @@ void Skeleton::visitUnaryExprMinusMinus(UnaryExprMinusMinus *unary_expr_minus_mi
 
 }
 
+void Skeleton::visitUnaryExprSizeOf(UnaryExprSizeOf *unary_expr_size_of)
+{
+  /* Code For UnaryExprSizeOf Goes Here */
+
+  if (unary_expr_size_of->assignexpr_) unary_expr_size_of->assignexpr_->accept(this);
+
+}
+
+void Skeleton::visitUnaryExprSizeOfTypeName(UnaryExprSizeOfTypeName *unary_expr_size_of_type_name)
+{
+  /* Code For UnaryExprSizeOfTypeName Goes Here */
+
+  if (unary_expr_size_of_type_name->typename_) unary_expr_size_of_type_name->typename_->accept(this);
+
+}
+
+void Skeleton::visitUnaryExprAlignOfUnaryExpr(UnaryExprAlignOfUnaryExpr *unary_expr_align_of_unary_expr)
+{
+  /* Code For UnaryExprAlignOfUnaryExpr Goes Here */
+
+  visitALIGNOF(unary_expr_align_of_unary_expr->alignof_);
+  if (unary_expr_align_of_unary_expr->assignexpr_) unary_expr_align_of_unary_expr->assignexpr_->accept(this);
+
+}
+
+void Skeleton::visitUnaryExprAlignOfTypeName(UnaryExprAlignOfTypeName *unary_expr_align_of_type_name)
+{
+  /* Code For UnaryExprAlignOfTypeName Goes Here */
+
+  visitALIGNOF(unary_expr_align_of_type_name->alignof_);
+  if (unary_expr_align_of_type_name->typename_) unary_expr_align_of_type_name->typename_->accept(this);
+
+}
+
 void Skeleton::visitUnaryExprPlus(UnaryExprPlus *unary_expr_plus)
 {
   /* Code For UnaryExprPlus Goes Here */
@@ -1366,9 +1680,7 @@ void Skeleton::visitBracketsPostfixExpression(BracketsPostfixExpression *bracket
   /* Code For BracketsPostfixExpression Goes Here */
 
   if (brackets_postfix_expression->assignexpr_) brackets_postfix_expression->assignexpr_->accept(this);
-  visitLBRACKET(brackets_postfix_expression->lbracket_);
   if (brackets_postfix_expression->listexpression_) brackets_postfix_expression->listexpression_->accept(this);
-  visitRBRACKET(brackets_postfix_expression->rbracket_);
 
 }
 
@@ -1471,6 +1783,14 @@ void Skeleton::visitTypeNameDeclSpecList(TypeNameDeclSpecList *type_name_decl_sp
 }
 
 
+void Skeleton::visitListEnumerator(ListEnumerator *list_enumerator)
+{
+  for (ListEnumerator::iterator i = list_enumerator->begin() ; i != list_enumerator->end() ; ++i)
+  {
+    (*i)->accept(this);
+  }
+}
+
 void Skeleton::visitListParameterDecl(ListParameterDecl *list_parameter_decl)
 {
   for (ListParameterDecl::iterator i = list_parameter_decl->begin() ; i != list_parameter_decl->end() ; ++i)
@@ -1553,19 +1873,14 @@ void Skeleton::visitIdent(Ident x)
   /* Code for Ident Goes Here */
 }
 
+void Skeleton::visitALIGNOF(ALIGNOF x)
+{
+  /* Code for ALIGNOF Goes Here */
+}
+
 void Skeleton::visitSIGNED(SIGNED x)
 {
   /* Code for SIGNED Goes Here */
-}
-
-void Skeleton::visitLBRACE(LBRACE x)
-{
-  /* Code for LBRACE Goes Here */
-}
-
-void Skeleton::visitRBRACE(RBRACE x)
-{
-  /* Code for RBRACE Goes Here */
 }
 
 void Skeleton::visitCONST(CONST x)
@@ -1586,16 +1901,6 @@ void Skeleton::visitVOLATILE(VOLATILE x)
 void Skeleton::visitBLOCKATTRIBUTE(BLOCKATTRIBUTE x)
 {
   /* Code for BLOCKATTRIBUTE Goes Here */
-}
-
-void Skeleton::visitLBRACKET(LBRACKET x)
-{
-  /* Code for LBRACKET Goes Here */
-}
-
-void Skeleton::visitRBRACKET(RBRACKET x)
-{
-  /* Code for RBRACKET Goes Here */
 }
 
 

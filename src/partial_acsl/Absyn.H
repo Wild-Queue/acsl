@@ -18,15 +18,12 @@ typedef std::string String;
 typedef std::string Ident;
 
 
+typedef std::string ALIGNOF;
 typedef std::string SIGNED;
-typedef std::string LBRACE;
-typedef std::string RBRACE;
 typedef std::string CONST;
 typedef std::string RESTRICT;
 typedef std::string VOLATILE;
 typedef std::string BLOCKATTRIBUTE;
-typedef std::string LBRACKET;
-typedef std::string RBRACKET;
 
 
 /********************   Forward Declarations    ********************/
@@ -38,12 +35,16 @@ class FunctionDef;
 class FunctionDefStart;
 class DeclSpecList;
 class DeclSpecListNoNamed;
+class DeclSpecWOType;
 class TypeSpec;
+class Enumerator;
+class MaybeComma;
 class Declarator;
 class PointerOpt;
 class DirectDecl;
 class AttributesWithAsm;
 class RestParList;
+class MaybeThreeDots;
 class ParameterDecl;
 class GhostParameterOpt;
 class IdOrTypename;
@@ -52,6 +53,7 @@ class Declaration;
 class DeclAndInitDeclAttrList;
 class InitDeclaratorAttr;
 class InitDeclarator;
+class InitExpression;
 class StructDeclList;
 class FieldDecl;
 class Attribute;
@@ -59,6 +61,7 @@ class Block;
 class BlockAttrs;
 class BlockElement;
 class Statement;
+class OptLoopAnnotations;
 class ForClause;
 class Attr;
 class BasicAttribute;
@@ -77,10 +80,19 @@ class GlobalsDeclataion;
 class GlobalsFunctionDef;
 class SimpleFunctionDef;
 class FunctionDefStartDeclarator;
+class DeclSpecWoType;
+class DeclSpecWoTypeNext;
 class DeclSpecTypeSpec;
 class DeclSpecTypeSpecNext;
+class DeclSpecNoNamedWOType;
+class DeclSpecNoNamedWOTypeNext;
 class DeclSpecNoNamedTypeSpec;
 class DeclSpecNoNamedTypeSpecNext;
+class DeclSpecWOTypeTypedefKeyWord;
+class DeclSpecWOTypeExternKeyWord;
+class DeclSpecWOTypeStaticKeyWord;
+class DeclSpecWOTypeAutoKeyWord;
+class DeclSpecWOTypeRegisterKeyWord;
 class TypeSpecVoidKeyWord;
 class TypeSpecCharKeyWord;
 class TypeSpecBoolKeyWord;
@@ -97,6 +109,16 @@ class TypeSpecUnsignedKeyWord;
 class StructId;
 class StructIdBraces;
 class StructBraces;
+class UnionId;
+class UnionIdBraces;
+class UnionBraces;
+class EnumId;
+class EnumIdBraces;
+class EnumBraces;
+class IdentEnumerator;
+class IdentAssignExpr;
+class NoComa;
+class Coma;
 class ADeclarator;
 class NoPointer;
 class SomePointer;
@@ -105,9 +127,10 @@ class DirectDeclGhostParam;
 class DirectDeclGhostRestParParam;
 class EmptyAttrWithASM;
 class SimpleParameterDecl;
+class NoThreeDots;
+class ThreeDots;
 class ParameterDeclSpecDeclarator;
 class ParameterDeclSpec;
-class ParameterDeclPar;
 class NoGhostParameter;
 class IdTypename;
 class IdOrTypenameAsIdIdentifier;
@@ -117,11 +140,15 @@ class InitDeclaration;
 class InitDeclarationWithAttr;
 class InitDeclaratorAttribute;
 class SimpleInitDeclarator;
+class InitDeclaratorExpression;
+class SimpleExpression;
 class EmptyStructDecl;
 class DeclSpecStructDecl;
 class SemicolonStructDecl;
 class SpecFieldDeclStructDecl;
 class FieldDeclDeclarator;
+class FieldDeclDeclaratorColon;
+class FieldDeclColonExpression;
 class AttributeConst;
 class ABlock;
 class NoBlockAttrs;
@@ -134,6 +161,7 @@ class BlockStatement;
 class IfStatement;
 class SwitchStatement;
 class WhileStatement;
+class DoWhileStatement;
 class ForStatement;
 class CaseStatement;
 class CaseSliceStatement;
@@ -142,6 +170,11 @@ class EmptyReturnStatement;
 class ReturnStatement;
 class BreakStatement;
 class ContinueStatement;
+class GotoStatement;
+class StarGotoStatement;
+class TryExceptStatement;
+class TryFinallyStatement;
+class NoLoopAnnotations;
 class ForClauseExpression;
 class ForClauseDeclaration;
 class AnAttr;
@@ -164,6 +197,10 @@ class SubOp;
 class MultOp;
 class DivOp;
 class ModOp;
+class SizeOfAttrUnary;
+class SizeOfAttrTypeName;
+class AlignOfAttrUnary;
+class AlignOfAttrTypeName;
 class PlusUnaryAttr;
 class MinusUnaryAttr;
 class MultUnaryAttr;
@@ -217,6 +254,10 @@ class ModExpr;
 class CastExpr;
 class UnaryExprPlusPlus;
 class UnaryExprMinusMinus;
+class UnaryExprSizeOf;
+class UnaryExprSizeOfTypeName;
+class UnaryExprAlignOfUnaryExpr;
+class UnaryExprAlignOfTypeName;
 class UnaryExprPlus;
 class UnaryExprMinus;
 class UnaryExprMult;
@@ -237,6 +278,7 @@ class ConstantInt;
 class ConstantFloat;
 class ConstantChar;
 class TypeNameDeclSpecList;
+class ListEnumerator;
 class ListParameterDecl;
 class ListInitDeclaratorAttr;
 class ListFieldDecl;
@@ -258,12 +300,16 @@ public:
   virtual void visitFunctionDefStart(FunctionDefStart *p) = 0;
   virtual void visitDeclSpecList(DeclSpecList *p) = 0;
   virtual void visitDeclSpecListNoNamed(DeclSpecListNoNamed *p) = 0;
+  virtual void visitDeclSpecWOType(DeclSpecWOType *p) = 0;
   virtual void visitTypeSpec(TypeSpec *p) = 0;
+  virtual void visitEnumerator(Enumerator *p) = 0;
+  virtual void visitMaybeComma(MaybeComma *p) = 0;
   virtual void visitDeclarator(Declarator *p) = 0;
   virtual void visitPointerOpt(PointerOpt *p) = 0;
   virtual void visitDirectDecl(DirectDecl *p) = 0;
   virtual void visitAttributesWithAsm(AttributesWithAsm *p) = 0;
   virtual void visitRestParList(RestParList *p) = 0;
+  virtual void visitMaybeThreeDots(MaybeThreeDots *p) = 0;
   virtual void visitParameterDecl(ParameterDecl *p) = 0;
   virtual void visitGhostParameterOpt(GhostParameterOpt *p) = 0;
   virtual void visitIdOrTypename(IdOrTypename *p) = 0;
@@ -272,6 +318,7 @@ public:
   virtual void visitDeclAndInitDeclAttrList(DeclAndInitDeclAttrList *p) = 0;
   virtual void visitInitDeclaratorAttr(InitDeclaratorAttr *p) = 0;
   virtual void visitInitDeclarator(InitDeclarator *p) = 0;
+  virtual void visitInitExpression(InitExpression *p) = 0;
   virtual void visitStructDeclList(StructDeclList *p) = 0;
   virtual void visitFieldDecl(FieldDecl *p) = 0;
   virtual void visitAttribute(Attribute *p) = 0;
@@ -279,6 +326,7 @@ public:
   virtual void visitBlockAttrs(BlockAttrs *p) = 0;
   virtual void visitBlockElement(BlockElement *p) = 0;
   virtual void visitStatement(Statement *p) = 0;
+  virtual void visitOptLoopAnnotations(OptLoopAnnotations *p) = 0;
   virtual void visitForClause(ForClause *p) = 0;
   virtual void visitAttr(Attr *p) = 0;
   virtual void visitBasicAttribute(BasicAttribute *p) = 0;
@@ -297,10 +345,19 @@ public:
   virtual void visitGlobalsFunctionDef(GlobalsFunctionDef *p) = 0;
   virtual void visitSimpleFunctionDef(SimpleFunctionDef *p) = 0;
   virtual void visitFunctionDefStartDeclarator(FunctionDefStartDeclarator *p) = 0;
+  virtual void visitDeclSpecWoType(DeclSpecWoType *p) = 0;
+  virtual void visitDeclSpecWoTypeNext(DeclSpecWoTypeNext *p) = 0;
   virtual void visitDeclSpecTypeSpec(DeclSpecTypeSpec *p) = 0;
   virtual void visitDeclSpecTypeSpecNext(DeclSpecTypeSpecNext *p) = 0;
+  virtual void visitDeclSpecNoNamedWOType(DeclSpecNoNamedWOType *p) = 0;
+  virtual void visitDeclSpecNoNamedWOTypeNext(DeclSpecNoNamedWOTypeNext *p) = 0;
   virtual void visitDeclSpecNoNamedTypeSpec(DeclSpecNoNamedTypeSpec *p) = 0;
   virtual void visitDeclSpecNoNamedTypeSpecNext(DeclSpecNoNamedTypeSpecNext *p) = 0;
+  virtual void visitDeclSpecWOTypeTypedefKeyWord(DeclSpecWOTypeTypedefKeyWord *p) = 0;
+  virtual void visitDeclSpecWOTypeExternKeyWord(DeclSpecWOTypeExternKeyWord *p) = 0;
+  virtual void visitDeclSpecWOTypeStaticKeyWord(DeclSpecWOTypeStaticKeyWord *p) = 0;
+  virtual void visitDeclSpecWOTypeAutoKeyWord(DeclSpecWOTypeAutoKeyWord *p) = 0;
+  virtual void visitDeclSpecWOTypeRegisterKeyWord(DeclSpecWOTypeRegisterKeyWord *p) = 0;
   virtual void visitTypeSpecVoidKeyWord(TypeSpecVoidKeyWord *p) = 0;
   virtual void visitTypeSpecCharKeyWord(TypeSpecCharKeyWord *p) = 0;
   virtual void visitTypeSpecBoolKeyWord(TypeSpecBoolKeyWord *p) = 0;
@@ -317,6 +374,16 @@ public:
   virtual void visitStructId(StructId *p) = 0;
   virtual void visitStructIdBraces(StructIdBraces *p) = 0;
   virtual void visitStructBraces(StructBraces *p) = 0;
+  virtual void visitUnionId(UnionId *p) = 0;
+  virtual void visitUnionIdBraces(UnionIdBraces *p) = 0;
+  virtual void visitUnionBraces(UnionBraces *p) = 0;
+  virtual void visitEnumId(EnumId *p) = 0;
+  virtual void visitEnumIdBraces(EnumIdBraces *p) = 0;
+  virtual void visitEnumBraces(EnumBraces *p) = 0;
+  virtual void visitIdentEnumerator(IdentEnumerator *p) = 0;
+  virtual void visitIdentAssignExpr(IdentAssignExpr *p) = 0;
+  virtual void visitNoComa(NoComa *p) = 0;
+  virtual void visitComa(Coma *p) = 0;
   virtual void visitADeclarator(ADeclarator *p) = 0;
   virtual void visitNoPointer(NoPointer *p) = 0;
   virtual void visitSomePointer(SomePointer *p) = 0;
@@ -325,9 +392,10 @@ public:
   virtual void visitDirectDeclGhostRestParParam(DirectDeclGhostRestParParam *p) = 0;
   virtual void visitEmptyAttrWithASM(EmptyAttrWithASM *p) = 0;
   virtual void visitSimpleParameterDecl(SimpleParameterDecl *p) = 0;
+  virtual void visitNoThreeDots(NoThreeDots *p) = 0;
+  virtual void visitThreeDots(ThreeDots *p) = 0;
   virtual void visitParameterDeclSpecDeclarator(ParameterDeclSpecDeclarator *p) = 0;
   virtual void visitParameterDeclSpec(ParameterDeclSpec *p) = 0;
-  virtual void visitParameterDeclPar(ParameterDeclPar *p) = 0;
   virtual void visitNoGhostParameter(NoGhostParameter *p) = 0;
   virtual void visitIdTypename(IdTypename *p) = 0;
   virtual void visitIdOrTypenameAsIdIdentifier(IdOrTypenameAsIdIdentifier *p) = 0;
@@ -337,11 +405,15 @@ public:
   virtual void visitInitDeclarationWithAttr(InitDeclarationWithAttr *p) = 0;
   virtual void visitInitDeclaratorAttribute(InitDeclaratorAttribute *p) = 0;
   virtual void visitSimpleInitDeclarator(SimpleInitDeclarator *p) = 0;
+  virtual void visitInitDeclaratorExpression(InitDeclaratorExpression *p) = 0;
+  virtual void visitSimpleExpression(SimpleExpression *p) = 0;
   virtual void visitEmptyStructDecl(EmptyStructDecl *p) = 0;
   virtual void visitDeclSpecStructDecl(DeclSpecStructDecl *p) = 0;
   virtual void visitSemicolonStructDecl(SemicolonStructDecl *p) = 0;
   virtual void visitSpecFieldDeclStructDecl(SpecFieldDeclStructDecl *p) = 0;
   virtual void visitFieldDeclDeclarator(FieldDeclDeclarator *p) = 0;
+  virtual void visitFieldDeclDeclaratorColon(FieldDeclDeclaratorColon *p) = 0;
+  virtual void visitFieldDeclColonExpression(FieldDeclColonExpression *p) = 0;
   virtual void visitAttributeConst(AttributeConst *p) = 0;
   virtual void visitABlock(ABlock *p) = 0;
   virtual void visitNoBlockAttrs(NoBlockAttrs *p) = 0;
@@ -354,6 +426,7 @@ public:
   virtual void visitIfStatement(IfStatement *p) = 0;
   virtual void visitSwitchStatement(SwitchStatement *p) = 0;
   virtual void visitWhileStatement(WhileStatement *p) = 0;
+  virtual void visitDoWhileStatement(DoWhileStatement *p) = 0;
   virtual void visitForStatement(ForStatement *p) = 0;
   virtual void visitCaseStatement(CaseStatement *p) = 0;
   virtual void visitCaseSliceStatement(CaseSliceStatement *p) = 0;
@@ -362,6 +435,11 @@ public:
   virtual void visitReturnStatement(ReturnStatement *p) = 0;
   virtual void visitBreakStatement(BreakStatement *p) = 0;
   virtual void visitContinueStatement(ContinueStatement *p) = 0;
+  virtual void visitGotoStatement(GotoStatement *p) = 0;
+  virtual void visitStarGotoStatement(StarGotoStatement *p) = 0;
+  virtual void visitTryExceptStatement(TryExceptStatement *p) = 0;
+  virtual void visitTryFinallyStatement(TryFinallyStatement *p) = 0;
+  virtual void visitNoLoopAnnotations(NoLoopAnnotations *p) = 0;
   virtual void visitForClauseExpression(ForClauseExpression *p) = 0;
   virtual void visitForClauseDeclaration(ForClauseDeclaration *p) = 0;
   virtual void visitAnAttr(AnAttr *p) = 0;
@@ -384,6 +462,10 @@ public:
   virtual void visitMultOp(MultOp *p) = 0;
   virtual void visitDivOp(DivOp *p) = 0;
   virtual void visitModOp(ModOp *p) = 0;
+  virtual void visitSizeOfAttrUnary(SizeOfAttrUnary *p) = 0;
+  virtual void visitSizeOfAttrTypeName(SizeOfAttrTypeName *p) = 0;
+  virtual void visitAlignOfAttrUnary(AlignOfAttrUnary *p) = 0;
+  virtual void visitAlignOfAttrTypeName(AlignOfAttrTypeName *p) = 0;
   virtual void visitPlusUnaryAttr(PlusUnaryAttr *p) = 0;
   virtual void visitMinusUnaryAttr(MinusUnaryAttr *p) = 0;
   virtual void visitMultUnaryAttr(MultUnaryAttr *p) = 0;
@@ -437,6 +519,10 @@ public:
   virtual void visitCastExpr(CastExpr *p) = 0;
   virtual void visitUnaryExprPlusPlus(UnaryExprPlusPlus *p) = 0;
   virtual void visitUnaryExprMinusMinus(UnaryExprMinusMinus *p) = 0;
+  virtual void visitUnaryExprSizeOf(UnaryExprSizeOf *p) = 0;
+  virtual void visitUnaryExprSizeOfTypeName(UnaryExprSizeOfTypeName *p) = 0;
+  virtual void visitUnaryExprAlignOfUnaryExpr(UnaryExprAlignOfUnaryExpr *p) = 0;
+  virtual void visitUnaryExprAlignOfTypeName(UnaryExprAlignOfTypeName *p) = 0;
   virtual void visitUnaryExprPlus(UnaryExprPlus *p) = 0;
   virtual void visitUnaryExprMinus(UnaryExprMinus *p) = 0;
   virtual void visitUnaryExprMult(UnaryExprMult *p) = 0;
@@ -457,6 +543,7 @@ public:
   virtual void visitConstantFloat(ConstantFloat *p) = 0;
   virtual void visitConstantChar(ConstantChar *p) = 0;
   virtual void visitTypeNameDeclSpecList(TypeNameDeclSpecList *p) = 0;
+  virtual void visitListEnumerator(ListEnumerator *p) = 0;
   virtual void visitListParameterDecl(ListParameterDecl *p) = 0;
   virtual void visitListInitDeclaratorAttr(ListInitDeclaratorAttr *p) = 0;
   virtual void visitListFieldDecl(ListFieldDecl *p) = 0;
@@ -471,15 +558,12 @@ public:
   virtual void visitDouble(Double x) = 0;
   virtual void visitString(String x) = 0;
   virtual void visitIdent(Ident x) = 0;
+  virtual void visitALIGNOF(ALIGNOF x) = 0;
   virtual void visitSIGNED(SIGNED x) = 0;
-  virtual void visitLBRACE(LBRACE x) = 0;
-  virtual void visitRBRACE(RBRACE x) = 0;
   virtual void visitCONST(CONST x) = 0;
   virtual void visitRESTRICT(RESTRICT x) = 0;
   virtual void visitVOLATILE(VOLATILE x) = 0;
   virtual void visitBLOCKATTRIBUTE(BLOCKATTRIBUTE x) = 0;
-  virtual void visitLBRACKET(LBRACKET x) = 0;
-  virtual void visitRBRACKET(RBRACKET x) = 0;
 
 };
 
@@ -543,10 +627,31 @@ public:
   int line_number, char_number;
 };
 
+class DeclSpecWOType : public Visitable
+{
+public:
+  virtual DeclSpecWOType *clone() const = 0;
+  int line_number, char_number;
+};
+
 class TypeSpec : public Visitable
 {
 public:
   virtual TypeSpec *clone() const = 0;
+  int line_number, char_number;
+};
+
+class Enumerator : public Visitable
+{
+public:
+  virtual Enumerator *clone() const = 0;
+  int line_number, char_number;
+};
+
+class MaybeComma : public Visitable
+{
+public:
+  virtual MaybeComma *clone() const = 0;
   int line_number, char_number;
 };
 
@@ -582,6 +687,13 @@ class RestParList : public Visitable
 {
 public:
   virtual RestParList *clone() const = 0;
+  int line_number, char_number;
+};
+
+class MaybeThreeDots : public Visitable
+{
+public:
+  virtual MaybeThreeDots *clone() const = 0;
   int line_number, char_number;
 };
 
@@ -641,6 +753,13 @@ public:
   int line_number, char_number;
 };
 
+class InitExpression : public Visitable
+{
+public:
+  virtual InitExpression *clone() const = 0;
+  int line_number, char_number;
+};
+
 class StructDeclList : public Visitable
 {
 public:
@@ -687,6 +806,13 @@ class Statement : public Visitable
 {
 public:
   virtual Statement *clone() const = 0;
+  int line_number, char_number;
+};
+
+class OptLoopAnnotations : public Visitable
+{
+public:
+  virtual OptLoopAnnotations *clone() const = 0;
   int line_number, char_number;
 };
 
@@ -876,6 +1002,35 @@ public:
   void swap(FunctionDefStartDeclarator &);
 };
 
+class DeclSpecWoType : public DeclSpecList
+{
+public:
+  DeclSpecWOType *declspecwotype_;
+
+  DeclSpecWoType(const DeclSpecWoType &);
+  DeclSpecWoType &operator=(const DeclSpecWoType &);
+  DeclSpecWoType(DeclSpecWOType *p1);
+  ~DeclSpecWoType();
+  virtual void accept(Visitor *v);
+  virtual DeclSpecWoType *clone() const;
+  void swap(DeclSpecWoType &);
+};
+
+class DeclSpecWoTypeNext : public DeclSpecList
+{
+public:
+  DeclSpecWOType *declspecwotype_;
+  DeclSpecList *declspeclist_;
+
+  DeclSpecWoTypeNext(const DeclSpecWoTypeNext &);
+  DeclSpecWoTypeNext &operator=(const DeclSpecWoTypeNext &);
+  DeclSpecWoTypeNext(DeclSpecWOType *p1, DeclSpecList *p2);
+  ~DeclSpecWoTypeNext();
+  virtual void accept(Visitor *v);
+  virtual DeclSpecWoTypeNext *clone() const;
+  void swap(DeclSpecWoTypeNext &);
+};
+
 class DeclSpecTypeSpec : public DeclSpecList
 {
 public:
@@ -905,6 +1060,35 @@ public:
   void swap(DeclSpecTypeSpecNext &);
 };
 
+class DeclSpecNoNamedWOType : public DeclSpecListNoNamed
+{
+public:
+  DeclSpecWOType *declspecwotype_;
+
+  DeclSpecNoNamedWOType(const DeclSpecNoNamedWOType &);
+  DeclSpecNoNamedWOType &operator=(const DeclSpecNoNamedWOType &);
+  DeclSpecNoNamedWOType(DeclSpecWOType *p1);
+  ~DeclSpecNoNamedWOType();
+  virtual void accept(Visitor *v);
+  virtual DeclSpecNoNamedWOType *clone() const;
+  void swap(DeclSpecNoNamedWOType &);
+};
+
+class DeclSpecNoNamedWOTypeNext : public DeclSpecListNoNamed
+{
+public:
+  DeclSpecWOType *declspecwotype_;
+  DeclSpecListNoNamed *declspeclistnonamed_;
+
+  DeclSpecNoNamedWOTypeNext(const DeclSpecNoNamedWOTypeNext &);
+  DeclSpecNoNamedWOTypeNext &operator=(const DeclSpecNoNamedWOTypeNext &);
+  DeclSpecNoNamedWOTypeNext(DeclSpecWOType *p1, DeclSpecListNoNamed *p2);
+  ~DeclSpecNoNamedWOTypeNext();
+  virtual void accept(Visitor *v);
+  virtual DeclSpecNoNamedWOTypeNext *clone() const;
+  void swap(DeclSpecNoNamedWOTypeNext &);
+};
+
 class DeclSpecNoNamedTypeSpec : public DeclSpecListNoNamed
 {
 public:
@@ -932,6 +1116,71 @@ public:
   virtual void accept(Visitor *v);
   virtual DeclSpecNoNamedTypeSpecNext *clone() const;
   void swap(DeclSpecNoNamedTypeSpecNext &);
+};
+
+class DeclSpecWOTypeTypedefKeyWord : public DeclSpecWOType
+{
+public:
+
+  DeclSpecWOTypeTypedefKeyWord(const DeclSpecWOTypeTypedefKeyWord &);
+  DeclSpecWOTypeTypedefKeyWord &operator=(const DeclSpecWOTypeTypedefKeyWord &);
+  DeclSpecWOTypeTypedefKeyWord();
+  ~DeclSpecWOTypeTypedefKeyWord();
+  virtual void accept(Visitor *v);
+  virtual DeclSpecWOTypeTypedefKeyWord *clone() const;
+  void swap(DeclSpecWOTypeTypedefKeyWord &);
+};
+
+class DeclSpecWOTypeExternKeyWord : public DeclSpecWOType
+{
+public:
+
+  DeclSpecWOTypeExternKeyWord(const DeclSpecWOTypeExternKeyWord &);
+  DeclSpecWOTypeExternKeyWord &operator=(const DeclSpecWOTypeExternKeyWord &);
+  DeclSpecWOTypeExternKeyWord();
+  ~DeclSpecWOTypeExternKeyWord();
+  virtual void accept(Visitor *v);
+  virtual DeclSpecWOTypeExternKeyWord *clone() const;
+  void swap(DeclSpecWOTypeExternKeyWord &);
+};
+
+class DeclSpecWOTypeStaticKeyWord : public DeclSpecWOType
+{
+public:
+
+  DeclSpecWOTypeStaticKeyWord(const DeclSpecWOTypeStaticKeyWord &);
+  DeclSpecWOTypeStaticKeyWord &operator=(const DeclSpecWOTypeStaticKeyWord &);
+  DeclSpecWOTypeStaticKeyWord();
+  ~DeclSpecWOTypeStaticKeyWord();
+  virtual void accept(Visitor *v);
+  virtual DeclSpecWOTypeStaticKeyWord *clone() const;
+  void swap(DeclSpecWOTypeStaticKeyWord &);
+};
+
+class DeclSpecWOTypeAutoKeyWord : public DeclSpecWOType
+{
+public:
+
+  DeclSpecWOTypeAutoKeyWord(const DeclSpecWOTypeAutoKeyWord &);
+  DeclSpecWOTypeAutoKeyWord &operator=(const DeclSpecWOTypeAutoKeyWord &);
+  DeclSpecWOTypeAutoKeyWord();
+  ~DeclSpecWOTypeAutoKeyWord();
+  virtual void accept(Visitor *v);
+  virtual DeclSpecWOTypeAutoKeyWord *clone() const;
+  void swap(DeclSpecWOTypeAutoKeyWord &);
+};
+
+class DeclSpecWOTypeRegisterKeyWord : public DeclSpecWOType
+{
+public:
+
+  DeclSpecWOTypeRegisterKeyWord(const DeclSpecWOTypeRegisterKeyWord &);
+  DeclSpecWOTypeRegisterKeyWord &operator=(const DeclSpecWOTypeRegisterKeyWord &);
+  DeclSpecWOTypeRegisterKeyWord();
+  ~DeclSpecWOTypeRegisterKeyWord();
+  virtual void accept(Visitor *v);
+  virtual DeclSpecWOTypeRegisterKeyWord *clone() const;
+  void swap(DeclSpecWOTypeRegisterKeyWord &);
 };
 
 class TypeSpecVoidKeyWord : public TypeSpec
@@ -1122,13 +1371,11 @@ class StructIdBraces : public TypeSpec
 {
 public:
   IdOrTypename *idortypename_;
-  LBRACE lbrace_;
   StructDeclList *structdecllist_;
-  RBRACE rbrace_;
 
   StructIdBraces(const StructIdBraces &);
   StructIdBraces &operator=(const StructIdBraces &);
-  StructIdBraces(IdOrTypename *p1, LBRACE p2, StructDeclList *p3, RBRACE p4);
+  StructIdBraces(IdOrTypename *p1, StructDeclList *p2);
   ~StructIdBraces();
   virtual void accept(Visitor *v);
   virtual StructIdBraces *clone() const;
@@ -1138,17 +1385,158 @@ public:
 class StructBraces : public TypeSpec
 {
 public:
-  LBRACE lbrace_;
   StructDeclList *structdecllist_;
-  RBRACE rbrace_;
 
   StructBraces(const StructBraces &);
   StructBraces &operator=(const StructBraces &);
-  StructBraces(LBRACE p1, StructDeclList *p2, RBRACE p3);
+  StructBraces(StructDeclList *p1);
   ~StructBraces();
   virtual void accept(Visitor *v);
   virtual StructBraces *clone() const;
   void swap(StructBraces &);
+};
+
+class UnionId : public TypeSpec
+{
+public:
+  IdOrTypename *idortypename_;
+
+  UnionId(const UnionId &);
+  UnionId &operator=(const UnionId &);
+  UnionId(IdOrTypename *p1);
+  ~UnionId();
+  virtual void accept(Visitor *v);
+  virtual UnionId *clone() const;
+  void swap(UnionId &);
+};
+
+class UnionIdBraces : public TypeSpec
+{
+public:
+  IdOrTypename *idortypename_;
+  StructDeclList *structdecllist_;
+
+  UnionIdBraces(const UnionIdBraces &);
+  UnionIdBraces &operator=(const UnionIdBraces &);
+  UnionIdBraces(IdOrTypename *p1, StructDeclList *p2);
+  ~UnionIdBraces();
+  virtual void accept(Visitor *v);
+  virtual UnionIdBraces *clone() const;
+  void swap(UnionIdBraces &);
+};
+
+class UnionBraces : public TypeSpec
+{
+public:
+  StructDeclList *structdecllist_;
+
+  UnionBraces(const UnionBraces &);
+  UnionBraces &operator=(const UnionBraces &);
+  UnionBraces(StructDeclList *p1);
+  ~UnionBraces();
+  virtual void accept(Visitor *v);
+  virtual UnionBraces *clone() const;
+  void swap(UnionBraces &);
+};
+
+class EnumId : public TypeSpec
+{
+public:
+  IdOrTypename *idortypename_;
+
+  EnumId(const EnumId &);
+  EnumId &operator=(const EnumId &);
+  EnumId(IdOrTypename *p1);
+  ~EnumId();
+  virtual void accept(Visitor *v);
+  virtual EnumId *clone() const;
+  void swap(EnumId &);
+};
+
+class EnumIdBraces : public TypeSpec
+{
+public:
+  IdOrTypename *idortypename_;
+  ListEnumerator *listenumerator_;
+  MaybeComma *maybecomma_;
+
+  EnumIdBraces(const EnumIdBraces &);
+  EnumIdBraces &operator=(const EnumIdBraces &);
+  EnumIdBraces(IdOrTypename *p1, ListEnumerator *p2, MaybeComma *p3);
+  ~EnumIdBraces();
+  virtual void accept(Visitor *v);
+  virtual EnumIdBraces *clone() const;
+  void swap(EnumIdBraces &);
+};
+
+class EnumBraces : public TypeSpec
+{
+public:
+  ListEnumerator *listenumerator_;
+  MaybeComma *maybecomma_;
+
+  EnumBraces(const EnumBraces &);
+  EnumBraces &operator=(const EnumBraces &);
+  EnumBraces(ListEnumerator *p1, MaybeComma *p2);
+  ~EnumBraces();
+  virtual void accept(Visitor *v);
+  virtual EnumBraces *clone() const;
+  void swap(EnumBraces &);
+};
+
+class IdentEnumerator : public Enumerator
+{
+public:
+  Ident ident_;
+
+  IdentEnumerator(const IdentEnumerator &);
+  IdentEnumerator &operator=(const IdentEnumerator &);
+  IdentEnumerator(Ident p1);
+  ~IdentEnumerator();
+  virtual void accept(Visitor *v);
+  virtual IdentEnumerator *clone() const;
+  void swap(IdentEnumerator &);
+};
+
+class IdentAssignExpr : public Enumerator
+{
+public:
+  Ident ident_;
+  Expression *expression_;
+
+  IdentAssignExpr(const IdentAssignExpr &);
+  IdentAssignExpr &operator=(const IdentAssignExpr &);
+  IdentAssignExpr(Ident p1, Expression *p2);
+  ~IdentAssignExpr();
+  virtual void accept(Visitor *v);
+  virtual IdentAssignExpr *clone() const;
+  void swap(IdentAssignExpr &);
+};
+
+class NoComa : public MaybeComma
+{
+public:
+
+  NoComa(const NoComa &);
+  NoComa &operator=(const NoComa &);
+  NoComa();
+  ~NoComa();
+  virtual void accept(Visitor *v);
+  virtual NoComa *clone() const;
+  void swap(NoComa &);
+};
+
+class Coma : public MaybeComma
+{
+public:
+
+  Coma(const Coma &);
+  Coma &operator=(const Coma &);
+  Coma();
+  ~Coma();
+  virtual void accept(Visitor *v);
+  virtual Coma *clone() const;
+  void swap(Coma &);
 };
 
 class ADeclarator : public Declarator
@@ -1257,14 +1645,41 @@ class SimpleParameterDecl : public RestParList
 {
 public:
   ListParameterDecl *listparameterdecl_;
+  MaybeThreeDots *maybethreedots_;
 
   SimpleParameterDecl(const SimpleParameterDecl &);
   SimpleParameterDecl &operator=(const SimpleParameterDecl &);
-  SimpleParameterDecl(ListParameterDecl *p1);
+  SimpleParameterDecl(ListParameterDecl *p1, MaybeThreeDots *p2);
   ~SimpleParameterDecl();
   virtual void accept(Visitor *v);
   virtual SimpleParameterDecl *clone() const;
   void swap(SimpleParameterDecl &);
+};
+
+class NoThreeDots : public MaybeThreeDots
+{
+public:
+
+  NoThreeDots(const NoThreeDots &);
+  NoThreeDots &operator=(const NoThreeDots &);
+  NoThreeDots();
+  ~NoThreeDots();
+  virtual void accept(Visitor *v);
+  virtual NoThreeDots *clone() const;
+  void swap(NoThreeDots &);
+};
+
+class ThreeDots : public MaybeThreeDots
+{
+public:
+
+  ThreeDots(const ThreeDots &);
+  ThreeDots &operator=(const ThreeDots &);
+  ThreeDots();
+  ~ThreeDots();
+  virtual void accept(Visitor *v);
+  virtual ThreeDots *clone() const;
+  void swap(ThreeDots &);
 };
 
 class ParameterDeclSpecDeclarator : public ParameterDecl
@@ -1294,20 +1709,6 @@ public:
   virtual void accept(Visitor *v);
   virtual ParameterDeclSpec *clone() const;
   void swap(ParameterDeclSpec &);
-};
-
-class ParameterDeclPar : public ParameterDecl
-{
-public:
-  ParameterDecl *parameterdecl_;
-
-  ParameterDeclPar(const ParameterDeclPar &);
-  ParameterDeclPar &operator=(const ParameterDeclPar &);
-  ParameterDeclPar(ParameterDecl *p1);
-  ~ParameterDeclPar();
-  virtual void accept(Visitor *v);
-  virtual ParameterDeclPar *clone() const;
-  void swap(ParameterDeclPar &);
 };
 
 class NoGhostParameter : public GhostParameterOpt
@@ -1437,6 +1838,35 @@ public:
   void swap(SimpleInitDeclarator &);
 };
 
+class InitDeclaratorExpression : public InitDeclarator
+{
+public:
+  Declarator *declarator_;
+  InitExpression *initexpression_;
+
+  InitDeclaratorExpression(const InitDeclaratorExpression &);
+  InitDeclaratorExpression &operator=(const InitDeclaratorExpression &);
+  InitDeclaratorExpression(Declarator *p1, InitExpression *p2);
+  ~InitDeclaratorExpression();
+  virtual void accept(Visitor *v);
+  virtual InitDeclaratorExpression *clone() const;
+  void swap(InitDeclaratorExpression &);
+};
+
+class SimpleExpression : public InitExpression
+{
+public:
+  Expression *expression_;
+
+  SimpleExpression(const SimpleExpression &);
+  SimpleExpression &operator=(const SimpleExpression &);
+  SimpleExpression(Expression *p1);
+  ~SimpleExpression();
+  virtual void accept(Visitor *v);
+  virtual SimpleExpression *clone() const;
+  void swap(SimpleExpression &);
+};
+
 class EmptyStructDecl : public StructDeclList
 {
 public:
@@ -1509,6 +1939,36 @@ public:
   void swap(FieldDeclDeclarator &);
 };
 
+class FieldDeclDeclaratorColon : public FieldDecl
+{
+public:
+  Declarator *declarator_;
+  Expression *expression_;
+  ListAttribute *listattribute_;
+
+  FieldDeclDeclaratorColon(const FieldDeclDeclaratorColon &);
+  FieldDeclDeclaratorColon &operator=(const FieldDeclDeclaratorColon &);
+  FieldDeclDeclaratorColon(Declarator *p1, Expression *p2, ListAttribute *p3);
+  ~FieldDeclDeclaratorColon();
+  virtual void accept(Visitor *v);
+  virtual FieldDeclDeclaratorColon *clone() const;
+  void swap(FieldDeclDeclaratorColon &);
+};
+
+class FieldDeclColonExpression : public FieldDecl
+{
+public:
+  Expression *expression_;
+
+  FieldDeclColonExpression(const FieldDeclColonExpression &);
+  FieldDeclColonExpression &operator=(const FieldDeclColonExpression &);
+  FieldDeclColonExpression(Expression *p1);
+  ~FieldDeclColonExpression();
+  virtual void accept(Visitor *v);
+  virtual FieldDeclColonExpression *clone() const;
+  void swap(FieldDeclColonExpression &);
+};
+
 class AttributeConst : public Attribute
 {
 public:
@@ -1526,14 +1986,12 @@ public:
 class ABlock : public Block
 {
 public:
-  LBRACE lbrace_;
   BlockAttrs *blockattrs_;
   ListBlockElement *listblockelement_;
-  RBRACE rbrace_;
 
   ABlock(const ABlock &);
   ABlock &operator=(const ABlock &);
-  ABlock(LBRACE p1, BlockAttrs *p2, ListBlockElement *p3, RBRACE p4);
+  ABlock(BlockAttrs *p1, ListBlockElement *p2);
   ~ABlock();
   virtual void accept(Visitor *v);
   virtual ABlock *clone() const;
@@ -1671,21 +2129,39 @@ public:
 class WhileStatement : public Statement
 {
 public:
+  OptLoopAnnotations *optloopannotations_;
   ListExpression *listexpression_;
   AnnotatedStmt *annotatedstmt_;
 
   WhileStatement(const WhileStatement &);
   WhileStatement &operator=(const WhileStatement &);
-  WhileStatement(ListExpression *p1, AnnotatedStmt *p2);
+  WhileStatement(OptLoopAnnotations *p1, ListExpression *p2, AnnotatedStmt *p3);
   ~WhileStatement();
   virtual void accept(Visitor *v);
   virtual WhileStatement *clone() const;
   void swap(WhileStatement &);
 };
 
+class DoWhileStatement : public Statement
+{
+public:
+  OptLoopAnnotations *optloopannotations_;
+  AnnotatedStmt *annotatedstmt_;
+  ListExpression *listexpression_;
+
+  DoWhileStatement(const DoWhileStatement &);
+  DoWhileStatement &operator=(const DoWhileStatement &);
+  DoWhileStatement(OptLoopAnnotations *p1, AnnotatedStmt *p2, ListExpression *p3);
+  ~DoWhileStatement();
+  virtual void accept(Visitor *v);
+  virtual DoWhileStatement *clone() const;
+  void swap(DoWhileStatement &);
+};
+
 class ForStatement : public Statement
 {
 public:
+  OptLoopAnnotations *optloopannotations_;
   ForClause *forclause_;
   OptExpression *optexpression_1;
   OptExpression *optexpression_2;
@@ -1693,7 +2169,7 @@ public:
 
   ForStatement(const ForStatement &);
   ForStatement &operator=(const ForStatement &);
-  ForStatement(ForClause *p1, OptExpression *p2, OptExpression *p3, AnnotatedStmt *p4);
+  ForStatement(OptLoopAnnotations *p1, ForClause *p2, OptExpression *p3, OptExpression *p4, AnnotatedStmt *p5);
   ~ForStatement();
   virtual void accept(Visitor *v);
   virtual ForStatement *clone() const;
@@ -1796,6 +2272,78 @@ public:
   virtual void accept(Visitor *v);
   virtual ContinueStatement *clone() const;
   void swap(ContinueStatement &);
+};
+
+class GotoStatement : public Statement
+{
+public:
+  IdOrTypenameAsId *idortypenameasid_;
+
+  GotoStatement(const GotoStatement &);
+  GotoStatement &operator=(const GotoStatement &);
+  GotoStatement(IdOrTypenameAsId *p1);
+  ~GotoStatement();
+  virtual void accept(Visitor *v);
+  virtual GotoStatement *clone() const;
+  void swap(GotoStatement &);
+};
+
+class StarGotoStatement : public Statement
+{
+public:
+  ListExpression *listexpression_;
+
+  StarGotoStatement(const StarGotoStatement &);
+  StarGotoStatement &operator=(const StarGotoStatement &);
+  StarGotoStatement(ListExpression *p1);
+  ~StarGotoStatement();
+  virtual void accept(Visitor *v);
+  virtual StarGotoStatement *clone() const;
+  void swap(StarGotoStatement &);
+};
+
+class TryExceptStatement : public Statement
+{
+public:
+  Block *block_1;
+  ListExpression *listexpression_;
+  Block *block_2;
+
+  TryExceptStatement(const TryExceptStatement &);
+  TryExceptStatement &operator=(const TryExceptStatement &);
+  TryExceptStatement(Block *p1, ListExpression *p2, Block *p3);
+  ~TryExceptStatement();
+  virtual void accept(Visitor *v);
+  virtual TryExceptStatement *clone() const;
+  void swap(TryExceptStatement &);
+};
+
+class TryFinallyStatement : public Statement
+{
+public:
+  Block *block_1;
+  Block *block_2;
+
+  TryFinallyStatement(const TryFinallyStatement &);
+  TryFinallyStatement &operator=(const TryFinallyStatement &);
+  TryFinallyStatement(Block *p1, Block *p2);
+  ~TryFinallyStatement();
+  virtual void accept(Visitor *v);
+  virtual TryFinallyStatement *clone() const;
+  void swap(TryFinallyStatement &);
+};
+
+class NoLoopAnnotations : public OptLoopAnnotations
+{
+public:
+
+  NoLoopAnnotations(const NoLoopAnnotations &);
+  NoLoopAnnotations &operator=(const NoLoopAnnotations &);
+  NoLoopAnnotations();
+  ~NoLoopAnnotations();
+  virtual void accept(Visitor *v);
+  virtual NoLoopAnnotations *clone() const;
+  void swap(NoLoopAnnotations &);
 };
 
 class ForClauseExpression : public ForClause
@@ -2127,6 +2675,64 @@ public:
   void swap(ModOp &);
 };
 
+class SizeOfAttrUnary : public Attr
+{
+public:
+  AssignExpr *assignexpr_;
+
+  SizeOfAttrUnary(const SizeOfAttrUnary &);
+  SizeOfAttrUnary &operator=(const SizeOfAttrUnary &);
+  SizeOfAttrUnary(AssignExpr *p1);
+  ~SizeOfAttrUnary();
+  virtual void accept(Visitor *v);
+  virtual SizeOfAttrUnary *clone() const;
+  void swap(SizeOfAttrUnary &);
+};
+
+class SizeOfAttrTypeName : public Attr
+{
+public:
+  TypeName *typename_;
+
+  SizeOfAttrTypeName(const SizeOfAttrTypeName &);
+  SizeOfAttrTypeName &operator=(const SizeOfAttrTypeName &);
+  SizeOfAttrTypeName(TypeName *p1);
+  ~SizeOfAttrTypeName();
+  virtual void accept(Visitor *v);
+  virtual SizeOfAttrTypeName *clone() const;
+  void swap(SizeOfAttrTypeName &);
+};
+
+class AlignOfAttrUnary : public Attr
+{
+public:
+  ALIGNOF alignof_;
+  AssignExpr *assignexpr_;
+
+  AlignOfAttrUnary(const AlignOfAttrUnary &);
+  AlignOfAttrUnary &operator=(const AlignOfAttrUnary &);
+  AlignOfAttrUnary(ALIGNOF p1, AssignExpr *p2);
+  ~AlignOfAttrUnary();
+  virtual void accept(Visitor *v);
+  virtual AlignOfAttrUnary *clone() const;
+  void swap(AlignOfAttrUnary &);
+};
+
+class AlignOfAttrTypeName : public Attr
+{
+public:
+  ALIGNOF alignof_;
+  TypeName *typename_;
+
+  AlignOfAttrTypeName(const AlignOfAttrTypeName &);
+  AlignOfAttrTypeName &operator=(const AlignOfAttrTypeName &);
+  AlignOfAttrTypeName(ALIGNOF p1, TypeName *p2);
+  ~AlignOfAttrTypeName();
+  virtual void accept(Visitor *v);
+  virtual AlignOfAttrTypeName *clone() const;
+  void swap(AlignOfAttrTypeName &);
+};
+
 class PlusUnaryAttr : public Attr
 {
 public:
@@ -2274,13 +2880,11 @@ class ArrayAttr : public Attr
 {
 public:
   Attr *attr_1;
-  LBRACKET lbracket_;
   Attr *attr_2;
-  RBRACKET rbracket_;
 
   ArrayAttr(const ArrayAttr &);
   ArrayAttr &operator=(const ArrayAttr &);
-  ArrayAttr(Attr *p1, LBRACKET p2, Attr *p3, RBRACKET p4);
+  ArrayAttr(Attr *p1, Attr *p2);
   ~ArrayAttr();
   virtual void accept(Visitor *v);
   virtual ArrayAttr *clone() const;
@@ -2905,6 +3509,64 @@ public:
   void swap(UnaryExprMinusMinus &);
 };
 
+class UnaryExprSizeOf : public AssignExpr
+{
+public:
+  AssignExpr *assignexpr_;
+
+  UnaryExprSizeOf(const UnaryExprSizeOf &);
+  UnaryExprSizeOf &operator=(const UnaryExprSizeOf &);
+  UnaryExprSizeOf(AssignExpr *p1);
+  ~UnaryExprSizeOf();
+  virtual void accept(Visitor *v);
+  virtual UnaryExprSizeOf *clone() const;
+  void swap(UnaryExprSizeOf &);
+};
+
+class UnaryExprSizeOfTypeName : public AssignExpr
+{
+public:
+  TypeName *typename_;
+
+  UnaryExprSizeOfTypeName(const UnaryExprSizeOfTypeName &);
+  UnaryExprSizeOfTypeName &operator=(const UnaryExprSizeOfTypeName &);
+  UnaryExprSizeOfTypeName(TypeName *p1);
+  ~UnaryExprSizeOfTypeName();
+  virtual void accept(Visitor *v);
+  virtual UnaryExprSizeOfTypeName *clone() const;
+  void swap(UnaryExprSizeOfTypeName &);
+};
+
+class UnaryExprAlignOfUnaryExpr : public AssignExpr
+{
+public:
+  ALIGNOF alignof_;
+  AssignExpr *assignexpr_;
+
+  UnaryExprAlignOfUnaryExpr(const UnaryExprAlignOfUnaryExpr &);
+  UnaryExprAlignOfUnaryExpr &operator=(const UnaryExprAlignOfUnaryExpr &);
+  UnaryExprAlignOfUnaryExpr(ALIGNOF p1, AssignExpr *p2);
+  ~UnaryExprAlignOfUnaryExpr();
+  virtual void accept(Visitor *v);
+  virtual UnaryExprAlignOfUnaryExpr *clone() const;
+  void swap(UnaryExprAlignOfUnaryExpr &);
+};
+
+class UnaryExprAlignOfTypeName : public AssignExpr
+{
+public:
+  ALIGNOF alignof_;
+  TypeName *typename_;
+
+  UnaryExprAlignOfTypeName(const UnaryExprAlignOfTypeName &);
+  UnaryExprAlignOfTypeName &operator=(const UnaryExprAlignOfTypeName &);
+  UnaryExprAlignOfTypeName(ALIGNOF p1, TypeName *p2);
+  ~UnaryExprAlignOfTypeName();
+  virtual void accept(Visitor *v);
+  virtual UnaryExprAlignOfTypeName *clone() const;
+  void swap(UnaryExprAlignOfTypeName &);
+};
+
 class UnaryExprPlus : public AssignExpr
 {
 public:
@@ -3007,13 +3669,11 @@ class BracketsPostfixExpression : public AssignExpr
 {
 public:
   AssignExpr *assignexpr_;
-  LBRACKET lbracket_;
   ListExpression *listexpression_;
-  RBRACKET rbracket_;
 
   BracketsPostfixExpression(const BracketsPostfixExpression &);
   BracketsPostfixExpression &operator=(const BracketsPostfixExpression &);
-  BracketsPostfixExpression(AssignExpr *p1, LBRACKET p2, ListExpression *p3, RBRACKET p4);
+  BracketsPostfixExpression(AssignExpr *p1, ListExpression *p2);
   ~BracketsPostfixExpression();
   virtual void accept(Visitor *v);
   virtual BracketsPostfixExpression *clone() const;
@@ -3191,6 +3851,15 @@ public:
 };
 
 
+
+class ListEnumerator : public Visitable, public std::vector<Enumerator*>
+{
+public:
+  virtual void accept(Visitor *v);
+  virtual ListEnumerator *clone() const;
+};
+
+ListEnumerator* consListEnumerator(Enumerator* x, ListEnumerator* xs);
 
 class ListParameterDecl : public Visitable, public std::vector<ParameterDecl*>
 {

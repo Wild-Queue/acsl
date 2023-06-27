@@ -169,126 +169,135 @@ enum yysymbol_kind_t
   YYSYMBOL__DGT = 37,                      /* _DGT  */
   YYSYMBOL__DGTEQ = 38,                    /* _DGTEQ  */
   YYSYMBOL__QUESTION = 39,                 /* _QUESTION  */
-  YYSYMBOL__CARET = 40,                    /* _CARET  */
-  YYSYMBOL__CARETEQ = 41,                  /* _CARETEQ  */
-  YYSYMBOL__SYMB_1 = 42,                   /* _SYMB_1  */
-  YYSYMBOL__SYMB_2 = 43,                   /* _SYMB_2  */
-  YYSYMBOL__SYMB_3 = 44,                   /* _SYMB_3  */
-  YYSYMBOL__KW_break = 45,                 /* _KW_break  */
-  YYSYMBOL__KW_case = 46,                  /* _KW_case  */
-  YYSYMBOL__KW_char = 47,                  /* _KW_char  */
-  YYSYMBOL__KW_continue = 48,              /* _KW_continue  */
-  YYSYMBOL__KW_default = 49,               /* _KW_default  */
-  YYSYMBOL__KW_double = 50,                /* _KW_double  */
-  YYSYMBOL__KW_else = 51,                  /* _KW_else  */
-  YYSYMBOL__KW_float = 52,                 /* _KW_float  */
-  YYSYMBOL__KW_if = 53,                    /* _KW_if  */
-  YYSYMBOL__KW_int = 54,                   /* _KW_int  */
-  YYSYMBOL__KW_long = 55,                  /* _KW_long  */
-  YYSYMBOL__KW_return = 56,                /* _KW_return  */
-  YYSYMBOL__KW_short = 57,                 /* _KW_short  */
-  YYSYMBOL__KW_struct = 58,                /* _KW_struct  */
-  YYSYMBOL__KW_switch = 59,                /* _KW_switch  */
-  YYSYMBOL__KW_unsigned = 60,              /* _KW_unsigned  */
-  YYSYMBOL__KW_void = 61,                  /* _KW_void  */
-  YYSYMBOL__KW_while = 62,                 /* _KW_while  */
-  YYSYMBOL__BAR = 63,                      /* _BAR  */
-  YYSYMBOL__BAREQ = 64,                    /* _BAREQ  */
-  YYSYMBOL__DBAR = 65,                     /* _DBAR  */
-  YYSYMBOL__TILDE = 66,                    /* _TILDE  */
-  YYSYMBOL_T_BLOCKATTRIBUTE = 67,          /* T_BLOCKATTRIBUTE  */
-  YYSYMBOL_T_CONST = 68,                   /* T_CONST  */
-  YYSYMBOL_T_LBRACE = 69,                  /* T_LBRACE  */
-  YYSYMBOL_T_LBRACKET = 70,                /* T_LBRACKET  */
-  YYSYMBOL_T_RBRACE = 71,                  /* T_RBRACE  */
-  YYSYMBOL_T_RBRACKET = 72,                /* T_RBRACKET  */
-  YYSYMBOL_T_RESTRICT = 73,                /* T_RESTRICT  */
-  YYSYMBOL_T_SIGNED = 74,                  /* T_SIGNED  */
-  YYSYMBOL_T_VOLATILE = 75,                /* T_VOLATILE  */
-  YYSYMBOL__CHAR_ = 76,                    /* _CHAR_  */
-  YYSYMBOL__INTEGER_ = 77,                 /* _INTEGER_  */
-  YYSYMBOL__DOUBLE_ = 78,                  /* _DOUBLE_  */
-  YYSYMBOL__IDENT_ = 79,                   /* _IDENT_  */
-  YYSYMBOL_YYACCEPT = 80,                  /* $accept  */
-  YYSYMBOL_Program = 81,                   /* Program  */
-  YYSYMBOL_Globals = 82,                   /* Globals  */
-  YYSYMBOL_Global = 83,                    /* Global  */
-  YYSYMBOL_FunctionDef = 84,               /* FunctionDef  */
-  YYSYMBOL_FunctionDefStart = 85,          /* FunctionDefStart  */
-  YYSYMBOL_DeclSpecList = 86,              /* DeclSpecList  */
-  YYSYMBOL_DeclSpecListNoNamed = 87,       /* DeclSpecListNoNamed  */
-  YYSYMBOL_TypeSpec = 88,                  /* TypeSpec  */
-  YYSYMBOL_Declarator = 89,                /* Declarator  */
-  YYSYMBOL_PointerOpt = 90,                /* PointerOpt  */
-  YYSYMBOL_DirectDecl = 91,                /* DirectDecl  */
-  YYSYMBOL_AttributesWithAsm = 92,         /* AttributesWithAsm  */
-  YYSYMBOL_RestParList = 93,               /* RestParList  */
-  YYSYMBOL_ParameterDecl = 94,             /* ParameterDecl  */
-  YYSYMBOL_ListParameterDecl = 95,         /* ListParameterDecl  */
-  YYSYMBOL_GhostParameterOpt = 96,         /* GhostParameterOpt  */
-  YYSYMBOL_IdOrTypename = 97,              /* IdOrTypename  */
-  YYSYMBOL_IdOrTypenameAsId = 98,          /* IdOrTypenameAsId  */
-  YYSYMBOL_Declaration = 99,               /* Declaration  */
-  YYSYMBOL_DeclAndInitDeclAttrList = 100,  /* DeclAndInitDeclAttrList  */
-  YYSYMBOL_InitDeclaratorAttr = 101,       /* InitDeclaratorAttr  */
-  YYSYMBOL_ListInitDeclaratorAttr = 102,   /* ListInitDeclaratorAttr  */
-  YYSYMBOL_InitDeclarator = 103,           /* InitDeclarator  */
-  YYSYMBOL_StructDeclList = 104,           /* StructDeclList  */
-  YYSYMBOL_FieldDecl = 105,                /* FieldDecl  */
-  YYSYMBOL_ListFieldDecl = 106,            /* ListFieldDecl  */
-  YYSYMBOL_Attribute = 107,                /* Attribute  */
-  YYSYMBOL_ListAttribute = 108,            /* ListAttribute  */
-  YYSYMBOL_Block = 109,                    /* Block  */
-  YYSYMBOL_BlockAttrs = 110,               /* BlockAttrs  */
-  YYSYMBOL_BlockElement = 111,             /* BlockElement  */
-  YYSYMBOL_ListBlockElement = 112,         /* ListBlockElement  */
-  YYSYMBOL_Statement = 113,                /* Statement  */
-  YYSYMBOL_Attr = 114,                     /* Attr  */
-  YYSYMBOL_ListAttr = 115,                 /* ListAttr  */
-  YYSYMBOL_Attr1 = 116,                    /* Attr1  */
-  YYSYMBOL_Attr2 = 117,                    /* Attr2  */
-  YYSYMBOL_Attr3 = 118,                    /* Attr3  */
-  YYSYMBOL_Attr4 = 119,                    /* Attr4  */
-  YYSYMBOL_Attr5 = 120,                    /* Attr5  */
-  YYSYMBOL_Attr6 = 121,                    /* Attr6  */
-  YYSYMBOL_Attr7 = 122,                    /* Attr7  */
-  YYSYMBOL_Attr8 = 123,                    /* Attr8  */
-  YYSYMBOL_Attr9 = 124,                    /* Attr9  */
-  YYSYMBOL_Attr10 = 125,                   /* Attr10  */
-  YYSYMBOL_Attr11 = 126,                   /* Attr11  */
-  YYSYMBOL_Attr12 = 127,                   /* Attr12  */
-  YYSYMBOL_Attr13 = 128,                   /* Attr13  */
-  YYSYMBOL_Attr14 = 129,                   /* Attr14  */
-  YYSYMBOL_BasicAttribute = 130,           /* BasicAttribute  */
-  YYSYMBOL_AnnotatedStmt = 131,            /* AnnotatedStmt  */
-  YYSYMBOL_ElsePart = 132,                 /* ElsePart  */
-  YYSYMBOL_OptExpression = 133,            /* OptExpression  */
-  YYSYMBOL_Expression = 134,               /* Expression  */
-  YYSYMBOL_ListExpression = 135,           /* ListExpression  */
-  YYSYMBOL_AssignExpr = 136,               /* AssignExpr  */
-  YYSYMBOL_AssignExpr1 = 137,              /* AssignExpr1  */
-  YYSYMBOL_AssignExpr2 = 138,              /* AssignExpr2  */
-  YYSYMBOL_AssignExpr3 = 139,              /* AssignExpr3  */
-  YYSYMBOL_AssignExpr4 = 140,              /* AssignExpr4  */
-  YYSYMBOL_AssignExpr5 = 141,              /* AssignExpr5  */
-  YYSYMBOL_AssignExpr6 = 142,              /* AssignExpr6  */
-  YYSYMBOL_AssignExpr7 = 143,              /* AssignExpr7  */
-  YYSYMBOL_AssignExpr8 = 144,              /* AssignExpr8  */
-  YYSYMBOL_AssignExpr9 = 145,              /* AssignExpr9  */
-  YYSYMBOL_AssignExpr10 = 146,             /* AssignExpr10  */
-  YYSYMBOL_AssignExpr11 = 147,             /* AssignExpr11  */
-  YYSYMBOL_AssignExpr12 = 148,             /* AssignExpr12  */
-  YYSYMBOL_AssignExpr13 = 149,             /* AssignExpr13  */
-  YYSYMBOL_AssignExpr14 = 150,             /* AssignExpr14  */
-  YYSYMBOL_AssignExpr15 = 151,             /* AssignExpr15  */
-  YYSYMBOL_Constant = 152,                 /* Constant  */
-  YYSYMBOL_TypeName = 153                  /* TypeName  */
+  YYSYMBOL__LBRACK = 40,                   /* _LBRACK  */
+  YYSYMBOL__RBRACK = 41,                   /* _RBRACK  */
+  YYSYMBOL__CARET = 42,                    /* _CARET  */
+  YYSYMBOL__CARETEQ = 43,                  /* _CARETEQ  */
+  YYSYMBOL__SYMB_1 = 44,                   /* _SYMB_1  */
+  YYSYMBOL__SYMB_2 = 45,                   /* _SYMB_2  */
+  YYSYMBOL__SYMB_3 = 46,                   /* _SYMB_3  */
+  YYSYMBOL__KW_break = 47,                 /* _KW_break  */
+  YYSYMBOL__KW_case = 48,                  /* _KW_case  */
+  YYSYMBOL__KW_char = 49,                  /* _KW_char  */
+  YYSYMBOL__KW_continue = 50,              /* _KW_continue  */
+  YYSYMBOL__KW_default = 51,               /* _KW_default  */
+  YYSYMBOL__KW_double = 52,                /* _KW_double  */
+  YYSYMBOL__KW_else = 53,                  /* _KW_else  */
+  YYSYMBOL__KW_enum = 54,                  /* _KW_enum  */
+  YYSYMBOL__KW_float = 55,                 /* _KW_float  */
+  YYSYMBOL__KW_for = 56,                   /* _KW_for  */
+  YYSYMBOL__KW_if = 57,                    /* _KW_if  */
+  YYSYMBOL__KW_int = 58,                   /* _KW_int  */
+  YYSYMBOL__KW_long = 59,                  /* _KW_long  */
+  YYSYMBOL__KW_return = 60,                /* _KW_return  */
+  YYSYMBOL__KW_short = 61,                 /* _KW_short  */
+  YYSYMBOL__KW_64 = 62,                    /* _KW_64  */
+  YYSYMBOL__KW_struct = 63,                /* _KW_struct  */
+  YYSYMBOL__KW_switch = 64,                /* _KW_switch  */
+  YYSYMBOL__KW_union = 65,                 /* _KW_union  */
+  YYSYMBOL__KW_unsigned = 66,              /* _KW_unsigned  */
+  YYSYMBOL__KW_void = 67,                  /* _KW_void  */
+  YYSYMBOL__KW_while = 68,                 /* _KW_while  */
+  YYSYMBOL__LBRACE = 69,                   /* _LBRACE  */
+  YYSYMBOL__BAR = 70,                      /* _BAR  */
+  YYSYMBOL__BAREQ = 71,                    /* _BAREQ  */
+  YYSYMBOL__DBAR = 72,                     /* _DBAR  */
+  YYSYMBOL__RBRACE = 73,                   /* _RBRACE  */
+  YYSYMBOL__TILDE = 74,                    /* _TILDE  */
+  YYSYMBOL_T_BLOCKATTRIBUTE = 75,          /* T_BLOCKATTRIBUTE  */
+  YYSYMBOL_T_CONST = 76,                   /* T_CONST  */
+  YYSYMBOL_T_RESTRICT = 77,                /* T_RESTRICT  */
+  YYSYMBOL_T_SIGNED = 78,                  /* T_SIGNED  */
+  YYSYMBOL_T_VOLATILE = 79,                /* T_VOLATILE  */
+  YYSYMBOL__CHAR_ = 80,                    /* _CHAR_  */
+  YYSYMBOL__INTEGER_ = 81,                 /* _INTEGER_  */
+  YYSYMBOL__DOUBLE_ = 82,                  /* _DOUBLE_  */
+  YYSYMBOL__IDENT_ = 83,                   /* _IDENT_  */
+  YYSYMBOL_YYACCEPT = 84,                  /* $accept  */
+  YYSYMBOL_Program = 85,                   /* Program  */
+  YYSYMBOL_Globals = 86,                   /* Globals  */
+  YYSYMBOL_Global = 87,                    /* Global  */
+  YYSYMBOL_FunctionDef = 88,               /* FunctionDef  */
+  YYSYMBOL_FunctionDefStart = 89,          /* FunctionDefStart  */
+  YYSYMBOL_DeclSpecList = 90,              /* DeclSpecList  */
+  YYSYMBOL_DeclSpecListNoNamed = 91,       /* DeclSpecListNoNamed  */
+  YYSYMBOL_TypeSpec = 92,                  /* TypeSpec  */
+  YYSYMBOL_Enumerator = 93,                /* Enumerator  */
+  YYSYMBOL_ListEnumerator = 94,            /* ListEnumerator  */
+  YYSYMBOL_MaybeComma = 95,                /* MaybeComma  */
+  YYSYMBOL_Declarator = 96,                /* Declarator  */
+  YYSYMBOL_PointerOpt = 97,                /* PointerOpt  */
+  YYSYMBOL_DirectDecl = 98,                /* DirectDecl  */
+  YYSYMBOL_AttributesWithAsm = 99,         /* AttributesWithAsm  */
+  YYSYMBOL_RestParList = 100,              /* RestParList  */
+  YYSYMBOL_MaybeThreeDots = 101,           /* MaybeThreeDots  */
+  YYSYMBOL_ParameterDecl = 102,            /* ParameterDecl  */
+  YYSYMBOL_ListParameterDecl = 103,        /* ListParameterDecl  */
+  YYSYMBOL_GhostParameterOpt = 104,        /* GhostParameterOpt  */
+  YYSYMBOL_IdOrTypename = 105,             /* IdOrTypename  */
+  YYSYMBOL_IdOrTypenameAsId = 106,         /* IdOrTypenameAsId  */
+  YYSYMBOL_Declaration = 107,              /* Declaration  */
+  YYSYMBOL_DeclAndInitDeclAttrList = 108,  /* DeclAndInitDeclAttrList  */
+  YYSYMBOL_InitDeclaratorAttr = 109,       /* InitDeclaratorAttr  */
+  YYSYMBOL_ListInitDeclaratorAttr = 110,   /* ListInitDeclaratorAttr  */
+  YYSYMBOL_InitDeclarator = 111,           /* InitDeclarator  */
+  YYSYMBOL_StructDeclList = 112,           /* StructDeclList  */
+  YYSYMBOL_FieldDecl = 113,                /* FieldDecl  */
+  YYSYMBOL_ListFieldDecl = 114,            /* ListFieldDecl  */
+  YYSYMBOL_Attribute = 115,                /* Attribute  */
+  YYSYMBOL_ListAttribute = 116,            /* ListAttribute  */
+  YYSYMBOL_Block = 117,                    /* Block  */
+  YYSYMBOL_BlockAttrs = 118,               /* BlockAttrs  */
+  YYSYMBOL_BlockElement = 119,             /* BlockElement  */
+  YYSYMBOL_ListBlockElement = 120,         /* ListBlockElement  */
+  YYSYMBOL_Statement = 121,                /* Statement  */
+  YYSYMBOL_ForClause = 122,                /* ForClause  */
+  YYSYMBOL_Attr = 123,                     /* Attr  */
+  YYSYMBOL_ListAttr = 124,                 /* ListAttr  */
+  YYSYMBOL_Attr1 = 125,                    /* Attr1  */
+  YYSYMBOL_Attr2 = 126,                    /* Attr2  */
+  YYSYMBOL_Attr3 = 127,                    /* Attr3  */
+  YYSYMBOL_Attr4 = 128,                    /* Attr4  */
+  YYSYMBOL_Attr5 = 129,                    /* Attr5  */
+  YYSYMBOL_Attr6 = 130,                    /* Attr6  */
+  YYSYMBOL_Attr7 = 131,                    /* Attr7  */
+  YYSYMBOL_Attr8 = 132,                    /* Attr8  */
+  YYSYMBOL_Attr9 = 133,                    /* Attr9  */
+  YYSYMBOL_Attr10 = 134,                   /* Attr10  */
+  YYSYMBOL_Attr11 = 135,                   /* Attr11  */
+  YYSYMBOL_Attr12 = 136,                   /* Attr12  */
+  YYSYMBOL_Attr13 = 137,                   /* Attr13  */
+  YYSYMBOL_Attr14 = 138,                   /* Attr14  */
+  YYSYMBOL_BasicAttribute = 139,           /* BasicAttribute  */
+  YYSYMBOL_AnnotatedStmt = 140,            /* AnnotatedStmt  */
+  YYSYMBOL_ElsePart = 141,                 /* ElsePart  */
+  YYSYMBOL_OptExpression = 142,            /* OptExpression  */
+  YYSYMBOL_Expression = 143,               /* Expression  */
+  YYSYMBOL_ListExpression = 144,           /* ListExpression  */
+  YYSYMBOL_AssignExpr = 145,               /* AssignExpr  */
+  YYSYMBOL_AssignExpr1 = 146,              /* AssignExpr1  */
+  YYSYMBOL_AssignExpr2 = 147,              /* AssignExpr2  */
+  YYSYMBOL_AssignExpr3 = 148,              /* AssignExpr3  */
+  YYSYMBOL_AssignExpr4 = 149,              /* AssignExpr4  */
+  YYSYMBOL_AssignExpr5 = 150,              /* AssignExpr5  */
+  YYSYMBOL_AssignExpr6 = 151,              /* AssignExpr6  */
+  YYSYMBOL_AssignExpr7 = 152,              /* AssignExpr7  */
+  YYSYMBOL_AssignExpr8 = 153,              /* AssignExpr8  */
+  YYSYMBOL_AssignExpr9 = 154,              /* AssignExpr9  */
+  YYSYMBOL_AssignExpr10 = 155,             /* AssignExpr10  */
+  YYSYMBOL_AssignExpr11 = 156,             /* AssignExpr11  */
+  YYSYMBOL_AssignExpr12 = 157,             /* AssignExpr12  */
+  YYSYMBOL_AssignExpr13 = 158,             /* AssignExpr13  */
+  YYSYMBOL_AssignExpr14 = 159,             /* AssignExpr14  */
+  YYSYMBOL_AssignExpr15 = 160,             /* AssignExpr15  */
+  YYSYMBOL_Constant = 161,                 /* Constant  */
+  YYSYMBOL_TypeName = 162                  /* TypeName  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
 
 /* Second part of user prologue.  */
-#line 104 "partial_bnfc_parser.y"
+#line 108 "partial_bnfc_parser.y"
 
 void yyerror(YYLTYPE *loc, yyscan_t scanner, YYSTYPE *result, const char *msg)
 {
@@ -300,7 +309,7 @@ int yyparse(yyscan_t scanner, YYSTYPE *result);
 
 extern int yylex(YYSTYPE *lvalp, YYLTYPE *llocp, yyscan_t scanner);
 
-#line 304 "partial_bnfc_parser.tab.c"
+#line 313 "partial_bnfc_parser.tab.c"
 
 
 #ifdef short
@@ -625,21 +634,21 @@ union yyalloc
 #endif /* !YYCOPY_NEEDED */
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  29
+#define YYFINAL  35
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   688
+#define YYLAST   714
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  80
+#define YYNTOKENS  84
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  74
+#define YYNNTS  79
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  209
+#define YYNRULES  227
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  354
+#define YYNSTATES  395
 
 /* YYMAXUTOK -- Last valid token kind.  */
-#define YYMAXUTOK   334
+#define YYMAXUTOK   338
 
 
 /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
@@ -686,34 +695,36 @@ static const yytype_int8 yytranslate[] =
       45,    46,    47,    48,    49,    50,    51,    52,    53,    54,
       55,    56,    57,    58,    59,    60,    61,    62,    63,    64,
       65,    66,    67,    68,    69,    70,    71,    72,    73,    74,
-      75,    76,    77,    78,    79
+      75,    76,    77,    78,    79,    80,    81,    82,    83
 };
 
 #if YYDEBUG
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,   273,   273,   275,   276,   277,   279,   280,   282,   284,
-     286,   287,   289,   290,   292,   293,   294,   295,   296,   297,
-     298,   299,   300,   301,   302,   303,   304,   305,   306,   307,
-     309,   311,   312,   314,   315,   316,   318,   320,   322,   323,
-     324,   326,   327,   329,   331,   333,   335,   336,   338,   339,
-     341,   343,   344,   346,   348,   349,   350,   351,   353,   355,
-     356,   358,   360,   361,   363,   365,   366,   368,   369,   371,
-     372,   374,   375,   376,   377,   378,   379,   380,   381,   382,
-     383,   384,   385,   386,   388,   389,   391,   392,   394,   395,
-     397,   398,   400,   401,   403,   404,   406,   407,   409,   410,
-     412,   413,   414,   416,   417,   418,   419,   420,   422,   423,
-     424,   426,   427,   428,   430,   431,   432,   433,   435,   436,
-     437,   438,   439,   440,   441,   443,   444,   445,   446,   447,
-     448,   450,   451,   453,   454,   459,   461,   462,   464,   465,
-     467,   469,   470,   472,   473,   474,   475,   476,   477,   478,
-     479,   480,   481,   482,   483,   485,   486,   488,   489,   491,
-     492,   494,   495,   497,   498,   500,   501,   503,   504,   505,
-     507,   508,   509,   510,   511,   513,   514,   515,   517,   518,
-     519,   521,   522,   523,   524,   526,   527,   529,   530,   531,
-     532,   533,   534,   535,   536,   537,   538,   540,   541,   542,
-     543,   544,   546,   547,   548,   549,   551,   552,   553,   555
+       0,   285,   285,   287,   288,   289,   291,   292,   294,   296,
+     298,   299,   301,   302,   304,   305,   306,   307,   308,   309,
+     310,   311,   312,   313,   314,   315,   316,   317,   318,   319,
+     320,   321,   322,   323,   324,   325,   327,   328,   330,   331,
+     333,   334,   336,   338,   339,   341,   342,   343,   345,   347,
+     349,   350,   352,   353,   354,   356,   357,   359,   361,   363,
+     365,   366,   368,   369,   371,   373,   374,   376,   378,   379,
+     380,   381,   383,   385,   386,   388,   390,   391,   393,   395,
+     396,   398,   399,   401,   402,   404,   405,   406,   407,   408,
+     409,   410,   411,   412,   413,   414,   415,   416,   417,   419,
+     420,   422,   423,   425,   426,   428,   429,   431,   432,   434,
+     435,   437,   438,   440,   441,   443,   444,   446,   447,   448,
+     450,   451,   452,   453,   454,   456,   457,   458,   460,   461,
+     462,   464,   465,   466,   467,   469,   470,   471,   472,   473,
+     474,   475,   477,   478,   479,   480,   481,   482,   484,   485,
+     487,   488,   490,   492,   493,   495,   496,   498,   500,   501,
+     503,   504,   505,   506,   507,   508,   509,   510,   511,   512,
+     513,   514,   516,   517,   519,   520,   522,   523,   525,   526,
+     528,   529,   531,   532,   534,   535,   536,   538,   539,   540,
+     541,   542,   544,   545,   546,   548,   549,   550,   552,   553,
+     554,   555,   557,   558,   560,   561,   562,   563,   564,   565,
+     566,   567,   568,   569,   571,   572,   573,   574,   575,   576,
+     578,   579,   580,   581,   583,   584,   585,   587
 };
 #endif
 
@@ -735,31 +746,32 @@ static const char *const yytname[] =
   "_COMMA", "_MINUS", "_DMINUS", "_MINUSEQ", "_RARROW", "_DOT",
   "_ELLIPSIS", "_SLASH", "_SLASHEQ", "_COLON", "_SEMI", "_LT", "_DLT",
   "_DLTEQ", "_LDARROW", "_EQ", "_DEQ", "_GT", "_GTEQ", "_DGT", "_DGTEQ",
-  "_QUESTION", "_CARET", "_CARETEQ", "_SYMB_1", "_SYMB_2", "_SYMB_3",
-  "_KW_break", "_KW_case", "_KW_char", "_KW_continue", "_KW_default",
-  "_KW_double", "_KW_else", "_KW_float", "_KW_if", "_KW_int", "_KW_long",
-  "_KW_return", "_KW_short", "_KW_struct", "_KW_switch", "_KW_unsigned",
-  "_KW_void", "_KW_while", "_BAR", "_BAREQ", "_DBAR", "_TILDE",
-  "T_BLOCKATTRIBUTE", "T_CONST", "T_LBRACE", "T_LBRACKET", "T_RBRACE",
-  "T_RBRACKET", "T_RESTRICT", "T_SIGNED", "T_VOLATILE", "_CHAR_",
-  "_INTEGER_", "_DOUBLE_", "_IDENT_", "$accept", "Program", "Globals",
-  "Global", "FunctionDef", "FunctionDefStart", "DeclSpecList",
-  "DeclSpecListNoNamed", "TypeSpec", "Declarator", "PointerOpt",
-  "DirectDecl", "AttributesWithAsm", "RestParList", "ParameterDecl",
-  "ListParameterDecl", "GhostParameterOpt", "IdOrTypename",
-  "IdOrTypenameAsId", "Declaration", "DeclAndInitDeclAttrList",
-  "InitDeclaratorAttr", "ListInitDeclaratorAttr", "InitDeclarator",
-  "StructDeclList", "FieldDecl", "ListFieldDecl", "Attribute",
-  "ListAttribute", "Block", "BlockAttrs", "BlockElement",
-  "ListBlockElement", "Statement", "Attr", "ListAttr", "Attr1", "Attr2",
-  "Attr3", "Attr4", "Attr5", "Attr6", "Attr7", "Attr8", "Attr9", "Attr10",
-  "Attr11", "Attr12", "Attr13", "Attr14", "BasicAttribute",
-  "AnnotatedStmt", "ElsePart", "OptExpression", "Expression",
-  "ListExpression", "AssignExpr", "AssignExpr1", "AssignExpr2",
-  "AssignExpr3", "AssignExpr4", "AssignExpr5", "AssignExpr6",
-  "AssignExpr7", "AssignExpr8", "AssignExpr9", "AssignExpr10",
-  "AssignExpr11", "AssignExpr12", "AssignExpr13", "AssignExpr14",
-  "AssignExpr15", "Constant", "TypeName", YY_NULLPTR
+  "_QUESTION", "_LBRACK", "_RBRACK", "_CARET", "_CARETEQ", "_SYMB_1",
+  "_SYMB_2", "_SYMB_3", "_KW_break", "_KW_case", "_KW_char",
+  "_KW_continue", "_KW_default", "_KW_double", "_KW_else", "_KW_enum",
+  "_KW_float", "_KW_for", "_KW_if", "_KW_int", "_KW_long", "_KW_return",
+  "_KW_short", "_KW_64", "_KW_struct", "_KW_switch", "_KW_union",
+  "_KW_unsigned", "_KW_void", "_KW_while", "_LBRACE", "_BAR", "_BAREQ",
+  "_DBAR", "_RBRACE", "_TILDE", "T_BLOCKATTRIBUTE", "T_CONST",
+  "T_RESTRICT", "T_SIGNED", "T_VOLATILE", "_CHAR_", "_INTEGER_",
+  "_DOUBLE_", "_IDENT_", "$accept", "Program", "Globals", "Global",
+  "FunctionDef", "FunctionDefStart", "DeclSpecList", "DeclSpecListNoNamed",
+  "TypeSpec", "Enumerator", "ListEnumerator", "MaybeComma", "Declarator",
+  "PointerOpt", "DirectDecl", "AttributesWithAsm", "RestParList",
+  "MaybeThreeDots", "ParameterDecl", "ListParameterDecl",
+  "GhostParameterOpt", "IdOrTypename", "IdOrTypenameAsId", "Declaration",
+  "DeclAndInitDeclAttrList", "InitDeclaratorAttr",
+  "ListInitDeclaratorAttr", "InitDeclarator", "StructDeclList",
+  "FieldDecl", "ListFieldDecl", "Attribute", "ListAttribute", "Block",
+  "BlockAttrs", "BlockElement", "ListBlockElement", "Statement",
+  "ForClause", "Attr", "ListAttr", "Attr1", "Attr2", "Attr3", "Attr4",
+  "Attr5", "Attr6", "Attr7", "Attr8", "Attr9", "Attr10", "Attr11",
+  "Attr12", "Attr13", "Attr14", "BasicAttribute", "AnnotatedStmt",
+  "ElsePart", "OptExpression", "Expression", "ListExpression",
+  "AssignExpr", "AssignExpr1", "AssignExpr2", "AssignExpr3", "AssignExpr4",
+  "AssignExpr5", "AssignExpr6", "AssignExpr7", "AssignExpr8",
+  "AssignExpr9", "AssignExpr10", "AssignExpr11", "AssignExpr12",
+  "AssignExpr13", "AssignExpr14", "AssignExpr15", "Constant", "TypeName", YY_NULLPTR
 };
 
 static const char *
@@ -769,12 +781,12 @@ yysymbol_name (yysymbol_kind_t yysymbol)
 }
 #endif
 
-#define YYPACT_NINF (-274)
+#define YYPACT_NINF (-249)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
 
-#define YYTABLE_NINF (-32)
+#define YYTABLE_NINF (-44)
 
 #define yytable_value_is_error(Yyn) \
   0
@@ -783,42 +795,46 @@ yysymbol_name (yysymbol_kind_t yysymbol)
    STATE-NUM.  */
 static const yytype_int16 yypact[] =
 {
-     470,   470,  -274,  -274,  -274,  -274,  -274,  -274,  -274,  -274,
-    -274,   -20,  -274,  -274,  -274,  -274,    52,  -274,   470,  -274,
-      21,    34,   609,  -274,  -274,   586,  -274,    33,  -274,  -274,
-    -274,    45,  -274,  -274,  -274,    48,    60,   113,   127,  -274,
-     609,   586,    35,    78,   586,   145,  -274,     6,   153,  -274,
-    -274,   165,  -274,  -274,   586,  -274,   148,   158,  -274,   129,
-     488,   218,  -274,  -274,  -274,   530,  -274,  -274,   184,  -274,
-    -274,  -274,   165,   586,  -274,   488,   488,   488,   488,   488,
-     488,   488,  -274,  -274,   194,   190,   203,   187,   -10,   212,
-     161,   185,   222,    16,    47,    40,    38,    18,  -274,     3,
-    -274,  -274,   460,   460,    60,   294,   460,   460,   474,   460,
-     474,  -274,   204,   460,   207,   209,   228,    76,   229,   230,
-     460,  -274,  -274,  -274,  -274,   558,    34,  -274,  -274,  -274,
-    -274,   224,   219,  -274,  -274,    -7,   239,   186,   210,   243,
-      17,    65,    81,    56,    31,   301,  -274,    93,  -274,  -274,
-     149,  -274,     2,   240,   235,  -274,   165,  -274,  -274,  -274,
-    -274,   242,  -274,  -274,  -274,  -274,    95,   488,  -274,   488,
-     488,   488,   488,   488,   488,   488,   488,   488,   488,   488,
-     488,   488,   488,   488,   488,   488,   488,   488,   488,    60,
-      60,   488,  -274,  -274,  -274,  -274,  -274,   245,   246,   247,
-    -274,  -274,   384,  -274,  -274,  -274,  -274,   116,  -274,   370,
-     460,  -274,   227,   460,   460,  -274,   460,  -274,   460,   460,
-     460,   460,   460,   460,   460,   460,   460,   460,   460,   460,
-     460,   460,   460,   460,   460,   460,   460,   460,   460,   460,
-     460,   460,   460,   460,   460,   460,   460,   460,  -274,  -274,
-      60,    60,   257,  -274,  -274,  -274,   149,  -274,  -274,  -274,
-     269,  -274,  -274,   255,   212,   161,   185,   222,    16,    47,
-      47,    40,    40,    40,    40,    38,    38,    18,    18,  -274,
-    -274,  -274,  -274,  -274,   211,  -274,  -274,   460,   460,   370,
-    -274,  -274,   273,  -274,   274,   276,  -274,   263,  -274,   239,
-    -274,   186,   210,   243,    17,    65,    65,    81,    81,    81,
-      81,    56,    56,    31,    31,  -274,  -274,  -274,  -274,  -274,
-    -274,  -274,  -274,  -274,  -274,  -274,  -274,  -274,  -274,  -274,
-    -274,  -274,  -274,  -274,  -274,   488,  -274,  -274,   264,  -274,
-     370,   370,   370,   460,  -274,   370,   248,  -274,  -274,  -274,
-    -274,   370,  -274,  -274
+     586,   586,  -249,  -249,  -249,  -249,  -249,   -18,  -249,  -249,
+    -249,  -249,  -249,    61,    71,  -249,  -249,  -249,    33,  -249,
+     586,  -249,   -15,    78,   636,  -249,  -249,    11,  -249,    12,
+    -249,   611,    38,   611,    62,  -249,  -249,    -8,  -249,  -249,
+    -249,    81,    17,   114,    60,  -249,   636,   119,   149,   158,
+      11,   611,   130,    99,   611,   121,   611,   176,  -249,     4,
+     208,  -249,  -249,   209,  -249,   355,    11,  -249,   157,   158,
+    -249,   611,  -249,   223,   198,  -249,   174,  -249,   179,   472,
+     252,  -249,  -249,  -249,   533,  -249,  -249,   237,  -249,  -249,
+     355,   355,    17,   332,   355,   355,   435,   355,   435,   355,
+    -249,  -249,  -249,  -249,  -249,  -249,  -249,    -2,   250,   192,
+     224,   276,    50,   164,   104,    86,    83,    31,  -249,    20,
+    -249,  -249,  -249,  -249,   214,  -249,   209,   611,  -249,  -249,
+     472,   472,   472,   472,   472,   472,   472,  -249,  -249,   274,
+     272,   293,   289,    10,   314,   254,   285,   320,    54,   210,
+     123,   154,   126,  -249,    70,  -249,  -249,  -249,   301,   355,
+     303,   310,   327,   328,   212,   331,   333,  -249,    78,  -249,
+    -249,  -249,  -249,   335,   318,   558,  -249,    21,   337,   336,
+     338,   209,  -249,  -249,  -249,  -249,   343,   345,   346,  -249,
+    -249,   155,  -249,  -249,  -249,  -249,   355,   355,   355,   355,
+     355,   355,   355,   355,   355,   355,   355,   355,   355,   355,
+     355,   355,   355,   355,   355,   355,   355,   355,   355,   355,
+     355,   355,   355,   355,   355,   355,  -249,  -249,    17,    17,
+     355,  -249,  -249,  -249,  -249,  -249,   348,  -249,  -249,  -249,
+    -249,    64,   472,  -249,   472,   472,   472,   472,   472,   472,
+     472,   472,   472,   472,   472,   472,   472,   472,   472,   472,
+     472,   472,   472,   472,    17,    17,   472,  -249,   153,  -249,
+     492,   412,   355,  -249,   322,   355,   355,   355,  -249,   349,
+    -249,  -249,  -249,   558,   341,  -249,  -249,  -249,  -249,   355,
+     340,  -249,   250,  -249,   192,   224,   276,    50,   164,   164,
+     104,   104,   104,   104,    86,    86,    83,    83,  -249,  -249,
+    -249,  -249,  -249,  -249,  -249,  -249,  -249,  -249,  -249,  -249,
+    -249,  -249,  -249,  -249,   321,  -249,  -249,   357,  -249,  -249,
+     352,   314,   254,   285,   320,    54,   210,   210,   123,   123,
+     123,   123,   154,   154,   126,   126,  -249,  -249,  -249,  -249,
+    -249,   339,   355,   492,  -249,  -249,  -249,   355,   344,   361,
+    -249,   370,   371,  -249,  -249,  -249,  -249,  -249,  -249,   355,
+    -249,  -249,   472,  -249,   358,  -249,   360,  -249,   492,   492,
+     492,  -249,  -249,   492,   355,   347,  -249,  -249,  -249,   377,
+     492,  -249,   492,  -249,  -249
 };
 
 /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -826,68 +842,72 @@ static const yytype_int16 yypact[] =
    means the default is an error.  */
 static const yytype_uint8 yydefact[] =
 {
-       3,     3,    16,    18,    21,    15,    23,    22,    19,    20,
-      17,     0,    25,    14,    24,    29,     0,     2,     3,     7,
-       0,    31,    10,     6,     5,    54,    45,    26,    44,     1,
-       4,    65,     8,    62,    47,    53,     0,     0,    48,    11,
-      12,    54,    31,     0,    54,     0,    69,    31,    36,    33,
-      46,    31,    13,    56,    54,    58,    59,     0,    28,     0,
-       0,     0,    61,    32,    63,     0,    30,    53,    51,    49,
-      50,    55,    31,    54,    27,     0,     0,     0,     0,     0,
-       0,     0,   133,   134,     0,    86,     0,    84,    88,    90,
-      92,    94,    96,    98,   100,   103,   108,   111,   114,   118,
-     125,   131,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,    71,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,    64,   208,   206,   207,   202,    31,    67,    73,    70,
-      68,   141,     0,   140,   143,   155,   157,   159,   161,   163,
-     165,   167,   170,   175,   178,   181,   185,   187,   197,   203,
-       0,    43,    39,     0,    41,    37,    31,    60,    57,   123,
-     122,     0,   121,   119,   120,   124,     0,     0,    66,     0,
+       3,     3,    16,    18,    22,    15,    24,     0,    23,    19,
+      21,    17,    20,     0,     0,    26,    14,    25,     0,     2,
+       3,     7,     0,    43,    10,     6,     5,     0,    59,    33,
+      58,    68,    27,    68,    30,     1,     4,    79,     8,    76,
+      61,    67,     0,     0,    62,    11,    12,    36,    38,    40,
+       0,    68,    43,     0,    68,     0,    68,     0,    83,    43,
+      48,    45,    60,    43,    13,     0,     0,    41,     0,    40,
+      70,    68,    72,    73,     0,    29,     0,    32,     0,     0,
+       0,    75,    44,    77,     0,    42,    67,    65,    63,    64,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+     226,   224,   225,   220,    37,   157,   160,   172,   174,   176,
+     178,   180,   182,   184,   187,   192,   195,   198,   202,   204,
+     214,   221,    39,    35,     0,    69,    43,    68,    28,    31,
+       0,     0,     0,     0,     0,     0,     0,   150,   151,     0,
+     103,     0,   101,   105,   107,   109,   111,   113,   115,   117,
+     120,   125,   128,   131,   135,   142,   148,    85,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,    78,    43,    81,
+      87,    84,    82,   158,     0,     0,    57,    53,     0,    55,
+      50,    43,   211,   210,   213,   227,     0,     0,     0,   209,
+     207,     0,   205,   208,   206,   212,   155,     0,     0,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,   202,   194,   193,   196,   209,     0,     0,     0,
-     192,   190,     0,   188,   191,   189,    82,     0,    83,     0,
-       0,    80,     0,     0,     0,   195,     0,    72,   138,     0,
+       0,     0,     0,     0,     0,     0,   218,   219,     0,     0,
+       0,    34,    74,    71,   140,   139,     0,   138,   136,   137,
+     141,     0,     0,    80,     0,     0,     0,     0,     0,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,     0,     0,     0,   200,   201,
-       0,     0,     0,    34,    38,    43,     0,    52,   132,   127,
-       0,    87,    85,     0,    91,    93,    95,    97,    99,   102,
-     101,   104,   106,   105,   107,   109,   110,   112,   113,   117,
-     115,   116,   128,   129,     0,   205,   204,     0,     0,     0,
-     135,    79,     0,    81,     0,     0,   142,     0,   139,   158,
-     181,   160,   162,   164,   166,   169,   168,   171,   173,   172,
-     174,   176,   177,   179,   180,   184,   182,   183,   149,   150,
-     147,   145,   146,   148,   153,   144,   154,   152,   151,   199,
-     198,    40,    35,    42,   126,     0,   130,   186,     0,    77,
-       0,     0,     0,     0,    89,     0,   136,    75,    76,   156,
-      78,     0,    74,   137
+       0,     0,     0,     0,     0,     0,     0,    97,     0,    98,
+       0,   155,     0,    95,     0,     0,     0,     0,    86,     0,
+      46,    52,    57,     0,     0,    49,    66,   223,   222,     0,
+       0,   156,   175,   198,   177,   179,   181,   183,   186,   185,
+     188,   190,   189,   191,   193,   194,   196,   197,   201,   199,
+     200,   166,   167,   164,   162,   163,   165,   170,   161,   171,
+     169,   168,   217,   216,     0,   149,   144,     0,   104,   102,
+       0,   108,   110,   112,   114,   116,   119,   118,   121,   123,
+     122,   124,   126,   127,   129,   130,   134,   132,   133,   145,
+     146,     0,     0,     0,   152,    94,   100,   155,     0,     0,
+      96,     0,     0,   159,    54,    47,    56,    51,   203,     0,
+     215,   143,     0,   147,     0,    92,     0,    99,     0,     0,
+       0,   173,   106,     0,   155,   153,    89,    90,    93,     0,
+       0,    88,     0,   154,    91
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int16 yypgoto[] =
 {
-    -274,  -274,    27,  -274,  -274,  -274,     0,   253,    20,    -8,
-     254,  -274,  -274,  -274,   150,    50,    49,   -32,    -6,   251,
-    -274,  -274,   160,   -18,   -27,  -274,   249,  -274,  -274,   -12,
-    -274,  -274,  -274,   256,   -54,     9,  -158,  -274,   152,   147,
-     151,   146,   154,    12,     1,    15,    10,   -40,  -274,  -274,
-    -274,  -273,  -274,  -274,  -103,   -51,   434,   -15,  -274,   106,
-     110,   105,   109,   112,   -13,   -58,   -17,   -16,  -100,   -22,
-    -274,  -274,  -274,  -274
+    -249,  -249,    19,  -249,  -249,  -249,     6,   350,    39,  -249,
+       0,   323,     9,   359,  -249,  -249,  -249,  -249,   227,   120,
+     122,   -11,     5,   -70,  -249,  -249,   226,   -48,     2,  -249,
+     279,  -249,  -249,    -6,  -249,  -249,  -249,   329,  -249,  -118,
+     -80,  -223,  -249,   162,   170,   163,   173,   169,   -63,    -5,
+     -60,   -16,  -106,  -249,  -249,  -249,  -188,  -249,  -248,   -64,
+     -93,   -10,    57,  -249,   233,   235,   225,   234,   239,    55,
+      69,    73,    68,   -86,   -52,  -249,  -249,  -249,  -249
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int16 yydefgoto[] =
 {
-       0,    16,    17,    18,    19,    20,    42,    39,    22,    67,
-      36,    48,    66,   153,   154,   155,   253,    27,    84,    23,
-      37,    68,    69,    38,    43,    56,    57,    64,    47,   128,
-      46,   129,    61,   290,    85,    86,    87,    88,    89,    90,
-      91,    92,    93,    94,    95,    96,    97,    98,    99,   100,
-     101,   291,   352,   297,   131,   132,   133,   134,   135,   136,
-     137,   138,   139,   140,   141,   142,   143,   144,   145,   146,
-     147,   148,   149,   199
+       0,    18,    19,    20,    21,    22,    52,    45,    24,    48,
+      49,    68,    86,    42,    60,    85,   178,   285,   179,   180,
+     280,    29,   139,    25,    43,    87,    88,    44,    53,    73,
+      74,    83,    59,   170,    58,   171,    80,   354,   357,   140,
+     141,   142,   143,   144,   145,   146,   147,   148,   149,   150,
+     151,   152,   153,   154,   155,   156,   355,   391,   290,   173,
+     174,   105,   106,   107,   108,   109,   110,   111,   112,   113,
+     114,   115,   116,   117,   118,   119,   120,   121,   188
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -895,216 +915,228 @@ static const yytype_int16 yydefgoto[] =
    number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int16 yytable[] =
 {
-      21,    21,   193,   194,    49,    28,   200,   201,    32,   204,
-     207,   262,   263,    35,    53,    33,   339,    59,    21,    33,
-     215,   176,   224,   161,   186,   189,   190,    71,    24,   170,
-      28,   187,   218,    70,    55,   159,   160,   234,   162,   163,
-     164,   165,    40,   188,   235,    30,   158,    33,    33,    25,
-     177,   225,    29,   184,   198,   171,   236,   185,   219,    26,
-      40,   126,    34,    54,    55,   152,   212,   346,   347,   348,
-     182,   232,   350,   191,    62,   233,   178,   183,   353,   179,
-     102,   -31,   180,   181,   103,   104,   203,   105,   205,   106,
-      31,   107,   108,   197,   226,   109,   110,   227,   195,    75,
-     228,   229,    44,    76,   211,   196,    77,   259,    78,   248,
-      79,   230,    45,   249,    80,   250,   251,    -9,   231,   300,
-     300,   300,   300,   300,   300,   300,   300,   300,   300,   300,
-     300,   300,   300,   300,   315,   316,   317,   284,    70,    26,
-     288,    50,   120,   289,   254,    51,   279,   280,   281,    58,
-     152,   198,   122,   123,   124,   192,    60,   282,   283,   292,
-     150,    81,   294,   295,    65,   296,    72,   298,   307,   308,
-     309,   310,    82,    83,    26,   260,   261,   344,    33,   271,
-     272,   273,   274,    28,    28,   338,    73,   337,   269,   270,
-     197,     2,     3,     4,   277,   278,     5,   275,   276,     6,
-      74,     7,   156,     8,     9,   166,    10,    11,   167,    12,
-      13,   305,   306,   311,   312,   168,   313,   314,   329,   330,
-     169,   172,   102,    14,   173,   174,   103,   104,    15,   105,
-     175,   106,   206,   107,   108,   208,   209,   109,   110,   210,
-     213,   214,   216,   300,    28,    28,   111,   217,   220,   221,
-     222,   223,   255,   256,   258,   293,   152,   285,   286,   287,
-       2,     3,     4,   112,   113,     5,   114,   115,     6,   331,
-       7,   116,     8,     9,   117,    10,    11,   118,    12,    13,
-     119,   334,   335,   336,   120,   340,   341,    31,   342,   121,
-     343,   345,    14,    52,   122,   123,   124,   125,   102,   351,
-     252,    63,   103,   104,   332,   105,   333,   106,   237,   107,
-     108,   238,   127,   109,   110,   239,   257,   130,   240,   265,
-     267,   157,   241,   264,   266,   299,   302,   242,   349,   268,
-     301,   303,   243,     0,   244,   304,     2,     3,     4,   245,
-       0,     5,   246,     0,     6,     0,     7,     0,     8,     9,
-       0,    10,    11,     0,    12,    13,     0,     0,     0,     0,
-     120,     0,     0,    31,     0,   247,     0,     0,    14,     0,
-     122,   123,   124,   125,   102,     0,     0,     0,   103,   104,
-       0,   105,     0,   106,     0,   107,   108,     0,   102,   109,
-     110,     0,   103,   104,     0,   105,     0,   106,   111,   107,
-     108,     0,     0,   109,   110,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,   112,   113,     0,   114,   115,
-       0,     0,     0,   116,     0,     0,   117,     0,     0,   118,
-       0,     0,   119,     0,     0,     0,   120,     0,     0,    31,
-       0,     0,     0,     0,     0,     0,   122,   123,   124,   192,
-     120,     0,     0,    31,     0,     0,     0,     0,     0,     0,
-     122,   123,   124,   192,   102,     0,     0,     0,   103,   104,
-       0,   105,     0,   106,     0,   107,   108,     0,   102,   109,
-     110,     0,   103,   104,     0,   202,     0,   106,     0,   107,
-     108,     0,    75,   109,   110,     0,    76,     0,     1,    77,
-       0,    78,     0,    79,     0,     0,     0,    80,     0,     0,
-       0,     0,     2,     3,     4,     0,     0,     5,     0,     0,
-       6,     0,     7,     0,     8,     9,   120,    10,    11,     0,
-      12,    13,     0,     0,     0,     0,   122,   123,   124,   192,
-     120,   150,   151,     0,    14,     0,     0,     0,     0,    15,
-     122,   123,   124,   192,    81,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,    82,    83,    26,     0,     0,
-     -29,   -29,     2,     3,     4,     0,     0,     5,     0,     0,
-       6,     0,     7,     0,     8,     9,   -29,    10,    11,     0,
-      12,    13,     0,     0,     0,     0,     0,     0,     0,     0,
-     -29,   -29,   -29,     0,    14,   -29,     0,     0,   -29,    15,
-     -29,     0,   -29,   -29,    41,   -29,   -29,     0,   -29,   -29,
-       0,     0,     0,     0,     0,     0,     0,     0,     2,     3,
-       4,     0,   -29,     5,     0,     0,     6,   -29,     7,     0,
-       8,     9,     0,    10,    11,     0,    12,    13,     0,     0,
-       0,     2,     3,     4,     0,     0,     5,     0,     0,     6,
-      14,     7,     0,     8,     9,    15,    10,    11,     0,    12,
-      13,   318,   319,   320,   321,   322,   323,   324,   325,   326,
-     327,   328,     0,    14,     0,     0,     0,     0,    15
+     187,   104,    32,    34,   182,   183,    23,    23,   189,   190,
+     169,   193,    30,   195,   236,    89,    38,    39,    30,    30,
+      26,   329,   330,   358,   234,   235,    23,   237,   238,   239,
+     240,    61,    41,    35,    39,    55,   226,   196,   215,    36,
+     227,   216,   228,   229,   192,   217,   194,    30,   218,   245,
+      69,    27,   219,    70,    37,   202,    76,   220,    78,   251,
+     230,    72,   221,    46,   222,    28,   122,    57,   130,   223,
+     197,   274,   131,   125,   224,   132,   326,   133,    63,   134,
+      81,    50,   246,   135,   203,    46,   168,   186,   252,   212,
+     177,    39,   264,   265,    47,   268,   213,   184,   187,   185,
+      28,   210,   225,   291,   -43,   211,    40,    54,   214,   376,
+     266,   293,   293,   293,   293,   293,   293,   293,   293,   293,
+     293,   293,   293,   293,   293,   293,   308,   309,   310,   233,
+      31,    56,   261,    89,   208,    72,   389,   324,   136,   262,
+      33,   209,    62,    39,    28,   137,   138,    28,   351,   382,
+      -9,   263,    65,   257,    28,   346,   347,   348,    71,    90,
+     258,   327,   328,    91,    92,   375,    93,    66,    94,   259,
+      95,    96,    75,   260,    97,    98,    67,   352,   291,   359,
+     353,   177,   361,   362,   363,   186,   281,    79,   336,   337,
+     385,   386,   387,   204,    77,   388,   205,   342,   343,   206,
+     207,   356,   393,   368,   394,   311,   312,   313,   314,   315,
+     316,   317,   318,   319,   320,   321,    90,   322,   323,    84,
+      91,    92,    39,    93,    37,    94,   127,    95,    96,    99,
+     123,    97,    98,    30,    30,   100,   101,   102,   103,   253,
+     273,   126,   254,   344,   345,   255,   256,   128,   338,   339,
+     340,   341,   129,   349,   350,   181,    90,   298,   299,   198,
+      91,    92,   199,    93,   291,    94,   200,    95,    96,    30,
+      30,    97,    98,   300,   301,   302,   303,   168,   306,   307,
+     157,   304,   305,   293,   201,   241,    99,   231,   374,   177,
+     242,   291,   100,   101,   102,   103,     2,     3,     4,   158,
+     159,     5,   160,   161,     6,   243,     7,     8,   162,   163,
+       9,    10,   164,    11,    12,    13,   165,    14,    15,    16,
+     166,    37,   244,   247,   248,   167,    99,   249,   250,   267,
+      17,   269,   100,   101,   102,   103,    90,   270,   271,   272,
+      91,    92,   275,    93,   276,    94,   278,    95,    96,   282,
+     360,    97,    98,   277,   283,   287,   284,   288,   289,    90,
+     325,   364,   370,    91,    92,   367,    93,   369,    94,   371,
+      95,    96,   377,   378,    97,    98,     2,     3,     4,   372,
+     373,     5,   379,   380,     6,   383,     7,     8,   384,   392,
+       9,    10,   124,    11,    12,    13,    64,    14,    15,    16,
+     390,    37,   279,   366,   365,   232,    99,   286,   331,   172,
+      17,   333,   100,   101,   102,   103,    90,   332,    82,   335,
+      91,    92,   334,    93,   295,    94,   381,    95,    96,    99,
+     292,    97,    98,   294,   296,   100,   101,   102,   103,    90,
+     297,     0,     0,    91,    92,     0,   191,     0,    94,     0,
+      95,    96,     0,     0,    97,    98,     2,     3,     4,     0,
+       0,     5,     0,     0,     6,     0,     7,     8,     0,     0,
+       9,    10,     0,    11,    12,    13,   130,    14,    15,    16,
+     131,     0,     0,   132,     0,   133,    99,   134,     0,     0,
+      17,   135,   100,   101,   102,   103,    90,     0,     0,     0,
+      91,    92,     0,    93,     0,    94,     0,    95,    96,    99,
+       0,    97,    98,     0,     0,   100,   101,   102,   103,     0,
+     157,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,   158,
+     159,     0,   160,   161,   175,   176,   136,     0,   162,   163,
+       0,     0,   164,   137,   138,    28,   165,     0,     0,     0,
+     166,    37,     0,     0,     0,     0,    99,     0,     0,   175,
+       0,     0,   100,   101,   102,   103,     0,     2,     3,     4,
+       0,     0,     5,     0,     0,     6,     0,     7,     8,     0,
+       0,     9,    10,     0,    11,    12,    13,     0,    14,    15,
+      16,     0,     2,     3,     4,     0,     0,     5,     0,     0,
+       6,    17,     7,     8,     1,     0,     9,    10,     0,    11,
+      12,    13,     0,    14,    15,    16,     0,     0,     0,     0,
+       2,     3,     4,     0,     0,     5,    17,     0,     6,    51,
+       7,     8,     0,     0,     9,    10,     0,    11,    12,    13,
+       0,    14,    15,    16,     0,     2,     3,     4,     0,     0,
+       5,     0,     0,     6,    17,     7,     8,     0,     0,     9,
+      10,     0,    11,    12,    13,     0,    14,    15,    16,     0,
+       2,     3,     4,     0,     0,     5,     0,     0,     6,    17,
+       7,     8,     0,     0,     9,    10,     0,    11,    12,    13,
+       0,    14,    15,    16,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,    17
 };
 
 static const yytype_int16 yycheck[] =
 {
-       0,     1,   102,   103,    36,    11,   106,   107,    20,   109,
-     113,   169,   170,    21,    41,    13,   289,    44,    18,    13,
-     120,     5,     5,    77,     6,    22,    23,    54,     1,    39,
-      36,    13,    39,    51,    42,    75,    76,     6,    78,    79,
-      80,    81,    22,    25,    13,    18,    73,    13,    13,    69,
-      34,    34,     0,    15,   105,    65,    25,    19,    65,    79,
-      40,    61,    28,    28,    72,    65,   117,   340,   341,   342,
-      30,    15,   345,    70,    68,    19,    29,    37,   351,    32,
-       4,    79,    35,    36,     8,     9,   108,    11,   110,    13,
-      69,    15,    16,   105,    29,    19,    20,    32,   104,     4,
-      35,    36,    69,     8,    28,   105,    11,    12,    13,    16,
-      15,    30,    67,    20,    19,    22,    23,    69,    37,   219,
-     220,   221,   222,   223,   224,   225,   226,   227,   228,   229,
-     230,   231,   232,   233,   234,   235,   236,   191,   156,    79,
-      24,    28,    66,    27,   152,    18,   186,   187,   188,    71,
-     150,   202,    76,    77,    78,    79,    11,   189,   190,   210,
-      11,    66,   213,   214,    11,   216,    18,   218,   226,   227,
-     228,   229,    77,    78,    79,   166,   167,   335,    13,   178,
-     179,   180,   181,   189,   190,   288,    28,   287,   176,   177,
-     202,    42,    43,    44,   184,   185,    47,   182,   183,    50,
-      71,    52,    18,    54,    55,    11,    57,    58,    18,    60,
-      61,   224,   225,   230,   231,    12,   232,   233,   250,   251,
-      33,     9,     4,    74,    63,    40,     8,     9,    79,    11,
-       8,    13,    28,    15,    16,    28,    27,    19,    20,    11,
-      11,    11,    18,   343,   250,   251,    28,    28,     9,    63,
-      40,     8,    12,    18,    12,    28,   256,    12,    12,    12,
-      42,    43,    44,    45,    46,    47,    48,    49,    50,    12,
-      52,    53,    54,    55,    56,    57,    58,    59,    60,    61,
-      62,    12,    27,    72,    66,    12,    12,    69,    12,    71,
-      27,    27,    74,    40,    76,    77,    78,    79,     4,    51,
-     150,    47,     8,     9,   255,    11,   256,    13,     7,    15,
-      16,    10,    61,    19,    20,    14,   156,    61,    17,   172,
-     174,    72,    21,   171,   173,   219,   221,    26,   343,   175,
-     220,   222,    31,    -1,    33,   223,    42,    43,    44,    38,
-      -1,    47,    41,    -1,    50,    -1,    52,    -1,    54,    55,
-      -1,    57,    58,    -1,    60,    61,    -1,    -1,    -1,    -1,
-      66,    -1,    -1,    69,    -1,    64,    -1,    -1,    74,    -1,
-      76,    77,    78,    79,     4,    -1,    -1,    -1,     8,     9,
-      -1,    11,    -1,    13,    -1,    15,    16,    -1,     4,    19,
-      20,    -1,     8,     9,    -1,    11,    -1,    13,    28,    15,
-      16,    -1,    -1,    19,    20,    -1,    -1,    -1,    -1,    -1,
-      -1,    -1,    -1,    -1,    -1,    45,    46,    -1,    48,    49,
-      -1,    -1,    -1,    53,    -1,    -1,    56,    -1,    -1,    59,
-      -1,    -1,    62,    -1,    -1,    -1,    66,    -1,    -1,    69,
-      -1,    -1,    -1,    -1,    -1,    -1,    76,    77,    78,    79,
-      66,    -1,    -1,    69,    -1,    -1,    -1,    -1,    -1,    -1,
-      76,    77,    78,    79,     4,    -1,    -1,    -1,     8,     9,
-      -1,    11,    -1,    13,    -1,    15,    16,    -1,     4,    19,
-      20,    -1,     8,     9,    -1,    11,    -1,    13,    -1,    15,
-      16,    -1,     4,    19,    20,    -1,     8,    -1,    28,    11,
-      -1,    13,    -1,    15,    -1,    -1,    -1,    19,    -1,    -1,
-      -1,    -1,    42,    43,    44,    -1,    -1,    47,    -1,    -1,
-      50,    -1,    52,    -1,    54,    55,    66,    57,    58,    -1,
-      60,    61,    -1,    -1,    -1,    -1,    76,    77,    78,    79,
-      66,    11,    12,    -1,    74,    -1,    -1,    -1,    -1,    79,
-      76,    77,    78,    79,    66,    -1,    -1,    -1,    -1,    -1,
-      -1,    -1,    -1,    -1,    -1,    77,    78,    79,    -1,    -1,
-      12,    13,    42,    43,    44,    -1,    -1,    47,    -1,    -1,
-      50,    -1,    52,    -1,    54,    55,    28,    57,    58,    -1,
-      60,    61,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
-      42,    43,    44,    -1,    74,    47,    -1,    -1,    50,    79,
-      52,    -1,    54,    55,    28,    57,    58,    -1,    60,    61,
-      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    42,    43,
-      44,    -1,    74,    47,    -1,    -1,    50,    79,    52,    -1,
-      54,    55,    -1,    57,    58,    -1,    60,    61,    -1,    -1,
-      -1,    42,    43,    44,    -1,    -1,    47,    -1,    -1,    50,
-      74,    52,    -1,    54,    55,    79,    57,    58,    -1,    60,
-      61,   237,   238,   239,   240,   241,   242,   243,   244,   245,
-     246,   247,    -1,    74,    -1,    -1,    -1,    -1,    79
+      93,    65,    13,    14,    90,    91,     0,     1,    94,    95,
+      80,    97,     7,    99,   132,    63,    22,    13,    13,    14,
+       1,   244,   245,   271,   130,   131,    20,   133,   134,   135,
+     136,    42,    23,     0,    13,    33,    16,    39,     7,    20,
+      20,    10,    22,    23,    96,    14,    98,    42,    17,    39,
+      50,    69,    21,    51,    69,     5,    54,    26,    56,     5,
+      40,    52,    31,    24,    33,    83,    66,    75,     4,    38,
+      72,   164,     8,    71,    43,    11,    12,    13,    18,    15,
+      76,    69,    72,    19,    34,    46,    80,    93,    34,     6,
+      84,    13,    22,    23,    83,   159,    13,    92,   191,    93,
+      83,    15,    71,   196,    83,    19,    28,    69,    25,   357,
+      40,   197,   198,   199,   200,   201,   202,   203,   204,   205,
+     206,   207,   208,   209,   210,   211,   212,   213,   214,   127,
+      69,    69,     6,   181,    30,   126,   384,   230,    74,    13,
+      69,    37,    28,    13,    83,    81,    82,    83,   266,   372,
+      69,    25,    33,    30,    83,   261,   262,   263,    28,     4,
+      37,   241,   242,     8,     9,   353,    11,    18,    13,    15,
+      15,    16,    73,    19,    19,    20,    18,    24,   271,   272,
+      27,   175,   275,   276,   277,   191,   177,    11,   251,   252,
+     378,   379,   380,    29,    73,   383,    32,   257,   258,    35,
+      36,   271,   390,   289,   392,   215,   216,   217,   218,   219,
+     220,   221,   222,   223,   224,   225,     4,   228,   229,    11,
+       8,     9,    13,    11,    69,    13,    28,    15,    16,    74,
+      73,    19,    20,   228,   229,    80,    81,    82,    83,    29,
+      28,    18,    32,   259,   260,    35,    36,    73,   253,   254,
+     255,   256,    73,   264,   265,    18,     4,   202,   203,     9,
+       8,     9,    70,    11,   357,    13,    42,    15,    16,   264,
+     265,    19,    20,   204,   205,   206,   207,   271,   210,   211,
+      28,   208,   209,   369,     8,    11,    74,    73,   352,   283,
+      18,   384,    80,    81,    82,    83,    44,    45,    46,    47,
+      48,    49,    50,    51,    52,    12,    54,    55,    56,    57,
+      58,    59,    60,    61,    62,    63,    64,    65,    66,    67,
+      68,    69,    33,     9,    70,    73,    74,    42,     8,    28,
+      78,    28,    80,    81,    82,    83,     4,    27,    11,    11,
+       8,     9,    11,    11,    11,    13,    28,    15,    16,    12,
+      28,    19,    20,    18,    18,    12,    18,    12,    12,     4,
+      12,    12,    41,     8,     9,    24,    11,    27,    13,    12,
+      15,    16,    28,    12,    19,    20,    44,    45,    46,    27,
+      41,    49,    12,    12,    52,    27,    54,    55,    28,    12,
+      58,    59,    69,    61,    62,    63,    46,    65,    66,    67,
+      53,    69,   175,   283,   282,   126,    74,   181,   246,    80,
+      78,   248,    80,    81,    82,    83,     4,   247,    59,   250,
+       8,     9,   249,    11,   199,    13,   369,    15,    16,    74,
+     197,    19,    20,   198,   200,    80,    81,    82,    83,     4,
+     201,    -1,    -1,     8,     9,    -1,    11,    -1,    13,    -1,
+      15,    16,    -1,    -1,    19,    20,    44,    45,    46,    -1,
+      -1,    49,    -1,    -1,    52,    -1,    54,    55,    -1,    -1,
+      58,    59,    -1,    61,    62,    63,     4,    65,    66,    67,
+       8,    -1,    -1,    11,    -1,    13,    74,    15,    -1,    -1,
+      78,    19,    80,    81,    82,    83,     4,    -1,    -1,    -1,
+       8,     9,    -1,    11,    -1,    13,    -1,    15,    16,    74,
+      -1,    19,    20,    -1,    -1,    80,    81,    82,    83,    -1,
+      28,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    47,
+      48,    -1,    50,    51,    11,    12,    74,    -1,    56,    57,
+      -1,    -1,    60,    81,    82,    83,    64,    -1,    -1,    -1,
+      68,    69,    -1,    -1,    -1,    -1,    74,    -1,    -1,    11,
+      -1,    -1,    80,    81,    82,    83,    -1,    44,    45,    46,
+      -1,    -1,    49,    -1,    -1,    52,    -1,    54,    55,    -1,
+      -1,    58,    59,    -1,    61,    62,    63,    -1,    65,    66,
+      67,    -1,    44,    45,    46,    -1,    -1,    49,    -1,    -1,
+      52,    78,    54,    55,    28,    -1,    58,    59,    -1,    61,
+      62,    63,    -1,    65,    66,    67,    -1,    -1,    -1,    -1,
+      44,    45,    46,    -1,    -1,    49,    78,    -1,    52,    28,
+      54,    55,    -1,    -1,    58,    59,    -1,    61,    62,    63,
+      -1,    65,    66,    67,    -1,    44,    45,    46,    -1,    -1,
+      49,    -1,    -1,    52,    78,    54,    55,    -1,    -1,    58,
+      59,    -1,    61,    62,    63,    -1,    65,    66,    67,    -1,
+      44,    45,    46,    -1,    -1,    49,    -1,    -1,    52,    78,
+      54,    55,    -1,    -1,    58,    59,    -1,    61,    62,    63,
+      -1,    65,    66,    67,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    78
 };
 
 /* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
    state STATE-NUM.  */
 static const yytype_uint8 yystos[] =
 {
-       0,    28,    42,    43,    44,    47,    50,    52,    54,    55,
-      57,    58,    60,    61,    74,    79,    81,    82,    83,    84,
-      85,    86,    88,    99,    82,    69,    79,    97,    98,     0,
-      82,    69,   109,    13,    28,    89,    90,   100,   103,    87,
-      88,    28,    86,   104,    69,    67,   110,   108,    91,    97,
-      28,    18,    87,   104,    28,    89,   105,   106,    71,   104,
-      11,   112,    68,    90,   107,    11,    92,    89,   101,   102,
-     103,   104,    18,    28,    71,     4,     8,    11,    13,    15,
-      19,    66,    77,    78,    98,   114,   115,   116,   117,   118,
-     119,   120,   121,   122,   123,   124,   125,   126,   127,   128,
-     129,   130,     4,     8,     9,    11,    13,    15,    16,    19,
-      20,    28,    45,    46,    48,    49,    53,    56,    59,    62,
-      66,    71,    76,    77,    78,    79,    86,    99,   109,   111,
-     113,   134,   135,   136,   137,   138,   139,   140,   141,   142,
-     143,   144,   145,   146,   147,   148,   149,   150,   151,   152,
-      11,    12,    86,    93,    94,    95,    18,   106,   104,   127,
-     127,   114,   127,   127,   127,   127,    11,    18,    12,    33,
-      39,    65,     9,    63,    40,     8,     5,    34,    29,    32,
-      35,    36,    30,    37,    15,    19,     6,    13,    25,    22,
-      23,    70,    79,   148,   148,    98,    86,   109,   135,   153,
-     148,   148,    11,   149,   148,   149,    28,   134,    28,    27,
-      11,    28,   135,    11,    11,   148,    18,    28,    39,    65,
-       9,    63,    40,     8,     5,    34,    29,    32,    35,    36,
-      30,    37,    15,    19,     6,    13,    25,     7,    10,    14,
-      17,    21,    26,    31,    33,    38,    41,    64,    16,    20,
-      22,    23,    94,    96,    89,    12,    18,   102,    12,    12,
-     115,   115,   116,   116,   118,   119,   120,   121,   122,   123,
-     123,   124,   124,   124,   124,   125,   125,   126,   126,   127,
-     127,   127,    97,    97,   114,    12,    12,    12,    24,    27,
-     113,   131,   135,    28,   135,   135,   135,   133,   135,   139,
-     148,   140,   141,   142,   143,   144,   144,   145,   145,   145,
-     145,   146,   146,   147,   147,   148,   148,   148,   136,   136,
-     136,   136,   136,   136,   136,   136,   136,   136,   136,    97,
-      97,    12,    96,    95,    12,    27,    72,   148,   134,   131,
-      12,    12,    12,    27,   116,    27,   131,   131,   131,   137,
-     131,    51,   132,   131
+       0,    28,    44,    45,    46,    49,    52,    54,    55,    58,
+      59,    61,    62,    63,    65,    66,    67,    78,    85,    86,
+      87,    88,    89,    90,    92,   107,    86,    69,    83,   105,
+     106,    69,   105,    69,   105,     0,    86,    69,   117,    13,
+      28,    96,    97,   108,   111,    91,    92,    83,    93,    94,
+      69,    28,    90,   112,    69,   112,    69,    75,   118,   116,
+      98,   105,    28,    18,    91,    33,    18,    18,    95,    94,
+     112,    28,    96,   113,   114,    73,   112,    73,   112,    11,
+     120,    76,    97,   115,    11,    99,    96,   109,   110,   111,
+       4,     8,     9,    11,    13,    15,    16,    19,    20,    74,
+      80,    81,    82,    83,   143,   145,   146,   147,   148,   149,
+     150,   151,   152,   153,   154,   155,   156,   157,   158,   159,
+     160,   161,    94,    73,    95,   112,    18,    28,    73,    73,
+       4,     8,    11,    13,    15,    19,    74,    81,    82,   106,
+     123,   124,   125,   126,   127,   128,   129,   130,   131,   132,
+     133,   134,   135,   136,   137,   138,   139,    28,    47,    48,
+      50,    51,    56,    57,    60,    64,    68,    73,    90,   107,
+     117,   119,   121,   143,   144,    11,    12,    90,   100,   102,
+     103,    18,   157,   157,   106,    90,   117,   144,   162,   157,
+     157,    11,   158,   157,   158,   157,    39,    72,     9,    70,
+      42,     8,     5,    34,    29,    32,    35,    36,    30,    37,
+      15,    19,     6,    13,    25,     7,    10,    14,    17,    21,
+      26,    31,    33,    38,    43,    71,    16,    20,    22,    23,
+      40,    73,   114,   112,   136,   136,   123,   136,   136,   136,
+     136,    11,    18,    12,    33,    39,    72,     9,    70,    42,
+       8,     5,    34,    29,    32,    35,    36,    30,    37,    15,
+      19,     6,    13,    25,    22,    23,    40,    28,   143,    28,
+      27,    11,    11,    28,   144,    11,    11,    18,    28,   102,
+     104,    96,    12,    18,    18,   101,   110,    12,    12,    12,
+     142,   144,   148,   157,   149,   150,   151,   152,   153,   153,
+     154,   154,   154,   154,   155,   155,   156,   156,   157,   157,
+     157,   145,   145,   145,   145,   145,   145,   145,   145,   145,
+     145,   145,   105,   105,   144,    12,    12,   124,   124,   125,
+     125,   127,   128,   129,   130,   131,   132,   132,   133,   133,
+     133,   133,   134,   134,   135,   135,   136,   136,   136,   105,
+     105,   123,    24,    27,   121,   140,   107,   122,   142,   144,
+      28,   144,   144,   144,    12,   104,   103,    24,   157,    27,
+      41,    12,    27,    41,   143,   140,   142,    28,    12,    12,
+      12,   146,   125,    27,    28,   140,   140,   140,   140,   142,
+      53,   141,    12,   140,   140
 };
 
 /* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
 static const yytype_uint8 yyr1[] =
 {
-       0,    80,    81,    82,    82,    82,    83,    83,    84,    85,
-      86,    86,    87,    87,    88,    88,    88,    88,    88,    88,
-      88,    88,    88,    88,    88,    88,    88,    88,    88,    88,
-      89,    90,    90,    91,    91,    91,    92,    93,    94,    94,
-      94,    95,    95,    96,    97,    98,    99,    99,   100,   100,
-     101,   102,   102,   103,   104,   104,   104,   104,   105,   106,
-     106,   107,   108,   108,   109,   110,   110,   111,   111,   112,
-     112,   113,   113,   113,   113,   113,   113,   113,   113,   113,
-     113,   113,   113,   113,   114,   114,   115,   115,   116,   116,
-     117,   117,   118,   118,   119,   119,   120,   120,   121,   121,
-     122,   122,   122,   123,   123,   123,   123,   123,   124,   124,
-     124,   125,   125,   125,   126,   126,   126,   126,   127,   127,
-     127,   127,   127,   127,   127,   128,   128,   128,   128,   128,
-     128,   129,   129,   130,   130,   131,   132,   132,   133,   133,
-     134,   135,   135,   136,   136,   136,   136,   136,   136,   136,
-     136,   136,   136,   136,   136,   137,   137,   138,   138,   139,
-     139,   140,   140,   141,   141,   142,   142,   143,   143,   143,
-     144,   144,   144,   144,   144,   145,   145,   145,   146,   146,
-     146,   147,   147,   147,   147,   148,   148,   149,   149,   149,
-     149,   149,   149,   149,   149,   149,   149,   150,   150,   150,
-     150,   150,   151,   151,   151,   151,   152,   152,   152,   153
+       0,    84,    85,    86,    86,    86,    87,    87,    88,    89,
+      90,    90,    91,    91,    92,    92,    92,    92,    92,    92,
+      92,    92,    92,    92,    92,    92,    92,    92,    92,    92,
+      92,    92,    92,    92,    92,    92,    93,    93,    94,    94,
+      95,    95,    96,    97,    97,    98,    98,    98,    99,   100,
+     101,   101,   102,   102,   102,   103,   103,   104,   105,   106,
+     107,   107,   108,   108,   109,   110,   110,   111,   112,   112,
+     112,   112,   113,   114,   114,   115,   116,   116,   117,   118,
+     118,   119,   119,   120,   120,   121,   121,   121,   121,   121,
+     121,   121,   121,   121,   121,   121,   121,   121,   121,   122,
+     122,   123,   123,   124,   124,   125,   125,   126,   126,   127,
+     127,   128,   128,   129,   129,   130,   130,   131,   131,   131,
+     132,   132,   132,   132,   132,   133,   133,   133,   134,   134,
+     134,   135,   135,   135,   135,   136,   136,   136,   136,   136,
+     136,   136,   137,   137,   137,   137,   137,   137,   138,   138,
+     139,   139,   140,   141,   141,   142,   142,   143,   144,   144,
+     145,   145,   145,   145,   145,   145,   145,   145,   145,   145,
+     145,   145,   146,   146,   147,   147,   148,   148,   149,   149,
+     150,   150,   151,   151,   152,   152,   152,   153,   153,   153,
+     153,   153,   154,   154,   154,   155,   155,   155,   156,   156,
+     156,   156,   157,   157,   158,   158,   158,   158,   158,   158,
+     158,   158,   158,   158,   159,   159,   159,   159,   159,   159,
+     160,   160,   160,   160,   161,   161,   161,   162
 };
 
 /* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
@@ -1112,25 +1144,27 @@ static const yytype_int8 yyr2[] =
 {
        0,     2,     1,     0,     2,     2,     1,     1,     2,     2,
        1,     2,     1,     2,     1,     1,     1,     1,     1,     1,
-       1,     1,     1,     1,     1,     1,     2,     5,     4,     1,
-       3,     0,     3,     1,     4,     5,     0,     1,     2,     1,
-       3,     1,     3,     0,     1,     1,     3,     2,     1,     3,
-       1,     1,     3,     1,     0,     3,     2,     4,     1,     1,
-       3,     1,     0,     2,     4,     0,     4,     1,     1,     0,
-       2,     1,     2,     1,     6,     5,     5,     4,     6,     3,
-       2,     3,     2,     2,     1,     3,     1,     3,     1,     5,
-       1,     3,     1,     3,     1,     3,     1,     3,     1,     3,
-       1,     3,     3,     1,     3,     3,     3,     3,     1,     3,
-       3,     1,     3,     3,     1,     3,     3,     3,     1,     2,
-       2,     2,     2,     2,     2,     1,     4,     3,     3,     3,
-       4,     1,     3,     1,     1,     1,     0,     2,     0,     1,
-       1,     1,     3,     1,     3,     3,     3,     3,     3,     3,
-       3,     3,     3,     3,     3,     1,     5,     1,     3,     1,
+       1,     1,     1,     1,     1,     1,     1,     2,     5,     4,
+       2,     5,     4,     2,     6,     5,     1,     3,     1,     3,
+       0,     1,     3,     0,     3,     1,     4,     5,     0,     2,
+       0,     2,     2,     1,     3,     1,     3,     0,     1,     1,
+       3,     2,     1,     3,     1,     1,     3,     1,     0,     3,
+       2,     4,     1,     1,     3,     1,     0,     2,     4,     0,
+       4,     1,     1,     0,     2,     1,     2,     1,     6,     5,
+       5,     8,     4,     6,     3,     2,     3,     2,     2,     2,
+       1,     1,     3,     1,     3,     1,     5,     1,     3,     1,
        3,     1,     3,     1,     3,     1,     3,     1,     3,     3,
        1,     3,     3,     3,     3,     1,     3,     3,     1,     3,
-       3,     1,     3,     3,     3,     1,     4,     1,     2,     2,
-       2,     2,     2,     2,     2,     2,     2,     1,     3,     3,
-       2,     2,     1,     1,     3,     3,     1,     1,     1,     1
+       3,     1,     3,     3,     3,     1,     2,     2,     2,     2,
+       2,     2,     1,     4,     3,     3,     3,     4,     1,     3,
+       1,     1,     1,     0,     2,     0,     1,     1,     1,     3,
+       1,     3,     3,     3,     3,     3,     3,     3,     3,     3,
+       3,     3,     1,     5,     1,     3,     1,     3,     1,     3,
+       1,     3,     1,     3,     1,     3,     3,     1,     3,     3,
+       3,     3,     1,     3,     3,     1,     3,     3,     1,     3,
+       3,     3,     1,     4,     1,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     1,     4,     3,     3,     2,     2,
+       1,     1,     3,     3,     1,     1,     1,     1
 };
 
 
@@ -1719,1255 +1753,1363 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* Program: Globals  */
-#line 273 "partial_bnfc_parser.y"
+#line 285 "partial_bnfc_parser.y"
                   { (yyval.program_) = new partial_acsl::AProgram((yyvsp[0].globals_)); (yyval.program_)->line_number = (yyloc).first_line; (yyval.program_)->char_number = (yyloc).first_column; result->program_ = (yyval.program_); }
-#line 1725 "partial_bnfc_parser.tab.c"
+#line 1759 "partial_bnfc_parser.tab.c"
     break;
 
   case 3: /* Globals: %empty  */
-#line 275 "partial_bnfc_parser.y"
+#line 287 "partial_bnfc_parser.y"
                       { (yyval.globals_) = new partial_acsl::NoGlobals(); (yyval.globals_)->line_number = (yyloc).first_line; (yyval.globals_)->char_number = (yyloc).first_column; result->globals_ = (yyval.globals_); }
-#line 1731 "partial_bnfc_parser.tab.c"
+#line 1765 "partial_bnfc_parser.tab.c"
     break;
 
   case 4: /* Globals: Global Globals  */
-#line 276 "partial_bnfc_parser.y"
+#line 288 "partial_bnfc_parser.y"
                    { (yyval.globals_) = new partial_acsl::SimpleGlobals((yyvsp[-1].global_), (yyvsp[0].globals_)); (yyval.globals_)->line_number = (yyloc).first_line; (yyval.globals_)->char_number = (yyloc).first_column; result->globals_ = (yyval.globals_); }
-#line 1737 "partial_bnfc_parser.tab.c"
+#line 1771 "partial_bnfc_parser.tab.c"
     break;
 
   case 5: /* Globals: _SEMI Globals  */
-#line 277 "partial_bnfc_parser.y"
+#line 289 "partial_bnfc_parser.y"
                   { (yyval.globals_) = new partial_acsl::SemiColonGlobals((yyvsp[0].globals_)); (yyval.globals_)->line_number = (yyloc).first_line; (yyval.globals_)->char_number = (yyloc).first_column; result->globals_ = (yyval.globals_); }
-#line 1743 "partial_bnfc_parser.tab.c"
+#line 1777 "partial_bnfc_parser.tab.c"
     break;
 
   case 6: /* Global: Declaration  */
-#line 279 "partial_bnfc_parser.y"
+#line 291 "partial_bnfc_parser.y"
                      { (yyval.global_) = new partial_acsl::GlobalsDeclataion((yyvsp[0].declaration_)); (yyval.global_)->line_number = (yyloc).first_line; (yyval.global_)->char_number = (yyloc).first_column; result->global_ = (yyval.global_); }
-#line 1749 "partial_bnfc_parser.tab.c"
+#line 1783 "partial_bnfc_parser.tab.c"
     break;
 
   case 7: /* Global: FunctionDef  */
-#line 280 "partial_bnfc_parser.y"
+#line 292 "partial_bnfc_parser.y"
                 { (yyval.global_) = new partial_acsl::GlobalsFunctionDef((yyvsp[0].functiondef_)); (yyval.global_)->line_number = (yyloc).first_line; (yyval.global_)->char_number = (yyloc).first_column; result->global_ = (yyval.global_); }
-#line 1755 "partial_bnfc_parser.tab.c"
+#line 1789 "partial_bnfc_parser.tab.c"
     break;
 
   case 8: /* FunctionDef: FunctionDefStart Block  */
-#line 282 "partial_bnfc_parser.y"
+#line 294 "partial_bnfc_parser.y"
                                      { (yyval.functiondef_) = new partial_acsl::SimpleFunctionDef((yyvsp[-1].functiondefstart_), (yyvsp[0].block_)); (yyval.functiondef_)->line_number = (yyloc).first_line; (yyval.functiondef_)->char_number = (yyloc).first_column; result->functiondef_ = (yyval.functiondef_); }
-#line 1761 "partial_bnfc_parser.tab.c"
+#line 1795 "partial_bnfc_parser.tab.c"
     break;
 
   case 9: /* FunctionDefStart: DeclSpecList Declarator  */
-#line 284 "partial_bnfc_parser.y"
+#line 296 "partial_bnfc_parser.y"
                                            { (yyval.functiondefstart_) = new partial_acsl::FunctionDefStartDeclarator((yyvsp[-1].declspeclist_), (yyvsp[0].declarator_)); (yyval.functiondefstart_)->line_number = (yyloc).first_line; (yyval.functiondefstart_)->char_number = (yyloc).first_column; result->functiondefstart_ = (yyval.functiondefstart_); }
-#line 1767 "partial_bnfc_parser.tab.c"
+#line 1801 "partial_bnfc_parser.tab.c"
     break;
 
   case 10: /* DeclSpecList: TypeSpec  */
-#line 286 "partial_bnfc_parser.y"
+#line 298 "partial_bnfc_parser.y"
                         { (yyval.declspeclist_) = new partial_acsl::DeclSpecTypeSpec((yyvsp[0].typespec_)); (yyval.declspeclist_)->line_number = (yyloc).first_line; (yyval.declspeclist_)->char_number = (yyloc).first_column; result->declspeclist_ = (yyval.declspeclist_); }
-#line 1773 "partial_bnfc_parser.tab.c"
+#line 1807 "partial_bnfc_parser.tab.c"
     break;
 
   case 11: /* DeclSpecList: TypeSpec DeclSpecListNoNamed  */
-#line 287 "partial_bnfc_parser.y"
+#line 299 "partial_bnfc_parser.y"
                                  { (yyval.declspeclist_) = new partial_acsl::DeclSpecTypeSpecNext((yyvsp[-1].typespec_), (yyvsp[0].declspeclistnonamed_)); (yyval.declspeclist_)->line_number = (yyloc).first_line; (yyval.declspeclist_)->char_number = (yyloc).first_column; result->declspeclist_ = (yyval.declspeclist_); }
-#line 1779 "partial_bnfc_parser.tab.c"
+#line 1813 "partial_bnfc_parser.tab.c"
     break;
 
   case 12: /* DeclSpecListNoNamed: TypeSpec  */
-#line 289 "partial_bnfc_parser.y"
+#line 301 "partial_bnfc_parser.y"
                                { (yyval.declspeclistnonamed_) = new partial_acsl::DeclSpecNoNamedTypeSpec((yyvsp[0].typespec_)); (yyval.declspeclistnonamed_)->line_number = (yyloc).first_line; (yyval.declspeclistnonamed_)->char_number = (yyloc).first_column; result->declspeclistnonamed_ = (yyval.declspeclistnonamed_); }
-#line 1785 "partial_bnfc_parser.tab.c"
+#line 1819 "partial_bnfc_parser.tab.c"
     break;
 
   case 13: /* DeclSpecListNoNamed: TypeSpec DeclSpecListNoNamed  */
-#line 290 "partial_bnfc_parser.y"
+#line 302 "partial_bnfc_parser.y"
                                  { (yyval.declspeclistnonamed_) = new partial_acsl::DeclSpecNoNamedTypeSpecNext((yyvsp[-1].typespec_), (yyvsp[0].declspeclistnonamed_)); (yyval.declspeclistnonamed_)->line_number = (yyloc).first_line; (yyval.declspeclistnonamed_)->char_number = (yyloc).first_column; result->declspeclistnonamed_ = (yyval.declspeclistnonamed_); }
-#line 1791 "partial_bnfc_parser.tab.c"
+#line 1825 "partial_bnfc_parser.tab.c"
     break;
 
   case 14: /* TypeSpec: _KW_void  */
-#line 292 "partial_bnfc_parser.y"
+#line 304 "partial_bnfc_parser.y"
                     { (yyval.typespec_) = new partial_acsl::TypeSpecVoidKeyWord(); (yyval.typespec_)->line_number = (yyloc).first_line; (yyval.typespec_)->char_number = (yyloc).first_column; result->typespec_ = (yyval.typespec_); }
-#line 1797 "partial_bnfc_parser.tab.c"
+#line 1831 "partial_bnfc_parser.tab.c"
     break;
 
   case 15: /* TypeSpec: _KW_char  */
-#line 293 "partial_bnfc_parser.y"
+#line 305 "partial_bnfc_parser.y"
              { (yyval.typespec_) = new partial_acsl::TypeSpecCharKeyWord(); (yyval.typespec_)->line_number = (yyloc).first_line; (yyval.typespec_)->char_number = (yyloc).first_column; result->typespec_ = (yyval.typespec_); }
-#line 1803 "partial_bnfc_parser.tab.c"
+#line 1837 "partial_bnfc_parser.tab.c"
     break;
 
   case 16: /* TypeSpec: _SYMB_1  */
-#line 294 "partial_bnfc_parser.y"
+#line 306 "partial_bnfc_parser.y"
             { (yyval.typespec_) = new partial_acsl::TypeSpecBoolKeyWord(); (yyval.typespec_)->line_number = (yyloc).first_line; (yyval.typespec_)->char_number = (yyloc).first_column; result->typespec_ = (yyval.typespec_); }
-#line 1809 "partial_bnfc_parser.tab.c"
+#line 1843 "partial_bnfc_parser.tab.c"
     break;
 
   case 17: /* TypeSpec: _KW_short  */
-#line 295 "partial_bnfc_parser.y"
+#line 307 "partial_bnfc_parser.y"
               { (yyval.typespec_) = new partial_acsl::TypeSpecShortKeyWord(); (yyval.typespec_)->line_number = (yyloc).first_line; (yyval.typespec_)->char_number = (yyloc).first_column; result->typespec_ = (yyval.typespec_); }
-#line 1815 "partial_bnfc_parser.tab.c"
+#line 1849 "partial_bnfc_parser.tab.c"
     break;
 
   case 18: /* TypeSpec: _SYMB_2  */
-#line 296 "partial_bnfc_parser.y"
+#line 308 "partial_bnfc_parser.y"
             { (yyval.typespec_) = new partial_acsl::TypeSpecInt32KeyWord(); (yyval.typespec_)->line_number = (yyloc).first_line; (yyval.typespec_)->char_number = (yyloc).first_column; result->typespec_ = (yyval.typespec_); }
-#line 1821 "partial_bnfc_parser.tab.c"
+#line 1855 "partial_bnfc_parser.tab.c"
     break;
 
   case 19: /* TypeSpec: _KW_int  */
-#line 297 "partial_bnfc_parser.y"
-            { (yyval.typespec_) = new partial_acsl::TypeSpecIntKeyWord(); (yyval.typespec_)->line_number = (yyloc).first_line; (yyval.typespec_)->char_number = (yyloc).first_column; result->typespec_ = (yyval.typespec_); }
-#line 1827 "partial_bnfc_parser.tab.c"
-    break;
-
-  case 20: /* TypeSpec: _KW_long  */
-#line 298 "partial_bnfc_parser.y"
-             { (yyval.typespec_) = new partial_acsl::TypeSpecLongKeyWord(); (yyval.typespec_)->line_number = (yyloc).first_line; (yyval.typespec_)->char_number = (yyloc).first_column; result->typespec_ = (yyval.typespec_); }
-#line 1833 "partial_bnfc_parser.tab.c"
-    break;
-
-  case 21: /* TypeSpec: _SYMB_3  */
-#line 299 "partial_bnfc_parser.y"
-            { (yyval.typespec_) = new partial_acsl::TypeSpecInt64KeyWord(); (yyval.typespec_)->line_number = (yyloc).first_line; (yyval.typespec_)->char_number = (yyloc).first_column; result->typespec_ = (yyval.typespec_); }
-#line 1839 "partial_bnfc_parser.tab.c"
-    break;
-
-  case 22: /* TypeSpec: _KW_float  */
-#line 300 "partial_bnfc_parser.y"
-              { (yyval.typespec_) = new partial_acsl::TypeSpecFloatKeyWord(); (yyval.typespec_)->line_number = (yyloc).first_line; (yyval.typespec_)->char_number = (yyloc).first_column; result->typespec_ = (yyval.typespec_); }
-#line 1845 "partial_bnfc_parser.tab.c"
-    break;
-
-  case 23: /* TypeSpec: _KW_double  */
-#line 301 "partial_bnfc_parser.y"
-               { (yyval.typespec_) = new partial_acsl::TypeSpecDoubleKeyWord(); (yyval.typespec_)->line_number = (yyloc).first_line; (yyval.typespec_)->char_number = (yyloc).first_column; result->typespec_ = (yyval.typespec_); }
-#line 1851 "partial_bnfc_parser.tab.c"
-    break;
-
-  case 24: /* TypeSpec: T_SIGNED  */
-#line 302 "partial_bnfc_parser.y"
-             { (yyval.typespec_) = new partial_acsl::TypeSpecSignedKeyWord((yyvsp[0]._string)); (yyval.typespec_)->line_number = (yyloc).first_line; (yyval.typespec_)->char_number = (yyloc).first_column; result->typespec_ = (yyval.typespec_); }
-#line 1857 "partial_bnfc_parser.tab.c"
-    break;
-
-  case 25: /* TypeSpec: _KW_unsigned  */
-#line 303 "partial_bnfc_parser.y"
-                 { (yyval.typespec_) = new partial_acsl::TypeSpecUnsignedKeyWord(); (yyval.typespec_)->line_number = (yyloc).first_line; (yyval.typespec_)->char_number = (yyloc).first_column; result->typespec_ = (yyval.typespec_); }
-#line 1863 "partial_bnfc_parser.tab.c"
-    break;
-
-  case 26: /* TypeSpec: _KW_struct IdOrTypename  */
-#line 304 "partial_bnfc_parser.y"
-                            { (yyval.typespec_) = new partial_acsl::StructId((yyvsp[0].idortypename_)); (yyval.typespec_)->line_number = (yyloc).first_line; (yyval.typespec_)->char_number = (yyloc).first_column; result->typespec_ = (yyval.typespec_); }
-#line 1869 "partial_bnfc_parser.tab.c"
-    break;
-
-  case 27: /* TypeSpec: _KW_struct IdOrTypename T_LBRACE StructDeclList T_RBRACE  */
-#line 305 "partial_bnfc_parser.y"
-                                                             { (yyval.typespec_) = new partial_acsl::StructIdBraces((yyvsp[-3].idortypename_), (yyvsp[-2]._string), (yyvsp[-1].structdecllist_), (yyvsp[0]._string)); (yyval.typespec_)->line_number = (yyloc).first_line; (yyval.typespec_)->char_number = (yyloc).first_column; result->typespec_ = (yyval.typespec_); }
-#line 1875 "partial_bnfc_parser.tab.c"
-    break;
-
-  case 28: /* TypeSpec: _KW_struct T_LBRACE StructDeclList T_RBRACE  */
-#line 306 "partial_bnfc_parser.y"
-                                                { (yyval.typespec_) = new partial_acsl::StructBraces((yyvsp[-2]._string), (yyvsp[-1].structdecllist_), (yyvsp[0]._string)); (yyval.typespec_)->line_number = (yyloc).first_line; (yyval.typespec_)->char_number = (yyloc).first_column; result->typespec_ = (yyval.typespec_); }
-#line 1881 "partial_bnfc_parser.tab.c"
-    break;
-
-  case 29: /* TypeSpec: _IDENT_  */
-#line 307 "partial_bnfc_parser.y"
-            { (yyval.typespec_) = new partial_acsl::NamedTypeTypeSpec((yyvsp[0]._string)); (yyval.typespec_)->line_number = (yyloc).first_line; (yyval.typespec_)->char_number = (yyloc).first_column; result->typespec_ = (yyval.typespec_); }
-#line 1887 "partial_bnfc_parser.tab.c"
-    break;
-
-  case 30: /* Declarator: PointerOpt DirectDecl AttributesWithAsm  */
 #line 309 "partial_bnfc_parser.y"
-                                                     { (yyval.declarator_) = new partial_acsl::ADeclarator((yyvsp[-2].pointeropt_), (yyvsp[-1].directdecl_), (yyvsp[0].attributeswithasm_)); (yyval.declarator_)->line_number = (yyloc).first_line; (yyval.declarator_)->char_number = (yyloc).first_column; result->declarator_ = (yyval.declarator_); }
-#line 1893 "partial_bnfc_parser.tab.c"
+            { (yyval.typespec_) = new partial_acsl::TypeSpecIntKeyWord(); (yyval.typespec_)->line_number = (yyloc).first_line; (yyval.typespec_)->char_number = (yyloc).first_column; result->typespec_ = (yyval.typespec_); }
+#line 1861 "partial_bnfc_parser.tab.c"
     break;
 
-  case 31: /* PointerOpt: %empty  */
+  case 20: /* TypeSpec: _KW_64  */
+#line 310 "partial_bnfc_parser.y"
+           { (yyval.typespec_) = new partial_acsl::TypeSpecSizeTKeyWord(); (yyval.typespec_)->line_number = (yyloc).first_line; (yyval.typespec_)->char_number = (yyloc).first_column; result->typespec_ = (yyval.typespec_); }
+#line 1867 "partial_bnfc_parser.tab.c"
+    break;
+
+  case 21: /* TypeSpec: _KW_long  */
 #line 311 "partial_bnfc_parser.y"
-                         { (yyval.pointeropt_) = new partial_acsl::NoPointer(); (yyval.pointeropt_)->line_number = (yyloc).first_line; (yyval.pointeropt_)->char_number = (yyloc).first_column; result->pointeropt_ = (yyval.pointeropt_); }
-#line 1899 "partial_bnfc_parser.tab.c"
+             { (yyval.typespec_) = new partial_acsl::TypeSpecLongKeyWord(); (yyval.typespec_)->line_number = (yyloc).first_line; (yyval.typespec_)->char_number = (yyloc).first_column; result->typespec_ = (yyval.typespec_); }
+#line 1873 "partial_bnfc_parser.tab.c"
     break;
 
-  case 32: /* PointerOpt: _STAR ListAttribute PointerOpt  */
+  case 22: /* TypeSpec: _SYMB_3  */
 #line 312 "partial_bnfc_parser.y"
-                                   { (yyval.pointeropt_) = new partial_acsl::SomePointer((yyvsp[-1].listattribute_), (yyvsp[0].pointeropt_)); (yyval.pointeropt_)->line_number = (yyloc).first_line; (yyval.pointeropt_)->char_number = (yyloc).first_column; result->pointeropt_ = (yyval.pointeropt_); }
-#line 1905 "partial_bnfc_parser.tab.c"
+            { (yyval.typespec_) = new partial_acsl::TypeSpecInt64KeyWord(); (yyval.typespec_)->line_number = (yyloc).first_line; (yyval.typespec_)->char_number = (yyloc).first_column; result->typespec_ = (yyval.typespec_); }
+#line 1879 "partial_bnfc_parser.tab.c"
     break;
 
-  case 33: /* DirectDecl: IdOrTypename  */
+  case 23: /* TypeSpec: _KW_float  */
+#line 313 "partial_bnfc_parser.y"
+              { (yyval.typespec_) = new partial_acsl::TypeSpecFloatKeyWord(); (yyval.typespec_)->line_number = (yyloc).first_line; (yyval.typespec_)->char_number = (yyloc).first_column; result->typespec_ = (yyval.typespec_); }
+#line 1885 "partial_bnfc_parser.tab.c"
+    break;
+
+  case 24: /* TypeSpec: _KW_double  */
 #line 314 "partial_bnfc_parser.y"
-                          { (yyval.directdecl_) = new partial_acsl::DirectDeclIdTypename((yyvsp[0].idortypename_)); (yyval.directdecl_)->line_number = (yyloc).first_line; (yyval.directdecl_)->char_number = (yyloc).first_column; result->directdecl_ = (yyval.directdecl_); }
-#line 1911 "partial_bnfc_parser.tab.c"
+               { (yyval.typespec_) = new partial_acsl::TypeSpecDoubleKeyWord(); (yyval.typespec_)->line_number = (yyloc).first_line; (yyval.typespec_)->char_number = (yyloc).first_column; result->typespec_ = (yyval.typespec_); }
+#line 1891 "partial_bnfc_parser.tab.c"
     break;
 
-  case 34: /* DirectDecl: DirectDecl _LPAREN _RPAREN GhostParameterOpt  */
+  case 25: /* TypeSpec: T_SIGNED  */
 #line 315 "partial_bnfc_parser.y"
-                                                 { (yyval.directdecl_) = new partial_acsl::DirectDeclGhostParam((yyvsp[-3].directdecl_), (yyvsp[0].ghostparameteropt_)); (yyval.directdecl_)->line_number = (yyloc).first_line; (yyval.directdecl_)->char_number = (yyloc).first_column; result->directdecl_ = (yyval.directdecl_); }
-#line 1917 "partial_bnfc_parser.tab.c"
+             { (yyval.typespec_) = new partial_acsl::TypeSpecSignedKeyWord((yyvsp[0]._string)); (yyval.typespec_)->line_number = (yyloc).first_line; (yyval.typespec_)->char_number = (yyloc).first_column; result->typespec_ = (yyval.typespec_); }
+#line 1897 "partial_bnfc_parser.tab.c"
     break;
 
-  case 35: /* DirectDecl: DirectDecl _LPAREN RestParList _RPAREN GhostParameterOpt  */
+  case 26: /* TypeSpec: _KW_unsigned  */
 #line 316 "partial_bnfc_parser.y"
-                                                             { (yyval.directdecl_) = new partial_acsl::DirectDeclGhostRestParParam((yyvsp[-4].directdecl_), (yyvsp[-2].restparlist_), (yyvsp[0].ghostparameteropt_)); (yyval.directdecl_)->line_number = (yyloc).first_line; (yyval.directdecl_)->char_number = (yyloc).first_column; result->directdecl_ = (yyval.directdecl_); }
-#line 1923 "partial_bnfc_parser.tab.c"
+                 { (yyval.typespec_) = new partial_acsl::TypeSpecUnsignedKeyWord(); (yyval.typespec_)->line_number = (yyloc).first_line; (yyval.typespec_)->char_number = (yyloc).first_column; result->typespec_ = (yyval.typespec_); }
+#line 1903 "partial_bnfc_parser.tab.c"
     break;
 
-  case 36: /* AttributesWithAsm: %empty  */
+  case 27: /* TypeSpec: _KW_struct IdOrTypename  */
+#line 317 "partial_bnfc_parser.y"
+                            { (yyval.typespec_) = new partial_acsl::StructId((yyvsp[0].idortypename_)); (yyval.typespec_)->line_number = (yyloc).first_line; (yyval.typespec_)->char_number = (yyloc).first_column; result->typespec_ = (yyval.typespec_); }
+#line 1909 "partial_bnfc_parser.tab.c"
+    break;
+
+  case 28: /* TypeSpec: _KW_struct IdOrTypename _LBRACE StructDeclList _RBRACE  */
 #line 318 "partial_bnfc_parser.y"
-                                { (yyval.attributeswithasm_) = new partial_acsl::EmptyAttrWithASM(); (yyval.attributeswithasm_)->line_number = (yyloc).first_line; (yyval.attributeswithasm_)->char_number = (yyloc).first_column; result->attributeswithasm_ = (yyval.attributeswithasm_); }
-#line 1929 "partial_bnfc_parser.tab.c"
+                                                           { (yyval.typespec_) = new partial_acsl::StructIdBraces((yyvsp[-3].idortypename_), (yyvsp[-1].structdecllist_)); (yyval.typespec_)->line_number = (yyloc).first_line; (yyval.typespec_)->char_number = (yyloc).first_column; result->typespec_ = (yyval.typespec_); }
+#line 1915 "partial_bnfc_parser.tab.c"
     break;
 
-  case 37: /* RestParList: ListParameterDecl  */
+  case 29: /* TypeSpec: _KW_struct _LBRACE StructDeclList _RBRACE  */
+#line 319 "partial_bnfc_parser.y"
+                                              { (yyval.typespec_) = new partial_acsl::StructBraces((yyvsp[-1].structdecllist_)); (yyval.typespec_)->line_number = (yyloc).first_line; (yyval.typespec_)->char_number = (yyloc).first_column; result->typespec_ = (yyval.typespec_); }
+#line 1921 "partial_bnfc_parser.tab.c"
+    break;
+
+  case 30: /* TypeSpec: _KW_union IdOrTypename  */
 #line 320 "partial_bnfc_parser.y"
-                                { std::reverse((yyvsp[0].listparameterdecl_)->begin(),(yyvsp[0].listparameterdecl_)->end()) ;(yyval.restparlist_) = new partial_acsl::SimpleParameterDecl((yyvsp[0].listparameterdecl_)); (yyval.restparlist_)->line_number = (yyloc).first_line; (yyval.restparlist_)->char_number = (yyloc).first_column; result->restparlist_ = (yyval.restparlist_); }
-#line 1935 "partial_bnfc_parser.tab.c"
+                           { (yyval.typespec_) = new partial_acsl::UnionId((yyvsp[0].idortypename_)); (yyval.typespec_)->line_number = (yyloc).first_line; (yyval.typespec_)->char_number = (yyloc).first_column; result->typespec_ = (yyval.typespec_); }
+#line 1927 "partial_bnfc_parser.tab.c"
     break;
 
-  case 38: /* ParameterDecl: DeclSpecList Declarator  */
+  case 31: /* TypeSpec: _KW_union IdOrTypename _LBRACE StructDeclList _RBRACE  */
+#line 321 "partial_bnfc_parser.y"
+                                                          { (yyval.typespec_) = new partial_acsl::UnionIdBraces((yyvsp[-3].idortypename_), (yyvsp[-1].structdecllist_)); (yyval.typespec_)->line_number = (yyloc).first_line; (yyval.typespec_)->char_number = (yyloc).first_column; result->typespec_ = (yyval.typespec_); }
+#line 1933 "partial_bnfc_parser.tab.c"
+    break;
+
+  case 32: /* TypeSpec: _KW_union _LBRACE StructDeclList _RBRACE  */
 #line 322 "partial_bnfc_parser.y"
-                                        { (yyval.parameterdecl_) = new partial_acsl::ParameterDeclSpecDeclarator((yyvsp[-1].declspeclist_), (yyvsp[0].declarator_)); (yyval.parameterdecl_)->line_number = (yyloc).first_line; (yyval.parameterdecl_)->char_number = (yyloc).first_column; result->parameterdecl_ = (yyval.parameterdecl_); }
-#line 1941 "partial_bnfc_parser.tab.c"
+                                             { (yyval.typespec_) = new partial_acsl::UnionBraces((yyvsp[-1].structdecllist_)); (yyval.typespec_)->line_number = (yyloc).first_line; (yyval.typespec_)->char_number = (yyloc).first_column; result->typespec_ = (yyval.typespec_); }
+#line 1939 "partial_bnfc_parser.tab.c"
     break;
 
-  case 39: /* ParameterDecl: DeclSpecList  */
+  case 33: /* TypeSpec: _KW_enum IdOrTypename  */
 #line 323 "partial_bnfc_parser.y"
-                 { (yyval.parameterdecl_) = new partial_acsl::ParameterDeclSpec((yyvsp[0].declspeclist_)); (yyval.parameterdecl_)->line_number = (yyloc).first_line; (yyval.parameterdecl_)->char_number = (yyloc).first_column; result->parameterdecl_ = (yyval.parameterdecl_); }
-#line 1947 "partial_bnfc_parser.tab.c"
+                          { (yyval.typespec_) = new partial_acsl::EnumId((yyvsp[0].idortypename_)); (yyval.typespec_)->line_number = (yyloc).first_line; (yyval.typespec_)->char_number = (yyloc).first_column; result->typespec_ = (yyval.typespec_); }
+#line 1945 "partial_bnfc_parser.tab.c"
     break;
 
-  case 40: /* ParameterDecl: _LPAREN ParameterDecl _RPAREN  */
+  case 34: /* TypeSpec: _KW_enum IdOrTypename _LBRACE ListEnumerator MaybeComma _RBRACE  */
 #line 324 "partial_bnfc_parser.y"
-                                  { (yyval.parameterdecl_) = new partial_acsl::ParameterDeclPar((yyvsp[-1].parameterdecl_)); (yyval.parameterdecl_)->line_number = (yyloc).first_line; (yyval.parameterdecl_)->char_number = (yyloc).first_column; result->parameterdecl_ = (yyval.parameterdecl_); }
-#line 1953 "partial_bnfc_parser.tab.c"
+                                                                    { std::reverse((yyvsp[-2].listenumerator_)->begin(),(yyvsp[-2].listenumerator_)->end()) ;(yyval.typespec_) = new partial_acsl::EnumIdBraces((yyvsp[-4].idortypename_), (yyvsp[-2].listenumerator_), (yyvsp[-1].maybecomma_)); (yyval.typespec_)->line_number = (yyloc).first_line; (yyval.typespec_)->char_number = (yyloc).first_column; result->typespec_ = (yyval.typespec_); }
+#line 1951 "partial_bnfc_parser.tab.c"
     break;
 
-  case 41: /* ListParameterDecl: ParameterDecl  */
-#line 326 "partial_bnfc_parser.y"
-                                  { (yyval.listparameterdecl_) = new partial_acsl::ListParameterDecl(); (yyval.listparameterdecl_)->push_back((yyvsp[0].parameterdecl_)); result->listparameterdecl_ = (yyval.listparameterdecl_); }
-#line 1959 "partial_bnfc_parser.tab.c"
+  case 35: /* TypeSpec: _KW_enum _LBRACE ListEnumerator MaybeComma _RBRACE  */
+#line 325 "partial_bnfc_parser.y"
+                                                       { std::reverse((yyvsp[-2].listenumerator_)->begin(),(yyvsp[-2].listenumerator_)->end()) ;(yyval.typespec_) = new partial_acsl::EnumBraces((yyvsp[-2].listenumerator_), (yyvsp[-1].maybecomma_)); (yyval.typespec_)->line_number = (yyloc).first_line; (yyval.typespec_)->char_number = (yyloc).first_column; result->typespec_ = (yyval.typespec_); }
+#line 1957 "partial_bnfc_parser.tab.c"
     break;
 
-  case 42: /* ListParameterDecl: ParameterDecl _COMMA ListParameterDecl  */
+  case 36: /* Enumerator: _IDENT_  */
 #line 327 "partial_bnfc_parser.y"
-                                           { (yyvsp[0].listparameterdecl_)->push_back((yyvsp[-2].parameterdecl_)); (yyval.listparameterdecl_) = (yyvsp[0].listparameterdecl_); result->listparameterdecl_ = (yyval.listparameterdecl_); }
-#line 1965 "partial_bnfc_parser.tab.c"
+                     { (yyval.enumerator_) = new partial_acsl::IdentEnumerator((yyvsp[0]._string)); (yyval.enumerator_)->line_number = (yyloc).first_line; (yyval.enumerator_)->char_number = (yyloc).first_column; result->enumerator_ = (yyval.enumerator_); }
+#line 1963 "partial_bnfc_parser.tab.c"
     break;
 
-  case 43: /* GhostParameterOpt: %empty  */
-#line 329 "partial_bnfc_parser.y"
-                                { (yyval.ghostparameteropt_) = new partial_acsl::NoGhostParameter(); (yyval.ghostparameteropt_)->line_number = (yyloc).first_line; (yyval.ghostparameteropt_)->char_number = (yyloc).first_column; result->ghostparameteropt_ = (yyval.ghostparameteropt_); }
-#line 1971 "partial_bnfc_parser.tab.c"
+  case 37: /* Enumerator: _IDENT_ _EQ Expression  */
+#line 328 "partial_bnfc_parser.y"
+                           { (yyval.enumerator_) = new partial_acsl::IdentAssignExpr((yyvsp[-2]._string), (yyvsp[0].expression_)); (yyval.enumerator_)->line_number = (yyloc).first_line; (yyval.enumerator_)->char_number = (yyloc).first_column; result->enumerator_ = (yyval.enumerator_); }
+#line 1969 "partial_bnfc_parser.tab.c"
     break;
 
-  case 44: /* IdOrTypename: IdOrTypenameAsId  */
+  case 38: /* ListEnumerator: Enumerator  */
+#line 330 "partial_bnfc_parser.y"
+                            { (yyval.listenumerator_) = new partial_acsl::ListEnumerator(); (yyval.listenumerator_)->push_back((yyvsp[0].enumerator_)); result->listenumerator_ = (yyval.listenumerator_); }
+#line 1975 "partial_bnfc_parser.tab.c"
+    break;
+
+  case 39: /* ListEnumerator: Enumerator _COMMA ListEnumerator  */
 #line 331 "partial_bnfc_parser.y"
-                                { (yyval.idortypename_) = new partial_acsl::IdTypename((yyvsp[0].idortypenameasid_)); (yyval.idortypename_)->line_number = (yyloc).first_line; (yyval.idortypename_)->char_number = (yyloc).first_column; result->idortypename_ = (yyval.idortypename_); }
-#line 1977 "partial_bnfc_parser.tab.c"
+                                     { (yyvsp[0].listenumerator_)->push_back((yyvsp[-2].enumerator_)); (yyval.listenumerator_) = (yyvsp[0].listenumerator_); result->listenumerator_ = (yyval.listenumerator_); }
+#line 1981 "partial_bnfc_parser.tab.c"
     break;
 
-  case 45: /* IdOrTypenameAsId: _IDENT_  */
+  case 40: /* MaybeComma: %empty  */
 #line 333 "partial_bnfc_parser.y"
-                           { (yyval.idortypenameasid_) = new partial_acsl::IdOrTypenameAsIdIdentifier((yyvsp[0]._string)); (yyval.idortypenameasid_)->line_number = (yyloc).first_line; (yyval.idortypenameasid_)->char_number = (yyloc).first_column; result->idortypenameasid_ = (yyval.idortypenameasid_); }
-#line 1983 "partial_bnfc_parser.tab.c"
+                         { (yyval.maybecomma_) = new partial_acsl::NoComa(); (yyval.maybecomma_)->line_number = (yyloc).first_line; (yyval.maybecomma_)->char_number = (yyloc).first_column; result->maybecomma_ = (yyval.maybecomma_); }
+#line 1987 "partial_bnfc_parser.tab.c"
     break;
 
-  case 46: /* Declaration: DeclSpecList DeclAndInitDeclAttrList _SEMI  */
-#line 335 "partial_bnfc_parser.y"
-                                                         { (yyval.declaration_) = new partial_acsl::DeclSpecInitDecl((yyvsp[-2].declspeclist_), (yyvsp[-1].declandinitdeclattrlist_)); (yyval.declaration_)->line_number = (yyloc).first_line; (yyval.declaration_)->char_number = (yyloc).first_column; result->declaration_ = (yyval.declaration_); }
-#line 1989 "partial_bnfc_parser.tab.c"
+  case 41: /* MaybeComma: _COMMA  */
+#line 334 "partial_bnfc_parser.y"
+           { (yyval.maybecomma_) = new partial_acsl::Coma(); (yyval.maybecomma_)->line_number = (yyloc).first_line; (yyval.maybecomma_)->char_number = (yyloc).first_column; result->maybecomma_ = (yyval.maybecomma_); }
+#line 1993 "partial_bnfc_parser.tab.c"
     break;
 
-  case 47: /* Declaration: DeclSpecList _SEMI  */
+  case 42: /* Declarator: PointerOpt DirectDecl AttributesWithAsm  */
 #line 336 "partial_bnfc_parser.y"
-                       { (yyval.declaration_) = new partial_acsl::DeclSpec((yyvsp[-1].declspeclist_)); (yyval.declaration_)->line_number = (yyloc).first_line; (yyval.declaration_)->char_number = (yyloc).first_column; result->declaration_ = (yyval.declaration_); }
-#line 1995 "partial_bnfc_parser.tab.c"
+                                                     { (yyval.declarator_) = new partial_acsl::ADeclarator((yyvsp[-2].pointeropt_), (yyvsp[-1].directdecl_), (yyvsp[0].attributeswithasm_)); (yyval.declarator_)->line_number = (yyloc).first_line; (yyval.declarator_)->char_number = (yyloc).first_column; result->declarator_ = (yyval.declarator_); }
+#line 1999 "partial_bnfc_parser.tab.c"
     break;
 
-  case 48: /* DeclAndInitDeclAttrList: InitDeclarator  */
+  case 43: /* PointerOpt: %empty  */
 #line 338 "partial_bnfc_parser.y"
-                                         { (yyval.declandinitdeclattrlist_) = new partial_acsl::InitDeclaration((yyvsp[0].initdeclarator_)); (yyval.declandinitdeclattrlist_)->line_number = (yyloc).first_line; (yyval.declandinitdeclattrlist_)->char_number = (yyloc).first_column; result->declandinitdeclattrlist_ = (yyval.declandinitdeclattrlist_); }
-#line 2001 "partial_bnfc_parser.tab.c"
+                         { (yyval.pointeropt_) = new partial_acsl::NoPointer(); (yyval.pointeropt_)->line_number = (yyloc).first_line; (yyval.pointeropt_)->char_number = (yyloc).first_column; result->pointeropt_ = (yyval.pointeropt_); }
+#line 2005 "partial_bnfc_parser.tab.c"
     break;
 
-  case 49: /* DeclAndInitDeclAttrList: InitDeclarator _COMMA ListInitDeclaratorAttr  */
+  case 44: /* PointerOpt: _STAR ListAttribute PointerOpt  */
 #line 339 "partial_bnfc_parser.y"
-                                                 { std::reverse((yyvsp[0].listinitdeclaratorattr_)->begin(),(yyvsp[0].listinitdeclaratorattr_)->end()) ;(yyval.declandinitdeclattrlist_) = new partial_acsl::InitDeclarationWithAttr((yyvsp[-2].initdeclarator_), (yyvsp[0].listinitdeclaratorattr_)); (yyval.declandinitdeclattrlist_)->line_number = (yyloc).first_line; (yyval.declandinitdeclattrlist_)->char_number = (yyloc).first_column; result->declandinitdeclattrlist_ = (yyval.declandinitdeclattrlist_); }
-#line 2007 "partial_bnfc_parser.tab.c"
+                                   { (yyval.pointeropt_) = new partial_acsl::SomePointer((yyvsp[-1].listattribute_), (yyvsp[0].pointeropt_)); (yyval.pointeropt_)->line_number = (yyloc).first_line; (yyval.pointeropt_)->char_number = (yyloc).first_column; result->pointeropt_ = (yyval.pointeropt_); }
+#line 2011 "partial_bnfc_parser.tab.c"
     break;
 
-  case 50: /* InitDeclaratorAttr: InitDeclarator  */
+  case 45: /* DirectDecl: IdOrTypename  */
 #line 341 "partial_bnfc_parser.y"
-                                    { (yyval.initdeclaratorattr_) = new partial_acsl::InitDeclaratorAttribute((yyvsp[0].initdeclarator_)); (yyval.initdeclaratorattr_)->line_number = (yyloc).first_line; (yyval.initdeclaratorattr_)->char_number = (yyloc).first_column; result->initdeclaratorattr_ = (yyval.initdeclaratorattr_); }
-#line 2013 "partial_bnfc_parser.tab.c"
+                          { (yyval.directdecl_) = new partial_acsl::DirectDeclIdTypename((yyvsp[0].idortypename_)); (yyval.directdecl_)->line_number = (yyloc).first_line; (yyval.directdecl_)->char_number = (yyloc).first_column; result->directdecl_ = (yyval.directdecl_); }
+#line 2017 "partial_bnfc_parser.tab.c"
     break;
 
-  case 51: /* ListInitDeclaratorAttr: InitDeclaratorAttr  */
+  case 46: /* DirectDecl: DirectDecl _LPAREN _RPAREN GhostParameterOpt  */
+#line 342 "partial_bnfc_parser.y"
+                                                 { (yyval.directdecl_) = new partial_acsl::DirectDeclGhostParam((yyvsp[-3].directdecl_), (yyvsp[0].ghostparameteropt_)); (yyval.directdecl_)->line_number = (yyloc).first_line; (yyval.directdecl_)->char_number = (yyloc).first_column; result->directdecl_ = (yyval.directdecl_); }
+#line 2023 "partial_bnfc_parser.tab.c"
+    break;
+
+  case 47: /* DirectDecl: DirectDecl _LPAREN RestParList _RPAREN GhostParameterOpt  */
 #line 343 "partial_bnfc_parser.y"
-                                            { (yyval.listinitdeclaratorattr_) = new partial_acsl::ListInitDeclaratorAttr(); (yyval.listinitdeclaratorattr_)->push_back((yyvsp[0].initdeclaratorattr_)); result->listinitdeclaratorattr_ = (yyval.listinitdeclaratorattr_); }
-#line 2019 "partial_bnfc_parser.tab.c"
+                                                             { (yyval.directdecl_) = new partial_acsl::DirectDeclGhostRestParParam((yyvsp[-4].directdecl_), (yyvsp[-2].restparlist_), (yyvsp[0].ghostparameteropt_)); (yyval.directdecl_)->line_number = (yyloc).first_line; (yyval.directdecl_)->char_number = (yyloc).first_column; result->directdecl_ = (yyval.directdecl_); }
+#line 2029 "partial_bnfc_parser.tab.c"
     break;
 
-  case 52: /* ListInitDeclaratorAttr: InitDeclaratorAttr _COMMA ListInitDeclaratorAttr  */
-#line 344 "partial_bnfc_parser.y"
-                                                     { (yyvsp[0].listinitdeclaratorattr_)->push_back((yyvsp[-2].initdeclaratorattr_)); (yyval.listinitdeclaratorattr_) = (yyvsp[0].listinitdeclaratorattr_); result->listinitdeclaratorattr_ = (yyval.listinitdeclaratorattr_); }
-#line 2025 "partial_bnfc_parser.tab.c"
+  case 48: /* AttributesWithAsm: %empty  */
+#line 345 "partial_bnfc_parser.y"
+                                { (yyval.attributeswithasm_) = new partial_acsl::EmptyAttrWithASM(); (yyval.attributeswithasm_)->line_number = (yyloc).first_line; (yyval.attributeswithasm_)->char_number = (yyloc).first_column; result->attributeswithasm_ = (yyval.attributeswithasm_); }
+#line 2035 "partial_bnfc_parser.tab.c"
     break;
 
-  case 53: /* InitDeclarator: Declarator  */
-#line 346 "partial_bnfc_parser.y"
-                            { (yyval.initdeclarator_) = new partial_acsl::SimpleInitDeclarator((yyvsp[0].declarator_)); (yyval.initdeclarator_)->line_number = (yyloc).first_line; (yyval.initdeclarator_)->char_number = (yyloc).first_column; result->initdeclarator_ = (yyval.initdeclarator_); }
-#line 2031 "partial_bnfc_parser.tab.c"
+  case 49: /* RestParList: ListParameterDecl MaybeThreeDots  */
+#line 347 "partial_bnfc_parser.y"
+                                               { std::reverse((yyvsp[-1].listparameterdecl_)->begin(),(yyvsp[-1].listparameterdecl_)->end()) ;(yyval.restparlist_) = new partial_acsl::SimpleParameterDecl((yyvsp[-1].listparameterdecl_), (yyvsp[0].maybethreedots_)); (yyval.restparlist_)->line_number = (yyloc).first_line; (yyval.restparlist_)->char_number = (yyloc).first_column; result->restparlist_ = (yyval.restparlist_); }
+#line 2041 "partial_bnfc_parser.tab.c"
     break;
 
-  case 54: /* StructDeclList: %empty  */
-#line 348 "partial_bnfc_parser.y"
-                             { (yyval.structdecllist_) = new partial_acsl::EmptyStructDecl(); (yyval.structdecllist_)->line_number = (yyloc).first_line; (yyval.structdecllist_)->char_number = (yyloc).first_column; result->structdecllist_ = (yyval.structdecllist_); }
-#line 2037 "partial_bnfc_parser.tab.c"
-    break;
-
-  case 55: /* StructDeclList: DeclSpecList _SEMI StructDeclList  */
+  case 50: /* MaybeThreeDots: %empty  */
 #line 349 "partial_bnfc_parser.y"
-                                      { (yyval.structdecllist_) = new partial_acsl::DeclSpecStructDecl((yyvsp[-2].declspeclist_), (yyvsp[0].structdecllist_)); (yyval.structdecllist_)->line_number = (yyloc).first_line; (yyval.structdecllist_)->char_number = (yyloc).first_column; result->structdecllist_ = (yyval.structdecllist_); }
-#line 2043 "partial_bnfc_parser.tab.c"
+                             { (yyval.maybethreedots_) = new partial_acsl::NoThreeDots(); (yyval.maybethreedots_)->line_number = (yyloc).first_line; (yyval.maybethreedots_)->char_number = (yyloc).first_column; result->maybethreedots_ = (yyval.maybethreedots_); }
+#line 2047 "partial_bnfc_parser.tab.c"
     break;
 
-  case 56: /* StructDeclList: _SEMI StructDeclList  */
+  case 51: /* MaybeThreeDots: _COMMA _ELLIPSIS  */
 #line 350 "partial_bnfc_parser.y"
-                         { (yyval.structdecllist_) = new partial_acsl::SemicolonStructDecl((yyvsp[0].structdecllist_)); (yyval.structdecllist_)->line_number = (yyloc).first_line; (yyval.structdecllist_)->char_number = (yyloc).first_column; result->structdecllist_ = (yyval.structdecllist_); }
-#line 2049 "partial_bnfc_parser.tab.c"
+                     { (yyval.maybethreedots_) = new partial_acsl::ThreeDots(); (yyval.maybethreedots_)->line_number = (yyloc).first_line; (yyval.maybethreedots_)->char_number = (yyloc).first_column; result->maybethreedots_ = (yyval.maybethreedots_); }
+#line 2053 "partial_bnfc_parser.tab.c"
     break;
 
-  case 57: /* StructDeclList: DeclSpecList ListFieldDecl _SEMI StructDeclList  */
-#line 351 "partial_bnfc_parser.y"
-                                                    { std::reverse((yyvsp[-2].listfielddecl_)->begin(),(yyvsp[-2].listfielddecl_)->end()) ;(yyval.structdecllist_) = new partial_acsl::SpecFieldDeclStructDecl((yyvsp[-3].declspeclist_), (yyvsp[-2].listfielddecl_), (yyvsp[0].structdecllist_)); (yyval.structdecllist_)->line_number = (yyloc).first_line; (yyval.structdecllist_)->char_number = (yyloc).first_column; result->structdecllist_ = (yyval.structdecllist_); }
-#line 2055 "partial_bnfc_parser.tab.c"
+  case 52: /* ParameterDecl: DeclSpecList Declarator  */
+#line 352 "partial_bnfc_parser.y"
+                                        { (yyval.parameterdecl_) = new partial_acsl::ParameterDeclSpecDeclarator((yyvsp[-1].declspeclist_), (yyvsp[0].declarator_)); (yyval.parameterdecl_)->line_number = (yyloc).first_line; (yyval.parameterdecl_)->char_number = (yyloc).first_column; result->parameterdecl_ = (yyval.parameterdecl_); }
+#line 2059 "partial_bnfc_parser.tab.c"
     break;
 
-  case 58: /* FieldDecl: Declarator  */
+  case 53: /* ParameterDecl: DeclSpecList  */
 #line 353 "partial_bnfc_parser.y"
-                       { (yyval.fielddecl_) = new partial_acsl::FieldDeclDeclarator((yyvsp[0].declarator_)); (yyval.fielddecl_)->line_number = (yyloc).first_line; (yyval.fielddecl_)->char_number = (yyloc).first_column; result->fielddecl_ = (yyval.fielddecl_); }
-#line 2061 "partial_bnfc_parser.tab.c"
+                 { (yyval.parameterdecl_) = new partial_acsl::ParameterDeclSpec((yyvsp[0].declspeclist_)); (yyval.parameterdecl_)->line_number = (yyloc).first_line; (yyval.parameterdecl_)->char_number = (yyloc).first_column; result->parameterdecl_ = (yyval.parameterdecl_); }
+#line 2065 "partial_bnfc_parser.tab.c"
     break;
 
-  case 59: /* ListFieldDecl: FieldDecl  */
-#line 355 "partial_bnfc_parser.y"
-                          { (yyval.listfielddecl_) = new partial_acsl::ListFieldDecl(); (yyval.listfielddecl_)->push_back((yyvsp[0].fielddecl_)); result->listfielddecl_ = (yyval.listfielddecl_); }
-#line 2067 "partial_bnfc_parser.tab.c"
+  case 54: /* ParameterDecl: _LPAREN ParameterDecl _RPAREN  */
+#line 354 "partial_bnfc_parser.y"
+                                  { (yyval.parameterdecl_) = new partial_acsl::ParameterDeclPar((yyvsp[-1].parameterdecl_)); (yyval.parameterdecl_)->line_number = (yyloc).first_line; (yyval.parameterdecl_)->char_number = (yyloc).first_column; result->parameterdecl_ = (yyval.parameterdecl_); }
+#line 2071 "partial_bnfc_parser.tab.c"
     break;
 
-  case 60: /* ListFieldDecl: FieldDecl _COMMA ListFieldDecl  */
+  case 55: /* ListParameterDecl: ParameterDecl  */
 #line 356 "partial_bnfc_parser.y"
-                                   { (yyvsp[0].listfielddecl_)->push_back((yyvsp[-2].fielddecl_)); (yyval.listfielddecl_) = (yyvsp[0].listfielddecl_); result->listfielddecl_ = (yyval.listfielddecl_); }
-#line 2073 "partial_bnfc_parser.tab.c"
+                                  { (yyval.listparameterdecl_) = new partial_acsl::ListParameterDecl(); (yyval.listparameterdecl_)->push_back((yyvsp[0].parameterdecl_)); result->listparameterdecl_ = (yyval.listparameterdecl_); }
+#line 2077 "partial_bnfc_parser.tab.c"
     break;
 
-  case 61: /* Attribute: T_CONST  */
-#line 358 "partial_bnfc_parser.y"
-                    { (yyval.attribute_) = new partial_acsl::AttributeConst((yyvsp[0]._string)); (yyval.attribute_)->line_number = (yyloc).first_line; (yyval.attribute_)->char_number = (yyloc).first_column; result->attribute_ = (yyval.attribute_); }
-#line 2079 "partial_bnfc_parser.tab.c"
+  case 56: /* ListParameterDecl: ParameterDecl _COMMA ListParameterDecl  */
+#line 357 "partial_bnfc_parser.y"
+                                           { (yyvsp[0].listparameterdecl_)->push_back((yyvsp[-2].parameterdecl_)); (yyval.listparameterdecl_) = (yyvsp[0].listparameterdecl_); result->listparameterdecl_ = (yyval.listparameterdecl_); }
+#line 2083 "partial_bnfc_parser.tab.c"
     break;
 
-  case 62: /* ListAttribute: %empty  */
-#line 360 "partial_bnfc_parser.y"
-                            { (yyval.listattribute_) = new partial_acsl::ListAttribute(); result->listattribute_ = (yyval.listattribute_); }
-#line 2085 "partial_bnfc_parser.tab.c"
+  case 57: /* GhostParameterOpt: %empty  */
+#line 359 "partial_bnfc_parser.y"
+                                { (yyval.ghostparameteropt_) = new partial_acsl::NoGhostParameter(); (yyval.ghostparameteropt_)->line_number = (yyloc).first_line; (yyval.ghostparameteropt_)->char_number = (yyloc).first_column; result->ghostparameteropt_ = (yyval.ghostparameteropt_); }
+#line 2089 "partial_bnfc_parser.tab.c"
     break;
 
-  case 63: /* ListAttribute: ListAttribute Attribute  */
+  case 58: /* IdOrTypename: IdOrTypenameAsId  */
 #line 361 "partial_bnfc_parser.y"
-                            { (yyvsp[-1].listattribute_)->push_back((yyvsp[0].attribute_)); (yyval.listattribute_) = (yyvsp[-1].listattribute_); result->listattribute_ = (yyval.listattribute_); }
-#line 2091 "partial_bnfc_parser.tab.c"
+                                { (yyval.idortypename_) = new partial_acsl::IdTypename((yyvsp[0].idortypenameasid_)); (yyval.idortypename_)->line_number = (yyloc).first_line; (yyval.idortypename_)->char_number = (yyloc).first_column; result->idortypename_ = (yyval.idortypename_); }
+#line 2095 "partial_bnfc_parser.tab.c"
     break;
 
-  case 64: /* Block: T_LBRACE BlockAttrs ListBlockElement T_RBRACE  */
+  case 59: /* IdOrTypenameAsId: _IDENT_  */
 #line 363 "partial_bnfc_parser.y"
-                                                      { (yyval.block_) = new partial_acsl::ABlock((yyvsp[-3]._string), (yyvsp[-2].blockattrs_), (yyvsp[-1].listblockelement_), (yyvsp[0]._string)); (yyval.block_)->line_number = (yyloc).first_line; (yyval.block_)->char_number = (yyloc).first_column; result->block_ = (yyval.block_); }
-#line 2097 "partial_bnfc_parser.tab.c"
+                           { (yyval.idortypenameasid_) = new partial_acsl::IdOrTypenameAsIdIdentifier((yyvsp[0]._string)); (yyval.idortypenameasid_)->line_number = (yyloc).first_line; (yyval.idortypenameasid_)->char_number = (yyloc).first_column; result->idortypenameasid_ = (yyval.idortypenameasid_); }
+#line 2101 "partial_bnfc_parser.tab.c"
     break;
 
-  case 65: /* BlockAttrs: %empty  */
+  case 60: /* Declaration: DeclSpecList DeclAndInitDeclAttrList _SEMI  */
 #line 365 "partial_bnfc_parser.y"
-                         { (yyval.blockattrs_) = new partial_acsl::NoBlockAttrs(); (yyval.blockattrs_)->line_number = (yyloc).first_line; (yyval.blockattrs_)->char_number = (yyloc).first_column; result->blockattrs_ = (yyval.blockattrs_); }
-#line 2103 "partial_bnfc_parser.tab.c"
+                                                         { (yyval.declaration_) = new partial_acsl::DeclSpecInitDecl((yyvsp[-2].declspeclist_), (yyvsp[-1].declandinitdeclattrlist_)); (yyval.declaration_)->line_number = (yyloc).first_line; (yyval.declaration_)->char_number = (yyloc).first_column; result->declaration_ = (yyval.declaration_); }
+#line 2107 "partial_bnfc_parser.tab.c"
     break;
 
-  case 66: /* BlockAttrs: T_BLOCKATTRIBUTE _LPAREN ListAttr _RPAREN  */
+  case 61: /* Declaration: DeclSpecList _SEMI  */
 #line 366 "partial_bnfc_parser.y"
-                                              { std::reverse((yyvsp[-1].listattr_)->begin(),(yyvsp[-1].listattr_)->end()) ;(yyval.blockattrs_) = new partial_acsl::SomeBlockAttrs((yyvsp[-3]._string), (yyvsp[-1].listattr_)); (yyval.blockattrs_)->line_number = (yyloc).first_line; (yyval.blockattrs_)->char_number = (yyloc).first_column; result->blockattrs_ = (yyval.blockattrs_); }
-#line 2109 "partial_bnfc_parser.tab.c"
+                       { (yyval.declaration_) = new partial_acsl::DeclSpec((yyvsp[-1].declspeclist_)); (yyval.declaration_)->line_number = (yyloc).first_line; (yyval.declaration_)->char_number = (yyloc).first_column; result->declaration_ = (yyval.declaration_); }
+#line 2113 "partial_bnfc_parser.tab.c"
     break;
 
-  case 67: /* BlockElement: Declaration  */
+  case 62: /* DeclAndInitDeclAttrList: InitDeclarator  */
 #line 368 "partial_bnfc_parser.y"
-                           { (yyval.blockelement_) = new partial_acsl::DeclarationElement((yyvsp[0].declaration_)); (yyval.blockelement_)->line_number = (yyloc).first_line; (yyval.blockelement_)->char_number = (yyloc).first_column; result->blockelement_ = (yyval.blockelement_); }
-#line 2115 "partial_bnfc_parser.tab.c"
+                                         { (yyval.declandinitdeclattrlist_) = new partial_acsl::InitDeclaration((yyvsp[0].initdeclarator_)); (yyval.declandinitdeclattrlist_)->line_number = (yyloc).first_line; (yyval.declandinitdeclattrlist_)->char_number = (yyloc).first_column; result->declandinitdeclattrlist_ = (yyval.declandinitdeclattrlist_); }
+#line 2119 "partial_bnfc_parser.tab.c"
     break;
 
-  case 68: /* BlockElement: Statement  */
+  case 63: /* DeclAndInitDeclAttrList: InitDeclarator _COMMA ListInitDeclaratorAttr  */
 #line 369 "partial_bnfc_parser.y"
-              { (yyval.blockelement_) = new partial_acsl::StatementElement((yyvsp[0].statement_)); (yyval.blockelement_)->line_number = (yyloc).first_line; (yyval.blockelement_)->char_number = (yyloc).first_column; result->blockelement_ = (yyval.blockelement_); }
-#line 2121 "partial_bnfc_parser.tab.c"
+                                                 { std::reverse((yyvsp[0].listinitdeclaratorattr_)->begin(),(yyvsp[0].listinitdeclaratorattr_)->end()) ;(yyval.declandinitdeclattrlist_) = new partial_acsl::InitDeclarationWithAttr((yyvsp[-2].initdeclarator_), (yyvsp[0].listinitdeclaratorattr_)); (yyval.declandinitdeclattrlist_)->line_number = (yyloc).first_line; (yyval.declandinitdeclattrlist_)->char_number = (yyloc).first_column; result->declandinitdeclattrlist_ = (yyval.declandinitdeclattrlist_); }
+#line 2125 "partial_bnfc_parser.tab.c"
     break;
 
-  case 69: /* ListBlockElement: %empty  */
+  case 64: /* InitDeclaratorAttr: InitDeclarator  */
 #line 371 "partial_bnfc_parser.y"
-                               { (yyval.listblockelement_) = new partial_acsl::ListBlockElement(); result->listblockelement_ = (yyval.listblockelement_); }
-#line 2127 "partial_bnfc_parser.tab.c"
+                                    { (yyval.initdeclaratorattr_) = new partial_acsl::InitDeclaratorAttribute((yyvsp[0].initdeclarator_)); (yyval.initdeclaratorattr_)->line_number = (yyloc).first_line; (yyval.initdeclaratorattr_)->char_number = (yyloc).first_column; result->initdeclaratorattr_ = (yyval.initdeclaratorattr_); }
+#line 2131 "partial_bnfc_parser.tab.c"
     break;
 
-  case 70: /* ListBlockElement: ListBlockElement BlockElement  */
-#line 372 "partial_bnfc_parser.y"
-                                  { (yyvsp[-1].listblockelement_)->push_back((yyvsp[0].blockelement_)); (yyval.listblockelement_) = (yyvsp[-1].listblockelement_); result->listblockelement_ = (yyval.listblockelement_); }
-#line 2133 "partial_bnfc_parser.tab.c"
+  case 65: /* ListInitDeclaratorAttr: InitDeclaratorAttr  */
+#line 373 "partial_bnfc_parser.y"
+                                            { (yyval.listinitdeclaratorattr_) = new partial_acsl::ListInitDeclaratorAttr(); (yyval.listinitdeclaratorattr_)->push_back((yyvsp[0].initdeclaratorattr_)); result->listinitdeclaratorattr_ = (yyval.listinitdeclaratorattr_); }
+#line 2137 "partial_bnfc_parser.tab.c"
     break;
 
-  case 71: /* Statement: _SEMI  */
+  case 66: /* ListInitDeclaratorAttr: InitDeclaratorAttr _COMMA ListInitDeclaratorAttr  */
 #line 374 "partial_bnfc_parser.y"
-                  { (yyval.statement_) = new partial_acsl::SemicolonStatement(); (yyval.statement_)->line_number = (yyloc).first_line; (yyval.statement_)->char_number = (yyloc).first_column; result->statement_ = (yyval.statement_); }
-#line 2139 "partial_bnfc_parser.tab.c"
+                                                     { (yyvsp[0].listinitdeclaratorattr_)->push_back((yyvsp[-2].initdeclaratorattr_)); (yyval.listinitdeclaratorattr_) = (yyvsp[0].listinitdeclaratorattr_); result->listinitdeclaratorattr_ = (yyval.listinitdeclaratorattr_); }
+#line 2143 "partial_bnfc_parser.tab.c"
     break;
 
-  case 72: /* Statement: ListExpression _SEMI  */
-#line 375 "partial_bnfc_parser.y"
-                         { std::reverse((yyvsp[-1].listexpression_)->begin(),(yyvsp[-1].listexpression_)->end()) ;(yyval.statement_) = new partial_acsl::ExprsStatement((yyvsp[-1].listexpression_)); (yyval.statement_)->line_number = (yyloc).first_line; (yyval.statement_)->char_number = (yyloc).first_column; result->statement_ = (yyval.statement_); }
-#line 2145 "partial_bnfc_parser.tab.c"
-    break;
-
-  case 73: /* Statement: Block  */
+  case 67: /* InitDeclarator: Declarator  */
 #line 376 "partial_bnfc_parser.y"
-          { (yyval.statement_) = new partial_acsl::BlockStatement((yyvsp[0].block_)); (yyval.statement_)->line_number = (yyloc).first_line; (yyval.statement_)->char_number = (yyloc).first_column; result->statement_ = (yyval.statement_); }
-#line 2151 "partial_bnfc_parser.tab.c"
+                            { (yyval.initdeclarator_) = new partial_acsl::SimpleInitDeclarator((yyvsp[0].declarator_)); (yyval.initdeclarator_)->line_number = (yyloc).first_line; (yyval.initdeclarator_)->char_number = (yyloc).first_column; result->initdeclarator_ = (yyval.initdeclarator_); }
+#line 2149 "partial_bnfc_parser.tab.c"
     break;
 
-  case 74: /* Statement: _KW_if _LPAREN ListExpression _RPAREN AnnotatedStmt ElsePart  */
-#line 377 "partial_bnfc_parser.y"
-                                                                 { std::reverse((yyvsp[-3].listexpression_)->begin(),(yyvsp[-3].listexpression_)->end()) ;(yyval.statement_) = new partial_acsl::IfStatement((yyvsp[-3].listexpression_), (yyvsp[-1].annotatedstmt_), (yyvsp[0].elsepart_)); (yyval.statement_)->line_number = (yyloc).first_line; (yyval.statement_)->char_number = (yyloc).first_column; result->statement_ = (yyval.statement_); }
-#line 2157 "partial_bnfc_parser.tab.c"
-    break;
-
-  case 75: /* Statement: _KW_switch _LPAREN ListExpression _RPAREN AnnotatedStmt  */
+  case 68: /* StructDeclList: %empty  */
 #line 378 "partial_bnfc_parser.y"
-                                                            { std::reverse((yyvsp[-2].listexpression_)->begin(),(yyvsp[-2].listexpression_)->end()) ;(yyval.statement_) = new partial_acsl::SwitchStatement((yyvsp[-2].listexpression_), (yyvsp[0].annotatedstmt_)); (yyval.statement_)->line_number = (yyloc).first_line; (yyval.statement_)->char_number = (yyloc).first_column; result->statement_ = (yyval.statement_); }
-#line 2163 "partial_bnfc_parser.tab.c"
+                             { (yyval.structdecllist_) = new partial_acsl::EmptyStructDecl(); (yyval.structdecllist_)->line_number = (yyloc).first_line; (yyval.structdecllist_)->char_number = (yyloc).first_column; result->structdecllist_ = (yyval.structdecllist_); }
+#line 2155 "partial_bnfc_parser.tab.c"
     break;
 
-  case 76: /* Statement: _KW_while _LPAREN ListExpression _RPAREN AnnotatedStmt  */
+  case 69: /* StructDeclList: DeclSpecList _SEMI StructDeclList  */
 #line 379 "partial_bnfc_parser.y"
-                                                           { std::reverse((yyvsp[-2].listexpression_)->begin(),(yyvsp[-2].listexpression_)->end()) ;(yyval.statement_) = new partial_acsl::WhileStatement((yyvsp[-2].listexpression_), (yyvsp[0].annotatedstmt_)); (yyval.statement_)->line_number = (yyloc).first_line; (yyval.statement_)->char_number = (yyloc).first_column; result->statement_ = (yyval.statement_); }
-#line 2169 "partial_bnfc_parser.tab.c"
+                                      { (yyval.structdecllist_) = new partial_acsl::DeclSpecStructDecl((yyvsp[-2].declspeclist_), (yyvsp[0].structdecllist_)); (yyval.structdecllist_)->line_number = (yyloc).first_line; (yyval.structdecllist_)->char_number = (yyloc).first_column; result->structdecllist_ = (yyval.structdecllist_); }
+#line 2161 "partial_bnfc_parser.tab.c"
     break;
 
-  case 77: /* Statement: _KW_case Expression _COLON AnnotatedStmt  */
+  case 70: /* StructDeclList: _SEMI StructDeclList  */
 #line 380 "partial_bnfc_parser.y"
-                                             { (yyval.statement_) = new partial_acsl::CaseStatement((yyvsp[-2].expression_), (yyvsp[0].annotatedstmt_)); (yyval.statement_)->line_number = (yyloc).first_line; (yyval.statement_)->char_number = (yyloc).first_column; result->statement_ = (yyval.statement_); }
-#line 2175 "partial_bnfc_parser.tab.c"
+                         { (yyval.structdecllist_) = new partial_acsl::SemicolonStructDecl((yyvsp[0].structdecllist_)); (yyval.structdecllist_)->line_number = (yyloc).first_line; (yyval.structdecllist_)->char_number = (yyloc).first_column; result->structdecllist_ = (yyval.structdecllist_); }
+#line 2167 "partial_bnfc_parser.tab.c"
     break;
 
-  case 78: /* Statement: _KW_case Expression _ELLIPSIS Expression _COLON AnnotatedStmt  */
+  case 71: /* StructDeclList: DeclSpecList ListFieldDecl _SEMI StructDeclList  */
 #line 381 "partial_bnfc_parser.y"
-                                                                  { (yyval.statement_) = new partial_acsl::CaseSliceStatement((yyvsp[-4].expression_), (yyvsp[-2].expression_), (yyvsp[0].annotatedstmt_)); (yyval.statement_)->line_number = (yyloc).first_line; (yyval.statement_)->char_number = (yyloc).first_column; result->statement_ = (yyval.statement_); }
-#line 2181 "partial_bnfc_parser.tab.c"
+                                                    { std::reverse((yyvsp[-2].listfielddecl_)->begin(),(yyvsp[-2].listfielddecl_)->end()) ;(yyval.structdecllist_) = new partial_acsl::SpecFieldDeclStructDecl((yyvsp[-3].declspeclist_), (yyvsp[-2].listfielddecl_), (yyvsp[0].structdecllist_)); (yyval.structdecllist_)->line_number = (yyloc).first_line; (yyval.structdecllist_)->char_number = (yyloc).first_column; result->structdecllist_ = (yyval.structdecllist_); }
+#line 2173 "partial_bnfc_parser.tab.c"
     break;
 
-  case 79: /* Statement: _KW_default _COLON AnnotatedStmt  */
-#line 382 "partial_bnfc_parser.y"
-                                     { (yyval.statement_) = new partial_acsl::DefaultStatement((yyvsp[0].annotatedstmt_)); (yyval.statement_)->line_number = (yyloc).first_line; (yyval.statement_)->char_number = (yyloc).first_column; result->statement_ = (yyval.statement_); }
-#line 2187 "partial_bnfc_parser.tab.c"
-    break;
-
-  case 80: /* Statement: _KW_return _SEMI  */
+  case 72: /* FieldDecl: Declarator  */
 #line 383 "partial_bnfc_parser.y"
-                     { (yyval.statement_) = new partial_acsl::EmptyReturnStatement(); (yyval.statement_)->line_number = (yyloc).first_line; (yyval.statement_)->char_number = (yyloc).first_column; result->statement_ = (yyval.statement_); }
-#line 2193 "partial_bnfc_parser.tab.c"
+                       { (yyval.fielddecl_) = new partial_acsl::FieldDeclDeclarator((yyvsp[0].declarator_)); (yyval.fielddecl_)->line_number = (yyloc).first_line; (yyval.fielddecl_)->char_number = (yyloc).first_column; result->fielddecl_ = (yyval.fielddecl_); }
+#line 2179 "partial_bnfc_parser.tab.c"
     break;
 
-  case 81: /* Statement: _KW_return ListExpression _SEMI  */
-#line 384 "partial_bnfc_parser.y"
-                                    { std::reverse((yyvsp[-1].listexpression_)->begin(),(yyvsp[-1].listexpression_)->end()) ;(yyval.statement_) = new partial_acsl::ReturnStatement((yyvsp[-1].listexpression_)); (yyval.statement_)->line_number = (yyloc).first_line; (yyval.statement_)->char_number = (yyloc).first_column; result->statement_ = (yyval.statement_); }
-#line 2199 "partial_bnfc_parser.tab.c"
-    break;
-
-  case 82: /* Statement: _KW_break _SEMI  */
+  case 73: /* ListFieldDecl: FieldDecl  */
 #line 385 "partial_bnfc_parser.y"
-                    { (yyval.statement_) = new partial_acsl::BreakStatement(); (yyval.statement_)->line_number = (yyloc).first_line; (yyval.statement_)->char_number = (yyloc).first_column; result->statement_ = (yyval.statement_); }
-#line 2205 "partial_bnfc_parser.tab.c"
+                          { (yyval.listfielddecl_) = new partial_acsl::ListFieldDecl(); (yyval.listfielddecl_)->push_back((yyvsp[0].fielddecl_)); result->listfielddecl_ = (yyval.listfielddecl_); }
+#line 2185 "partial_bnfc_parser.tab.c"
     break;
 
-  case 83: /* Statement: _KW_continue _SEMI  */
+  case 74: /* ListFieldDecl: FieldDecl _COMMA ListFieldDecl  */
 #line 386 "partial_bnfc_parser.y"
-                       { (yyval.statement_) = new partial_acsl::ContinueStatement(); (yyval.statement_)->line_number = (yyloc).first_line; (yyval.statement_)->char_number = (yyloc).first_column; result->statement_ = (yyval.statement_); }
-#line 2211 "partial_bnfc_parser.tab.c"
+                                   { (yyvsp[0].listfielddecl_)->push_back((yyvsp[-2].fielddecl_)); (yyval.listfielddecl_) = (yyvsp[0].listfielddecl_); result->listfielddecl_ = (yyval.listfielddecl_); }
+#line 2191 "partial_bnfc_parser.tab.c"
     break;
 
-  case 84: /* Attr: Attr1  */
+  case 75: /* Attribute: T_CONST  */
 #line 388 "partial_bnfc_parser.y"
-             { (yyval.attr_) = (yyvsp[0].attr_); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
-#line 2217 "partial_bnfc_parser.tab.c"
+                    { (yyval.attribute_) = new partial_acsl::AttributeConst((yyvsp[0]._string)); (yyval.attribute_)->line_number = (yyloc).first_line; (yyval.attribute_)->char_number = (yyloc).first_column; result->attribute_ = (yyval.attribute_); }
+#line 2197 "partial_bnfc_parser.tab.c"
     break;
 
-  case 85: /* Attr: Attr1 _EQ Attr1  */
-#line 389 "partial_bnfc_parser.y"
-                    { (yyval.attr_) = new partial_acsl::AnAttr((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
-#line 2223 "partial_bnfc_parser.tab.c"
+  case 76: /* ListAttribute: %empty  */
+#line 390 "partial_bnfc_parser.y"
+                            { (yyval.listattribute_) = new partial_acsl::ListAttribute(); result->listattribute_ = (yyval.listattribute_); }
+#line 2203 "partial_bnfc_parser.tab.c"
     break;
 
-  case 86: /* ListAttr: Attr  */
+  case 77: /* ListAttribute: ListAttribute Attribute  */
 #line 391 "partial_bnfc_parser.y"
-                { (yyval.listattr_) = new partial_acsl::ListAttr(); (yyval.listattr_)->push_back((yyvsp[0].attr_)); result->listattr_ = (yyval.listattr_); }
-#line 2229 "partial_bnfc_parser.tab.c"
+                            { (yyvsp[-1].listattribute_)->push_back((yyvsp[0].attribute_)); (yyval.listattribute_) = (yyvsp[-1].listattribute_); result->listattribute_ = (yyval.listattribute_); }
+#line 2209 "partial_bnfc_parser.tab.c"
     break;
 
-  case 87: /* ListAttr: Attr _COMMA ListAttr  */
-#line 392 "partial_bnfc_parser.y"
-                         { (yyvsp[0].listattr_)->push_back((yyvsp[-2].attr_)); (yyval.listattr_) = (yyvsp[0].listattr_); result->listattr_ = (yyval.listattr_); }
-#line 2235 "partial_bnfc_parser.tab.c"
+  case 78: /* Block: _LBRACE BlockAttrs ListBlockElement _RBRACE  */
+#line 393 "partial_bnfc_parser.y"
+                                                    { (yyval.block_) = new partial_acsl::ABlock((yyvsp[-2].blockattrs_), (yyvsp[-1].listblockelement_)); (yyval.block_)->line_number = (yyloc).first_line; (yyval.block_)->char_number = (yyloc).first_column; result->block_ = (yyval.block_); }
+#line 2215 "partial_bnfc_parser.tab.c"
     break;
 
-  case 88: /* Attr1: Attr2  */
-#line 394 "partial_bnfc_parser.y"
-              { (yyval.attr_) = (yyvsp[0].attr_); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
-#line 2241 "partial_bnfc_parser.tab.c"
-    break;
-
-  case 89: /* Attr1: Attr2 _QUESTION Attr1 _COLON Attr1  */
+  case 79: /* BlockAttrs: %empty  */
 #line 395 "partial_bnfc_parser.y"
-                                       { (yyval.attr_) = new partial_acsl::TernaryCond((yyvsp[-4].attr_), (yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
-#line 2247 "partial_bnfc_parser.tab.c"
+                         { (yyval.blockattrs_) = new partial_acsl::NoBlockAttrs(); (yyval.blockattrs_)->line_number = (yyloc).first_line; (yyval.blockattrs_)->char_number = (yyloc).first_column; result->blockattrs_ = (yyval.blockattrs_); }
+#line 2221 "partial_bnfc_parser.tab.c"
     break;
 
-  case 90: /* Attr2: Attr3  */
-#line 397 "partial_bnfc_parser.y"
-              { (yyval.attr_) = (yyvsp[0].attr_); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
-#line 2253 "partial_bnfc_parser.tab.c"
+  case 80: /* BlockAttrs: T_BLOCKATTRIBUTE _LPAREN ListAttr _RPAREN  */
+#line 396 "partial_bnfc_parser.y"
+                                              { std::reverse((yyvsp[-1].listattr_)->begin(),(yyvsp[-1].listattr_)->end()) ;(yyval.blockattrs_) = new partial_acsl::SomeBlockAttrs((yyvsp[-3]._string), (yyvsp[-1].listattr_)); (yyval.blockattrs_)->line_number = (yyloc).first_line; (yyval.blockattrs_)->char_number = (yyloc).first_column; result->blockattrs_ = (yyval.blockattrs_); }
+#line 2227 "partial_bnfc_parser.tab.c"
     break;
 
-  case 91: /* Attr2: Attr2 _DBAR Attr3  */
+  case 81: /* BlockElement: Declaration  */
 #line 398 "partial_bnfc_parser.y"
-                      { (yyval.attr_) = new partial_acsl::Or((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
-#line 2259 "partial_bnfc_parser.tab.c"
+                           { (yyval.blockelement_) = new partial_acsl::DeclarationElement((yyvsp[0].declaration_)); (yyval.blockelement_)->line_number = (yyloc).first_line; (yyval.blockelement_)->char_number = (yyloc).first_column; result->blockelement_ = (yyval.blockelement_); }
+#line 2233 "partial_bnfc_parser.tab.c"
     break;
 
-  case 92: /* Attr3: Attr4  */
-#line 400 "partial_bnfc_parser.y"
-              { (yyval.attr_) = (yyvsp[0].attr_); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
-#line 2265 "partial_bnfc_parser.tab.c"
+  case 82: /* BlockElement: Statement  */
+#line 399 "partial_bnfc_parser.y"
+              { (yyval.blockelement_) = new partial_acsl::StatementElement((yyvsp[0].statement_)); (yyval.blockelement_)->line_number = (yyloc).first_line; (yyval.blockelement_)->char_number = (yyloc).first_column; result->blockelement_ = (yyval.blockelement_); }
+#line 2239 "partial_bnfc_parser.tab.c"
     break;
 
-  case 93: /* Attr3: Attr3 _DAMP Attr4  */
+  case 83: /* ListBlockElement: %empty  */
 #line 401 "partial_bnfc_parser.y"
-                      { (yyval.attr_) = new partial_acsl::And((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
-#line 2271 "partial_bnfc_parser.tab.c"
+                               { (yyval.listblockelement_) = new partial_acsl::ListBlockElement(); result->listblockelement_ = (yyval.listblockelement_); }
+#line 2245 "partial_bnfc_parser.tab.c"
     break;
 
-  case 94: /* Attr4: Attr5  */
-#line 403 "partial_bnfc_parser.y"
-              { (yyval.attr_) = (yyvsp[0].attr_); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
-#line 2277 "partial_bnfc_parser.tab.c"
+  case 84: /* ListBlockElement: ListBlockElement BlockElement  */
+#line 402 "partial_bnfc_parser.y"
+                                  { (yyvsp[-1].listblockelement_)->push_back((yyvsp[0].blockelement_)); (yyval.listblockelement_) = (yyvsp[-1].listblockelement_); result->listblockelement_ = (yyval.listblockelement_); }
+#line 2251 "partial_bnfc_parser.tab.c"
     break;
 
-  case 95: /* Attr4: Attr4 _BAR Attr5  */
+  case 85: /* Statement: _SEMI  */
 #line 404 "partial_bnfc_parser.y"
-                     { (yyval.attr_) = new partial_acsl::BitOr((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
-#line 2283 "partial_bnfc_parser.tab.c"
+                  { (yyval.statement_) = new partial_acsl::SemicolonStatement(); (yyval.statement_)->line_number = (yyloc).first_line; (yyval.statement_)->char_number = (yyloc).first_column; result->statement_ = (yyval.statement_); }
+#line 2257 "partial_bnfc_parser.tab.c"
     break;
 
-  case 96: /* Attr5: Attr6  */
+  case 86: /* Statement: ListExpression _SEMI  */
+#line 405 "partial_bnfc_parser.y"
+                         { std::reverse((yyvsp[-1].listexpression_)->begin(),(yyvsp[-1].listexpression_)->end()) ;(yyval.statement_) = new partial_acsl::ExprsStatement((yyvsp[-1].listexpression_)); (yyval.statement_)->line_number = (yyloc).first_line; (yyval.statement_)->char_number = (yyloc).first_column; result->statement_ = (yyval.statement_); }
+#line 2263 "partial_bnfc_parser.tab.c"
+    break;
+
+  case 87: /* Statement: Block  */
 #line 406 "partial_bnfc_parser.y"
-              { (yyval.attr_) = (yyvsp[0].attr_); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
-#line 2289 "partial_bnfc_parser.tab.c"
+          { (yyval.statement_) = new partial_acsl::BlockStatement((yyvsp[0].block_)); (yyval.statement_)->line_number = (yyloc).first_line; (yyval.statement_)->char_number = (yyloc).first_column; result->statement_ = (yyval.statement_); }
+#line 2269 "partial_bnfc_parser.tab.c"
     break;
 
-  case 97: /* Attr5: Attr5 _CARET Attr6  */
+  case 88: /* Statement: _KW_if _LPAREN ListExpression _RPAREN AnnotatedStmt ElsePart  */
 #line 407 "partial_bnfc_parser.y"
-                       { (yyval.attr_) = new partial_acsl::Xor((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
-#line 2295 "partial_bnfc_parser.tab.c"
+                                                                 { std::reverse((yyvsp[-3].listexpression_)->begin(),(yyvsp[-3].listexpression_)->end()) ;(yyval.statement_) = new partial_acsl::IfStatement((yyvsp[-3].listexpression_), (yyvsp[-1].annotatedstmt_), (yyvsp[0].elsepart_)); (yyval.statement_)->line_number = (yyloc).first_line; (yyval.statement_)->char_number = (yyloc).first_column; result->statement_ = (yyval.statement_); }
+#line 2275 "partial_bnfc_parser.tab.c"
     break;
 
-  case 98: /* Attr6: Attr7  */
+  case 89: /* Statement: _KW_switch _LPAREN ListExpression _RPAREN AnnotatedStmt  */
+#line 408 "partial_bnfc_parser.y"
+                                                            { std::reverse((yyvsp[-2].listexpression_)->begin(),(yyvsp[-2].listexpression_)->end()) ;(yyval.statement_) = new partial_acsl::SwitchStatement((yyvsp[-2].listexpression_), (yyvsp[0].annotatedstmt_)); (yyval.statement_)->line_number = (yyloc).first_line; (yyval.statement_)->char_number = (yyloc).first_column; result->statement_ = (yyval.statement_); }
+#line 2281 "partial_bnfc_parser.tab.c"
+    break;
+
+  case 90: /* Statement: _KW_while _LPAREN ListExpression _RPAREN AnnotatedStmt  */
 #line 409 "partial_bnfc_parser.y"
-              { (yyval.attr_) = (yyvsp[0].attr_); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
-#line 2301 "partial_bnfc_parser.tab.c"
+                                                           { std::reverse((yyvsp[-2].listexpression_)->begin(),(yyvsp[-2].listexpression_)->end()) ;(yyval.statement_) = new partial_acsl::WhileStatement((yyvsp[-2].listexpression_), (yyvsp[0].annotatedstmt_)); (yyval.statement_)->line_number = (yyloc).first_line; (yyval.statement_)->char_number = (yyloc).first_column; result->statement_ = (yyval.statement_); }
+#line 2287 "partial_bnfc_parser.tab.c"
     break;
 
-  case 99: /* Attr6: Attr6 _AMP Attr7  */
+  case 91: /* Statement: _KW_for _LPAREN ForClause OptExpression _SEMI OptExpression _RPAREN AnnotatedStmt  */
 #line 410 "partial_bnfc_parser.y"
-                     { (yyval.attr_) = new partial_acsl::BitAnd((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
-#line 2307 "partial_bnfc_parser.tab.c"
+                                                                                      { (yyval.statement_) = new partial_acsl::ForStatement((yyvsp[-5].forclause_), (yyvsp[-4].optexpression_), (yyvsp[-2].optexpression_), (yyvsp[0].annotatedstmt_)); (yyval.statement_)->line_number = (yyloc).first_line; (yyval.statement_)->char_number = (yyloc).first_column; result->statement_ = (yyval.statement_); }
+#line 2293 "partial_bnfc_parser.tab.c"
     break;
 
-  case 100: /* Attr7: Attr8  */
+  case 92: /* Statement: _KW_case Expression _COLON AnnotatedStmt  */
+#line 411 "partial_bnfc_parser.y"
+                                             { (yyval.statement_) = new partial_acsl::CaseStatement((yyvsp[-2].expression_), (yyvsp[0].annotatedstmt_)); (yyval.statement_)->line_number = (yyloc).first_line; (yyval.statement_)->char_number = (yyloc).first_column; result->statement_ = (yyval.statement_); }
+#line 2299 "partial_bnfc_parser.tab.c"
+    break;
+
+  case 93: /* Statement: _KW_case Expression _ELLIPSIS Expression _COLON AnnotatedStmt  */
 #line 412 "partial_bnfc_parser.y"
-              { (yyval.attr_) = (yyvsp[0].attr_); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
-#line 2313 "partial_bnfc_parser.tab.c"
+                                                                  { (yyval.statement_) = new partial_acsl::CaseSliceStatement((yyvsp[-4].expression_), (yyvsp[-2].expression_), (yyvsp[0].annotatedstmt_)); (yyval.statement_)->line_number = (yyloc).first_line; (yyval.statement_)->char_number = (yyloc).first_column; result->statement_ = (yyval.statement_); }
+#line 2305 "partial_bnfc_parser.tab.c"
     break;
 
-  case 101: /* Attr7: Attr7 _DEQ Attr8  */
+  case 94: /* Statement: _KW_default _COLON AnnotatedStmt  */
 #line 413 "partial_bnfc_parser.y"
-                     { (yyval.attr_) = new partial_acsl::EqualEqual((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
-#line 2319 "partial_bnfc_parser.tab.c"
+                                     { (yyval.statement_) = new partial_acsl::DefaultStatement((yyvsp[0].annotatedstmt_)); (yyval.statement_)->line_number = (yyloc).first_line; (yyval.statement_)->char_number = (yyloc).first_column; result->statement_ = (yyval.statement_); }
+#line 2311 "partial_bnfc_parser.tab.c"
     break;
 
-  case 102: /* Attr7: Attr7 _BANGEQ Attr8  */
+  case 95: /* Statement: _KW_return _SEMI  */
 #line 414 "partial_bnfc_parser.y"
-                        { (yyval.attr_) = new partial_acsl::NotEqual((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
-#line 2325 "partial_bnfc_parser.tab.c"
+                     { (yyval.statement_) = new partial_acsl::EmptyReturnStatement(); (yyval.statement_)->line_number = (yyloc).first_line; (yyval.statement_)->char_number = (yyloc).first_column; result->statement_ = (yyval.statement_); }
+#line 2317 "partial_bnfc_parser.tab.c"
     break;
 
-  case 103: /* Attr8: Attr9  */
+  case 96: /* Statement: _KW_return ListExpression _SEMI  */
+#line 415 "partial_bnfc_parser.y"
+                                    { std::reverse((yyvsp[-1].listexpression_)->begin(),(yyvsp[-1].listexpression_)->end()) ;(yyval.statement_) = new partial_acsl::ReturnStatement((yyvsp[-1].listexpression_)); (yyval.statement_)->line_number = (yyloc).first_line; (yyval.statement_)->char_number = (yyloc).first_column; result->statement_ = (yyval.statement_); }
+#line 2323 "partial_bnfc_parser.tab.c"
+    break;
+
+  case 97: /* Statement: _KW_break _SEMI  */
 #line 416 "partial_bnfc_parser.y"
-              { (yyval.attr_) = (yyvsp[0].attr_); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
-#line 2331 "partial_bnfc_parser.tab.c"
+                    { (yyval.statement_) = new partial_acsl::BreakStatement(); (yyval.statement_)->line_number = (yyloc).first_line; (yyval.statement_)->char_number = (yyloc).first_column; result->statement_ = (yyval.statement_); }
+#line 2329 "partial_bnfc_parser.tab.c"
     break;
 
-  case 104: /* Attr8: Attr8 _LT Attr9  */
+  case 98: /* Statement: _KW_continue _SEMI  */
 #line 417 "partial_bnfc_parser.y"
-                    { (yyval.attr_) = new partial_acsl::Less((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
-#line 2337 "partial_bnfc_parser.tab.c"
+                       { (yyval.statement_) = new partial_acsl::ContinueStatement(); (yyval.statement_)->line_number = (yyloc).first_line; (yyval.statement_)->char_number = (yyloc).first_column; result->statement_ = (yyval.statement_); }
+#line 2335 "partial_bnfc_parser.tab.c"
     break;
 
-  case 105: /* Attr8: Attr8 _GT Attr9  */
-#line 418 "partial_bnfc_parser.y"
-                    { (yyval.attr_) = new partial_acsl::Greater((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
-#line 2343 "partial_bnfc_parser.tab.c"
-    break;
-
-  case 106: /* Attr8: Attr8 _LDARROW Attr9  */
+  case 99: /* ForClause: OptExpression _SEMI  */
 #line 419 "partial_bnfc_parser.y"
-                         { (yyval.attr_) = new partial_acsl::LessEqual((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
-#line 2349 "partial_bnfc_parser.tab.c"
+                                { (yyval.forclause_) = new partial_acsl::ForClauseExpression((yyvsp[-1].optexpression_)); (yyval.forclause_)->line_number = (yyloc).first_line; (yyval.forclause_)->char_number = (yyloc).first_column; result->forclause_ = (yyval.forclause_); }
+#line 2341 "partial_bnfc_parser.tab.c"
     break;
 
-  case 107: /* Attr8: Attr8 _GTEQ Attr9  */
+  case 100: /* ForClause: Declaration  */
 #line 420 "partial_bnfc_parser.y"
-                      { (yyval.attr_) = new partial_acsl::GreaterEqual((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
-#line 2355 "partial_bnfc_parser.tab.c"
+                { (yyval.forclause_) = new partial_acsl::ForClauseDeclaration((yyvsp[0].declaration_)); (yyval.forclause_)->line_number = (yyloc).first_line; (yyval.forclause_)->char_number = (yyloc).first_column; result->forclause_ = (yyval.forclause_); }
+#line 2347 "partial_bnfc_parser.tab.c"
     break;
 
-  case 108: /* Attr9: Attr10  */
+  case 101: /* Attr: Attr1  */
 #line 422 "partial_bnfc_parser.y"
-               { (yyval.attr_) = (yyvsp[0].attr_); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
-#line 2361 "partial_bnfc_parser.tab.c"
+             { (yyval.attr_) = (yyvsp[0].attr_); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2353 "partial_bnfc_parser.tab.c"
     break;
 
-  case 109: /* Attr9: Attr9 _DLT Attr10  */
+  case 102: /* Attr: Attr1 _EQ Attr1  */
 #line 423 "partial_bnfc_parser.y"
-                      { (yyval.attr_) = new partial_acsl::LeftShiftOp((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
-#line 2367 "partial_bnfc_parser.tab.c"
+                    { (yyval.attr_) = new partial_acsl::AnAttr((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2359 "partial_bnfc_parser.tab.c"
     break;
 
-  case 110: /* Attr9: Attr9 _DGT Attr10  */
-#line 424 "partial_bnfc_parser.y"
-                      { (yyval.attr_) = new partial_acsl::RightShiftOp((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
-#line 2373 "partial_bnfc_parser.tab.c"
+  case 103: /* ListAttr: Attr  */
+#line 425 "partial_bnfc_parser.y"
+                { (yyval.listattr_) = new partial_acsl::ListAttr(); (yyval.listattr_)->push_back((yyvsp[0].attr_)); result->listattr_ = (yyval.listattr_); }
+#line 2365 "partial_bnfc_parser.tab.c"
     break;
 
-  case 111: /* Attr10: Attr11  */
+  case 104: /* ListAttr: Attr _COMMA ListAttr  */
 #line 426 "partial_bnfc_parser.y"
-                { (yyval.attr_) = (yyvsp[0].attr_); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
-#line 2379 "partial_bnfc_parser.tab.c"
+                         { (yyvsp[0].listattr_)->push_back((yyvsp[-2].attr_)); (yyval.listattr_) = (yyvsp[0].listattr_); result->listattr_ = (yyval.listattr_); }
+#line 2371 "partial_bnfc_parser.tab.c"
     break;
 
-  case 112: /* Attr10: Attr10 _PLUS Attr11  */
-#line 427 "partial_bnfc_parser.y"
-                        { (yyval.attr_) = new partial_acsl::AddOp((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
-#line 2385 "partial_bnfc_parser.tab.c"
-    break;
-
-  case 113: /* Attr10: Attr10 _MINUS Attr11  */
+  case 105: /* Attr1: Attr2  */
 #line 428 "partial_bnfc_parser.y"
-                         { (yyval.attr_) = new partial_acsl::SubOp((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
-#line 2391 "partial_bnfc_parser.tab.c"
+              { (yyval.attr_) = (yyvsp[0].attr_); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2377 "partial_bnfc_parser.tab.c"
     break;
 
-  case 114: /* Attr11: Attr12  */
-#line 430 "partial_bnfc_parser.y"
-                { (yyval.attr_) = (yyvsp[0].attr_); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
-#line 2397 "partial_bnfc_parser.tab.c"
+  case 106: /* Attr1: Attr2 _QUESTION Attr1 _COLON Attr1  */
+#line 429 "partial_bnfc_parser.y"
+                                       { (yyval.attr_) = new partial_acsl::TernaryCond((yyvsp[-4].attr_), (yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2383 "partial_bnfc_parser.tab.c"
     break;
 
-  case 115: /* Attr11: Attr11 _STAR Attr12  */
+  case 107: /* Attr2: Attr3  */
 #line 431 "partial_bnfc_parser.y"
-                        { (yyval.attr_) = new partial_acsl::MultOp((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
-#line 2403 "partial_bnfc_parser.tab.c"
+              { (yyval.attr_) = (yyvsp[0].attr_); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2389 "partial_bnfc_parser.tab.c"
     break;
 
-  case 116: /* Attr11: Attr11 _SLASH Attr12  */
+  case 108: /* Attr2: Attr2 _DBAR Attr3  */
 #line 432 "partial_bnfc_parser.y"
-                         { (yyval.attr_) = new partial_acsl::DivOp((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
-#line 2409 "partial_bnfc_parser.tab.c"
+                      { (yyval.attr_) = new partial_acsl::Or((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2395 "partial_bnfc_parser.tab.c"
     break;
 
-  case 117: /* Attr11: Attr11 _PERCENT Attr12  */
-#line 433 "partial_bnfc_parser.y"
-                           { (yyval.attr_) = new partial_acsl::ModOp((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
-#line 2415 "partial_bnfc_parser.tab.c"
+  case 109: /* Attr3: Attr4  */
+#line 434 "partial_bnfc_parser.y"
+              { (yyval.attr_) = (yyvsp[0].attr_); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2401 "partial_bnfc_parser.tab.c"
     break;
 
-  case 118: /* Attr12: Attr13  */
+  case 110: /* Attr3: Attr3 _DAMP Attr4  */
 #line 435 "partial_bnfc_parser.y"
-                { (yyval.attr_) = (yyvsp[0].attr_); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
-#line 2421 "partial_bnfc_parser.tab.c"
+                      { (yyval.attr_) = new partial_acsl::And((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2407 "partial_bnfc_parser.tab.c"
     break;
 
-  case 119: /* Attr12: _PLUS Attr12  */
-#line 436 "partial_bnfc_parser.y"
-                 { (yyval.attr_) = new partial_acsl::PlusUnaryAttr((yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
-#line 2427 "partial_bnfc_parser.tab.c"
-    break;
-
-  case 120: /* Attr12: _MINUS Attr12  */
+  case 111: /* Attr4: Attr5  */
 #line 437 "partial_bnfc_parser.y"
-                  { (yyval.attr_) = new partial_acsl::MinusUnaryAttr((yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
-#line 2433 "partial_bnfc_parser.tab.c"
+              { (yyval.attr_) = (yyvsp[0].attr_); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2413 "partial_bnfc_parser.tab.c"
     break;
 
-  case 121: /* Attr12: _STAR Attr12  */
+  case 112: /* Attr4: Attr4 _BAR Attr5  */
 #line 438 "partial_bnfc_parser.y"
-                 { (yyval.attr_) = new partial_acsl::MultUnaryAttr((yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
-#line 2439 "partial_bnfc_parser.tab.c"
+                     { (yyval.attr_) = new partial_acsl::BitOr((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2419 "partial_bnfc_parser.tab.c"
     break;
 
-  case 122: /* Attr12: _AMP Attr12  */
-#line 439 "partial_bnfc_parser.y"
-                { (yyval.attr_) = new partial_acsl::AmpUnaryAttr((yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
-#line 2445 "partial_bnfc_parser.tab.c"
-    break;
-
-  case 123: /* Attr12: _BANG Attr12  */
+  case 113: /* Attr5: Attr6  */
 #line 440 "partial_bnfc_parser.y"
-                 { (yyval.attr_) = new partial_acsl::NotUnaryAttr((yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
-#line 2451 "partial_bnfc_parser.tab.c"
+              { (yyval.attr_) = (yyvsp[0].attr_); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2425 "partial_bnfc_parser.tab.c"
     break;
 
-  case 124: /* Attr12: _TILDE Attr12  */
+  case 114: /* Attr5: Attr5 _CARET Attr6  */
 #line 441 "partial_bnfc_parser.y"
-                  { (yyval.attr_) = new partial_acsl::TildeUnaryAttr((yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
-#line 2457 "partial_bnfc_parser.tab.c"
+                       { (yyval.attr_) = new partial_acsl::Xor((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2431 "partial_bnfc_parser.tab.c"
     break;
 
-  case 125: /* Attr13: Attr14  */
+  case 115: /* Attr6: Attr7  */
 #line 443 "partial_bnfc_parser.y"
-                { (yyval.attr_) = (yyvsp[0].attr_); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
-#line 2463 "partial_bnfc_parser.tab.c"
+              { (yyval.attr_) = (yyvsp[0].attr_); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2437 "partial_bnfc_parser.tab.c"
     break;
 
-  case 126: /* Attr13: IdOrTypenameAsId _LPAREN ListAttr _RPAREN  */
+  case 116: /* Attr6: Attr6 _AMP Attr7  */
 #line 444 "partial_bnfc_parser.y"
-                                              { std::reverse((yyvsp[-1].listattr_)->begin(),(yyvsp[-1].listattr_)->end()) ;(yyval.attr_) = new partial_acsl::FuncationCall((yyvsp[-3].idortypenameasid_), (yyvsp[-1].listattr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
-#line 2469 "partial_bnfc_parser.tab.c"
+                     { (yyval.attr_) = new partial_acsl::BitAnd((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2443 "partial_bnfc_parser.tab.c"
     break;
 
-  case 127: /* Attr13: IdOrTypenameAsId _LPAREN _RPAREN  */
-#line 445 "partial_bnfc_parser.y"
-                                     { (yyval.attr_) = new partial_acsl::ProcedureCall((yyvsp[-2].idortypenameasid_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
-#line 2475 "partial_bnfc_parser.tab.c"
-    break;
-
-  case 128: /* Attr13: Attr13 _RARROW IdOrTypename  */
+  case 117: /* Attr7: Attr8  */
 #line 446 "partial_bnfc_parser.y"
-                                { (yyval.attr_) = new partial_acsl::ArrowAttr((yyvsp[-2].attr_), (yyvsp[0].idortypename_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
-#line 2481 "partial_bnfc_parser.tab.c"
+              { (yyval.attr_) = (yyvsp[0].attr_); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2449 "partial_bnfc_parser.tab.c"
     break;
 
-  case 129: /* Attr13: Attr13 _DOT IdOrTypename  */
+  case 118: /* Attr7: Attr7 _DEQ Attr8  */
 #line 447 "partial_bnfc_parser.y"
-                             { (yyval.attr_) = new partial_acsl::DotAttr((yyvsp[-2].attr_), (yyvsp[0].idortypename_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
-#line 2487 "partial_bnfc_parser.tab.c"
+                     { (yyval.attr_) = new partial_acsl::EqualEqual((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2455 "partial_bnfc_parser.tab.c"
     break;
 
-  case 130: /* Attr13: Attr13 T_LBRACKET Attr T_RBRACKET  */
+  case 119: /* Attr7: Attr7 _BANGEQ Attr8  */
 #line 448 "partial_bnfc_parser.y"
-                                      { (yyval.attr_) = new partial_acsl::ArrayAttr((yyvsp[-3].attr_), (yyvsp[-2]._string), (yyvsp[-1].attr_), (yyvsp[0]._string)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
-#line 2493 "partial_bnfc_parser.tab.c"
+                        { (yyval.attr_) = new partial_acsl::NotEqual((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2461 "partial_bnfc_parser.tab.c"
     break;
 
-  case 131: /* Attr14: BasicAttribute  */
+  case 120: /* Attr8: Attr9  */
 #line 450 "partial_bnfc_parser.y"
-                        { (yyval.attr_) = new partial_acsl::BasicAttr((yyvsp[0].basicattribute_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
-#line 2499 "partial_bnfc_parser.tab.c"
+              { (yyval.attr_) = (yyvsp[0].attr_); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2467 "partial_bnfc_parser.tab.c"
     break;
 
-  case 132: /* Attr14: _LPAREN Attr _RPAREN  */
+  case 121: /* Attr8: Attr8 _LT Attr9  */
 #line 451 "partial_bnfc_parser.y"
-                         { (yyval.attr_) = (yyvsp[-1].attr_); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
-#line 2505 "partial_bnfc_parser.tab.c"
+                    { (yyval.attr_) = new partial_acsl::Less((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2473 "partial_bnfc_parser.tab.c"
     break;
 
-  case 133: /* BasicAttribute: _INTEGER_  */
+  case 122: /* Attr8: Attr8 _GT Attr9  */
+#line 452 "partial_bnfc_parser.y"
+                    { (yyval.attr_) = new partial_acsl::Greater((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2479 "partial_bnfc_parser.tab.c"
+    break;
+
+  case 123: /* Attr8: Attr8 _LDARROW Attr9  */
 #line 453 "partial_bnfc_parser.y"
-                           { (yyval.basicattribute_) = new partial_acsl::BasicAttrConsInt((yyvsp[0]._int)); (yyval.basicattribute_)->line_number = (yyloc).first_line; (yyval.basicattribute_)->char_number = (yyloc).first_column; result->basicattribute_ = (yyval.basicattribute_); }
-#line 2511 "partial_bnfc_parser.tab.c"
+                         { (yyval.attr_) = new partial_acsl::LessEqual((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2485 "partial_bnfc_parser.tab.c"
     break;
 
-  case 134: /* BasicAttribute: _DOUBLE_  */
+  case 124: /* Attr8: Attr8 _GTEQ Attr9  */
 #line 454 "partial_bnfc_parser.y"
-             { (yyval.basicattribute_) = new partial_acsl::BasicAttrConsFloat((yyvsp[0]._double)); (yyval.basicattribute_)->line_number = (yyloc).first_line; (yyval.basicattribute_)->char_number = (yyloc).first_column; result->basicattribute_ = (yyval.basicattribute_); }
-#line 2517 "partial_bnfc_parser.tab.c"
+                      { (yyval.attr_) = new partial_acsl::GreaterEqual((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2491 "partial_bnfc_parser.tab.c"
     break;
 
-  case 135: /* AnnotatedStmt: Statement  */
-#line 459 "partial_bnfc_parser.y"
-                          { (yyval.annotatedstmt_) = new partial_acsl::AnnotatedStatement((yyvsp[0].statement_)); (yyval.annotatedstmt_)->line_number = (yyloc).first_line; (yyval.annotatedstmt_)->char_number = (yyloc).first_column; result->annotatedstmt_ = (yyval.annotatedstmt_); }
-#line 2523 "partial_bnfc_parser.tab.c"
+  case 125: /* Attr9: Attr10  */
+#line 456 "partial_bnfc_parser.y"
+               { (yyval.attr_) = (yyvsp[0].attr_); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2497 "partial_bnfc_parser.tab.c"
     break;
 
-  case 136: /* ElsePart: %empty  */
+  case 126: /* Attr9: Attr9 _DLT Attr10  */
+#line 457 "partial_bnfc_parser.y"
+                      { (yyval.attr_) = new partial_acsl::LeftShiftOp((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2503 "partial_bnfc_parser.tab.c"
+    break;
+
+  case 127: /* Attr9: Attr9 _DGT Attr10  */
+#line 458 "partial_bnfc_parser.y"
+                      { (yyval.attr_) = new partial_acsl::RightShiftOp((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2509 "partial_bnfc_parser.tab.c"
+    break;
+
+  case 128: /* Attr10: Attr11  */
+#line 460 "partial_bnfc_parser.y"
+                { (yyval.attr_) = (yyvsp[0].attr_); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2515 "partial_bnfc_parser.tab.c"
+    break;
+
+  case 129: /* Attr10: Attr10 _PLUS Attr11  */
 #line 461 "partial_bnfc_parser.y"
-                       { (yyval.elsepart_) = new partial_acsl::NoElsePart(); (yyval.elsepart_)->line_number = (yyloc).first_line; (yyval.elsepart_)->char_number = (yyloc).first_column; result->elsepart_ = (yyval.elsepart_); }
-#line 2529 "partial_bnfc_parser.tab.c"
+                        { (yyval.attr_) = new partial_acsl::AddOp((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2521 "partial_bnfc_parser.tab.c"
     break;
 
-  case 137: /* ElsePart: _KW_else AnnotatedStmt  */
+  case 130: /* Attr10: Attr10 _MINUS Attr11  */
 #line 462 "partial_bnfc_parser.y"
-                           { (yyval.elsepart_) = new partial_acsl::SimpleElsePart((yyvsp[0].annotatedstmt_)); (yyval.elsepart_)->line_number = (yyloc).first_line; (yyval.elsepart_)->char_number = (yyloc).first_column; result->elsepart_ = (yyval.elsepart_); }
-#line 2535 "partial_bnfc_parser.tab.c"
+                         { (yyval.attr_) = new partial_acsl::SubOp((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2527 "partial_bnfc_parser.tab.c"
     break;
 
-  case 138: /* OptExpression: %empty  */
+  case 131: /* Attr11: Attr12  */
 #line 464 "partial_bnfc_parser.y"
-                            { (yyval.optexpression_) = new partial_acsl::NoExpression(); (yyval.optexpression_)->line_number = (yyloc).first_line; (yyval.optexpression_)->char_number = (yyloc).first_column; result->optexpression_ = (yyval.optexpression_); }
-#line 2541 "partial_bnfc_parser.tab.c"
+                { (yyval.attr_) = (yyvsp[0].attr_); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2533 "partial_bnfc_parser.tab.c"
     break;
 
-  case 139: /* OptExpression: ListExpression  */
+  case 132: /* Attr11: Attr11 _STAR Attr12  */
 #line 465 "partial_bnfc_parser.y"
-                   { std::reverse((yyvsp[0].listexpression_)->begin(),(yyvsp[0].listexpression_)->end()) ;(yyval.optexpression_) = new partial_acsl::SomeExpression((yyvsp[0].listexpression_)); (yyval.optexpression_)->line_number = (yyloc).first_line; (yyval.optexpression_)->char_number = (yyloc).first_column; result->optexpression_ = (yyval.optexpression_); }
-#line 2547 "partial_bnfc_parser.tab.c"
+                        { (yyval.attr_) = new partial_acsl::MultOp((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2539 "partial_bnfc_parser.tab.c"
     break;
 
-  case 140: /* Expression: AssignExpr  */
+  case 133: /* Attr11: Attr11 _SLASH Attr12  */
+#line 466 "partial_bnfc_parser.y"
+                         { (yyval.attr_) = new partial_acsl::DivOp((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2545 "partial_bnfc_parser.tab.c"
+    break;
+
+  case 134: /* Attr11: Attr11 _PERCENT Attr12  */
 #line 467 "partial_bnfc_parser.y"
-                        { (yyval.expression_) = new partial_acsl::AssignmentExpr((yyvsp[0].assignexpr_)); (yyval.expression_)->line_number = (yyloc).first_line; (yyval.expression_)->char_number = (yyloc).first_column; result->expression_ = (yyval.expression_); }
-#line 2553 "partial_bnfc_parser.tab.c"
+                           { (yyval.attr_) = new partial_acsl::ModOp((yyvsp[-2].attr_), (yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2551 "partial_bnfc_parser.tab.c"
     break;
 
-  case 141: /* ListExpression: Expression  */
+  case 135: /* Attr12: Attr13  */
 #line 469 "partial_bnfc_parser.y"
-                            { (yyval.listexpression_) = new partial_acsl::ListExpression(); (yyval.listexpression_)->push_back((yyvsp[0].expression_)); result->listexpression_ = (yyval.listexpression_); }
-#line 2559 "partial_bnfc_parser.tab.c"
+                { (yyval.attr_) = (yyvsp[0].attr_); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2557 "partial_bnfc_parser.tab.c"
     break;
 
-  case 142: /* ListExpression: Expression _COMMA ListExpression  */
+  case 136: /* Attr12: _PLUS Attr12  */
 #line 470 "partial_bnfc_parser.y"
-                                     { (yyvsp[0].listexpression_)->push_back((yyvsp[-2].expression_)); (yyval.listexpression_) = (yyvsp[0].listexpression_); result->listexpression_ = (yyval.listexpression_); }
-#line 2565 "partial_bnfc_parser.tab.c"
+                 { (yyval.attr_) = new partial_acsl::PlusUnaryAttr((yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2563 "partial_bnfc_parser.tab.c"
     break;
 
-  case 143: /* AssignExpr: AssignExpr1  */
+  case 137: /* Attr12: _MINUS Attr12  */
+#line 471 "partial_bnfc_parser.y"
+                  { (yyval.attr_) = new partial_acsl::MinusUnaryAttr((yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2569 "partial_bnfc_parser.tab.c"
+    break;
+
+  case 138: /* Attr12: _STAR Attr12  */
 #line 472 "partial_bnfc_parser.y"
-                         { (yyval.assignexpr_) = (yyvsp[0].assignexpr_); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2571 "partial_bnfc_parser.tab.c"
+                 { (yyval.attr_) = new partial_acsl::MultUnaryAttr((yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2575 "partial_bnfc_parser.tab.c"
     break;
 
-  case 144: /* AssignExpr: AssignExpr12 _EQ AssignExpr  */
+  case 139: /* Attr12: _AMP Attr12  */
 #line 473 "partial_bnfc_parser.y"
-                                { (yyval.assignexpr_) = new partial_acsl::EqAssignExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2577 "partial_bnfc_parser.tab.c"
+                { (yyval.attr_) = new partial_acsl::AmpUnaryAttr((yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2581 "partial_bnfc_parser.tab.c"
     break;
 
-  case 145: /* AssignExpr: AssignExpr12 _PLUSEQ AssignExpr  */
+  case 140: /* Attr12: _BANG Attr12  */
 #line 474 "partial_bnfc_parser.y"
-                                    { (yyval.assignexpr_) = new partial_acsl::PlusEqAssignExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2583 "partial_bnfc_parser.tab.c"
+                 { (yyval.attr_) = new partial_acsl::NotUnaryAttr((yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2587 "partial_bnfc_parser.tab.c"
     break;
 
-  case 146: /* AssignExpr: AssignExpr12 _MINUSEQ AssignExpr  */
+  case 141: /* Attr12: _TILDE Attr12  */
 #line 475 "partial_bnfc_parser.y"
-                                     { (yyval.assignexpr_) = new partial_acsl::MinusEqAssignExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2589 "partial_bnfc_parser.tab.c"
+                  { (yyval.attr_) = new partial_acsl::TildeUnaryAttr((yyvsp[0].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2593 "partial_bnfc_parser.tab.c"
     break;
 
-  case 147: /* AssignExpr: AssignExpr12 _STAREQ AssignExpr  */
-#line 476 "partial_bnfc_parser.y"
-                                    { (yyval.assignexpr_) = new partial_acsl::MultEqAssignExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2595 "partial_bnfc_parser.tab.c"
-    break;
-
-  case 148: /* AssignExpr: AssignExpr12 _SLASHEQ AssignExpr  */
+  case 142: /* Attr13: Attr14  */
 #line 477 "partial_bnfc_parser.y"
-                                     { (yyval.assignexpr_) = new partial_acsl::DivEqAssignExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2601 "partial_bnfc_parser.tab.c"
+                { (yyval.attr_) = (yyvsp[0].attr_); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2599 "partial_bnfc_parser.tab.c"
     break;
 
-  case 149: /* AssignExpr: AssignExpr12 _PERCENTEQ AssignExpr  */
+  case 143: /* Attr13: IdOrTypenameAsId _LPAREN ListAttr _RPAREN  */
 #line 478 "partial_bnfc_parser.y"
-                                       { (yyval.assignexpr_) = new partial_acsl::ModEqAssignExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2607 "partial_bnfc_parser.tab.c"
+                                              { std::reverse((yyvsp[-1].listattr_)->begin(),(yyvsp[-1].listattr_)->end()) ;(yyval.attr_) = new partial_acsl::FuncationCall((yyvsp[-3].idortypenameasid_), (yyvsp[-1].listattr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2605 "partial_bnfc_parser.tab.c"
     break;
 
-  case 150: /* AssignExpr: AssignExpr12 _AMPEQ AssignExpr  */
+  case 144: /* Attr13: IdOrTypenameAsId _LPAREN _RPAREN  */
 #line 479 "partial_bnfc_parser.y"
-                                   { (yyval.assignexpr_) = new partial_acsl::AndEqAssignExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2613 "partial_bnfc_parser.tab.c"
+                                     { (yyval.attr_) = new partial_acsl::ProcedureCall((yyvsp[-2].idortypenameasid_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2611 "partial_bnfc_parser.tab.c"
     break;
 
-  case 151: /* AssignExpr: AssignExpr12 _BAREQ AssignExpr  */
+  case 145: /* Attr13: Attr13 _RARROW IdOrTypename  */
 #line 480 "partial_bnfc_parser.y"
-                                   { (yyval.assignexpr_) = new partial_acsl::OrEqAssignExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2619 "partial_bnfc_parser.tab.c"
+                                { (yyval.attr_) = new partial_acsl::ArrowAttr((yyvsp[-2].attr_), (yyvsp[0].idortypename_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2617 "partial_bnfc_parser.tab.c"
     break;
 
-  case 152: /* AssignExpr: AssignExpr12 _CARETEQ AssignExpr  */
+  case 146: /* Attr13: Attr13 _DOT IdOrTypename  */
 #line 481 "partial_bnfc_parser.y"
-                                     { (yyval.assignexpr_) = new partial_acsl::XorEqAssignExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2625 "partial_bnfc_parser.tab.c"
+                             { (yyval.attr_) = new partial_acsl::DotAttr((yyvsp[-2].attr_), (yyvsp[0].idortypename_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2623 "partial_bnfc_parser.tab.c"
     break;
 
-  case 153: /* AssignExpr: AssignExpr12 _DLTEQ AssignExpr  */
+  case 147: /* Attr13: Attr13 _LBRACK Attr _RBRACK  */
 #line 482 "partial_bnfc_parser.y"
-                                   { (yyval.assignexpr_) = new partial_acsl::LeftShiftEqAssignExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2631 "partial_bnfc_parser.tab.c"
+                                { (yyval.attr_) = new partial_acsl::ArrayAttr((yyvsp[-3].attr_), (yyvsp[-1].attr_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2629 "partial_bnfc_parser.tab.c"
     break;
 
-  case 154: /* AssignExpr: AssignExpr12 _DGTEQ AssignExpr  */
-#line 483 "partial_bnfc_parser.y"
-                                   { (yyval.assignexpr_) = new partial_acsl::RightShiftEqAssignExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2637 "partial_bnfc_parser.tab.c"
+  case 148: /* Attr14: BasicAttribute  */
+#line 484 "partial_bnfc_parser.y"
+                        { (yyval.attr_) = new partial_acsl::BasicAttr((yyvsp[0].basicattribute_)); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2635 "partial_bnfc_parser.tab.c"
     break;
 
-  case 155: /* AssignExpr1: AssignExpr2  */
+  case 149: /* Attr14: _LPAREN Attr _RPAREN  */
 #line 485 "partial_bnfc_parser.y"
-                          { (yyval.assignexpr_) = (yyvsp[0].assignexpr_); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2643 "partial_bnfc_parser.tab.c"
+                         { (yyval.attr_) = (yyvsp[-1].attr_); (yyval.attr_)->line_number = (yyloc).first_line; (yyval.attr_)->char_number = (yyloc).first_column; result->attr_ = (yyval.attr_); }
+#line 2641 "partial_bnfc_parser.tab.c"
     break;
 
-  case 156: /* AssignExpr1: AssignExpr2 _QUESTION OptExpression _COLON AssignExpr1  */
-#line 486 "partial_bnfc_parser.y"
-                                                           { (yyval.assignexpr_) = new partial_acsl::TernaryCondExpr((yyvsp[-4].assignexpr_), (yyvsp[-2].optexpression_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2649 "partial_bnfc_parser.tab.c"
+  case 150: /* BasicAttribute: _INTEGER_  */
+#line 487 "partial_bnfc_parser.y"
+                           { (yyval.basicattribute_) = new partial_acsl::BasicAttrConsInt((yyvsp[0]._int)); (yyval.basicattribute_)->line_number = (yyloc).first_line; (yyval.basicattribute_)->char_number = (yyloc).first_column; result->basicattribute_ = (yyval.basicattribute_); }
+#line 2647 "partial_bnfc_parser.tab.c"
     break;
 
-  case 157: /* AssignExpr2: AssignExpr3  */
+  case 151: /* BasicAttribute: _DOUBLE_  */
 #line 488 "partial_bnfc_parser.y"
-                          { (yyval.assignexpr_) = (yyvsp[0].assignexpr_); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2655 "partial_bnfc_parser.tab.c"
+             { (yyval.basicattribute_) = new partial_acsl::BasicAttrConsFloat((yyvsp[0]._double)); (yyval.basicattribute_)->line_number = (yyloc).first_line; (yyval.basicattribute_)->char_number = (yyloc).first_column; result->basicattribute_ = (yyval.basicattribute_); }
+#line 2653 "partial_bnfc_parser.tab.c"
     break;
 
-  case 158: /* AssignExpr2: AssignExpr2 _DBAR AssignExpr3  */
-#line 489 "partial_bnfc_parser.y"
-                                  { (yyval.assignexpr_) = new partial_acsl::OrExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2661 "partial_bnfc_parser.tab.c"
+  case 152: /* AnnotatedStmt: Statement  */
+#line 490 "partial_bnfc_parser.y"
+                          { (yyval.annotatedstmt_) = new partial_acsl::AnnotatedStatement((yyvsp[0].statement_)); (yyval.annotatedstmt_)->line_number = (yyloc).first_line; (yyval.annotatedstmt_)->char_number = (yyloc).first_column; result->annotatedstmt_ = (yyval.annotatedstmt_); }
+#line 2659 "partial_bnfc_parser.tab.c"
     break;
 
-  case 159: /* AssignExpr3: AssignExpr4  */
-#line 491 "partial_bnfc_parser.y"
-                          { (yyval.assignexpr_) = (yyvsp[0].assignexpr_); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2667 "partial_bnfc_parser.tab.c"
-    break;
-
-  case 160: /* AssignExpr3: AssignExpr3 _DAMP AssignExpr4  */
+  case 153: /* ElsePart: %empty  */
 #line 492 "partial_bnfc_parser.y"
-                                  { (yyval.assignexpr_) = new partial_acsl::AndExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2673 "partial_bnfc_parser.tab.c"
+                       { (yyval.elsepart_) = new partial_acsl::NoElsePart(); (yyval.elsepart_)->line_number = (yyloc).first_line; (yyval.elsepart_)->char_number = (yyloc).first_column; result->elsepart_ = (yyval.elsepart_); }
+#line 2665 "partial_bnfc_parser.tab.c"
     break;
 
-  case 161: /* AssignExpr4: AssignExpr5  */
-#line 494 "partial_bnfc_parser.y"
-                          { (yyval.assignexpr_) = (yyvsp[0].assignexpr_); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2679 "partial_bnfc_parser.tab.c"
+  case 154: /* ElsePart: _KW_else AnnotatedStmt  */
+#line 493 "partial_bnfc_parser.y"
+                           { (yyval.elsepart_) = new partial_acsl::SimpleElsePart((yyvsp[0].annotatedstmt_)); (yyval.elsepart_)->line_number = (yyloc).first_line; (yyval.elsepart_)->char_number = (yyloc).first_column; result->elsepart_ = (yyval.elsepart_); }
+#line 2671 "partial_bnfc_parser.tab.c"
     break;
 
-  case 162: /* AssignExpr4: AssignExpr4 _BAR AssignExpr5  */
+  case 155: /* OptExpression: %empty  */
 #line 495 "partial_bnfc_parser.y"
-                                 { (yyval.assignexpr_) = new partial_acsl::BitOrExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2685 "partial_bnfc_parser.tab.c"
+                            { (yyval.optexpression_) = new partial_acsl::NoExpression(); (yyval.optexpression_)->line_number = (yyloc).first_line; (yyval.optexpression_)->char_number = (yyloc).first_column; result->optexpression_ = (yyval.optexpression_); }
+#line 2677 "partial_bnfc_parser.tab.c"
     break;
 
-  case 163: /* AssignExpr5: AssignExpr6  */
-#line 497 "partial_bnfc_parser.y"
-                          { (yyval.assignexpr_) = (yyvsp[0].assignexpr_); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2691 "partial_bnfc_parser.tab.c"
+  case 156: /* OptExpression: ListExpression  */
+#line 496 "partial_bnfc_parser.y"
+                   { std::reverse((yyvsp[0].listexpression_)->begin(),(yyvsp[0].listexpression_)->end()) ;(yyval.optexpression_) = new partial_acsl::SomeExpression((yyvsp[0].listexpression_)); (yyval.optexpression_)->line_number = (yyloc).first_line; (yyval.optexpression_)->char_number = (yyloc).first_column; result->optexpression_ = (yyval.optexpression_); }
+#line 2683 "partial_bnfc_parser.tab.c"
     break;
 
-  case 164: /* AssignExpr5: AssignExpr5 _CARET AssignExpr6  */
+  case 157: /* Expression: AssignExpr  */
 #line 498 "partial_bnfc_parser.y"
-                                   { (yyval.assignexpr_) = new partial_acsl::BitXorExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2697 "partial_bnfc_parser.tab.c"
+                        { (yyval.expression_) = new partial_acsl::AssignmentExpr((yyvsp[0].assignexpr_)); (yyval.expression_)->line_number = (yyloc).first_line; (yyval.expression_)->char_number = (yyloc).first_column; result->expression_ = (yyval.expression_); }
+#line 2689 "partial_bnfc_parser.tab.c"
     break;
 
-  case 165: /* AssignExpr6: AssignExpr7  */
+  case 158: /* ListExpression: Expression  */
 #line 500 "partial_bnfc_parser.y"
-                          { (yyval.assignexpr_) = (yyvsp[0].assignexpr_); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2703 "partial_bnfc_parser.tab.c"
+                            { (yyval.listexpression_) = new partial_acsl::ListExpression(); (yyval.listexpression_)->push_back((yyvsp[0].expression_)); result->listexpression_ = (yyval.listexpression_); }
+#line 2695 "partial_bnfc_parser.tab.c"
     break;
 
-  case 166: /* AssignExpr6: AssignExpr6 _AMP AssignExpr7  */
+  case 159: /* ListExpression: Expression _COMMA ListExpression  */
 #line 501 "partial_bnfc_parser.y"
-                                 { (yyval.assignexpr_) = new partial_acsl::BitAndExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2709 "partial_bnfc_parser.tab.c"
+                                     { (yyvsp[0].listexpression_)->push_back((yyvsp[-2].expression_)); (yyval.listexpression_) = (yyvsp[0].listexpression_); result->listexpression_ = (yyval.listexpression_); }
+#line 2701 "partial_bnfc_parser.tab.c"
     break;
 
-  case 167: /* AssignExpr7: AssignExpr8  */
+  case 160: /* AssignExpr: AssignExpr1  */
 #line 503 "partial_bnfc_parser.y"
-                          { (yyval.assignexpr_) = (yyvsp[0].assignexpr_); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2715 "partial_bnfc_parser.tab.c"
+                         { (yyval.assignexpr_) = (yyvsp[0].assignexpr_); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2707 "partial_bnfc_parser.tab.c"
     break;
 
-  case 168: /* AssignExpr7: AssignExpr7 _DEQ AssignExpr8  */
+  case 161: /* AssignExpr: AssignExpr12 _EQ AssignExpr  */
 #line 504 "partial_bnfc_parser.y"
-                                 { (yyval.assignexpr_) = new partial_acsl::EqExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2721 "partial_bnfc_parser.tab.c"
+                                { (yyval.assignexpr_) = new partial_acsl::EqAssignExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2713 "partial_bnfc_parser.tab.c"
     break;
 
-  case 169: /* AssignExpr7: AssignExpr7 _BANGEQ AssignExpr8  */
+  case 162: /* AssignExpr: AssignExpr12 _PLUSEQ AssignExpr  */
 #line 505 "partial_bnfc_parser.y"
-                                    { (yyval.assignexpr_) = new partial_acsl::NotEqExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2727 "partial_bnfc_parser.tab.c"
+                                    { (yyval.assignexpr_) = new partial_acsl::PlusEqAssignExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2719 "partial_bnfc_parser.tab.c"
     break;
 
-  case 170: /* AssignExpr8: AssignExpr9  */
+  case 163: /* AssignExpr: AssignExpr12 _MINUSEQ AssignExpr  */
+#line 506 "partial_bnfc_parser.y"
+                                     { (yyval.assignexpr_) = new partial_acsl::MinusEqAssignExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2725 "partial_bnfc_parser.tab.c"
+    break;
+
+  case 164: /* AssignExpr: AssignExpr12 _STAREQ AssignExpr  */
 #line 507 "partial_bnfc_parser.y"
-                          { (yyval.assignexpr_) = (yyvsp[0].assignexpr_); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2733 "partial_bnfc_parser.tab.c"
+                                    { (yyval.assignexpr_) = new partial_acsl::MultEqAssignExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2731 "partial_bnfc_parser.tab.c"
     break;
 
-  case 171: /* AssignExpr8: AssignExpr8 _LT AssignExpr9  */
+  case 165: /* AssignExpr: AssignExpr12 _SLASHEQ AssignExpr  */
 #line 508 "partial_bnfc_parser.y"
-                                { (yyval.assignexpr_) = new partial_acsl::LessExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2739 "partial_bnfc_parser.tab.c"
+                                     { (yyval.assignexpr_) = new partial_acsl::DivEqAssignExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2737 "partial_bnfc_parser.tab.c"
     break;
 
-  case 172: /* AssignExpr8: AssignExpr8 _GT AssignExpr9  */
+  case 166: /* AssignExpr: AssignExpr12 _PERCENTEQ AssignExpr  */
 #line 509 "partial_bnfc_parser.y"
-                                { (yyval.assignexpr_) = new partial_acsl::GreaterExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2745 "partial_bnfc_parser.tab.c"
+                                       { (yyval.assignexpr_) = new partial_acsl::ModEqAssignExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2743 "partial_bnfc_parser.tab.c"
     break;
 
-  case 173: /* AssignExpr8: AssignExpr8 _LDARROW AssignExpr9  */
+  case 167: /* AssignExpr: AssignExpr12 _AMPEQ AssignExpr  */
 #line 510 "partial_bnfc_parser.y"
-                                     { (yyval.assignexpr_) = new partial_acsl::LessEqualExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2751 "partial_bnfc_parser.tab.c"
+                                   { (yyval.assignexpr_) = new partial_acsl::AndEqAssignExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2749 "partial_bnfc_parser.tab.c"
     break;
 
-  case 174: /* AssignExpr8: AssignExpr8 _GTEQ AssignExpr9  */
+  case 168: /* AssignExpr: AssignExpr12 _BAREQ AssignExpr  */
 #line 511 "partial_bnfc_parser.y"
-                                  { (yyval.assignexpr_) = new partial_acsl::GreaterEqualExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2757 "partial_bnfc_parser.tab.c"
+                                   { (yyval.assignexpr_) = new partial_acsl::OrEqAssignExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2755 "partial_bnfc_parser.tab.c"
     break;
 
-  case 175: /* AssignExpr9: AssignExpr10  */
+  case 169: /* AssignExpr: AssignExpr12 _CARETEQ AssignExpr  */
+#line 512 "partial_bnfc_parser.y"
+                                     { (yyval.assignexpr_) = new partial_acsl::XorEqAssignExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2761 "partial_bnfc_parser.tab.c"
+    break;
+
+  case 170: /* AssignExpr: AssignExpr12 _DLTEQ AssignExpr  */
 #line 513 "partial_bnfc_parser.y"
-                           { (yyval.assignexpr_) = (yyvsp[0].assignexpr_); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2763 "partial_bnfc_parser.tab.c"
+                                   { (yyval.assignexpr_) = new partial_acsl::LeftShiftEqAssignExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2767 "partial_bnfc_parser.tab.c"
     break;
 
-  case 176: /* AssignExpr9: AssignExpr9 _DLT AssignExpr10  */
+  case 171: /* AssignExpr: AssignExpr12 _DGTEQ AssignExpr  */
 #line 514 "partial_bnfc_parser.y"
-                                  { (yyval.assignexpr_) = new partial_acsl::LeftShiftExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2769 "partial_bnfc_parser.tab.c"
+                                   { (yyval.assignexpr_) = new partial_acsl::RightShiftEqAssignExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2773 "partial_bnfc_parser.tab.c"
     break;
 
-  case 177: /* AssignExpr9: AssignExpr9 _DGT AssignExpr10  */
-#line 515 "partial_bnfc_parser.y"
-                                  { (yyval.assignexpr_) = new partial_acsl::RightShiftExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2775 "partial_bnfc_parser.tab.c"
+  case 172: /* AssignExpr1: AssignExpr2  */
+#line 516 "partial_bnfc_parser.y"
+                          { (yyval.assignexpr_) = (yyvsp[0].assignexpr_); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2779 "partial_bnfc_parser.tab.c"
     break;
 
-  case 178: /* AssignExpr10: AssignExpr11  */
+  case 173: /* AssignExpr1: AssignExpr2 _QUESTION OptExpression _COLON AssignExpr1  */
 #line 517 "partial_bnfc_parser.y"
-                            { (yyval.assignexpr_) = (yyvsp[0].assignexpr_); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2781 "partial_bnfc_parser.tab.c"
+                                                           { (yyval.assignexpr_) = new partial_acsl::TernaryCondExpr((yyvsp[-4].assignexpr_), (yyvsp[-2].optexpression_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2785 "partial_bnfc_parser.tab.c"
     break;
 
-  case 179: /* AssignExpr10: AssignExpr10 _PLUS AssignExpr11  */
-#line 518 "partial_bnfc_parser.y"
-                                    { (yyval.assignexpr_) = new partial_acsl::PlusExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2787 "partial_bnfc_parser.tab.c"
-    break;
-
-  case 180: /* AssignExpr10: AssignExpr10 _MINUS AssignExpr11  */
+  case 174: /* AssignExpr2: AssignExpr3  */
 #line 519 "partial_bnfc_parser.y"
-                                     { (yyval.assignexpr_) = new partial_acsl::MinusExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2793 "partial_bnfc_parser.tab.c"
+                          { (yyval.assignexpr_) = (yyvsp[0].assignexpr_); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2791 "partial_bnfc_parser.tab.c"
     break;
 
-  case 181: /* AssignExpr11: AssignExpr12  */
-#line 521 "partial_bnfc_parser.y"
-                            { (yyval.assignexpr_) = (yyvsp[0].assignexpr_); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2799 "partial_bnfc_parser.tab.c"
+  case 175: /* AssignExpr2: AssignExpr2 _DBAR AssignExpr3  */
+#line 520 "partial_bnfc_parser.y"
+                                  { (yyval.assignexpr_) = new partial_acsl::OrExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2797 "partial_bnfc_parser.tab.c"
     break;
 
-  case 182: /* AssignExpr11: AssignExpr11 _STAR AssignExpr12  */
+  case 176: /* AssignExpr3: AssignExpr4  */
 #line 522 "partial_bnfc_parser.y"
-                                    { (yyval.assignexpr_) = new partial_acsl::MulsExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2805 "partial_bnfc_parser.tab.c"
+                          { (yyval.assignexpr_) = (yyvsp[0].assignexpr_); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2803 "partial_bnfc_parser.tab.c"
     break;
 
-  case 183: /* AssignExpr11: AssignExpr11 _SLASH AssignExpr12  */
+  case 177: /* AssignExpr3: AssignExpr3 _DAMP AssignExpr4  */
 #line 523 "partial_bnfc_parser.y"
-                                     { (yyval.assignexpr_) = new partial_acsl::DivExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2811 "partial_bnfc_parser.tab.c"
+                                  { (yyval.assignexpr_) = new partial_acsl::AndExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2809 "partial_bnfc_parser.tab.c"
     break;
 
-  case 184: /* AssignExpr11: AssignExpr11 _PERCENT AssignExpr12  */
-#line 524 "partial_bnfc_parser.y"
-                                       { (yyval.assignexpr_) = new partial_acsl::ModExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2817 "partial_bnfc_parser.tab.c"
+  case 178: /* AssignExpr4: AssignExpr5  */
+#line 525 "partial_bnfc_parser.y"
+                          { (yyval.assignexpr_) = (yyvsp[0].assignexpr_); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2815 "partial_bnfc_parser.tab.c"
     break;
 
-  case 185: /* AssignExpr12: AssignExpr13  */
+  case 179: /* AssignExpr4: AssignExpr4 _BAR AssignExpr5  */
 #line 526 "partial_bnfc_parser.y"
-                            { (yyval.assignexpr_) = (yyvsp[0].assignexpr_); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2823 "partial_bnfc_parser.tab.c"
+                                 { (yyval.assignexpr_) = new partial_acsl::BitOrExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2821 "partial_bnfc_parser.tab.c"
     break;
 
-  case 186: /* AssignExpr12: _LPAREN TypeName _RPAREN AssignExpr12  */
-#line 527 "partial_bnfc_parser.y"
-                                          { (yyval.assignexpr_) = new partial_acsl::CastExpr((yyvsp[-2].typename_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2829 "partial_bnfc_parser.tab.c"
+  case 180: /* AssignExpr5: AssignExpr6  */
+#line 528 "partial_bnfc_parser.y"
+                          { (yyval.assignexpr_) = (yyvsp[0].assignexpr_); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2827 "partial_bnfc_parser.tab.c"
     break;
 
-  case 187: /* AssignExpr13: AssignExpr14  */
+  case 181: /* AssignExpr5: AssignExpr5 _CARET AssignExpr6  */
 #line 529 "partial_bnfc_parser.y"
-                            { (yyval.assignexpr_) = (yyvsp[0].assignexpr_); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2835 "partial_bnfc_parser.tab.c"
+                                   { (yyval.assignexpr_) = new partial_acsl::BitXorExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2833 "partial_bnfc_parser.tab.c"
     break;
 
-  case 188: /* AssignExpr13: _DPLUS AssignExpr13  */
-#line 530 "partial_bnfc_parser.y"
-                        { (yyval.assignexpr_) = new partial_acsl::UnaryExprPlusPlus((yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2841 "partial_bnfc_parser.tab.c"
-    break;
-
-  case 189: /* AssignExpr13: _DMINUS AssignExpr13  */
+  case 182: /* AssignExpr6: AssignExpr7  */
 #line 531 "partial_bnfc_parser.y"
-                         { (yyval.assignexpr_) = new partial_acsl::UnaryExprMinusMinus((yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2847 "partial_bnfc_parser.tab.c"
+                          { (yyval.assignexpr_) = (yyvsp[0].assignexpr_); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2839 "partial_bnfc_parser.tab.c"
     break;
 
-  case 190: /* AssignExpr13: _PLUS AssignExpr12  */
+  case 183: /* AssignExpr6: AssignExpr6 _AMP AssignExpr7  */
 #line 532 "partial_bnfc_parser.y"
-                       { (yyval.assignexpr_) = new partial_acsl::UnaryExprPlus((yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2853 "partial_bnfc_parser.tab.c"
+                                 { (yyval.assignexpr_) = new partial_acsl::BitAndExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2845 "partial_bnfc_parser.tab.c"
     break;
 
-  case 191: /* AssignExpr13: _MINUS AssignExpr12  */
-#line 533 "partial_bnfc_parser.y"
-                        { (yyval.assignexpr_) = new partial_acsl::UnaryExprMinus((yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2859 "partial_bnfc_parser.tab.c"
-    break;
-
-  case 192: /* AssignExpr13: _STAR AssignExpr12  */
+  case 184: /* AssignExpr7: AssignExpr8  */
 #line 534 "partial_bnfc_parser.y"
-                       { (yyval.assignexpr_) = new partial_acsl::UnaryExprMult((yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2865 "partial_bnfc_parser.tab.c"
+                          { (yyval.assignexpr_) = (yyvsp[0].assignexpr_); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2851 "partial_bnfc_parser.tab.c"
     break;
 
-  case 193: /* AssignExpr13: _AMP AssignExpr12  */
+  case 185: /* AssignExpr7: AssignExpr7 _DEQ AssignExpr8  */
 #line 535 "partial_bnfc_parser.y"
-                      { (yyval.assignexpr_) = new partial_acsl::UnaryExprAmp((yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2871 "partial_bnfc_parser.tab.c"
+                                 { (yyval.assignexpr_) = new partial_acsl::EqExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2857 "partial_bnfc_parser.tab.c"
     break;
 
-  case 194: /* AssignExpr13: _BANG AssignExpr12  */
+  case 186: /* AssignExpr7: AssignExpr7 _BANGEQ AssignExpr8  */
 #line 536 "partial_bnfc_parser.y"
-                       { (yyval.assignexpr_) = new partial_acsl::UnaryExprNot((yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2877 "partial_bnfc_parser.tab.c"
+                                    { (yyval.assignexpr_) = new partial_acsl::NotEqExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2863 "partial_bnfc_parser.tab.c"
     break;
 
-  case 195: /* AssignExpr13: _TILDE AssignExpr12  */
-#line 537 "partial_bnfc_parser.y"
-                        { (yyval.assignexpr_) = new partial_acsl::UnaryExprTilde((yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2883 "partial_bnfc_parser.tab.c"
-    break;
-
-  case 196: /* AssignExpr13: _DAMP IdOrTypenameAsId  */
+  case 187: /* AssignExpr8: AssignExpr9  */
 #line 538 "partial_bnfc_parser.y"
-                           { (yyval.assignexpr_) = new partial_acsl::UnaryExprAddress((yyvsp[0].idortypenameasid_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2889 "partial_bnfc_parser.tab.c"
+                          { (yyval.assignexpr_) = (yyvsp[0].assignexpr_); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2869 "partial_bnfc_parser.tab.c"
     break;
 
-  case 197: /* AssignExpr14: AssignExpr15  */
+  case 188: /* AssignExpr8: AssignExpr8 _LT AssignExpr9  */
+#line 539 "partial_bnfc_parser.y"
+                                { (yyval.assignexpr_) = new partial_acsl::LessExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2875 "partial_bnfc_parser.tab.c"
+    break;
+
+  case 189: /* AssignExpr8: AssignExpr8 _GT AssignExpr9  */
 #line 540 "partial_bnfc_parser.y"
-                            { (yyval.assignexpr_) = (yyvsp[0].assignexpr_); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2895 "partial_bnfc_parser.tab.c"
+                                { (yyval.assignexpr_) = new partial_acsl::GreaterExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2881 "partial_bnfc_parser.tab.c"
     break;
 
-  case 198: /* AssignExpr14: AssignExpr14 _DOT IdOrTypename  */
+  case 190: /* AssignExpr8: AssignExpr8 _LDARROW AssignExpr9  */
 #line 541 "partial_bnfc_parser.y"
-                                   { (yyval.assignexpr_) = new partial_acsl::DotPostfixExpression((yyvsp[-2].assignexpr_), (yyvsp[0].idortypename_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2901 "partial_bnfc_parser.tab.c"
+                                     { (yyval.assignexpr_) = new partial_acsl::LessEqualExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2887 "partial_bnfc_parser.tab.c"
     break;
 
-  case 199: /* AssignExpr14: AssignExpr14 _RARROW IdOrTypename  */
+  case 191: /* AssignExpr8: AssignExpr8 _GTEQ AssignExpr9  */
 #line 542 "partial_bnfc_parser.y"
-                                      { (yyval.assignexpr_) = new partial_acsl::ArrowPostfixExpression((yyvsp[-2].assignexpr_), (yyvsp[0].idortypename_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2907 "partial_bnfc_parser.tab.c"
+                                  { (yyval.assignexpr_) = new partial_acsl::GreaterEqualExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2893 "partial_bnfc_parser.tab.c"
     break;
 
-  case 200: /* AssignExpr14: AssignExpr14 _DPLUS  */
-#line 543 "partial_bnfc_parser.y"
-                        { (yyval.assignexpr_) = new partial_acsl::PlusPlusPostfixExpression((yyvsp[-1].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2913 "partial_bnfc_parser.tab.c"
-    break;
-
-  case 201: /* AssignExpr14: AssignExpr14 _DMINUS  */
+  case 192: /* AssignExpr9: AssignExpr10  */
 #line 544 "partial_bnfc_parser.y"
-                         { (yyval.assignexpr_) = new partial_acsl::MinusMinusPostfixExpression((yyvsp[-1].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2919 "partial_bnfc_parser.tab.c"
+                           { (yyval.assignexpr_) = (yyvsp[0].assignexpr_); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2899 "partial_bnfc_parser.tab.c"
     break;
 
-  case 202: /* AssignExpr15: _IDENT_  */
+  case 193: /* AssignExpr9: AssignExpr9 _DLT AssignExpr10  */
+#line 545 "partial_bnfc_parser.y"
+                                  { (yyval.assignexpr_) = new partial_acsl::LeftShiftExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2905 "partial_bnfc_parser.tab.c"
+    break;
+
+  case 194: /* AssignExpr9: AssignExpr9 _DGT AssignExpr10  */
 #line 546 "partial_bnfc_parser.y"
-                       { (yyval.assignexpr_) = new partial_acsl::IdentifierPrimaryExpression((yyvsp[0]._string)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2925 "partial_bnfc_parser.tab.c"
+                                  { (yyval.assignexpr_) = new partial_acsl::RightShiftExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2911 "partial_bnfc_parser.tab.c"
     break;
 
-  case 203: /* AssignExpr15: Constant  */
-#line 547 "partial_bnfc_parser.y"
-             { (yyval.assignexpr_) = new partial_acsl::ConstantPrimaryExpressin((yyvsp[0].constant_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2931 "partial_bnfc_parser.tab.c"
-    break;
-
-  case 204: /* AssignExpr15: _LPAREN ListExpression _RPAREN  */
+  case 195: /* AssignExpr10: AssignExpr11  */
 #line 548 "partial_bnfc_parser.y"
-                                   { std::reverse((yyvsp[-1].listexpression_)->begin(),(yyvsp[-1].listexpression_)->end()) ;(yyval.assignexpr_) = new partial_acsl::CommaExpressionPrimaryExpressin((yyvsp[-1].listexpression_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2937 "partial_bnfc_parser.tab.c"
+                            { (yyval.assignexpr_) = (yyvsp[0].assignexpr_); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2917 "partial_bnfc_parser.tab.c"
     break;
 
-  case 205: /* AssignExpr15: _LPAREN Block _RPAREN  */
+  case 196: /* AssignExpr10: AssignExpr10 _PLUS AssignExpr11  */
 #line 549 "partial_bnfc_parser.y"
-                          { (yyval.assignexpr_) = new partial_acsl::BlockPrimaryExpressin((yyvsp[-1].block_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
-#line 2943 "partial_bnfc_parser.tab.c"
+                                    { (yyval.assignexpr_) = new partial_acsl::PlusExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2923 "partial_bnfc_parser.tab.c"
     break;
 
-  case 206: /* Constant: _INTEGER_  */
-#line 551 "partial_bnfc_parser.y"
-                     { (yyval.constant_) = new partial_acsl::ConstantInt((yyvsp[0]._int)); (yyval.constant_)->line_number = (yyloc).first_line; (yyval.constant_)->char_number = (yyloc).first_column; result->constant_ = (yyval.constant_); }
-#line 2949 "partial_bnfc_parser.tab.c"
+  case 197: /* AssignExpr10: AssignExpr10 _MINUS AssignExpr11  */
+#line 550 "partial_bnfc_parser.y"
+                                     { (yyval.assignexpr_) = new partial_acsl::MinusExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2929 "partial_bnfc_parser.tab.c"
     break;
 
-  case 207: /* Constant: _DOUBLE_  */
+  case 198: /* AssignExpr11: AssignExpr12  */
 #line 552 "partial_bnfc_parser.y"
-             { (yyval.constant_) = new partial_acsl::ConstantFloat((yyvsp[0]._double)); (yyval.constant_)->line_number = (yyloc).first_line; (yyval.constant_)->char_number = (yyloc).first_column; result->constant_ = (yyval.constant_); }
-#line 2955 "partial_bnfc_parser.tab.c"
+                            { (yyval.assignexpr_) = (yyvsp[0].assignexpr_); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2935 "partial_bnfc_parser.tab.c"
     break;
 
-  case 208: /* Constant: _CHAR_  */
+  case 199: /* AssignExpr11: AssignExpr11 _STAR AssignExpr12  */
 #line 553 "partial_bnfc_parser.y"
-           { (yyval.constant_) = new partial_acsl::ConstantChar((yyvsp[0]._char)); (yyval.constant_)->line_number = (yyloc).first_line; (yyval.constant_)->char_number = (yyloc).first_column; result->constant_ = (yyval.constant_); }
-#line 2961 "partial_bnfc_parser.tab.c"
+                                    { (yyval.assignexpr_) = new partial_acsl::MulsExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2941 "partial_bnfc_parser.tab.c"
     break;
 
-  case 209: /* TypeName: DeclSpecList  */
+  case 200: /* AssignExpr11: AssignExpr11 _SLASH AssignExpr12  */
+#line 554 "partial_bnfc_parser.y"
+                                     { (yyval.assignexpr_) = new partial_acsl::DivExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2947 "partial_bnfc_parser.tab.c"
+    break;
+
+  case 201: /* AssignExpr11: AssignExpr11 _PERCENT AssignExpr12  */
 #line 555 "partial_bnfc_parser.y"
+                                       { (yyval.assignexpr_) = new partial_acsl::ModExpr((yyvsp[-2].assignexpr_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2953 "partial_bnfc_parser.tab.c"
+    break;
+
+  case 202: /* AssignExpr12: AssignExpr13  */
+#line 557 "partial_bnfc_parser.y"
+                            { (yyval.assignexpr_) = (yyvsp[0].assignexpr_); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2959 "partial_bnfc_parser.tab.c"
+    break;
+
+  case 203: /* AssignExpr12: _LPAREN TypeName _RPAREN AssignExpr12  */
+#line 558 "partial_bnfc_parser.y"
+                                          { (yyval.assignexpr_) = new partial_acsl::CastExpr((yyvsp[-2].typename_), (yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2965 "partial_bnfc_parser.tab.c"
+    break;
+
+  case 204: /* AssignExpr13: AssignExpr14  */
+#line 560 "partial_bnfc_parser.y"
+                            { (yyval.assignexpr_) = (yyvsp[0].assignexpr_); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2971 "partial_bnfc_parser.tab.c"
+    break;
+
+  case 205: /* AssignExpr13: _DPLUS AssignExpr13  */
+#line 561 "partial_bnfc_parser.y"
+                        { (yyval.assignexpr_) = new partial_acsl::UnaryExprPlusPlus((yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2977 "partial_bnfc_parser.tab.c"
+    break;
+
+  case 206: /* AssignExpr13: _DMINUS AssignExpr13  */
+#line 562 "partial_bnfc_parser.y"
+                         { (yyval.assignexpr_) = new partial_acsl::UnaryExprMinusMinus((yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2983 "partial_bnfc_parser.tab.c"
+    break;
+
+  case 207: /* AssignExpr13: _PLUS AssignExpr12  */
+#line 563 "partial_bnfc_parser.y"
+                       { (yyval.assignexpr_) = new partial_acsl::UnaryExprPlus((yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2989 "partial_bnfc_parser.tab.c"
+    break;
+
+  case 208: /* AssignExpr13: _MINUS AssignExpr12  */
+#line 564 "partial_bnfc_parser.y"
+                        { (yyval.assignexpr_) = new partial_acsl::UnaryExprMinus((yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 2995 "partial_bnfc_parser.tab.c"
+    break;
+
+  case 209: /* AssignExpr13: _STAR AssignExpr12  */
+#line 565 "partial_bnfc_parser.y"
+                       { (yyval.assignexpr_) = new partial_acsl::UnaryExprMult((yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 3001 "partial_bnfc_parser.tab.c"
+    break;
+
+  case 210: /* AssignExpr13: _AMP AssignExpr12  */
+#line 566 "partial_bnfc_parser.y"
+                      { (yyval.assignexpr_) = new partial_acsl::UnaryExprAmp((yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 3007 "partial_bnfc_parser.tab.c"
+    break;
+
+  case 211: /* AssignExpr13: _BANG AssignExpr12  */
+#line 567 "partial_bnfc_parser.y"
+                       { (yyval.assignexpr_) = new partial_acsl::UnaryExprNot((yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 3013 "partial_bnfc_parser.tab.c"
+    break;
+
+  case 212: /* AssignExpr13: _TILDE AssignExpr12  */
+#line 568 "partial_bnfc_parser.y"
+                        { (yyval.assignexpr_) = new partial_acsl::UnaryExprTilde((yyvsp[0].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 3019 "partial_bnfc_parser.tab.c"
+    break;
+
+  case 213: /* AssignExpr13: _DAMP IdOrTypenameAsId  */
+#line 569 "partial_bnfc_parser.y"
+                           { (yyval.assignexpr_) = new partial_acsl::UnaryExprAddress((yyvsp[0].idortypenameasid_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 3025 "partial_bnfc_parser.tab.c"
+    break;
+
+  case 214: /* AssignExpr14: AssignExpr15  */
+#line 571 "partial_bnfc_parser.y"
+                            { (yyval.assignexpr_) = (yyvsp[0].assignexpr_); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 3031 "partial_bnfc_parser.tab.c"
+    break;
+
+  case 215: /* AssignExpr14: AssignExpr14 _LBRACK ListExpression _RBRACK  */
+#line 572 "partial_bnfc_parser.y"
+                                                { std::reverse((yyvsp[-1].listexpression_)->begin(),(yyvsp[-1].listexpression_)->end()) ;(yyval.assignexpr_) = new partial_acsl::BracketsPostfixExpression((yyvsp[-3].assignexpr_), (yyvsp[-1].listexpression_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 3037 "partial_bnfc_parser.tab.c"
+    break;
+
+  case 216: /* AssignExpr14: AssignExpr14 _DOT IdOrTypename  */
+#line 573 "partial_bnfc_parser.y"
+                                   { (yyval.assignexpr_) = new partial_acsl::DotPostfixExpression((yyvsp[-2].assignexpr_), (yyvsp[0].idortypename_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 3043 "partial_bnfc_parser.tab.c"
+    break;
+
+  case 217: /* AssignExpr14: AssignExpr14 _RARROW IdOrTypename  */
+#line 574 "partial_bnfc_parser.y"
+                                      { (yyval.assignexpr_) = new partial_acsl::ArrowPostfixExpression((yyvsp[-2].assignexpr_), (yyvsp[0].idortypename_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 3049 "partial_bnfc_parser.tab.c"
+    break;
+
+  case 218: /* AssignExpr14: AssignExpr14 _DPLUS  */
+#line 575 "partial_bnfc_parser.y"
+                        { (yyval.assignexpr_) = new partial_acsl::PlusPlusPostfixExpression((yyvsp[-1].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 3055 "partial_bnfc_parser.tab.c"
+    break;
+
+  case 219: /* AssignExpr14: AssignExpr14 _DMINUS  */
+#line 576 "partial_bnfc_parser.y"
+                         { (yyval.assignexpr_) = new partial_acsl::MinusMinusPostfixExpression((yyvsp[-1].assignexpr_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 3061 "partial_bnfc_parser.tab.c"
+    break;
+
+  case 220: /* AssignExpr15: _IDENT_  */
+#line 578 "partial_bnfc_parser.y"
+                       { (yyval.assignexpr_) = new partial_acsl::IdentifierPrimaryExpression((yyvsp[0]._string)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 3067 "partial_bnfc_parser.tab.c"
+    break;
+
+  case 221: /* AssignExpr15: Constant  */
+#line 579 "partial_bnfc_parser.y"
+             { (yyval.assignexpr_) = new partial_acsl::ConstantPrimaryExpressin((yyvsp[0].constant_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 3073 "partial_bnfc_parser.tab.c"
+    break;
+
+  case 222: /* AssignExpr15: _LPAREN ListExpression _RPAREN  */
+#line 580 "partial_bnfc_parser.y"
+                                   { std::reverse((yyvsp[-1].listexpression_)->begin(),(yyvsp[-1].listexpression_)->end()) ;(yyval.assignexpr_) = new partial_acsl::CommaExpressionPrimaryExpressin((yyvsp[-1].listexpression_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 3079 "partial_bnfc_parser.tab.c"
+    break;
+
+  case 223: /* AssignExpr15: _LPAREN Block _RPAREN  */
+#line 581 "partial_bnfc_parser.y"
+                          { (yyval.assignexpr_) = new partial_acsl::BlockPrimaryExpressin((yyvsp[-1].block_)); (yyval.assignexpr_)->line_number = (yyloc).first_line; (yyval.assignexpr_)->char_number = (yyloc).first_column; result->assignexpr_ = (yyval.assignexpr_); }
+#line 3085 "partial_bnfc_parser.tab.c"
+    break;
+
+  case 224: /* Constant: _INTEGER_  */
+#line 583 "partial_bnfc_parser.y"
+                     { (yyval.constant_) = new partial_acsl::ConstantInt((yyvsp[0]._int)); (yyval.constant_)->line_number = (yyloc).first_line; (yyval.constant_)->char_number = (yyloc).first_column; result->constant_ = (yyval.constant_); }
+#line 3091 "partial_bnfc_parser.tab.c"
+    break;
+
+  case 225: /* Constant: _DOUBLE_  */
+#line 584 "partial_bnfc_parser.y"
+             { (yyval.constant_) = new partial_acsl::ConstantFloat((yyvsp[0]._double)); (yyval.constant_)->line_number = (yyloc).first_line; (yyval.constant_)->char_number = (yyloc).first_column; result->constant_ = (yyval.constant_); }
+#line 3097 "partial_bnfc_parser.tab.c"
+    break;
+
+  case 226: /* Constant: _CHAR_  */
+#line 585 "partial_bnfc_parser.y"
+           { (yyval.constant_) = new partial_acsl::ConstantChar((yyvsp[0]._char)); (yyval.constant_)->line_number = (yyloc).first_line; (yyval.constant_)->char_number = (yyloc).first_column; result->constant_ = (yyval.constant_); }
+#line 3103 "partial_bnfc_parser.tab.c"
+    break;
+
+  case 227: /* TypeName: DeclSpecList  */
+#line 587 "partial_bnfc_parser.y"
                         { (yyval.typename_) = new partial_acsl::TypeNameDeclSpecList((yyvsp[0].declspeclist_)); (yyval.typename_)->line_number = (yyloc).first_line; (yyval.typename_)->char_number = (yyloc).first_column; result->typename_ = (yyval.typename_); }
-#line 2967 "partial_bnfc_parser.tab.c"
+#line 3109 "partial_bnfc_parser.tab.c"
     break;
 
 
-#line 2971 "partial_bnfc_parser.tab.c"
+#line 3113 "partial_bnfc_parser.tab.c"
 
       default: break;
     }
@@ -3165,7 +3307,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 558 "partial_bnfc_parser.y"
+#line 590 "partial_bnfc_parser.y"
 
 
 namespace partial_acsl
@@ -3522,6 +3664,140 @@ TypeSpec* psTypeSpec(const char *str)
   }
 }
 
+/* Entrypoint: parse Enumerator* from file. */
+Enumerator* pEnumerator(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.enumerator_;
+  }
+}
+
+/* Entrypoint: parse Enumerator* from string. */
+Enumerator* psEnumerator(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.enumerator_;
+  }
+}
+
+/* Entrypoint: parse ListEnumerator* from file. */
+ListEnumerator* pListEnumerator(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+std::reverse(result.listenumerator_->begin(), result.listenumerator_->end());
+    return result.listenumerator_;
+  }
+}
+
+/* Entrypoint: parse ListEnumerator* from string. */
+ListEnumerator* psListEnumerator(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+std::reverse(result.listenumerator_->begin(), result.listenumerator_->end());
+    return result.listenumerator_;
+  }
+}
+
+/* Entrypoint: parse MaybeComma* from file. */
+MaybeComma* pMaybeComma(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.maybecomma_;
+  }
+}
+
+/* Entrypoint: parse MaybeComma* from string. */
+MaybeComma* psMaybeComma(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.maybecomma_;
+  }
+}
+
 /* Entrypoint: parse Declarator* from file. */
 Declarator* pDeclarator(FILE *inp)
 {
@@ -3739,6 +4015,50 @@ RestParList* psRestParList(const char *str)
   else
   { /* Success */
     return result.restparlist_;
+  }
+}
+
+/* Entrypoint: parse MaybeThreeDots* from file. */
+MaybeThreeDots* pMaybeThreeDots(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.maybethreedots_;
+  }
+}
+
+/* Entrypoint: parse MaybeThreeDots* from string. */
+MaybeThreeDots* psMaybeThreeDots(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.maybethreedots_;
   }
 }
 
@@ -4628,6 +4948,50 @@ Statement* psStatement(const char *str)
   }
 }
 
+/* Entrypoint: parse ForClause* from file. */
+ForClause* pForClause(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.forclause_;
+  }
+}
+
+/* Entrypoint: parse ForClause* from string. */
+ForClause* psForClause(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.forclause_;
+  }
+}
+
 /* Entrypoint: parse Attr* from file. */
 Attr* pAttr(FILE *inp)
 {
@@ -5375,52 +5739,6 @@ BasicAttribute* psBasicAttribute(const char *str)
   else
   { /* Success */
     return result.basicattribute_;
-  }
-}
-
-/* Entrypoint: parse ListBasicAttribute* from file. */
-ListBasicAttribute* pListBasicAttribute(FILE *inp)
-{
-  YYSTYPE result;
-  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
-  if (!scanner) {
-    fprintf(stderr, "Failed to initialize lexer.\n");
-    return 0;
-  }
-  int error = yyparse(scanner, &result);
-  partial_acsllex_destroy(scanner);
-  if (error)
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-std::reverse(result.listbasicattribute_->begin(), result.listbasicattribute_->end());
-    return result.listbasicattribute_;
-  }
-}
-
-/* Entrypoint: parse ListBasicAttribute* from string. */
-ListBasicAttribute* psListBasicAttribute(const char *str)
-{
-  YYSTYPE result;
-  yyscan_t scanner = partial_acsl_initialize_lexer(0);
-  if (!scanner) {
-    fprintf(stderr, "Failed to initialize lexer.\n");
-    return 0;
-  }
-  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
-  int error = yyparse(scanner, &result);
-  partial_acsl_delete_buffer(buf, scanner);
-  partial_acsllex_destroy(scanner);
-  if (error)
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-std::reverse(result.listbasicattribute_->begin(), result.listbasicattribute_->end());
-    return result.listbasicattribute_;
   }
 }
 

@@ -7,46 +7,90 @@
 #include "Absyn.H"
 namespace partial_bnfc_acsl
 {
-/********************   AProgram    ********************/
-AProgram::AProgram(Annot *p1)
+/********************   AnnotProgram    ********************/
+AnnotProgram::AnnotProgram(Annot *p1)
 {
   annot_ = p1;
 
 }
 
-AProgram::AProgram(const AProgram & other)
+AnnotProgram::AnnotProgram(const AnnotProgram & other)
 {
   annot_ = other.annot_->clone();
 
 }
 
-AProgram &AProgram::operator=(const AProgram & other)
+AnnotProgram &AnnotProgram::operator=(const AnnotProgram & other)
 {
-  AProgram tmp(other);
+  AnnotProgram tmp(other);
   swap(tmp);
   return *this;
 }
 
-void AProgram::swap(AProgram & other)
+void AnnotProgram::swap(AnnotProgram & other)
 {
   std::swap(annot_, other.annot_);
 
 }
 
-AProgram::~AProgram()
+AnnotProgram::~AnnotProgram()
 {
   delete(annot_);
 
 }
 
-void AProgram::accept(Visitor *v)
+void AnnotProgram::accept(Visitor *v)
 {
-  v->visitAProgram(this);
+  v->visitAnnotProgram(this);
 }
 
-AProgram *AProgram::clone() const
+AnnotProgram *AnnotProgram::clone() const
 {
-  return new AProgram(*this);
+  return new AnnotProgram(*this);
+}
+
+
+
+/********************   AnnotationProgram    ********************/
+AnnotationProgram::AnnotationProgram(LogicPTreeAnnot *p1)
+{
+  logicptreeannot_ = p1;
+
+}
+
+AnnotationProgram::AnnotationProgram(const AnnotationProgram & other)
+{
+  logicptreeannot_ = other.logicptreeannot_->clone();
+
+}
+
+AnnotationProgram &AnnotationProgram::operator=(const AnnotationProgram & other)
+{
+  AnnotationProgram tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void AnnotationProgram::swap(AnnotationProgram & other)
+{
+  std::swap(logicptreeannot_, other.logicptreeannot_);
+
+}
+
+AnnotationProgram::~AnnotationProgram()
+{
+  delete(logicptreeannot_);
+
+}
+
+void AnnotationProgram::accept(Visitor *v)
+{
+  v->visitAnnotationProgram(this);
+}
+
+AnnotationProgram *AnnotationProgram::clone() const
+{
+  return new AnnotationProgram(*this);
 }
 
 
@@ -199,6 +243,174 @@ void SimpleContract::accept(Visitor *v)
 SimpleContract *SimpleContract::clone() const
 {
   return new SimpleContract(*this);
+}
+
+
+
+/********************   ClausesRequiresContract    ********************/
+ClausesRequiresContract::ClausesRequiresContract(Requires *p1, Terminates *p2, Decreases *p3, NESimpleClauses *p4)
+{
+  requires_ = p1;
+  terminates_ = p2;
+  decreases_ = p3;
+  nesimpleclauses_ = p4;
+
+}
+
+ClausesRequiresContract::ClausesRequiresContract(const ClausesRequiresContract & other)
+{
+  requires_ = other.requires_->clone();
+  terminates_ = other.terminates_->clone();
+  decreases_ = other.decreases_->clone();
+  nesimpleclauses_ = other.nesimpleclauses_->clone();
+
+}
+
+ClausesRequiresContract &ClausesRequiresContract::operator=(const ClausesRequiresContract & other)
+{
+  ClausesRequiresContract tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void ClausesRequiresContract::swap(ClausesRequiresContract & other)
+{
+  std::swap(requires_, other.requires_);
+  std::swap(terminates_, other.terminates_);
+  std::swap(decreases_, other.decreases_);
+  std::swap(nesimpleclauses_, other.nesimpleclauses_);
+
+}
+
+ClausesRequiresContract::~ClausesRequiresContract()
+{
+  delete(requires_);
+  delete(terminates_);
+  delete(decreases_);
+  delete(nesimpleclauses_);
+
+}
+
+void ClausesRequiresContract::accept(Visitor *v)
+{
+  v->visitClausesRequiresContract(this);
+}
+
+ClausesRequiresContract *ClausesRequiresContract::clone() const
+{
+  return new ClausesRequiresContract(*this);
+}
+
+
+
+/********************   ClausesTerminatesContract    ********************/
+ClausesTerminatesContract::ClausesTerminatesContract(Requires *p1, Terminates *p2, Decreases *p3, NESimpleClauses *p4)
+{
+  requires_ = p1;
+  terminates_ = p2;
+  decreases_ = p3;
+  nesimpleclauses_ = p4;
+
+}
+
+ClausesTerminatesContract::ClausesTerminatesContract(const ClausesTerminatesContract & other)
+{
+  requires_ = other.requires_->clone();
+  terminates_ = other.terminates_->clone();
+  decreases_ = other.decreases_->clone();
+  nesimpleclauses_ = other.nesimpleclauses_->clone();
+
+}
+
+ClausesTerminatesContract &ClausesTerminatesContract::operator=(const ClausesTerminatesContract & other)
+{
+  ClausesTerminatesContract tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void ClausesTerminatesContract::swap(ClausesTerminatesContract & other)
+{
+  std::swap(requires_, other.requires_);
+  std::swap(terminates_, other.terminates_);
+  std::swap(decreases_, other.decreases_);
+  std::swap(nesimpleclauses_, other.nesimpleclauses_);
+
+}
+
+ClausesTerminatesContract::~ClausesTerminatesContract()
+{
+  delete(requires_);
+  delete(terminates_);
+  delete(decreases_);
+  delete(nesimpleclauses_);
+
+}
+
+void ClausesTerminatesContract::accept(Visitor *v)
+{
+  v->visitClausesTerminatesContract(this);
+}
+
+ClausesTerminatesContract *ClausesTerminatesContract::clone() const
+{
+  return new ClausesTerminatesContract(*this);
+}
+
+
+
+/********************   ClausesDecreasesContract    ********************/
+ClausesDecreasesContract::ClausesDecreasesContract(Requires *p1, Terminates *p2, Decreases *p3, NESimpleClauses *p4)
+{
+  requires_ = p1;
+  terminates_ = p2;
+  decreases_ = p3;
+  nesimpleclauses_ = p4;
+
+}
+
+ClausesDecreasesContract::ClausesDecreasesContract(const ClausesDecreasesContract & other)
+{
+  requires_ = other.requires_->clone();
+  terminates_ = other.terminates_->clone();
+  decreases_ = other.decreases_->clone();
+  nesimpleclauses_ = other.nesimpleclauses_->clone();
+
+}
+
+ClausesDecreasesContract &ClausesDecreasesContract::operator=(const ClausesDecreasesContract & other)
+{
+  ClausesDecreasesContract tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void ClausesDecreasesContract::swap(ClausesDecreasesContract & other)
+{
+  std::swap(requires_, other.requires_);
+  std::swap(terminates_, other.terminates_);
+  std::swap(decreases_, other.decreases_);
+  std::swap(nesimpleclauses_, other.nesimpleclauses_);
+
+}
+
+ClausesDecreasesContract::~ClausesDecreasesContract()
+{
+  delete(requires_);
+  delete(terminates_);
+  delete(decreases_);
+  delete(nesimpleclauses_);
+
+}
+
+void ClausesDecreasesContract::accept(Visitor *v)
+{
+  v->visitClausesDecreasesContract(this);
+}
+
+ClausesDecreasesContract *ClausesDecreasesContract::clone() const
+{
+  return new ClausesDecreasesContract(*this);
 }
 
 
@@ -1191,6 +1403,346 @@ HatHatLexpr *HatHatLexpr::clone() const
 
 
 
+/********************   AmpLexpr    ********************/
+AmpLexpr::AmpLexpr(Lexpr *p1, Lexpr *p2)
+{
+  lexpr_1 = p1;
+  lexpr_2 = p2;
+
+}
+
+AmpLexpr::AmpLexpr(const AmpLexpr & other)
+{
+  lexpr_1 = other.lexpr_1->clone();
+  lexpr_2 = other.lexpr_2->clone();
+
+}
+
+AmpLexpr &AmpLexpr::operator=(const AmpLexpr & other)
+{
+  AmpLexpr tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void AmpLexpr::swap(AmpLexpr & other)
+{
+  std::swap(lexpr_1, other.lexpr_1);
+  std::swap(lexpr_2, other.lexpr_2);
+
+}
+
+AmpLexpr::~AmpLexpr()
+{
+  delete(lexpr_1);
+  delete(lexpr_2);
+
+}
+
+void AmpLexpr::accept(Visitor *v)
+{
+  v->visitAmpLexpr(this);
+}
+
+AmpLexpr *AmpLexpr::clone() const
+{
+  return new AmpLexpr(*this);
+}
+
+
+
+/********************   PipeLexpr    ********************/
+PipeLexpr::PipeLexpr(Lexpr *p1, Lexpr *p2)
+{
+  lexpr_1 = p1;
+  lexpr_2 = p2;
+
+}
+
+PipeLexpr::PipeLexpr(const PipeLexpr & other)
+{
+  lexpr_1 = other.lexpr_1->clone();
+  lexpr_2 = other.lexpr_2->clone();
+
+}
+
+PipeLexpr &PipeLexpr::operator=(const PipeLexpr & other)
+{
+  PipeLexpr tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void PipeLexpr::swap(PipeLexpr & other)
+{
+  std::swap(lexpr_1, other.lexpr_1);
+  std::swap(lexpr_2, other.lexpr_2);
+
+}
+
+PipeLexpr::~PipeLexpr()
+{
+  delete(lexpr_1);
+  delete(lexpr_2);
+
+}
+
+void PipeLexpr::accept(Visitor *v)
+{
+  v->visitPipeLexpr(this);
+}
+
+PipeLexpr *PipeLexpr::clone() const
+{
+  return new PipeLexpr(*this);
+}
+
+
+
+/********************   HatLexpr    ********************/
+HatLexpr::HatLexpr(Lexpr *p1, Lexpr *p2)
+{
+  lexpr_1 = p1;
+  lexpr_2 = p2;
+
+}
+
+HatLexpr::HatLexpr(const HatLexpr & other)
+{
+  lexpr_1 = other.lexpr_1->clone();
+  lexpr_2 = other.lexpr_2->clone();
+
+}
+
+HatLexpr &HatLexpr::operator=(const HatLexpr & other)
+{
+  HatLexpr tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void HatLexpr::swap(HatLexpr & other)
+{
+  std::swap(lexpr_1, other.lexpr_1);
+  std::swap(lexpr_2, other.lexpr_2);
+
+}
+
+HatLexpr::~HatLexpr()
+{
+  delete(lexpr_1);
+  delete(lexpr_2);
+
+}
+
+void HatLexpr::accept(Visitor *v)
+{
+  v->visitHatLexpr(this);
+}
+
+HatLexpr *HatLexpr::clone() const
+{
+  return new HatLexpr(*this);
+}
+
+
+
+/********************   BimpliesLexpr    ********************/
+BimpliesLexpr::BimpliesLexpr(Lexpr *p1, Lexpr *p2)
+{
+  lexpr_1 = p1;
+  lexpr_2 = p2;
+
+}
+
+BimpliesLexpr::BimpliesLexpr(const BimpliesLexpr & other)
+{
+  lexpr_1 = other.lexpr_1->clone();
+  lexpr_2 = other.lexpr_2->clone();
+
+}
+
+BimpliesLexpr &BimpliesLexpr::operator=(const BimpliesLexpr & other)
+{
+  BimpliesLexpr tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void BimpliesLexpr::swap(BimpliesLexpr & other)
+{
+  std::swap(lexpr_1, other.lexpr_1);
+  std::swap(lexpr_2, other.lexpr_2);
+
+}
+
+BimpliesLexpr::~BimpliesLexpr()
+{
+  delete(lexpr_1);
+  delete(lexpr_2);
+
+}
+
+void BimpliesLexpr::accept(Visitor *v)
+{
+  v->visitBimpliesLexpr(this);
+}
+
+BimpliesLexpr *BimpliesLexpr::clone() const
+{
+  return new BimpliesLexpr(*this);
+}
+
+
+
+/********************   BiffLexpr    ********************/
+BiffLexpr::BiffLexpr(Lexpr *p1, Lexpr *p2)
+{
+  lexpr_1 = p1;
+  lexpr_2 = p2;
+
+}
+
+BiffLexpr::BiffLexpr(const BiffLexpr & other)
+{
+  lexpr_1 = other.lexpr_1->clone();
+  lexpr_2 = other.lexpr_2->clone();
+
+}
+
+BiffLexpr &BiffLexpr::operator=(const BiffLexpr & other)
+{
+  BiffLexpr tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void BiffLexpr::swap(BiffLexpr & other)
+{
+  std::swap(lexpr_1, other.lexpr_1);
+  std::swap(lexpr_2, other.lexpr_2);
+
+}
+
+BiffLexpr::~BiffLexpr()
+{
+  delete(lexpr_1);
+  delete(lexpr_2);
+
+}
+
+void BiffLexpr::accept(Visitor *v)
+{
+  v->visitBiffLexpr(this);
+}
+
+BiffLexpr *BiffLexpr::clone() const
+{
+  return new BiffLexpr(*this);
+}
+
+
+
+/********************   InLexpr    ********************/
+InLexpr::InLexpr(Lexpr *p1, Lexpr *p2)
+{
+  lexpr_1 = p1;
+  lexpr_2 = p2;
+
+}
+
+InLexpr::InLexpr(const InLexpr & other)
+{
+  lexpr_1 = other.lexpr_1->clone();
+  lexpr_2 = other.lexpr_2->clone();
+
+}
+
+InLexpr &InLexpr::operator=(const InLexpr & other)
+{
+  InLexpr tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void InLexpr::swap(InLexpr & other)
+{
+  std::swap(lexpr_1, other.lexpr_1);
+  std::swap(lexpr_2, other.lexpr_2);
+
+}
+
+InLexpr::~InLexpr()
+{
+  delete(lexpr_1);
+  delete(lexpr_2);
+
+}
+
+void InLexpr::accept(Visitor *v)
+{
+  v->visitInLexpr(this);
+}
+
+InLexpr *InLexpr::clone() const
+{
+  return new InLexpr(*this);
+}
+
+
+
+/********************   TernaryLexpr    ********************/
+TernaryLexpr::TernaryLexpr(Lexpr *p1, Lexpr *p2, Lexpr *p3)
+{
+  lexpr_1 = p1;
+  lexpr_2 = p2;
+  lexpr_3 = p3;
+
+}
+
+TernaryLexpr::TernaryLexpr(const TernaryLexpr & other)
+{
+  lexpr_1 = other.lexpr_1->clone();
+  lexpr_2 = other.lexpr_2->clone();
+  lexpr_3 = other.lexpr_3->clone();
+
+}
+
+TernaryLexpr &TernaryLexpr::operator=(const TernaryLexpr & other)
+{
+  TernaryLexpr tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void TernaryLexpr::swap(TernaryLexpr & other)
+{
+  std::swap(lexpr_1, other.lexpr_1);
+  std::swap(lexpr_2, other.lexpr_2);
+  std::swap(lexpr_3, other.lexpr_3);
+
+}
+
+TernaryLexpr::~TernaryLexpr()
+{
+  delete(lexpr_1);
+  delete(lexpr_2);
+  delete(lexpr_3);
+
+}
+
+void TernaryLexpr::accept(Visitor *v)
+{
+  v->visitTernaryLexpr(this);
+}
+
+TernaryLexpr *TernaryLexpr::clone() const
+{
+  return new TernaryLexpr(*this);
+}
+
+
+
 /********************   RelationLexpr    ********************/
 RelationLexpr::RelationLexpr(Lexpr *p1, ListLexprRelInner *p2, Relation *p3, Lexpr *p4)
 {
@@ -1415,6 +1967,54 @@ FalseLexpr *FalseLexpr::clone() const
 
 
 
+/********************   PointerLexpr    ********************/
+PointerLexpr::PointerLexpr(OptLabel *p1, Lexpr *p2)
+{
+  optlabel_ = p1;
+  lexpr_ = p2;
+
+}
+
+PointerLexpr::PointerLexpr(const PointerLexpr & other)
+{
+  optlabel_ = other.optlabel_->clone();
+  lexpr_ = other.lexpr_->clone();
+
+}
+
+PointerLexpr &PointerLexpr::operator=(const PointerLexpr & other)
+{
+  PointerLexpr tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void PointerLexpr::swap(PointerLexpr & other)
+{
+  std::swap(optlabel_, other.optlabel_);
+  std::swap(lexpr_, other.lexpr_);
+
+}
+
+PointerLexpr::~PointerLexpr()
+{
+  delete(optlabel_);
+  delete(lexpr_);
+
+}
+
+void PointerLexpr::accept(Visitor *v)
+{
+  v->visitPointerLexpr(this);
+}
+
+PointerLexpr *PointerLexpr::clone() const
+{
+  return new PointerLexpr(*this);
+}
+
+
+
 /********************   ValidLexpr    ********************/
 ValidLexpr::ValidLexpr(OptLabel *p1, Lexpr *p2)
 {
@@ -1459,6 +2059,642 @@ void ValidLexpr::accept(Visitor *v)
 ValidLexpr *ValidLexpr::clone() const
 {
   return new ValidLexpr(*this);
+}
+
+
+
+/********************   ValidReadLexpr    ********************/
+ValidReadLexpr::ValidReadLexpr(OptLabel *p1, Lexpr *p2)
+{
+  optlabel_ = p1;
+  lexpr_ = p2;
+
+}
+
+ValidReadLexpr::ValidReadLexpr(const ValidReadLexpr & other)
+{
+  optlabel_ = other.optlabel_->clone();
+  lexpr_ = other.lexpr_->clone();
+
+}
+
+ValidReadLexpr &ValidReadLexpr::operator=(const ValidReadLexpr & other)
+{
+  ValidReadLexpr tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void ValidReadLexpr::swap(ValidReadLexpr & other)
+{
+  std::swap(optlabel_, other.optlabel_);
+  std::swap(lexpr_, other.lexpr_);
+
+}
+
+ValidReadLexpr::~ValidReadLexpr()
+{
+  delete(optlabel_);
+  delete(lexpr_);
+
+}
+
+void ValidReadLexpr::accept(Visitor *v)
+{
+  v->visitValidReadLexpr(this);
+}
+
+ValidReadLexpr *ValidReadLexpr::clone() const
+{
+  return new ValidReadLexpr(*this);
+}
+
+
+
+/********************   ValidFuncLexpr    ********************/
+ValidFuncLexpr::ValidFuncLexpr(Lexpr *p1)
+{
+  lexpr_ = p1;
+
+}
+
+ValidFuncLexpr::ValidFuncLexpr(const ValidFuncLexpr & other)
+{
+  lexpr_ = other.lexpr_->clone();
+
+}
+
+ValidFuncLexpr &ValidFuncLexpr::operator=(const ValidFuncLexpr & other)
+{
+  ValidFuncLexpr tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void ValidFuncLexpr::swap(ValidFuncLexpr & other)
+{
+  std::swap(lexpr_, other.lexpr_);
+
+}
+
+ValidFuncLexpr::~ValidFuncLexpr()
+{
+  delete(lexpr_);
+
+}
+
+void ValidFuncLexpr::accept(Visitor *v)
+{
+  v->visitValidFuncLexpr(this);
+}
+
+ValidFuncLexpr *ValidFuncLexpr::clone() const
+{
+  return new ValidFuncLexpr(*this);
+}
+
+
+
+/********************   ValidIndxLexpr    ********************/
+ValidIndxLexpr::ValidIndxLexpr(OptLabel *p1, Lexpr *p2, Lexpr *p3)
+{
+  optlabel_ = p1;
+  lexpr_1 = p2;
+  lexpr_2 = p3;
+
+}
+
+ValidIndxLexpr::ValidIndxLexpr(const ValidIndxLexpr & other)
+{
+  optlabel_ = other.optlabel_->clone();
+  lexpr_1 = other.lexpr_1->clone();
+  lexpr_2 = other.lexpr_2->clone();
+
+}
+
+ValidIndxLexpr &ValidIndxLexpr::operator=(const ValidIndxLexpr & other)
+{
+  ValidIndxLexpr tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void ValidIndxLexpr::swap(ValidIndxLexpr & other)
+{
+  std::swap(optlabel_, other.optlabel_);
+  std::swap(lexpr_1, other.lexpr_1);
+  std::swap(lexpr_2, other.lexpr_2);
+
+}
+
+ValidIndxLexpr::~ValidIndxLexpr()
+{
+  delete(optlabel_);
+  delete(lexpr_1);
+  delete(lexpr_2);
+
+}
+
+void ValidIndxLexpr::accept(Visitor *v)
+{
+  v->visitValidIndxLexpr(this);
+}
+
+ValidIndxLexpr *ValidIndxLexpr::clone() const
+{
+  return new ValidIndxLexpr(*this);
+}
+
+
+
+/********************   ValidRangeLexpr    ********************/
+ValidRangeLexpr::ValidRangeLexpr(OptLabel *p1, Lexpr *p2, Lexpr *p3, Lexpr *p4)
+{
+  optlabel_ = p1;
+  lexpr_1 = p2;
+  lexpr_2 = p3;
+  lexpr_3 = p4;
+
+}
+
+ValidRangeLexpr::ValidRangeLexpr(const ValidRangeLexpr & other)
+{
+  optlabel_ = other.optlabel_->clone();
+  lexpr_1 = other.lexpr_1->clone();
+  lexpr_2 = other.lexpr_2->clone();
+  lexpr_3 = other.lexpr_3->clone();
+
+}
+
+ValidRangeLexpr &ValidRangeLexpr::operator=(const ValidRangeLexpr & other)
+{
+  ValidRangeLexpr tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void ValidRangeLexpr::swap(ValidRangeLexpr & other)
+{
+  std::swap(optlabel_, other.optlabel_);
+  std::swap(lexpr_1, other.lexpr_1);
+  std::swap(lexpr_2, other.lexpr_2);
+  std::swap(lexpr_3, other.lexpr_3);
+
+}
+
+ValidRangeLexpr::~ValidRangeLexpr()
+{
+  delete(optlabel_);
+  delete(lexpr_1);
+  delete(lexpr_2);
+  delete(lexpr_3);
+
+}
+
+void ValidRangeLexpr::accept(Visitor *v)
+{
+  v->visitValidRangeLexpr(this);
+}
+
+ValidRangeLexpr *ValidRangeLexpr::clone() const
+{
+  return new ValidRangeLexpr(*this);
+}
+
+
+
+/********************   InitializedLexpr    ********************/
+InitializedLexpr::InitializedLexpr(OptLabel *p1, Lexpr *p2)
+{
+  optlabel_ = p1;
+  lexpr_ = p2;
+
+}
+
+InitializedLexpr::InitializedLexpr(const InitializedLexpr & other)
+{
+  optlabel_ = other.optlabel_->clone();
+  lexpr_ = other.lexpr_->clone();
+
+}
+
+InitializedLexpr &InitializedLexpr::operator=(const InitializedLexpr & other)
+{
+  InitializedLexpr tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void InitializedLexpr::swap(InitializedLexpr & other)
+{
+  std::swap(optlabel_, other.optlabel_);
+  std::swap(lexpr_, other.lexpr_);
+
+}
+
+InitializedLexpr::~InitializedLexpr()
+{
+  delete(optlabel_);
+  delete(lexpr_);
+
+}
+
+void InitializedLexpr::accept(Visitor *v)
+{
+  v->visitInitializedLexpr(this);
+}
+
+InitializedLexpr *InitializedLexpr::clone() const
+{
+  return new InitializedLexpr(*this);
+}
+
+
+
+/********************   DanglingLexpr    ********************/
+DanglingLexpr::DanglingLexpr(OptLabel *p1, Lexpr *p2)
+{
+  optlabel_ = p1;
+  lexpr_ = p2;
+
+}
+
+DanglingLexpr::DanglingLexpr(const DanglingLexpr & other)
+{
+  optlabel_ = other.optlabel_->clone();
+  lexpr_ = other.lexpr_->clone();
+
+}
+
+DanglingLexpr &DanglingLexpr::operator=(const DanglingLexpr & other)
+{
+  DanglingLexpr tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void DanglingLexpr::swap(DanglingLexpr & other)
+{
+  std::swap(optlabel_, other.optlabel_);
+  std::swap(lexpr_, other.lexpr_);
+
+}
+
+DanglingLexpr::~DanglingLexpr()
+{
+  delete(optlabel_);
+  delete(lexpr_);
+
+}
+
+void DanglingLexpr::accept(Visitor *v)
+{
+  v->visitDanglingLexpr(this);
+}
+
+DanglingLexpr *DanglingLexpr::clone() const
+{
+  return new DanglingLexpr(*this);
+}
+
+
+
+/********************   FreshLexpr    ********************/
+FreshLexpr::FreshLexpr(OptLabel *p1, Lexpr *p2, Lexpr *p3)
+{
+  optlabel_ = p1;
+  lexpr_1 = p2;
+  lexpr_2 = p3;
+
+}
+
+FreshLexpr::FreshLexpr(const FreshLexpr & other)
+{
+  optlabel_ = other.optlabel_->clone();
+  lexpr_1 = other.lexpr_1->clone();
+  lexpr_2 = other.lexpr_2->clone();
+
+}
+
+FreshLexpr &FreshLexpr::operator=(const FreshLexpr & other)
+{
+  FreshLexpr tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void FreshLexpr::swap(FreshLexpr & other)
+{
+  std::swap(optlabel_, other.optlabel_);
+  std::swap(lexpr_1, other.lexpr_1);
+  std::swap(lexpr_2, other.lexpr_2);
+
+}
+
+FreshLexpr::~FreshLexpr()
+{
+  delete(optlabel_);
+  delete(lexpr_1);
+  delete(lexpr_2);
+
+}
+
+void FreshLexpr::accept(Visitor *v)
+{
+  v->visitFreshLexpr(this);
+}
+
+FreshLexpr *FreshLexpr::clone() const
+{
+  return new FreshLexpr(*this);
+}
+
+
+
+/********************   BaseAddrLexpr    ********************/
+BaseAddrLexpr::BaseAddrLexpr(OptLabel *p1, Lexpr *p2)
+{
+  optlabel_ = p1;
+  lexpr_ = p2;
+
+}
+
+BaseAddrLexpr::BaseAddrLexpr(const BaseAddrLexpr & other)
+{
+  optlabel_ = other.optlabel_->clone();
+  lexpr_ = other.lexpr_->clone();
+
+}
+
+BaseAddrLexpr &BaseAddrLexpr::operator=(const BaseAddrLexpr & other)
+{
+  BaseAddrLexpr tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void BaseAddrLexpr::swap(BaseAddrLexpr & other)
+{
+  std::swap(optlabel_, other.optlabel_);
+  std::swap(lexpr_, other.lexpr_);
+
+}
+
+BaseAddrLexpr::~BaseAddrLexpr()
+{
+  delete(optlabel_);
+  delete(lexpr_);
+
+}
+
+void BaseAddrLexpr::accept(Visitor *v)
+{
+  v->visitBaseAddrLexpr(this);
+}
+
+BaseAddrLexpr *BaseAddrLexpr::clone() const
+{
+  return new BaseAddrLexpr(*this);
+}
+
+
+
+/********************   BlockLengthLexpr    ********************/
+BlockLengthLexpr::BlockLengthLexpr(OptLabel *p1, Lexpr *p2)
+{
+  optlabel_ = p1;
+  lexpr_ = p2;
+
+}
+
+BlockLengthLexpr::BlockLengthLexpr(const BlockLengthLexpr & other)
+{
+  optlabel_ = other.optlabel_->clone();
+  lexpr_ = other.lexpr_->clone();
+
+}
+
+BlockLengthLexpr &BlockLengthLexpr::operator=(const BlockLengthLexpr & other)
+{
+  BlockLengthLexpr tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void BlockLengthLexpr::swap(BlockLengthLexpr & other)
+{
+  std::swap(optlabel_, other.optlabel_);
+  std::swap(lexpr_, other.lexpr_);
+
+}
+
+BlockLengthLexpr::~BlockLengthLexpr()
+{
+  delete(optlabel_);
+  delete(lexpr_);
+
+}
+
+void BlockLengthLexpr::accept(Visitor *v)
+{
+  v->visitBlockLengthLexpr(this);
+}
+
+BlockLengthLexpr *BlockLengthLexpr::clone() const
+{
+  return new BlockLengthLexpr(*this);
+}
+
+
+
+/********************   OffsetLexpr    ********************/
+OffsetLexpr::OffsetLexpr(OptLabel *p1, Lexpr *p2)
+{
+  optlabel_ = p1;
+  lexpr_ = p2;
+
+}
+
+OffsetLexpr::OffsetLexpr(const OffsetLexpr & other)
+{
+  optlabel_ = other.optlabel_->clone();
+  lexpr_ = other.lexpr_->clone();
+
+}
+
+OffsetLexpr &OffsetLexpr::operator=(const OffsetLexpr & other)
+{
+  OffsetLexpr tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void OffsetLexpr::swap(OffsetLexpr & other)
+{
+  std::swap(optlabel_, other.optlabel_);
+  std::swap(lexpr_, other.lexpr_);
+
+}
+
+OffsetLexpr::~OffsetLexpr()
+{
+  delete(optlabel_);
+  delete(lexpr_);
+
+}
+
+void OffsetLexpr::accept(Visitor *v)
+{
+  v->visitOffsetLexpr(this);
+}
+
+OffsetLexpr *OffsetLexpr::clone() const
+{
+  return new OffsetLexpr(*this);
+}
+
+
+
+/********************   AllocableLexpr    ********************/
+AllocableLexpr::AllocableLexpr(OptLabel *p1, Lexpr *p2)
+{
+  optlabel_ = p1;
+  lexpr_ = p2;
+
+}
+
+AllocableLexpr::AllocableLexpr(const AllocableLexpr & other)
+{
+  optlabel_ = other.optlabel_->clone();
+  lexpr_ = other.lexpr_->clone();
+
+}
+
+AllocableLexpr &AllocableLexpr::operator=(const AllocableLexpr & other)
+{
+  AllocableLexpr tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void AllocableLexpr::swap(AllocableLexpr & other)
+{
+  std::swap(optlabel_, other.optlabel_);
+  std::swap(lexpr_, other.lexpr_);
+
+}
+
+AllocableLexpr::~AllocableLexpr()
+{
+  delete(optlabel_);
+  delete(lexpr_);
+
+}
+
+void AllocableLexpr::accept(Visitor *v)
+{
+  v->visitAllocableLexpr(this);
+}
+
+AllocableLexpr *AllocableLexpr::clone() const
+{
+  return new AllocableLexpr(*this);
+}
+
+
+
+/********************   FreeableLexpr    ********************/
+FreeableLexpr::FreeableLexpr(OptLabel *p1, Lexpr *p2)
+{
+  optlabel_ = p1;
+  lexpr_ = p2;
+
+}
+
+FreeableLexpr::FreeableLexpr(const FreeableLexpr & other)
+{
+  optlabel_ = other.optlabel_->clone();
+  lexpr_ = other.lexpr_->clone();
+
+}
+
+FreeableLexpr &FreeableLexpr::operator=(const FreeableLexpr & other)
+{
+  FreeableLexpr tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void FreeableLexpr::swap(FreeableLexpr & other)
+{
+  std::swap(optlabel_, other.optlabel_);
+  std::swap(lexpr_, other.lexpr_);
+
+}
+
+FreeableLexpr::~FreeableLexpr()
+{
+  delete(optlabel_);
+  delete(lexpr_);
+
+}
+
+void FreeableLexpr::accept(Visitor *v)
+{
+  v->visitFreeableLexpr(this);
+}
+
+FreeableLexpr *FreeableLexpr::clone() const
+{
+  return new FreeableLexpr(*this);
+}
+
+
+
+/********************   AllocationLexpr    ********************/
+AllocationLexpr::AllocationLexpr(OptLabel *p1, Lexpr *p2)
+{
+  optlabel_ = p1;
+  lexpr_ = p2;
+
+}
+
+AllocationLexpr::AllocationLexpr(const AllocationLexpr & other)
+{
+  optlabel_ = other.optlabel_->clone();
+  lexpr_ = other.lexpr_->clone();
+
+}
+
+AllocationLexpr &AllocationLexpr::operator=(const AllocationLexpr & other)
+{
+  AllocationLexpr tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void AllocationLexpr::swap(AllocationLexpr & other)
+{
+  std::swap(optlabel_, other.optlabel_);
+  std::swap(lexpr_, other.lexpr_);
+
+}
+
+AllocationLexpr::~AllocationLexpr()
+{
+  delete(optlabel_);
+  delete(lexpr_);
+
+}
+
+void AllocationLexpr::accept(Visitor *v)
+{
+  v->visitAllocationLexpr(this);
+}
+
+AllocationLexpr *AllocationLexpr::clone() const
+{
+  return new AllocationLexpr(*this);
 }
 
 
@@ -1928,6 +3164,150 @@ SubtrLexpr *SubtrLexpr::clone() const
 
 
 
+/********************   MultLexpr    ********************/
+MultLexpr::MultLexpr(Lexpr *p1, Lexpr *p2)
+{
+  lexpr_1 = p1;
+  lexpr_2 = p2;
+
+}
+
+MultLexpr::MultLexpr(const MultLexpr & other)
+{
+  lexpr_1 = other.lexpr_1->clone();
+  lexpr_2 = other.lexpr_2->clone();
+
+}
+
+MultLexpr &MultLexpr::operator=(const MultLexpr & other)
+{
+  MultLexpr tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void MultLexpr::swap(MultLexpr & other)
+{
+  std::swap(lexpr_1, other.lexpr_1);
+  std::swap(lexpr_2, other.lexpr_2);
+
+}
+
+MultLexpr::~MultLexpr()
+{
+  delete(lexpr_1);
+  delete(lexpr_2);
+
+}
+
+void MultLexpr::accept(Visitor *v)
+{
+  v->visitMultLexpr(this);
+}
+
+MultLexpr *MultLexpr::clone() const
+{
+  return new MultLexpr(*this);
+}
+
+
+
+/********************   DivLexpr    ********************/
+DivLexpr::DivLexpr(Lexpr *p1, Lexpr *p2)
+{
+  lexpr_1 = p1;
+  lexpr_2 = p2;
+
+}
+
+DivLexpr::DivLexpr(const DivLexpr & other)
+{
+  lexpr_1 = other.lexpr_1->clone();
+  lexpr_2 = other.lexpr_2->clone();
+
+}
+
+DivLexpr &DivLexpr::operator=(const DivLexpr & other)
+{
+  DivLexpr tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void DivLexpr::swap(DivLexpr & other)
+{
+  std::swap(lexpr_1, other.lexpr_1);
+  std::swap(lexpr_2, other.lexpr_2);
+
+}
+
+DivLexpr::~DivLexpr()
+{
+  delete(lexpr_1);
+  delete(lexpr_2);
+
+}
+
+void DivLexpr::accept(Visitor *v)
+{
+  v->visitDivLexpr(this);
+}
+
+DivLexpr *DivLexpr::clone() const
+{
+  return new DivLexpr(*this);
+}
+
+
+
+/********************   ModLexpr    ********************/
+ModLexpr::ModLexpr(Lexpr *p1, Lexpr *p2)
+{
+  lexpr_1 = p1;
+  lexpr_2 = p2;
+
+}
+
+ModLexpr::ModLexpr(const ModLexpr & other)
+{
+  lexpr_1 = other.lexpr_1->clone();
+  lexpr_2 = other.lexpr_2->clone();
+
+}
+
+ModLexpr &ModLexpr::operator=(const ModLexpr & other)
+{
+  ModLexpr tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void ModLexpr::swap(ModLexpr & other)
+{
+  std::swap(lexpr_1, other.lexpr_1);
+  std::swap(lexpr_2, other.lexpr_2);
+
+}
+
+ModLexpr::~ModLexpr()
+{
+  delete(lexpr_1);
+  delete(lexpr_2);
+
+}
+
+void ModLexpr::accept(Visitor *v)
+{
+  v->visitModLexpr(this);
+}
+
+ModLexpr *ModLexpr::clone() const
+{
+  return new ModLexpr(*this);
+}
+
+
+
 /********************   SquaresRangeLexpr    ********************/
 SquaresRangeLexpr::SquaresRangeLexpr(Lexpr *p1, Range *p2)
 {
@@ -2020,6 +3400,182 @@ void SquaresLexpr::accept(Visitor *v)
 SquaresLexpr *SquaresLexpr::clone() const
 {
   return new SquaresLexpr(*this);
+}
+
+
+
+/********************   SizeOfLexpr    ********************/
+SizeOfLexpr::SizeOfLexpr(Lexpr *p1)
+{
+  lexpr_ = p1;
+
+}
+
+SizeOfLexpr::SizeOfLexpr(const SizeOfLexpr & other)
+{
+  lexpr_ = other.lexpr_->clone();
+
+}
+
+SizeOfLexpr &SizeOfLexpr::operator=(const SizeOfLexpr & other)
+{
+  SizeOfLexpr tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void SizeOfLexpr::swap(SizeOfLexpr & other)
+{
+  std::swap(lexpr_, other.lexpr_);
+
+}
+
+SizeOfLexpr::~SizeOfLexpr()
+{
+  delete(lexpr_);
+
+}
+
+void SizeOfLexpr::accept(Visitor *v)
+{
+  v->visitSizeOfLexpr(this);
+}
+
+SizeOfLexpr *SizeOfLexpr::clone() const
+{
+  return new SizeOfLexpr(*this);
+}
+
+
+
+/********************   OldLexpr    ********************/
+OldLexpr::OldLexpr(Lexpr *p1)
+{
+  lexpr_ = p1;
+
+}
+
+OldLexpr::OldLexpr(const OldLexpr & other)
+{
+  lexpr_ = other.lexpr_->clone();
+
+}
+
+OldLexpr &OldLexpr::operator=(const OldLexpr & other)
+{
+  OldLexpr tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void OldLexpr::swap(OldLexpr & other)
+{
+  std::swap(lexpr_, other.lexpr_);
+
+}
+
+OldLexpr::~OldLexpr()
+{
+  delete(lexpr_);
+
+}
+
+void OldLexpr::accept(Visitor *v)
+{
+  v->visitOldLexpr(this);
+}
+
+OldLexpr *OldLexpr::clone() const
+{
+  return new OldLexpr(*this);
+}
+
+
+
+/********************   AtLexpr    ********************/
+AtLexpr::AtLexpr(Lexpr *p1, LabelName *p2)
+{
+  lexpr_ = p1;
+  labelname_ = p2;
+
+}
+
+AtLexpr::AtLexpr(const AtLexpr & other)
+{
+  lexpr_ = other.lexpr_->clone();
+  labelname_ = other.labelname_->clone();
+
+}
+
+AtLexpr &AtLexpr::operator=(const AtLexpr & other)
+{
+  AtLexpr tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void AtLexpr::swap(AtLexpr & other)
+{
+  std::swap(lexpr_, other.lexpr_);
+  std::swap(labelname_, other.labelname_);
+
+}
+
+AtLexpr::~AtLexpr()
+{
+  delete(lexpr_);
+  delete(labelname_);
+
+}
+
+void AtLexpr::accept(Visitor *v)
+{
+  v->visitAtLexpr(this);
+}
+
+AtLexpr *AtLexpr::clone() const
+{
+  return new AtLexpr(*this);
+}
+
+
+
+/********************   ResultLexpr    ********************/
+ResultLexpr::ResultLexpr()
+{
+
+}
+
+ResultLexpr::ResultLexpr(const ResultLexpr & other)
+{
+
+}
+
+ResultLexpr &ResultLexpr::operator=(const ResultLexpr & other)
+{
+  ResultLexpr tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void ResultLexpr::swap(ResultLexpr & other)
+{
+
+}
+
+ResultLexpr::~ResultLexpr()
+{
+
+}
+
+void ResultLexpr::accept(Visitor *v)
+{
+  v->visitResultLexpr(this);
+}
+
+ResultLexpr *ResultLexpr::clone() const
+{
+  return new ResultLexpr(*this);
 }
 
 
@@ -4250,6 +5806,1566 @@ SimpleIdentifierFull *SimpleIdentifierFull::clone() const
 
 
 
+/********************   AdmitKeyWordFullIdent    ********************/
+AdmitKeyWordFullIdent::AdmitKeyWordFullIdent()
+{
+
+}
+
+AdmitKeyWordFullIdent::AdmitKeyWordFullIdent(const AdmitKeyWordFullIdent & other)
+{
+
+}
+
+AdmitKeyWordFullIdent &AdmitKeyWordFullIdent::operator=(const AdmitKeyWordFullIdent & other)
+{
+  AdmitKeyWordFullIdent tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void AdmitKeyWordFullIdent::swap(AdmitKeyWordFullIdent & other)
+{
+
+}
+
+AdmitKeyWordFullIdent::~AdmitKeyWordFullIdent()
+{
+
+}
+
+void AdmitKeyWordFullIdent::accept(Visitor *v)
+{
+  v->visitAdmitKeyWordFullIdent(this);
+}
+
+AdmitKeyWordFullIdent *AdmitKeyWordFullIdent::clone() const
+{
+  return new AdmitKeyWordFullIdent(*this);
+}
+
+
+
+/********************   AllocatesKeyWordFullIdent    ********************/
+AllocatesKeyWordFullIdent::AllocatesKeyWordFullIdent()
+{
+
+}
+
+AllocatesKeyWordFullIdent::AllocatesKeyWordFullIdent(const AllocatesKeyWordFullIdent & other)
+{
+
+}
+
+AllocatesKeyWordFullIdent &AllocatesKeyWordFullIdent::operator=(const AllocatesKeyWordFullIdent & other)
+{
+  AllocatesKeyWordFullIdent tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void AllocatesKeyWordFullIdent::swap(AllocatesKeyWordFullIdent & other)
+{
+
+}
+
+AllocatesKeyWordFullIdent::~AllocatesKeyWordFullIdent()
+{
+
+}
+
+void AllocatesKeyWordFullIdent::accept(Visitor *v)
+{
+  v->visitAllocatesKeyWordFullIdent(this);
+}
+
+AllocatesKeyWordFullIdent *AllocatesKeyWordFullIdent::clone() const
+{
+  return new AllocatesKeyWordFullIdent(*this);
+}
+
+
+
+/********************   AssertKeyWordFullIdent    ********************/
+AssertKeyWordFullIdent::AssertKeyWordFullIdent()
+{
+
+}
+
+AssertKeyWordFullIdent::AssertKeyWordFullIdent(const AssertKeyWordFullIdent & other)
+{
+
+}
+
+AssertKeyWordFullIdent &AssertKeyWordFullIdent::operator=(const AssertKeyWordFullIdent & other)
+{
+  AssertKeyWordFullIdent tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void AssertKeyWordFullIdent::swap(AssertKeyWordFullIdent & other)
+{
+
+}
+
+AssertKeyWordFullIdent::~AssertKeyWordFullIdent()
+{
+
+}
+
+void AssertKeyWordFullIdent::accept(Visitor *v)
+{
+  v->visitAssertKeyWordFullIdent(this);
+}
+
+AssertKeyWordFullIdent *AssertKeyWordFullIdent::clone() const
+{
+  return new AssertKeyWordFullIdent(*this);
+}
+
+
+
+/********************   AssignsKeyWordFullIdent    ********************/
+AssignsKeyWordFullIdent::AssignsKeyWordFullIdent()
+{
+
+}
+
+AssignsKeyWordFullIdent::AssignsKeyWordFullIdent(const AssignsKeyWordFullIdent & other)
+{
+
+}
+
+AssignsKeyWordFullIdent &AssignsKeyWordFullIdent::operator=(const AssignsKeyWordFullIdent & other)
+{
+  AssignsKeyWordFullIdent tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void AssignsKeyWordFullIdent::swap(AssignsKeyWordFullIdent & other)
+{
+
+}
+
+AssignsKeyWordFullIdent::~AssignsKeyWordFullIdent()
+{
+
+}
+
+void AssignsKeyWordFullIdent::accept(Visitor *v)
+{
+  v->visitAssignsKeyWordFullIdent(this);
+}
+
+AssignsKeyWordFullIdent *AssignsKeyWordFullIdent::clone() const
+{
+  return new AssignsKeyWordFullIdent(*this);
+}
+
+
+
+/********************   AssumesKeyWordFullIdent    ********************/
+AssumesKeyWordFullIdent::AssumesKeyWordFullIdent()
+{
+
+}
+
+AssumesKeyWordFullIdent::AssumesKeyWordFullIdent(const AssumesKeyWordFullIdent & other)
+{
+
+}
+
+AssumesKeyWordFullIdent &AssumesKeyWordFullIdent::operator=(const AssumesKeyWordFullIdent & other)
+{
+  AssumesKeyWordFullIdent tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void AssumesKeyWordFullIdent::swap(AssumesKeyWordFullIdent & other)
+{
+
+}
+
+AssumesKeyWordFullIdent::~AssumesKeyWordFullIdent()
+{
+
+}
+
+void AssumesKeyWordFullIdent::accept(Visitor *v)
+{
+  v->visitAssumesKeyWordFullIdent(this);
+}
+
+AssumesKeyWordFullIdent *AssumesKeyWordFullIdent::clone() const
+{
+  return new AssumesKeyWordFullIdent(*this);
+}
+
+
+
+/********************   AtKeyWordFullIdent    ********************/
+AtKeyWordFullIdent::AtKeyWordFullIdent()
+{
+
+}
+
+AtKeyWordFullIdent::AtKeyWordFullIdent(const AtKeyWordFullIdent & other)
+{
+
+}
+
+AtKeyWordFullIdent &AtKeyWordFullIdent::operator=(const AtKeyWordFullIdent & other)
+{
+  AtKeyWordFullIdent tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void AtKeyWordFullIdent::swap(AtKeyWordFullIdent & other)
+{
+
+}
+
+AtKeyWordFullIdent::~AtKeyWordFullIdent()
+{
+
+}
+
+void AtKeyWordFullIdent::accept(Visitor *v)
+{
+  v->visitAtKeyWordFullIdent(this);
+}
+
+AtKeyWordFullIdent *AtKeyWordFullIdent::clone() const
+{
+  return new AtKeyWordFullIdent(*this);
+}
+
+
+
+/********************   AxiomKeyWordFullIdent    ********************/
+AxiomKeyWordFullIdent::AxiomKeyWordFullIdent()
+{
+
+}
+
+AxiomKeyWordFullIdent::AxiomKeyWordFullIdent(const AxiomKeyWordFullIdent & other)
+{
+
+}
+
+AxiomKeyWordFullIdent &AxiomKeyWordFullIdent::operator=(const AxiomKeyWordFullIdent & other)
+{
+  AxiomKeyWordFullIdent tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void AxiomKeyWordFullIdent::swap(AxiomKeyWordFullIdent & other)
+{
+
+}
+
+AxiomKeyWordFullIdent::~AxiomKeyWordFullIdent()
+{
+
+}
+
+void AxiomKeyWordFullIdent::accept(Visitor *v)
+{
+  v->visitAxiomKeyWordFullIdent(this);
+}
+
+AxiomKeyWordFullIdent *AxiomKeyWordFullIdent::clone() const
+{
+  return new AxiomKeyWordFullIdent(*this);
+}
+
+
+
+/********************   AxiomaticKeyWordFullIdent    ********************/
+AxiomaticKeyWordFullIdent::AxiomaticKeyWordFullIdent()
+{
+
+}
+
+AxiomaticKeyWordFullIdent::AxiomaticKeyWordFullIdent(const AxiomaticKeyWordFullIdent & other)
+{
+
+}
+
+AxiomaticKeyWordFullIdent &AxiomaticKeyWordFullIdent::operator=(const AxiomaticKeyWordFullIdent & other)
+{
+  AxiomaticKeyWordFullIdent tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void AxiomaticKeyWordFullIdent::swap(AxiomaticKeyWordFullIdent & other)
+{
+
+}
+
+AxiomaticKeyWordFullIdent::~AxiomaticKeyWordFullIdent()
+{
+
+}
+
+void AxiomaticKeyWordFullIdent::accept(Visitor *v)
+{
+  v->visitAxiomaticKeyWordFullIdent(this);
+}
+
+AxiomaticKeyWordFullIdent *AxiomaticKeyWordFullIdent::clone() const
+{
+  return new AxiomaticKeyWordFullIdent(*this);
+}
+
+
+
+/********************   BehaviorKeyWordFullIdent    ********************/
+BehaviorKeyWordFullIdent::BehaviorKeyWordFullIdent()
+{
+
+}
+
+BehaviorKeyWordFullIdent::BehaviorKeyWordFullIdent(const BehaviorKeyWordFullIdent & other)
+{
+
+}
+
+BehaviorKeyWordFullIdent &BehaviorKeyWordFullIdent::operator=(const BehaviorKeyWordFullIdent & other)
+{
+  BehaviorKeyWordFullIdent tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void BehaviorKeyWordFullIdent::swap(BehaviorKeyWordFullIdent & other)
+{
+
+}
+
+BehaviorKeyWordFullIdent::~BehaviorKeyWordFullIdent()
+{
+
+}
+
+void BehaviorKeyWordFullIdent::accept(Visitor *v)
+{
+  v->visitBehaviorKeyWordFullIdent(this);
+}
+
+BehaviorKeyWordFullIdent *BehaviorKeyWordFullIdent::clone() const
+{
+  return new BehaviorKeyWordFullIdent(*this);
+}
+
+
+
+/********************   BreaksKeyWordFullIdent    ********************/
+BreaksKeyWordFullIdent::BreaksKeyWordFullIdent()
+{
+
+}
+
+BreaksKeyWordFullIdent::BreaksKeyWordFullIdent(const BreaksKeyWordFullIdent & other)
+{
+
+}
+
+BreaksKeyWordFullIdent &BreaksKeyWordFullIdent::operator=(const BreaksKeyWordFullIdent & other)
+{
+  BreaksKeyWordFullIdent tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void BreaksKeyWordFullIdent::swap(BreaksKeyWordFullIdent & other)
+{
+
+}
+
+BreaksKeyWordFullIdent::~BreaksKeyWordFullIdent()
+{
+
+}
+
+void BreaksKeyWordFullIdent::accept(Visitor *v)
+{
+  v->visitBreaksKeyWordFullIdent(this);
+}
+
+BreaksKeyWordFullIdent *BreaksKeyWordFullIdent::clone() const
+{
+  return new BreaksKeyWordFullIdent(*this);
+}
+
+
+
+/********************   CheckKeyWordFullIdent    ********************/
+CheckKeyWordFullIdent::CheckKeyWordFullIdent()
+{
+
+}
+
+CheckKeyWordFullIdent::CheckKeyWordFullIdent(const CheckKeyWordFullIdent & other)
+{
+
+}
+
+CheckKeyWordFullIdent &CheckKeyWordFullIdent::operator=(const CheckKeyWordFullIdent & other)
+{
+  CheckKeyWordFullIdent tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void CheckKeyWordFullIdent::swap(CheckKeyWordFullIdent & other)
+{
+
+}
+
+CheckKeyWordFullIdent::~CheckKeyWordFullIdent()
+{
+
+}
+
+void CheckKeyWordFullIdent::accept(Visitor *v)
+{
+  v->visitCheckKeyWordFullIdent(this);
+}
+
+CheckKeyWordFullIdent *CheckKeyWordFullIdent::clone() const
+{
+  return new CheckKeyWordFullIdent(*this);
+}
+
+
+
+/********************   CompleteKeyWordFullIdent    ********************/
+CompleteKeyWordFullIdent::CompleteKeyWordFullIdent()
+{
+
+}
+
+CompleteKeyWordFullIdent::CompleteKeyWordFullIdent(const CompleteKeyWordFullIdent & other)
+{
+
+}
+
+CompleteKeyWordFullIdent &CompleteKeyWordFullIdent::operator=(const CompleteKeyWordFullIdent & other)
+{
+  CompleteKeyWordFullIdent tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void CompleteKeyWordFullIdent::swap(CompleteKeyWordFullIdent & other)
+{
+
+}
+
+CompleteKeyWordFullIdent::~CompleteKeyWordFullIdent()
+{
+
+}
+
+void CompleteKeyWordFullIdent::accept(Visitor *v)
+{
+  v->visitCompleteKeyWordFullIdent(this);
+}
+
+CompleteKeyWordFullIdent *CompleteKeyWordFullIdent::clone() const
+{
+  return new CompleteKeyWordFullIdent(*this);
+}
+
+
+
+/********************   ContinuesKeyWordFullIdent    ********************/
+ContinuesKeyWordFullIdent::ContinuesKeyWordFullIdent()
+{
+
+}
+
+ContinuesKeyWordFullIdent::ContinuesKeyWordFullIdent(const ContinuesKeyWordFullIdent & other)
+{
+
+}
+
+ContinuesKeyWordFullIdent &ContinuesKeyWordFullIdent::operator=(const ContinuesKeyWordFullIdent & other)
+{
+  ContinuesKeyWordFullIdent tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void ContinuesKeyWordFullIdent::swap(ContinuesKeyWordFullIdent & other)
+{
+
+}
+
+ContinuesKeyWordFullIdent::~ContinuesKeyWordFullIdent()
+{
+
+}
+
+void ContinuesKeyWordFullIdent::accept(Visitor *v)
+{
+  v->visitContinuesKeyWordFullIdent(this);
+}
+
+ContinuesKeyWordFullIdent *ContinuesKeyWordFullIdent::clone() const
+{
+  return new ContinuesKeyWordFullIdent(*this);
+}
+
+
+
+/********************   ContractKeyWordFullIdent    ********************/
+ContractKeyWordFullIdent::ContractKeyWordFullIdent()
+{
+
+}
+
+ContractKeyWordFullIdent::ContractKeyWordFullIdent(const ContractKeyWordFullIdent & other)
+{
+
+}
+
+ContractKeyWordFullIdent &ContractKeyWordFullIdent::operator=(const ContractKeyWordFullIdent & other)
+{
+  ContractKeyWordFullIdent tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void ContractKeyWordFullIdent::swap(ContractKeyWordFullIdent & other)
+{
+
+}
+
+ContractKeyWordFullIdent::~ContractKeyWordFullIdent()
+{
+
+}
+
+void ContractKeyWordFullIdent::accept(Visitor *v)
+{
+  v->visitContractKeyWordFullIdent(this);
+}
+
+ContractKeyWordFullIdent *ContractKeyWordFullIdent::clone() const
+{
+  return new ContractKeyWordFullIdent(*this);
+}
+
+
+
+/********************   DecreasesKeyWordFullIdent    ********************/
+DecreasesKeyWordFullIdent::DecreasesKeyWordFullIdent()
+{
+
+}
+
+DecreasesKeyWordFullIdent::DecreasesKeyWordFullIdent(const DecreasesKeyWordFullIdent & other)
+{
+
+}
+
+DecreasesKeyWordFullIdent &DecreasesKeyWordFullIdent::operator=(const DecreasesKeyWordFullIdent & other)
+{
+  DecreasesKeyWordFullIdent tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void DecreasesKeyWordFullIdent::swap(DecreasesKeyWordFullIdent & other)
+{
+
+}
+
+DecreasesKeyWordFullIdent::~DecreasesKeyWordFullIdent()
+{
+
+}
+
+void DecreasesKeyWordFullIdent::accept(Visitor *v)
+{
+  v->visitDecreasesKeyWordFullIdent(this);
+}
+
+DecreasesKeyWordFullIdent *DecreasesKeyWordFullIdent::clone() const
+{
+  return new DecreasesKeyWordFullIdent(*this);
+}
+
+
+
+/********************   DisjointKeyWordFullIdent    ********************/
+DisjointKeyWordFullIdent::DisjointKeyWordFullIdent()
+{
+
+}
+
+DisjointKeyWordFullIdent::DisjointKeyWordFullIdent(const DisjointKeyWordFullIdent & other)
+{
+
+}
+
+DisjointKeyWordFullIdent &DisjointKeyWordFullIdent::operator=(const DisjointKeyWordFullIdent & other)
+{
+  DisjointKeyWordFullIdent tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void DisjointKeyWordFullIdent::swap(DisjointKeyWordFullIdent & other)
+{
+
+}
+
+DisjointKeyWordFullIdent::~DisjointKeyWordFullIdent()
+{
+
+}
+
+void DisjointKeyWordFullIdent::accept(Visitor *v)
+{
+  v->visitDisjointKeyWordFullIdent(this);
+}
+
+DisjointKeyWordFullIdent *DisjointKeyWordFullIdent::clone() const
+{
+  return new DisjointKeyWordFullIdent(*this);
+}
+
+
+
+/********************   EnsuresKeyWordFullIdent    ********************/
+EnsuresKeyWordFullIdent::EnsuresKeyWordFullIdent()
+{
+
+}
+
+EnsuresKeyWordFullIdent::EnsuresKeyWordFullIdent(const EnsuresKeyWordFullIdent & other)
+{
+
+}
+
+EnsuresKeyWordFullIdent &EnsuresKeyWordFullIdent::operator=(const EnsuresKeyWordFullIdent & other)
+{
+  EnsuresKeyWordFullIdent tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void EnsuresKeyWordFullIdent::swap(EnsuresKeyWordFullIdent & other)
+{
+
+}
+
+EnsuresKeyWordFullIdent::~EnsuresKeyWordFullIdent()
+{
+
+}
+
+void EnsuresKeyWordFullIdent::accept(Visitor *v)
+{
+  v->visitEnsuresKeyWordFullIdent(this);
+}
+
+EnsuresKeyWordFullIdent *EnsuresKeyWordFullIdent::clone() const
+{
+  return new EnsuresKeyWordFullIdent(*this);
+}
+
+
+
+/********************   ExitsKeyWordFullIdent    ********************/
+ExitsKeyWordFullIdent::ExitsKeyWordFullIdent()
+{
+
+}
+
+ExitsKeyWordFullIdent::ExitsKeyWordFullIdent(const ExitsKeyWordFullIdent & other)
+{
+
+}
+
+ExitsKeyWordFullIdent &ExitsKeyWordFullIdent::operator=(const ExitsKeyWordFullIdent & other)
+{
+  ExitsKeyWordFullIdent tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void ExitsKeyWordFullIdent::swap(ExitsKeyWordFullIdent & other)
+{
+
+}
+
+ExitsKeyWordFullIdent::~ExitsKeyWordFullIdent()
+{
+
+}
+
+void ExitsKeyWordFullIdent::accept(Visitor *v)
+{
+  v->visitExitsKeyWordFullIdent(this);
+}
+
+ExitsKeyWordFullIdent *ExitsKeyWordFullIdent::clone() const
+{
+  return new ExitsKeyWordFullIdent(*this);
+}
+
+
+
+/********************   FreesKeyWordFullIdent    ********************/
+FreesKeyWordFullIdent::FreesKeyWordFullIdent()
+{
+
+}
+
+FreesKeyWordFullIdent::FreesKeyWordFullIdent(const FreesKeyWordFullIdent & other)
+{
+
+}
+
+FreesKeyWordFullIdent &FreesKeyWordFullIdent::operator=(const FreesKeyWordFullIdent & other)
+{
+  FreesKeyWordFullIdent tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void FreesKeyWordFullIdent::swap(FreesKeyWordFullIdent & other)
+{
+
+}
+
+FreesKeyWordFullIdent::~FreesKeyWordFullIdent()
+{
+
+}
+
+void FreesKeyWordFullIdent::accept(Visitor *v)
+{
+  v->visitFreesKeyWordFullIdent(this);
+}
+
+FreesKeyWordFullIdent *FreesKeyWordFullIdent::clone() const
+{
+  return new FreesKeyWordFullIdent(*this);
+}
+
+
+
+/********************   FunctionKeyWordFullIdent    ********************/
+FunctionKeyWordFullIdent::FunctionKeyWordFullIdent()
+{
+
+}
+
+FunctionKeyWordFullIdent::FunctionKeyWordFullIdent(const FunctionKeyWordFullIdent & other)
+{
+
+}
+
+FunctionKeyWordFullIdent &FunctionKeyWordFullIdent::operator=(const FunctionKeyWordFullIdent & other)
+{
+  FunctionKeyWordFullIdent tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void FunctionKeyWordFullIdent::swap(FunctionKeyWordFullIdent & other)
+{
+
+}
+
+FunctionKeyWordFullIdent::~FunctionKeyWordFullIdent()
+{
+
+}
+
+void FunctionKeyWordFullIdent::accept(Visitor *v)
+{
+  v->visitFunctionKeyWordFullIdent(this);
+}
+
+FunctionKeyWordFullIdent *FunctionKeyWordFullIdent::clone() const
+{
+  return new FunctionKeyWordFullIdent(*this);
+}
+
+
+
+/********************   GlobalKeyWordFullIdent    ********************/
+GlobalKeyWordFullIdent::GlobalKeyWordFullIdent()
+{
+
+}
+
+GlobalKeyWordFullIdent::GlobalKeyWordFullIdent(const GlobalKeyWordFullIdent & other)
+{
+
+}
+
+GlobalKeyWordFullIdent &GlobalKeyWordFullIdent::operator=(const GlobalKeyWordFullIdent & other)
+{
+  GlobalKeyWordFullIdent tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void GlobalKeyWordFullIdent::swap(GlobalKeyWordFullIdent & other)
+{
+
+}
+
+GlobalKeyWordFullIdent::~GlobalKeyWordFullIdent()
+{
+
+}
+
+void GlobalKeyWordFullIdent::accept(Visitor *v)
+{
+  v->visitGlobalKeyWordFullIdent(this);
+}
+
+GlobalKeyWordFullIdent *GlobalKeyWordFullIdent::clone() const
+{
+  return new GlobalKeyWordFullIdent(*this);
+}
+
+
+
+/********************   ImpactKeyWordFullIdent    ********************/
+ImpactKeyWordFullIdent::ImpactKeyWordFullIdent()
+{
+
+}
+
+ImpactKeyWordFullIdent::ImpactKeyWordFullIdent(const ImpactKeyWordFullIdent & other)
+{
+
+}
+
+ImpactKeyWordFullIdent &ImpactKeyWordFullIdent::operator=(const ImpactKeyWordFullIdent & other)
+{
+  ImpactKeyWordFullIdent tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void ImpactKeyWordFullIdent::swap(ImpactKeyWordFullIdent & other)
+{
+
+}
+
+ImpactKeyWordFullIdent::~ImpactKeyWordFullIdent()
+{
+
+}
+
+void ImpactKeyWordFullIdent::accept(Visitor *v)
+{
+  v->visitImpactKeyWordFullIdent(this);
+}
+
+ImpactKeyWordFullIdent *ImpactKeyWordFullIdent::clone() const
+{
+  return new ImpactKeyWordFullIdent(*this);
+}
+
+
+
+/********************   InductiveKeyWordFullIdent    ********************/
+InductiveKeyWordFullIdent::InductiveKeyWordFullIdent()
+{
+
+}
+
+InductiveKeyWordFullIdent::InductiveKeyWordFullIdent(const InductiveKeyWordFullIdent & other)
+{
+
+}
+
+InductiveKeyWordFullIdent &InductiveKeyWordFullIdent::operator=(const InductiveKeyWordFullIdent & other)
+{
+  InductiveKeyWordFullIdent tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void InductiveKeyWordFullIdent::swap(InductiveKeyWordFullIdent & other)
+{
+
+}
+
+InductiveKeyWordFullIdent::~InductiveKeyWordFullIdent()
+{
+
+}
+
+void InductiveKeyWordFullIdent::accept(Visitor *v)
+{
+  v->visitInductiveKeyWordFullIdent(this);
+}
+
+InductiveKeyWordFullIdent *InductiveKeyWordFullIdent::clone() const
+{
+  return new InductiveKeyWordFullIdent(*this);
+}
+
+
+
+/********************   IncludeKeyWordFullIdent    ********************/
+IncludeKeyWordFullIdent::IncludeKeyWordFullIdent()
+{
+
+}
+
+IncludeKeyWordFullIdent::IncludeKeyWordFullIdent(const IncludeKeyWordFullIdent & other)
+{
+
+}
+
+IncludeKeyWordFullIdent &IncludeKeyWordFullIdent::operator=(const IncludeKeyWordFullIdent & other)
+{
+  IncludeKeyWordFullIdent tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void IncludeKeyWordFullIdent::swap(IncludeKeyWordFullIdent & other)
+{
+
+}
+
+IncludeKeyWordFullIdent::~IncludeKeyWordFullIdent()
+{
+
+}
+
+void IncludeKeyWordFullIdent::accept(Visitor *v)
+{
+  v->visitIncludeKeyWordFullIdent(this);
+}
+
+IncludeKeyWordFullIdent *IncludeKeyWordFullIdent::clone() const
+{
+  return new IncludeKeyWordFullIdent(*this);
+}
+
+
+
+/********************   InvariantKeyWordFullIdent    ********************/
+InvariantKeyWordFullIdent::InvariantKeyWordFullIdent()
+{
+
+}
+
+InvariantKeyWordFullIdent::InvariantKeyWordFullIdent(const InvariantKeyWordFullIdent & other)
+{
+
+}
+
+InvariantKeyWordFullIdent &InvariantKeyWordFullIdent::operator=(const InvariantKeyWordFullIdent & other)
+{
+  InvariantKeyWordFullIdent tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void InvariantKeyWordFullIdent::swap(InvariantKeyWordFullIdent & other)
+{
+
+}
+
+InvariantKeyWordFullIdent::~InvariantKeyWordFullIdent()
+{
+
+}
+
+void InvariantKeyWordFullIdent::accept(Visitor *v)
+{
+  v->visitInvariantKeyWordFullIdent(this);
+}
+
+InvariantKeyWordFullIdent *InvariantKeyWordFullIdent::clone() const
+{
+  return new InvariantKeyWordFullIdent(*this);
+}
+
+
+
+/********************   LemmaKeyWordFullIdent    ********************/
+LemmaKeyWordFullIdent::LemmaKeyWordFullIdent()
+{
+
+}
+
+LemmaKeyWordFullIdent::LemmaKeyWordFullIdent(const LemmaKeyWordFullIdent & other)
+{
+
+}
+
+LemmaKeyWordFullIdent &LemmaKeyWordFullIdent::operator=(const LemmaKeyWordFullIdent & other)
+{
+  LemmaKeyWordFullIdent tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void LemmaKeyWordFullIdent::swap(LemmaKeyWordFullIdent & other)
+{
+
+}
+
+LemmaKeyWordFullIdent::~LemmaKeyWordFullIdent()
+{
+
+}
+
+void LemmaKeyWordFullIdent::accept(Visitor *v)
+{
+  v->visitLemmaKeyWordFullIdent(this);
+}
+
+LemmaKeyWordFullIdent *LemmaKeyWordFullIdent::clone() const
+{
+  return new LemmaKeyWordFullIdent(*this);
+}
+
+
+
+/********************   LetKeyWordFullIdent    ********************/
+LetKeyWordFullIdent::LetKeyWordFullIdent()
+{
+
+}
+
+LetKeyWordFullIdent::LetKeyWordFullIdent(const LetKeyWordFullIdent & other)
+{
+
+}
+
+LetKeyWordFullIdent &LetKeyWordFullIdent::operator=(const LetKeyWordFullIdent & other)
+{
+  LetKeyWordFullIdent tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void LetKeyWordFullIdent::swap(LetKeyWordFullIdent & other)
+{
+
+}
+
+LetKeyWordFullIdent::~LetKeyWordFullIdent()
+{
+
+}
+
+void LetKeyWordFullIdent::accept(Visitor *v)
+{
+  v->visitLetKeyWordFullIdent(this);
+}
+
+LetKeyWordFullIdent *LetKeyWordFullIdent::clone() const
+{
+  return new LetKeyWordFullIdent(*this);
+}
+
+
+
+/********************   LogicKeyWordFullIdent    ********************/
+LogicKeyWordFullIdent::LogicKeyWordFullIdent()
+{
+
+}
+
+LogicKeyWordFullIdent::LogicKeyWordFullIdent(const LogicKeyWordFullIdent & other)
+{
+
+}
+
+LogicKeyWordFullIdent &LogicKeyWordFullIdent::operator=(const LogicKeyWordFullIdent & other)
+{
+  LogicKeyWordFullIdent tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void LogicKeyWordFullIdent::swap(LogicKeyWordFullIdent & other)
+{
+
+}
+
+LogicKeyWordFullIdent::~LogicKeyWordFullIdent()
+{
+
+}
+
+void LogicKeyWordFullIdent::accept(Visitor *v)
+{
+  v->visitLogicKeyWordFullIdent(this);
+}
+
+LogicKeyWordFullIdent *LogicKeyWordFullIdent::clone() const
+{
+  return new LogicKeyWordFullIdent(*this);
+}
+
+
+
+/********************   LoopKeyWordFullIdent    ********************/
+LoopKeyWordFullIdent::LoopKeyWordFullIdent()
+{
+
+}
+
+LoopKeyWordFullIdent::LoopKeyWordFullIdent(const LoopKeyWordFullIdent & other)
+{
+
+}
+
+LoopKeyWordFullIdent &LoopKeyWordFullIdent::operator=(const LoopKeyWordFullIdent & other)
+{
+  LoopKeyWordFullIdent tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void LoopKeyWordFullIdent::swap(LoopKeyWordFullIdent & other)
+{
+
+}
+
+LoopKeyWordFullIdent::~LoopKeyWordFullIdent()
+{
+
+}
+
+void LoopKeyWordFullIdent::accept(Visitor *v)
+{
+  v->visitLoopKeyWordFullIdent(this);
+}
+
+LoopKeyWordFullIdent *LoopKeyWordFullIdent::clone() const
+{
+  return new LoopKeyWordFullIdent(*this);
+}
+
+
+
+/********************   ModelKeyWordFullIdent    ********************/
+ModelKeyWordFullIdent::ModelKeyWordFullIdent()
+{
+
+}
+
+ModelKeyWordFullIdent::ModelKeyWordFullIdent(const ModelKeyWordFullIdent & other)
+{
+
+}
+
+ModelKeyWordFullIdent &ModelKeyWordFullIdent::operator=(const ModelKeyWordFullIdent & other)
+{
+  ModelKeyWordFullIdent tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void ModelKeyWordFullIdent::swap(ModelKeyWordFullIdent & other)
+{
+
+}
+
+ModelKeyWordFullIdent::~ModelKeyWordFullIdent()
+{
+
+}
+
+void ModelKeyWordFullIdent::accept(Visitor *v)
+{
+  v->visitModelKeyWordFullIdent(this);
+}
+
+ModelKeyWordFullIdent *ModelKeyWordFullIdent::clone() const
+{
+  return new ModelKeyWordFullIdent(*this);
+}
+
+
+
+/********************   ModuleKeyWordFullIdent    ********************/
+ModuleKeyWordFullIdent::ModuleKeyWordFullIdent()
+{
+
+}
+
+ModuleKeyWordFullIdent::ModuleKeyWordFullIdent(const ModuleKeyWordFullIdent & other)
+{
+
+}
+
+ModuleKeyWordFullIdent &ModuleKeyWordFullIdent::operator=(const ModuleKeyWordFullIdent & other)
+{
+  ModuleKeyWordFullIdent tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void ModuleKeyWordFullIdent::swap(ModuleKeyWordFullIdent & other)
+{
+
+}
+
+ModuleKeyWordFullIdent::~ModuleKeyWordFullIdent()
+{
+
+}
+
+void ModuleKeyWordFullIdent::accept(Visitor *v)
+{
+  v->visitModuleKeyWordFullIdent(this);
+}
+
+ModuleKeyWordFullIdent *ModuleKeyWordFullIdent::clone() const
+{
+  return new ModuleKeyWordFullIdent(*this);
+}
+
+
+
+/********************   PragmaKeyWordFullIdent    ********************/
+PragmaKeyWordFullIdent::PragmaKeyWordFullIdent()
+{
+
+}
+
+PragmaKeyWordFullIdent::PragmaKeyWordFullIdent(const PragmaKeyWordFullIdent & other)
+{
+
+}
+
+PragmaKeyWordFullIdent &PragmaKeyWordFullIdent::operator=(const PragmaKeyWordFullIdent & other)
+{
+  PragmaKeyWordFullIdent tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void PragmaKeyWordFullIdent::swap(PragmaKeyWordFullIdent & other)
+{
+
+}
+
+PragmaKeyWordFullIdent::~PragmaKeyWordFullIdent()
+{
+
+}
+
+void PragmaKeyWordFullIdent::accept(Visitor *v)
+{
+  v->visitPragmaKeyWordFullIdent(this);
+}
+
+PragmaKeyWordFullIdent *PragmaKeyWordFullIdent::clone() const
+{
+  return new PragmaKeyWordFullIdent(*this);
+}
+
+
+
+/********************   PredicateKeyWordFullIdent    ********************/
+PredicateKeyWordFullIdent::PredicateKeyWordFullIdent()
+{
+
+}
+
+PredicateKeyWordFullIdent::PredicateKeyWordFullIdent(const PredicateKeyWordFullIdent & other)
+{
+
+}
+
+PredicateKeyWordFullIdent &PredicateKeyWordFullIdent::operator=(const PredicateKeyWordFullIdent & other)
+{
+  PredicateKeyWordFullIdent tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void PredicateKeyWordFullIdent::swap(PredicateKeyWordFullIdent & other)
+{
+
+}
+
+PredicateKeyWordFullIdent::~PredicateKeyWordFullIdent()
+{
+
+}
+
+void PredicateKeyWordFullIdent::accept(Visitor *v)
+{
+  v->visitPredicateKeyWordFullIdent(this);
+}
+
+PredicateKeyWordFullIdent *PredicateKeyWordFullIdent::clone() const
+{
+  return new PredicateKeyWordFullIdent(*this);
+}
+
+
+
+/********************   RequiresKeyWordFullIdent    ********************/
+RequiresKeyWordFullIdent::RequiresKeyWordFullIdent()
+{
+
+}
+
+RequiresKeyWordFullIdent::RequiresKeyWordFullIdent(const RequiresKeyWordFullIdent & other)
+{
+
+}
+
+RequiresKeyWordFullIdent &RequiresKeyWordFullIdent::operator=(const RequiresKeyWordFullIdent & other)
+{
+  RequiresKeyWordFullIdent tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void RequiresKeyWordFullIdent::swap(RequiresKeyWordFullIdent & other)
+{
+
+}
+
+RequiresKeyWordFullIdent::~RequiresKeyWordFullIdent()
+{
+
+}
+
+void RequiresKeyWordFullIdent::accept(Visitor *v)
+{
+  v->visitRequiresKeyWordFullIdent(this);
+}
+
+RequiresKeyWordFullIdent *RequiresKeyWordFullIdent::clone() const
+{
+  return new RequiresKeyWordFullIdent(*this);
+}
+
+
+
+/********************   ReturnsKeyWordFullIdent    ********************/
+ReturnsKeyWordFullIdent::ReturnsKeyWordFullIdent()
+{
+
+}
+
+ReturnsKeyWordFullIdent::ReturnsKeyWordFullIdent(const ReturnsKeyWordFullIdent & other)
+{
+
+}
+
+ReturnsKeyWordFullIdent &ReturnsKeyWordFullIdent::operator=(const ReturnsKeyWordFullIdent & other)
+{
+  ReturnsKeyWordFullIdent tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void ReturnsKeyWordFullIdent::swap(ReturnsKeyWordFullIdent & other)
+{
+
+}
+
+ReturnsKeyWordFullIdent::~ReturnsKeyWordFullIdent()
+{
+
+}
+
+void ReturnsKeyWordFullIdent::accept(Visitor *v)
+{
+  v->visitReturnsKeyWordFullIdent(this);
+}
+
+ReturnsKeyWordFullIdent *ReturnsKeyWordFullIdent::clone() const
+{
+  return new ReturnsKeyWordFullIdent(*this);
+}
+
+
+
+/********************   SliceKeyWordFullIdent    ********************/
+SliceKeyWordFullIdent::SliceKeyWordFullIdent()
+{
+
+}
+
+SliceKeyWordFullIdent::SliceKeyWordFullIdent(const SliceKeyWordFullIdent & other)
+{
+
+}
+
+SliceKeyWordFullIdent &SliceKeyWordFullIdent::operator=(const SliceKeyWordFullIdent & other)
+{
+  SliceKeyWordFullIdent tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void SliceKeyWordFullIdent::swap(SliceKeyWordFullIdent & other)
+{
+
+}
+
+SliceKeyWordFullIdent::~SliceKeyWordFullIdent()
+{
+
+}
+
+void SliceKeyWordFullIdent::accept(Visitor *v)
+{
+  v->visitSliceKeyWordFullIdent(this);
+}
+
+SliceKeyWordFullIdent *SliceKeyWordFullIdent::clone() const
+{
+  return new SliceKeyWordFullIdent(*this);
+}
+
+
+
+/********************   TerminatesKeyWordFullIdent    ********************/
+TerminatesKeyWordFullIdent::TerminatesKeyWordFullIdent()
+{
+
+}
+
+TerminatesKeyWordFullIdent::TerminatesKeyWordFullIdent(const TerminatesKeyWordFullIdent & other)
+{
+
+}
+
+TerminatesKeyWordFullIdent &TerminatesKeyWordFullIdent::operator=(const TerminatesKeyWordFullIdent & other)
+{
+  TerminatesKeyWordFullIdent tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void TerminatesKeyWordFullIdent::swap(TerminatesKeyWordFullIdent & other)
+{
+
+}
+
+TerminatesKeyWordFullIdent::~TerminatesKeyWordFullIdent()
+{
+
+}
+
+void TerminatesKeyWordFullIdent::accept(Visitor *v)
+{
+  v->visitTerminatesKeyWordFullIdent(this);
+}
+
+TerminatesKeyWordFullIdent *TerminatesKeyWordFullIdent::clone() const
+{
+  return new TerminatesKeyWordFullIdent(*this);
+}
+
+
+
+/********************   TypeKeyWordFullIdent    ********************/
+TypeKeyWordFullIdent::TypeKeyWordFullIdent()
+{
+
+}
+
+TypeKeyWordFullIdent::TypeKeyWordFullIdent(const TypeKeyWordFullIdent & other)
+{
+
+}
+
+TypeKeyWordFullIdent &TypeKeyWordFullIdent::operator=(const TypeKeyWordFullIdent & other)
+{
+  TypeKeyWordFullIdent tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void TypeKeyWordFullIdent::swap(TypeKeyWordFullIdent & other)
+{
+
+}
+
+TypeKeyWordFullIdent::~TypeKeyWordFullIdent()
+{
+
+}
+
+void TypeKeyWordFullIdent::accept(Visitor *v)
+{
+  v->visitTypeKeyWordFullIdent(this);
+}
+
+TypeKeyWordFullIdent *TypeKeyWordFullIdent::clone() const
+{
+  return new TypeKeyWordFullIdent(*this);
+}
+
+
+
+/********************   VariantKeyWordFullIdent    ********************/
+VariantKeyWordFullIdent::VariantKeyWordFullIdent()
+{
+
+}
+
+VariantKeyWordFullIdent::VariantKeyWordFullIdent(const VariantKeyWordFullIdent & other)
+{
+
+}
+
+VariantKeyWordFullIdent &VariantKeyWordFullIdent::operator=(const VariantKeyWordFullIdent & other)
+{
+  VariantKeyWordFullIdent tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void VariantKeyWordFullIdent::swap(VariantKeyWordFullIdent & other)
+{
+
+}
+
+VariantKeyWordFullIdent::~VariantKeyWordFullIdent()
+{
+
+}
+
+void VariantKeyWordFullIdent::accept(Visitor *v)
+{
+  v->visitVariantKeyWordFullIdent(this);
+}
+
+VariantKeyWordFullIdent *VariantKeyWordFullIdent::clone() const
+{
+  return new VariantKeyWordFullIdent(*this);
+}
+
+
+
 /********************   IdentifierIdent    ********************/
 IdentifierIdent::IdentifierIdent(Ident p1)
 {
@@ -4289,6 +7405,166 @@ void IdentifierIdent::accept(Visitor *v)
 IdentifierIdent *IdentifierIdent::clone() const
 {
   return new IdentifierIdent(*this);
+}
+
+
+
+/********************   BehaviorsKeyWord    ********************/
+BehaviorsKeyWord::BehaviorsKeyWord()
+{
+
+}
+
+BehaviorsKeyWord::BehaviorsKeyWord(const BehaviorsKeyWord & other)
+{
+
+}
+
+BehaviorsKeyWord &BehaviorsKeyWord::operator=(const BehaviorsKeyWord & other)
+{
+  BehaviorsKeyWord tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void BehaviorsKeyWord::swap(BehaviorsKeyWord & other)
+{
+
+}
+
+BehaviorsKeyWord::~BehaviorsKeyWord()
+{
+
+}
+
+void BehaviorsKeyWord::accept(Visitor *v)
+{
+  v->visitBehaviorsKeyWord(this);
+}
+
+BehaviorsKeyWord *BehaviorsKeyWord::clone() const
+{
+  return new BehaviorsKeyWord(*this);
+}
+
+
+
+/********************   LabelKeyWord    ********************/
+LabelKeyWord::LabelKeyWord()
+{
+
+}
+
+LabelKeyWord::LabelKeyWord(const LabelKeyWord & other)
+{
+
+}
+
+LabelKeyWord &LabelKeyWord::operator=(const LabelKeyWord & other)
+{
+  LabelKeyWord tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void LabelKeyWord::swap(LabelKeyWord & other)
+{
+
+}
+
+LabelKeyWord::~LabelKeyWord()
+{
+
+}
+
+void LabelKeyWord::accept(Visitor *v)
+{
+  v->visitLabelKeyWord(this);
+}
+
+LabelKeyWord *LabelKeyWord::clone() const
+{
+  return new LabelKeyWord(*this);
+}
+
+
+
+/********************   ReadsKeyWord    ********************/
+ReadsKeyWord::ReadsKeyWord()
+{
+
+}
+
+ReadsKeyWord::ReadsKeyWord(const ReadsKeyWord & other)
+{
+
+}
+
+ReadsKeyWord &ReadsKeyWord::operator=(const ReadsKeyWord & other)
+{
+  ReadsKeyWord tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void ReadsKeyWord::swap(ReadsKeyWord & other)
+{
+
+}
+
+ReadsKeyWord::~ReadsKeyWord()
+{
+
+}
+
+void ReadsKeyWord::accept(Visitor *v)
+{
+  v->visitReadsKeyWord(this);
+}
+
+ReadsKeyWord *ReadsKeyWord::clone() const
+{
+  return new ReadsKeyWord(*this);
+}
+
+
+
+/********************   WritesKeyWord    ********************/
+WritesKeyWord::WritesKeyWord()
+{
+
+}
+
+WritesKeyWord::WritesKeyWord(const WritesKeyWord & other)
+{
+
+}
+
+WritesKeyWord &WritesKeyWord::operator=(const WritesKeyWord & other)
+{
+  WritesKeyWord tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void WritesKeyWord::swap(WritesKeyWord & other)
+{
+
+}
+
+WritesKeyWord::~WritesKeyWord()
+{
+
+}
+
+void WritesKeyWord::accept(Visitor *v)
+{
+  v->visitWritesKeyWord(this);
+}
+
+WritesKeyWord *WritesKeyWord::clone() const
+{
+  return new WritesKeyWord(*this);
 }
 
 
@@ -4533,6 +7809,86 @@ TypeSpecSimpleCharKeyWord *TypeSpecSimpleCharKeyWord::clone() const
 
 
 
+/********************   TypeSpecSimpleSignedCharKeyWord    ********************/
+TypeSpecSimpleSignedCharKeyWord::TypeSpecSimpleSignedCharKeyWord()
+{
+
+}
+
+TypeSpecSimpleSignedCharKeyWord::TypeSpecSimpleSignedCharKeyWord(const TypeSpecSimpleSignedCharKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleSignedCharKeyWord &TypeSpecSimpleSignedCharKeyWord::operator=(const TypeSpecSimpleSignedCharKeyWord & other)
+{
+  TypeSpecSimpleSignedCharKeyWord tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void TypeSpecSimpleSignedCharKeyWord::swap(TypeSpecSimpleSignedCharKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleSignedCharKeyWord::~TypeSpecSimpleSignedCharKeyWord()
+{
+
+}
+
+void TypeSpecSimpleSignedCharKeyWord::accept(Visitor *v)
+{
+  v->visitTypeSpecSimpleSignedCharKeyWord(this);
+}
+
+TypeSpecSimpleSignedCharKeyWord *TypeSpecSimpleSignedCharKeyWord::clone() const
+{
+  return new TypeSpecSimpleSignedCharKeyWord(*this);
+}
+
+
+
+/********************   TypeSpecSimpleUnsignedCharKeyWord    ********************/
+TypeSpecSimpleUnsignedCharKeyWord::TypeSpecSimpleUnsignedCharKeyWord()
+{
+
+}
+
+TypeSpecSimpleUnsignedCharKeyWord::TypeSpecSimpleUnsignedCharKeyWord(const TypeSpecSimpleUnsignedCharKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleUnsignedCharKeyWord &TypeSpecSimpleUnsignedCharKeyWord::operator=(const TypeSpecSimpleUnsignedCharKeyWord & other)
+{
+  TypeSpecSimpleUnsignedCharKeyWord tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void TypeSpecSimpleUnsignedCharKeyWord::swap(TypeSpecSimpleUnsignedCharKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleUnsignedCharKeyWord::~TypeSpecSimpleUnsignedCharKeyWord()
+{
+
+}
+
+void TypeSpecSimpleUnsignedCharKeyWord::accept(Visitor *v)
+{
+  v->visitTypeSpecSimpleUnsignedCharKeyWord(this);
+}
+
+TypeSpecSimpleUnsignedCharKeyWord *TypeSpecSimpleUnsignedCharKeyWord::clone() const
+{
+  return new TypeSpecSimpleUnsignedCharKeyWord(*this);
+}
+
+
+
 /********************   TypeSpecSimpleIntKeyWord    ********************/
 TypeSpecSimpleIntKeyWord::TypeSpecSimpleIntKeyWord()
 {
@@ -4569,6 +7925,886 @@ void TypeSpecSimpleIntKeyWord::accept(Visitor *v)
 TypeSpecSimpleIntKeyWord *TypeSpecSimpleIntKeyWord::clone() const
 {
   return new TypeSpecSimpleIntKeyWord(*this);
+}
+
+
+
+/********************   TypeSpecSimpleSignedIntKeyWord    ********************/
+TypeSpecSimpleSignedIntKeyWord::TypeSpecSimpleSignedIntKeyWord()
+{
+
+}
+
+TypeSpecSimpleSignedIntKeyWord::TypeSpecSimpleSignedIntKeyWord(const TypeSpecSimpleSignedIntKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleSignedIntKeyWord &TypeSpecSimpleSignedIntKeyWord::operator=(const TypeSpecSimpleSignedIntKeyWord & other)
+{
+  TypeSpecSimpleSignedIntKeyWord tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void TypeSpecSimpleSignedIntKeyWord::swap(TypeSpecSimpleSignedIntKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleSignedIntKeyWord::~TypeSpecSimpleSignedIntKeyWord()
+{
+
+}
+
+void TypeSpecSimpleSignedIntKeyWord::accept(Visitor *v)
+{
+  v->visitTypeSpecSimpleSignedIntKeyWord(this);
+}
+
+TypeSpecSimpleSignedIntKeyWord *TypeSpecSimpleSignedIntKeyWord::clone() const
+{
+  return new TypeSpecSimpleSignedIntKeyWord(*this);
+}
+
+
+
+/********************   TypeSpecSimpleUnsignedIntKeyWord    ********************/
+TypeSpecSimpleUnsignedIntKeyWord::TypeSpecSimpleUnsignedIntKeyWord()
+{
+
+}
+
+TypeSpecSimpleUnsignedIntKeyWord::TypeSpecSimpleUnsignedIntKeyWord(const TypeSpecSimpleUnsignedIntKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleUnsignedIntKeyWord &TypeSpecSimpleUnsignedIntKeyWord::operator=(const TypeSpecSimpleUnsignedIntKeyWord & other)
+{
+  TypeSpecSimpleUnsignedIntKeyWord tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void TypeSpecSimpleUnsignedIntKeyWord::swap(TypeSpecSimpleUnsignedIntKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleUnsignedIntKeyWord::~TypeSpecSimpleUnsignedIntKeyWord()
+{
+
+}
+
+void TypeSpecSimpleUnsignedIntKeyWord::accept(Visitor *v)
+{
+  v->visitTypeSpecSimpleUnsignedIntKeyWord(this);
+}
+
+TypeSpecSimpleUnsignedIntKeyWord *TypeSpecSimpleUnsignedIntKeyWord::clone() const
+{
+  return new TypeSpecSimpleUnsignedIntKeyWord(*this);
+}
+
+
+
+/********************   TypeSpecSimpleUnsignedKeyWord    ********************/
+TypeSpecSimpleUnsignedKeyWord::TypeSpecSimpleUnsignedKeyWord()
+{
+
+}
+
+TypeSpecSimpleUnsignedKeyWord::TypeSpecSimpleUnsignedKeyWord(const TypeSpecSimpleUnsignedKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleUnsignedKeyWord &TypeSpecSimpleUnsignedKeyWord::operator=(const TypeSpecSimpleUnsignedKeyWord & other)
+{
+  TypeSpecSimpleUnsignedKeyWord tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void TypeSpecSimpleUnsignedKeyWord::swap(TypeSpecSimpleUnsignedKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleUnsignedKeyWord::~TypeSpecSimpleUnsignedKeyWord()
+{
+
+}
+
+void TypeSpecSimpleUnsignedKeyWord::accept(Visitor *v)
+{
+  v->visitTypeSpecSimpleUnsignedKeyWord(this);
+}
+
+TypeSpecSimpleUnsignedKeyWord *TypeSpecSimpleUnsignedKeyWord::clone() const
+{
+  return new TypeSpecSimpleUnsignedKeyWord(*this);
+}
+
+
+
+/********************   TypeSpecSimpleShortKeyWord    ********************/
+TypeSpecSimpleShortKeyWord::TypeSpecSimpleShortKeyWord()
+{
+
+}
+
+TypeSpecSimpleShortKeyWord::TypeSpecSimpleShortKeyWord(const TypeSpecSimpleShortKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleShortKeyWord &TypeSpecSimpleShortKeyWord::operator=(const TypeSpecSimpleShortKeyWord & other)
+{
+  TypeSpecSimpleShortKeyWord tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void TypeSpecSimpleShortKeyWord::swap(TypeSpecSimpleShortKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleShortKeyWord::~TypeSpecSimpleShortKeyWord()
+{
+
+}
+
+void TypeSpecSimpleShortKeyWord::accept(Visitor *v)
+{
+  v->visitTypeSpecSimpleShortKeyWord(this);
+}
+
+TypeSpecSimpleShortKeyWord *TypeSpecSimpleShortKeyWord::clone() const
+{
+  return new TypeSpecSimpleShortKeyWord(*this);
+}
+
+
+
+/********************   TypeSpecSimpleSignedShortKeyWord    ********************/
+TypeSpecSimpleSignedShortKeyWord::TypeSpecSimpleSignedShortKeyWord()
+{
+
+}
+
+TypeSpecSimpleSignedShortKeyWord::TypeSpecSimpleSignedShortKeyWord(const TypeSpecSimpleSignedShortKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleSignedShortKeyWord &TypeSpecSimpleSignedShortKeyWord::operator=(const TypeSpecSimpleSignedShortKeyWord & other)
+{
+  TypeSpecSimpleSignedShortKeyWord tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void TypeSpecSimpleSignedShortKeyWord::swap(TypeSpecSimpleSignedShortKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleSignedShortKeyWord::~TypeSpecSimpleSignedShortKeyWord()
+{
+
+}
+
+void TypeSpecSimpleSignedShortKeyWord::accept(Visitor *v)
+{
+  v->visitTypeSpecSimpleSignedShortKeyWord(this);
+}
+
+TypeSpecSimpleSignedShortKeyWord *TypeSpecSimpleSignedShortKeyWord::clone() const
+{
+  return new TypeSpecSimpleSignedShortKeyWord(*this);
+}
+
+
+
+/********************   TypeSpecSimpleUnsignedShortKeyWord    ********************/
+TypeSpecSimpleUnsignedShortKeyWord::TypeSpecSimpleUnsignedShortKeyWord()
+{
+
+}
+
+TypeSpecSimpleUnsignedShortKeyWord::TypeSpecSimpleUnsignedShortKeyWord(const TypeSpecSimpleUnsignedShortKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleUnsignedShortKeyWord &TypeSpecSimpleUnsignedShortKeyWord::operator=(const TypeSpecSimpleUnsignedShortKeyWord & other)
+{
+  TypeSpecSimpleUnsignedShortKeyWord tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void TypeSpecSimpleUnsignedShortKeyWord::swap(TypeSpecSimpleUnsignedShortKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleUnsignedShortKeyWord::~TypeSpecSimpleUnsignedShortKeyWord()
+{
+
+}
+
+void TypeSpecSimpleUnsignedShortKeyWord::accept(Visitor *v)
+{
+  v->visitTypeSpecSimpleUnsignedShortKeyWord(this);
+}
+
+TypeSpecSimpleUnsignedShortKeyWord *TypeSpecSimpleUnsignedShortKeyWord::clone() const
+{
+  return new TypeSpecSimpleUnsignedShortKeyWord(*this);
+}
+
+
+
+/********************   TypeSpecSimpleShortIntKeyWord    ********************/
+TypeSpecSimpleShortIntKeyWord::TypeSpecSimpleShortIntKeyWord()
+{
+
+}
+
+TypeSpecSimpleShortIntKeyWord::TypeSpecSimpleShortIntKeyWord(const TypeSpecSimpleShortIntKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleShortIntKeyWord &TypeSpecSimpleShortIntKeyWord::operator=(const TypeSpecSimpleShortIntKeyWord & other)
+{
+  TypeSpecSimpleShortIntKeyWord tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void TypeSpecSimpleShortIntKeyWord::swap(TypeSpecSimpleShortIntKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleShortIntKeyWord::~TypeSpecSimpleShortIntKeyWord()
+{
+
+}
+
+void TypeSpecSimpleShortIntKeyWord::accept(Visitor *v)
+{
+  v->visitTypeSpecSimpleShortIntKeyWord(this);
+}
+
+TypeSpecSimpleShortIntKeyWord *TypeSpecSimpleShortIntKeyWord::clone() const
+{
+  return new TypeSpecSimpleShortIntKeyWord(*this);
+}
+
+
+
+/********************   TypeSpecSimpleSignedShortIntKeyWord    ********************/
+TypeSpecSimpleSignedShortIntKeyWord::TypeSpecSimpleSignedShortIntKeyWord()
+{
+
+}
+
+TypeSpecSimpleSignedShortIntKeyWord::TypeSpecSimpleSignedShortIntKeyWord(const TypeSpecSimpleSignedShortIntKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleSignedShortIntKeyWord &TypeSpecSimpleSignedShortIntKeyWord::operator=(const TypeSpecSimpleSignedShortIntKeyWord & other)
+{
+  TypeSpecSimpleSignedShortIntKeyWord tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void TypeSpecSimpleSignedShortIntKeyWord::swap(TypeSpecSimpleSignedShortIntKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleSignedShortIntKeyWord::~TypeSpecSimpleSignedShortIntKeyWord()
+{
+
+}
+
+void TypeSpecSimpleSignedShortIntKeyWord::accept(Visitor *v)
+{
+  v->visitTypeSpecSimpleSignedShortIntKeyWord(this);
+}
+
+TypeSpecSimpleSignedShortIntKeyWord *TypeSpecSimpleSignedShortIntKeyWord::clone() const
+{
+  return new TypeSpecSimpleSignedShortIntKeyWord(*this);
+}
+
+
+
+/********************   TypeSpecSimpleUnsignedShortIntKeyWord    ********************/
+TypeSpecSimpleUnsignedShortIntKeyWord::TypeSpecSimpleUnsignedShortIntKeyWord()
+{
+
+}
+
+TypeSpecSimpleUnsignedShortIntKeyWord::TypeSpecSimpleUnsignedShortIntKeyWord(const TypeSpecSimpleUnsignedShortIntKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleUnsignedShortIntKeyWord &TypeSpecSimpleUnsignedShortIntKeyWord::operator=(const TypeSpecSimpleUnsignedShortIntKeyWord & other)
+{
+  TypeSpecSimpleUnsignedShortIntKeyWord tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void TypeSpecSimpleUnsignedShortIntKeyWord::swap(TypeSpecSimpleUnsignedShortIntKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleUnsignedShortIntKeyWord::~TypeSpecSimpleUnsignedShortIntKeyWord()
+{
+
+}
+
+void TypeSpecSimpleUnsignedShortIntKeyWord::accept(Visitor *v)
+{
+  v->visitTypeSpecSimpleUnsignedShortIntKeyWord(this);
+}
+
+TypeSpecSimpleUnsignedShortIntKeyWord *TypeSpecSimpleUnsignedShortIntKeyWord::clone() const
+{
+  return new TypeSpecSimpleUnsignedShortIntKeyWord(*this);
+}
+
+
+
+/********************   TypeSpecSimpleLongKeyWord    ********************/
+TypeSpecSimpleLongKeyWord::TypeSpecSimpleLongKeyWord()
+{
+
+}
+
+TypeSpecSimpleLongKeyWord::TypeSpecSimpleLongKeyWord(const TypeSpecSimpleLongKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleLongKeyWord &TypeSpecSimpleLongKeyWord::operator=(const TypeSpecSimpleLongKeyWord & other)
+{
+  TypeSpecSimpleLongKeyWord tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void TypeSpecSimpleLongKeyWord::swap(TypeSpecSimpleLongKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleLongKeyWord::~TypeSpecSimpleLongKeyWord()
+{
+
+}
+
+void TypeSpecSimpleLongKeyWord::accept(Visitor *v)
+{
+  v->visitTypeSpecSimpleLongKeyWord(this);
+}
+
+TypeSpecSimpleLongKeyWord *TypeSpecSimpleLongKeyWord::clone() const
+{
+  return new TypeSpecSimpleLongKeyWord(*this);
+}
+
+
+
+/********************   TypeSpecSimpleSignedLongKeyWord    ********************/
+TypeSpecSimpleSignedLongKeyWord::TypeSpecSimpleSignedLongKeyWord()
+{
+
+}
+
+TypeSpecSimpleSignedLongKeyWord::TypeSpecSimpleSignedLongKeyWord(const TypeSpecSimpleSignedLongKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleSignedLongKeyWord &TypeSpecSimpleSignedLongKeyWord::operator=(const TypeSpecSimpleSignedLongKeyWord & other)
+{
+  TypeSpecSimpleSignedLongKeyWord tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void TypeSpecSimpleSignedLongKeyWord::swap(TypeSpecSimpleSignedLongKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleSignedLongKeyWord::~TypeSpecSimpleSignedLongKeyWord()
+{
+
+}
+
+void TypeSpecSimpleSignedLongKeyWord::accept(Visitor *v)
+{
+  v->visitTypeSpecSimpleSignedLongKeyWord(this);
+}
+
+TypeSpecSimpleSignedLongKeyWord *TypeSpecSimpleSignedLongKeyWord::clone() const
+{
+  return new TypeSpecSimpleSignedLongKeyWord(*this);
+}
+
+
+
+/********************   TypeSpecSimpleUnsignedLongKeyWord    ********************/
+TypeSpecSimpleUnsignedLongKeyWord::TypeSpecSimpleUnsignedLongKeyWord()
+{
+
+}
+
+TypeSpecSimpleUnsignedLongKeyWord::TypeSpecSimpleUnsignedLongKeyWord(const TypeSpecSimpleUnsignedLongKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleUnsignedLongKeyWord &TypeSpecSimpleUnsignedLongKeyWord::operator=(const TypeSpecSimpleUnsignedLongKeyWord & other)
+{
+  TypeSpecSimpleUnsignedLongKeyWord tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void TypeSpecSimpleUnsignedLongKeyWord::swap(TypeSpecSimpleUnsignedLongKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleUnsignedLongKeyWord::~TypeSpecSimpleUnsignedLongKeyWord()
+{
+
+}
+
+void TypeSpecSimpleUnsignedLongKeyWord::accept(Visitor *v)
+{
+  v->visitTypeSpecSimpleUnsignedLongKeyWord(this);
+}
+
+TypeSpecSimpleUnsignedLongKeyWord *TypeSpecSimpleUnsignedLongKeyWord::clone() const
+{
+  return new TypeSpecSimpleUnsignedLongKeyWord(*this);
+}
+
+
+
+/********************   TypeSpecSimpleSignedLongIntKeyWord    ********************/
+TypeSpecSimpleSignedLongIntKeyWord::TypeSpecSimpleSignedLongIntKeyWord()
+{
+
+}
+
+TypeSpecSimpleSignedLongIntKeyWord::TypeSpecSimpleSignedLongIntKeyWord(const TypeSpecSimpleSignedLongIntKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleSignedLongIntKeyWord &TypeSpecSimpleSignedLongIntKeyWord::operator=(const TypeSpecSimpleSignedLongIntKeyWord & other)
+{
+  TypeSpecSimpleSignedLongIntKeyWord tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void TypeSpecSimpleSignedLongIntKeyWord::swap(TypeSpecSimpleSignedLongIntKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleSignedLongIntKeyWord::~TypeSpecSimpleSignedLongIntKeyWord()
+{
+
+}
+
+void TypeSpecSimpleSignedLongIntKeyWord::accept(Visitor *v)
+{
+  v->visitTypeSpecSimpleSignedLongIntKeyWord(this);
+}
+
+TypeSpecSimpleSignedLongIntKeyWord *TypeSpecSimpleSignedLongIntKeyWord::clone() const
+{
+  return new TypeSpecSimpleSignedLongIntKeyWord(*this);
+}
+
+
+
+/********************   TypeSpecSimpleLongIntKeyWord    ********************/
+TypeSpecSimpleLongIntKeyWord::TypeSpecSimpleLongIntKeyWord()
+{
+
+}
+
+TypeSpecSimpleLongIntKeyWord::TypeSpecSimpleLongIntKeyWord(const TypeSpecSimpleLongIntKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleLongIntKeyWord &TypeSpecSimpleLongIntKeyWord::operator=(const TypeSpecSimpleLongIntKeyWord & other)
+{
+  TypeSpecSimpleLongIntKeyWord tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void TypeSpecSimpleLongIntKeyWord::swap(TypeSpecSimpleLongIntKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleLongIntKeyWord::~TypeSpecSimpleLongIntKeyWord()
+{
+
+}
+
+void TypeSpecSimpleLongIntKeyWord::accept(Visitor *v)
+{
+  v->visitTypeSpecSimpleLongIntKeyWord(this);
+}
+
+TypeSpecSimpleLongIntKeyWord *TypeSpecSimpleLongIntKeyWord::clone() const
+{
+  return new TypeSpecSimpleLongIntKeyWord(*this);
+}
+
+
+
+/********************   TypeSpecSimpleUnsignedLongIntKeyWord    ********************/
+TypeSpecSimpleUnsignedLongIntKeyWord::TypeSpecSimpleUnsignedLongIntKeyWord()
+{
+
+}
+
+TypeSpecSimpleUnsignedLongIntKeyWord::TypeSpecSimpleUnsignedLongIntKeyWord(const TypeSpecSimpleUnsignedLongIntKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleUnsignedLongIntKeyWord &TypeSpecSimpleUnsignedLongIntKeyWord::operator=(const TypeSpecSimpleUnsignedLongIntKeyWord & other)
+{
+  TypeSpecSimpleUnsignedLongIntKeyWord tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void TypeSpecSimpleUnsignedLongIntKeyWord::swap(TypeSpecSimpleUnsignedLongIntKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleUnsignedLongIntKeyWord::~TypeSpecSimpleUnsignedLongIntKeyWord()
+{
+
+}
+
+void TypeSpecSimpleUnsignedLongIntKeyWord::accept(Visitor *v)
+{
+  v->visitTypeSpecSimpleUnsignedLongIntKeyWord(this);
+}
+
+TypeSpecSimpleUnsignedLongIntKeyWord *TypeSpecSimpleUnsignedLongIntKeyWord::clone() const
+{
+  return new TypeSpecSimpleUnsignedLongIntKeyWord(*this);
+}
+
+
+
+/********************   TypeSpecSimpleLongLongKeyWord    ********************/
+TypeSpecSimpleLongLongKeyWord::TypeSpecSimpleLongLongKeyWord()
+{
+
+}
+
+TypeSpecSimpleLongLongKeyWord::TypeSpecSimpleLongLongKeyWord(const TypeSpecSimpleLongLongKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleLongLongKeyWord &TypeSpecSimpleLongLongKeyWord::operator=(const TypeSpecSimpleLongLongKeyWord & other)
+{
+  TypeSpecSimpleLongLongKeyWord tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void TypeSpecSimpleLongLongKeyWord::swap(TypeSpecSimpleLongLongKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleLongLongKeyWord::~TypeSpecSimpleLongLongKeyWord()
+{
+
+}
+
+void TypeSpecSimpleLongLongKeyWord::accept(Visitor *v)
+{
+  v->visitTypeSpecSimpleLongLongKeyWord(this);
+}
+
+TypeSpecSimpleLongLongKeyWord *TypeSpecSimpleLongLongKeyWord::clone() const
+{
+  return new TypeSpecSimpleLongLongKeyWord(*this);
+}
+
+
+
+/********************   TypeSpecSimpleSignedLongLongKeyWord    ********************/
+TypeSpecSimpleSignedLongLongKeyWord::TypeSpecSimpleSignedLongLongKeyWord()
+{
+
+}
+
+TypeSpecSimpleSignedLongLongKeyWord::TypeSpecSimpleSignedLongLongKeyWord(const TypeSpecSimpleSignedLongLongKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleSignedLongLongKeyWord &TypeSpecSimpleSignedLongLongKeyWord::operator=(const TypeSpecSimpleSignedLongLongKeyWord & other)
+{
+  TypeSpecSimpleSignedLongLongKeyWord tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void TypeSpecSimpleSignedLongLongKeyWord::swap(TypeSpecSimpleSignedLongLongKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleSignedLongLongKeyWord::~TypeSpecSimpleSignedLongLongKeyWord()
+{
+
+}
+
+void TypeSpecSimpleSignedLongLongKeyWord::accept(Visitor *v)
+{
+  v->visitTypeSpecSimpleSignedLongLongKeyWord(this);
+}
+
+TypeSpecSimpleSignedLongLongKeyWord *TypeSpecSimpleSignedLongLongKeyWord::clone() const
+{
+  return new TypeSpecSimpleSignedLongLongKeyWord(*this);
+}
+
+
+
+/********************   TypeSpecSimpleUnsignedLongLongKeyWord    ********************/
+TypeSpecSimpleUnsignedLongLongKeyWord::TypeSpecSimpleUnsignedLongLongKeyWord()
+{
+
+}
+
+TypeSpecSimpleUnsignedLongLongKeyWord::TypeSpecSimpleUnsignedLongLongKeyWord(const TypeSpecSimpleUnsignedLongLongKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleUnsignedLongLongKeyWord &TypeSpecSimpleUnsignedLongLongKeyWord::operator=(const TypeSpecSimpleUnsignedLongLongKeyWord & other)
+{
+  TypeSpecSimpleUnsignedLongLongKeyWord tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void TypeSpecSimpleUnsignedLongLongKeyWord::swap(TypeSpecSimpleUnsignedLongLongKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleUnsignedLongLongKeyWord::~TypeSpecSimpleUnsignedLongLongKeyWord()
+{
+
+}
+
+void TypeSpecSimpleUnsignedLongLongKeyWord::accept(Visitor *v)
+{
+  v->visitTypeSpecSimpleUnsignedLongLongKeyWord(this);
+}
+
+TypeSpecSimpleUnsignedLongLongKeyWord *TypeSpecSimpleUnsignedLongLongKeyWord::clone() const
+{
+  return new TypeSpecSimpleUnsignedLongLongKeyWord(*this);
+}
+
+
+
+/********************   TypeSpecSimpleLongLongIntKeyWord    ********************/
+TypeSpecSimpleLongLongIntKeyWord::TypeSpecSimpleLongLongIntKeyWord()
+{
+
+}
+
+TypeSpecSimpleLongLongIntKeyWord::TypeSpecSimpleLongLongIntKeyWord(const TypeSpecSimpleLongLongIntKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleLongLongIntKeyWord &TypeSpecSimpleLongLongIntKeyWord::operator=(const TypeSpecSimpleLongLongIntKeyWord & other)
+{
+  TypeSpecSimpleLongLongIntKeyWord tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void TypeSpecSimpleLongLongIntKeyWord::swap(TypeSpecSimpleLongLongIntKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleLongLongIntKeyWord::~TypeSpecSimpleLongLongIntKeyWord()
+{
+
+}
+
+void TypeSpecSimpleLongLongIntKeyWord::accept(Visitor *v)
+{
+  v->visitTypeSpecSimpleLongLongIntKeyWord(this);
+}
+
+TypeSpecSimpleLongLongIntKeyWord *TypeSpecSimpleLongLongIntKeyWord::clone() const
+{
+  return new TypeSpecSimpleLongLongIntKeyWord(*this);
+}
+
+
+
+/********************   TypeSpecSimpleSignedLongLongIntKeyWord    ********************/
+TypeSpecSimpleSignedLongLongIntKeyWord::TypeSpecSimpleSignedLongLongIntKeyWord()
+{
+
+}
+
+TypeSpecSimpleSignedLongLongIntKeyWord::TypeSpecSimpleSignedLongLongIntKeyWord(const TypeSpecSimpleSignedLongLongIntKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleSignedLongLongIntKeyWord &TypeSpecSimpleSignedLongLongIntKeyWord::operator=(const TypeSpecSimpleSignedLongLongIntKeyWord & other)
+{
+  TypeSpecSimpleSignedLongLongIntKeyWord tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void TypeSpecSimpleSignedLongLongIntKeyWord::swap(TypeSpecSimpleSignedLongLongIntKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleSignedLongLongIntKeyWord::~TypeSpecSimpleSignedLongLongIntKeyWord()
+{
+
+}
+
+void TypeSpecSimpleSignedLongLongIntKeyWord::accept(Visitor *v)
+{
+  v->visitTypeSpecSimpleSignedLongLongIntKeyWord(this);
+}
+
+TypeSpecSimpleSignedLongLongIntKeyWord *TypeSpecSimpleSignedLongLongIntKeyWord::clone() const
+{
+  return new TypeSpecSimpleSignedLongLongIntKeyWord(*this);
+}
+
+
+
+/********************   TypeSpecSimpleUnsignedLongLongIntKeyWord    ********************/
+TypeSpecSimpleUnsignedLongLongIntKeyWord::TypeSpecSimpleUnsignedLongLongIntKeyWord()
+{
+
+}
+
+TypeSpecSimpleUnsignedLongLongIntKeyWord::TypeSpecSimpleUnsignedLongLongIntKeyWord(const TypeSpecSimpleUnsignedLongLongIntKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleUnsignedLongLongIntKeyWord &TypeSpecSimpleUnsignedLongLongIntKeyWord::operator=(const TypeSpecSimpleUnsignedLongLongIntKeyWord & other)
+{
+  TypeSpecSimpleUnsignedLongLongIntKeyWord tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void TypeSpecSimpleUnsignedLongLongIntKeyWord::swap(TypeSpecSimpleUnsignedLongLongIntKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleUnsignedLongLongIntKeyWord::~TypeSpecSimpleUnsignedLongLongIntKeyWord()
+{
+
+}
+
+void TypeSpecSimpleUnsignedLongLongIntKeyWord::accept(Visitor *v)
+{
+  v->visitTypeSpecSimpleUnsignedLongLongIntKeyWord(this);
+}
+
+TypeSpecSimpleUnsignedLongLongIntKeyWord *TypeSpecSimpleUnsignedLongLongIntKeyWord::clone() const
+{
+  return new TypeSpecSimpleUnsignedLongLongIntKeyWord(*this);
+}
+
+
+
+/********************   TypeSpecSimpleFloatKeyWord    ********************/
+TypeSpecSimpleFloatKeyWord::TypeSpecSimpleFloatKeyWord()
+{
+
+}
+
+TypeSpecSimpleFloatKeyWord::TypeSpecSimpleFloatKeyWord(const TypeSpecSimpleFloatKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleFloatKeyWord &TypeSpecSimpleFloatKeyWord::operator=(const TypeSpecSimpleFloatKeyWord & other)
+{
+  TypeSpecSimpleFloatKeyWord tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void TypeSpecSimpleFloatKeyWord::swap(TypeSpecSimpleFloatKeyWord & other)
+{
+
+}
+
+TypeSpecSimpleFloatKeyWord::~TypeSpecSimpleFloatKeyWord()
+{
+
+}
+
+void TypeSpecSimpleFloatKeyWord::accept(Visitor *v)
+{
+  v->visitTypeSpecSimpleFloatKeyWord(this);
+}
+
+TypeSpecSimpleFloatKeyWord *TypeSpecSimpleFloatKeyWord::clone() const
+{
+  return new TypeSpecSimpleFloatKeyWord(*this);
 }
 
 
@@ -4649,6 +8885,814 @@ void TypeSpecSimpleLongDoubleKeyWord::accept(Visitor *v)
 TypeSpecSimpleLongDoubleKeyWord *TypeSpecSimpleLongDoubleKeyWord::clone() const
 {
   return new TypeSpecSimpleLongDoubleKeyWord(*this);
+}
+
+
+
+/********************   AnAnnotation    ********************/
+AnAnnotation::AnAnnotation(Annotation *p1)
+{
+  annotation_ = p1;
+
+}
+
+AnAnnotation::AnAnnotation(const AnAnnotation & other)
+{
+  annotation_ = other.annotation_->clone();
+
+}
+
+AnAnnotation &AnAnnotation::operator=(const AnAnnotation & other)
+{
+  AnAnnotation tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void AnAnnotation::swap(AnAnnotation & other)
+{
+  std::swap(annotation_, other.annotation_);
+
+}
+
+AnAnnotation::~AnAnnotation()
+{
+  delete(annotation_);
+
+}
+
+void AnAnnotation::accept(Visitor *v)
+{
+  v->visitAnAnnotation(this);
+}
+
+AnAnnotation *AnAnnotation::clone() const
+{
+  return new AnAnnotation(*this);
+}
+
+
+
+/********************   LoopAnnotation    ********************/
+LoopAnnotation::LoopAnnotation(LoopAnnotStack *p1)
+{
+  loopannotstack_ = p1;
+
+}
+
+LoopAnnotation::LoopAnnotation(const LoopAnnotation & other)
+{
+  loopannotstack_ = other.loopannotstack_->clone();
+
+}
+
+LoopAnnotation &LoopAnnotation::operator=(const LoopAnnotation & other)
+{
+  LoopAnnotation tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void LoopAnnotation::swap(LoopAnnotation & other)
+{
+  std::swap(loopannotstack_, other.loopannotstack_);
+
+}
+
+LoopAnnotation::~LoopAnnotation()
+{
+  delete(loopannotstack_);
+
+}
+
+void LoopAnnotation::accept(Visitor *v)
+{
+  v->visitLoopAnnotation(this);
+}
+
+LoopAnnotation *LoopAnnotation::clone() const
+{
+  return new LoopAnnotation(*this);
+}
+
+
+
+/********************   LoopAnnotStackInvariant    ********************/
+LoopAnnotStackInvariant::LoopAnnotStackInvariant(LoopInvariant *p1, LoopAnnotOpt *p2)
+{
+  loopinvariant_ = p1;
+  loopannotopt_ = p2;
+
+}
+
+LoopAnnotStackInvariant::LoopAnnotStackInvariant(const LoopAnnotStackInvariant & other)
+{
+  loopinvariant_ = other.loopinvariant_->clone();
+  loopannotopt_ = other.loopannotopt_->clone();
+
+}
+
+LoopAnnotStackInvariant &LoopAnnotStackInvariant::operator=(const LoopAnnotStackInvariant & other)
+{
+  LoopAnnotStackInvariant tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void LoopAnnotStackInvariant::swap(LoopAnnotStackInvariant & other)
+{
+  std::swap(loopinvariant_, other.loopinvariant_);
+  std::swap(loopannotopt_, other.loopannotopt_);
+
+}
+
+LoopAnnotStackInvariant::~LoopAnnotStackInvariant()
+{
+  delete(loopinvariant_);
+  delete(loopannotopt_);
+
+}
+
+void LoopAnnotStackInvariant::accept(Visitor *v)
+{
+  v->visitLoopAnnotStackInvariant(this);
+}
+
+LoopAnnotStackInvariant *LoopAnnotStackInvariant::clone() const
+{
+  return new LoopAnnotStackInvariant(*this);
+}
+
+
+
+/********************   LoopAnnotStackEffects    ********************/
+LoopAnnotStackEffects::LoopAnnotStackEffects(LoopEffects *p1, LoopAnnotOpt *p2)
+{
+  loopeffects_ = p1;
+  loopannotopt_ = p2;
+
+}
+
+LoopAnnotStackEffects::LoopAnnotStackEffects(const LoopAnnotStackEffects & other)
+{
+  loopeffects_ = other.loopeffects_->clone();
+  loopannotopt_ = other.loopannotopt_->clone();
+
+}
+
+LoopAnnotStackEffects &LoopAnnotStackEffects::operator=(const LoopAnnotStackEffects & other)
+{
+  LoopAnnotStackEffects tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void LoopAnnotStackEffects::swap(LoopAnnotStackEffects & other)
+{
+  std::swap(loopeffects_, other.loopeffects_);
+  std::swap(loopannotopt_, other.loopannotopt_);
+
+}
+
+LoopAnnotStackEffects::~LoopAnnotStackEffects()
+{
+  delete(loopeffects_);
+  delete(loopannotopt_);
+
+}
+
+void LoopAnnotStackEffects::accept(Visitor *v)
+{
+  v->visitLoopAnnotStackEffects(this);
+}
+
+LoopAnnotStackEffects *LoopAnnotStackEffects::clone() const
+{
+  return new LoopAnnotStackEffects(*this);
+}
+
+
+
+/********************   LoopAnnotStackAllocation    ********************/
+LoopAnnotStackAllocation::LoopAnnotStackAllocation(LoopAllocation *p1, LoopAnnotOpt *p2)
+{
+  loopallocation_ = p1;
+  loopannotopt_ = p2;
+
+}
+
+LoopAnnotStackAllocation::LoopAnnotStackAllocation(const LoopAnnotStackAllocation & other)
+{
+  loopallocation_ = other.loopallocation_->clone();
+  loopannotopt_ = other.loopannotopt_->clone();
+
+}
+
+LoopAnnotStackAllocation &LoopAnnotStackAllocation::operator=(const LoopAnnotStackAllocation & other)
+{
+  LoopAnnotStackAllocation tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void LoopAnnotStackAllocation::swap(LoopAnnotStackAllocation & other)
+{
+  std::swap(loopallocation_, other.loopallocation_);
+  std::swap(loopannotopt_, other.loopannotopt_);
+
+}
+
+LoopAnnotStackAllocation::~LoopAnnotStackAllocation()
+{
+  delete(loopallocation_);
+  delete(loopannotopt_);
+
+}
+
+void LoopAnnotStackAllocation::accept(Visitor *v)
+{
+  v->visitLoopAnnotStackAllocation(this);
+}
+
+LoopAnnotStackAllocation *LoopAnnotStackAllocation::clone() const
+{
+  return new LoopAnnotStackAllocation(*this);
+}
+
+
+
+/********************   LoopAnnotStackVariant    ********************/
+LoopAnnotStackVariant::LoopAnnotStackVariant(LoopVariant *p1, LoopAnnotOpt *p2)
+{
+  loopvariant_ = p1;
+  loopannotopt_ = p2;
+
+}
+
+LoopAnnotStackVariant::LoopAnnotStackVariant(const LoopAnnotStackVariant & other)
+{
+  loopvariant_ = other.loopvariant_->clone();
+  loopannotopt_ = other.loopannotopt_->clone();
+
+}
+
+LoopAnnotStackVariant &LoopAnnotStackVariant::operator=(const LoopAnnotStackVariant & other)
+{
+  LoopAnnotStackVariant tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void LoopAnnotStackVariant::swap(LoopAnnotStackVariant & other)
+{
+  std::swap(loopvariant_, other.loopvariant_);
+  std::swap(loopannotopt_, other.loopannotopt_);
+
+}
+
+LoopAnnotStackVariant::~LoopAnnotStackVariant()
+{
+  delete(loopvariant_);
+  delete(loopannotopt_);
+
+}
+
+void LoopAnnotStackVariant::accept(Visitor *v)
+{
+  v->visitLoopAnnotStackVariant(this);
+}
+
+LoopAnnotStackVariant *LoopAnnotStackVariant::clone() const
+{
+  return new LoopAnnotStackVariant(*this);
+}
+
+
+
+/********************   NoLoopAnnot    ********************/
+NoLoopAnnot::NoLoopAnnot()
+{
+
+}
+
+NoLoopAnnot::NoLoopAnnot(const NoLoopAnnot & other)
+{
+
+}
+
+NoLoopAnnot &NoLoopAnnot::operator=(const NoLoopAnnot & other)
+{
+  NoLoopAnnot tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void NoLoopAnnot::swap(NoLoopAnnot & other)
+{
+
+}
+
+NoLoopAnnot::~NoLoopAnnot()
+{
+
+}
+
+void NoLoopAnnot::accept(Visitor *v)
+{
+  v->visitNoLoopAnnot(this);
+}
+
+NoLoopAnnot *NoLoopAnnot::clone() const
+{
+  return new NoLoopAnnot(*this);
+}
+
+
+
+/********************   SomeLoopAnnot    ********************/
+SomeLoopAnnot::SomeLoopAnnot(LoopAnnotStack *p1)
+{
+  loopannotstack_ = p1;
+
+}
+
+SomeLoopAnnot::SomeLoopAnnot(const SomeLoopAnnot & other)
+{
+  loopannotstack_ = other.loopannotstack_->clone();
+
+}
+
+SomeLoopAnnot &SomeLoopAnnot::operator=(const SomeLoopAnnot & other)
+{
+  SomeLoopAnnot tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void SomeLoopAnnot::swap(SomeLoopAnnot & other)
+{
+  std::swap(loopannotstack_, other.loopannotstack_);
+
+}
+
+SomeLoopAnnot::~SomeLoopAnnot()
+{
+  delete(loopannotstack_);
+
+}
+
+void SomeLoopAnnot::accept(Visitor *v)
+{
+  v->visitSomeLoopAnnot(this);
+}
+
+SomeLoopAnnot *SomeLoopAnnot::clone() const
+{
+  return new SomeLoopAnnot(*this);
+}
+
+
+
+/********************   SimpleLoopInvariant    ********************/
+SimpleLoopInvariant::SimpleLoopInvariant(Lexpr *p1)
+{
+  lexpr_ = p1;
+
+}
+
+SimpleLoopInvariant::SimpleLoopInvariant(const SimpleLoopInvariant & other)
+{
+  lexpr_ = other.lexpr_->clone();
+
+}
+
+SimpleLoopInvariant &SimpleLoopInvariant::operator=(const SimpleLoopInvariant & other)
+{
+  SimpleLoopInvariant tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void SimpleLoopInvariant::swap(SimpleLoopInvariant & other)
+{
+  std::swap(lexpr_, other.lexpr_);
+
+}
+
+SimpleLoopInvariant::~SimpleLoopInvariant()
+{
+  delete(lexpr_);
+
+}
+
+void SimpleLoopInvariant::accept(Visitor *v)
+{
+  v->visitSimpleLoopInvariant(this);
+}
+
+SimpleLoopInvariant *SimpleLoopInvariant::clone() const
+{
+  return new SimpleLoopInvariant(*this);
+}
+
+
+
+/********************   CheckLoopInvariant    ********************/
+CheckLoopInvariant::CheckLoopInvariant(Lexpr *p1)
+{
+  lexpr_ = p1;
+
+}
+
+CheckLoopInvariant::CheckLoopInvariant(const CheckLoopInvariant & other)
+{
+  lexpr_ = other.lexpr_->clone();
+
+}
+
+CheckLoopInvariant &CheckLoopInvariant::operator=(const CheckLoopInvariant & other)
+{
+  CheckLoopInvariant tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void CheckLoopInvariant::swap(CheckLoopInvariant & other)
+{
+  std::swap(lexpr_, other.lexpr_);
+
+}
+
+CheckLoopInvariant::~CheckLoopInvariant()
+{
+  delete(lexpr_);
+
+}
+
+void CheckLoopInvariant::accept(Visitor *v)
+{
+  v->visitCheckLoopInvariant(this);
+}
+
+CheckLoopInvariant *CheckLoopInvariant::clone() const
+{
+  return new CheckLoopInvariant(*this);
+}
+
+
+
+/********************   AdmitLoopInvariant    ********************/
+AdmitLoopInvariant::AdmitLoopInvariant(Lexpr *p1)
+{
+  lexpr_ = p1;
+
+}
+
+AdmitLoopInvariant::AdmitLoopInvariant(const AdmitLoopInvariant & other)
+{
+  lexpr_ = other.lexpr_->clone();
+
+}
+
+AdmitLoopInvariant &AdmitLoopInvariant::operator=(const AdmitLoopInvariant & other)
+{
+  AdmitLoopInvariant tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void AdmitLoopInvariant::swap(AdmitLoopInvariant & other)
+{
+  std::swap(lexpr_, other.lexpr_);
+
+}
+
+AdmitLoopInvariant::~AdmitLoopInvariant()
+{
+  delete(lexpr_);
+
+}
+
+void AdmitLoopInvariant::accept(Visitor *v)
+{
+  v->visitAdmitLoopInvariant(this);
+}
+
+AdmitLoopInvariant *AdmitLoopInvariant::clone() const
+{
+  return new AdmitLoopInvariant(*this);
+}
+
+
+
+/********************   SimpleLoopAllocation    ********************/
+SimpleLoopAllocation::SimpleLoopAllocation(Allocation *p1)
+{
+  allocation_ = p1;
+
+}
+
+SimpleLoopAllocation::SimpleLoopAllocation(const SimpleLoopAllocation & other)
+{
+  allocation_ = other.allocation_->clone();
+
+}
+
+SimpleLoopAllocation &SimpleLoopAllocation::operator=(const SimpleLoopAllocation & other)
+{
+  SimpleLoopAllocation tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void SimpleLoopAllocation::swap(SimpleLoopAllocation & other)
+{
+  std::swap(allocation_, other.allocation_);
+
+}
+
+SimpleLoopAllocation::~SimpleLoopAllocation()
+{
+  delete(allocation_);
+
+}
+
+void SimpleLoopAllocation::accept(Visitor *v)
+{
+  v->visitSimpleLoopAllocation(this);
+}
+
+SimpleLoopAllocation *SimpleLoopAllocation::clone() const
+{
+  return new SimpleLoopAllocation(*this);
+}
+
+
+
+/********************   AllocatesZones    ********************/
+AllocatesZones::AllocatesZones(Zones *p1)
+{
+  zones_ = p1;
+
+}
+
+AllocatesZones::AllocatesZones(const AllocatesZones & other)
+{
+  zones_ = other.zones_->clone();
+
+}
+
+AllocatesZones &AllocatesZones::operator=(const AllocatesZones & other)
+{
+  AllocatesZones tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void AllocatesZones::swap(AllocatesZones & other)
+{
+  std::swap(zones_, other.zones_);
+
+}
+
+AllocatesZones::~AllocatesZones()
+{
+  delete(zones_);
+
+}
+
+void AllocatesZones::accept(Visitor *v)
+{
+  v->visitAllocatesZones(this);
+}
+
+AllocatesZones *AllocatesZones::clone() const
+{
+  return new AllocatesZones(*this);
+}
+
+
+
+/********************   FreesZones    ********************/
+FreesZones::FreesZones(Zones *p1)
+{
+  zones_ = p1;
+
+}
+
+FreesZones::FreesZones(const FreesZones & other)
+{
+  zones_ = other.zones_->clone();
+
+}
+
+FreesZones &FreesZones::operator=(const FreesZones & other)
+{
+  FreesZones tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void FreesZones::swap(FreesZones & other)
+{
+  std::swap(zones_, other.zones_);
+
+}
+
+FreesZones::~FreesZones()
+{
+  delete(zones_);
+
+}
+
+void FreesZones::accept(Visitor *v)
+{
+  v->visitFreesZones(this);
+}
+
+FreesZones *FreesZones::clone() const
+{
+  return new FreesZones(*this);
+}
+
+
+
+/********************   SimpleLoopVariant    ********************/
+SimpleLoopVariant::SimpleLoopVariant(Variant *p1)
+{
+  variant_ = p1;
+
+}
+
+SimpleLoopVariant::SimpleLoopVariant(const SimpleLoopVariant & other)
+{
+  variant_ = other.variant_->clone();
+
+}
+
+SimpleLoopVariant &SimpleLoopVariant::operator=(const SimpleLoopVariant & other)
+{
+  SimpleLoopVariant tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void SimpleLoopVariant::swap(SimpleLoopVariant & other)
+{
+  std::swap(variant_, other.variant_);
+
+}
+
+SimpleLoopVariant::~SimpleLoopVariant()
+{
+  delete(variant_);
+
+}
+
+void SimpleLoopVariant::accept(Visitor *v)
+{
+  v->visitSimpleLoopVariant(this);
+}
+
+SimpleLoopVariant *SimpleLoopVariant::clone() const
+{
+  return new SimpleLoopVariant(*this);
+}
+
+
+
+/********************   LoopAssigns    ********************/
+LoopAssigns::LoopAssigns(Assigns *p1)
+{
+  assigns_ = p1;
+
+}
+
+LoopAssigns::LoopAssigns(const LoopAssigns & other)
+{
+  assigns_ = other.assigns_->clone();
+
+}
+
+LoopAssigns &LoopAssigns::operator=(const LoopAssigns & other)
+{
+  LoopAssigns tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void LoopAssigns::swap(LoopAssigns & other)
+{
+  std::swap(assigns_, other.assigns_);
+
+}
+
+LoopAssigns::~LoopAssigns()
+{
+  delete(assigns_);
+
+}
+
+void LoopAssigns::accept(Visitor *v)
+{
+  v->visitLoopAssigns(this);
+}
+
+LoopAssigns *LoopAssigns::clone() const
+{
+  return new LoopAssigns(*this);
+}
+
+
+
+/********************   ForVariant    ********************/
+ForVariant::ForVariant(Lexpr *p1, AnyIdentifier *p2)
+{
+  lexpr_ = p1;
+  anyidentifier_ = p2;
+
+}
+
+ForVariant::ForVariant(const ForVariant & other)
+{
+  lexpr_ = other.lexpr_->clone();
+  anyidentifier_ = other.anyidentifier_->clone();
+
+}
+
+ForVariant &ForVariant::operator=(const ForVariant & other)
+{
+  ForVariant tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void ForVariant::swap(ForVariant & other)
+{
+  std::swap(lexpr_, other.lexpr_);
+  std::swap(anyidentifier_, other.anyidentifier_);
+
+}
+
+ForVariant::~ForVariant()
+{
+  delete(lexpr_);
+  delete(anyidentifier_);
+
+}
+
+void ForVariant::accept(Visitor *v)
+{
+  v->visitForVariant(this);
+}
+
+ForVariant *ForVariant::clone() const
+{
+  return new ForVariant(*this);
+}
+
+
+
+/********************   LexprVariant    ********************/
+LexprVariant::LexprVariant(Lexpr *p1)
+{
+  lexpr_ = p1;
+
+}
+
+LexprVariant::LexprVariant(const LexprVariant & other)
+{
+  lexpr_ = other.lexpr_->clone();
+
+}
+
+LexprVariant &LexprVariant::operator=(const LexprVariant & other)
+{
+  LexprVariant tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void LexprVariant::swap(LexprVariant & other)
+{
+  std::swap(lexpr_, other.lexpr_);
+
+}
+
+LexprVariant::~LexprVariant()
+{
+  delete(lexpr_);
+
+}
+
+void LexprVariant::accept(Visitor *v)
+{
+  v->visitLexprVariant(this);
+}
+
+LexprVariant *LexprVariant::clone() const
+{
+  return new LexprVariant(*this);
 }
 
 

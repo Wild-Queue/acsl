@@ -45,6 +45,9 @@ class PrintAbsyn : public Visitor
   void visitCodeAnnotContract(CodeAnnotContract *p);
   void visitContract(Contract *p); /* abstract class */
   void visitSimpleContract(SimpleContract *p);
+  void visitClausesRequiresContract(ClausesRequiresContract *p);
+  void visitClausesTerminatesContract(ClausesTerminatesContract *p);
+  void visitClausesDecreasesContract(ClausesDecreasesContract *p);
   void visitRequires(Requires *p); /* abstract class */
   void visitNoRequires(NoRequires *p);
   void visitSomeRequires(SomeRequires *p);
@@ -78,12 +81,33 @@ class PrintAbsyn : public Visitor
   void visitOrLexpr(OrLexpr *p);
   void visitAndLexpr(AndLexpr *p);
   void visitHatHatLexpr(HatHatLexpr *p);
+  void visitAmpLexpr(AmpLexpr *p);
+  void visitPipeLexpr(PipeLexpr *p);
+  void visitHatLexpr(HatLexpr *p);
+  void visitBimpliesLexpr(BimpliesLexpr *p);
+  void visitBiffLexpr(BiffLexpr *p);
+  void visitInLexpr(InLexpr *p);
+  void visitTernaryLexpr(TernaryLexpr *p);
   void visitRelationLexpr(RelationLexpr *p);
   void visitBinderLexpr(BinderLexpr *p);
   void visitNotBinderLexpr(NotBinderLexpr *p);
   void visitTrueLexpr(TrueLexpr *p);
   void visitFalseLexpr(FalseLexpr *p);
+  void visitPointerLexpr(PointerLexpr *p);
   void visitValidLexpr(ValidLexpr *p);
+  void visitValidReadLexpr(ValidReadLexpr *p);
+  void visitValidFuncLexpr(ValidFuncLexpr *p);
+  void visitValidIndxLexpr(ValidIndxLexpr *p);
+  void visitValidRangeLexpr(ValidRangeLexpr *p);
+  void visitInitializedLexpr(InitializedLexpr *p);
+  void visitDanglingLexpr(DanglingLexpr *p);
+  void visitFreshLexpr(FreshLexpr *p);
+  void visitBaseAddrLexpr(BaseAddrLexpr *p);
+  void visitBlockLengthLexpr(BlockLengthLexpr *p);
+  void visitOffsetLexpr(OffsetLexpr *p);
+  void visitAllocableLexpr(AllocableLexpr *p);
+  void visitFreeableLexpr(FreeableLexpr *p);
+  void visitAllocationLexpr(AllocationLexpr *p);
   void visitAutomaticLexpr(AutomaticLexpr *p);
   void visitDynamicLexpr(DynamicLexpr *p);
   void visitRegisterLexpr(RegisterLexpr *p);
@@ -95,8 +119,20 @@ class PrintAbsyn : public Visitor
   void visitLexprStringConst(LexprStringConst *p);
   void visitAddLexpr(AddLexpr *p);
   void visitSubtrLexpr(SubtrLexpr *p);
+  void visitMultLexpr(MultLexpr *p);
+  void visitDivLexpr(DivLexpr *p);
+  void visitModLexpr(ModLexpr *p);
   void visitSquaresRangeLexpr(SquaresRangeLexpr *p);
   void visitSquaresLexpr(SquaresLexpr *p);
+  void visitMinusLexpr(MinusLexpr *p);
+  void visitPlusLexpr(PlusLexpr *p);
+  void visitTildeLexpr(TildeLexpr *p);
+  void visitStarLexpr(StarLexpr *p);
+  void visitAmpUnaryLexpr(AmpUnaryLexpr *p);
+  void visitSizeOfLexpr(SizeOfLexpr *p);
+  void visitOldLexpr(OldLexpr *p);
+  void visitAtLexpr(AtLexpr *p);
+  void visitResultLexpr(ResultLexpr *p);
   void visitSeparatedLexpr(SeparatedLexpr *p);
   void visitFullIdParenLexpr(FullIdParenLexpr *p);
   void visitFullId(FullId *p);
@@ -176,10 +212,53 @@ class PrintAbsyn : public Visitor
   void visitAdmitReturnsKeyWord(AdmitReturnsKeyWord *p);
   void visitFullIdentifier(FullIdentifier *p); /* abstract class */
   void visitSimpleIdentifierFull(SimpleIdentifierFull *p);
+  void visitAdmitKeyWordFullIdent(AdmitKeyWordFullIdent *p);
+  void visitAllocatesKeyWordFullIdent(AllocatesKeyWordFullIdent *p);
+  void visitAssertKeyWordFullIdent(AssertKeyWordFullIdent *p);
+  void visitAssignsKeyWordFullIdent(AssignsKeyWordFullIdent *p);
+  void visitAssumesKeyWordFullIdent(AssumesKeyWordFullIdent *p);
+  void visitAtKeyWordFullIdent(AtKeyWordFullIdent *p);
+  void visitAxiomKeyWordFullIdent(AxiomKeyWordFullIdent *p);
+  void visitAxiomaticKeyWordFullIdent(AxiomaticKeyWordFullIdent *p);
+  void visitBehaviorKeyWordFullIdent(BehaviorKeyWordFullIdent *p);
+  void visitBreaksKeyWordFullIdent(BreaksKeyWordFullIdent *p);
+  void visitCheckKeyWordFullIdent(CheckKeyWordFullIdent *p);
+  void visitCompleteKeyWordFullIdent(CompleteKeyWordFullIdent *p);
+  void visitContinuesKeyWordFullIdent(ContinuesKeyWordFullIdent *p);
+  void visitContractKeyWordFullIdent(ContractKeyWordFullIdent *p);
+  void visitDecreasesKeyWordFullIdent(DecreasesKeyWordFullIdent *p);
+  void visitDisjointKeyWordFullIdent(DisjointKeyWordFullIdent *p);
+  void visitEnsuresKeyWordFullIdent(EnsuresKeyWordFullIdent *p);
+  void visitExitsKeyWordFullIdent(ExitsKeyWordFullIdent *p);
+  void visitFreesKeyWordFullIdent(FreesKeyWordFullIdent *p);
+  void visitFunctionKeyWordFullIdent(FunctionKeyWordFullIdent *p);
+  void visitGlobalKeyWordFullIdent(GlobalKeyWordFullIdent *p);
+  void visitImpactKeyWordFullIdent(ImpactKeyWordFullIdent *p);
+  void visitInductiveKeyWordFullIdent(InductiveKeyWordFullIdent *p);
+  void visitIncludeKeyWordFullIdent(IncludeKeyWordFullIdent *p);
+  void visitInvariantKeyWordFullIdent(InvariantKeyWordFullIdent *p);
+  void visitLemmaKeyWordFullIdent(LemmaKeyWordFullIdent *p);
+  void visitLetKeyWordFullIdent(LetKeyWordFullIdent *p);
+  void visitLogicKeyWordFullIdent(LogicKeyWordFullIdent *p);
+  void visitLoopKeyWordFullIdent(LoopKeyWordFullIdent *p);
+  void visitModelKeyWordFullIdent(ModelKeyWordFullIdent *p);
+  void visitModuleKeyWordFullIdent(ModuleKeyWordFullIdent *p);
+  void visitPragmaKeyWordFullIdent(PragmaKeyWordFullIdent *p);
+  void visitPredicateKeyWordFullIdent(PredicateKeyWordFullIdent *p);
+  void visitRequiresKeyWordFullIdent(RequiresKeyWordFullIdent *p);
+  void visitReturnsKeyWordFullIdent(ReturnsKeyWordFullIdent *p);
+  void visitSliceKeyWordFullIdent(SliceKeyWordFullIdent *p);
+  void visitTerminatesKeyWordFullIdent(TerminatesKeyWordFullIdent *p);
+  void visitTypeKeyWordFullIdent(TypeKeyWordFullIdent *p);
+  void visitVariantKeyWordFullIdent(VariantKeyWordFullIdent *p);
   void visitListFullIdentifier(ListFullIdentifier *p);
   void iterListFullIdentifier(ListFullIdentifier::const_iterator i, ListFullIdentifier::const_iterator j);
   void visitIdentifier(Identifier *p); /* abstract class */
   void visitIdentifierIdent(IdentifierIdent *p);
+  void visitBehaviorsKeyWord(BehaviorsKeyWord *p);
+  void visitLabelKeyWord(LabelKeyWord *p);
+  void visitReadsKeyWord(ReadsKeyWord *p);
+  void visitWritesKeyWord(WritesKeyWord *p);
   void visitTypeSpecSimple(TypeSpecSimple *p); /* abstract class */
   void visitTypeSpecSimpleIntegerKeyWord(TypeSpecSimpleIntegerKeyWord *p);
   void visitTypeSpecSimpleRealKeyWord(TypeSpecSimpleRealKeyWord *p);
@@ -187,7 +266,31 @@ class PrintAbsyn : public Visitor
   void visitTypeSpecSimpleVoidKeyWord(TypeSpecSimpleVoidKeyWord *p);
   void visitTypeSpecSimpleBoolKeyWord(TypeSpecSimpleBoolKeyWord *p);
   void visitTypeSpecSimpleCharKeyWord(TypeSpecSimpleCharKeyWord *p);
+  void visitTypeSpecSimpleSignedCharKeyWord(TypeSpecSimpleSignedCharKeyWord *p);
+  void visitTypeSpecSimpleUnsignedCharKeyWord(TypeSpecSimpleUnsignedCharKeyWord *p);
   void visitTypeSpecSimpleIntKeyWord(TypeSpecSimpleIntKeyWord *p);
+  void visitTypeSpecSimpleSignedIntKeyWord(TypeSpecSimpleSignedIntKeyWord *p);
+  void visitTypeSpecSimpleUnsignedIntKeyWord(TypeSpecSimpleUnsignedIntKeyWord *p);
+  void visitTypeSpecSimpleUnsignedKeyWord(TypeSpecSimpleUnsignedKeyWord *p);
+  void visitTypeSpecSimpleShortKeyWord(TypeSpecSimpleShortKeyWord *p);
+  void visitTypeSpecSimpleSignedShortKeyWord(TypeSpecSimpleSignedShortKeyWord *p);
+  void visitTypeSpecSimpleUnsignedShortKeyWord(TypeSpecSimpleUnsignedShortKeyWord *p);
+  void visitTypeSpecSimpleShortIntKeyWord(TypeSpecSimpleShortIntKeyWord *p);
+  void visitTypeSpecSimpleSignedShortIntKeyWord(TypeSpecSimpleSignedShortIntKeyWord *p);
+  void visitTypeSpecSimpleUnsignedShortIntKeyWord(TypeSpecSimpleUnsignedShortIntKeyWord *p);
+  void visitTypeSpecSimpleLongKeyWord(TypeSpecSimpleLongKeyWord *p);
+  void visitTypeSpecSimpleSignedLongKeyWord(TypeSpecSimpleSignedLongKeyWord *p);
+  void visitTypeSpecSimpleUnsignedLongKeyWord(TypeSpecSimpleUnsignedLongKeyWord *p);
+  void visitTypeSpecSimpleSignedLongIntKeyWord(TypeSpecSimpleSignedLongIntKeyWord *p);
+  void visitTypeSpecSimpleLongIntKeyWord(TypeSpecSimpleLongIntKeyWord *p);
+  void visitTypeSpecSimpleUnsignedLongIntKeyWord(TypeSpecSimpleUnsignedLongIntKeyWord *p);
+  void visitTypeSpecSimpleLongLongKeyWord(TypeSpecSimpleLongLongKeyWord *p);
+  void visitTypeSpecSimpleSignedLongLongKeyWord(TypeSpecSimpleSignedLongLongKeyWord *p);
+  void visitTypeSpecSimpleUnsignedLongLongKeyWord(TypeSpecSimpleUnsignedLongLongKeyWord *p);
+  void visitTypeSpecSimpleLongLongIntKeyWord(TypeSpecSimpleLongLongIntKeyWord *p);
+  void visitTypeSpecSimpleSignedLongLongIntKeyWord(TypeSpecSimpleSignedLongLongIntKeyWord *p);
+  void visitTypeSpecSimpleUnsignedLongLongIntKeyWord(TypeSpecSimpleUnsignedLongLongIntKeyWord *p);
+  void visitTypeSpecSimpleFloatKeyWord(TypeSpecSimpleFloatKeyWord *p);
   void visitTypeSpecSimpleDoubleKeyWord(TypeSpecSimpleDoubleKeyWord *p);
   void visitTypeSpecSimpleLongDoubleKeyWord(TypeSpecSimpleLongDoubleKeyWord *p);
   void visitLogicPTreeAnnot(LogicPTreeAnnot *p); /* abstract class */
@@ -197,6 +300,7 @@ class PrintAbsyn : public Visitor
   void visitLoopAnnotStack(LoopAnnotStack *p); /* abstract class */
   void visitLoopAnnotStackInvariant(LoopAnnotStackInvariant *p);
   void visitLoopAnnotStackEffects(LoopAnnotStackEffects *p);
+  void visitLoopAnnotStackAllocation(LoopAnnotStackAllocation *p);
   void visitLoopAnnotStackVariant(LoopAnnotStackVariant *p);
   void visitLoopAnnotOpt(LoopAnnotOpt *p); /* abstract class */
   void visitNoLoopAnnot(NoLoopAnnot *p);
@@ -205,6 +309,11 @@ class PrintAbsyn : public Visitor
   void visitSimpleLoopInvariant(SimpleLoopInvariant *p);
   void visitCheckLoopInvariant(CheckLoopInvariant *p);
   void visitAdmitLoopInvariant(AdmitLoopInvariant *p);
+  void visitLoopAllocation(LoopAllocation *p); /* abstract class */
+  void visitSimpleLoopAllocation(SimpleLoopAllocation *p);
+  void visitAllocation(Allocation *p); /* abstract class */
+  void visitAllocatesZones(AllocatesZones *p);
+  void visitFreesZones(FreesZones *p);
   void visitLoopVariant(LoopVariant *p); /* abstract class */
   void visitSimpleLoopVariant(SimpleLoopVariant *p);
   void visitLoopEffects(LoopEffects *p); /* abstract class */
@@ -289,6 +398,9 @@ class ShowAbsyn : public Visitor
   void visitCodeAnnotContract(CodeAnnotContract *p);
   void visitContract(Contract *p); /* abstract class */
   void visitSimpleContract(SimpleContract *p);
+  void visitClausesRequiresContract(ClausesRequiresContract *p);
+  void visitClausesTerminatesContract(ClausesTerminatesContract *p);
+  void visitClausesDecreasesContract(ClausesDecreasesContract *p);
   void visitRequires(Requires *p); /* abstract class */
   void visitNoRequires(NoRequires *p);
   void visitSomeRequires(SomeRequires *p);
@@ -322,12 +434,33 @@ class ShowAbsyn : public Visitor
   void visitOrLexpr(OrLexpr *p);
   void visitAndLexpr(AndLexpr *p);
   void visitHatHatLexpr(HatHatLexpr *p);
+  void visitAmpLexpr(AmpLexpr *p);
+  void visitPipeLexpr(PipeLexpr *p);
+  void visitHatLexpr(HatLexpr *p);
+  void visitBimpliesLexpr(BimpliesLexpr *p);
+  void visitBiffLexpr(BiffLexpr *p);
+  void visitInLexpr(InLexpr *p);
+  void visitTernaryLexpr(TernaryLexpr *p);
   void visitRelationLexpr(RelationLexpr *p);
   void visitBinderLexpr(BinderLexpr *p);
   void visitNotBinderLexpr(NotBinderLexpr *p);
   void visitTrueLexpr(TrueLexpr *p);
   void visitFalseLexpr(FalseLexpr *p);
+  void visitPointerLexpr(PointerLexpr *p);
   void visitValidLexpr(ValidLexpr *p);
+  void visitValidReadLexpr(ValidReadLexpr *p);
+  void visitValidFuncLexpr(ValidFuncLexpr *p);
+  void visitValidIndxLexpr(ValidIndxLexpr *p);
+  void visitValidRangeLexpr(ValidRangeLexpr *p);
+  void visitInitializedLexpr(InitializedLexpr *p);
+  void visitDanglingLexpr(DanglingLexpr *p);
+  void visitFreshLexpr(FreshLexpr *p);
+  void visitBaseAddrLexpr(BaseAddrLexpr *p);
+  void visitBlockLengthLexpr(BlockLengthLexpr *p);
+  void visitOffsetLexpr(OffsetLexpr *p);
+  void visitAllocableLexpr(AllocableLexpr *p);
+  void visitFreeableLexpr(FreeableLexpr *p);
+  void visitAllocationLexpr(AllocationLexpr *p);
   void visitAutomaticLexpr(AutomaticLexpr *p);
   void visitDynamicLexpr(DynamicLexpr *p);
   void visitRegisterLexpr(RegisterLexpr *p);
@@ -339,8 +472,20 @@ class ShowAbsyn : public Visitor
   void visitLexprStringConst(LexprStringConst *p);
   void visitAddLexpr(AddLexpr *p);
   void visitSubtrLexpr(SubtrLexpr *p);
+  void visitMultLexpr(MultLexpr *p);
+  void visitDivLexpr(DivLexpr *p);
+  void visitModLexpr(ModLexpr *p);
   void visitSquaresRangeLexpr(SquaresRangeLexpr *p);
   void visitSquaresLexpr(SquaresLexpr *p);
+  void visitMinusLexpr(MinusLexpr *p);
+  void visitPlusLexpr(PlusLexpr *p);
+  void visitTildeLexpr(TildeLexpr *p);
+  void visitStarLexpr(StarLexpr *p);
+  void visitAmpUnaryLexpr(AmpUnaryLexpr *p);
+  void visitSizeOfLexpr(SizeOfLexpr *p);
+  void visitOldLexpr(OldLexpr *p);
+  void visitAtLexpr(AtLexpr *p);
+  void visitResultLexpr(ResultLexpr *p);
   void visitSeparatedLexpr(SeparatedLexpr *p);
   void visitFullIdParenLexpr(FullIdParenLexpr *p);
   void visitFullId(FullId *p);
@@ -420,10 +565,53 @@ class ShowAbsyn : public Visitor
   void visitAdmitReturnsKeyWord(AdmitReturnsKeyWord *p);
   void visitFullIdentifier(FullIdentifier *p); /* abstract class */
   void visitSimpleIdentifierFull(SimpleIdentifierFull *p);
+  void visitAdmitKeyWordFullIdent(AdmitKeyWordFullIdent *p);
+  void visitAllocatesKeyWordFullIdent(AllocatesKeyWordFullIdent *p);
+  void visitAssertKeyWordFullIdent(AssertKeyWordFullIdent *p);
+  void visitAssignsKeyWordFullIdent(AssignsKeyWordFullIdent *p);
+  void visitAssumesKeyWordFullIdent(AssumesKeyWordFullIdent *p);
+  void visitAtKeyWordFullIdent(AtKeyWordFullIdent *p);
+  void visitAxiomKeyWordFullIdent(AxiomKeyWordFullIdent *p);
+  void visitAxiomaticKeyWordFullIdent(AxiomaticKeyWordFullIdent *p);
+  void visitBehaviorKeyWordFullIdent(BehaviorKeyWordFullIdent *p);
+  void visitBreaksKeyWordFullIdent(BreaksKeyWordFullIdent *p);
+  void visitCheckKeyWordFullIdent(CheckKeyWordFullIdent *p);
+  void visitCompleteKeyWordFullIdent(CompleteKeyWordFullIdent *p);
+  void visitContinuesKeyWordFullIdent(ContinuesKeyWordFullIdent *p);
+  void visitContractKeyWordFullIdent(ContractKeyWordFullIdent *p);
+  void visitDecreasesKeyWordFullIdent(DecreasesKeyWordFullIdent *p);
+  void visitDisjointKeyWordFullIdent(DisjointKeyWordFullIdent *p);
+  void visitEnsuresKeyWordFullIdent(EnsuresKeyWordFullIdent *p);
+  void visitExitsKeyWordFullIdent(ExitsKeyWordFullIdent *p);
+  void visitFreesKeyWordFullIdent(FreesKeyWordFullIdent *p);
+  void visitFunctionKeyWordFullIdent(FunctionKeyWordFullIdent *p);
+  void visitGlobalKeyWordFullIdent(GlobalKeyWordFullIdent *p);
+  void visitImpactKeyWordFullIdent(ImpactKeyWordFullIdent *p);
+  void visitInductiveKeyWordFullIdent(InductiveKeyWordFullIdent *p);
+  void visitIncludeKeyWordFullIdent(IncludeKeyWordFullIdent *p);
+  void visitInvariantKeyWordFullIdent(InvariantKeyWordFullIdent *p);
+  void visitLemmaKeyWordFullIdent(LemmaKeyWordFullIdent *p);
+  void visitLetKeyWordFullIdent(LetKeyWordFullIdent *p);
+  void visitLogicKeyWordFullIdent(LogicKeyWordFullIdent *p);
+  void visitLoopKeyWordFullIdent(LoopKeyWordFullIdent *p);
+  void visitModelKeyWordFullIdent(ModelKeyWordFullIdent *p);
+  void visitModuleKeyWordFullIdent(ModuleKeyWordFullIdent *p);
+  void visitPragmaKeyWordFullIdent(PragmaKeyWordFullIdent *p);
+  void visitPredicateKeyWordFullIdent(PredicateKeyWordFullIdent *p);
+  void visitRequiresKeyWordFullIdent(RequiresKeyWordFullIdent *p);
+  void visitReturnsKeyWordFullIdent(ReturnsKeyWordFullIdent *p);
+  void visitSliceKeyWordFullIdent(SliceKeyWordFullIdent *p);
+  void visitTerminatesKeyWordFullIdent(TerminatesKeyWordFullIdent *p);
+  void visitTypeKeyWordFullIdent(TypeKeyWordFullIdent *p);
+  void visitVariantKeyWordFullIdent(VariantKeyWordFullIdent *p);
   void visitListFullIdentifier(ListFullIdentifier *p);
   void iterListFullIdentifier(ListFullIdentifier::const_iterator i, ListFullIdentifier::const_iterator j);
   void visitIdentifier(Identifier *p); /* abstract class */
   void visitIdentifierIdent(IdentifierIdent *p);
+  void visitBehaviorsKeyWord(BehaviorsKeyWord *p);
+  void visitLabelKeyWord(LabelKeyWord *p);
+  void visitReadsKeyWord(ReadsKeyWord *p);
+  void visitWritesKeyWord(WritesKeyWord *p);
   void visitTypeSpecSimple(TypeSpecSimple *p); /* abstract class */
   void visitTypeSpecSimpleIntegerKeyWord(TypeSpecSimpleIntegerKeyWord *p);
   void visitTypeSpecSimpleRealKeyWord(TypeSpecSimpleRealKeyWord *p);
@@ -431,7 +619,31 @@ class ShowAbsyn : public Visitor
   void visitTypeSpecSimpleVoidKeyWord(TypeSpecSimpleVoidKeyWord *p);
   void visitTypeSpecSimpleBoolKeyWord(TypeSpecSimpleBoolKeyWord *p);
   void visitTypeSpecSimpleCharKeyWord(TypeSpecSimpleCharKeyWord *p);
+  void visitTypeSpecSimpleSignedCharKeyWord(TypeSpecSimpleSignedCharKeyWord *p);
+  void visitTypeSpecSimpleUnsignedCharKeyWord(TypeSpecSimpleUnsignedCharKeyWord *p);
   void visitTypeSpecSimpleIntKeyWord(TypeSpecSimpleIntKeyWord *p);
+  void visitTypeSpecSimpleSignedIntKeyWord(TypeSpecSimpleSignedIntKeyWord *p);
+  void visitTypeSpecSimpleUnsignedIntKeyWord(TypeSpecSimpleUnsignedIntKeyWord *p);
+  void visitTypeSpecSimpleUnsignedKeyWord(TypeSpecSimpleUnsignedKeyWord *p);
+  void visitTypeSpecSimpleShortKeyWord(TypeSpecSimpleShortKeyWord *p);
+  void visitTypeSpecSimpleSignedShortKeyWord(TypeSpecSimpleSignedShortKeyWord *p);
+  void visitTypeSpecSimpleUnsignedShortKeyWord(TypeSpecSimpleUnsignedShortKeyWord *p);
+  void visitTypeSpecSimpleShortIntKeyWord(TypeSpecSimpleShortIntKeyWord *p);
+  void visitTypeSpecSimpleSignedShortIntKeyWord(TypeSpecSimpleSignedShortIntKeyWord *p);
+  void visitTypeSpecSimpleUnsignedShortIntKeyWord(TypeSpecSimpleUnsignedShortIntKeyWord *p);
+  void visitTypeSpecSimpleLongKeyWord(TypeSpecSimpleLongKeyWord *p);
+  void visitTypeSpecSimpleSignedLongKeyWord(TypeSpecSimpleSignedLongKeyWord *p);
+  void visitTypeSpecSimpleUnsignedLongKeyWord(TypeSpecSimpleUnsignedLongKeyWord *p);
+  void visitTypeSpecSimpleSignedLongIntKeyWord(TypeSpecSimpleSignedLongIntKeyWord *p);
+  void visitTypeSpecSimpleLongIntKeyWord(TypeSpecSimpleLongIntKeyWord *p);
+  void visitTypeSpecSimpleUnsignedLongIntKeyWord(TypeSpecSimpleUnsignedLongIntKeyWord *p);
+  void visitTypeSpecSimpleLongLongKeyWord(TypeSpecSimpleLongLongKeyWord *p);
+  void visitTypeSpecSimpleSignedLongLongKeyWord(TypeSpecSimpleSignedLongLongKeyWord *p);
+  void visitTypeSpecSimpleUnsignedLongLongKeyWord(TypeSpecSimpleUnsignedLongLongKeyWord *p);
+  void visitTypeSpecSimpleLongLongIntKeyWord(TypeSpecSimpleLongLongIntKeyWord *p);
+  void visitTypeSpecSimpleSignedLongLongIntKeyWord(TypeSpecSimpleSignedLongLongIntKeyWord *p);
+  void visitTypeSpecSimpleUnsignedLongLongIntKeyWord(TypeSpecSimpleUnsignedLongLongIntKeyWord *p);
+  void visitTypeSpecSimpleFloatKeyWord(TypeSpecSimpleFloatKeyWord *p);
   void visitTypeSpecSimpleDoubleKeyWord(TypeSpecSimpleDoubleKeyWord *p);
   void visitTypeSpecSimpleLongDoubleKeyWord(TypeSpecSimpleLongDoubleKeyWord *p);
   void visitLogicPTreeAnnot(LogicPTreeAnnot *p); /* abstract class */
@@ -441,6 +653,7 @@ class ShowAbsyn : public Visitor
   void visitLoopAnnotStack(LoopAnnotStack *p); /* abstract class */
   void visitLoopAnnotStackInvariant(LoopAnnotStackInvariant *p);
   void visitLoopAnnotStackEffects(LoopAnnotStackEffects *p);
+  void visitLoopAnnotStackAllocation(LoopAnnotStackAllocation *p);
   void visitLoopAnnotStackVariant(LoopAnnotStackVariant *p);
   void visitLoopAnnotOpt(LoopAnnotOpt *p); /* abstract class */
   void visitNoLoopAnnot(NoLoopAnnot *p);
@@ -449,6 +662,11 @@ class ShowAbsyn : public Visitor
   void visitSimpleLoopInvariant(SimpleLoopInvariant *p);
   void visitCheckLoopInvariant(CheckLoopInvariant *p);
   void visitAdmitLoopInvariant(AdmitLoopInvariant *p);
+  void visitLoopAllocation(LoopAllocation *p); /* abstract class */
+  void visitSimpleLoopAllocation(SimpleLoopAllocation *p);
+  void visitAllocation(Allocation *p); /* abstract class */
+  void visitAllocatesZones(AllocatesZones *p);
+  void visitFreesZones(FreesZones *p);
   void visitLoopVariant(LoopVariant *p); /* abstract class */
   void visitSimpleLoopVariant(SimpleLoopVariant *p);
   void visitLoopEffects(LoopEffects *p); /* abstract class */

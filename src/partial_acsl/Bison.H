@@ -91,48 +91,62 @@ extern int partial_acsldebug;
     _DGT = 292,                    /* _DGT  */
     _DGTEQ = 293,                  /* _DGTEQ  */
     _QUESTION = 294,               /* _QUESTION  */
-    _CARET = 295,                  /* _CARET  */
-    _CARETEQ = 296,                /* _CARETEQ  */
-    _SYMB_1 = 297,                 /* _SYMB_1  */
-    _SYMB_2 = 298,                 /* _SYMB_2  */
-    _SYMB_3 = 299,                 /* _SYMB_3  */
-    _KW_break = 300,               /* _KW_break  */
-    _KW_case = 301,                /* _KW_case  */
-    _KW_char = 302,                /* _KW_char  */
-    _KW_continue = 303,            /* _KW_continue  */
-    _KW_default = 304,             /* _KW_default  */
-    _KW_double = 305,              /* _KW_double  */
-    _KW_else = 306,                /* _KW_else  */
-    _KW_float = 307,               /* _KW_float  */
-    _KW_for = 308,                 /* _KW_for  */
-    _KW_if = 309,                  /* _KW_if  */
-    _KW_int = 310,                 /* _KW_int  */
-    _KW_long = 311,                /* _KW_long  */
-    _KW_return = 312,              /* _KW_return  */
-    _KW_short = 313,               /* _KW_short  */
-    _KW_59 = 314,                  /* _KW_59  */
-    _KW_struct = 315,              /* _KW_struct  */
-    _KW_switch = 316,              /* _KW_switch  */
-    _KW_unsigned = 317,            /* _KW_unsigned  */
-    _KW_void = 318,                /* _KW_void  */
-    _KW_while = 319,               /* _KW_while  */
-    _BAR = 320,                    /* _BAR  */
-    _BAREQ = 321,                  /* _BAREQ  */
-    _DBAR = 322,                   /* _DBAR  */
-    _TILDE = 323,                  /* _TILDE  */
-    T_BLOCKATTRIBUTE = 324,        /* T_BLOCKATTRIBUTE  */
-    T_CONST = 325,                 /* T_CONST  */
-    T_LBRACE = 326,                /* T_LBRACE  */
-    T_LBRACKET = 327,              /* T_LBRACKET  */
-    T_RBRACE = 328,                /* T_RBRACE  */
-    T_RBRACKET = 329,              /* T_RBRACKET  */
-    T_RESTRICT = 330,              /* T_RESTRICT  */
-    T_SIGNED = 331,                /* T_SIGNED  */
-    T_VOLATILE = 332,              /* T_VOLATILE  */
-    _CHAR_ = 333,                  /* _CHAR_  */
-    _INTEGER_ = 334,               /* _INTEGER_  */
-    _DOUBLE_ = 335,                /* _DOUBLE_  */
-    _IDENT_ = 336                  /* _IDENT_  */
+    _LBRACK = 295,                 /* _LBRACK  */
+    _RBRACK = 296,                 /* _RBRACK  */
+    _CARET = 297,                  /* _CARET  */
+    _CARETEQ = 298,                /* _CARETEQ  */
+    _SYMB_1 = 299,                 /* _SYMB_1  */
+    _SYMB_14 = 300,                /* _SYMB_14  */
+    _SYMB_15 = 301,                /* _SYMB_15  */
+    _SYMB_2 = 302,                 /* _SYMB_2  */
+    _SYMB_3 = 303,                 /* _SYMB_3  */
+    _SYMB_13 = 304,                /* _SYMB_13  */
+    _KW_auto = 305,                /* _KW_auto  */
+    _KW_break = 306,               /* _KW_break  */
+    _KW_case = 307,                /* _KW_case  */
+    _KW_char = 308,                /* _KW_char  */
+    _KW_continue = 309,            /* _KW_continue  */
+    _KW_default = 310,             /* _KW_default  */
+    _KW_do = 311,                  /* _KW_do  */
+    _KW_double = 312,              /* _KW_double  */
+    _KW_else = 313,                /* _KW_else  */
+    _KW_enum = 314,                /* _KW_enum  */
+    _KW_extern = 315,              /* _KW_extern  */
+    _KW_float = 316,               /* _KW_float  */
+    _KW_for = 317,                 /* _KW_for  */
+    _KW_goto = 318,                /* _KW_goto  */
+    _KW_if = 319,                  /* _KW_if  */
+    _KW_int = 320,                 /* _KW_int  */
+    _KW_long = 321,                /* _KW_long  */
+    _KW_register = 322,            /* _KW_register  */
+    _KW_return = 323,              /* _KW_return  */
+    _KW_short = 324,               /* _KW_short  */
+    _KW_72 = 325,                  /* _KW_72  */
+    _KW_sizeof = 326,              /* _KW_sizeof  */
+    _KW_static = 327,              /* _KW_static  */
+    _KW_struct = 328,              /* _KW_struct  */
+    _KW_switch = 329,              /* _KW_switch  */
+    _KW_typedef = 330,             /* _KW_typedef  */
+    _KW_union = 331,               /* _KW_union  */
+    _KW_unsigned = 332,            /* _KW_unsigned  */
+    _KW_void = 333,                /* _KW_void  */
+    _KW_while = 334,               /* _KW_while  */
+    _LBRACE = 335,                 /* _LBRACE  */
+    _BAR = 336,                    /* _BAR  */
+    _BAREQ = 337,                  /* _BAREQ  */
+    _DBAR = 338,                   /* _DBAR  */
+    _RBRACE = 339,                 /* _RBRACE  */
+    _TILDE = 340,                  /* _TILDE  */
+    T_ALIGNOF = 341,               /* T_ALIGNOF  */
+    T_BLOCKATTRIBUTE = 342,        /* T_BLOCKATTRIBUTE  */
+    T_CONST = 343,                 /* T_CONST  */
+    T_RESTRICT = 344,              /* T_RESTRICT  */
+    T_SIGNED = 345,                /* T_SIGNED  */
+    T_VOLATILE = 346,              /* T_VOLATILE  */
+    _CHAR_ = 347,                  /* _CHAR_  */
+    _INTEGER_ = 348,               /* _INTEGER_  */
+    _DOUBLE_ = 349,                /* _DOUBLE_  */
+    _IDENT_ = 350                  /* _IDENT_  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -154,12 +168,17 @@ union YYSTYPE
   partial_acsl::FunctionDefStart* functiondefstart_;
   partial_acsl::DeclSpecList* declspeclist_;
   partial_acsl::DeclSpecListNoNamed* declspeclistnonamed_;
+  partial_acsl::DeclSpecWOType* declspecwotype_;
   partial_acsl::TypeSpec* typespec_;
+  partial_acsl::Enumerator* enumerator_;
+  partial_acsl::ListEnumerator* listenumerator_;
+  partial_acsl::MaybeComma* maybecomma_;
   partial_acsl::Declarator* declarator_;
   partial_acsl::PointerOpt* pointeropt_;
   partial_acsl::DirectDecl* directdecl_;
   partial_acsl::AttributesWithAsm* attributeswithasm_;
   partial_acsl::RestParList* restparlist_;
+  partial_acsl::MaybeThreeDots* maybethreedots_;
   partial_acsl::ParameterDecl* parameterdecl_;
   partial_acsl::ListParameterDecl* listparameterdecl_;
   partial_acsl::GhostParameterOpt* ghostparameteropt_;
@@ -170,6 +189,7 @@ union YYSTYPE
   partial_acsl::InitDeclaratorAttr* initdeclaratorattr_;
   partial_acsl::ListInitDeclaratorAttr* listinitdeclaratorattr_;
   partial_acsl::InitDeclarator* initdeclarator_;
+  partial_acsl::InitExpression* initexpression_;
   partial_acsl::StructDeclList* structdecllist_;
   partial_acsl::FieldDecl* fielddecl_;
   partial_acsl::ListFieldDecl* listfielddecl_;
@@ -180,6 +200,7 @@ union YYSTYPE
   partial_acsl::BlockElement* blockelement_;
   partial_acsl::ListBlockElement* listblockelement_;
   partial_acsl::Statement* statement_;
+  partial_acsl::OptLoopAnnotations* optloopannotations_;
   partial_acsl::ForClause* forclause_;
   partial_acsl::Attr* attr_;
   partial_acsl::ListAttr* listattr_;
@@ -193,7 +214,7 @@ union YYSTYPE
   partial_acsl::Constant* constant_;
   partial_acsl::TypeName* typename_;
 
-#line 197 "Bison.H"
+#line 218 "Bison.H"
 
 };
 typedef union YYSTYPE YYSTYPE;

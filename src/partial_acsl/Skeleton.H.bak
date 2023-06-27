@@ -19,11 +19,14 @@ public:
   void visitDeclSpecList(DeclSpecList *p);
   void visitDeclSpecListNoNamed(DeclSpecListNoNamed *p);
   void visitTypeSpec(TypeSpec *p);
+  void visitEnumerator(Enumerator *p);
+  void visitMaybeComma(MaybeComma *p);
   void visitDeclarator(Declarator *p);
   void visitPointerOpt(PointerOpt *p);
   void visitDirectDecl(DirectDecl *p);
   void visitAttributesWithAsm(AttributesWithAsm *p);
   void visitRestParList(RestParList *p);
+  void visitMaybeThreeDots(MaybeThreeDots *p);
   void visitParameterDecl(ParameterDecl *p);
   void visitGhostParameterOpt(GhostParameterOpt *p);
   void visitIdOrTypename(IdOrTypename *p);
@@ -32,6 +35,7 @@ public:
   void visitDeclAndInitDeclAttrList(DeclAndInitDeclAttrList *p);
   void visitInitDeclaratorAttr(InitDeclaratorAttr *p);
   void visitInitDeclarator(InitDeclarator *p);
+  void visitInitExpression(InitExpression *p);
   void visitStructDeclList(StructDeclList *p);
   void visitFieldDecl(FieldDecl *p);
   void visitAttribute(Attribute *p);
@@ -39,6 +43,7 @@ public:
   void visitBlockAttrs(BlockAttrs *p);
   void visitBlockElement(BlockElement *p);
   void visitStatement(Statement *p);
+  void visitOptLoopAnnotations(OptLoopAnnotations *p);
   void visitForClause(ForClause *p);
   void visitAttr(Attr *p);
   void visitBasicAttribute(BasicAttribute *p);
@@ -67,6 +72,7 @@ public:
   void visitTypeSpecShortKeyWord(TypeSpecShortKeyWord *p);
   void visitTypeSpecInt32KeyWord(TypeSpecInt32KeyWord *p);
   void visitTypeSpecIntKeyWord(TypeSpecIntKeyWord *p);
+  void visitTypeSpecSizeTKeyWord(TypeSpecSizeTKeyWord *p);
   void visitTypeSpecLongKeyWord(TypeSpecLongKeyWord *p);
   void visitTypeSpecInt64KeyWord(TypeSpecInt64KeyWord *p);
   void visitTypeSpecFloatKeyWord(TypeSpecFloatKeyWord *p);
@@ -76,6 +82,16 @@ public:
   void visitStructId(StructId *p);
   void visitStructIdBraces(StructIdBraces *p);
   void visitStructBraces(StructBraces *p);
+  void visitUnionId(UnionId *p);
+  void visitUnionIdBraces(UnionIdBraces *p);
+  void visitUnionBraces(UnionBraces *p);
+  void visitEnumId(EnumId *p);
+  void visitEnumIdBraces(EnumIdBraces *p);
+  void visitEnumBraces(EnumBraces *p);
+  void visitIdentEnumerator(IdentEnumerator *p);
+  void visitIdentAssignExpr(IdentAssignExpr *p);
+  void visitNoComa(NoComa *p);
+  void visitComa(Coma *p);
   void visitADeclarator(ADeclarator *p);
   void visitNoPointer(NoPointer *p);
   void visitSomePointer(SomePointer *p);
@@ -84,9 +100,10 @@ public:
   void visitDirectDeclGhostRestParParam(DirectDeclGhostRestParParam *p);
   void visitEmptyAttrWithASM(EmptyAttrWithASM *p);
   void visitSimpleParameterDecl(SimpleParameterDecl *p);
+  void visitNoThreeDots(NoThreeDots *p);
+  void visitThreeDots(ThreeDots *p);
   void visitParameterDeclSpecDeclarator(ParameterDeclSpecDeclarator *p);
   void visitParameterDeclSpec(ParameterDeclSpec *p);
-  void visitParameterDeclPar(ParameterDeclPar *p);
   void visitNoGhostParameter(NoGhostParameter *p);
   void visitIdTypename(IdTypename *p);
   void visitIdOrTypenameAsIdIdentifier(IdOrTypenameAsIdIdentifier *p);
@@ -96,11 +113,15 @@ public:
   void visitInitDeclarationWithAttr(InitDeclarationWithAttr *p);
   void visitInitDeclaratorAttribute(InitDeclaratorAttribute *p);
   void visitSimpleInitDeclarator(SimpleInitDeclarator *p);
+  void visitInitDeclaratorExpression(InitDeclaratorExpression *p);
+  void visitSimpleExpression(SimpleExpression *p);
   void visitEmptyStructDecl(EmptyStructDecl *p);
   void visitDeclSpecStructDecl(DeclSpecStructDecl *p);
   void visitSemicolonStructDecl(SemicolonStructDecl *p);
   void visitSpecFieldDeclStructDecl(SpecFieldDeclStructDecl *p);
   void visitFieldDeclDeclarator(FieldDeclDeclarator *p);
+  void visitFieldDeclDeclaratorColon(FieldDeclDeclaratorColon *p);
+  void visitFieldDeclColonExpression(FieldDeclColonExpression *p);
   void visitAttributeConst(AttributeConst *p);
   void visitABlock(ABlock *p);
   void visitNoBlockAttrs(NoBlockAttrs *p);
@@ -113,6 +134,7 @@ public:
   void visitIfStatement(IfStatement *p);
   void visitSwitchStatement(SwitchStatement *p);
   void visitWhileStatement(WhileStatement *p);
+  void visitDoWhileStatement(DoWhileStatement *p);
   void visitForStatement(ForStatement *p);
   void visitCaseStatement(CaseStatement *p);
   void visitCaseSliceStatement(CaseSliceStatement *p);
@@ -121,6 +143,11 @@ public:
   void visitReturnStatement(ReturnStatement *p);
   void visitBreakStatement(BreakStatement *p);
   void visitContinueStatement(ContinueStatement *p);
+  void visitGotoStatement(GotoStatement *p);
+  void visitStarGotoStatement(StarGotoStatement *p);
+  void visitTryExceptStatement(TryExceptStatement *p);
+  void visitTryFinallyStatement(TryFinallyStatement *p);
+  void visitNoLoopAnnotations(NoLoopAnnotations *p);
   void visitForClauseExpression(ForClauseExpression *p);
   void visitForClauseDeclaration(ForClauseDeclaration *p);
   void visitAnAttr(AnAttr *p);
@@ -143,6 +170,10 @@ public:
   void visitMultOp(MultOp *p);
   void visitDivOp(DivOp *p);
   void visitModOp(ModOp *p);
+  void visitSizeOfAttrUnary(SizeOfAttrUnary *p);
+  void visitSizeOfAttrTypeName(SizeOfAttrTypeName *p);
+  void visitAlignOfAttrUnary(AlignOfAttrUnary *p);
+  void visitAlignOfAttrTypeName(AlignOfAttrTypeName *p);
   void visitPlusUnaryAttr(PlusUnaryAttr *p);
   void visitMinusUnaryAttr(MinusUnaryAttr *p);
   void visitMultUnaryAttr(MultUnaryAttr *p);
@@ -196,6 +227,10 @@ public:
   void visitCastExpr(CastExpr *p);
   void visitUnaryExprPlusPlus(UnaryExprPlusPlus *p);
   void visitUnaryExprMinusMinus(UnaryExprMinusMinus *p);
+  void visitUnaryExprSizeOf(UnaryExprSizeOf *p);
+  void visitUnaryExprSizeOfTypeName(UnaryExprSizeOfTypeName *p);
+  void visitUnaryExprAlignOfUnaryExpr(UnaryExprAlignOfUnaryExpr *p);
+  void visitUnaryExprAlignOfTypeName(UnaryExprAlignOfTypeName *p);
   void visitUnaryExprPlus(UnaryExprPlus *p);
   void visitUnaryExprMinus(UnaryExprMinus *p);
   void visitUnaryExprMult(UnaryExprMult *p);
@@ -216,6 +251,7 @@ public:
   void visitConstantFloat(ConstantFloat *p);
   void visitConstantChar(ConstantChar *p);
   void visitTypeNameDeclSpecList(TypeNameDeclSpecList *p);
+  void visitListEnumerator(ListEnumerator *p);
   void visitListParameterDecl(ListParameterDecl *p);
   void visitListInitDeclaratorAttr(ListInitDeclaratorAttr *p);
   void visitListFieldDecl(ListFieldDecl *p);
@@ -229,15 +265,12 @@ public:
   void visitDouble(Double x);
   void visitString(String x);
   void visitIdent(Ident x);
+  void visitALIGNOF(ALIGNOF x);
   void visitSIGNED(SIGNED x);
-  void visitLBRACE(LBRACE x);
-  void visitRBRACE(RBRACE x);
   void visitCONST(CONST x);
   void visitRESTRICT(RESTRICT x);
   void visitVOLATILE(VOLATILE x);
   void visitBLOCKATTRIBUTE(BLOCKATTRIBUTE x);
-  void visitLBRACKET(LBRACKET x);
-  void visitRBRACKET(RBRACKET x);
 
 };
 }

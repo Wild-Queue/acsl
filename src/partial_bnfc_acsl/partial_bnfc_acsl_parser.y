@@ -99,6 +99,8 @@ extern yyscan_t partial_bnfc_acsl_initialize_lexer(FILE * inp);
   partial_bnfc_acsl::LoopAnnotStack* loopannotstack_;
   partial_bnfc_acsl::LoopAnnotOpt* loopannotopt_;
   partial_bnfc_acsl::LoopInvariant* loopinvariant_;
+  partial_bnfc_acsl::LoopAllocation* loopallocation_;
+  partial_bnfc_acsl::Allocation* allocation_;
   partial_bnfc_acsl::LoopVariant* loopvariant_;
   partial_bnfc_acsl::LoopEffects* loopeffects_;
   partial_bnfc_acsl::Variant* variant_;
@@ -117,68 +119,132 @@ extern int yylex(YYSTYPE *lvalp, YYLTYPE *llocp, yyscan_t scanner);
 %}
 
 %token          _ERROR_
-%token          _BANG          /* ! */
-%token          _BANGEQ        /* != */
-%token          _DAMP          /* && */
-%token          _LPAREN        /* ( */
-%token          _RPAREN        /* ) */
-%token          _STAR          /* * */
-%token          _PLUS          /* + */
-%token          _COMMA         /* , */
-%token          _MINUS         /* - */
-%token          _DDOT          /* .. */
-%token          _SEMI          /* ; */
-%token          _LT            /* < */
-%token          _LDARROW       /* <= */
-%token          _SYMB_4        /* <==> */
-%token          _DEQ           /* == */
-%token          _SYMB_3        /* ==> */
-%token          _GT            /* > */
-%token          _GTEQ          /* >= */
-%token          _LBRACK        /* [ */
-%token          _SYMB_27       /* \\automatic */
-%token          _SYMB_28       /* \\dynamic */
-%token          _SYMB_17       /* \\exists */
-%token          _SYMB_25       /* \\false */
-%token          _SYMB_16       /* \\forall */
-%token          _SYMB_1        /* \\from */
-%token          _SYMB_18       /* \\lambda */
-%token          _SYMB_2        /* \\nothing */
-%token          _SYMB_32       /* \\null */
-%token          _SYMB_36       /* \\pi */
-%token          _SYMB_29       /* \\register */
-%token          _SYMB_35       /* \\separated */
-%token          _SYMB_30       /* \\static */
-%token          _SYMB_24       /* \\true */
-%token          _SYMB_31       /* \\unallocated */
-%token          _SYMB_26       /* \\valid */
-%token          _RBRACK        /* ] */
-%token          _DCARET        /* ^^ */
-%token          _SYMB_40       /* _Bool */
-%token          _KW_admit      /* admit */
-%token          _KW_assigns    /* assigns */
-%token          _KW_boolean    /* boolean */
-%token          _KW_breaks     /* breaks */
-%token          _KW_char       /* char */
-%token          _KW_check      /* check */
-%token          _KW_continues  /* continues */
-%token          _KW_double     /* double */
-%token          _KW_ensures    /* ensures */
-%token          _KW_exits      /* exits */
-%token          _KW_for        /* for */
-%token          _KW_int        /* int */
-%token          _KW_integer    /* integer */
-%token          _KW_invariant  /* invariant */
-%token          _KW_long       /* long */
-%token          _KW_loop       /* loop */
-%token          _KW_real       /* real */
-%token          _KW_requires   /* requires */
-%token          _KW_returns    /* returns */
-%token          _KW_variant    /* variant */
-%token          _KW_void       /* void */
-%token          _LBRACE        /* { */
-%token          _DBAR          /* || */
-%token          _RBRACE        /* } */
+%token          _BANG           /* ! */
+%token          _BANGEQ         /* != */
+%token          _PERCENT        /* % */
+%token          _AMP            /* & */
+%token          _DAMP           /* && */
+%token          _LPAREN         /* ( */
+%token          _RPAREN         /* ) */
+%token          _STAR           /* * */
+%token          _PLUS           /* + */
+%token          _COMMA          /* , */
+%token          _MINUS          /* - */
+%token          _SYMB_11        /* --> */
+%token          _DDOT           /* .. */
+%token          _SLASH          /* / */
+%token          _COLON          /* : */
+%token          _SEMI           /* ; */
+%token          _LT             /* < */
+%token          _SYMB_12        /* <--> */
+%token          _LDARROW        /* <= */
+%token          _SYMB_4         /* <==> */
+%token          _DEQ            /* == */
+%token          _SYMB_3         /* ==> */
+%token          _GT             /* > */
+%token          _GTEQ           /* >= */
+%token          _QUESTION       /* ? */
+%token          _LBRACK         /* [ */
+%token          _SYMB_46        /* \\allocable */
+%token          _SYMB_48        /* \\allocation */
+%token          _SYMB_61        /* \\at */
+%token          _SYMB_49        /* \\automatic */
+%token          _SYMB_43        /* \\base_addr */
+%token          _SYMB_44        /* \\block_length */
+%token          _SYMB_41        /* \\dangling */
+%token          _SYMB_50        /* \\dynamic */
+%token          _SYMB_25        /* \\exists */
+%token          _SYMB_33        /* \\false */
+%token          _SYMB_24        /* \\forall */
+%token          _SYMB_47        /* \\freeable */
+%token          _SYMB_42        /* \\fresh */
+%token          _SYMB_1         /* \\from */
+%token          _SYMB_13        /* \\in */
+%token          _SYMB_40        /* \\initialized */
+%token          _SYMB_26        /* \\lambda */
+%token          _SYMB_2         /* \\nothing */
+%token          _SYMB_54        /* \\null */
+%token          _SYMB_34        /* \\object_pointer */
+%token          _SYMB_45        /* \\offset */
+%token          _SYMB_60        /* \\old */
+%token          _SYMB_64        /* \\pi */
+%token          _SYMB_51        /* \\register */
+%token          _SYMB_62        /* \\result */
+%token          _SYMB_63        /* \\separated */
+%token          _SYMB_52        /* \\static */
+%token          _SYMB_32        /* \\true */
+%token          _SYMB_53        /* \\unallocated */
+%token          _SYMB_35        /* \\valid */
+%token          _SYMB_37        /* \\valid_function */
+%token          _SYMB_38        /* \\valid_index */
+%token          _SYMB_39        /* \\valid_range */
+%token          _SYMB_36        /* \\valid_read */
+%token          _RBRACK         /* ] */
+%token          _CARET          /* ^ */
+%token          _DCARET         /* ^^ */
+%token          _SYMB_68        /* _Bool */
+%token          _KW_admit       /* admit */
+%token          _KW_allocates   /* allocates */
+%token          _KW_assert      /* assert */
+%token          _KW_assigns     /* assigns */
+%token          _KW_assumes     /* assumes */
+%token          _KW_at          /* at */
+%token          _KW_axiom       /* axiom */
+%token          _KW_axiomatic   /* axiomatic */
+%token          _KW_behavior    /* behavior */
+%token          _KW_behaviors   /* behaviors */
+%token          _KW_boolean     /* boolean */
+%token          _KW_breaks      /* breaks */
+%token          _KW_char        /* char */
+%token          _KW_check       /* check */
+%token          _KW_complete    /* complete */
+%token          _KW_continues   /* continues */
+%token          _KW_contract    /* contract */
+%token          _KW_decreases   /* decreases */
+%token          _KW_disjoint    /* disjoint */
+%token          _KW_double      /* double */
+%token          _KW_ensures     /* ensures */
+%token          _KW_exits       /* exits */
+%token          _KW_float       /* float */
+%token          _KW_for         /* for */
+%token          _KW_frees       /* frees */
+%token          _KW_function    /* function */
+%token          _KW_global      /* global */
+%token          _KW_impact      /* impact */
+%token          _KW_include     /* include */
+%token          _KW_inductive   /* inductive */
+%token          _KW_int         /* int */
+%token          _KW_integer     /* integer */
+%token          _KW_invariant   /* invariant */
+%token          _KW_label       /* label */
+%token          _KW_lemma       /* lemma */
+%token          _KW_let         /* let */
+%token          _KW_logic       /* logic */
+%token          _KW_long        /* long */
+%token          _KW_loop        /* loop */
+%token          _KW_model       /* model */
+%token          _KW_module      /* module */
+%token          _KW_pragma      /* pragma */
+%token          _KW_predicate   /* predicate */
+%token          _KW_reads       /* reads */
+%token          _KW_real        /* real */
+%token          _KW_requires    /* requires */
+%token          _KW_returns     /* returns */
+%token          _KW_short       /* short */
+%token          _KW_signed      /* signed */
+%token          _KW_sizeof      /* sizeof */
+%token          _KW_slice       /* slice */
+%token          _KW_terminates  /* terminates */
+%token          _KW_type        /* type */
+%token          _KW_unsigned    /* unsigned */
+%token          _KW_variant     /* variant */
+%token          _KW_void        /* void */
+%token          _KW_writes      /* writes */
+%token          _LBRACE         /* { */
+%token          _BAR            /* | */
+%token          _DBAR           /* || */
+%token          _RBRACE         /* } */
+%token          _TILDE          /* ~ */
 %token<_string> _STRING_
 %token<_int>    _INTEGER_
 %token<_double> _DOUBLE_
@@ -234,6 +300,8 @@ extern int yylex(YYSTYPE *lvalp, YYLTYPE *llocp, yyscan_t scanner);
 %type <loopannotstack_> LoopAnnotStack
 %type <loopannotopt_> LoopAnnotOpt
 %type <loopinvariant_> LoopInvariant
+%type <loopallocation_> LoopAllocation
+%type <allocation_> Allocation
 %type <loopvariant_> LoopVariant
 %type <loopeffects_> LoopEffects
 %type <variant_> Variant
@@ -250,6 +318,9 @@ Annot : Code_Annot { $$ = new partial_bnfc_acsl::CodeAnnot($1); $$->line_number 
 Code_Annot : Contract { $$ = new partial_bnfc_acsl::CodeAnnotContract($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->code_annot_ = $$; }
 ;
 Contract : Requires Terminates Decreases SimpleClauses Behaviors CompleteOrDisjoint { $$ = new partial_bnfc_acsl::SimpleContract($1, $2, $3, $4, $5, $6); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->contract_ = $$; }
+  | Requires Terminates Decreases NESimpleClauses _KW_requires { $$ = new partial_bnfc_acsl::ClausesRequiresContract($1, $2, $3, $4); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->contract_ = $$; }
+  | Requires Terminates Decreases NESimpleClauses _KW_terminates { $$ = new partial_bnfc_acsl::ClausesTerminatesContract($1, $2, $3, $4); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->contract_ = $$; }
+  | Requires Terminates Decreases NESimpleClauses _KW_decreases { $$ = new partial_bnfc_acsl::ClausesDecreasesContract($1, $2, $3, $4); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->contract_ = $$; }
 ;
 Requires : /* empty */ { $$ = new partial_bnfc_acsl::NoRequires(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->requires_ = $$; }
   | NERequires { $$ = new partial_bnfc_acsl::SomeRequires($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->requires_ = $$; }
@@ -278,11 +349,18 @@ Behaviors : /* empty */ { $$ = new partial_bnfc_acsl::NoBehaviors(); $$->line_nu
 ;
 CompleteOrDisjoint : /* empty */ { $$ = new partial_bnfc_acsl::NoComplDisj(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->completeordisjoint_ = $$; }
 ;
-Lexpr : Lexpr _SYMB_3 Lexpr1 { $$ = new partial_bnfc_acsl::ImplLexpr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
-  | Lexpr _SYMB_4 Lexpr1 { $$ = new partial_bnfc_acsl::IffLexpr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
-  | Lexpr _DBAR Lexpr1 { $$ = new partial_bnfc_acsl::OrLexpr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
-  | Lexpr _DAMP Lexpr1 { $$ = new partial_bnfc_acsl::AndLexpr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
-  | Lexpr _DCARET Lexpr1 { $$ = new partial_bnfc_acsl::HatHatLexpr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
+Lexpr : Lexpr1 _SYMB_3 Lexpr { $$ = new partial_bnfc_acsl::ImplLexpr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
+  | Lexpr1 _SYMB_4 Lexpr { $$ = new partial_bnfc_acsl::IffLexpr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
+  | Lexpr1 _DBAR Lexpr { $$ = new partial_bnfc_acsl::OrLexpr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
+  | Lexpr1 _DAMP Lexpr { $$ = new partial_bnfc_acsl::AndLexpr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
+  | Lexpr1 _DCARET Lexpr { $$ = new partial_bnfc_acsl::HatHatLexpr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
+  | Lexpr1 _AMP Lexpr { $$ = new partial_bnfc_acsl::AmpLexpr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
+  | Lexpr1 _BAR Lexpr { $$ = new partial_bnfc_acsl::PipeLexpr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
+  | Lexpr1 _CARET Lexpr { $$ = new partial_bnfc_acsl::HatLexpr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
+  | Lexpr1 _SYMB_11 Lexpr { $$ = new partial_bnfc_acsl::BimpliesLexpr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
+  | Lexpr1 _SYMB_12 Lexpr { $$ = new partial_bnfc_acsl::BiffLexpr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
+  | Lexpr1 _SYMB_13 Lexpr { $$ = new partial_bnfc_acsl::InLexpr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
+  | Lexpr _QUESTION Lexpr _COLON Lexpr { $$ = new partial_bnfc_acsl::TernaryLexpr($1, $3, $5); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
   | Lexpr1 { $$ = $1; $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
 ;
 ListLexpr : Lexpr { $$ = new partial_bnfc_acsl::ListLexpr(); $$->push_back($1); result->listlexpr_ = $$; }
@@ -307,9 +385,9 @@ Lexpr2 : Lexpr3 { $$ = $1; $$->line_number = @$.first_line; $$->char_number = @$
   | LexprBinder { $$ = new partial_bnfc_acsl::BinderLexpr($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
   | _BANG LexprBinder { $$ = new partial_bnfc_acsl::NotBinderLexpr($2); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
 ;
-LexprBinder : _SYMB_16 Binders _SEMI Lexpr { $$ = new partial_bnfc_acsl::ForallBinderLexpr($2, $4); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexprbinder_ = $$; }
-  | _SYMB_17 Binders _SEMI Lexpr { $$ = new partial_bnfc_acsl::ExistBinderLexpr($2, $4); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexprbinder_ = $$; }
-  | _SYMB_18 Binders _SEMI Lexpr { $$ = new partial_bnfc_acsl::LambdaBinderLexpr($2, $4); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexprbinder_ = $$; }
+LexprBinder : _SYMB_24 Binders _SEMI Lexpr { $$ = new partial_bnfc_acsl::ForallBinderLexpr($2, $4); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexprbinder_ = $$; }
+  | _SYMB_25 Binders _SEMI Lexpr { $$ = new partial_bnfc_acsl::ExistBinderLexpr($2, $4); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexprbinder_ = $$; }
+  | _SYMB_26 Binders _SEMI Lexpr { $$ = new partial_bnfc_acsl::LambdaBinderLexpr($2, $4); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexprbinder_ = $$; }
 ;
 Binders : TypeSpecOFTYPENAME VarSpec ListBindersReentrance { $$ = new partial_bnfc_acsl::TheBinders($1, $2, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->binders_ = $$; }
 ;
@@ -338,26 +416,52 @@ ArraySize : _INTEGER_ { $$ = new partial_bnfc_acsl::IntConstArraySize($1); $$->l
   | FullIdentifier { $$ = new partial_bnfc_acsl::SomeArraySize($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->arraysize_ = $$; }
   | /* empty */ { $$ = new partial_bnfc_acsl::NoSize(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->arraysize_ = $$; }
 ;
-Lexpr3 : _SYMB_24 { $$ = new partial_bnfc_acsl::TrueLexpr(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
-  | _SYMB_25 { $$ = new partial_bnfc_acsl::FalseLexpr(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
-  | _SYMB_26 OptLabel1 _LPAREN Lexpr _RPAREN { $$ = new partial_bnfc_acsl::ValidLexpr($2, $4); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
-  | _SYMB_27 { $$ = new partial_bnfc_acsl::AutomaticLexpr(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
-  | _SYMB_28 { $$ = new partial_bnfc_acsl::DynamicLexpr(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
-  | _SYMB_29 { $$ = new partial_bnfc_acsl::RegisterLexpr(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
-  | _SYMB_30 { $$ = new partial_bnfc_acsl::StaticLexpr(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
-  | _SYMB_31 { $$ = new partial_bnfc_acsl::UnallocatedLexpr(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
-  | _SYMB_32 { $$ = new partial_bnfc_acsl::NullLexpr(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
+Lexpr3 : _SYMB_32 { $$ = new partial_bnfc_acsl::TrueLexpr(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
+  | _SYMB_33 { $$ = new partial_bnfc_acsl::FalseLexpr(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
+  | _SYMB_34 OptLabel1 _LPAREN Lexpr _RPAREN { $$ = new partial_bnfc_acsl::PointerLexpr($2, $4); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
+  | _SYMB_35 OptLabel1 _LPAREN Lexpr _RPAREN { $$ = new partial_bnfc_acsl::ValidLexpr($2, $4); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
+  | _SYMB_36 OptLabel1 _LPAREN Lexpr _RPAREN { $$ = new partial_bnfc_acsl::ValidReadLexpr($2, $4); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
+  | _SYMB_37 _LPAREN Lexpr _RPAREN { $$ = new partial_bnfc_acsl::ValidFuncLexpr($3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
+  | _SYMB_38 OptLabel1 _LPAREN Lexpr _COMMA Lexpr _RPAREN { $$ = new partial_bnfc_acsl::ValidIndxLexpr($2, $4, $6); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
+  | _SYMB_39 OptLabel1 _LPAREN Lexpr _COMMA Lexpr _COMMA Lexpr _RPAREN { $$ = new partial_bnfc_acsl::ValidRangeLexpr($2, $4, $6, $8); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
+  | _SYMB_40 OptLabel1 _LPAREN Lexpr _RPAREN { $$ = new partial_bnfc_acsl::InitializedLexpr($2, $4); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
+  | _SYMB_41 OptLabel1 _LPAREN Lexpr _RPAREN { $$ = new partial_bnfc_acsl::DanglingLexpr($2, $4); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
+  | _SYMB_42 OptLabel2 _LPAREN Lexpr _COMMA Lexpr _RPAREN { $$ = new partial_bnfc_acsl::FreshLexpr($2, $4, $6); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
+  | _SYMB_43 OptLabel1 _LPAREN Lexpr _RPAREN { $$ = new partial_bnfc_acsl::BaseAddrLexpr($2, $4); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
+  | _SYMB_44 OptLabel1 _LPAREN Lexpr _RPAREN { $$ = new partial_bnfc_acsl::BlockLengthLexpr($2, $4); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
+  | _SYMB_45 OptLabel1 _LPAREN Lexpr _RPAREN { $$ = new partial_bnfc_acsl::OffsetLexpr($2, $4); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
+  | _SYMB_46 OptLabel1 _LPAREN Lexpr _RPAREN { $$ = new partial_bnfc_acsl::AllocableLexpr($2, $4); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
+  | _SYMB_47 OptLabel1 _LPAREN Lexpr _RPAREN { $$ = new partial_bnfc_acsl::FreeableLexpr($2, $4); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
+  | _SYMB_48 OptLabel1 _LPAREN Lexpr _RPAREN { $$ = new partial_bnfc_acsl::AllocationLexpr($2, $4); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
+  | _SYMB_49 { $$ = new partial_bnfc_acsl::AutomaticLexpr(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
+  | _SYMB_50 { $$ = new partial_bnfc_acsl::DynamicLexpr(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
+  | _SYMB_51 { $$ = new partial_bnfc_acsl::RegisterLexpr(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
+  | _SYMB_52 { $$ = new partial_bnfc_acsl::StaticLexpr(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
+  | _SYMB_53 { $$ = new partial_bnfc_acsl::UnallocatedLexpr(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
+  | _SYMB_54 { $$ = new partial_bnfc_acsl::NullLexpr(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
   | _INTEGER_ { $$ = new partial_bnfc_acsl::LexprIntConst($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
   | _DOUBLE_ { $$ = new partial_bnfc_acsl::LexprFloatConst($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
   | _STRING_ { $$ = new partial_bnfc_acsl::LexprStringConst($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
   | Lexpr3 _PLUS Lexpr3 { $$ = new partial_bnfc_acsl::AddLexpr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
   | Lexpr3 _MINUS Lexpr3 { $$ = new partial_bnfc_acsl::SubtrLexpr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
+  | Lexpr3 _STAR Lexpr3 { $$ = new partial_bnfc_acsl::MultLexpr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
+  | Lexpr3 _SLASH Lexpr3 { $$ = new partial_bnfc_acsl::DivLexpr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
+  | Lexpr3 _PERCENT Lexpr3 { $$ = new partial_bnfc_acsl::ModLexpr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
   | Lexpr3 _LBRACK Range _RBRACK { $$ = new partial_bnfc_acsl::SquaresRangeLexpr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
   | Lexpr3 _LBRACK Lexpr _RBRACK { $$ = new partial_bnfc_acsl::SquaresLexpr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
-  | _SYMB_35 _LPAREN ListLexpr _RPAREN { std::reverse($3->begin(),$3->end()) ;$$ = new partial_bnfc_acsl::SeparatedLexpr($3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
+  | _MINUS Lexpr3 { $$ = new partial_bnfc_acsl::MinusLexpr($2); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
+  | _PLUS Lexpr3 { $$ = new partial_bnfc_acsl::PlusLexpr($2); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
+  | _TILDE Lexpr3 { $$ = new partial_bnfc_acsl::TildeLexpr($2); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
+  | _STAR Lexpr3 { $$ = new partial_bnfc_acsl::StarLexpr($2); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
+  | _AMP Lexpr3 { $$ = new partial_bnfc_acsl::AmpUnaryLexpr($2); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
+  | _KW_sizeof _LPAREN Lexpr _RPAREN { $$ = new partial_bnfc_acsl::SizeOfLexpr($3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
+  | _SYMB_60 _LPAREN Lexpr _RPAREN { $$ = new partial_bnfc_acsl::OldLexpr($3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
+  | _SYMB_61 _LPAREN Lexpr _COMMA LabelName _RPAREN { $$ = new partial_bnfc_acsl::AtLexpr($3, $5); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
+  | _SYMB_62 { $$ = new partial_bnfc_acsl::ResultLexpr(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
+  | _SYMB_63 _LPAREN ListLexpr _RPAREN { std::reverse($3->begin(),$3->end()) ;$$ = new partial_bnfc_acsl::SeparatedLexpr($3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
   | FullIdentifier _LPAREN ListLexpr _RPAREN { std::reverse($3->begin(),$3->end()) ;$$ = new partial_bnfc_acsl::FullIdParenLexpr($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
   | FullIdentifier { $$ = new partial_bnfc_acsl::FullId($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
-  | _SYMB_36 { $$ = new partial_bnfc_acsl::PiLexpr(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
+  | _SYMB_64 { $$ = new partial_bnfc_acsl::PiLexpr(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
   | _LPAREN Lexpr _RPAREN { $$ = $2; $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
   | _LPAREN Range _RPAREN { $$ = new partial_bnfc_acsl::ParenRangeLexpr($2); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->lexpr_ = $$; }
 ;
@@ -397,19 +501,86 @@ PostCond : _KW_ensures { $$ = new partial_bnfc_acsl::EnsuresKeyWord(); $$->line_
   | _KW_admit _KW_returns { $$ = new partial_bnfc_acsl::AdmitReturnsKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->postcond_ = $$; }
 ;
 FullIdentifier : Identifier { $$ = new partial_bnfc_acsl::SimpleIdentifierFull($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->fullidentifier_ = $$; }
+  | _KW_admit { $$ = new partial_bnfc_acsl::AdmitKeyWordFullIdent(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->fullidentifier_ = $$; }
+  | _KW_allocates { $$ = new partial_bnfc_acsl::AllocatesKeyWordFullIdent(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->fullidentifier_ = $$; }
+  | _KW_assert { $$ = new partial_bnfc_acsl::AssertKeyWordFullIdent(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->fullidentifier_ = $$; }
+  | _KW_assigns { $$ = new partial_bnfc_acsl::AssignsKeyWordFullIdent(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->fullidentifier_ = $$; }
+  | _KW_assumes { $$ = new partial_bnfc_acsl::AssumesKeyWordFullIdent(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->fullidentifier_ = $$; }
+  | _KW_at { $$ = new partial_bnfc_acsl::AtKeyWordFullIdent(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->fullidentifier_ = $$; }
+  | _KW_axiom { $$ = new partial_bnfc_acsl::AxiomKeyWordFullIdent(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->fullidentifier_ = $$; }
+  | _KW_axiomatic { $$ = new partial_bnfc_acsl::AxiomaticKeyWordFullIdent(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->fullidentifier_ = $$; }
+  | _KW_behavior { $$ = new partial_bnfc_acsl::BehaviorKeyWordFullIdent(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->fullidentifier_ = $$; }
+  | _KW_breaks { $$ = new partial_bnfc_acsl::BreaksKeyWordFullIdent(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->fullidentifier_ = $$; }
+  | _KW_check { $$ = new partial_bnfc_acsl::CheckKeyWordFullIdent(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->fullidentifier_ = $$; }
+  | _KW_complete { $$ = new partial_bnfc_acsl::CompleteKeyWordFullIdent(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->fullidentifier_ = $$; }
+  | _KW_continues { $$ = new partial_bnfc_acsl::ContinuesKeyWordFullIdent(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->fullidentifier_ = $$; }
+  | _KW_contract { $$ = new partial_bnfc_acsl::ContractKeyWordFullIdent(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->fullidentifier_ = $$; }
+  | _KW_decreases { $$ = new partial_bnfc_acsl::DecreasesKeyWordFullIdent(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->fullidentifier_ = $$; }
+  | _KW_disjoint { $$ = new partial_bnfc_acsl::DisjointKeyWordFullIdent(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->fullidentifier_ = $$; }
+  | _KW_ensures { $$ = new partial_bnfc_acsl::EnsuresKeyWordFullIdent(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->fullidentifier_ = $$; }
+  | _KW_exits { $$ = new partial_bnfc_acsl::ExitsKeyWordFullIdent(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->fullidentifier_ = $$; }
+  | _KW_frees { $$ = new partial_bnfc_acsl::FreesKeyWordFullIdent(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->fullidentifier_ = $$; }
+  | _KW_function { $$ = new partial_bnfc_acsl::FunctionKeyWordFullIdent(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->fullidentifier_ = $$; }
+  | _KW_global { $$ = new partial_bnfc_acsl::GlobalKeyWordFullIdent(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->fullidentifier_ = $$; }
+  | _KW_impact { $$ = new partial_bnfc_acsl::ImpactKeyWordFullIdent(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->fullidentifier_ = $$; }
+  | _KW_inductive { $$ = new partial_bnfc_acsl::InductiveKeyWordFullIdent(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->fullidentifier_ = $$; }
+  | _KW_include { $$ = new partial_bnfc_acsl::IncludeKeyWordFullIdent(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->fullidentifier_ = $$; }
+  | _KW_invariant { $$ = new partial_bnfc_acsl::InvariantKeyWordFullIdent(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->fullidentifier_ = $$; }
+  | _KW_lemma { $$ = new partial_bnfc_acsl::LemmaKeyWordFullIdent(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->fullidentifier_ = $$; }
+  | _KW_let { $$ = new partial_bnfc_acsl::LetKeyWordFullIdent(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->fullidentifier_ = $$; }
+  | _KW_logic { $$ = new partial_bnfc_acsl::LogicKeyWordFullIdent(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->fullidentifier_ = $$; }
+  | _KW_loop { $$ = new partial_bnfc_acsl::LoopKeyWordFullIdent(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->fullidentifier_ = $$; }
+  | _KW_model { $$ = new partial_bnfc_acsl::ModelKeyWordFullIdent(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->fullidentifier_ = $$; }
+  | _KW_module { $$ = new partial_bnfc_acsl::ModuleKeyWordFullIdent(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->fullidentifier_ = $$; }
+  | _KW_pragma { $$ = new partial_bnfc_acsl::PragmaKeyWordFullIdent(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->fullidentifier_ = $$; }
+  | _KW_predicate { $$ = new partial_bnfc_acsl::PredicateKeyWordFullIdent(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->fullidentifier_ = $$; }
+  | _KW_requires { $$ = new partial_bnfc_acsl::RequiresKeyWordFullIdent(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->fullidentifier_ = $$; }
+  | _KW_returns { $$ = new partial_bnfc_acsl::ReturnsKeyWordFullIdent(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->fullidentifier_ = $$; }
+  | _KW_slice { $$ = new partial_bnfc_acsl::SliceKeyWordFullIdent(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->fullidentifier_ = $$; }
+  | _KW_terminates { $$ = new partial_bnfc_acsl::TerminatesKeyWordFullIdent(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->fullidentifier_ = $$; }
+  | _KW_type { $$ = new partial_bnfc_acsl::TypeKeyWordFullIdent(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->fullidentifier_ = $$; }
+  | _KW_variant { $$ = new partial_bnfc_acsl::VariantKeyWordFullIdent(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->fullidentifier_ = $$; }
 ;
 ListFullIdentifier : FullIdentifier { $$ = new partial_bnfc_acsl::ListFullIdentifier(); $$->push_back($1); result->listfullidentifier_ = $$; }
   | FullIdentifier _COMMA ListFullIdentifier { $3->push_back($1); $$ = $3; result->listfullidentifier_ = $$; }
 ;
 Identifier : _IDENT_ { $$ = new partial_bnfc_acsl::IdentifierIdent($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->identifier_ = $$; }
+  | _KW_behaviors { $$ = new partial_bnfc_acsl::BehaviorsKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->identifier_ = $$; }
+  | _KW_label { $$ = new partial_bnfc_acsl::LabelKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->identifier_ = $$; }
+  | _KW_reads { $$ = new partial_bnfc_acsl::ReadsKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->identifier_ = $$; }
+  | _KW_writes { $$ = new partial_bnfc_acsl::WritesKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->identifier_ = $$; }
 ;
 TypeSpecSimple : _KW_integer { $$ = new partial_bnfc_acsl::TypeSpecSimpleIntegerKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespecsimple_ = $$; }
   | _KW_real { $$ = new partial_bnfc_acsl::TypeSpecSimpleRealKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespecsimple_ = $$; }
   | _KW_boolean { $$ = new partial_bnfc_acsl::TypeSpecSimpleBooleanKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespecsimple_ = $$; }
   | _KW_void { $$ = new partial_bnfc_acsl::TypeSpecSimpleVoidKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespecsimple_ = $$; }
-  | _SYMB_40 { $$ = new partial_bnfc_acsl::TypeSpecSimpleBoolKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespecsimple_ = $$; }
+  | _SYMB_68 { $$ = new partial_bnfc_acsl::TypeSpecSimpleBoolKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespecsimple_ = $$; }
   | _KW_char { $$ = new partial_bnfc_acsl::TypeSpecSimpleCharKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespecsimple_ = $$; }
+  | _KW_signed _KW_char { $$ = new partial_bnfc_acsl::TypeSpecSimpleSignedCharKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespecsimple_ = $$; }
+  | _KW_unsigned _KW_char { $$ = new partial_bnfc_acsl::TypeSpecSimpleUnsignedCharKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespecsimple_ = $$; }
   | _KW_int { $$ = new partial_bnfc_acsl::TypeSpecSimpleIntKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespecsimple_ = $$; }
+  | _KW_signed _KW_int { $$ = new partial_bnfc_acsl::TypeSpecSimpleSignedIntKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespecsimple_ = $$; }
+  | _KW_unsigned _KW_int { $$ = new partial_bnfc_acsl::TypeSpecSimpleUnsignedIntKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespecsimple_ = $$; }
+  | _KW_unsigned { $$ = new partial_bnfc_acsl::TypeSpecSimpleUnsignedKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespecsimple_ = $$; }
+  | _KW_short { $$ = new partial_bnfc_acsl::TypeSpecSimpleShortKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespecsimple_ = $$; }
+  | _KW_signed _KW_short { $$ = new partial_bnfc_acsl::TypeSpecSimpleSignedShortKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespecsimple_ = $$; }
+  | _KW_unsigned _KW_short { $$ = new partial_bnfc_acsl::TypeSpecSimpleUnsignedShortKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespecsimple_ = $$; }
+  | _KW_short _KW_int { $$ = new partial_bnfc_acsl::TypeSpecSimpleShortIntKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespecsimple_ = $$; }
+  | _KW_signed _KW_short _KW_int { $$ = new partial_bnfc_acsl::TypeSpecSimpleSignedShortIntKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespecsimple_ = $$; }
+  | _KW_unsigned _KW_short _KW_int { $$ = new partial_bnfc_acsl::TypeSpecSimpleUnsignedShortIntKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespecsimple_ = $$; }
+  | _KW_long { $$ = new partial_bnfc_acsl::TypeSpecSimpleLongKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespecsimple_ = $$; }
+  | _KW_signed _KW_long { $$ = new partial_bnfc_acsl::TypeSpecSimpleSignedLongKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespecsimple_ = $$; }
+  | _KW_unsigned _KW_long { $$ = new partial_bnfc_acsl::TypeSpecSimpleUnsignedLongKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespecsimple_ = $$; }
+  | _KW_signed _KW_long _KW_int { $$ = new partial_bnfc_acsl::TypeSpecSimpleSignedLongIntKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespecsimple_ = $$; }
+  | _KW_long _KW_int { $$ = new partial_bnfc_acsl::TypeSpecSimpleLongIntKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespecsimple_ = $$; }
+  | _KW_unsigned _KW_long _KW_int { $$ = new partial_bnfc_acsl::TypeSpecSimpleUnsignedLongIntKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespecsimple_ = $$; }
+  | _KW_long _KW_long { $$ = new partial_bnfc_acsl::TypeSpecSimpleLongLongKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespecsimple_ = $$; }
+  | _KW_signed _KW_long _KW_long { $$ = new partial_bnfc_acsl::TypeSpecSimpleSignedLongLongKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespecsimple_ = $$; }
+  | _KW_unsigned _KW_long _KW_long { $$ = new partial_bnfc_acsl::TypeSpecSimpleUnsignedLongLongKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespecsimple_ = $$; }
+  | _KW_long _KW_long _KW_int { $$ = new partial_bnfc_acsl::TypeSpecSimpleLongLongIntKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespecsimple_ = $$; }
+  | _KW_signed _KW_long _KW_long _KW_int { $$ = new partial_bnfc_acsl::TypeSpecSimpleSignedLongLongIntKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespecsimple_ = $$; }
+  | _KW_unsigned _KW_long _KW_long _KW_int { $$ = new partial_bnfc_acsl::TypeSpecSimpleUnsignedLongLongIntKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespecsimple_ = $$; }
+  | _KW_float { $$ = new partial_bnfc_acsl::TypeSpecSimpleFloatKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespecsimple_ = $$; }
   | _KW_double { $$ = new partial_bnfc_acsl::TypeSpecSimpleDoubleKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespecsimple_ = $$; }
   | _KW_long _KW_double { $$ = new partial_bnfc_acsl::TypeSpecSimpleLongDoubleKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespecsimple_ = $$; }
 ;
@@ -419,6 +590,7 @@ Annotation : LoopAnnotStack { $$ = new partial_bnfc_acsl::LoopAnnotation($1); $$
 ;
 LoopAnnotStack : LoopInvariant LoopAnnotOpt { $$ = new partial_bnfc_acsl::LoopAnnotStackInvariant($1, $2); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->loopannotstack_ = $$; }
   | LoopEffects LoopAnnotOpt { $$ = new partial_bnfc_acsl::LoopAnnotStackEffects($1, $2); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->loopannotstack_ = $$; }
+  | LoopAllocation LoopAnnotOpt { $$ = new partial_bnfc_acsl::LoopAnnotStackAllocation($1, $2); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->loopannotstack_ = $$; }
   | LoopVariant LoopAnnotOpt { $$ = new partial_bnfc_acsl::LoopAnnotStackVariant($1, $2); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->loopannotstack_ = $$; }
 ;
 LoopAnnotOpt : /* empty */ { $$ = new partial_bnfc_acsl::NoLoopAnnot(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->loopannotopt_ = $$; }
@@ -427,6 +599,11 @@ LoopAnnotOpt : /* empty */ { $$ = new partial_bnfc_acsl::NoLoopAnnot(); $$->line
 LoopInvariant : _KW_loop _KW_invariant Lexpr _SEMI { $$ = new partial_bnfc_acsl::SimpleLoopInvariant($3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->loopinvariant_ = $$; }
   | _KW_check _KW_loop _KW_invariant Lexpr _SEMI { $$ = new partial_bnfc_acsl::CheckLoopInvariant($4); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->loopinvariant_ = $$; }
   | _KW_admit _KW_loop _KW_invariant Lexpr _SEMI { $$ = new partial_bnfc_acsl::AdmitLoopInvariant($4); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->loopinvariant_ = $$; }
+;
+LoopAllocation : _KW_loop Allocation _SEMI { $$ = new partial_bnfc_acsl::SimpleLoopAllocation($2); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->loopallocation_ = $$; }
+;
+Allocation : _KW_allocates Zones { $$ = new partial_bnfc_acsl::AllocatesZones($2); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->allocation_ = $$; }
+  | _KW_frees Zones { $$ = new partial_bnfc_acsl::FreesZones($2); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->allocation_ = $$; }
 ;
 LoopVariant : _KW_loop _KW_variant Variant _SEMI { $$ = new partial_bnfc_acsl::SimpleLoopVariant($3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->loopvariant_ = $$; }
 ;
@@ -2645,6 +2822,94 @@ LoopInvariant* psLoopInvariant(const char *str)
   else
   { /* Success */
     return result.loopinvariant_;
+  }
+}
+
+/* Entrypoint: parse LoopAllocation* from file. */
+LoopAllocation* pLoopAllocation(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_bnfc_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_bnfc_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.loopallocation_;
+  }
+}
+
+/* Entrypoint: parse LoopAllocation* from string. */
+LoopAllocation* psLoopAllocation(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_bnfc_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_bnfc_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_bnfc_acsl_delete_buffer(buf, scanner);
+  partial_bnfc_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.loopallocation_;
+  }
+}
+
+/* Entrypoint: parse Allocation* from file. */
+Allocation* pAllocation(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_bnfc_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_bnfc_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.allocation_;
+  }
+}
+
+/* Entrypoint: parse Allocation* from string. */
+Allocation* psAllocation(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_bnfc_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_bnfc_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_bnfc_acsl_delete_buffer(buf, scanner);
+  partial_bnfc_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.allocation_;
   }
 }
 

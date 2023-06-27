@@ -61,6 +61,8 @@ class Annotation;
 class LoopAnnotStack;
 class LoopAnnotOpt;
 class LoopInvariant;
+class LoopAllocation;
+class Allocation;
 class LoopVariant;
 class LoopEffects;
 class Variant;
@@ -69,6 +71,9 @@ class AnnotationProgram;
 class CodeAnnot;
 class CodeAnnotContract;
 class SimpleContract;
+class ClausesRequiresContract;
+class ClausesTerminatesContract;
+class ClausesDecreasesContract;
 class NoRequires;
 class SomeRequires;
 class SimpleRequires;
@@ -91,6 +96,13 @@ class IffLexpr;
 class OrLexpr;
 class AndLexpr;
 class HatHatLexpr;
+class AmpLexpr;
+class PipeLexpr;
+class HatLexpr;
+class BimpliesLexpr;
+class BiffLexpr;
+class InLexpr;
+class TernaryLexpr;
 class RelationLexpr;
 class RelInnerLexpr;
 class LessRel;
@@ -118,7 +130,21 @@ class SomeArraySize;
 class NoSize;
 class TrueLexpr;
 class FalseLexpr;
+class PointerLexpr;
 class ValidLexpr;
+class ValidReadLexpr;
+class ValidFuncLexpr;
+class ValidIndxLexpr;
+class ValidRangeLexpr;
+class InitializedLexpr;
+class DanglingLexpr;
+class FreshLexpr;
+class BaseAddrLexpr;
+class BlockLengthLexpr;
+class OffsetLexpr;
+class AllocableLexpr;
+class FreeableLexpr;
+class AllocationLexpr;
 class AutomaticLexpr;
 class DynamicLexpr;
 class RegisterLexpr;
@@ -130,8 +156,20 @@ class LexprFloatConst;
 class LexprStringConst;
 class AddLexpr;
 class SubtrLexpr;
+class MultLexpr;
+class DivLexpr;
+class ModLexpr;
 class SquaresRangeLexpr;
 class SquaresLexpr;
+class MinusLexpr;
+class PlusLexpr;
+class TildeLexpr;
+class StarLexpr;
+class AmpUnaryLexpr;
+class SizeOfLexpr;
+class OldLexpr;
+class AtLexpr;
+class ResultLexpr;
 class SeparatedLexpr;
 class FullIdParenLexpr;
 class FullId;
@@ -162,26 +200,97 @@ class AdmitBreaksKeyWord;
 class AdmitContinuesKeyWord;
 class AdmitReturnsKeyWord;
 class SimpleIdentifierFull;
+class AdmitKeyWordFullIdent;
+class AllocatesKeyWordFullIdent;
+class AssertKeyWordFullIdent;
+class AssignsKeyWordFullIdent;
+class AssumesKeyWordFullIdent;
+class AtKeyWordFullIdent;
+class AxiomKeyWordFullIdent;
+class AxiomaticKeyWordFullIdent;
+class BehaviorKeyWordFullIdent;
+class BreaksKeyWordFullIdent;
+class CheckKeyWordFullIdent;
+class CompleteKeyWordFullIdent;
+class ContinuesKeyWordFullIdent;
+class ContractKeyWordFullIdent;
+class DecreasesKeyWordFullIdent;
+class DisjointKeyWordFullIdent;
+class EnsuresKeyWordFullIdent;
+class ExitsKeyWordFullIdent;
+class FreesKeyWordFullIdent;
+class FunctionKeyWordFullIdent;
+class GlobalKeyWordFullIdent;
+class ImpactKeyWordFullIdent;
+class InductiveKeyWordFullIdent;
+class IncludeKeyWordFullIdent;
+class InvariantKeyWordFullIdent;
+class LemmaKeyWordFullIdent;
+class LetKeyWordFullIdent;
+class LogicKeyWordFullIdent;
+class LoopKeyWordFullIdent;
+class ModelKeyWordFullIdent;
+class ModuleKeyWordFullIdent;
+class PragmaKeyWordFullIdent;
+class PredicateKeyWordFullIdent;
+class RequiresKeyWordFullIdent;
+class ReturnsKeyWordFullIdent;
+class SliceKeyWordFullIdent;
+class TerminatesKeyWordFullIdent;
+class TypeKeyWordFullIdent;
+class VariantKeyWordFullIdent;
 class IdentifierIdent;
+class BehaviorsKeyWord;
+class LabelKeyWord;
+class ReadsKeyWord;
+class WritesKeyWord;
 class TypeSpecSimpleIntegerKeyWord;
 class TypeSpecSimpleRealKeyWord;
 class TypeSpecSimpleBooleanKeyWord;
 class TypeSpecSimpleVoidKeyWord;
 class TypeSpecSimpleBoolKeyWord;
 class TypeSpecSimpleCharKeyWord;
+class TypeSpecSimpleSignedCharKeyWord;
+class TypeSpecSimpleUnsignedCharKeyWord;
 class TypeSpecSimpleIntKeyWord;
+class TypeSpecSimpleSignedIntKeyWord;
+class TypeSpecSimpleUnsignedIntKeyWord;
+class TypeSpecSimpleUnsignedKeyWord;
+class TypeSpecSimpleShortKeyWord;
+class TypeSpecSimpleSignedShortKeyWord;
+class TypeSpecSimpleUnsignedShortKeyWord;
+class TypeSpecSimpleShortIntKeyWord;
+class TypeSpecSimpleSignedShortIntKeyWord;
+class TypeSpecSimpleUnsignedShortIntKeyWord;
+class TypeSpecSimpleLongKeyWord;
+class TypeSpecSimpleSignedLongKeyWord;
+class TypeSpecSimpleUnsignedLongKeyWord;
+class TypeSpecSimpleSignedLongIntKeyWord;
+class TypeSpecSimpleLongIntKeyWord;
+class TypeSpecSimpleUnsignedLongIntKeyWord;
+class TypeSpecSimpleLongLongKeyWord;
+class TypeSpecSimpleSignedLongLongKeyWord;
+class TypeSpecSimpleUnsignedLongLongKeyWord;
+class TypeSpecSimpleLongLongIntKeyWord;
+class TypeSpecSimpleSignedLongLongIntKeyWord;
+class TypeSpecSimpleUnsignedLongLongIntKeyWord;
+class TypeSpecSimpleFloatKeyWord;
 class TypeSpecSimpleDoubleKeyWord;
 class TypeSpecSimpleLongDoubleKeyWord;
 class AnAnnotation;
 class LoopAnnotation;
 class LoopAnnotStackInvariant;
 class LoopAnnotStackEffects;
+class LoopAnnotStackAllocation;
 class LoopAnnotStackVariant;
 class NoLoopAnnot;
 class SomeLoopAnnot;
 class SimpleLoopInvariant;
 class CheckLoopInvariant;
 class AdmitLoopInvariant;
+class SimpleLoopAllocation;
+class AllocatesZones;
+class FreesZones;
 class SimpleLoopVariant;
 class LoopAssigns;
 class ForVariant;
@@ -238,6 +347,8 @@ public:
   virtual void visitLoopAnnotStack(LoopAnnotStack *p) = 0;
   virtual void visitLoopAnnotOpt(LoopAnnotOpt *p) = 0;
   virtual void visitLoopInvariant(LoopInvariant *p) = 0;
+  virtual void visitLoopAllocation(LoopAllocation *p) = 0;
+  virtual void visitAllocation(Allocation *p) = 0;
   virtual void visitLoopVariant(LoopVariant *p) = 0;
   virtual void visitLoopEffects(LoopEffects *p) = 0;
   virtual void visitVariant(Variant *p) = 0;
@@ -246,6 +357,9 @@ public:
   virtual void visitCodeAnnot(CodeAnnot *p) = 0;
   virtual void visitCodeAnnotContract(CodeAnnotContract *p) = 0;
   virtual void visitSimpleContract(SimpleContract *p) = 0;
+  virtual void visitClausesRequiresContract(ClausesRequiresContract *p) = 0;
+  virtual void visitClausesTerminatesContract(ClausesTerminatesContract *p) = 0;
+  virtual void visitClausesDecreasesContract(ClausesDecreasesContract *p) = 0;
   virtual void visitNoRequires(NoRequires *p) = 0;
   virtual void visitSomeRequires(SomeRequires *p) = 0;
   virtual void visitSimpleRequires(SimpleRequires *p) = 0;
@@ -268,6 +382,13 @@ public:
   virtual void visitOrLexpr(OrLexpr *p) = 0;
   virtual void visitAndLexpr(AndLexpr *p) = 0;
   virtual void visitHatHatLexpr(HatHatLexpr *p) = 0;
+  virtual void visitAmpLexpr(AmpLexpr *p) = 0;
+  virtual void visitPipeLexpr(PipeLexpr *p) = 0;
+  virtual void visitHatLexpr(HatLexpr *p) = 0;
+  virtual void visitBimpliesLexpr(BimpliesLexpr *p) = 0;
+  virtual void visitBiffLexpr(BiffLexpr *p) = 0;
+  virtual void visitInLexpr(InLexpr *p) = 0;
+  virtual void visitTernaryLexpr(TernaryLexpr *p) = 0;
   virtual void visitRelationLexpr(RelationLexpr *p) = 0;
   virtual void visitRelInnerLexpr(RelInnerLexpr *p) = 0;
   virtual void visitLessRel(LessRel *p) = 0;
@@ -295,7 +416,21 @@ public:
   virtual void visitNoSize(NoSize *p) = 0;
   virtual void visitTrueLexpr(TrueLexpr *p) = 0;
   virtual void visitFalseLexpr(FalseLexpr *p) = 0;
+  virtual void visitPointerLexpr(PointerLexpr *p) = 0;
   virtual void visitValidLexpr(ValidLexpr *p) = 0;
+  virtual void visitValidReadLexpr(ValidReadLexpr *p) = 0;
+  virtual void visitValidFuncLexpr(ValidFuncLexpr *p) = 0;
+  virtual void visitValidIndxLexpr(ValidIndxLexpr *p) = 0;
+  virtual void visitValidRangeLexpr(ValidRangeLexpr *p) = 0;
+  virtual void visitInitializedLexpr(InitializedLexpr *p) = 0;
+  virtual void visitDanglingLexpr(DanglingLexpr *p) = 0;
+  virtual void visitFreshLexpr(FreshLexpr *p) = 0;
+  virtual void visitBaseAddrLexpr(BaseAddrLexpr *p) = 0;
+  virtual void visitBlockLengthLexpr(BlockLengthLexpr *p) = 0;
+  virtual void visitOffsetLexpr(OffsetLexpr *p) = 0;
+  virtual void visitAllocableLexpr(AllocableLexpr *p) = 0;
+  virtual void visitFreeableLexpr(FreeableLexpr *p) = 0;
+  virtual void visitAllocationLexpr(AllocationLexpr *p) = 0;
   virtual void visitAutomaticLexpr(AutomaticLexpr *p) = 0;
   virtual void visitDynamicLexpr(DynamicLexpr *p) = 0;
   virtual void visitRegisterLexpr(RegisterLexpr *p) = 0;
@@ -307,8 +442,20 @@ public:
   virtual void visitLexprStringConst(LexprStringConst *p) = 0;
   virtual void visitAddLexpr(AddLexpr *p) = 0;
   virtual void visitSubtrLexpr(SubtrLexpr *p) = 0;
+  virtual void visitMultLexpr(MultLexpr *p) = 0;
+  virtual void visitDivLexpr(DivLexpr *p) = 0;
+  virtual void visitModLexpr(ModLexpr *p) = 0;
   virtual void visitSquaresRangeLexpr(SquaresRangeLexpr *p) = 0;
   virtual void visitSquaresLexpr(SquaresLexpr *p) = 0;
+  virtual void visitMinusLexpr(MinusLexpr *p) = 0;
+  virtual void visitPlusLexpr(PlusLexpr *p) = 0;
+  virtual void visitTildeLexpr(TildeLexpr *p) = 0;
+  virtual void visitStarLexpr(StarLexpr *p) = 0;
+  virtual void visitAmpUnaryLexpr(AmpUnaryLexpr *p) = 0;
+  virtual void visitSizeOfLexpr(SizeOfLexpr *p) = 0;
+  virtual void visitOldLexpr(OldLexpr *p) = 0;
+  virtual void visitAtLexpr(AtLexpr *p) = 0;
+  virtual void visitResultLexpr(ResultLexpr *p) = 0;
   virtual void visitSeparatedLexpr(SeparatedLexpr *p) = 0;
   virtual void visitFullIdParenLexpr(FullIdParenLexpr *p) = 0;
   virtual void visitFullId(FullId *p) = 0;
@@ -339,26 +486,97 @@ public:
   virtual void visitAdmitContinuesKeyWord(AdmitContinuesKeyWord *p) = 0;
   virtual void visitAdmitReturnsKeyWord(AdmitReturnsKeyWord *p) = 0;
   virtual void visitSimpleIdentifierFull(SimpleIdentifierFull *p) = 0;
+  virtual void visitAdmitKeyWordFullIdent(AdmitKeyWordFullIdent *p) = 0;
+  virtual void visitAllocatesKeyWordFullIdent(AllocatesKeyWordFullIdent *p) = 0;
+  virtual void visitAssertKeyWordFullIdent(AssertKeyWordFullIdent *p) = 0;
+  virtual void visitAssignsKeyWordFullIdent(AssignsKeyWordFullIdent *p) = 0;
+  virtual void visitAssumesKeyWordFullIdent(AssumesKeyWordFullIdent *p) = 0;
+  virtual void visitAtKeyWordFullIdent(AtKeyWordFullIdent *p) = 0;
+  virtual void visitAxiomKeyWordFullIdent(AxiomKeyWordFullIdent *p) = 0;
+  virtual void visitAxiomaticKeyWordFullIdent(AxiomaticKeyWordFullIdent *p) = 0;
+  virtual void visitBehaviorKeyWordFullIdent(BehaviorKeyWordFullIdent *p) = 0;
+  virtual void visitBreaksKeyWordFullIdent(BreaksKeyWordFullIdent *p) = 0;
+  virtual void visitCheckKeyWordFullIdent(CheckKeyWordFullIdent *p) = 0;
+  virtual void visitCompleteKeyWordFullIdent(CompleteKeyWordFullIdent *p) = 0;
+  virtual void visitContinuesKeyWordFullIdent(ContinuesKeyWordFullIdent *p) = 0;
+  virtual void visitContractKeyWordFullIdent(ContractKeyWordFullIdent *p) = 0;
+  virtual void visitDecreasesKeyWordFullIdent(DecreasesKeyWordFullIdent *p) = 0;
+  virtual void visitDisjointKeyWordFullIdent(DisjointKeyWordFullIdent *p) = 0;
+  virtual void visitEnsuresKeyWordFullIdent(EnsuresKeyWordFullIdent *p) = 0;
+  virtual void visitExitsKeyWordFullIdent(ExitsKeyWordFullIdent *p) = 0;
+  virtual void visitFreesKeyWordFullIdent(FreesKeyWordFullIdent *p) = 0;
+  virtual void visitFunctionKeyWordFullIdent(FunctionKeyWordFullIdent *p) = 0;
+  virtual void visitGlobalKeyWordFullIdent(GlobalKeyWordFullIdent *p) = 0;
+  virtual void visitImpactKeyWordFullIdent(ImpactKeyWordFullIdent *p) = 0;
+  virtual void visitInductiveKeyWordFullIdent(InductiveKeyWordFullIdent *p) = 0;
+  virtual void visitIncludeKeyWordFullIdent(IncludeKeyWordFullIdent *p) = 0;
+  virtual void visitInvariantKeyWordFullIdent(InvariantKeyWordFullIdent *p) = 0;
+  virtual void visitLemmaKeyWordFullIdent(LemmaKeyWordFullIdent *p) = 0;
+  virtual void visitLetKeyWordFullIdent(LetKeyWordFullIdent *p) = 0;
+  virtual void visitLogicKeyWordFullIdent(LogicKeyWordFullIdent *p) = 0;
+  virtual void visitLoopKeyWordFullIdent(LoopKeyWordFullIdent *p) = 0;
+  virtual void visitModelKeyWordFullIdent(ModelKeyWordFullIdent *p) = 0;
+  virtual void visitModuleKeyWordFullIdent(ModuleKeyWordFullIdent *p) = 0;
+  virtual void visitPragmaKeyWordFullIdent(PragmaKeyWordFullIdent *p) = 0;
+  virtual void visitPredicateKeyWordFullIdent(PredicateKeyWordFullIdent *p) = 0;
+  virtual void visitRequiresKeyWordFullIdent(RequiresKeyWordFullIdent *p) = 0;
+  virtual void visitReturnsKeyWordFullIdent(ReturnsKeyWordFullIdent *p) = 0;
+  virtual void visitSliceKeyWordFullIdent(SliceKeyWordFullIdent *p) = 0;
+  virtual void visitTerminatesKeyWordFullIdent(TerminatesKeyWordFullIdent *p) = 0;
+  virtual void visitTypeKeyWordFullIdent(TypeKeyWordFullIdent *p) = 0;
+  virtual void visitVariantKeyWordFullIdent(VariantKeyWordFullIdent *p) = 0;
   virtual void visitIdentifierIdent(IdentifierIdent *p) = 0;
+  virtual void visitBehaviorsKeyWord(BehaviorsKeyWord *p) = 0;
+  virtual void visitLabelKeyWord(LabelKeyWord *p) = 0;
+  virtual void visitReadsKeyWord(ReadsKeyWord *p) = 0;
+  virtual void visitWritesKeyWord(WritesKeyWord *p) = 0;
   virtual void visitTypeSpecSimpleIntegerKeyWord(TypeSpecSimpleIntegerKeyWord *p) = 0;
   virtual void visitTypeSpecSimpleRealKeyWord(TypeSpecSimpleRealKeyWord *p) = 0;
   virtual void visitTypeSpecSimpleBooleanKeyWord(TypeSpecSimpleBooleanKeyWord *p) = 0;
   virtual void visitTypeSpecSimpleVoidKeyWord(TypeSpecSimpleVoidKeyWord *p) = 0;
   virtual void visitTypeSpecSimpleBoolKeyWord(TypeSpecSimpleBoolKeyWord *p) = 0;
   virtual void visitTypeSpecSimpleCharKeyWord(TypeSpecSimpleCharKeyWord *p) = 0;
+  virtual void visitTypeSpecSimpleSignedCharKeyWord(TypeSpecSimpleSignedCharKeyWord *p) = 0;
+  virtual void visitTypeSpecSimpleUnsignedCharKeyWord(TypeSpecSimpleUnsignedCharKeyWord *p) = 0;
   virtual void visitTypeSpecSimpleIntKeyWord(TypeSpecSimpleIntKeyWord *p) = 0;
+  virtual void visitTypeSpecSimpleSignedIntKeyWord(TypeSpecSimpleSignedIntKeyWord *p) = 0;
+  virtual void visitTypeSpecSimpleUnsignedIntKeyWord(TypeSpecSimpleUnsignedIntKeyWord *p) = 0;
+  virtual void visitTypeSpecSimpleUnsignedKeyWord(TypeSpecSimpleUnsignedKeyWord *p) = 0;
+  virtual void visitTypeSpecSimpleShortKeyWord(TypeSpecSimpleShortKeyWord *p) = 0;
+  virtual void visitTypeSpecSimpleSignedShortKeyWord(TypeSpecSimpleSignedShortKeyWord *p) = 0;
+  virtual void visitTypeSpecSimpleUnsignedShortKeyWord(TypeSpecSimpleUnsignedShortKeyWord *p) = 0;
+  virtual void visitTypeSpecSimpleShortIntKeyWord(TypeSpecSimpleShortIntKeyWord *p) = 0;
+  virtual void visitTypeSpecSimpleSignedShortIntKeyWord(TypeSpecSimpleSignedShortIntKeyWord *p) = 0;
+  virtual void visitTypeSpecSimpleUnsignedShortIntKeyWord(TypeSpecSimpleUnsignedShortIntKeyWord *p) = 0;
+  virtual void visitTypeSpecSimpleLongKeyWord(TypeSpecSimpleLongKeyWord *p) = 0;
+  virtual void visitTypeSpecSimpleSignedLongKeyWord(TypeSpecSimpleSignedLongKeyWord *p) = 0;
+  virtual void visitTypeSpecSimpleUnsignedLongKeyWord(TypeSpecSimpleUnsignedLongKeyWord *p) = 0;
+  virtual void visitTypeSpecSimpleSignedLongIntKeyWord(TypeSpecSimpleSignedLongIntKeyWord *p) = 0;
+  virtual void visitTypeSpecSimpleLongIntKeyWord(TypeSpecSimpleLongIntKeyWord *p) = 0;
+  virtual void visitTypeSpecSimpleUnsignedLongIntKeyWord(TypeSpecSimpleUnsignedLongIntKeyWord *p) = 0;
+  virtual void visitTypeSpecSimpleLongLongKeyWord(TypeSpecSimpleLongLongKeyWord *p) = 0;
+  virtual void visitTypeSpecSimpleSignedLongLongKeyWord(TypeSpecSimpleSignedLongLongKeyWord *p) = 0;
+  virtual void visitTypeSpecSimpleUnsignedLongLongKeyWord(TypeSpecSimpleUnsignedLongLongKeyWord *p) = 0;
+  virtual void visitTypeSpecSimpleLongLongIntKeyWord(TypeSpecSimpleLongLongIntKeyWord *p) = 0;
+  virtual void visitTypeSpecSimpleSignedLongLongIntKeyWord(TypeSpecSimpleSignedLongLongIntKeyWord *p) = 0;
+  virtual void visitTypeSpecSimpleUnsignedLongLongIntKeyWord(TypeSpecSimpleUnsignedLongLongIntKeyWord *p) = 0;
+  virtual void visitTypeSpecSimpleFloatKeyWord(TypeSpecSimpleFloatKeyWord *p) = 0;
   virtual void visitTypeSpecSimpleDoubleKeyWord(TypeSpecSimpleDoubleKeyWord *p) = 0;
   virtual void visitTypeSpecSimpleLongDoubleKeyWord(TypeSpecSimpleLongDoubleKeyWord *p) = 0;
   virtual void visitAnAnnotation(AnAnnotation *p) = 0;
   virtual void visitLoopAnnotation(LoopAnnotation *p) = 0;
   virtual void visitLoopAnnotStackInvariant(LoopAnnotStackInvariant *p) = 0;
   virtual void visitLoopAnnotStackEffects(LoopAnnotStackEffects *p) = 0;
+  virtual void visitLoopAnnotStackAllocation(LoopAnnotStackAllocation *p) = 0;
   virtual void visitLoopAnnotStackVariant(LoopAnnotStackVariant *p) = 0;
   virtual void visitNoLoopAnnot(NoLoopAnnot *p) = 0;
   virtual void visitSomeLoopAnnot(SomeLoopAnnot *p) = 0;
   virtual void visitSimpleLoopInvariant(SimpleLoopInvariant *p) = 0;
   virtual void visitCheckLoopInvariant(CheckLoopInvariant *p) = 0;
   virtual void visitAdmitLoopInvariant(AdmitLoopInvariant *p) = 0;
+  virtual void visitSimpleLoopAllocation(SimpleLoopAllocation *p) = 0;
+  virtual void visitAllocatesZones(AllocatesZones *p) = 0;
+  virtual void visitFreesZones(FreesZones *p) = 0;
   virtual void visitSimpleLoopVariant(SimpleLoopVariant *p) = 0;
   virtual void visitLoopAssigns(LoopAssigns *p) = 0;
   virtual void visitForVariant(ForVariant *p) = 0;
@@ -663,6 +881,20 @@ public:
   int line_number, char_number;
 };
 
+class LoopAllocation : public Visitable
+{
+public:
+  virtual LoopAllocation *clone() const = 0;
+  int line_number, char_number;
+};
+
+class Allocation : public Visitable
+{
+public:
+  virtual Allocation *clone() const = 0;
+  int line_number, char_number;
+};
+
 class LoopVariant : public Visitable
 {
 public:
@@ -759,6 +991,57 @@ public:
   virtual void accept(Visitor *v);
   virtual SimpleContract *clone() const;
   void swap(SimpleContract &);
+};
+
+class ClausesRequiresContract : public Contract
+{
+public:
+  Requires *requires_;
+  Terminates *terminates_;
+  Decreases *decreases_;
+  NESimpleClauses *nesimpleclauses_;
+
+  ClausesRequiresContract(const ClausesRequiresContract &);
+  ClausesRequiresContract &operator=(const ClausesRequiresContract &);
+  ClausesRequiresContract(Requires *p1, Terminates *p2, Decreases *p3, NESimpleClauses *p4);
+  ~ClausesRequiresContract();
+  virtual void accept(Visitor *v);
+  virtual ClausesRequiresContract *clone() const;
+  void swap(ClausesRequiresContract &);
+};
+
+class ClausesTerminatesContract : public Contract
+{
+public:
+  Requires *requires_;
+  Terminates *terminates_;
+  Decreases *decreases_;
+  NESimpleClauses *nesimpleclauses_;
+
+  ClausesTerminatesContract(const ClausesTerminatesContract &);
+  ClausesTerminatesContract &operator=(const ClausesTerminatesContract &);
+  ClausesTerminatesContract(Requires *p1, Terminates *p2, Decreases *p3, NESimpleClauses *p4);
+  ~ClausesTerminatesContract();
+  virtual void accept(Visitor *v);
+  virtual ClausesTerminatesContract *clone() const;
+  void swap(ClausesTerminatesContract &);
+};
+
+class ClausesDecreasesContract : public Contract
+{
+public:
+  Requires *requires_;
+  Terminates *terminates_;
+  Decreases *decreases_;
+  NESimpleClauses *nesimpleclauses_;
+
+  ClausesDecreasesContract(const ClausesDecreasesContract &);
+  ClausesDecreasesContract &operator=(const ClausesDecreasesContract &);
+  ClausesDecreasesContract(Requires *p1, Terminates *p2, Decreases *p3, NESimpleClauses *p4);
+  ~ClausesDecreasesContract();
+  virtual void accept(Visitor *v);
+  virtual ClausesDecreasesContract *clone() const;
+  void swap(ClausesDecreasesContract &);
 };
 
 class NoRequires : public Requires
@@ -1074,6 +1357,112 @@ public:
   void swap(HatHatLexpr &);
 };
 
+class AmpLexpr : public Lexpr
+{
+public:
+  Lexpr *lexpr_1;
+  Lexpr *lexpr_2;
+
+  AmpLexpr(const AmpLexpr &);
+  AmpLexpr &operator=(const AmpLexpr &);
+  AmpLexpr(Lexpr *p1, Lexpr *p2);
+  ~AmpLexpr();
+  virtual void accept(Visitor *v);
+  virtual AmpLexpr *clone() const;
+  void swap(AmpLexpr &);
+};
+
+class PipeLexpr : public Lexpr
+{
+public:
+  Lexpr *lexpr_1;
+  Lexpr *lexpr_2;
+
+  PipeLexpr(const PipeLexpr &);
+  PipeLexpr &operator=(const PipeLexpr &);
+  PipeLexpr(Lexpr *p1, Lexpr *p2);
+  ~PipeLexpr();
+  virtual void accept(Visitor *v);
+  virtual PipeLexpr *clone() const;
+  void swap(PipeLexpr &);
+};
+
+class HatLexpr : public Lexpr
+{
+public:
+  Lexpr *lexpr_1;
+  Lexpr *lexpr_2;
+
+  HatLexpr(const HatLexpr &);
+  HatLexpr &operator=(const HatLexpr &);
+  HatLexpr(Lexpr *p1, Lexpr *p2);
+  ~HatLexpr();
+  virtual void accept(Visitor *v);
+  virtual HatLexpr *clone() const;
+  void swap(HatLexpr &);
+};
+
+class BimpliesLexpr : public Lexpr
+{
+public:
+  Lexpr *lexpr_1;
+  Lexpr *lexpr_2;
+
+  BimpliesLexpr(const BimpliesLexpr &);
+  BimpliesLexpr &operator=(const BimpliesLexpr &);
+  BimpliesLexpr(Lexpr *p1, Lexpr *p2);
+  ~BimpliesLexpr();
+  virtual void accept(Visitor *v);
+  virtual BimpliesLexpr *clone() const;
+  void swap(BimpliesLexpr &);
+};
+
+class BiffLexpr : public Lexpr
+{
+public:
+  Lexpr *lexpr_1;
+  Lexpr *lexpr_2;
+
+  BiffLexpr(const BiffLexpr &);
+  BiffLexpr &operator=(const BiffLexpr &);
+  BiffLexpr(Lexpr *p1, Lexpr *p2);
+  ~BiffLexpr();
+  virtual void accept(Visitor *v);
+  virtual BiffLexpr *clone() const;
+  void swap(BiffLexpr &);
+};
+
+class InLexpr : public Lexpr
+{
+public:
+  Lexpr *lexpr_1;
+  Lexpr *lexpr_2;
+
+  InLexpr(const InLexpr &);
+  InLexpr &operator=(const InLexpr &);
+  InLexpr(Lexpr *p1, Lexpr *p2);
+  ~InLexpr();
+  virtual void accept(Visitor *v);
+  virtual InLexpr *clone() const;
+  void swap(InLexpr &);
+};
+
+class TernaryLexpr : public Lexpr
+{
+public:
+  Lexpr *lexpr_1;
+  Lexpr *lexpr_2;
+  Lexpr *lexpr_3;
+
+  TernaryLexpr(const TernaryLexpr &);
+  TernaryLexpr &operator=(const TernaryLexpr &);
+  TernaryLexpr(Lexpr *p1, Lexpr *p2, Lexpr *p3);
+  ~TernaryLexpr();
+  virtual void accept(Visitor *v);
+  virtual TernaryLexpr *clone() const;
+  void swap(TernaryLexpr &);
+};
+
 class RelationLexpr : public Lexpr
 {
 public:
@@ -1145,6 +1534,21 @@ public:
   void swap(FalseLexpr &);
 };
 
+class PointerLexpr : public Lexpr
+{
+public:
+  OptLabel *optlabel_;
+  Lexpr *lexpr_;
+
+  PointerLexpr(const PointerLexpr &);
+  PointerLexpr &operator=(const PointerLexpr &);
+  PointerLexpr(OptLabel *p1, Lexpr *p2);
+  ~PointerLexpr();
+  virtual void accept(Visitor *v);
+  virtual PointerLexpr *clone() const;
+  void swap(PointerLexpr &);
+};
+
 class ValidLexpr : public Lexpr
 {
 public:
@@ -1158,6 +1562,204 @@ public:
   virtual void accept(Visitor *v);
   virtual ValidLexpr *clone() const;
   void swap(ValidLexpr &);
+};
+
+class ValidReadLexpr : public Lexpr
+{
+public:
+  OptLabel *optlabel_;
+  Lexpr *lexpr_;
+
+  ValidReadLexpr(const ValidReadLexpr &);
+  ValidReadLexpr &operator=(const ValidReadLexpr &);
+  ValidReadLexpr(OptLabel *p1, Lexpr *p2);
+  ~ValidReadLexpr();
+  virtual void accept(Visitor *v);
+  virtual ValidReadLexpr *clone() const;
+  void swap(ValidReadLexpr &);
+};
+
+class ValidFuncLexpr : public Lexpr
+{
+public:
+  Lexpr *lexpr_;
+
+  ValidFuncLexpr(const ValidFuncLexpr &);
+  ValidFuncLexpr &operator=(const ValidFuncLexpr &);
+  ValidFuncLexpr(Lexpr *p1);
+  ~ValidFuncLexpr();
+  virtual void accept(Visitor *v);
+  virtual ValidFuncLexpr *clone() const;
+  void swap(ValidFuncLexpr &);
+};
+
+class ValidIndxLexpr : public Lexpr
+{
+public:
+  OptLabel *optlabel_;
+  Lexpr *lexpr_1;
+  Lexpr *lexpr_2;
+
+  ValidIndxLexpr(const ValidIndxLexpr &);
+  ValidIndxLexpr &operator=(const ValidIndxLexpr &);
+  ValidIndxLexpr(OptLabel *p1, Lexpr *p2, Lexpr *p3);
+  ~ValidIndxLexpr();
+  virtual void accept(Visitor *v);
+  virtual ValidIndxLexpr *clone() const;
+  void swap(ValidIndxLexpr &);
+};
+
+class ValidRangeLexpr : public Lexpr
+{
+public:
+  OptLabel *optlabel_;
+  Lexpr *lexpr_1;
+  Lexpr *lexpr_2;
+  Lexpr *lexpr_3;
+
+  ValidRangeLexpr(const ValidRangeLexpr &);
+  ValidRangeLexpr &operator=(const ValidRangeLexpr &);
+  ValidRangeLexpr(OptLabel *p1, Lexpr *p2, Lexpr *p3, Lexpr *p4);
+  ~ValidRangeLexpr();
+  virtual void accept(Visitor *v);
+  virtual ValidRangeLexpr *clone() const;
+  void swap(ValidRangeLexpr &);
+};
+
+class InitializedLexpr : public Lexpr
+{
+public:
+  OptLabel *optlabel_;
+  Lexpr *lexpr_;
+
+  InitializedLexpr(const InitializedLexpr &);
+  InitializedLexpr &operator=(const InitializedLexpr &);
+  InitializedLexpr(OptLabel *p1, Lexpr *p2);
+  ~InitializedLexpr();
+  virtual void accept(Visitor *v);
+  virtual InitializedLexpr *clone() const;
+  void swap(InitializedLexpr &);
+};
+
+class DanglingLexpr : public Lexpr
+{
+public:
+  OptLabel *optlabel_;
+  Lexpr *lexpr_;
+
+  DanglingLexpr(const DanglingLexpr &);
+  DanglingLexpr &operator=(const DanglingLexpr &);
+  DanglingLexpr(OptLabel *p1, Lexpr *p2);
+  ~DanglingLexpr();
+  virtual void accept(Visitor *v);
+  virtual DanglingLexpr *clone() const;
+  void swap(DanglingLexpr &);
+};
+
+class FreshLexpr : public Lexpr
+{
+public:
+  OptLabel *optlabel_;
+  Lexpr *lexpr_1;
+  Lexpr *lexpr_2;
+
+  FreshLexpr(const FreshLexpr &);
+  FreshLexpr &operator=(const FreshLexpr &);
+  FreshLexpr(OptLabel *p1, Lexpr *p2, Lexpr *p3);
+  ~FreshLexpr();
+  virtual void accept(Visitor *v);
+  virtual FreshLexpr *clone() const;
+  void swap(FreshLexpr &);
+};
+
+class BaseAddrLexpr : public Lexpr
+{
+public:
+  OptLabel *optlabel_;
+  Lexpr *lexpr_;
+
+  BaseAddrLexpr(const BaseAddrLexpr &);
+  BaseAddrLexpr &operator=(const BaseAddrLexpr &);
+  BaseAddrLexpr(OptLabel *p1, Lexpr *p2);
+  ~BaseAddrLexpr();
+  virtual void accept(Visitor *v);
+  virtual BaseAddrLexpr *clone() const;
+  void swap(BaseAddrLexpr &);
+};
+
+class BlockLengthLexpr : public Lexpr
+{
+public:
+  OptLabel *optlabel_;
+  Lexpr *lexpr_;
+
+  BlockLengthLexpr(const BlockLengthLexpr &);
+  BlockLengthLexpr &operator=(const BlockLengthLexpr &);
+  BlockLengthLexpr(OptLabel *p1, Lexpr *p2);
+  ~BlockLengthLexpr();
+  virtual void accept(Visitor *v);
+  virtual BlockLengthLexpr *clone() const;
+  void swap(BlockLengthLexpr &);
+};
+
+class OffsetLexpr : public Lexpr
+{
+public:
+  OptLabel *optlabel_;
+  Lexpr *lexpr_;
+
+  OffsetLexpr(const OffsetLexpr &);
+  OffsetLexpr &operator=(const OffsetLexpr &);
+  OffsetLexpr(OptLabel *p1, Lexpr *p2);
+  ~OffsetLexpr();
+  virtual void accept(Visitor *v);
+  virtual OffsetLexpr *clone() const;
+  void swap(OffsetLexpr &);
+};
+
+class AllocableLexpr : public Lexpr
+{
+public:
+  OptLabel *optlabel_;
+  Lexpr *lexpr_;
+
+  AllocableLexpr(const AllocableLexpr &);
+  AllocableLexpr &operator=(const AllocableLexpr &);
+  AllocableLexpr(OptLabel *p1, Lexpr *p2);
+  ~AllocableLexpr();
+  virtual void accept(Visitor *v);
+  virtual AllocableLexpr *clone() const;
+  void swap(AllocableLexpr &);
+};
+
+class FreeableLexpr : public Lexpr
+{
+public:
+  OptLabel *optlabel_;
+  Lexpr *lexpr_;
+
+  FreeableLexpr(const FreeableLexpr &);
+  FreeableLexpr &operator=(const FreeableLexpr &);
+  FreeableLexpr(OptLabel *p1, Lexpr *p2);
+  ~FreeableLexpr();
+  virtual void accept(Visitor *v);
+  virtual FreeableLexpr *clone() const;
+  void swap(FreeableLexpr &);
+};
+
+class AllocationLexpr : public Lexpr
+{
+public:
+  OptLabel *optlabel_;
+  Lexpr *lexpr_;
+
+  AllocationLexpr(const AllocationLexpr &);
+  AllocationLexpr &operator=(const AllocationLexpr &);
+  AllocationLexpr(OptLabel *p1, Lexpr *p2);
+  ~AllocationLexpr();
+  virtual void accept(Visitor *v);
+  virtual AllocationLexpr *clone() const;
+  void swap(AllocationLexpr &);
 };
 
 class AutomaticLexpr : public Lexpr
@@ -1310,6 +1912,51 @@ public:
   void swap(SubtrLexpr &);
 };
 
+class MultLexpr : public Lexpr
+{
+public:
+  Lexpr *lexpr_1;
+  Lexpr *lexpr_2;
+
+  MultLexpr(const MultLexpr &);
+  MultLexpr &operator=(const MultLexpr &);
+  MultLexpr(Lexpr *p1, Lexpr *p2);
+  ~MultLexpr();
+  virtual void accept(Visitor *v);
+  virtual MultLexpr *clone() const;
+  void swap(MultLexpr &);
+};
+
+class DivLexpr : public Lexpr
+{
+public:
+  Lexpr *lexpr_1;
+  Lexpr *lexpr_2;
+
+  DivLexpr(const DivLexpr &);
+  DivLexpr &operator=(const DivLexpr &);
+  DivLexpr(Lexpr *p1, Lexpr *p2);
+  ~DivLexpr();
+  virtual void accept(Visitor *v);
+  virtual DivLexpr *clone() const;
+  void swap(DivLexpr &);
+};
+
+class ModLexpr : public Lexpr
+{
+public:
+  Lexpr *lexpr_1;
+  Lexpr *lexpr_2;
+
+  ModLexpr(const ModLexpr &);
+  ModLexpr &operator=(const ModLexpr &);
+  ModLexpr(Lexpr *p1, Lexpr *p2);
+  ~ModLexpr();
+  virtual void accept(Visitor *v);
+  virtual ModLexpr *clone() const;
+  void swap(ModLexpr &);
+};
+
 class SquaresRangeLexpr : public Lexpr
 {
 public:
@@ -1338,6 +1985,132 @@ public:
   virtual void accept(Visitor *v);
   virtual SquaresLexpr *clone() const;
   void swap(SquaresLexpr &);
+};
+
+class MinusLexpr : public Lexpr
+{
+public:
+  Lexpr *lexpr_;
+
+  MinusLexpr(const MinusLexpr &);
+  MinusLexpr &operator=(const MinusLexpr &);
+  MinusLexpr(Lexpr *p1);
+  ~MinusLexpr();
+  virtual void accept(Visitor *v);
+  virtual MinusLexpr *clone() const;
+  void swap(MinusLexpr &);
+};
+
+class PlusLexpr : public Lexpr
+{
+public:
+  Lexpr *lexpr_;
+
+  PlusLexpr(const PlusLexpr &);
+  PlusLexpr &operator=(const PlusLexpr &);
+  PlusLexpr(Lexpr *p1);
+  ~PlusLexpr();
+  virtual void accept(Visitor *v);
+  virtual PlusLexpr *clone() const;
+  void swap(PlusLexpr &);
+};
+
+class TildeLexpr : public Lexpr
+{
+public:
+  Lexpr *lexpr_;
+
+  TildeLexpr(const TildeLexpr &);
+  TildeLexpr &operator=(const TildeLexpr &);
+  TildeLexpr(Lexpr *p1);
+  ~TildeLexpr();
+  virtual void accept(Visitor *v);
+  virtual TildeLexpr *clone() const;
+  void swap(TildeLexpr &);
+};
+
+class StarLexpr : public Lexpr
+{
+public:
+  Lexpr *lexpr_;
+
+  StarLexpr(const StarLexpr &);
+  StarLexpr &operator=(const StarLexpr &);
+  StarLexpr(Lexpr *p1);
+  ~StarLexpr();
+  virtual void accept(Visitor *v);
+  virtual StarLexpr *clone() const;
+  void swap(StarLexpr &);
+};
+
+class AmpUnaryLexpr : public Lexpr
+{
+public:
+  Lexpr *lexpr_;
+
+  AmpUnaryLexpr(const AmpUnaryLexpr &);
+  AmpUnaryLexpr &operator=(const AmpUnaryLexpr &);
+  AmpUnaryLexpr(Lexpr *p1);
+  ~AmpUnaryLexpr();
+  virtual void accept(Visitor *v);
+  virtual AmpUnaryLexpr *clone() const;
+  void swap(AmpUnaryLexpr &);
+};
+
+class SizeOfLexpr : public Lexpr
+{
+public:
+  Lexpr *lexpr_;
+
+  SizeOfLexpr(const SizeOfLexpr &);
+  SizeOfLexpr &operator=(const SizeOfLexpr &);
+  SizeOfLexpr(Lexpr *p1);
+  ~SizeOfLexpr();
+  virtual void accept(Visitor *v);
+  virtual SizeOfLexpr *clone() const;
+  void swap(SizeOfLexpr &);
+};
+
+class OldLexpr : public Lexpr
+{
+public:
+  Lexpr *lexpr_;
+
+  OldLexpr(const OldLexpr &);
+  OldLexpr &operator=(const OldLexpr &);
+  OldLexpr(Lexpr *p1);
+  ~OldLexpr();
+  virtual void accept(Visitor *v);
+  virtual OldLexpr *clone() const;
+  void swap(OldLexpr &);
+};
+
+class AtLexpr : public Lexpr
+{
+public:
+  Lexpr *lexpr_;
+  LabelName *labelname_;
+
+  AtLexpr(const AtLexpr &);
+  AtLexpr &operator=(const AtLexpr &);
+  AtLexpr(Lexpr *p1, LabelName *p2);
+  ~AtLexpr();
+  virtual void accept(Visitor *v);
+  virtual AtLexpr *clone() const;
+  void swap(AtLexpr &);
+};
+
+class ResultLexpr : public Lexpr
+{
+public:
+
+  ResultLexpr(const ResultLexpr &);
+  ResultLexpr &operator=(const ResultLexpr &);
+  ResultLexpr();
+  ~ResultLexpr();
+  virtual void accept(Visitor *v);
+  virtual ResultLexpr *clone() const;
+  void swap(ResultLexpr &);
 };
 
 class SeparatedLexpr : public Lexpr
@@ -2053,6 +2826,513 @@ public:
   void swap(SimpleIdentifierFull &);
 };
 
+class AdmitKeyWordFullIdent : public FullIdentifier
+{
+public:
+
+  AdmitKeyWordFullIdent(const AdmitKeyWordFullIdent &);
+  AdmitKeyWordFullIdent &operator=(const AdmitKeyWordFullIdent &);
+  AdmitKeyWordFullIdent();
+  ~AdmitKeyWordFullIdent();
+  virtual void accept(Visitor *v);
+  virtual AdmitKeyWordFullIdent *clone() const;
+  void swap(AdmitKeyWordFullIdent &);
+};
+
+class AllocatesKeyWordFullIdent : public FullIdentifier
+{
+public:
+
+  AllocatesKeyWordFullIdent(const AllocatesKeyWordFullIdent &);
+  AllocatesKeyWordFullIdent &operator=(const AllocatesKeyWordFullIdent &);
+  AllocatesKeyWordFullIdent();
+  ~AllocatesKeyWordFullIdent();
+  virtual void accept(Visitor *v);
+  virtual AllocatesKeyWordFullIdent *clone() const;
+  void swap(AllocatesKeyWordFullIdent &);
+};
+
+class AssertKeyWordFullIdent : public FullIdentifier
+{
+public:
+
+  AssertKeyWordFullIdent(const AssertKeyWordFullIdent &);
+  AssertKeyWordFullIdent &operator=(const AssertKeyWordFullIdent &);
+  AssertKeyWordFullIdent();
+  ~AssertKeyWordFullIdent();
+  virtual void accept(Visitor *v);
+  virtual AssertKeyWordFullIdent *clone() const;
+  void swap(AssertKeyWordFullIdent &);
+};
+
+class AssignsKeyWordFullIdent : public FullIdentifier
+{
+public:
+
+  AssignsKeyWordFullIdent(const AssignsKeyWordFullIdent &);
+  AssignsKeyWordFullIdent &operator=(const AssignsKeyWordFullIdent &);
+  AssignsKeyWordFullIdent();
+  ~AssignsKeyWordFullIdent();
+  virtual void accept(Visitor *v);
+  virtual AssignsKeyWordFullIdent *clone() const;
+  void swap(AssignsKeyWordFullIdent &);
+};
+
+class AssumesKeyWordFullIdent : public FullIdentifier
+{
+public:
+
+  AssumesKeyWordFullIdent(const AssumesKeyWordFullIdent &);
+  AssumesKeyWordFullIdent &operator=(const AssumesKeyWordFullIdent &);
+  AssumesKeyWordFullIdent();
+  ~AssumesKeyWordFullIdent();
+  virtual void accept(Visitor *v);
+  virtual AssumesKeyWordFullIdent *clone() const;
+  void swap(AssumesKeyWordFullIdent &);
+};
+
+class AtKeyWordFullIdent : public FullIdentifier
+{
+public:
+
+  AtKeyWordFullIdent(const AtKeyWordFullIdent &);
+  AtKeyWordFullIdent &operator=(const AtKeyWordFullIdent &);
+  AtKeyWordFullIdent();
+  ~AtKeyWordFullIdent();
+  virtual void accept(Visitor *v);
+  virtual AtKeyWordFullIdent *clone() const;
+  void swap(AtKeyWordFullIdent &);
+};
+
+class AxiomKeyWordFullIdent : public FullIdentifier
+{
+public:
+
+  AxiomKeyWordFullIdent(const AxiomKeyWordFullIdent &);
+  AxiomKeyWordFullIdent &operator=(const AxiomKeyWordFullIdent &);
+  AxiomKeyWordFullIdent();
+  ~AxiomKeyWordFullIdent();
+  virtual void accept(Visitor *v);
+  virtual AxiomKeyWordFullIdent *clone() const;
+  void swap(AxiomKeyWordFullIdent &);
+};
+
+class AxiomaticKeyWordFullIdent : public FullIdentifier
+{
+public:
+
+  AxiomaticKeyWordFullIdent(const AxiomaticKeyWordFullIdent &);
+  AxiomaticKeyWordFullIdent &operator=(const AxiomaticKeyWordFullIdent &);
+  AxiomaticKeyWordFullIdent();
+  ~AxiomaticKeyWordFullIdent();
+  virtual void accept(Visitor *v);
+  virtual AxiomaticKeyWordFullIdent *clone() const;
+  void swap(AxiomaticKeyWordFullIdent &);
+};
+
+class BehaviorKeyWordFullIdent : public FullIdentifier
+{
+public:
+
+  BehaviorKeyWordFullIdent(const BehaviorKeyWordFullIdent &);
+  BehaviorKeyWordFullIdent &operator=(const BehaviorKeyWordFullIdent &);
+  BehaviorKeyWordFullIdent();
+  ~BehaviorKeyWordFullIdent();
+  virtual void accept(Visitor *v);
+  virtual BehaviorKeyWordFullIdent *clone() const;
+  void swap(BehaviorKeyWordFullIdent &);
+};
+
+class BreaksKeyWordFullIdent : public FullIdentifier
+{
+public:
+
+  BreaksKeyWordFullIdent(const BreaksKeyWordFullIdent &);
+  BreaksKeyWordFullIdent &operator=(const BreaksKeyWordFullIdent &);
+  BreaksKeyWordFullIdent();
+  ~BreaksKeyWordFullIdent();
+  virtual void accept(Visitor *v);
+  virtual BreaksKeyWordFullIdent *clone() const;
+  void swap(BreaksKeyWordFullIdent &);
+};
+
+class CheckKeyWordFullIdent : public FullIdentifier
+{
+public:
+
+  CheckKeyWordFullIdent(const CheckKeyWordFullIdent &);
+  CheckKeyWordFullIdent &operator=(const CheckKeyWordFullIdent &);
+  CheckKeyWordFullIdent();
+  ~CheckKeyWordFullIdent();
+  virtual void accept(Visitor *v);
+  virtual CheckKeyWordFullIdent *clone() const;
+  void swap(CheckKeyWordFullIdent &);
+};
+
+class CompleteKeyWordFullIdent : public FullIdentifier
+{
+public:
+
+  CompleteKeyWordFullIdent(const CompleteKeyWordFullIdent &);
+  CompleteKeyWordFullIdent &operator=(const CompleteKeyWordFullIdent &);
+  CompleteKeyWordFullIdent();
+  ~CompleteKeyWordFullIdent();
+  virtual void accept(Visitor *v);
+  virtual CompleteKeyWordFullIdent *clone() const;
+  void swap(CompleteKeyWordFullIdent &);
+};
+
+class ContinuesKeyWordFullIdent : public FullIdentifier
+{
+public:
+
+  ContinuesKeyWordFullIdent(const ContinuesKeyWordFullIdent &);
+  ContinuesKeyWordFullIdent &operator=(const ContinuesKeyWordFullIdent &);
+  ContinuesKeyWordFullIdent();
+  ~ContinuesKeyWordFullIdent();
+  virtual void accept(Visitor *v);
+  virtual ContinuesKeyWordFullIdent *clone() const;
+  void swap(ContinuesKeyWordFullIdent &);
+};
+
+class ContractKeyWordFullIdent : public FullIdentifier
+{
+public:
+
+  ContractKeyWordFullIdent(const ContractKeyWordFullIdent &);
+  ContractKeyWordFullIdent &operator=(const ContractKeyWordFullIdent &);
+  ContractKeyWordFullIdent();
+  ~ContractKeyWordFullIdent();
+  virtual void accept(Visitor *v);
+  virtual ContractKeyWordFullIdent *clone() const;
+  void swap(ContractKeyWordFullIdent &);
+};
+
+class DecreasesKeyWordFullIdent : public FullIdentifier
+{
+public:
+
+  DecreasesKeyWordFullIdent(const DecreasesKeyWordFullIdent &);
+  DecreasesKeyWordFullIdent &operator=(const DecreasesKeyWordFullIdent &);
+  DecreasesKeyWordFullIdent();
+  ~DecreasesKeyWordFullIdent();
+  virtual void accept(Visitor *v);
+  virtual DecreasesKeyWordFullIdent *clone() const;
+  void swap(DecreasesKeyWordFullIdent &);
+};
+
+class DisjointKeyWordFullIdent : public FullIdentifier
+{
+public:
+
+  DisjointKeyWordFullIdent(const DisjointKeyWordFullIdent &);
+  DisjointKeyWordFullIdent &operator=(const DisjointKeyWordFullIdent &);
+  DisjointKeyWordFullIdent();
+  ~DisjointKeyWordFullIdent();
+  virtual void accept(Visitor *v);
+  virtual DisjointKeyWordFullIdent *clone() const;
+  void swap(DisjointKeyWordFullIdent &);
+};
+
+class EnsuresKeyWordFullIdent : public FullIdentifier
+{
+public:
+
+  EnsuresKeyWordFullIdent(const EnsuresKeyWordFullIdent &);
+  EnsuresKeyWordFullIdent &operator=(const EnsuresKeyWordFullIdent &);
+  EnsuresKeyWordFullIdent();
+  ~EnsuresKeyWordFullIdent();
+  virtual void accept(Visitor *v);
+  virtual EnsuresKeyWordFullIdent *clone() const;
+  void swap(EnsuresKeyWordFullIdent &);
+};
+
+class ExitsKeyWordFullIdent : public FullIdentifier
+{
+public:
+
+  ExitsKeyWordFullIdent(const ExitsKeyWordFullIdent &);
+  ExitsKeyWordFullIdent &operator=(const ExitsKeyWordFullIdent &);
+  ExitsKeyWordFullIdent();
+  ~ExitsKeyWordFullIdent();
+  virtual void accept(Visitor *v);
+  virtual ExitsKeyWordFullIdent *clone() const;
+  void swap(ExitsKeyWordFullIdent &);
+};
+
+class FreesKeyWordFullIdent : public FullIdentifier
+{
+public:
+
+  FreesKeyWordFullIdent(const FreesKeyWordFullIdent &);
+  FreesKeyWordFullIdent &operator=(const FreesKeyWordFullIdent &);
+  FreesKeyWordFullIdent();
+  ~FreesKeyWordFullIdent();
+  virtual void accept(Visitor *v);
+  virtual FreesKeyWordFullIdent *clone() const;
+  void swap(FreesKeyWordFullIdent &);
+};
+
+class FunctionKeyWordFullIdent : public FullIdentifier
+{
+public:
+
+  FunctionKeyWordFullIdent(const FunctionKeyWordFullIdent &);
+  FunctionKeyWordFullIdent &operator=(const FunctionKeyWordFullIdent &);
+  FunctionKeyWordFullIdent();
+  ~FunctionKeyWordFullIdent();
+  virtual void accept(Visitor *v);
+  virtual FunctionKeyWordFullIdent *clone() const;
+  void swap(FunctionKeyWordFullIdent &);
+};
+
+class GlobalKeyWordFullIdent : public FullIdentifier
+{
+public:
+
+  GlobalKeyWordFullIdent(const GlobalKeyWordFullIdent &);
+  GlobalKeyWordFullIdent &operator=(const GlobalKeyWordFullIdent &);
+  GlobalKeyWordFullIdent();
+  ~GlobalKeyWordFullIdent();
+  virtual void accept(Visitor *v);
+  virtual GlobalKeyWordFullIdent *clone() const;
+  void swap(GlobalKeyWordFullIdent &);
+};
+
+class ImpactKeyWordFullIdent : public FullIdentifier
+{
+public:
+
+  ImpactKeyWordFullIdent(const ImpactKeyWordFullIdent &);
+  ImpactKeyWordFullIdent &operator=(const ImpactKeyWordFullIdent &);
+  ImpactKeyWordFullIdent();
+  ~ImpactKeyWordFullIdent();
+  virtual void accept(Visitor *v);
+  virtual ImpactKeyWordFullIdent *clone() const;
+  void swap(ImpactKeyWordFullIdent &);
+};
+
+class InductiveKeyWordFullIdent : public FullIdentifier
+{
+public:
+
+  InductiveKeyWordFullIdent(const InductiveKeyWordFullIdent &);
+  InductiveKeyWordFullIdent &operator=(const InductiveKeyWordFullIdent &);
+  InductiveKeyWordFullIdent();
+  ~InductiveKeyWordFullIdent();
+  virtual void accept(Visitor *v);
+  virtual InductiveKeyWordFullIdent *clone() const;
+  void swap(InductiveKeyWordFullIdent &);
+};
+
+class IncludeKeyWordFullIdent : public FullIdentifier
+{
+public:
+
+  IncludeKeyWordFullIdent(const IncludeKeyWordFullIdent &);
+  IncludeKeyWordFullIdent &operator=(const IncludeKeyWordFullIdent &);
+  IncludeKeyWordFullIdent();
+  ~IncludeKeyWordFullIdent();
+  virtual void accept(Visitor *v);
+  virtual IncludeKeyWordFullIdent *clone() const;
+  void swap(IncludeKeyWordFullIdent &);
+};
+
+class InvariantKeyWordFullIdent : public FullIdentifier
+{
+public:
+
+  InvariantKeyWordFullIdent(const InvariantKeyWordFullIdent &);
+  InvariantKeyWordFullIdent &operator=(const InvariantKeyWordFullIdent &);
+  InvariantKeyWordFullIdent();
+  ~InvariantKeyWordFullIdent();
+  virtual void accept(Visitor *v);
+  virtual InvariantKeyWordFullIdent *clone() const;
+  void swap(InvariantKeyWordFullIdent &);
+};
+
+class LemmaKeyWordFullIdent : public FullIdentifier
+{
+public:
+
+  LemmaKeyWordFullIdent(const LemmaKeyWordFullIdent &);
+  LemmaKeyWordFullIdent &operator=(const LemmaKeyWordFullIdent &);
+  LemmaKeyWordFullIdent();
+  ~LemmaKeyWordFullIdent();
+  virtual void accept(Visitor *v);
+  virtual LemmaKeyWordFullIdent *clone() const;
+  void swap(LemmaKeyWordFullIdent &);
+};
+
+class LetKeyWordFullIdent : public FullIdentifier
+{
+public:
+
+  LetKeyWordFullIdent(const LetKeyWordFullIdent &);
+  LetKeyWordFullIdent &operator=(const LetKeyWordFullIdent &);
+  LetKeyWordFullIdent();
+  ~LetKeyWordFullIdent();
+  virtual void accept(Visitor *v);
+  virtual LetKeyWordFullIdent *clone() const;
+  void swap(LetKeyWordFullIdent &);
+};
+
+class LogicKeyWordFullIdent : public FullIdentifier
+{
+public:
+
+  LogicKeyWordFullIdent(const LogicKeyWordFullIdent &);
+  LogicKeyWordFullIdent &operator=(const LogicKeyWordFullIdent &);
+  LogicKeyWordFullIdent();
+  ~LogicKeyWordFullIdent();
+  virtual void accept(Visitor *v);
+  virtual LogicKeyWordFullIdent *clone() const;
+  void swap(LogicKeyWordFullIdent &);
+};
+
+class LoopKeyWordFullIdent : public FullIdentifier
+{
+public:
+
+  LoopKeyWordFullIdent(const LoopKeyWordFullIdent &);
+  LoopKeyWordFullIdent &operator=(const LoopKeyWordFullIdent &);
+  LoopKeyWordFullIdent();
+  ~LoopKeyWordFullIdent();
+  virtual void accept(Visitor *v);
+  virtual LoopKeyWordFullIdent *clone() const;
+  void swap(LoopKeyWordFullIdent &);
+};
+
+class ModelKeyWordFullIdent : public FullIdentifier
+{
+public:
+
+  ModelKeyWordFullIdent(const ModelKeyWordFullIdent &);
+  ModelKeyWordFullIdent &operator=(const ModelKeyWordFullIdent &);
+  ModelKeyWordFullIdent();
+  ~ModelKeyWordFullIdent();
+  virtual void accept(Visitor *v);
+  virtual ModelKeyWordFullIdent *clone() const;
+  void swap(ModelKeyWordFullIdent &);
+};
+
+class ModuleKeyWordFullIdent : public FullIdentifier
+{
+public:
+
+  ModuleKeyWordFullIdent(const ModuleKeyWordFullIdent &);
+  ModuleKeyWordFullIdent &operator=(const ModuleKeyWordFullIdent &);
+  ModuleKeyWordFullIdent();
+  ~ModuleKeyWordFullIdent();
+  virtual void accept(Visitor *v);
+  virtual ModuleKeyWordFullIdent *clone() const;
+  void swap(ModuleKeyWordFullIdent &);
+};
+
+class PragmaKeyWordFullIdent : public FullIdentifier
+{
+public:
+
+  PragmaKeyWordFullIdent(const PragmaKeyWordFullIdent &);
+  PragmaKeyWordFullIdent &operator=(const PragmaKeyWordFullIdent &);
+  PragmaKeyWordFullIdent();
+  ~PragmaKeyWordFullIdent();
+  virtual void accept(Visitor *v);
+  virtual PragmaKeyWordFullIdent *clone() const;
+  void swap(PragmaKeyWordFullIdent &);
+};
+
+class PredicateKeyWordFullIdent : public FullIdentifier
+{
+public:
+
+  PredicateKeyWordFullIdent(const PredicateKeyWordFullIdent &);
+  PredicateKeyWordFullIdent &operator=(const PredicateKeyWordFullIdent &);
+  PredicateKeyWordFullIdent();
+  ~PredicateKeyWordFullIdent();
+  virtual void accept(Visitor *v);
+  virtual PredicateKeyWordFullIdent *clone() const;
+  void swap(PredicateKeyWordFullIdent &);
+};
+
+class RequiresKeyWordFullIdent : public FullIdentifier
+{
+public:
+
+  RequiresKeyWordFullIdent(const RequiresKeyWordFullIdent &);
+  RequiresKeyWordFullIdent &operator=(const RequiresKeyWordFullIdent &);
+  RequiresKeyWordFullIdent();
+  ~RequiresKeyWordFullIdent();
+  virtual void accept(Visitor *v);
+  virtual RequiresKeyWordFullIdent *clone() const;
+  void swap(RequiresKeyWordFullIdent &);
+};
+
+class ReturnsKeyWordFullIdent : public FullIdentifier
+{
+public:
+
+  ReturnsKeyWordFullIdent(const ReturnsKeyWordFullIdent &);
+  ReturnsKeyWordFullIdent &operator=(const ReturnsKeyWordFullIdent &);
+  ReturnsKeyWordFullIdent();
+  ~ReturnsKeyWordFullIdent();
+  virtual void accept(Visitor *v);
+  virtual ReturnsKeyWordFullIdent *clone() const;
+  void swap(ReturnsKeyWordFullIdent &);
+};
+
+class SliceKeyWordFullIdent : public FullIdentifier
+{
+public:
+
+  SliceKeyWordFullIdent(const SliceKeyWordFullIdent &);
+  SliceKeyWordFullIdent &operator=(const SliceKeyWordFullIdent &);
+  SliceKeyWordFullIdent();
+  ~SliceKeyWordFullIdent();
+  virtual void accept(Visitor *v);
+  virtual SliceKeyWordFullIdent *clone() const;
+  void swap(SliceKeyWordFullIdent &);
+};
+
+class TerminatesKeyWordFullIdent : public FullIdentifier
+{
+public:
+
+  TerminatesKeyWordFullIdent(const TerminatesKeyWordFullIdent &);
+  TerminatesKeyWordFullIdent &operator=(const TerminatesKeyWordFullIdent &);
+  TerminatesKeyWordFullIdent();
+  ~TerminatesKeyWordFullIdent();
+  virtual void accept(Visitor *v);
+  virtual TerminatesKeyWordFullIdent *clone() const;
+  void swap(TerminatesKeyWordFullIdent &);
+};
+
+class TypeKeyWordFullIdent : public FullIdentifier
+{
+public:
+
+  TypeKeyWordFullIdent(const TypeKeyWordFullIdent &);
+  TypeKeyWordFullIdent &operator=(const TypeKeyWordFullIdent &);
+  TypeKeyWordFullIdent();
+  ~TypeKeyWordFullIdent();
+  virtual void accept(Visitor *v);
+  virtual TypeKeyWordFullIdent *clone() const;
+  void swap(TypeKeyWordFullIdent &);
+};
+
+class VariantKeyWordFullIdent : public FullIdentifier
+{
+public:
+
+  VariantKeyWordFullIdent(const VariantKeyWordFullIdent &);
+  VariantKeyWordFullIdent &operator=(const VariantKeyWordFullIdent &);
+  VariantKeyWordFullIdent();
+  ~VariantKeyWordFullIdent();
+  virtual void accept(Visitor *v);
+  virtual VariantKeyWordFullIdent *clone() const;
+  void swap(VariantKeyWordFullIdent &);
+};
+
 class IdentifierIdent : public Identifier
 {
 public:
@@ -2065,6 +3345,58 @@ public:
   virtual void accept(Visitor *v);
   virtual IdentifierIdent *clone() const;
   void swap(IdentifierIdent &);
+};
+
+class BehaviorsKeyWord : public Identifier
+{
+public:
+
+  BehaviorsKeyWord(const BehaviorsKeyWord &);
+  BehaviorsKeyWord &operator=(const BehaviorsKeyWord &);
+  BehaviorsKeyWord();
+  ~BehaviorsKeyWord();
+  virtual void accept(Visitor *v);
+  virtual BehaviorsKeyWord *clone() const;
+  void swap(BehaviorsKeyWord &);
+};
+
+class LabelKeyWord : public Identifier
+{
+public:
+
+  LabelKeyWord(const LabelKeyWord &);
+  LabelKeyWord &operator=(const LabelKeyWord &);
+  LabelKeyWord();
+  ~LabelKeyWord();
+  virtual void accept(Visitor *v);
+  virtual LabelKeyWord *clone() const;
+  void swap(LabelKeyWord &);
+};
+
+class ReadsKeyWord : public Identifier
+{
+public:
+
+  ReadsKeyWord(const ReadsKeyWord &);
+  ReadsKeyWord &operator=(const ReadsKeyWord &);
+  ReadsKeyWord();
+  ~ReadsKeyWord();
+  virtual void accept(Visitor *v);
+  virtual ReadsKeyWord *clone() const;
+  void swap(ReadsKeyWord &);
+};
+
+class WritesKeyWord : public Identifier
+{
+public:
+
+  WritesKeyWord(const WritesKeyWord &);
+  WritesKeyWord &operator=(const WritesKeyWord &);
+  WritesKeyWord();
+  ~WritesKeyWord();
+  virtual void accept(Visitor *v);
+  virtual WritesKeyWord *clone() const;
+  void swap(WritesKeyWord &);
 };
 
 class TypeSpecSimpleIntegerKeyWord : public TypeSpecSimple
@@ -2145,6 +3477,32 @@ public:
   void swap(TypeSpecSimpleCharKeyWord &);
 };
 
+class TypeSpecSimpleSignedCharKeyWord : public TypeSpecSimple
+{
+public:
+
+  TypeSpecSimpleSignedCharKeyWord(const TypeSpecSimpleSignedCharKeyWord &);
+  TypeSpecSimpleSignedCharKeyWord &operator=(const TypeSpecSimpleSignedCharKeyWord &);
+  TypeSpecSimpleSignedCharKeyWord();
+  ~TypeSpecSimpleSignedCharKeyWord();
+  virtual void accept(Visitor *v);
+  virtual TypeSpecSimpleSignedCharKeyWord *clone() const;
+  void swap(TypeSpecSimpleSignedCharKeyWord &);
+};
+
+class TypeSpecSimpleUnsignedCharKeyWord : public TypeSpecSimple
+{
+public:
+
+  TypeSpecSimpleUnsignedCharKeyWord(const TypeSpecSimpleUnsignedCharKeyWord &);
+  TypeSpecSimpleUnsignedCharKeyWord &operator=(const TypeSpecSimpleUnsignedCharKeyWord &);
+  TypeSpecSimpleUnsignedCharKeyWord();
+  ~TypeSpecSimpleUnsignedCharKeyWord();
+  virtual void accept(Visitor *v);
+  virtual TypeSpecSimpleUnsignedCharKeyWord *clone() const;
+  void swap(TypeSpecSimpleUnsignedCharKeyWord &);
+};
+
 class TypeSpecSimpleIntKeyWord : public TypeSpecSimple
 {
 public:
@@ -2156,6 +3514,292 @@ public:
   virtual void accept(Visitor *v);
   virtual TypeSpecSimpleIntKeyWord *clone() const;
   void swap(TypeSpecSimpleIntKeyWord &);
+};
+
+class TypeSpecSimpleSignedIntKeyWord : public TypeSpecSimple
+{
+public:
+
+  TypeSpecSimpleSignedIntKeyWord(const TypeSpecSimpleSignedIntKeyWord &);
+  TypeSpecSimpleSignedIntKeyWord &operator=(const TypeSpecSimpleSignedIntKeyWord &);
+  TypeSpecSimpleSignedIntKeyWord();
+  ~TypeSpecSimpleSignedIntKeyWord();
+  virtual void accept(Visitor *v);
+  virtual TypeSpecSimpleSignedIntKeyWord *clone() const;
+  void swap(TypeSpecSimpleSignedIntKeyWord &);
+};
+
+class TypeSpecSimpleUnsignedIntKeyWord : public TypeSpecSimple
+{
+public:
+
+  TypeSpecSimpleUnsignedIntKeyWord(const TypeSpecSimpleUnsignedIntKeyWord &);
+  TypeSpecSimpleUnsignedIntKeyWord &operator=(const TypeSpecSimpleUnsignedIntKeyWord &);
+  TypeSpecSimpleUnsignedIntKeyWord();
+  ~TypeSpecSimpleUnsignedIntKeyWord();
+  virtual void accept(Visitor *v);
+  virtual TypeSpecSimpleUnsignedIntKeyWord *clone() const;
+  void swap(TypeSpecSimpleUnsignedIntKeyWord &);
+};
+
+class TypeSpecSimpleUnsignedKeyWord : public TypeSpecSimple
+{
+public:
+
+  TypeSpecSimpleUnsignedKeyWord(const TypeSpecSimpleUnsignedKeyWord &);
+  TypeSpecSimpleUnsignedKeyWord &operator=(const TypeSpecSimpleUnsignedKeyWord &);
+  TypeSpecSimpleUnsignedKeyWord();
+  ~TypeSpecSimpleUnsignedKeyWord();
+  virtual void accept(Visitor *v);
+  virtual TypeSpecSimpleUnsignedKeyWord *clone() const;
+  void swap(TypeSpecSimpleUnsignedKeyWord &);
+};
+
+class TypeSpecSimpleShortKeyWord : public TypeSpecSimple
+{
+public:
+
+  TypeSpecSimpleShortKeyWord(const TypeSpecSimpleShortKeyWord &);
+  TypeSpecSimpleShortKeyWord &operator=(const TypeSpecSimpleShortKeyWord &);
+  TypeSpecSimpleShortKeyWord();
+  ~TypeSpecSimpleShortKeyWord();
+  virtual void accept(Visitor *v);
+  virtual TypeSpecSimpleShortKeyWord *clone() const;
+  void swap(TypeSpecSimpleShortKeyWord &);
+};
+
+class TypeSpecSimpleSignedShortKeyWord : public TypeSpecSimple
+{
+public:
+
+  TypeSpecSimpleSignedShortKeyWord(const TypeSpecSimpleSignedShortKeyWord &);
+  TypeSpecSimpleSignedShortKeyWord &operator=(const TypeSpecSimpleSignedShortKeyWord &);
+  TypeSpecSimpleSignedShortKeyWord();
+  ~TypeSpecSimpleSignedShortKeyWord();
+  virtual void accept(Visitor *v);
+  virtual TypeSpecSimpleSignedShortKeyWord *clone() const;
+  void swap(TypeSpecSimpleSignedShortKeyWord &);
+};
+
+class TypeSpecSimpleUnsignedShortKeyWord : public TypeSpecSimple
+{
+public:
+
+  TypeSpecSimpleUnsignedShortKeyWord(const TypeSpecSimpleUnsignedShortKeyWord &);
+  TypeSpecSimpleUnsignedShortKeyWord &operator=(const TypeSpecSimpleUnsignedShortKeyWord &);
+  TypeSpecSimpleUnsignedShortKeyWord();
+  ~TypeSpecSimpleUnsignedShortKeyWord();
+  virtual void accept(Visitor *v);
+  virtual TypeSpecSimpleUnsignedShortKeyWord *clone() const;
+  void swap(TypeSpecSimpleUnsignedShortKeyWord &);
+};
+
+class TypeSpecSimpleShortIntKeyWord : public TypeSpecSimple
+{
+public:
+
+  TypeSpecSimpleShortIntKeyWord(const TypeSpecSimpleShortIntKeyWord &);
+  TypeSpecSimpleShortIntKeyWord &operator=(const TypeSpecSimpleShortIntKeyWord &);
+  TypeSpecSimpleShortIntKeyWord();
+  ~TypeSpecSimpleShortIntKeyWord();
+  virtual void accept(Visitor *v);
+  virtual TypeSpecSimpleShortIntKeyWord *clone() const;
+  void swap(TypeSpecSimpleShortIntKeyWord &);
+};
+
+class TypeSpecSimpleSignedShortIntKeyWord : public TypeSpecSimple
+{
+public:
+
+  TypeSpecSimpleSignedShortIntKeyWord(const TypeSpecSimpleSignedShortIntKeyWord &);
+  TypeSpecSimpleSignedShortIntKeyWord &operator=(const TypeSpecSimpleSignedShortIntKeyWord &);
+  TypeSpecSimpleSignedShortIntKeyWord();
+  ~TypeSpecSimpleSignedShortIntKeyWord();
+  virtual void accept(Visitor *v);
+  virtual TypeSpecSimpleSignedShortIntKeyWord *clone() const;
+  void swap(TypeSpecSimpleSignedShortIntKeyWord &);
+};
+
+class TypeSpecSimpleUnsignedShortIntKeyWord : public TypeSpecSimple
+{
+public:
+
+  TypeSpecSimpleUnsignedShortIntKeyWord(const TypeSpecSimpleUnsignedShortIntKeyWord &);
+  TypeSpecSimpleUnsignedShortIntKeyWord &operator=(const TypeSpecSimpleUnsignedShortIntKeyWord &);
+  TypeSpecSimpleUnsignedShortIntKeyWord();
+  ~TypeSpecSimpleUnsignedShortIntKeyWord();
+  virtual void accept(Visitor *v);
+  virtual TypeSpecSimpleUnsignedShortIntKeyWord *clone() const;
+  void swap(TypeSpecSimpleUnsignedShortIntKeyWord &);
+};
+
+class TypeSpecSimpleLongKeyWord : public TypeSpecSimple
+{
+public:
+
+  TypeSpecSimpleLongKeyWord(const TypeSpecSimpleLongKeyWord &);
+  TypeSpecSimpleLongKeyWord &operator=(const TypeSpecSimpleLongKeyWord &);
+  TypeSpecSimpleLongKeyWord();
+  ~TypeSpecSimpleLongKeyWord();
+  virtual void accept(Visitor *v);
+  virtual TypeSpecSimpleLongKeyWord *clone() const;
+  void swap(TypeSpecSimpleLongKeyWord &);
+};
+
+class TypeSpecSimpleSignedLongKeyWord : public TypeSpecSimple
+{
+public:
+
+  TypeSpecSimpleSignedLongKeyWord(const TypeSpecSimpleSignedLongKeyWord &);
+  TypeSpecSimpleSignedLongKeyWord &operator=(const TypeSpecSimpleSignedLongKeyWord &);
+  TypeSpecSimpleSignedLongKeyWord();
+  ~TypeSpecSimpleSignedLongKeyWord();
+  virtual void accept(Visitor *v);
+  virtual TypeSpecSimpleSignedLongKeyWord *clone() const;
+  void swap(TypeSpecSimpleSignedLongKeyWord &);
+};
+
+class TypeSpecSimpleUnsignedLongKeyWord : public TypeSpecSimple
+{
+public:
+
+  TypeSpecSimpleUnsignedLongKeyWord(const TypeSpecSimpleUnsignedLongKeyWord &);
+  TypeSpecSimpleUnsignedLongKeyWord &operator=(const TypeSpecSimpleUnsignedLongKeyWord &);
+  TypeSpecSimpleUnsignedLongKeyWord();
+  ~TypeSpecSimpleUnsignedLongKeyWord();
+  virtual void accept(Visitor *v);
+  virtual TypeSpecSimpleUnsignedLongKeyWord *clone() const;
+  void swap(TypeSpecSimpleUnsignedLongKeyWord &);
+};
+
+class TypeSpecSimpleSignedLongIntKeyWord : public TypeSpecSimple
+{
+public:
+
+  TypeSpecSimpleSignedLongIntKeyWord(const TypeSpecSimpleSignedLongIntKeyWord &);
+  TypeSpecSimpleSignedLongIntKeyWord &operator=(const TypeSpecSimpleSignedLongIntKeyWord &);
+  TypeSpecSimpleSignedLongIntKeyWord();
+  ~TypeSpecSimpleSignedLongIntKeyWord();
+  virtual void accept(Visitor *v);
+  virtual TypeSpecSimpleSignedLongIntKeyWord *clone() const;
+  void swap(TypeSpecSimpleSignedLongIntKeyWord &);
+};
+
+class TypeSpecSimpleLongIntKeyWord : public TypeSpecSimple
+{
+public:
+
+  TypeSpecSimpleLongIntKeyWord(const TypeSpecSimpleLongIntKeyWord &);
+  TypeSpecSimpleLongIntKeyWord &operator=(const TypeSpecSimpleLongIntKeyWord &);
+  TypeSpecSimpleLongIntKeyWord();
+  ~TypeSpecSimpleLongIntKeyWord();
+  virtual void accept(Visitor *v);
+  virtual TypeSpecSimpleLongIntKeyWord *clone() const;
+  void swap(TypeSpecSimpleLongIntKeyWord &);
+};
+
+class TypeSpecSimpleUnsignedLongIntKeyWord : public TypeSpecSimple
+{
+public:
+
+  TypeSpecSimpleUnsignedLongIntKeyWord(const TypeSpecSimpleUnsignedLongIntKeyWord &);
+  TypeSpecSimpleUnsignedLongIntKeyWord &operator=(const TypeSpecSimpleUnsignedLongIntKeyWord &);
+  TypeSpecSimpleUnsignedLongIntKeyWord();
+  ~TypeSpecSimpleUnsignedLongIntKeyWord();
+  virtual void accept(Visitor *v);
+  virtual TypeSpecSimpleUnsignedLongIntKeyWord *clone() const;
+  void swap(TypeSpecSimpleUnsignedLongIntKeyWord &);
+};
+
+class TypeSpecSimpleLongLongKeyWord : public TypeSpecSimple
+{
+public:
+
+  TypeSpecSimpleLongLongKeyWord(const TypeSpecSimpleLongLongKeyWord &);
+  TypeSpecSimpleLongLongKeyWord &operator=(const TypeSpecSimpleLongLongKeyWord &);
+  TypeSpecSimpleLongLongKeyWord();
+  ~TypeSpecSimpleLongLongKeyWord();
+  virtual void accept(Visitor *v);
+  virtual TypeSpecSimpleLongLongKeyWord *clone() const;
+  void swap(TypeSpecSimpleLongLongKeyWord &);
+};
+
+class TypeSpecSimpleSignedLongLongKeyWord : public TypeSpecSimple
+{
+public:
+
+  TypeSpecSimpleSignedLongLongKeyWord(const TypeSpecSimpleSignedLongLongKeyWord &);
+  TypeSpecSimpleSignedLongLongKeyWord &operator=(const TypeSpecSimpleSignedLongLongKeyWord &);
+  TypeSpecSimpleSignedLongLongKeyWord();
+  ~TypeSpecSimpleSignedLongLongKeyWord();
+  virtual void accept(Visitor *v);
+  virtual TypeSpecSimpleSignedLongLongKeyWord *clone() const;
+  void swap(TypeSpecSimpleSignedLongLongKeyWord &);
+};
+
+class TypeSpecSimpleUnsignedLongLongKeyWord : public TypeSpecSimple
+{
+public:
+
+  TypeSpecSimpleUnsignedLongLongKeyWord(const TypeSpecSimpleUnsignedLongLongKeyWord &);
+  TypeSpecSimpleUnsignedLongLongKeyWord &operator=(const TypeSpecSimpleUnsignedLongLongKeyWord &);
+  TypeSpecSimpleUnsignedLongLongKeyWord();
+  ~TypeSpecSimpleUnsignedLongLongKeyWord();
+  virtual void accept(Visitor *v);
+  virtual TypeSpecSimpleUnsignedLongLongKeyWord *clone() const;
+  void swap(TypeSpecSimpleUnsignedLongLongKeyWord &);
+};
+
+class TypeSpecSimpleLongLongIntKeyWord : public TypeSpecSimple
+{
+public:
+
+  TypeSpecSimpleLongLongIntKeyWord(const TypeSpecSimpleLongLongIntKeyWord &);
+  TypeSpecSimpleLongLongIntKeyWord &operator=(const TypeSpecSimpleLongLongIntKeyWord &);
+  TypeSpecSimpleLongLongIntKeyWord();
+  ~TypeSpecSimpleLongLongIntKeyWord();
+  virtual void accept(Visitor *v);
+  virtual TypeSpecSimpleLongLongIntKeyWord *clone() const;
+  void swap(TypeSpecSimpleLongLongIntKeyWord &);
+};
+
+class TypeSpecSimpleSignedLongLongIntKeyWord : public TypeSpecSimple
+{
+public:
+
+  TypeSpecSimpleSignedLongLongIntKeyWord(const TypeSpecSimpleSignedLongLongIntKeyWord &);
+  TypeSpecSimpleSignedLongLongIntKeyWord &operator=(const TypeSpecSimpleSignedLongLongIntKeyWord &);
+  TypeSpecSimpleSignedLongLongIntKeyWord();
+  ~TypeSpecSimpleSignedLongLongIntKeyWord();
+  virtual void accept(Visitor *v);
+  virtual TypeSpecSimpleSignedLongLongIntKeyWord *clone() const;
+  void swap(TypeSpecSimpleSignedLongLongIntKeyWord &);
+};
+
+class TypeSpecSimpleUnsignedLongLongIntKeyWord : public TypeSpecSimple
+{
+public:
+
+  TypeSpecSimpleUnsignedLongLongIntKeyWord(const TypeSpecSimpleUnsignedLongLongIntKeyWord &);
+  TypeSpecSimpleUnsignedLongLongIntKeyWord &operator=(const TypeSpecSimpleUnsignedLongLongIntKeyWord &);
+  TypeSpecSimpleUnsignedLongLongIntKeyWord();
+  ~TypeSpecSimpleUnsignedLongLongIntKeyWord();
+  virtual void accept(Visitor *v);
+  virtual TypeSpecSimpleUnsignedLongLongIntKeyWord *clone() const;
+  void swap(TypeSpecSimpleUnsignedLongLongIntKeyWord &);
+};
+
+class TypeSpecSimpleFloatKeyWord : public TypeSpecSimple
+{
+public:
+
+  TypeSpecSimpleFloatKeyWord(const TypeSpecSimpleFloatKeyWord &);
+  TypeSpecSimpleFloatKeyWord &operator=(const TypeSpecSimpleFloatKeyWord &);
+  TypeSpecSimpleFloatKeyWord();
+  ~TypeSpecSimpleFloatKeyWord();
+  virtual void accept(Visitor *v);
+  virtual TypeSpecSimpleFloatKeyWord *clone() const;
+  void swap(TypeSpecSimpleFloatKeyWord &);
 };
 
 class TypeSpecSimpleDoubleKeyWord : public TypeSpecSimple
@@ -2242,6 +3886,21 @@ public:
   void swap(LoopAnnotStackEffects &);
 };
 
+class LoopAnnotStackAllocation : public LoopAnnotStack
+{
+public:
+  LoopAllocation *loopallocation_;
+  LoopAnnotOpt *loopannotopt_;
+
+  LoopAnnotStackAllocation(const LoopAnnotStackAllocation &);
+  LoopAnnotStackAllocation &operator=(const LoopAnnotStackAllocation &);
+  LoopAnnotStackAllocation(LoopAllocation *p1, LoopAnnotOpt *p2);
+  ~LoopAnnotStackAllocation();
+  virtual void accept(Visitor *v);
+  virtual LoopAnnotStackAllocation *clone() const;
+  void swap(LoopAnnotStackAllocation &);
+};
+
 class LoopAnnotStackVariant : public LoopAnnotStack
 {
 public:
@@ -2324,6 +3983,48 @@ public:
   virtual void accept(Visitor *v);
   virtual AdmitLoopInvariant *clone() const;
   void swap(AdmitLoopInvariant &);
+};
+
+class SimpleLoopAllocation : public LoopAllocation
+{
+public:
+  Allocation *allocation_;
+
+  SimpleLoopAllocation(const SimpleLoopAllocation &);
+  SimpleLoopAllocation &operator=(const SimpleLoopAllocation &);
+  SimpleLoopAllocation(Allocation *p1);
+  ~SimpleLoopAllocation();
+  virtual void accept(Visitor *v);
+  virtual SimpleLoopAllocation *clone() const;
+  void swap(SimpleLoopAllocation &);
+};
+
+class AllocatesZones : public Allocation
+{
+public:
+  Zones *zones_;
+
+  AllocatesZones(const AllocatesZones &);
+  AllocatesZones &operator=(const AllocatesZones &);
+  AllocatesZones(Zones *p1);
+  ~AllocatesZones();
+  virtual void accept(Visitor *v);
+  virtual AllocatesZones *clone() const;
+  void swap(AllocatesZones &);
+};
+
+class FreesZones : public Allocation
+{
+public:
+  Zones *zones_;
+
+  FreesZones(const FreesZones &);
+  FreesZones &operator=(const FreesZones &);
+  FreesZones(Zones *p1);
+  ~FreesZones();
+  virtual void accept(Visitor *v);
+  virtual FreesZones *clone() const;
+  void swap(FreesZones &);
 };
 
 class SimpleLoopVariant : public LoopVariant

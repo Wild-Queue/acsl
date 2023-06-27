@@ -100,6 +100,22 @@ Identifier* pIdentifier(FILE *inp);
 Identifier* pIdentifier(const char *str);
 TypeSpecSimple* pTypeSpecSimple(FILE *inp);
 TypeSpecSimple* pTypeSpecSimple(const char *str);
+LogicPTreeAnnot* pLogicPTreeAnnot(FILE *inp);
+LogicPTreeAnnot* pLogicPTreeAnnot(const char *str);
+Annotation* pAnnotation(FILE *inp);
+Annotation* pAnnotation(const char *str);
+LoopAnnotStack* pLoopAnnotStack(FILE *inp);
+LoopAnnotStack* pLoopAnnotStack(const char *str);
+LoopAnnotOpt* pLoopAnnotOpt(FILE *inp);
+LoopAnnotOpt* pLoopAnnotOpt(const char *str);
+LoopInvariant* pLoopInvariant(FILE *inp);
+LoopInvariant* pLoopInvariant(const char *str);
+LoopVariant* pLoopVariant(FILE *inp);
+LoopVariant* pLoopVariant(const char *str);
+LoopEffects* pLoopEffects(FILE *inp);
+LoopEffects* pLoopEffects(const char *str);
+Variant* pVariant(FILE *inp);
+Variant* pVariant(const char *str);
 }
 
 #endif

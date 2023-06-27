@@ -16,9 +16,9 @@ SimpleContract.                 Contract ::= Requires Terminates Decreases Simpl
 --TerminatesRequiresContract.     Contract ::= Requires NETerminates "requires" ;
 --DecreasesRequiresContract.      Contract ::= Requires Terminates NEDecreases "requires" ;
 --DecreasesTerminatesContract.    Contract ::= Requires Terminates NEDecreases "terminates" ;
---ClausesRequiresContract.        Contract ::= Requires Terminates Decreases NESimpleClauses "requires" ;
---ClausesTerminatesContract.      Contract ::= Requires Terminates Decreases NESimpleClauses "terminates" ;
---ClausesDecreasesContract.       Contract ::= Requires Terminates Decreases NESimpleClauses "decreases" ;
+ClausesRequiresContract.        Contract ::= Requires Terminates Decreases NESimpleClauses "requires" ;
+ClausesTerminatesContract.      Contract ::= Requires Terminates Decreases NESimpleClauses "terminates" ;
+ClausesDecreasesContract.       Contract ::= Requires Terminates Decreases NESimpleClauses "decreases" ;
 --BehaviorsTerminatesContract.    Contract ::= Requires Terminates Decreases SimpleClauses NEBehaviors "terminates" ;
 --BehaviorsDecreasesContract.     Contract ::= Requires Terminates Decreases SimpleClauses NEBehaviors "decreases" ;
 --ComplDisjRequiresContract.      Contract ::= Requires Terminates Decreases SimpleClauses Behaviors NECompleteOrDisjoint "requires" ;
@@ -95,20 +95,20 @@ NoComplDisj.    CompleteOrDisjoint ::= ; --/* epsilon */
 --EmptyClauseKW.          ClauseKW ::= ; -- EOF 
 
 
---NoLexpr.        Lexpr ::= ; --/* predicates */ 
-ImplLexpr.      Lexpr ::= Lexpr "==>" Lexpr1 ; --Lexpr => Lexpr1
-IffLexpr.       Lexpr ::= Lexpr "<==>" Lexpr1 ; --Lexpr => Lexpr1
-OrLexpr.        Lexpr ::= Lexpr "||" Lexpr1 ; --Lexpr => Lexpr1
-AndLexpr.       Lexpr ::= Lexpr "&&" Lexpr1 ; --Lexpr => Lexpr1
-HatHatLexpr.    Lexpr ::= Lexpr "^^" Lexpr1 ; --Lexpr => Lexpr1
+--NoLexpr.          Lexpr ::= ; --/* predicates */ 
+ImplLexpr.          Lexpr ::= Lexpr1 "==>" Lexpr ; --Lexpr => Lexpr1
+IffLexpr.           Lexpr ::= Lexpr1 "<==>" Lexpr ; --Lexpr => Lexpr1
+OrLexpr.            Lexpr ::= Lexpr1 "||" Lexpr ; --Lexpr => Lexpr1
+AndLexpr.           Lexpr ::= Lexpr1 "&&" Lexpr ; --Lexpr => Lexpr1
+HatHatLexpr.        Lexpr ::= Lexpr1 "^^" Lexpr ; --Lexpr => Lexpr1
 --/* terms */
---AmpLexpr.       Lexpr ::= Lexpr "&" Lexpr1 ; --Lexpr => Lexpr1
---PipeLexpr.      Lexpr ::= Lexpr "|" Lexpr1 ; --Lexpr => Lexpr1
---HatLexpr.       Lexpr ::= Lexpr "^" Lexpr1 ; --Lexpr => Lexpr1
---BimpliesLexpr.  Lexpr ::= Lexpr "-->" Lexpr1 ; --Lexpr => Lexpr1
---BiffLexpr.      Lexpr ::= Lexpr "<-->" Lexpr1 ; --Lexpr => Lexpr1
---InLexpr.        Lexpr ::= Lexpr "\\in" Lexpr1 ; --Lexpr => Lexpr1
---TernaryLexpr.   Lexpr ::= Lexpr "?" Lexpr ":" Lexpr ; --%prec prec_question
+AmpLexpr.           Lexpr ::= Lexpr1 "&" Lexpr ; --Lexpr => Lexpr1
+PipeLexpr.          Lexpr ::= Lexpr1 "|" Lexpr ; --Lexpr => Lexpr1
+HatLexpr.           Lexpr ::= Lexpr1 "^" Lexpr ; --Lexpr => Lexpr1
+BimpliesLexpr.      Lexpr ::= Lexpr1 "-->" Lexpr ; --Lexpr => Lexpr1
+BiffLexpr.          Lexpr ::= Lexpr1 "<-->" Lexpr ; --Lexpr => Lexpr1
+InLexpr.            Lexpr ::= Lexpr1 "\\in" Lexpr ; --Lexpr => Lexpr1
+TernaryLexpr.       Lexpr ::= Lexpr "?" Lexpr ":" Lexpr ; --%prec prec_question
 ----/* both terms and predicates */
 --IdAssignLexpr.  Lexpr ::= AnyIdentifier ":" Lexpr ; --%prec prec_named 
 --StrAssignLexpr. Lexpr ::= [STRING_LITERAL] ":" Lexpr ; --%prec prec_named
@@ -170,21 +170,21 @@ NoSize.             ArraySize ::= ; --/* empty */`
 --NotLexprInner.          Lexpr3 ::= "!" Lexpr3 ;
 TrueLexpr.              Lexpr3 ::= "\\true" ;
 FalseLexpr.             Lexpr3 ::= "\\false" ;
---PointerLexpr.           Lexpr3 ::= "\\object_pointer" OptLabel1 "(" Lexpr ")" ;
+PointerLexpr.           Lexpr3 ::= "\\object_pointer" OptLabel1 "(" Lexpr ")" ;
 ValidLexpr.             Lexpr3 ::= "\\valid" OptLabel1 "(" Lexpr ")" ;
---ValidReadLexpr.         Lexpr3 ::= "\\valid_read" OptLabel1 "(" Lexpr ")" ;
---ValidFuncLexpr.         Lexpr3 ::= "\\valid_function" "(" Lexpr ")" ;
---ValidIndxLexpr.         Lexpr3 ::= "\\valid_index" OptLabel1 "(" Lexpr "," Lexpr ")" ;
---ValidRangeLexpr.        Lexpr3 ::= "\\valid_range" OptLabel1 "(" Lexpr "," Lexpr "," Lexpr ")" ;
---InitializedLexpr.       Lexpr3 ::= "\\initialized" OptLabel1 "(" Lexpr ")" ;
---DanglingLexpr.          Lexpr3 ::= "\\dangling" OptLabel1 "(" Lexpr ")" ;
---FreshLexpr.             Lexpr3 ::= "\\fresh" OptLabel2 "(" Lexpr "," Lexpr ")" ;
---BaseAddrLexpr.          Lexpr3 ::= "\\base_addr" OptLabel1 "(" Lexpr ")" ;
---BlockLengthLexpr.       Lexpr3 ::= "\\block_length" OptLabel1 "(" Lexpr ")" ;
---OffsetLexpr.            Lexpr3 ::= "\\offset" OptLabel1 "(" Lexpr ")" ;
---AllocableLexpr.         Lexpr3 ::= "\\allocable" OptLabel1 "(" Lexpr ")" ;
---FreeableLexpr.          Lexpr3 ::= "\\freeable" OptLabel1 "(" Lexpr ")" ;
---AllocationLexpr.        Lexpr3 ::= "\\allocation" OptLabel1 "(" Lexpr ")" ;
+ValidReadLexpr.         Lexpr3 ::= "\\valid_read" OptLabel1 "(" Lexpr ")" ;
+ValidFuncLexpr.         Lexpr3 ::= "\\valid_function" "(" Lexpr ")" ;
+ValidIndxLexpr.         Lexpr3 ::= "\\valid_index" OptLabel1 "(" Lexpr "," Lexpr ")" ;
+ValidRangeLexpr.        Lexpr3 ::= "\\valid_range" OptLabel1 "(" Lexpr "," Lexpr "," Lexpr ")" ;
+InitializedLexpr.       Lexpr3 ::= "\\initialized" OptLabel1 "(" Lexpr ")" ;
+DanglingLexpr.          Lexpr3 ::= "\\dangling" OptLabel1 "(" Lexpr ")" ;
+FreshLexpr.             Lexpr3 ::= "\\fresh" OptLabel2 "(" Lexpr "," Lexpr ")" ;
+BaseAddrLexpr.          Lexpr3 ::= "\\base_addr" OptLabel1 "(" Lexpr ")" ;
+BlockLengthLexpr.       Lexpr3 ::= "\\block_length" OptLabel1 "(" Lexpr ")" ;
+OffsetLexpr.            Lexpr3 ::= "\\offset" OptLabel1 "(" Lexpr ")" ;
+AllocableLexpr.         Lexpr3 ::= "\\allocable" OptLabel1 "(" Lexpr ")" ;
+FreeableLexpr.          Lexpr3 ::= "\\freeable" OptLabel1 "(" Lexpr ")" ;
+AllocationLexpr.        Lexpr3 ::= "\\allocation" OptLabel1 "(" Lexpr ")" ;
 AutomaticLexpr.         Lexpr3 ::= "\\automatic" ;
 DynamicLexpr.           Lexpr3 ::= "\\dynamic" ;
 RegisterLexpr.          Lexpr3 ::= "\\register" ;
@@ -197,25 +197,25 @@ LexprStringConst.       Lexpr3 ::= String ;
 --LexprWStringConst.       Lexpr3 ::= WSTRING_CONSTANT ;
 AddLexpr.               Lexpr3 ::= Lexpr3 "+" Lexpr3 ;
 SubtrLexpr.             Lexpr3 ::= Lexpr3 "-" Lexpr3 ;
---MultLexpr.              Lexpr3 ::= Lexpr3 "*" Lexpr3 ;
---DivLexpr.               Lexpr3 ::= Lexpr3 "/" Lexpr3 ;
---ModLexpr.               Lexpr3 ::= Lexpr3 "%" Lexpr3 ;
+MultLexpr.              Lexpr3 ::= Lexpr3 "*" Lexpr3 ;
+DivLexpr.               Lexpr3 ::= Lexpr3 "/" Lexpr3 ;
+ModLexpr.               Lexpr3 ::= Lexpr3 "%" Lexpr3 ;
 --StarHatLexpr.           Lexpr3 ::= Lexpr3 "*^" Lexpr3 ;
 --ArrowLexpr.             Lexpr3 ::= Lexpr3 "->" IdentifierOrTypenameFull ;
 --DotLexpr.               Lexpr3 ::= Lexpr3 "." IdentifierOrTypenameFull ;
 SquaresRangeLexpr.      Lexpr3 ::= Lexpr3 "[" Range "]" ;
 SquaresLexpr.           Lexpr3 ::= Lexpr3 "[" Lexpr "]" ;
 --SquaresPipeLexpr.       Lexpr3 ::= "[|" LexprList "|]" ;
---MinusLexpr.             Lexpr3 ::= "-" Lexpr3 ; --%prec prec_unary_op
---PlusLexpr.              Lexpr3 ::= "+" Lexpr3 ; --%prec prec_unary_op
---TildeLexpr.             Lexpr3 ::= "~" Lexpr3 ;
---StarLexpr.              Lexpr3 ::= "*" Lexpr3 ; --%prec prec_unary_op 
---AmpUnaryLexpr.          Lexpr3 ::= "&" Lexpr3 ; --%prec prec_unary_op 
---SizeOfLexpr.            Lexpr3 ::= "sizeof" "(" Lexpr ")" ;
+MinusLexpr.             Lexpr3 ::= "-" Lexpr3 ; --%prec prec_unary_op
+PlusLexpr.              Lexpr3 ::= "+" Lexpr3 ; --%prec prec_unary_op
+TildeLexpr.             Lexpr3 ::= "~" Lexpr3 ;
+StarLexpr.              Lexpr3 ::= "*" Lexpr3 ; --%prec prec_unary_op 
+AmpUnaryLexpr.          Lexpr3 ::= "&" Lexpr3 ; --%prec prec_unary_op 
+SizeOfLexpr.            Lexpr3 ::= "sizeof" "(" Lexpr ")" ;
 --SizeOfLogicTypeLexpr.   Lexpr3 ::= "sizeof" "(" CastLogicType ")" ;
---OldLexpr.               Lexpr3 ::= "\\old" "(" Lexpr ")" ;
---AtLexpr.                Lexpr3 ::= "\\at" "(" Lexpr "," LabelName ")" ;
---ResultLexpr.            Lexpr3 ::= "\\result" ;
+OldLexpr.               Lexpr3 ::= "\\old" "(" Lexpr ")" ;
+AtLexpr.                Lexpr3 ::= "\\at" "(" Lexpr "," LabelName ")" ;
+ResultLexpr.            Lexpr3 ::= "\\result" ;
 SeparatedLexpr.         Lexpr3 ::= "\\separated" "(" [Lexpr] ")" ;
 FullIdParenLexpr.       Lexpr3 ::= FullIdentifier "(" [Lexpr] ")" ;
 --FullIdBraceParenLexpr.  Lexpr3 ::= FullIdentifier "{" [IdentifierOrTypenameFull] "}" "(" [Lexpr] ")" ;
@@ -270,45 +270,45 @@ AdmitContinuesKeyWord.  PostCond ::= "admit" "continues" ;
 AdmitReturnsKeyWord.    PostCond ::= "admit" "returns" ;
 
 SimpleIdentifierFull.           FullIdentifier ::= Identifier ;
---AdmitKeyWordFullIdent.          FullIdentifier ::= "admit" ;
---AllocatesKeyWordFullIdent.      FullIdentifier ::= "allocates" ;
---AssertKeyWordFullIdent.         FullIdentifier ::= "assert" ;
---AssignsKeyWordFullIdent.        FullIdentifier ::= "assigns" ;
---AssumesKeyWordFullIdent.        FullIdentifier ::= "assumes" ;
---AtKeyWordFullIdent.             FullIdentifier ::= "at" ;
---AxiomKeyWordFullIdent.          FullIdentifier ::= "axiom" ;
---AxiomaticKeyWordFullIdent.      FullIdentifier ::= "axiomatic" ;
---BehaviorKeyWordFullIdent.       FullIdentifier ::= "behavior" ;
---BreaksKeyWordFullIdent.         FullIdentifier ::= "breaks" ;
---CheckKeyWordFullIdent.          FullIdentifier ::= "check" ;
---CompleteKeyWordFullIdent.       FullIdentifier ::= "complete" ;
---ContinuesKeyWordFullIdent.      FullIdentifier ::= "continues" ;
---ContractKeyWordFullIdent.       FullIdentifier ::= "contract" ;
---DecreasesKeyWordFullIdent.      FullIdentifier ::= "decreases" ;
---DisjointKeyWordFullIdent.       FullIdentifier ::= "disjoint" ;
---EnsuresKeyWordFullIdent.        FullIdentifier ::= "ensures" ;
---ExitsKeyWordFullIdent.          FullIdentifier ::= "exits" ;
---FreesKeyWordFullIdent.          FullIdentifier ::= "frees" ;
---FunctionKeyWordFullIdent.       FullIdentifier ::= "function" ;
---GlobalKeyWordFullIdent.         FullIdentifier ::= "global" ;
---ImpactKeyWordFullIdent.         FullIdentifier ::= "impact" ;
---InductiveKeyWordFullIdent.      FullIdentifier ::= "inductive" ;
---IncludeKeyWordFullIdent.        FullIdentifier ::= "include" ;
---InvariantKeyWordFullIdent.      FullIdentifier ::= "invariant" ;
---LemmaKeyWordFullIdent.          FullIdentifier ::= "lemma" ;
---LetKeyWordFullIdent.            FullIdentifier ::= "let" ;
---LogicKeyWordFullIdent.          FullIdentifier ::= "logic" ;
---LoopKeyWordFullIdent.           FullIdentifier ::= "loop" ;
---ModelKeyWordFullIdent.          FullIdentifier ::= "model" ;
---ModuleKeyWordFullIdent.         FullIdentifier ::= "module" ;
---PragmaKeyWordFullIdent.         FullIdentifier ::= "pragma" ;
---PredicateKeyWordFullIdent.      FullIdentifier ::= "predicate" ;
---RequiresKeyWordFullIdent.       FullIdentifier ::= "requires" ;
---ReturnsKeyWordFullIdent.        FullIdentifier ::= "returns" ;
---SliceKeyWordFullIdent.          FullIdentifier ::= "slice" ;
---TerminatesKeyWordFullIdent.     FullIdentifier ::= "terminates" ;
---TypeKeyWordFullIdent.           FullIdentifier ::= "type" ;
---VariantKeyWordFullIdent.        FullIdentifier ::= "variant" ;
+AdmitKeyWordFullIdent.          FullIdentifier ::= "admit" ;
+AllocatesKeyWordFullIdent.      FullIdentifier ::= "allocates" ;
+AssertKeyWordFullIdent.         FullIdentifier ::= "assert" ;
+AssignsKeyWordFullIdent.        FullIdentifier ::= "assigns" ;
+AssumesKeyWordFullIdent.        FullIdentifier ::= "assumes" ;
+AtKeyWordFullIdent.             FullIdentifier ::= "at" ;
+AxiomKeyWordFullIdent.          FullIdentifier ::= "axiom" ;
+AxiomaticKeyWordFullIdent.      FullIdentifier ::= "axiomatic" ;
+BehaviorKeyWordFullIdent.       FullIdentifier ::= "behavior" ;
+BreaksKeyWordFullIdent.         FullIdentifier ::= "breaks" ;
+CheckKeyWordFullIdent.          FullIdentifier ::= "check" ;
+CompleteKeyWordFullIdent.       FullIdentifier ::= "complete" ;
+ContinuesKeyWordFullIdent.      FullIdentifier ::= "continues" ;
+ContractKeyWordFullIdent.       FullIdentifier ::= "contract" ;
+DecreasesKeyWordFullIdent.      FullIdentifier ::= "decreases" ;
+DisjointKeyWordFullIdent.       FullIdentifier ::= "disjoint" ;
+EnsuresKeyWordFullIdent.        FullIdentifier ::= "ensures" ;
+ExitsKeyWordFullIdent.          FullIdentifier ::= "exits" ;
+FreesKeyWordFullIdent.          FullIdentifier ::= "frees" ;
+FunctionKeyWordFullIdent.       FullIdentifier ::= "function" ;
+GlobalKeyWordFullIdent.         FullIdentifier ::= "global" ;
+ImpactKeyWordFullIdent.         FullIdentifier ::= "impact" ;
+InductiveKeyWordFullIdent.      FullIdentifier ::= "inductive" ;
+IncludeKeyWordFullIdent.        FullIdentifier ::= "include" ;
+InvariantKeyWordFullIdent.      FullIdentifier ::= "invariant" ;
+LemmaKeyWordFullIdent.          FullIdentifier ::= "lemma" ;
+LetKeyWordFullIdent.            FullIdentifier ::= "let" ;
+LogicKeyWordFullIdent.          FullIdentifier ::= "logic" ;
+LoopKeyWordFullIdent.           FullIdentifier ::= "loop" ;
+ModelKeyWordFullIdent.          FullIdentifier ::= "model" ;
+ModuleKeyWordFullIdent.         FullIdentifier ::= "module" ;
+PragmaKeyWordFullIdent.         FullIdentifier ::= "pragma" ;
+PredicateKeyWordFullIdent.      FullIdentifier ::= "predicate" ;
+RequiresKeyWordFullIdent.       FullIdentifier ::= "requires" ;
+ReturnsKeyWordFullIdent.        FullIdentifier ::= "returns" ;
+SliceKeyWordFullIdent.          FullIdentifier ::= "slice" ;
+TerminatesKeyWordFullIdent.     FullIdentifier ::= "terminates" ;
+TypeKeyWordFullIdent.           FullIdentifier ::= "type" ;
+VariantKeyWordFullIdent.        FullIdentifier ::= "variant" ;
 
 --IdentExtCodeAnnotFullIdent.     FullIdentifier ::= EXT_CODE_ANNOT ;
 --IdentExtContractFullIdent.      FullIdentifier ::= EXT_CONTRACT ;
@@ -318,10 +318,10 @@ separator nonempty FullIdentifier "," ;
 
 IdentifierIdent.    Identifier ::= Ident ;
 --/* token list used inside acsl clauses: */
---BehaviorsKeyWord.   Identifier ::= "behaviors" ;
---LabelKeyWord.       Identifier ::= "label" ;
---ReadsKeyWord.       Identifier ::= "reads" ;
---WritesKeyWord.      Identifier ::= "writes" ;
+BehaviorsKeyWord.   Identifier ::= "behaviors" ;
+LabelKeyWord.       Identifier ::= "label" ;
+ReadsKeyWord.       Identifier ::= "reads" ;
+WritesKeyWord.      Identifier ::= "writes" ;
 
 
 TypeSpecSimpleIntegerKeyWord.                   TypeSpecSimple ::= "integer" ;
@@ -329,32 +329,32 @@ TypeSpecSimpleRealKeyWord.                      TypeSpecSimple ::= "real" ;
 TypeSpecSimpleBooleanKeyWord.                   TypeSpecSimple ::= "boolean" ;
 TypeSpecSimpleVoidKeyWord.                      TypeSpecSimple ::= "void" ;
 TypeSpecSimpleBoolKeyWord.                      TypeSpecSimple ::= "_Bool" ;
-TypeSpecSimpleCharKeyWord.                      TypeSpecSimple ::= "char" ;                           --/** [char] */
---TypeSpecSimpleSignedCharKeyWord.                TypeSpecSimple ::= "signed" "char" ;                  --/** [signed char] */
---TypeSpecSimpleUnsignedCharKeyWord.              TypeSpecSimple ::= "unsigned" "char" ;                --/** [unsigned char] */
+TypeSpecSimpleCharKeyWord.                      TypeSpecSimple ::= "char" ;                             --/** [char] */
+TypeSpecSimpleSignedCharKeyWord.                TypeSpecSimple ::= "signed" "char" ;                  --/** [signed char] */
+TypeSpecSimpleUnsignedCharKeyWord.              TypeSpecSimple ::= "unsigned" "char" ;                --/** [unsigned char] */
 TypeSpecSimpleIntKeyWord.                       TypeSpecSimple ::= "int" ;                            --/** [int] */
---TypeSpecSimpleSignedIntKeyWord.                 TypeSpecSimple ::= "signed" "int" ;                   --/** [int] */
---TypeSpecSimpleUnsignedIntKeyWord.               TypeSpecSimple ::= "unsigned" "int" ;                 --/** [unsigned int] */
---TypeSpecSimpleUnsignedKeyWord.                  TypeSpecSimple ::= "unsigned" ;   
---TypeSpecSimpleShortKeyWord.                     TypeSpecSimple ::= "short" ;                          --/** [short] */
---TypeSpecSimpleSignedShortKeyWord.               TypeSpecSimple ::= "signed" "short" ;                 --/** [short] */
---TypeSpecSimpleUnsignedShortKeyWord.             TypeSpecSimple ::= "unsigned" "short" ;               --/** [unsigned short] */
---TypeSpecSimpleShortIntKeyWord.                  TypeSpecSimple ::= "short" "int" ;                    --/** [short] */
---TypeSpecSimpleSignedShortIntKeyWord.            TypeSpecSimple ::= "signed" "short" "int" ;           --/** [short] */
---TypeSpecSimpleUnsignedShortIntKeyWord.          TypeSpecSimple ::= "unsigned" "short" "int" ;         --/** [unsigned short] */
---TypeSpecSimpleLongKeyWord.                      TypeSpecSimple ::= "long" ;                           --/** [long] */
---TypeSpecSimpleSignedLongKeyWord.                TypeSpecSimple ::= "signed" "long" ;                  --/** [long] */
---TypeSpecSimpleUnsignedLongKeyWord.              TypeSpecSimple ::= "unsigned" "long" ;                --/** [unsigned long] */
---TypeSpecSimpleSignedLongIntKeyWord.             TypeSpecSimple ::= "signed" "long" "int" ;            --/** [long] */
---TypeSpecSimpleLongIntKeyWord.                   TypeSpecSimple ::= "long" "int" ;                     --/** [long] */
---TypeSpecSimpleUnsignedLongIntKeyWord.           TypeSpecSimple ::= "unsigned" "long" "int" ;          --/** [unsigned long] */
---TypeSpecSimpleLongLongKeyWord.                  TypeSpecSimple ::= "long" "long" ;                    --/** [long long] (or [_int64] on Microsoft Visual C) */
---TypeSpecSimpleSignedLongLongKeyWord.            TypeSpecSimple ::= "signed" "long" "long" ;           --/** [long long] (or [_int64] on Microsoft Visual C) */
---TypeSpecSimpleUnsignedLongLongKeyWord.          TypeSpecSimple ::= "unsigned" "long" "long" ;         --/** [unsigned long long] (or [unsigned _int64] on Microsoft Visual C) */
---TypeSpecSimpleLongLongIntKeyWord.               TypeSpecSimple ::= "long" "long" "int" ;              --/** [long long] (or [_int64] on Microsoft Visual C) */
---TypeSpecSimpleSignedLongLongIntKeyWord.         TypeSpecSimple ::= "signed" "long" "long" "int" ;     --/** [long long] (or [_int64] on Microsoft Visual C) */
---TypeSpecSimpleUnsignedLongLongIntKeyWord.       TypeSpecSimple ::= "unsigned" "long" "long" "int" ;   --/** [unsigned long long] (or [unsigned _int64] on Microsoft Visual C) */
---TypeSpecSimpleFloatKeyWord.                     TypeSpecSimple ::= "float" ;
+TypeSpecSimpleSignedIntKeyWord.                 TypeSpecSimple ::= "signed" "int" ;                   --/** [int] */
+TypeSpecSimpleUnsignedIntKeyWord.               TypeSpecSimple ::= "unsigned" "int" ;                 --/** [unsigned int] */
+TypeSpecSimpleUnsignedKeyWord.                  TypeSpecSimple ::= "unsigned" ;   
+TypeSpecSimpleShortKeyWord.                     TypeSpecSimple ::= "short" ;                          --/** [short] */
+TypeSpecSimpleSignedShortKeyWord.               TypeSpecSimple ::= "signed" "short" ;                 --/** [short] */
+TypeSpecSimpleUnsignedShortKeyWord.             TypeSpecSimple ::= "unsigned" "short" ;               --/** [unsigned short] */
+TypeSpecSimpleShortIntKeyWord.                  TypeSpecSimple ::= "short" "int" ;                    --/** [short] */
+TypeSpecSimpleSignedShortIntKeyWord.            TypeSpecSimple ::= "signed" "short" "int" ;           --/** [short] */
+TypeSpecSimpleUnsignedShortIntKeyWord.          TypeSpecSimple ::= "unsigned" "short" "int" ;         --/** [unsigned short] */
+TypeSpecSimpleLongKeyWord.                      TypeSpecSimple ::= "long" ;                           --/** [long] */
+TypeSpecSimpleSignedLongKeyWord.                TypeSpecSimple ::= "signed" "long" ;                  --/** [long] */
+TypeSpecSimpleUnsignedLongKeyWord.              TypeSpecSimple ::= "unsigned" "long" ;                --/** [unsigned long] */
+TypeSpecSimpleSignedLongIntKeyWord.             TypeSpecSimple ::= "signed" "long" "int" ;            --/** [long] */
+TypeSpecSimpleLongIntKeyWord.                   TypeSpecSimple ::= "long" "int" ;                     --/** [long] */
+TypeSpecSimpleUnsignedLongIntKeyWord.           TypeSpecSimple ::= "unsigned" "long" "int" ;          --/** [unsigned long] */
+TypeSpecSimpleLongLongKeyWord.                  TypeSpecSimple ::= "long" "long" ;                    --/** [long long] (or [_int64] on Microsoft Visual C) */
+TypeSpecSimpleSignedLongLongKeyWord.            TypeSpecSimple ::= "signed" "long" "long" ;           --/** [long long] (or [_int64] on Microsoft Visual C) */
+TypeSpecSimpleUnsignedLongLongKeyWord.          TypeSpecSimple ::= "unsigned" "long" "long" ;         --/** [unsigned long long] (or [unsigned _int64] on Microsoft Visual C) */
+TypeSpecSimpleLongLongIntKeyWord.               TypeSpecSimple ::= "long" "long" "int" ;              --/** [long long] (or [_int64] on Microsoft Visual C) */
+TypeSpecSimpleSignedLongLongIntKeyWord.         TypeSpecSimple ::= "signed" "long" "long" "int" ;     --/** [long long] (or [_int64] on Microsoft Visual C) */
+TypeSpecSimpleUnsignedLongLongIntKeyWord.       TypeSpecSimple ::= "unsigned" "long" "long" "int" ;   --/** [unsigned long long] (or [unsigned _int64] on Microsoft Visual C) */
+TypeSpecSimpleFloatKeyWord.                     TypeSpecSimple ::= "float" ;
 TypeSpecSimpleDoubleKeyWord.                    TypeSpecSimple ::= "double" ;
 TypeSpecSimpleLongDoubleKeyWord.                TypeSpecSimple ::= "long" "double" ;
 --TypeSpecSimpleStruct.                           TypeSpecSimple ::= "struct" IdentifierOrTypenameFull ;
@@ -385,7 +385,7 @@ LoopAnnotation.                 Annotation ::= LoopAnnotStack ; --LoopAnnotStack
 --/* TODO: gather loop Assigns that are related to the same behavior */
 LoopAnnotStackInvariant.      LoopAnnotStack ::= LoopInvariant LoopAnnotOpt ;
 LoopAnnotStackEffects.        LoopAnnotStack ::= LoopEffects LoopAnnotOpt ;
---LoopAnnotStackAllocation.     LoopAnnotStack ::= LoopAllocation LoopAnnotOpt ;
+LoopAnnotStackAllocation.     LoopAnnotStack ::= LoopAllocation LoopAnnotOpt ;
 --LoopAnnotStackForBehavior.    LoopAnnotStack ::= "for" [BehaviorName] ":" LoopAnnotStack ;
 LoopAnnotStackVariant.        LoopAnnotStack ::= LoopVariant LoopAnnotOpt ;
 --LoopAnnotStackPragma.         LoopAnnotStack ::= LoopPragma LoopAnnotOpt ;
@@ -397,6 +397,11 @@ SomeLoopAnnot.  LoopAnnotOpt ::= LoopAnnotStack ;
 SimpleLoopInvariant.    LoopInvariant ::= "loop" "invariant" Lexpr ";" ;
 CheckLoopInvariant.     LoopInvariant ::= "check" "loop" "invariant" Lexpr ";" ;
 AdmitLoopInvariant.     LoopInvariant ::= "admit" "loop" "invariant" Lexpr ";" ;
+
+SimpleLoopAllocation.   LoopAllocation ::= "loop" Allocation ";" ;
+
+AllocatesZones. Allocation ::= "allocates" Zones ;
+FreesZones.     Allocation ::= "frees" Zones ;
 
 SimpleLoopVariant.      LoopVariant ::= "loop" "variant" Variant ";" ;
 
