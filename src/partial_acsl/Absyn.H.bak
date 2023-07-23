@@ -24,6 +24,7 @@ typedef std::string CONST;
 typedef std::string RESTRICT;
 typedef std::string VOLATILE;
 typedef std::string BLOCKATTRIBUTE;
+typedef std::string BOOL;
 
 
 /********************   Forward Declarations    ********************/
@@ -35,12 +36,15 @@ class FunctionDef;
 class FunctionDefStart;
 class DeclSpecList;
 class DeclSpecListNoNamed;
+class DeclSpecWOType;
 class TypeSpec;
 class Enumerator;
 class MaybeComma;
 class Declarator;
 class PointerOpt;
 class DirectDecl;
+class AttributesOrStatic;
+class CommaExpressionOpt;
 class AttributesWithAsm;
 class RestParList;
 class MaybeThreeDots;
@@ -71,6 +75,7 @@ class Expression;
 class AssignExpr;
 class Constant;
 class TypeName;
+class Arguments;
 class AProgram;
 class NoGlobals;
 class SimpleGlobals;
@@ -79,10 +84,19 @@ class GlobalsDeclataion;
 class GlobalsFunctionDef;
 class SimpleFunctionDef;
 class FunctionDefStartDeclarator;
+class DeclSpecWoType;
+class DeclSpecWoTypeNext;
 class DeclSpecTypeSpec;
 class DeclSpecTypeSpecNext;
+class DeclSpecNoNamedWOType;
+class DeclSpecNoNamedWOTypeNext;
 class DeclSpecNoNamedTypeSpec;
 class DeclSpecNoNamedTypeSpecNext;
+class DeclSpecWOTypeTypedefKeyWord;
+class DeclSpecWOTypeExternKeyWord;
+class DeclSpecWOTypeStaticKeyWord;
+class DeclSpecWOTypeAutoKeyWord;
+class DeclSpecWOTypeRegisterKeyWord;
 class TypeSpecVoidKeyWord;
 class TypeSpecCharKeyWord;
 class TypeSpecBoolKeyWord;
@@ -113,8 +127,12 @@ class ADeclarator;
 class NoPointer;
 class SomePointer;
 class DirectDeclIdTypename;
+class DirectDeclAttrStatic;
 class DirectDeclGhostParam;
 class DirectDeclGhostRestParParam;
+class AttributesCommaExpression;
+class NoCommaExpression;
+class SomeCommaExpression;
 class EmptyAttrWithASM;
 class SimpleParameterDecl;
 class NoThreeDots;
@@ -153,6 +171,7 @@ class SwitchStatement;
 class WhileStatement;
 class DoWhileStatement;
 class ForStatement;
+class ColonStatement;
 class CaseStatement;
 class CaseSliceStatement;
 class DefaultStatement;
@@ -256,6 +275,7 @@ class UnaryExprNot;
 class UnaryExprTilde;
 class UnaryExprAddress;
 class BracketsPostfixExpression;
+class ArgumentsPostfixExpression;
 class DotPostfixExpression;
 class ArrowPostfixExpression;
 class PlusPlusPostfixExpression;
@@ -267,7 +287,10 @@ class BlockPrimaryExpressin;
 class ConstantInt;
 class ConstantFloat;
 class ConstantChar;
+class ConstantString;
 class TypeNameDeclSpecList;
+class NoArguments;
+class SomeArguments;
 class ListEnumerator;
 class ListParameterDecl;
 class ListInitDeclaratorAttr;
@@ -290,12 +313,15 @@ public:
   virtual void visitFunctionDefStart(FunctionDefStart *p) = 0;
   virtual void visitDeclSpecList(DeclSpecList *p) = 0;
   virtual void visitDeclSpecListNoNamed(DeclSpecListNoNamed *p) = 0;
+  virtual void visitDeclSpecWOType(DeclSpecWOType *p) = 0;
   virtual void visitTypeSpec(TypeSpec *p) = 0;
   virtual void visitEnumerator(Enumerator *p) = 0;
   virtual void visitMaybeComma(MaybeComma *p) = 0;
   virtual void visitDeclarator(Declarator *p) = 0;
   virtual void visitPointerOpt(PointerOpt *p) = 0;
   virtual void visitDirectDecl(DirectDecl *p) = 0;
+  virtual void visitAttributesOrStatic(AttributesOrStatic *p) = 0;
+  virtual void visitCommaExpressionOpt(CommaExpressionOpt *p) = 0;
   virtual void visitAttributesWithAsm(AttributesWithAsm *p) = 0;
   virtual void visitRestParList(RestParList *p) = 0;
   virtual void visitMaybeThreeDots(MaybeThreeDots *p) = 0;
@@ -326,6 +352,7 @@ public:
   virtual void visitAssignExpr(AssignExpr *p) = 0;
   virtual void visitConstant(Constant *p) = 0;
   virtual void visitTypeName(TypeName *p) = 0;
+  virtual void visitArguments(Arguments *p) = 0;
   virtual void visitAProgram(AProgram *p) = 0;
   virtual void visitNoGlobals(NoGlobals *p) = 0;
   virtual void visitSimpleGlobals(SimpleGlobals *p) = 0;
@@ -334,10 +361,19 @@ public:
   virtual void visitGlobalsFunctionDef(GlobalsFunctionDef *p) = 0;
   virtual void visitSimpleFunctionDef(SimpleFunctionDef *p) = 0;
   virtual void visitFunctionDefStartDeclarator(FunctionDefStartDeclarator *p) = 0;
+  virtual void visitDeclSpecWoType(DeclSpecWoType *p) = 0;
+  virtual void visitDeclSpecWoTypeNext(DeclSpecWoTypeNext *p) = 0;
   virtual void visitDeclSpecTypeSpec(DeclSpecTypeSpec *p) = 0;
   virtual void visitDeclSpecTypeSpecNext(DeclSpecTypeSpecNext *p) = 0;
+  virtual void visitDeclSpecNoNamedWOType(DeclSpecNoNamedWOType *p) = 0;
+  virtual void visitDeclSpecNoNamedWOTypeNext(DeclSpecNoNamedWOTypeNext *p) = 0;
   virtual void visitDeclSpecNoNamedTypeSpec(DeclSpecNoNamedTypeSpec *p) = 0;
   virtual void visitDeclSpecNoNamedTypeSpecNext(DeclSpecNoNamedTypeSpecNext *p) = 0;
+  virtual void visitDeclSpecWOTypeTypedefKeyWord(DeclSpecWOTypeTypedefKeyWord *p) = 0;
+  virtual void visitDeclSpecWOTypeExternKeyWord(DeclSpecWOTypeExternKeyWord *p) = 0;
+  virtual void visitDeclSpecWOTypeStaticKeyWord(DeclSpecWOTypeStaticKeyWord *p) = 0;
+  virtual void visitDeclSpecWOTypeAutoKeyWord(DeclSpecWOTypeAutoKeyWord *p) = 0;
+  virtual void visitDeclSpecWOTypeRegisterKeyWord(DeclSpecWOTypeRegisterKeyWord *p) = 0;
   virtual void visitTypeSpecVoidKeyWord(TypeSpecVoidKeyWord *p) = 0;
   virtual void visitTypeSpecCharKeyWord(TypeSpecCharKeyWord *p) = 0;
   virtual void visitTypeSpecBoolKeyWord(TypeSpecBoolKeyWord *p) = 0;
@@ -368,8 +404,12 @@ public:
   virtual void visitNoPointer(NoPointer *p) = 0;
   virtual void visitSomePointer(SomePointer *p) = 0;
   virtual void visitDirectDeclIdTypename(DirectDeclIdTypename *p) = 0;
+  virtual void visitDirectDeclAttrStatic(DirectDeclAttrStatic *p) = 0;
   virtual void visitDirectDeclGhostParam(DirectDeclGhostParam *p) = 0;
   virtual void visitDirectDeclGhostRestParParam(DirectDeclGhostRestParParam *p) = 0;
+  virtual void visitAttributesCommaExpression(AttributesCommaExpression *p) = 0;
+  virtual void visitNoCommaExpression(NoCommaExpression *p) = 0;
+  virtual void visitSomeCommaExpression(SomeCommaExpression *p) = 0;
   virtual void visitEmptyAttrWithASM(EmptyAttrWithASM *p) = 0;
   virtual void visitSimpleParameterDecl(SimpleParameterDecl *p) = 0;
   virtual void visitNoThreeDots(NoThreeDots *p) = 0;
@@ -408,6 +448,7 @@ public:
   virtual void visitWhileStatement(WhileStatement *p) = 0;
   virtual void visitDoWhileStatement(DoWhileStatement *p) = 0;
   virtual void visitForStatement(ForStatement *p) = 0;
+  virtual void visitColonStatement(ColonStatement *p) = 0;
   virtual void visitCaseStatement(CaseStatement *p) = 0;
   virtual void visitCaseSliceStatement(CaseSliceStatement *p) = 0;
   virtual void visitDefaultStatement(DefaultStatement *p) = 0;
@@ -511,6 +552,7 @@ public:
   virtual void visitUnaryExprTilde(UnaryExprTilde *p) = 0;
   virtual void visitUnaryExprAddress(UnaryExprAddress *p) = 0;
   virtual void visitBracketsPostfixExpression(BracketsPostfixExpression *p) = 0;
+  virtual void visitArgumentsPostfixExpression(ArgumentsPostfixExpression *p) = 0;
   virtual void visitDotPostfixExpression(DotPostfixExpression *p) = 0;
   virtual void visitArrowPostfixExpression(ArrowPostfixExpression *p) = 0;
   virtual void visitPlusPlusPostfixExpression(PlusPlusPostfixExpression *p) = 0;
@@ -522,7 +564,10 @@ public:
   virtual void visitConstantInt(ConstantInt *p) = 0;
   virtual void visitConstantFloat(ConstantFloat *p) = 0;
   virtual void visitConstantChar(ConstantChar *p) = 0;
+  virtual void visitConstantString(ConstantString *p) = 0;
   virtual void visitTypeNameDeclSpecList(TypeNameDeclSpecList *p) = 0;
+  virtual void visitNoArguments(NoArguments *p) = 0;
+  virtual void visitSomeArguments(SomeArguments *p) = 0;
   virtual void visitListEnumerator(ListEnumerator *p) = 0;
   virtual void visitListParameterDecl(ListParameterDecl *p) = 0;
   virtual void visitListInitDeclaratorAttr(ListInitDeclaratorAttr *p) = 0;
@@ -544,6 +589,7 @@ public:
   virtual void visitRESTRICT(RESTRICT x) = 0;
   virtual void visitVOLATILE(VOLATILE x) = 0;
   virtual void visitBLOCKATTRIBUTE(BLOCKATTRIBUTE x) = 0;
+  virtual void visitBOOL(BOOL x) = 0;
 
 };
 
@@ -607,6 +653,13 @@ public:
   int line_number, char_number;
 };
 
+class DeclSpecWOType : public Visitable
+{
+public:
+  virtual DeclSpecWOType *clone() const = 0;
+  int line_number, char_number;
+};
+
 class TypeSpec : public Visitable
 {
 public:
@@ -646,6 +699,20 @@ class DirectDecl : public Visitable
 {
 public:
   virtual DirectDecl *clone() const = 0;
+  int line_number, char_number;
+};
+
+class AttributesOrStatic : public Visitable
+{
+public:
+  virtual AttributesOrStatic *clone() const = 0;
+  int line_number, char_number;
+};
+
+class CommaExpressionOpt : public Visitable
+{
+public:
+  virtual CommaExpressionOpt *clone() const = 0;
   int line_number, char_number;
 };
 
@@ -859,6 +926,13 @@ public:
   int line_number, char_number;
 };
 
+class Arguments : public Visitable
+{
+public:
+  virtual Arguments *clone() const = 0;
+  int line_number, char_number;
+};
+
 
 
 class AProgram : public Program
@@ -975,6 +1049,35 @@ public:
   void swap(FunctionDefStartDeclarator &);
 };
 
+class DeclSpecWoType : public DeclSpecList
+{
+public:
+  DeclSpecWOType *declspecwotype_;
+
+  DeclSpecWoType(const DeclSpecWoType &);
+  DeclSpecWoType &operator=(const DeclSpecWoType &);
+  DeclSpecWoType(DeclSpecWOType *p1);
+  ~DeclSpecWoType();
+  virtual void accept(Visitor *v);
+  virtual DeclSpecWoType *clone() const;
+  void swap(DeclSpecWoType &);
+};
+
+class DeclSpecWoTypeNext : public DeclSpecList
+{
+public:
+  DeclSpecWOType *declspecwotype_;
+  DeclSpecList *declspeclist_;
+
+  DeclSpecWoTypeNext(const DeclSpecWoTypeNext &);
+  DeclSpecWoTypeNext &operator=(const DeclSpecWoTypeNext &);
+  DeclSpecWoTypeNext(DeclSpecWOType *p1, DeclSpecList *p2);
+  ~DeclSpecWoTypeNext();
+  virtual void accept(Visitor *v);
+  virtual DeclSpecWoTypeNext *clone() const;
+  void swap(DeclSpecWoTypeNext &);
+};
+
 class DeclSpecTypeSpec : public DeclSpecList
 {
 public:
@@ -1002,6 +1105,35 @@ public:
   virtual void accept(Visitor *v);
   virtual DeclSpecTypeSpecNext *clone() const;
   void swap(DeclSpecTypeSpecNext &);
+};
+
+class DeclSpecNoNamedWOType : public DeclSpecListNoNamed
+{
+public:
+  DeclSpecWOType *declspecwotype_;
+
+  DeclSpecNoNamedWOType(const DeclSpecNoNamedWOType &);
+  DeclSpecNoNamedWOType &operator=(const DeclSpecNoNamedWOType &);
+  DeclSpecNoNamedWOType(DeclSpecWOType *p1);
+  ~DeclSpecNoNamedWOType();
+  virtual void accept(Visitor *v);
+  virtual DeclSpecNoNamedWOType *clone() const;
+  void swap(DeclSpecNoNamedWOType &);
+};
+
+class DeclSpecNoNamedWOTypeNext : public DeclSpecListNoNamed
+{
+public:
+  DeclSpecWOType *declspecwotype_;
+  DeclSpecListNoNamed *declspeclistnonamed_;
+
+  DeclSpecNoNamedWOTypeNext(const DeclSpecNoNamedWOTypeNext &);
+  DeclSpecNoNamedWOTypeNext &operator=(const DeclSpecNoNamedWOTypeNext &);
+  DeclSpecNoNamedWOTypeNext(DeclSpecWOType *p1, DeclSpecListNoNamed *p2);
+  ~DeclSpecNoNamedWOTypeNext();
+  virtual void accept(Visitor *v);
+  virtual DeclSpecNoNamedWOTypeNext *clone() const;
+  void swap(DeclSpecNoNamedWOTypeNext &);
 };
 
 class DeclSpecNoNamedTypeSpec : public DeclSpecListNoNamed
@@ -1033,6 +1165,71 @@ public:
   void swap(DeclSpecNoNamedTypeSpecNext &);
 };
 
+class DeclSpecWOTypeTypedefKeyWord : public DeclSpecWOType
+{
+public:
+
+  DeclSpecWOTypeTypedefKeyWord(const DeclSpecWOTypeTypedefKeyWord &);
+  DeclSpecWOTypeTypedefKeyWord &operator=(const DeclSpecWOTypeTypedefKeyWord &);
+  DeclSpecWOTypeTypedefKeyWord();
+  ~DeclSpecWOTypeTypedefKeyWord();
+  virtual void accept(Visitor *v);
+  virtual DeclSpecWOTypeTypedefKeyWord *clone() const;
+  void swap(DeclSpecWOTypeTypedefKeyWord &);
+};
+
+class DeclSpecWOTypeExternKeyWord : public DeclSpecWOType
+{
+public:
+
+  DeclSpecWOTypeExternKeyWord(const DeclSpecWOTypeExternKeyWord &);
+  DeclSpecWOTypeExternKeyWord &operator=(const DeclSpecWOTypeExternKeyWord &);
+  DeclSpecWOTypeExternKeyWord();
+  ~DeclSpecWOTypeExternKeyWord();
+  virtual void accept(Visitor *v);
+  virtual DeclSpecWOTypeExternKeyWord *clone() const;
+  void swap(DeclSpecWOTypeExternKeyWord &);
+};
+
+class DeclSpecWOTypeStaticKeyWord : public DeclSpecWOType
+{
+public:
+
+  DeclSpecWOTypeStaticKeyWord(const DeclSpecWOTypeStaticKeyWord &);
+  DeclSpecWOTypeStaticKeyWord &operator=(const DeclSpecWOTypeStaticKeyWord &);
+  DeclSpecWOTypeStaticKeyWord();
+  ~DeclSpecWOTypeStaticKeyWord();
+  virtual void accept(Visitor *v);
+  virtual DeclSpecWOTypeStaticKeyWord *clone() const;
+  void swap(DeclSpecWOTypeStaticKeyWord &);
+};
+
+class DeclSpecWOTypeAutoKeyWord : public DeclSpecWOType
+{
+public:
+
+  DeclSpecWOTypeAutoKeyWord(const DeclSpecWOTypeAutoKeyWord &);
+  DeclSpecWOTypeAutoKeyWord &operator=(const DeclSpecWOTypeAutoKeyWord &);
+  DeclSpecWOTypeAutoKeyWord();
+  ~DeclSpecWOTypeAutoKeyWord();
+  virtual void accept(Visitor *v);
+  virtual DeclSpecWOTypeAutoKeyWord *clone() const;
+  void swap(DeclSpecWOTypeAutoKeyWord &);
+};
+
+class DeclSpecWOTypeRegisterKeyWord : public DeclSpecWOType
+{
+public:
+
+  DeclSpecWOTypeRegisterKeyWord(const DeclSpecWOTypeRegisterKeyWord &);
+  DeclSpecWOTypeRegisterKeyWord &operator=(const DeclSpecWOTypeRegisterKeyWord &);
+  DeclSpecWOTypeRegisterKeyWord();
+  ~DeclSpecWOTypeRegisterKeyWord();
+  virtual void accept(Visitor *v);
+  virtual DeclSpecWOTypeRegisterKeyWord *clone() const;
+  void swap(DeclSpecWOTypeRegisterKeyWord &);
+};
+
 class TypeSpecVoidKeyWord : public TypeSpec
 {
 public:
@@ -1062,10 +1259,11 @@ public:
 class TypeSpecBoolKeyWord : public TypeSpec
 {
 public:
+  BOOL bool_;
 
   TypeSpecBoolKeyWord(const TypeSpecBoolKeyWord &);
   TypeSpecBoolKeyWord &operator=(const TypeSpecBoolKeyWord &);
-  TypeSpecBoolKeyWord();
+  TypeSpecBoolKeyWord(BOOL p1);
   ~TypeSpecBoolKeyWord();
   virtual void accept(Visitor *v);
   virtual TypeSpecBoolKeyWord *clone() const;
@@ -1447,6 +1645,21 @@ public:
   void swap(DirectDeclIdTypename &);
 };
 
+class DirectDeclAttrStatic : public DirectDecl
+{
+public:
+  DirectDecl *directdecl_;
+  AttributesOrStatic *attributesorstatic_;
+
+  DirectDeclAttrStatic(const DirectDeclAttrStatic &);
+  DirectDeclAttrStatic &operator=(const DirectDeclAttrStatic &);
+  DirectDeclAttrStatic(DirectDecl *p1, AttributesOrStatic *p2);
+  ~DirectDeclAttrStatic();
+  virtual void accept(Visitor *v);
+  virtual DirectDeclAttrStatic *clone() const;
+  void swap(DirectDeclAttrStatic &);
+};
+
 class DirectDeclGhostParam : public DirectDecl
 {
 public:
@@ -1476,6 +1689,48 @@ public:
   virtual void accept(Visitor *v);
   virtual DirectDeclGhostRestParParam *clone() const;
   void swap(DirectDeclGhostRestParParam &);
+};
+
+class AttributesCommaExpression : public AttributesOrStatic
+{
+public:
+  ListAttribute *listattribute_;
+  CommaExpressionOpt *commaexpressionopt_;
+
+  AttributesCommaExpression(const AttributesCommaExpression &);
+  AttributesCommaExpression &operator=(const AttributesCommaExpression &);
+  AttributesCommaExpression(ListAttribute *p1, CommaExpressionOpt *p2);
+  ~AttributesCommaExpression();
+  virtual void accept(Visitor *v);
+  virtual AttributesCommaExpression *clone() const;
+  void swap(AttributesCommaExpression &);
+};
+
+class NoCommaExpression : public CommaExpressionOpt
+{
+public:
+
+  NoCommaExpression(const NoCommaExpression &);
+  NoCommaExpression &operator=(const NoCommaExpression &);
+  NoCommaExpression();
+  ~NoCommaExpression();
+  virtual void accept(Visitor *v);
+  virtual NoCommaExpression *clone() const;
+  void swap(NoCommaExpression &);
+};
+
+class SomeCommaExpression : public CommaExpressionOpt
+{
+public:
+  ListExpression *listexpression_;
+
+  SomeCommaExpression(const SomeCommaExpression &);
+  SomeCommaExpression &operator=(const SomeCommaExpression &);
+  SomeCommaExpression(ListExpression *p1);
+  ~SomeCommaExpression();
+  virtual void accept(Visitor *v);
+  virtual SomeCommaExpression *clone() const;
+  void swap(SomeCommaExpression &);
 };
 
 class EmptyAttrWithASM : public AttributesWithAsm
@@ -1535,12 +1790,13 @@ public:
 class ParameterDeclSpecDeclarator : public ParameterDecl
 {
 public:
+  PointerOpt *pointeropt_;
   DeclSpecList *declspeclist_;
   Declarator *declarator_;
 
   ParameterDeclSpecDeclarator(const ParameterDeclSpecDeclarator &);
   ParameterDeclSpecDeclarator &operator=(const ParameterDeclSpecDeclarator &);
-  ParameterDeclSpecDeclarator(DeclSpecList *p1, Declarator *p2);
+  ParameterDeclSpecDeclarator(PointerOpt *p1, DeclSpecList *p2, Declarator *p3);
   ~ParameterDeclSpecDeclarator();
   virtual void accept(Visitor *v);
   virtual ParameterDeclSpecDeclarator *clone() const;
@@ -1550,11 +1806,12 @@ public:
 class ParameterDeclSpec : public ParameterDecl
 {
 public:
+  PointerOpt *pointeropt_;
   DeclSpecList *declspeclist_;
 
   ParameterDeclSpec(const ParameterDeclSpec &);
   ParameterDeclSpec &operator=(const ParameterDeclSpec &);
-  ParameterDeclSpec(DeclSpecList *p1);
+  ParameterDeclSpec(PointerOpt *p1, DeclSpecList *p2);
   ~ParameterDeclSpec();
   virtual void accept(Visitor *v);
   virtual ParameterDeclSpec *clone() const;
@@ -2024,6 +2281,21 @@ public:
   virtual void accept(Visitor *v);
   virtual ForStatement *clone() const;
   void swap(ForStatement &);
+};
+
+class ColonStatement : public Statement
+{
+public:
+  IdOrTypenameAsId *idortypenameasid_;
+  AnnotatedStmt *annotatedstmt_;
+
+  ColonStatement(const ColonStatement &);
+  ColonStatement &operator=(const ColonStatement &);
+  ColonStatement(IdOrTypenameAsId *p1, AnnotatedStmt *p2);
+  ~ColonStatement();
+  virtual void accept(Visitor *v);
+  virtual ColonStatement *clone() const;
+  void swap(ColonStatement &);
 };
 
 class CaseStatement : public Statement
@@ -3530,6 +3802,21 @@ public:
   void swap(BracketsPostfixExpression &);
 };
 
+class ArgumentsPostfixExpression : public AssignExpr
+{
+public:
+  AssignExpr *assignexpr_;
+  Arguments *arguments_;
+
+  ArgumentsPostfixExpression(const ArgumentsPostfixExpression &);
+  ArgumentsPostfixExpression &operator=(const ArgumentsPostfixExpression &);
+  ArgumentsPostfixExpression(AssignExpr *p1, Arguments *p2);
+  ~ArgumentsPostfixExpression();
+  virtual void accept(Visitor *v);
+  virtual ArgumentsPostfixExpression *clone() const;
+  void swap(ArgumentsPostfixExpression &);
+};
+
 class DotPostfixExpression : public AssignExpr
 {
 public:
@@ -3686,6 +3973,20 @@ public:
   void swap(ConstantChar &);
 };
 
+class ConstantString : public Constant
+{
+public:
+  String string_;
+
+  ConstantString(const ConstantString &);
+  ConstantString &operator=(const ConstantString &);
+  ConstantString(String p1);
+  ~ConstantString();
+  virtual void accept(Visitor *v);
+  virtual ConstantString *clone() const;
+  void swap(ConstantString &);
+};
+
 class TypeNameDeclSpecList : public TypeName
 {
 public:
@@ -3698,6 +3999,33 @@ public:
   virtual void accept(Visitor *v);
   virtual TypeNameDeclSpecList *clone() const;
   void swap(TypeNameDeclSpecList &);
+};
+
+class NoArguments : public Arguments
+{
+public:
+
+  NoArguments(const NoArguments &);
+  NoArguments &operator=(const NoArguments &);
+  NoArguments();
+  ~NoArguments();
+  virtual void accept(Visitor *v);
+  virtual NoArguments *clone() const;
+  void swap(NoArguments &);
+};
+
+class SomeArguments : public Arguments
+{
+public:
+  ListExpression *listexpression_;
+
+  SomeArguments(const SomeArguments &);
+  SomeArguments &operator=(const SomeArguments &);
+  SomeArguments(ListExpression *p1);
+  ~SomeArguments();
+  virtual void accept(Visitor *v);
+  virtual SomeArguments *clone() const;
+  void swap(SomeArguments &);
 };
 
 

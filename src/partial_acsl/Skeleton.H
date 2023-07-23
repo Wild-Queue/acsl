@@ -25,6 +25,8 @@ public:
   void visitDeclarator(Declarator *p);
   void visitPointerOpt(PointerOpt *p);
   void visitDirectDecl(DirectDecl *p);
+  void visitAttributesOrStatic(AttributesOrStatic *p);
+  void visitCommaExpressionOpt(CommaExpressionOpt *p);
   void visitAttributesWithAsm(AttributesWithAsm *p);
   void visitRestParList(RestParList *p);
   void visitMaybeThreeDots(MaybeThreeDots *p);
@@ -37,6 +39,8 @@ public:
   void visitInitDeclaratorAttr(InitDeclaratorAttr *p);
   void visitInitDeclarator(InitDeclarator *p);
   void visitInitExpression(InitExpression *p);
+  void visitInitializerListOpt(InitializerListOpt *p);
+  void visitInitializerSingle(InitializerSingle *p);
   void visitStructDeclList(StructDeclList *p);
   void visitFieldDecl(FieldDecl *p);
   void visitAttribute(Attribute *p);
@@ -55,6 +59,7 @@ public:
   void visitAssignExpr(AssignExpr *p);
   void visitConstant(Constant *p);
   void visitTypeName(TypeName *p);
+  void visitArguments(Arguments *p);
   void visitAProgram(AProgram *p);
   void visitNoGlobals(NoGlobals *p);
   void visitSimpleGlobals(SimpleGlobals *p);
@@ -106,8 +111,12 @@ public:
   void visitNoPointer(NoPointer *p);
   void visitSomePointer(SomePointer *p);
   void visitDirectDeclIdTypename(DirectDeclIdTypename *p);
+  void visitDirectDeclAttrStatic(DirectDeclAttrStatic *p);
   void visitDirectDeclGhostParam(DirectDeclGhostParam *p);
   void visitDirectDeclGhostRestParParam(DirectDeclGhostRestParParam *p);
+  void visitAttributesCommaExpression(AttributesCommaExpression *p);
+  void visitNoCommaExpression(NoCommaExpression *p);
+  void visitSomeCommaExpression(SomeCommaExpression *p);
   void visitEmptyAttrWithASM(EmptyAttrWithASM *p);
   void visitSimpleParameterDecl(SimpleParameterDecl *p);
   void visitNoThreeDots(NoThreeDots *p);
@@ -125,6 +134,12 @@ public:
   void visitSimpleInitDeclarator(SimpleInitDeclarator *p);
   void visitInitDeclaratorExpression(InitDeclaratorExpression *p);
   void visitSimpleExpression(SimpleExpression *p);
+  void visitArrayInitExpression(ArrayInitExpression *p);
+  void visitEmptyInitializerList(EmptyInitializerList *p);
+  void visitInitializerList(InitializerList *p);
+  void visitInitializerListComma(InitializerListComma *p);
+  void visitInitializerGCCDesignator(InitializerGCCDesignator *p);
+  void visitEmptyInitializer(EmptyInitializer *p);
   void visitEmptyStructDecl(EmptyStructDecl *p);
   void visitDeclSpecStructDecl(DeclSpecStructDecl *p);
   void visitSemicolonStructDecl(SemicolonStructDecl *p);
@@ -146,6 +161,7 @@ public:
   void visitWhileStatement(WhileStatement *p);
   void visitDoWhileStatement(DoWhileStatement *p);
   void visitForStatement(ForStatement *p);
+  void visitColonStatement(ColonStatement *p);
   void visitCaseStatement(CaseStatement *p);
   void visitCaseSliceStatement(CaseSliceStatement *p);
   void visitDefaultStatement(DefaultStatement *p);
@@ -249,6 +265,7 @@ public:
   void visitUnaryExprTilde(UnaryExprTilde *p);
   void visitUnaryExprAddress(UnaryExprAddress *p);
   void visitBracketsPostfixExpression(BracketsPostfixExpression *p);
+  void visitArgumentsPostfixExpression(ArgumentsPostfixExpression *p);
   void visitDotPostfixExpression(DotPostfixExpression *p);
   void visitArrowPostfixExpression(ArrowPostfixExpression *p);
   void visitPlusPlusPostfixExpression(PlusPlusPostfixExpression *p);
@@ -260,10 +277,14 @@ public:
   void visitConstantInt(ConstantInt *p);
   void visitConstantFloat(ConstantFloat *p);
   void visitConstantChar(ConstantChar *p);
+  void visitConstantString(ConstantString *p);
   void visitTypeNameDeclSpecList(TypeNameDeclSpecList *p);
+  void visitNoArguments(NoArguments *p);
+  void visitSomeArguments(SomeArguments *p);
   void visitListEnumerator(ListEnumerator *p);
   void visitListParameterDecl(ListParameterDecl *p);
   void visitListInitDeclaratorAttr(ListInitDeclaratorAttr *p);
+  void visitListInitializerSingle(ListInitializerSingle *p);
   void visitListFieldDecl(ListFieldDecl *p);
   void visitListAttribute(ListAttribute *p);
   void visitListBlockElement(ListBlockElement *p);
@@ -281,6 +302,7 @@ public:
   void visitRESTRICT(RESTRICT x);
   void visitVOLATILE(VOLATILE x);
   void visitBLOCKATTRIBUTE(BLOCKATTRIBUTE x);
+  void visitBOOL(BOOL x);
 
 };
 }

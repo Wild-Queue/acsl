@@ -25,6 +25,8 @@ void Skeleton::visitMaybeComma(MaybeComma *t) {} //abstract class
 void Skeleton::visitDeclarator(Declarator *t) {} //abstract class
 void Skeleton::visitPointerOpt(PointerOpt *t) {} //abstract class
 void Skeleton::visitDirectDecl(DirectDecl *t) {} //abstract class
+void Skeleton::visitAttributesOrStatic(AttributesOrStatic *t) {} //abstract class
+void Skeleton::visitCommaExpressionOpt(CommaExpressionOpt *t) {} //abstract class
 void Skeleton::visitAttributesWithAsm(AttributesWithAsm *t) {} //abstract class
 void Skeleton::visitRestParList(RestParList *t) {} //abstract class
 void Skeleton::visitMaybeThreeDots(MaybeThreeDots *t) {} //abstract class
@@ -37,6 +39,8 @@ void Skeleton::visitDeclAndInitDeclAttrList(DeclAndInitDeclAttrList *t) {} //abs
 void Skeleton::visitInitDeclaratorAttr(InitDeclaratorAttr *t) {} //abstract class
 void Skeleton::visitInitDeclarator(InitDeclarator *t) {} //abstract class
 void Skeleton::visitInitExpression(InitExpression *t) {} //abstract class
+void Skeleton::visitInitializerListOpt(InitializerListOpt *t) {} //abstract class
+void Skeleton::visitInitializerSingle(InitializerSingle *t) {} //abstract class
 void Skeleton::visitStructDeclList(StructDeclList *t) {} //abstract class
 void Skeleton::visitFieldDecl(FieldDecl *t) {} //abstract class
 void Skeleton::visitAttribute(Attribute *t) {} //abstract class
@@ -55,6 +59,7 @@ void Skeleton::visitExpression(Expression *t) {} //abstract class
 void Skeleton::visitAssignExpr(AssignExpr *t) {} //abstract class
 void Skeleton::visitConstant(Constant *t) {} //abstract class
 void Skeleton::visitTypeName(TypeName *t) {} //abstract class
+void Skeleton::visitArguments(Arguments *t) {} //abstract class
 
 void Skeleton::visitAProgram(AProgram *a_program)
 {
@@ -243,6 +248,7 @@ void Skeleton::visitTypeSpecBoolKeyWord(TypeSpecBoolKeyWord *type_spec_bool_key_
 {
   /* Code For TypeSpecBoolKeyWord Goes Here */
 
+  visitBOOL(type_spec_bool_key_word->bool_);
 
 }
 
@@ -459,6 +465,15 @@ void Skeleton::visitDirectDeclIdTypename(DirectDeclIdTypename *direct_decl_id_ty
 
 }
 
+void Skeleton::visitDirectDeclAttrStatic(DirectDeclAttrStatic *direct_decl_attr_static)
+{
+  /* Code For DirectDeclAttrStatic Goes Here */
+
+  if (direct_decl_attr_static->directdecl_) direct_decl_attr_static->directdecl_->accept(this);
+  if (direct_decl_attr_static->attributesorstatic_) direct_decl_attr_static->attributesorstatic_->accept(this);
+
+}
+
 void Skeleton::visitDirectDeclGhostParam(DirectDeclGhostParam *direct_decl_ghost_param)
 {
   /* Code For DirectDeclGhostParam Goes Here */
@@ -475,6 +490,30 @@ void Skeleton::visitDirectDeclGhostRestParParam(DirectDeclGhostRestParParam *dir
   if (direct_decl_ghost_rest_par_param->directdecl_) direct_decl_ghost_rest_par_param->directdecl_->accept(this);
   if (direct_decl_ghost_rest_par_param->restparlist_) direct_decl_ghost_rest_par_param->restparlist_->accept(this);
   if (direct_decl_ghost_rest_par_param->ghostparameteropt_) direct_decl_ghost_rest_par_param->ghostparameteropt_->accept(this);
+
+}
+
+void Skeleton::visitAttributesCommaExpression(AttributesCommaExpression *attributes_comma_expression)
+{
+  /* Code For AttributesCommaExpression Goes Here */
+
+  if (attributes_comma_expression->listattribute_) attributes_comma_expression->listattribute_->accept(this);
+  if (attributes_comma_expression->commaexpressionopt_) attributes_comma_expression->commaexpressionopt_->accept(this);
+
+}
+
+void Skeleton::visitNoCommaExpression(NoCommaExpression *no_comma_expression)
+{
+  /* Code For NoCommaExpression Goes Here */
+
+
+}
+
+void Skeleton::visitSomeCommaExpression(SomeCommaExpression *some_comma_expression)
+{
+  /* Code For SomeCommaExpression Goes Here */
+
+  if (some_comma_expression->listexpression_) some_comma_expression->listexpression_->accept(this);
 
 }
 
@@ -512,6 +551,7 @@ void Skeleton::visitParameterDeclSpecDeclarator(ParameterDeclSpecDeclarator *par
 {
   /* Code For ParameterDeclSpecDeclarator Goes Here */
 
+  if (parameter_decl_spec_declarator->pointeropt_) parameter_decl_spec_declarator->pointeropt_->accept(this);
   if (parameter_decl_spec_declarator->declspeclist_) parameter_decl_spec_declarator->declspeclist_->accept(this);
   if (parameter_decl_spec_declarator->declarator_) parameter_decl_spec_declarator->declarator_->accept(this);
 
@@ -521,6 +561,7 @@ void Skeleton::visitParameterDeclSpec(ParameterDeclSpec *parameter_decl_spec)
 {
   /* Code For ParameterDeclSpec Goes Here */
 
+  if (parameter_decl_spec->pointeropt_) parameter_decl_spec->pointeropt_->accept(this);
   if (parameter_decl_spec->declspeclist_) parameter_decl_spec->declspeclist_->accept(this);
 
 }
@@ -612,6 +653,54 @@ void Skeleton::visitSimpleExpression(SimpleExpression *simple_expression)
   /* Code For SimpleExpression Goes Here */
 
   if (simple_expression->expression_) simple_expression->expression_->accept(this);
+
+}
+
+void Skeleton::visitArrayInitExpression(ArrayInitExpression *array_init_expression)
+{
+  /* Code For ArrayInitExpression Goes Here */
+
+  if (array_init_expression->initializerlistopt_) array_init_expression->initializerlistopt_->accept(this);
+
+}
+
+void Skeleton::visitEmptyInitializerList(EmptyInitializerList *empty_initializer_list)
+{
+  /* Code For EmptyInitializerList Goes Here */
+
+
+}
+
+void Skeleton::visitInitializerList(InitializerList *initializer_list)
+{
+  /* Code For InitializerList Goes Here */
+
+  if (initializer_list->listinitializersingle_) initializer_list->listinitializersingle_->accept(this);
+
+}
+
+void Skeleton::visitInitializerListComma(InitializerListComma *initializer_list_comma)
+{
+  /* Code For InitializerListComma Goes Here */
+
+  if (initializer_list_comma->listinitializersingle_) initializer_list_comma->listinitializersingle_->accept(this);
+
+}
+
+void Skeleton::visitInitializerGCCDesignator(InitializerGCCDesignator *initializer_gcc_designator)
+{
+  /* Code For InitializerGCCDesignator Goes Here */
+
+  if (initializer_gcc_designator->idortypename_) initializer_gcc_designator->idortypename_->accept(this);
+  if (initializer_gcc_designator->initexpression_) initializer_gcc_designator->initexpression_->accept(this);
+
+}
+
+void Skeleton::visitEmptyInitializer(EmptyInitializer *empty_initializer)
+{
+  /* Code For EmptyInitializer Goes Here */
+
+  if (empty_initializer->initexpression_) empty_initializer->initexpression_->accept(this);
 
 }
 
@@ -795,6 +884,15 @@ void Skeleton::visitForStatement(ForStatement *for_statement)
   if (for_statement->optexpression_1) for_statement->optexpression_1->accept(this);
   if (for_statement->optexpression_2) for_statement->optexpression_2->accept(this);
   if (for_statement->annotatedstmt_) for_statement->annotatedstmt_->accept(this);
+
+}
+
+void Skeleton::visitColonStatement(ColonStatement *colon_statement)
+{
+  /* Code For ColonStatement Goes Here */
+
+  if (colon_statement->idortypenameasid_) colon_statement->idortypenameasid_->accept(this);
+  if (colon_statement->annotatedstmt_) colon_statement->annotatedstmt_->accept(this);
 
 }
 
@@ -1684,6 +1782,15 @@ void Skeleton::visitBracketsPostfixExpression(BracketsPostfixExpression *bracket
 
 }
 
+void Skeleton::visitArgumentsPostfixExpression(ArgumentsPostfixExpression *arguments_postfix_expression)
+{
+  /* Code For ArgumentsPostfixExpression Goes Here */
+
+  if (arguments_postfix_expression->assignexpr_) arguments_postfix_expression->assignexpr_->accept(this);
+  if (arguments_postfix_expression->arguments_) arguments_postfix_expression->arguments_->accept(this);
+
+}
+
 void Skeleton::visitDotPostfixExpression(DotPostfixExpression *dot_postfix_expression)
 {
   /* Code For DotPostfixExpression Goes Here */
@@ -1774,11 +1881,34 @@ void Skeleton::visitConstantChar(ConstantChar *constant_char)
 
 }
 
+void Skeleton::visitConstantString(ConstantString *constant_string)
+{
+  /* Code For ConstantString Goes Here */
+
+  visitString(constant_string->string_);
+
+}
+
 void Skeleton::visitTypeNameDeclSpecList(TypeNameDeclSpecList *type_name_decl_spec_list)
 {
   /* Code For TypeNameDeclSpecList Goes Here */
 
   if (type_name_decl_spec_list->declspeclist_) type_name_decl_spec_list->declspeclist_->accept(this);
+
+}
+
+void Skeleton::visitNoArguments(NoArguments *no_arguments)
+{
+  /* Code For NoArguments Goes Here */
+
+
+}
+
+void Skeleton::visitSomeArguments(SomeArguments *some_arguments)
+{
+  /* Code For SomeArguments Goes Here */
+
+  if (some_arguments->listexpression_) some_arguments->listexpression_->accept(this);
 
 }
 
@@ -1802,6 +1932,14 @@ void Skeleton::visitListParameterDecl(ListParameterDecl *list_parameter_decl)
 void Skeleton::visitListInitDeclaratorAttr(ListInitDeclaratorAttr *list_init_declarator_attr)
 {
   for (ListInitDeclaratorAttr::iterator i = list_init_declarator_attr->begin() ; i != list_init_declarator_attr->end() ; ++i)
+  {
+    (*i)->accept(this);
+  }
+}
+
+void Skeleton::visitListInitializerSingle(ListInitializerSingle *list_initializer_single)
+{
+  for (ListInitializerSingle::iterator i = list_initializer_single->begin() ; i != list_initializer_single->end() ; ++i)
   {
     (*i)->accept(this);
   }
@@ -1901,6 +2039,11 @@ void Skeleton::visitVOLATILE(VOLATILE x)
 void Skeleton::visitBLOCKATTRIBUTE(BLOCKATTRIBUTE x)
 {
   /* Code for BLOCKATTRIBUTE Goes Here */
+}
+
+void Skeleton::visitBOOL(BOOL x)
+{
+  /* Code for BOOL Goes Here */
 }
 
 

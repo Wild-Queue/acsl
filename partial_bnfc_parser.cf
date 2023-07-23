@@ -14,6 +14,7 @@ token CONST ({"const"} | {"__const"} | {"__const__"});
 token RESTRICT ({"__restrict"} | {"restrict"});
 token VOLATILE ({"volatile"} | {"__volatile"} | {"__volatile__"} | {"__volatile"});
 token BLOCKATTRIBUTE ({"__blockattribute__"} | {"__blockattribute"});
+token BOOL ({"_Bool"} | {"bool"});
 
 
 AProgram.  Program ::= Globals ;
@@ -75,7 +76,7 @@ DeclSpecWOTypeRegisterKeyWord.    DeclSpecWOType ::= "register" ;
 
 TypeSpecVoidKeyWord.                TypeSpec ::= "void" ;
 TypeSpecCharKeyWord.                TypeSpec ::= "char" ;
-TypeSpecBoolKeyWord.                TypeSpec ::= "_Bool" ;
+TypeSpecBoolKeyWord.                TypeSpec ::= BOOL ;
 TypeSpecShortKeyWord.               TypeSpec ::= "short" ;
 TypeSpecInt32KeyWord.               TypeSpec ::= "__int32" ;
 TypeSpecIntKeyWord.                 TypeSpec ::= "int" ;
@@ -122,9 +123,18 @@ SomePointer.    PointerOpt ::= "*" [Attribute] PointerOpt ;
 
 DirectDeclIdTypename.           DirectDecl ::= IdOrTypename ;                                        --/* (* We want to be able to redefine named types as variable names *) */
 --DirectDeclAttrDecl.             DirectDecl ::= "(" [Attribute] Declarator ")" ;
---DirectDeclAttrStatic.           DirectDecl ::= DirectDecl "[" AttributesOrStatic  "]" ;
+DirectDeclAttrStatic.           DirectDecl ::= DirectDecl "[" AttributesOrStatic  "]" ;
 DirectDeclGhostParam.           DirectDecl ::= DirectDecl "(" ")" GhostParameterOpt ;
 DirectDeclGhostRestParParam.    DirectDecl ::= DirectDecl "(" RestParList ")" GhostParameterOpt ;
+
+
+AttributesCommaExpression.  AttributesOrStatic ::= [Attribute] CommaExpressionOpt ;
+--AttributesStaticExpression. AttributesOrStatic ::= Attribute [Attribute] "static" [Expression] ;
+--StaticAttributesExpression. AttributesOrStatic ::= "static" [Attribute] [Expression] ;
+
+
+NoCommaExpression.      CommaExpressionOpt ::= ; --/* empty */ 
+SomeCommaExpression.    CommaExpressionOpt ::= [Expression] ;
 
 
 EmptyAttrWithASM.       AttributesWithAsm ::= ; --/* empty */ 
@@ -137,9 +147,11 @@ SimpleParameterDecl.    RestParList ::= [ParameterDecl] MaybeThreeDots;
 NoThreeDots.    MaybeThreeDots ::= ; --/*empty*/
 ThreeDots.      MaybeThreeDots ::= "," "..."; 
 
-ParameterDeclSpecDeclarator.    ParameterDecl ::= DeclSpecList Declarator ;
+--ParameterDeclSpecDeclarator.    ParameterDecl ::= DeclSpecList Declarator ;
+ParameterDeclSpecDeclarator.    ParameterDecl ::= PointerOpt DeclSpecList Declarator ;
 --ParameterDeclSpecAbstract.      ParameterDecl ::= DeclSpecList AbstractDecl ;
-ParameterDeclSpec.              ParameterDecl ::= DeclSpecList ;
+--ParameterDeclSpec.              ParameterDecl ::= DeclSpecList ;
+ParameterDeclSpec.              ParameterDecl ::= PointerOpt DeclSpecList ;
 --ParameterDeclPar.               ParameterDecl ::= "(" ParameterDecl ")" ;
 separator nonempty ParameterDecl "," ;
 
@@ -172,8 +184,19 @@ separator nonempty InitDeclaratorAttr "," ;
 SimpleInitDeclarator.       InitDeclarator ::= Declarator ;
 InitDeclaratorExpression.   InitDeclarator ::= Declarator "=" InitExpression ;
 
-SimpleExpression.   InitExpression ::= Expression ;
---BracesExpression.   InitExpression ::= "{" InitializerListOpt "}" ;
+SimpleExpression.       InitExpression ::= Expression ;
+ArrayInitExpression.    InitExpression ::= "{" InitializerListOpt "}" ;
+
+
+EmptyInitializerList.   InitializerListOpt ::= ; --/* empty */ 
+InitializerList.        InitializerListOpt ::= [InitializerSingle] ;
+InitializerListComma.   InitializerListOpt ::= [InitializerSingle] "," ;
+
+--InitializerDesignator.      InitializerSingle ::= InitDesignators EqOpt InitExpression ;
+InitializerGCCDesignator.   InitializerSingle ::= IdOrTypename ":" InitExpression ;
+EmptyInitializer.           InitializerSingle ::= InitExpression ;
+separator nonempty InitializerSingle "," ;
+
 
 EmptyStructDecl.            StructDeclList ::= ; --/* empty */ 
 DeclSpecStructDecl.         StructDeclList ::= DeclSpecList ";" StructDeclList ;
@@ -224,6 +247,7 @@ WhileStatement.             Statement ::= OptLoopAnnotations "while" "(" [Expres
 DoWhileStatement.           Statement ::= OptLoopAnnotations "do" AnnotatedStmt "while" "(" [Expression] ")" ";" ;
 ForStatement.               Statement ::= OptLoopAnnotations "for" "(" ForClause OptExpression ";" OptExpression ")" AnnotatedStmt ;
 --ColonStatement.             Statement ::= IdOrTypenameAsId ":" [AttributeNocv] AnnotatedStmt ;
+ColonStatement.             Statement ::= IdOrTypenameAsId ":" AnnotatedStmt ;
 CaseStatement.              Statement ::= "case" Expression ":" AnnotatedStmt ;
 CaseSliceStatement.         Statement ::= "case" Expression "..." Expression ":" AnnotatedStmt ;
 DefaultStatement.           Statement ::= "default" ":" AnnotatedStmt ;
@@ -411,6 +435,7 @@ UnaryExprAddress.           AssignExpr13 ::= "&&" IdOrTypenameAsId ;
 _.                                      AssignExpr14 ::= AssignExpr15 ;
 BracketsPostfixExpression.              AssignExpr14 ::= AssignExpr14 "[" [Expression] "]" ;
 --ArgumentsPostfixExpression.             AssignExpr14 ::= AssignExpr14 "(" Arguments ")" GhostArgumentsOpt ;
+ArgumentsPostfixExpression.             AssignExpr14 ::= AssignExpr14 "(" Arguments ")" ;
 --BuiltinVaArgPostfixExpression.          AssignExpr14 ::= "__builtin_va_arg" "(" Expression "," TypeName ")" ;
 --BuiltinTypesCompatPostfixExpression.    AssignExpr14 ::= "__builtin_types_compatible_p" "(" TypeName "," TypeName ")" ;
 --BuiltinOffsetOfPostfixExpression.       AssignExpr14 ::= "__builtin_offsetof" "(" TypeName "," OffsetofMemberDesignator ")" ;
@@ -433,7 +458,11 @@ ConstantFloat.      Constant ::= Double ;
 ConstantChar.       Constant ::= Char ;
 --ConstantWChar.      Constant ::= CST_WCHAR ;
 --ConstantString.     Constant ::= StringConstant ;
+ConstantString.     Constant ::= String ;
 --ConstantWString.    Constant ::= WStringList ;
 
 --TypeNameAbstractDecl.   TypeName ::= DeclSpecList AbstractDecl ;
 TypeNameDeclSpecList.   TypeName ::= DeclSpecList ;
+
+NoArguments.    Arguments ::= ; --/* empty */ 
+SomeArguments.  Arguments ::= [Expression] ;

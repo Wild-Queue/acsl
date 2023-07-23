@@ -103,8 +103,14 @@ class PrintAbsyn : public Visitor
   void visitSomePointer(SomePointer *p);
   void visitDirectDecl(DirectDecl *p); /* abstract class */
   void visitDirectDeclIdTypename(DirectDeclIdTypename *p);
+  void visitDirectDeclAttrStatic(DirectDeclAttrStatic *p);
   void visitDirectDeclGhostParam(DirectDeclGhostParam *p);
   void visitDirectDeclGhostRestParParam(DirectDeclGhostRestParParam *p);
+  void visitAttributesOrStatic(AttributesOrStatic *p); /* abstract class */
+  void visitAttributesCommaExpression(AttributesCommaExpression *p);
+  void visitCommaExpressionOpt(CommaExpressionOpt *p); /* abstract class */
+  void visitNoCommaExpression(NoCommaExpression *p);
+  void visitSomeCommaExpression(SomeCommaExpression *p);
   void visitAttributesWithAsm(AttributesWithAsm *p); /* abstract class */
   void visitEmptyAttrWithASM(EmptyAttrWithASM *p);
   void visitRestParList(RestParList *p); /* abstract class */
@@ -138,6 +144,16 @@ class PrintAbsyn : public Visitor
   void visitInitDeclaratorExpression(InitDeclaratorExpression *p);
   void visitInitExpression(InitExpression *p); /* abstract class */
   void visitSimpleExpression(SimpleExpression *p);
+  void visitArrayInitExpression(ArrayInitExpression *p);
+  void visitInitializerListOpt(InitializerListOpt *p); /* abstract class */
+  void visitEmptyInitializerList(EmptyInitializerList *p);
+  void visitInitializerList(InitializerList *p);
+  void visitInitializerListComma(InitializerListComma *p);
+  void visitInitializerSingle(InitializerSingle *p); /* abstract class */
+  void visitInitializerGCCDesignator(InitializerGCCDesignator *p);
+  void visitEmptyInitializer(EmptyInitializer *p);
+  void visitListInitializerSingle(ListInitializerSingle *p);
+  void iterListInitializerSingle(ListInitializerSingle::const_iterator i, ListInitializerSingle::const_iterator j);
   void visitStructDeclList(StructDeclList *p); /* abstract class */
   void visitEmptyStructDecl(EmptyStructDecl *p);
   void visitDeclSpecStructDecl(DeclSpecStructDecl *p);
@@ -172,6 +188,7 @@ class PrintAbsyn : public Visitor
   void visitWhileStatement(WhileStatement *p);
   void visitDoWhileStatement(DoWhileStatement *p);
   void visitForStatement(ForStatement *p);
+  void visitColonStatement(ColonStatement *p);
   void visitCaseStatement(CaseStatement *p);
   void visitCaseSliceStatement(CaseSliceStatement *p);
   void visitDefaultStatement(DefaultStatement *p);
@@ -288,6 +305,7 @@ class PrintAbsyn : public Visitor
   void visitUnaryExprTilde(UnaryExprTilde *p);
   void visitUnaryExprAddress(UnaryExprAddress *p);
   void visitBracketsPostfixExpression(BracketsPostfixExpression *p);
+  void visitArgumentsPostfixExpression(ArgumentsPostfixExpression *p);
   void visitDotPostfixExpression(DotPostfixExpression *p);
   void visitArrowPostfixExpression(ArrowPostfixExpression *p);
   void visitPlusPlusPostfixExpression(PlusPlusPostfixExpression *p);
@@ -300,8 +318,12 @@ class PrintAbsyn : public Visitor
   void visitConstantInt(ConstantInt *p);
   void visitConstantFloat(ConstantFloat *p);
   void visitConstantChar(ConstantChar *p);
+  void visitConstantString(ConstantString *p);
   void visitTypeName(TypeName *p); /* abstract class */
   void visitTypeNameDeclSpecList(TypeNameDeclSpecList *p);
+  void visitArguments(Arguments *p); /* abstract class */
+  void visitNoArguments(NoArguments *p);
+  void visitSomeArguments(SomeArguments *p);
 
   void visitInteger(Integer i);
   void visitDouble(Double d);
@@ -314,6 +336,7 @@ class PrintAbsyn : public Visitor
   void visitRESTRICT(String s);
   void visitVOLATILE(String s);
   void visitBLOCKATTRIBUTE(String s);
+  void visitBOOL(String s);
  protected:
   char *buf_;
   size_t cur_, buf_size;
@@ -443,8 +466,14 @@ class ShowAbsyn : public Visitor
   void visitSomePointer(SomePointer *p);
   void visitDirectDecl(DirectDecl *p); /* abstract class */
   void visitDirectDeclIdTypename(DirectDeclIdTypename *p);
+  void visitDirectDeclAttrStatic(DirectDeclAttrStatic *p);
   void visitDirectDeclGhostParam(DirectDeclGhostParam *p);
   void visitDirectDeclGhostRestParParam(DirectDeclGhostRestParParam *p);
+  void visitAttributesOrStatic(AttributesOrStatic *p); /* abstract class */
+  void visitAttributesCommaExpression(AttributesCommaExpression *p);
+  void visitCommaExpressionOpt(CommaExpressionOpt *p); /* abstract class */
+  void visitNoCommaExpression(NoCommaExpression *p);
+  void visitSomeCommaExpression(SomeCommaExpression *p);
   void visitAttributesWithAsm(AttributesWithAsm *p); /* abstract class */
   void visitEmptyAttrWithASM(EmptyAttrWithASM *p);
   void visitRestParList(RestParList *p); /* abstract class */
@@ -478,6 +507,16 @@ class ShowAbsyn : public Visitor
   void visitInitDeclaratorExpression(InitDeclaratorExpression *p);
   void visitInitExpression(InitExpression *p); /* abstract class */
   void visitSimpleExpression(SimpleExpression *p);
+  void visitArrayInitExpression(ArrayInitExpression *p);
+  void visitInitializerListOpt(InitializerListOpt *p); /* abstract class */
+  void visitEmptyInitializerList(EmptyInitializerList *p);
+  void visitInitializerList(InitializerList *p);
+  void visitInitializerListComma(InitializerListComma *p);
+  void visitInitializerSingle(InitializerSingle *p); /* abstract class */
+  void visitInitializerGCCDesignator(InitializerGCCDesignator *p);
+  void visitEmptyInitializer(EmptyInitializer *p);
+  void visitListInitializerSingle(ListInitializerSingle *p);
+  void iterListInitializerSingle(ListInitializerSingle::const_iterator i, ListInitializerSingle::const_iterator j);
   void visitStructDeclList(StructDeclList *p); /* abstract class */
   void visitEmptyStructDecl(EmptyStructDecl *p);
   void visitDeclSpecStructDecl(DeclSpecStructDecl *p);
@@ -512,6 +551,7 @@ class ShowAbsyn : public Visitor
   void visitWhileStatement(WhileStatement *p);
   void visitDoWhileStatement(DoWhileStatement *p);
   void visitForStatement(ForStatement *p);
+  void visitColonStatement(ColonStatement *p);
   void visitCaseStatement(CaseStatement *p);
   void visitCaseSliceStatement(CaseSliceStatement *p);
   void visitDefaultStatement(DefaultStatement *p);
@@ -628,6 +668,7 @@ class ShowAbsyn : public Visitor
   void visitUnaryExprTilde(UnaryExprTilde *p);
   void visitUnaryExprAddress(UnaryExprAddress *p);
   void visitBracketsPostfixExpression(BracketsPostfixExpression *p);
+  void visitArgumentsPostfixExpression(ArgumentsPostfixExpression *p);
   void visitDotPostfixExpression(DotPostfixExpression *p);
   void visitArrowPostfixExpression(ArrowPostfixExpression *p);
   void visitPlusPlusPostfixExpression(PlusPlusPostfixExpression *p);
@@ -640,8 +681,12 @@ class ShowAbsyn : public Visitor
   void visitConstantInt(ConstantInt *p);
   void visitConstantFloat(ConstantFloat *p);
   void visitConstantChar(ConstantChar *p);
+  void visitConstantString(ConstantString *p);
   void visitTypeName(TypeName *p); /* abstract class */
   void visitTypeNameDeclSpecList(TypeNameDeclSpecList *p);
+  void visitArguments(Arguments *p); /* abstract class */
+  void visitNoArguments(NoArguments *p);
+  void visitSomeArguments(SomeArguments *p);
 
   void visitInteger(Integer i);
   void visitDouble(Double d);
@@ -654,6 +699,7 @@ class ShowAbsyn : public Visitor
   void visitRESTRICT(String s);
   void visitVOLATILE(String s);
   void visitBLOCKATTRIBUTE(String s);
+  void visitBOOL(String s);
  protected:
   char *buf_;
   size_t cur_, buf_size;

@@ -1016,13 +1016,15 @@ TypeSpecCharKeyWord *TypeSpecCharKeyWord::clone() const
 
 
 /********************   TypeSpecBoolKeyWord    ********************/
-TypeSpecBoolKeyWord::TypeSpecBoolKeyWord()
+TypeSpecBoolKeyWord::TypeSpecBoolKeyWord(BOOL p1)
 {
+  bool_ = p1;
 
 }
 
 TypeSpecBoolKeyWord::TypeSpecBoolKeyWord(const TypeSpecBoolKeyWord & other)
 {
+  bool_ = other.bool_;
 
 }
 
@@ -1035,6 +1037,7 @@ TypeSpecBoolKeyWord &TypeSpecBoolKeyWord::operator=(const TypeSpecBoolKeyWord & 
 
 void TypeSpecBoolKeyWord::swap(TypeSpecBoolKeyWord & other)
 {
+  std::swap(bool_, other.bool_);
 
 }
 
@@ -2228,6 +2231,54 @@ DirectDeclIdTypename *DirectDeclIdTypename::clone() const
 
 
 
+/********************   DirectDeclAttrStatic    ********************/
+DirectDeclAttrStatic::DirectDeclAttrStatic(DirectDecl *p1, AttributesOrStatic *p2)
+{
+  directdecl_ = p1;
+  attributesorstatic_ = p2;
+
+}
+
+DirectDeclAttrStatic::DirectDeclAttrStatic(const DirectDeclAttrStatic & other)
+{
+  directdecl_ = other.directdecl_->clone();
+  attributesorstatic_ = other.attributesorstatic_->clone();
+
+}
+
+DirectDeclAttrStatic &DirectDeclAttrStatic::operator=(const DirectDeclAttrStatic & other)
+{
+  DirectDeclAttrStatic tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void DirectDeclAttrStatic::swap(DirectDeclAttrStatic & other)
+{
+  std::swap(directdecl_, other.directdecl_);
+  std::swap(attributesorstatic_, other.attributesorstatic_);
+
+}
+
+DirectDeclAttrStatic::~DirectDeclAttrStatic()
+{
+  delete(directdecl_);
+  delete(attributesorstatic_);
+
+}
+
+void DirectDeclAttrStatic::accept(Visitor *v)
+{
+  v->visitDirectDeclAttrStatic(this);
+}
+
+DirectDeclAttrStatic *DirectDeclAttrStatic::clone() const
+{
+  return new DirectDeclAttrStatic(*this);
+}
+
+
+
 /********************   DirectDeclGhostParam    ********************/
 DirectDeclGhostParam::DirectDeclGhostParam(DirectDecl *p1, GhostParameterOpt *p2)
 {
@@ -2324,6 +2375,138 @@ void DirectDeclGhostRestParParam::accept(Visitor *v)
 DirectDeclGhostRestParParam *DirectDeclGhostRestParParam::clone() const
 {
   return new DirectDeclGhostRestParParam(*this);
+}
+
+
+
+/********************   AttributesCommaExpression    ********************/
+AttributesCommaExpression::AttributesCommaExpression(ListAttribute *p1, CommaExpressionOpt *p2)
+{
+  listattribute_ = p1;
+  commaexpressionopt_ = p2;
+
+}
+
+AttributesCommaExpression::AttributesCommaExpression(const AttributesCommaExpression & other)
+{
+  listattribute_ = other.listattribute_->clone();
+  commaexpressionopt_ = other.commaexpressionopt_->clone();
+
+}
+
+AttributesCommaExpression &AttributesCommaExpression::operator=(const AttributesCommaExpression & other)
+{
+  AttributesCommaExpression tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void AttributesCommaExpression::swap(AttributesCommaExpression & other)
+{
+  std::swap(listattribute_, other.listattribute_);
+  std::swap(commaexpressionopt_, other.commaexpressionopt_);
+
+}
+
+AttributesCommaExpression::~AttributesCommaExpression()
+{
+  delete(listattribute_);
+  delete(commaexpressionopt_);
+
+}
+
+void AttributesCommaExpression::accept(Visitor *v)
+{
+  v->visitAttributesCommaExpression(this);
+}
+
+AttributesCommaExpression *AttributesCommaExpression::clone() const
+{
+  return new AttributesCommaExpression(*this);
+}
+
+
+
+/********************   NoCommaExpression    ********************/
+NoCommaExpression::NoCommaExpression()
+{
+
+}
+
+NoCommaExpression::NoCommaExpression(const NoCommaExpression & other)
+{
+
+}
+
+NoCommaExpression &NoCommaExpression::operator=(const NoCommaExpression & other)
+{
+  NoCommaExpression tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void NoCommaExpression::swap(NoCommaExpression & other)
+{
+
+}
+
+NoCommaExpression::~NoCommaExpression()
+{
+
+}
+
+void NoCommaExpression::accept(Visitor *v)
+{
+  v->visitNoCommaExpression(this);
+}
+
+NoCommaExpression *NoCommaExpression::clone() const
+{
+  return new NoCommaExpression(*this);
+}
+
+
+
+/********************   SomeCommaExpression    ********************/
+SomeCommaExpression::SomeCommaExpression(ListExpression *p1)
+{
+  listexpression_ = p1;
+
+}
+
+SomeCommaExpression::SomeCommaExpression(const SomeCommaExpression & other)
+{
+  listexpression_ = other.listexpression_->clone();
+
+}
+
+SomeCommaExpression &SomeCommaExpression::operator=(const SomeCommaExpression & other)
+{
+  SomeCommaExpression tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void SomeCommaExpression::swap(SomeCommaExpression & other)
+{
+  std::swap(listexpression_, other.listexpression_);
+
+}
+
+SomeCommaExpression::~SomeCommaExpression()
+{
+  delete(listexpression_);
+
+}
+
+void SomeCommaExpression::accept(Visitor *v)
+{
+  v->visitSomeCommaExpression(this);
+}
+
+SomeCommaExpression *SomeCommaExpression::clone() const
+{
+  return new SomeCommaExpression(*this);
 }
 
 
@@ -2497,15 +2680,17 @@ ThreeDots *ThreeDots::clone() const
 
 
 /********************   ParameterDeclSpecDeclarator    ********************/
-ParameterDeclSpecDeclarator::ParameterDeclSpecDeclarator(DeclSpecList *p1, Declarator *p2)
+ParameterDeclSpecDeclarator::ParameterDeclSpecDeclarator(PointerOpt *p1, DeclSpecList *p2, Declarator *p3)
 {
-  declspeclist_ = p1;
-  declarator_ = p2;
+  pointeropt_ = p1;
+  declspeclist_ = p2;
+  declarator_ = p3;
 
 }
 
 ParameterDeclSpecDeclarator::ParameterDeclSpecDeclarator(const ParameterDeclSpecDeclarator & other)
 {
+  pointeropt_ = other.pointeropt_->clone();
   declspeclist_ = other.declspeclist_->clone();
   declarator_ = other.declarator_->clone();
 
@@ -2520,6 +2705,7 @@ ParameterDeclSpecDeclarator &ParameterDeclSpecDeclarator::operator=(const Parame
 
 void ParameterDeclSpecDeclarator::swap(ParameterDeclSpecDeclarator & other)
 {
+  std::swap(pointeropt_, other.pointeropt_);
   std::swap(declspeclist_, other.declspeclist_);
   std::swap(declarator_, other.declarator_);
 
@@ -2527,6 +2713,7 @@ void ParameterDeclSpecDeclarator::swap(ParameterDeclSpecDeclarator & other)
 
 ParameterDeclSpecDeclarator::~ParameterDeclSpecDeclarator()
 {
+  delete(pointeropt_);
   delete(declspeclist_);
   delete(declarator_);
 
@@ -2545,14 +2732,16 @@ ParameterDeclSpecDeclarator *ParameterDeclSpecDeclarator::clone() const
 
 
 /********************   ParameterDeclSpec    ********************/
-ParameterDeclSpec::ParameterDeclSpec(DeclSpecList *p1)
+ParameterDeclSpec::ParameterDeclSpec(PointerOpt *p1, DeclSpecList *p2)
 {
-  declspeclist_ = p1;
+  pointeropt_ = p1;
+  declspeclist_ = p2;
 
 }
 
 ParameterDeclSpec::ParameterDeclSpec(const ParameterDeclSpec & other)
 {
+  pointeropt_ = other.pointeropt_->clone();
   declspeclist_ = other.declspeclist_->clone();
 
 }
@@ -2566,12 +2755,14 @@ ParameterDeclSpec &ParameterDeclSpec::operator=(const ParameterDeclSpec & other)
 
 void ParameterDeclSpec::swap(ParameterDeclSpec & other)
 {
+  std::swap(pointeropt_, other.pointeropt_);
   std::swap(declspeclist_, other.declspeclist_);
 
 }
 
 ParameterDeclSpec::~ParameterDeclSpec()
 {
+  delete(pointeropt_);
   delete(declspeclist_);
 
 }
@@ -3075,6 +3266,270 @@ void SimpleExpression::accept(Visitor *v)
 SimpleExpression *SimpleExpression::clone() const
 {
   return new SimpleExpression(*this);
+}
+
+
+
+/********************   ArrayInitExpression    ********************/
+ArrayInitExpression::ArrayInitExpression(InitializerListOpt *p1)
+{
+  initializerlistopt_ = p1;
+
+}
+
+ArrayInitExpression::ArrayInitExpression(const ArrayInitExpression & other)
+{
+  initializerlistopt_ = other.initializerlistopt_->clone();
+
+}
+
+ArrayInitExpression &ArrayInitExpression::operator=(const ArrayInitExpression & other)
+{
+  ArrayInitExpression tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void ArrayInitExpression::swap(ArrayInitExpression & other)
+{
+  std::swap(initializerlistopt_, other.initializerlistopt_);
+
+}
+
+ArrayInitExpression::~ArrayInitExpression()
+{
+  delete(initializerlistopt_);
+
+}
+
+void ArrayInitExpression::accept(Visitor *v)
+{
+  v->visitArrayInitExpression(this);
+}
+
+ArrayInitExpression *ArrayInitExpression::clone() const
+{
+  return new ArrayInitExpression(*this);
+}
+
+
+
+/********************   EmptyInitializerList    ********************/
+EmptyInitializerList::EmptyInitializerList()
+{
+
+}
+
+EmptyInitializerList::EmptyInitializerList(const EmptyInitializerList & other)
+{
+
+}
+
+EmptyInitializerList &EmptyInitializerList::operator=(const EmptyInitializerList & other)
+{
+  EmptyInitializerList tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void EmptyInitializerList::swap(EmptyInitializerList & other)
+{
+
+}
+
+EmptyInitializerList::~EmptyInitializerList()
+{
+
+}
+
+void EmptyInitializerList::accept(Visitor *v)
+{
+  v->visitEmptyInitializerList(this);
+}
+
+EmptyInitializerList *EmptyInitializerList::clone() const
+{
+  return new EmptyInitializerList(*this);
+}
+
+
+
+/********************   InitializerList    ********************/
+InitializerList::InitializerList(ListInitializerSingle *p1)
+{
+  listinitializersingle_ = p1;
+
+}
+
+InitializerList::InitializerList(const InitializerList & other)
+{
+  listinitializersingle_ = other.listinitializersingle_->clone();
+
+}
+
+InitializerList &InitializerList::operator=(const InitializerList & other)
+{
+  InitializerList tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void InitializerList::swap(InitializerList & other)
+{
+  std::swap(listinitializersingle_, other.listinitializersingle_);
+
+}
+
+InitializerList::~InitializerList()
+{
+  delete(listinitializersingle_);
+
+}
+
+void InitializerList::accept(Visitor *v)
+{
+  v->visitInitializerList(this);
+}
+
+InitializerList *InitializerList::clone() const
+{
+  return new InitializerList(*this);
+}
+
+
+
+/********************   InitializerListComma    ********************/
+InitializerListComma::InitializerListComma(ListInitializerSingle *p1)
+{
+  listinitializersingle_ = p1;
+
+}
+
+InitializerListComma::InitializerListComma(const InitializerListComma & other)
+{
+  listinitializersingle_ = other.listinitializersingle_->clone();
+
+}
+
+InitializerListComma &InitializerListComma::operator=(const InitializerListComma & other)
+{
+  InitializerListComma tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void InitializerListComma::swap(InitializerListComma & other)
+{
+  std::swap(listinitializersingle_, other.listinitializersingle_);
+
+}
+
+InitializerListComma::~InitializerListComma()
+{
+  delete(listinitializersingle_);
+
+}
+
+void InitializerListComma::accept(Visitor *v)
+{
+  v->visitInitializerListComma(this);
+}
+
+InitializerListComma *InitializerListComma::clone() const
+{
+  return new InitializerListComma(*this);
+}
+
+
+
+/********************   InitializerGCCDesignator    ********************/
+InitializerGCCDesignator::InitializerGCCDesignator(IdOrTypename *p1, InitExpression *p2)
+{
+  idortypename_ = p1;
+  initexpression_ = p2;
+
+}
+
+InitializerGCCDesignator::InitializerGCCDesignator(const InitializerGCCDesignator & other)
+{
+  idortypename_ = other.idortypename_->clone();
+  initexpression_ = other.initexpression_->clone();
+
+}
+
+InitializerGCCDesignator &InitializerGCCDesignator::operator=(const InitializerGCCDesignator & other)
+{
+  InitializerGCCDesignator tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void InitializerGCCDesignator::swap(InitializerGCCDesignator & other)
+{
+  std::swap(idortypename_, other.idortypename_);
+  std::swap(initexpression_, other.initexpression_);
+
+}
+
+InitializerGCCDesignator::~InitializerGCCDesignator()
+{
+  delete(idortypename_);
+  delete(initexpression_);
+
+}
+
+void InitializerGCCDesignator::accept(Visitor *v)
+{
+  v->visitInitializerGCCDesignator(this);
+}
+
+InitializerGCCDesignator *InitializerGCCDesignator::clone() const
+{
+  return new InitializerGCCDesignator(*this);
+}
+
+
+
+/********************   EmptyInitializer    ********************/
+EmptyInitializer::EmptyInitializer(InitExpression *p1)
+{
+  initexpression_ = p1;
+
+}
+
+EmptyInitializer::EmptyInitializer(const EmptyInitializer & other)
+{
+  initexpression_ = other.initexpression_->clone();
+
+}
+
+EmptyInitializer &EmptyInitializer::operator=(const EmptyInitializer & other)
+{
+  EmptyInitializer tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void EmptyInitializer::swap(EmptyInitializer & other)
+{
+  std::swap(initexpression_, other.initexpression_);
+
+}
+
+EmptyInitializer::~EmptyInitializer()
+{
+  delete(initexpression_);
+
+}
+
+void EmptyInitializer::accept(Visitor *v)
+{
+  v->visitEmptyInitializer(this);
+}
+
+EmptyInitializer *EmptyInitializer::clone() const
+{
+  return new EmptyInitializer(*this);
 }
 
 
@@ -4057,6 +4512,54 @@ void ForStatement::accept(Visitor *v)
 ForStatement *ForStatement::clone() const
 {
   return new ForStatement(*this);
+}
+
+
+
+/********************   ColonStatement    ********************/
+ColonStatement::ColonStatement(IdOrTypenameAsId *p1, AnnotatedStmt *p2)
+{
+  idortypenameasid_ = p1;
+  annotatedstmt_ = p2;
+
+}
+
+ColonStatement::ColonStatement(const ColonStatement & other)
+{
+  idortypenameasid_ = other.idortypenameasid_->clone();
+  annotatedstmt_ = other.annotatedstmt_->clone();
+
+}
+
+ColonStatement &ColonStatement::operator=(const ColonStatement & other)
+{
+  ColonStatement tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void ColonStatement::swap(ColonStatement & other)
+{
+  std::swap(idortypenameasid_, other.idortypenameasid_);
+  std::swap(annotatedstmt_, other.annotatedstmt_);
+
+}
+
+ColonStatement::~ColonStatement()
+{
+  delete(idortypenameasid_);
+  delete(annotatedstmt_);
+
+}
+
+void ColonStatement::accept(Visitor *v)
+{
+  v->visitColonStatement(this);
+}
+
+ColonStatement *ColonStatement::clone() const
+{
+  return new ColonStatement(*this);
 }
 
 
@@ -8835,6 +9338,54 @@ BracketsPostfixExpression *BracketsPostfixExpression::clone() const
 
 
 
+/********************   ArgumentsPostfixExpression    ********************/
+ArgumentsPostfixExpression::ArgumentsPostfixExpression(AssignExpr *p1, Arguments *p2)
+{
+  assignexpr_ = p1;
+  arguments_ = p2;
+
+}
+
+ArgumentsPostfixExpression::ArgumentsPostfixExpression(const ArgumentsPostfixExpression & other)
+{
+  assignexpr_ = other.assignexpr_->clone();
+  arguments_ = other.arguments_->clone();
+
+}
+
+ArgumentsPostfixExpression &ArgumentsPostfixExpression::operator=(const ArgumentsPostfixExpression & other)
+{
+  ArgumentsPostfixExpression tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void ArgumentsPostfixExpression::swap(ArgumentsPostfixExpression & other)
+{
+  std::swap(assignexpr_, other.assignexpr_);
+  std::swap(arguments_, other.arguments_);
+
+}
+
+ArgumentsPostfixExpression::~ArgumentsPostfixExpression()
+{
+  delete(assignexpr_);
+  delete(arguments_);
+
+}
+
+void ArgumentsPostfixExpression::accept(Visitor *v)
+{
+  v->visitArgumentsPostfixExpression(this);
+}
+
+ArgumentsPostfixExpression *ArgumentsPostfixExpression::clone() const
+{
+  return new ArgumentsPostfixExpression(*this);
+}
+
+
+
 /********************   DotPostfixExpression    ********************/
 DotPostfixExpression::DotPostfixExpression(AssignExpr *p1, IdOrTypename *p2)
 {
@@ -9323,6 +9874,49 @@ ConstantChar *ConstantChar::clone() const
 
 
 
+/********************   ConstantString    ********************/
+ConstantString::ConstantString(String p1)
+{
+  string_ = p1;
+
+}
+
+ConstantString::ConstantString(const ConstantString & other)
+{
+  string_ = other.string_;
+
+}
+
+ConstantString &ConstantString::operator=(const ConstantString & other)
+{
+  ConstantString tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void ConstantString::swap(ConstantString & other)
+{
+  std::swap(string_, other.string_);
+
+}
+
+ConstantString::~ConstantString()
+{
+
+}
+
+void ConstantString::accept(Visitor *v)
+{
+  v->visitConstantString(this);
+}
+
+ConstantString *ConstantString::clone() const
+{
+  return new ConstantString(*this);
+}
+
+
+
 /********************   TypeNameDeclSpecList    ********************/
 TypeNameDeclSpecList::TypeNameDeclSpecList(DeclSpecList *p1)
 {
@@ -9363,6 +9957,90 @@ void TypeNameDeclSpecList::accept(Visitor *v)
 TypeNameDeclSpecList *TypeNameDeclSpecList::clone() const
 {
   return new TypeNameDeclSpecList(*this);
+}
+
+
+
+/********************   NoArguments    ********************/
+NoArguments::NoArguments()
+{
+
+}
+
+NoArguments::NoArguments(const NoArguments & other)
+{
+
+}
+
+NoArguments &NoArguments::operator=(const NoArguments & other)
+{
+  NoArguments tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void NoArguments::swap(NoArguments & other)
+{
+
+}
+
+NoArguments::~NoArguments()
+{
+
+}
+
+void NoArguments::accept(Visitor *v)
+{
+  v->visitNoArguments(this);
+}
+
+NoArguments *NoArguments::clone() const
+{
+  return new NoArguments(*this);
+}
+
+
+
+/********************   SomeArguments    ********************/
+SomeArguments::SomeArguments(ListExpression *p1)
+{
+  listexpression_ = p1;
+
+}
+
+SomeArguments::SomeArguments(const SomeArguments & other)
+{
+  listexpression_ = other.listexpression_->clone();
+
+}
+
+SomeArguments &SomeArguments::operator=(const SomeArguments & other)
+{
+  SomeArguments tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void SomeArguments::swap(SomeArguments & other)
+{
+  std::swap(listexpression_, other.listexpression_);
+
+}
+
+SomeArguments::~SomeArguments()
+{
+  delete(listexpression_);
+
+}
+
+void SomeArguments::accept(Visitor *v)
+{
+  v->visitSomeArguments(this);
+}
+
+SomeArguments *SomeArguments::clone() const
+{
+  return new SomeArguments(*this);
 }
 
 
@@ -9417,6 +10095,24 @@ ListInitDeclaratorAttr *ListInitDeclaratorAttr::clone() const
 }
 
 ListInitDeclaratorAttr* consListInitDeclaratorAttr(InitDeclaratorAttr* x, ListInitDeclaratorAttr* xs) {
+  xs->insert(xs->begin(), x);
+  return xs;
+}
+
+
+/********************   ListInitializerSingle    ********************/
+
+void ListInitializerSingle::accept(Visitor *v)
+{
+  v->visitListInitializerSingle(this);
+}
+
+ListInitializerSingle *ListInitializerSingle::clone() const
+{
+  return new ListInitializerSingle(*this);
+}
+
+ListInitializerSingle* consListInitializerSingle(InitializerSingle* x, ListInitializerSingle* xs) {
   xs->insert(xs->begin(), x);
   return xs;
 }

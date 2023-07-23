@@ -24,6 +24,8 @@ DeclSpecList* pDeclSpecList(FILE *inp);
 DeclSpecList* pDeclSpecList(const char *str);
 DeclSpecListNoNamed* pDeclSpecListNoNamed(FILE *inp);
 DeclSpecListNoNamed* pDeclSpecListNoNamed(const char *str);
+DeclSpecWOType* pDeclSpecWOType(FILE *inp);
+DeclSpecWOType* pDeclSpecWOType(const char *str);
 TypeSpec* pTypeSpec(FILE *inp);
 TypeSpec* pTypeSpec(const char *str);
 Enumerator* pEnumerator(FILE *inp);
@@ -38,6 +40,10 @@ PointerOpt* pPointerOpt(FILE *inp);
 PointerOpt* pPointerOpt(const char *str);
 DirectDecl* pDirectDecl(FILE *inp);
 DirectDecl* pDirectDecl(const char *str);
+AttributesOrStatic* pAttributesOrStatic(FILE *inp);
+AttributesOrStatic* pAttributesOrStatic(const char *str);
+CommaExpressionOpt* pCommaExpressionOpt(FILE *inp);
+CommaExpressionOpt* pCommaExpressionOpt(const char *str);
 AttributesWithAsm* pAttributesWithAsm(FILE *inp);
 AttributesWithAsm* pAttributesWithAsm(const char *str);
 RestParList* pRestParList(FILE *inp);
@@ -170,6 +176,8 @@ Constant* pConstant(FILE *inp);
 Constant* pConstant(const char *str);
 TypeName* pTypeName(FILE *inp);
 TypeName* pTypeName(const char *str);
+Arguments* pArguments(FILE *inp);
+Arguments* pArguments(const char *str);
 }
 
 #endif

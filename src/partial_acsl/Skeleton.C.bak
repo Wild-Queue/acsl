@@ -18,12 +18,15 @@ void Skeleton::visitFunctionDef(FunctionDef *t) {} //abstract class
 void Skeleton::visitFunctionDefStart(FunctionDefStart *t) {} //abstract class
 void Skeleton::visitDeclSpecList(DeclSpecList *t) {} //abstract class
 void Skeleton::visitDeclSpecListNoNamed(DeclSpecListNoNamed *t) {} //abstract class
+void Skeleton::visitDeclSpecWOType(DeclSpecWOType *t) {} //abstract class
 void Skeleton::visitTypeSpec(TypeSpec *t) {} //abstract class
 void Skeleton::visitEnumerator(Enumerator *t) {} //abstract class
 void Skeleton::visitMaybeComma(MaybeComma *t) {} //abstract class
 void Skeleton::visitDeclarator(Declarator *t) {} //abstract class
 void Skeleton::visitPointerOpt(PointerOpt *t) {} //abstract class
 void Skeleton::visitDirectDecl(DirectDecl *t) {} //abstract class
+void Skeleton::visitAttributesOrStatic(AttributesOrStatic *t) {} //abstract class
+void Skeleton::visitCommaExpressionOpt(CommaExpressionOpt *t) {} //abstract class
 void Skeleton::visitAttributesWithAsm(AttributesWithAsm *t) {} //abstract class
 void Skeleton::visitRestParList(RestParList *t) {} //abstract class
 void Skeleton::visitMaybeThreeDots(MaybeThreeDots *t) {} //abstract class
@@ -54,6 +57,7 @@ void Skeleton::visitExpression(Expression *t) {} //abstract class
 void Skeleton::visitAssignExpr(AssignExpr *t) {} //abstract class
 void Skeleton::visitConstant(Constant *t) {} //abstract class
 void Skeleton::visitTypeName(TypeName *t) {} //abstract class
+void Skeleton::visitArguments(Arguments *t) {} //abstract class
 
 void Skeleton::visitAProgram(AProgram *a_program)
 {
@@ -121,6 +125,23 @@ void Skeleton::visitFunctionDefStartDeclarator(FunctionDefStartDeclarator *funct
 
 }
 
+void Skeleton::visitDeclSpecWoType(DeclSpecWoType *decl_spec_wo_type)
+{
+  /* Code For DeclSpecWoType Goes Here */
+
+  if (decl_spec_wo_type->declspecwotype_) decl_spec_wo_type->declspecwotype_->accept(this);
+
+}
+
+void Skeleton::visitDeclSpecWoTypeNext(DeclSpecWoTypeNext *decl_spec_wo_type_next)
+{
+  /* Code For DeclSpecWoTypeNext Goes Here */
+
+  if (decl_spec_wo_type_next->declspecwotype_) decl_spec_wo_type_next->declspecwotype_->accept(this);
+  if (decl_spec_wo_type_next->declspeclist_) decl_spec_wo_type_next->declspeclist_->accept(this);
+
+}
+
 void Skeleton::visitDeclSpecTypeSpec(DeclSpecTypeSpec *decl_spec_type_spec)
 {
   /* Code For DeclSpecTypeSpec Goes Here */
@@ -138,6 +159,23 @@ void Skeleton::visitDeclSpecTypeSpecNext(DeclSpecTypeSpecNext *decl_spec_type_sp
 
 }
 
+void Skeleton::visitDeclSpecNoNamedWOType(DeclSpecNoNamedWOType *decl_spec_no_named_wo_type)
+{
+  /* Code For DeclSpecNoNamedWOType Goes Here */
+
+  if (decl_spec_no_named_wo_type->declspecwotype_) decl_spec_no_named_wo_type->declspecwotype_->accept(this);
+
+}
+
+void Skeleton::visitDeclSpecNoNamedWOTypeNext(DeclSpecNoNamedWOTypeNext *decl_spec_no_named_wo_type_next)
+{
+  /* Code For DeclSpecNoNamedWOTypeNext Goes Here */
+
+  if (decl_spec_no_named_wo_type_next->declspecwotype_) decl_spec_no_named_wo_type_next->declspecwotype_->accept(this);
+  if (decl_spec_no_named_wo_type_next->declspeclistnonamed_) decl_spec_no_named_wo_type_next->declspeclistnonamed_->accept(this);
+
+}
+
 void Skeleton::visitDeclSpecNoNamedTypeSpec(DeclSpecNoNamedTypeSpec *decl_spec_no_named_type_spec)
 {
   /* Code For DeclSpecNoNamedTypeSpec Goes Here */
@@ -152,6 +190,41 @@ void Skeleton::visitDeclSpecNoNamedTypeSpecNext(DeclSpecNoNamedTypeSpecNext *dec
 
   if (decl_spec_no_named_type_spec_next->typespec_) decl_spec_no_named_type_spec_next->typespec_->accept(this);
   if (decl_spec_no_named_type_spec_next->declspeclistnonamed_) decl_spec_no_named_type_spec_next->declspeclistnonamed_->accept(this);
+
+}
+
+void Skeleton::visitDeclSpecWOTypeTypedefKeyWord(DeclSpecWOTypeTypedefKeyWord *decl_spec_wo_type_typedef_key_word)
+{
+  /* Code For DeclSpecWOTypeTypedefKeyWord Goes Here */
+
+
+}
+
+void Skeleton::visitDeclSpecWOTypeExternKeyWord(DeclSpecWOTypeExternKeyWord *decl_spec_wo_type_extern_key_word)
+{
+  /* Code For DeclSpecWOTypeExternKeyWord Goes Here */
+
+
+}
+
+void Skeleton::visitDeclSpecWOTypeStaticKeyWord(DeclSpecWOTypeStaticKeyWord *decl_spec_wo_type_static_key_word)
+{
+  /* Code For DeclSpecWOTypeStaticKeyWord Goes Here */
+
+
+}
+
+void Skeleton::visitDeclSpecWOTypeAutoKeyWord(DeclSpecWOTypeAutoKeyWord *decl_spec_wo_type_auto_key_word)
+{
+  /* Code For DeclSpecWOTypeAutoKeyWord Goes Here */
+
+
+}
+
+void Skeleton::visitDeclSpecWOTypeRegisterKeyWord(DeclSpecWOTypeRegisterKeyWord *decl_spec_wo_type_register_key_word)
+{
+  /* Code For DeclSpecWOTypeRegisterKeyWord Goes Here */
+
 
 }
 
@@ -173,6 +246,7 @@ void Skeleton::visitTypeSpecBoolKeyWord(TypeSpecBoolKeyWord *type_spec_bool_key_
 {
   /* Code For TypeSpecBoolKeyWord Goes Here */
 
+  visitBOOL(type_spec_bool_key_word->bool_);
 
 }
 
@@ -389,6 +463,15 @@ void Skeleton::visitDirectDeclIdTypename(DirectDeclIdTypename *direct_decl_id_ty
 
 }
 
+void Skeleton::visitDirectDeclAttrStatic(DirectDeclAttrStatic *direct_decl_attr_static)
+{
+  /* Code For DirectDeclAttrStatic Goes Here */
+
+  if (direct_decl_attr_static->directdecl_) direct_decl_attr_static->directdecl_->accept(this);
+  if (direct_decl_attr_static->attributesorstatic_) direct_decl_attr_static->attributesorstatic_->accept(this);
+
+}
+
 void Skeleton::visitDirectDeclGhostParam(DirectDeclGhostParam *direct_decl_ghost_param)
 {
   /* Code For DirectDeclGhostParam Goes Here */
@@ -405,6 +488,30 @@ void Skeleton::visitDirectDeclGhostRestParParam(DirectDeclGhostRestParParam *dir
   if (direct_decl_ghost_rest_par_param->directdecl_) direct_decl_ghost_rest_par_param->directdecl_->accept(this);
   if (direct_decl_ghost_rest_par_param->restparlist_) direct_decl_ghost_rest_par_param->restparlist_->accept(this);
   if (direct_decl_ghost_rest_par_param->ghostparameteropt_) direct_decl_ghost_rest_par_param->ghostparameteropt_->accept(this);
+
+}
+
+void Skeleton::visitAttributesCommaExpression(AttributesCommaExpression *attributes_comma_expression)
+{
+  /* Code For AttributesCommaExpression Goes Here */
+
+  if (attributes_comma_expression->listattribute_) attributes_comma_expression->listattribute_->accept(this);
+  if (attributes_comma_expression->commaexpressionopt_) attributes_comma_expression->commaexpressionopt_->accept(this);
+
+}
+
+void Skeleton::visitNoCommaExpression(NoCommaExpression *no_comma_expression)
+{
+  /* Code For NoCommaExpression Goes Here */
+
+
+}
+
+void Skeleton::visitSomeCommaExpression(SomeCommaExpression *some_comma_expression)
+{
+  /* Code For SomeCommaExpression Goes Here */
+
+  if (some_comma_expression->listexpression_) some_comma_expression->listexpression_->accept(this);
 
 }
 
@@ -442,6 +549,7 @@ void Skeleton::visitParameterDeclSpecDeclarator(ParameterDeclSpecDeclarator *par
 {
   /* Code For ParameterDeclSpecDeclarator Goes Here */
 
+  if (parameter_decl_spec_declarator->pointeropt_) parameter_decl_spec_declarator->pointeropt_->accept(this);
   if (parameter_decl_spec_declarator->declspeclist_) parameter_decl_spec_declarator->declspeclist_->accept(this);
   if (parameter_decl_spec_declarator->declarator_) parameter_decl_spec_declarator->declarator_->accept(this);
 
@@ -451,6 +559,7 @@ void Skeleton::visitParameterDeclSpec(ParameterDeclSpec *parameter_decl_spec)
 {
   /* Code For ParameterDeclSpec Goes Here */
 
+  if (parameter_decl_spec->pointeropt_) parameter_decl_spec->pointeropt_->accept(this);
   if (parameter_decl_spec->declspeclist_) parameter_decl_spec->declspeclist_->accept(this);
 
 }
@@ -725,6 +834,15 @@ void Skeleton::visitForStatement(ForStatement *for_statement)
   if (for_statement->optexpression_1) for_statement->optexpression_1->accept(this);
   if (for_statement->optexpression_2) for_statement->optexpression_2->accept(this);
   if (for_statement->annotatedstmt_) for_statement->annotatedstmt_->accept(this);
+
+}
+
+void Skeleton::visitColonStatement(ColonStatement *colon_statement)
+{
+  /* Code For ColonStatement Goes Here */
+
+  if (colon_statement->idortypenameasid_) colon_statement->idortypenameasid_->accept(this);
+  if (colon_statement->annotatedstmt_) colon_statement->annotatedstmt_->accept(this);
 
 }
 
@@ -1614,6 +1732,15 @@ void Skeleton::visitBracketsPostfixExpression(BracketsPostfixExpression *bracket
 
 }
 
+void Skeleton::visitArgumentsPostfixExpression(ArgumentsPostfixExpression *arguments_postfix_expression)
+{
+  /* Code For ArgumentsPostfixExpression Goes Here */
+
+  if (arguments_postfix_expression->assignexpr_) arguments_postfix_expression->assignexpr_->accept(this);
+  if (arguments_postfix_expression->arguments_) arguments_postfix_expression->arguments_->accept(this);
+
+}
+
 void Skeleton::visitDotPostfixExpression(DotPostfixExpression *dot_postfix_expression)
 {
   /* Code For DotPostfixExpression Goes Here */
@@ -1704,11 +1831,34 @@ void Skeleton::visitConstantChar(ConstantChar *constant_char)
 
 }
 
+void Skeleton::visitConstantString(ConstantString *constant_string)
+{
+  /* Code For ConstantString Goes Here */
+
+  visitString(constant_string->string_);
+
+}
+
 void Skeleton::visitTypeNameDeclSpecList(TypeNameDeclSpecList *type_name_decl_spec_list)
 {
   /* Code For TypeNameDeclSpecList Goes Here */
 
   if (type_name_decl_spec_list->declspeclist_) type_name_decl_spec_list->declspeclist_->accept(this);
+
+}
+
+void Skeleton::visitNoArguments(NoArguments *no_arguments)
+{
+  /* Code For NoArguments Goes Here */
+
+
+}
+
+void Skeleton::visitSomeArguments(SomeArguments *some_arguments)
+{
+  /* Code For SomeArguments Goes Here */
+
+  if (some_arguments->listexpression_) some_arguments->listexpression_->accept(this);
 
 }
 
@@ -1831,6 +1981,11 @@ void Skeleton::visitVOLATILE(VOLATILE x)
 void Skeleton::visitBLOCKATTRIBUTE(BLOCKATTRIBUTE x)
 {
   /* Code for BLOCKATTRIBUTE Goes Here */
+}
+
+void Skeleton::visitBOOL(BOOL x)
+{
+  /* Code for BOOL Goes Here */
 }
 
 

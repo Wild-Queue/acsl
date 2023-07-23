@@ -5,12 +5,42 @@
 %option noyywrap noinput nounput
 %option reentrant bison-bridge bison-locations
 
+/* Additional data for the lexer: a buffer for lexing string literals. */
+%option extra-type="Buffer"
+
 %option prefix="partial_acsl"
 %{
 #include "Absyn.H"
 #include "Bison.H"
 
 #define initialize_lexer partial_acsl_initialize_lexer
+
+/* BEGIN extensible string buffer */
+
+#include "Buffer.H"
+
+/* The initial size of the buffer to lex string literals. */
+#define LITERAL_BUFFER_INITIAL_SIZE 1024
+
+/* The pointer to the literal buffer. */
+#define literal_buffer yyextra
+
+/* Initialize the literal buffer. */
+#define LITERAL_BUFFER_CREATE() literal_buffer = newBuffer(LITERAL_BUFFER_INITIAL_SIZE)
+
+/* Append characters at the end of the buffer. */
+#define LITERAL_BUFFER_APPEND(s) bufferAppendString(literal_buffer, s)
+
+/* Append a character at the end of the buffer. */
+#define LITERAL_BUFFER_APPEND_CHAR(c) bufferAppendChar(literal_buffer, c)
+
+/* Release the buffer, returning a pointer to its content. */
+#define LITERAL_BUFFER_HARVEST() releaseBuffer(literal_buffer)
+
+/* In exceptional cases, e.g. when reaching EOF, we have to free the buffer. */
+#define LITERAL_BUFFER_FREE() freeBuffer(literal_buffer)
+
+/* END extensible string buffer */
 
 static void update_loc(YYLTYPE* loc, char* text)
 {
@@ -40,21 +70,22 @@ IDENT [a-zA-Z0-9'_]
 %%  /* Rules. */
 
 <INITIAL>";"      	 return _SEMI;
-<INITIAL>"_Bool"      	 return _SYMB_1;
-<INITIAL>"__int32"      	 return _SYMB_2;
-<INITIAL>"__int64"      	 return _SYMB_3;
+<INITIAL>"__int32"      	 return _SYMB_1;
+<INITIAL>"__int64"      	 return _SYMB_2;
 <INITIAL>"{"      	 return _LBRACE;
 <INITIAL>"}"      	 return _RBRACE;
 <INITIAL>"="      	 return _EQ;
 <INITIAL>","      	 return _COMMA;
 <INITIAL>"*"      	 return _STAR;
+<INITIAL>"["      	 return _LBRACK;
+<INITIAL>"]"      	 return _RBRACK;
 <INITIAL>"("      	 return _LPAREN;
 <INITIAL>")"      	 return _RPAREN;
 <INITIAL>"..."      	 return _ELLIPSIS;
 <INITIAL>":"      	 return _COLON;
-<INITIAL>"__try"      	 return _SYMB_13;
-<INITIAL>"__except"      	 return _SYMB_14;
-<INITIAL>"__finally"      	 return _SYMB_15;
+<INITIAL>"__try"      	 return _SYMB_14;
+<INITIAL>"__except"      	 return _SYMB_15;
+<INITIAL>"__finally"      	 return _SYMB_16;
 <INITIAL>"?"      	 return _QUESTION;
 <INITIAL>"||"      	 return _DBAR;
 <INITIAL>"&&"      	 return _DAMP;
@@ -77,8 +108,6 @@ IDENT [a-zA-Z0-9'_]
 <INITIAL>"~"      	 return _TILDE;
 <INITIAL>"->"      	 return _RARROW;
 <INITIAL>"."      	 return _DOT;
-<INITIAL>"["      	 return _LBRACK;
-<INITIAL>"]"      	 return _RBRACK;
 <INITIAL>"+="      	 return _PLUSEQ;
 <INITIAL>"-="      	 return _MINUSEQ;
 <INITIAL>"*="      	 return _STAREQ;
@@ -111,7 +140,7 @@ IDENT [a-zA-Z0-9'_]
 <INITIAL>"register"      	 return _KW_register;
 <INITIAL>"return"      	 return _KW_return;
 <INITIAL>"short"      	 return _KW_short;
-<INITIAL>"size_t"      	 return _KW_72;
+<INITIAL>"size_t"      	 return _KW_71;
 <INITIAL>"sizeof"      	 return _KW_sizeof;
 <INITIAL>"static"      	 return _KW_static;
 <INITIAL>"struct"      	 return _KW_struct;
@@ -134,6 +163,19 @@ IDENT [a-zA-Z0-9'_]
 <INITIAL>\_\_restrict|restrict    	 yylval->_string = strdup(yytext); return T_RESTRICT;
 <INITIAL>volatile|\_\_volatile|\_\_volatile\_\_|\_\_volatile    	 yylval->_string = strdup(yytext); return T_VOLATILE;
 <INITIAL>\_\_blockattribute\_\_|\_\_blockattribute    	 yylval->_string = strdup(yytext); return T_BLOCKATTRIBUTE;
+<INITIAL>\_Bool|bool    	 yylval->_string = strdup(yytext); return T_BOOL;
+<INITIAL>"\""        	 LITERAL_BUFFER_CREATE(); BEGIN STRING;
+<STRING>\\             	 BEGIN ESCAPED;
+<STRING>\"             	 yylval->_string = LITERAL_BUFFER_HARVEST(); BEGIN INITIAL; return _STRING_;
+<STRING>.              	 LITERAL_BUFFER_APPEND_CHAR(yytext[0]);
+<ESCAPED>f             	 LITERAL_BUFFER_APPEND_CHAR('\f'); BEGIN STRING;
+<ESCAPED>n             	 LITERAL_BUFFER_APPEND_CHAR('\n'); BEGIN STRING;
+<ESCAPED>r             	 LITERAL_BUFFER_APPEND_CHAR('\r'); BEGIN STRING;
+<ESCAPED>t             	 LITERAL_BUFFER_APPEND_CHAR('\t'); BEGIN STRING;
+<ESCAPED>\"            	 LITERAL_BUFFER_APPEND_CHAR('"');  BEGIN STRING;
+<ESCAPED>\\            	 LITERAL_BUFFER_APPEND_CHAR('\\'); BEGIN STRING;
+<ESCAPED>.             	 LITERAL_BUFFER_APPEND(yytext);    BEGIN STRING;
+<STRING,ESCAPED><<EOF>>	 LITERAL_BUFFER_FREE(); return _ERROR_;
 <INITIAL>"'" 	BEGIN CHAR;
 <CHAR>\\      	 BEGIN CHARESC;
 <CHAR>[^']      	 BEGIN CHAREND; yylval->_char = yytext[0]; return _CHAR_;

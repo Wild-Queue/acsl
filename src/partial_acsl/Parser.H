@@ -40,6 +40,10 @@ PointerOpt* pPointerOpt(FILE *inp);
 PointerOpt* pPointerOpt(const char *str);
 DirectDecl* pDirectDecl(FILE *inp);
 DirectDecl* pDirectDecl(const char *str);
+AttributesOrStatic* pAttributesOrStatic(FILE *inp);
+AttributesOrStatic* pAttributesOrStatic(const char *str);
+CommaExpressionOpt* pCommaExpressionOpt(FILE *inp);
+CommaExpressionOpt* pCommaExpressionOpt(const char *str);
 AttributesWithAsm* pAttributesWithAsm(FILE *inp);
 AttributesWithAsm* pAttributesWithAsm(const char *str);
 RestParList* pRestParList(FILE *inp);
@@ -68,6 +72,12 @@ InitDeclarator* pInitDeclarator(FILE *inp);
 InitDeclarator* pInitDeclarator(const char *str);
 InitExpression* pInitExpression(FILE *inp);
 InitExpression* pInitExpression(const char *str);
+InitializerListOpt* pInitializerListOpt(FILE *inp);
+InitializerListOpt* pInitializerListOpt(const char *str);
+InitializerSingle* pInitializerSingle(FILE *inp);
+InitializerSingle* pInitializerSingle(const char *str);
+ListInitializerSingle* pListInitializerSingle(FILE *inp);
+ListInitializerSingle* pListInitializerSingle(const char *str);
 StructDeclList* pStructDeclList(FILE *inp);
 StructDeclList* pStructDeclList(const char *str);
 FieldDecl* pFieldDecl(FILE *inp);
@@ -172,6 +182,8 @@ Constant* pConstant(FILE *inp);
 Constant* pConstant(const char *str);
 TypeName* pTypeName(FILE *inp);
 TypeName* pTypeName(const char *str);
+Arguments* pArguments(FILE *inp);
+Arguments* pArguments(const char *str);
 }
 
 #endif

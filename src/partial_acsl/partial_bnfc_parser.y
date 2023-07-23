@@ -69,6 +69,8 @@ extern yyscan_t partial_acsl_initialize_lexer(FILE * inp);
   partial_acsl::Declarator* declarator_;
   partial_acsl::PointerOpt* pointeropt_;
   partial_acsl::DirectDecl* directdecl_;
+  partial_acsl::AttributesOrStatic* attributesorstatic_;
+  partial_acsl::CommaExpressionOpt* commaexpressionopt_;
   partial_acsl::AttributesWithAsm* attributeswithasm_;
   partial_acsl::RestParList* restparlist_;
   partial_acsl::MaybeThreeDots* maybethreedots_;
@@ -83,6 +85,9 @@ extern yyscan_t partial_acsl_initialize_lexer(FILE * inp);
   partial_acsl::ListInitDeclaratorAttr* listinitdeclaratorattr_;
   partial_acsl::InitDeclarator* initdeclarator_;
   partial_acsl::InitExpression* initexpression_;
+  partial_acsl::InitializerListOpt* initializerlistopt_;
+  partial_acsl::InitializerSingle* initializersingle_;
+  partial_acsl::ListInitializerSingle* listinitializersingle_;
   partial_acsl::StructDeclList* structdecllist_;
   partial_acsl::FieldDecl* fielddecl_;
   partial_acsl::ListFieldDecl* listfielddecl_;
@@ -106,6 +111,7 @@ extern yyscan_t partial_acsl_initialize_lexer(FILE * inp);
   partial_acsl::AssignExpr* assignexpr_;
   partial_acsl::Constant* constant_;
   partial_acsl::TypeName* typename_;
+  partial_acsl::Arguments* arguments_;
 }
 
 %{
@@ -161,12 +167,11 @@ extern int yylex(YYSTYPE *lvalp, YYLTYPE *llocp, yyscan_t scanner);
 %token          _RBRACK           /* ] */
 %token          _CARET            /* ^ */
 %token          _CARETEQ          /* ^= */
-%token          _SYMB_1           /* _Bool */
-%token          _SYMB_14          /* __except */
-%token          _SYMB_15          /* __finally */
-%token          _SYMB_2           /* __int32 */
-%token          _SYMB_3           /* __int64 */
-%token          _SYMB_13          /* __try */
+%token          _SYMB_15          /* __except */
+%token          _SYMB_16          /* __finally */
+%token          _SYMB_1           /* __int32 */
+%token          _SYMB_2           /* __int64 */
+%token          _SYMB_14          /* __try */
 %token          _KW_auto          /* auto */
 %token          _KW_break         /* break */
 %token          _KW_case          /* case */
@@ -187,7 +192,7 @@ extern int yylex(YYSTYPE *lvalp, YYLTYPE *llocp, yyscan_t scanner);
 %token          _KW_register      /* register */
 %token          _KW_return        /* return */
 %token          _KW_short         /* short */
-%token          _KW_72            /* size_t */
+%token          _KW_71            /* size_t */
 %token          _KW_sizeof        /* sizeof */
 %token          _KW_static        /* static */
 %token          _KW_struct        /* struct */
@@ -205,10 +210,12 @@ extern int yylex(YYSTYPE *lvalp, YYLTYPE *llocp, yyscan_t scanner);
 %token          _TILDE            /* ~ */
 %token<_string> T_ALIGNOF         /* ALIGNOF */
 %token<_string> T_BLOCKATTRIBUTE  /* BLOCKATTRIBUTE */
+%token<_string> T_BOOL            /* BOOL */
 %token<_string> T_CONST           /* CONST */
 %token<_string> T_RESTRICT        /* RESTRICT */
 %token<_string> T_SIGNED          /* SIGNED */
 %token<_string> T_VOLATILE        /* VOLATILE */
+%token<_string> _STRING_
 %token<_char>   _CHAR_
 %token<_int>    _INTEGER_
 %token<_double> _DOUBLE_
@@ -229,6 +236,8 @@ extern int yylex(YYSTYPE *lvalp, YYLTYPE *llocp, yyscan_t scanner);
 %type <declarator_> Declarator
 %type <pointeropt_> PointerOpt
 %type <directdecl_> DirectDecl
+%type <attributesorstatic_> AttributesOrStatic
+%type <commaexpressionopt_> CommaExpressionOpt
 %type <attributeswithasm_> AttributesWithAsm
 %type <restparlist_> RestParList
 %type <maybethreedots_> MaybeThreeDots
@@ -243,6 +252,9 @@ extern int yylex(YYSTYPE *lvalp, YYLTYPE *llocp, yyscan_t scanner);
 %type <listinitdeclaratorattr_> ListInitDeclaratorAttr
 %type <initdeclarator_> InitDeclarator
 %type <initexpression_> InitExpression
+%type <initializerlistopt_> InitializerListOpt
+%type <initializersingle_> InitializerSingle
+%type <listinitializersingle_> ListInitializerSingle
 %type <structdecllist_> StructDeclList
 %type <fielddecl_> FieldDecl
 %type <listfielddecl_> ListFieldDecl
@@ -295,6 +307,7 @@ extern int yylex(YYSTYPE *lvalp, YYLTYPE *llocp, yyscan_t scanner);
 %type <assignexpr_> AssignExpr15
 %type <constant_> Constant
 %type <typename_> TypeName
+%type <arguments_> Arguments
 
 %start Program
 
@@ -331,13 +344,13 @@ DeclSpecWOType : _KW_typedef { $$ = new partial_acsl::DeclSpecWOTypeTypedefKeyWo
 ;
 TypeSpec : _KW_void { $$ = new partial_acsl::TypeSpecVoidKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespec_ = $$; }
   | _KW_char { $$ = new partial_acsl::TypeSpecCharKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespec_ = $$; }
-  | _SYMB_1 { $$ = new partial_acsl::TypeSpecBoolKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespec_ = $$; }
+  | T_BOOL { $$ = new partial_acsl::TypeSpecBoolKeyWord($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespec_ = $$; }
   | _KW_short { $$ = new partial_acsl::TypeSpecShortKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespec_ = $$; }
-  | _SYMB_2 { $$ = new partial_acsl::TypeSpecInt32KeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespec_ = $$; }
+  | _SYMB_1 { $$ = new partial_acsl::TypeSpecInt32KeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespec_ = $$; }
   | _KW_int { $$ = new partial_acsl::TypeSpecIntKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespec_ = $$; }
-  | _KW_72 { $$ = new partial_acsl::TypeSpecSizeTKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespec_ = $$; }
+  | _KW_71 { $$ = new partial_acsl::TypeSpecSizeTKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespec_ = $$; }
   | _KW_long { $$ = new partial_acsl::TypeSpecLongKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespec_ = $$; }
-  | _SYMB_3 { $$ = new partial_acsl::TypeSpecInt64KeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespec_ = $$; }
+  | _SYMB_2 { $$ = new partial_acsl::TypeSpecInt64KeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespec_ = $$; }
   | _KW_float { $$ = new partial_acsl::TypeSpecFloatKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespec_ = $$; }
   | _KW_double { $$ = new partial_acsl::TypeSpecDoubleKeyWord(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespec_ = $$; }
   | T_SIGNED { $$ = new partial_acsl::TypeSpecSignedKeyWord($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typespec_ = $$; }
@@ -367,8 +380,14 @@ PointerOpt : /* empty */ { $$ = new partial_acsl::NoPointer(); $$->line_number =
   | _STAR ListAttribute PointerOpt { $$ = new partial_acsl::SomePointer($2, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->pointeropt_ = $$; }
 ;
 DirectDecl : IdOrTypename { $$ = new partial_acsl::DirectDeclIdTypename($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->directdecl_ = $$; }
+  | DirectDecl _LBRACK AttributesOrStatic _RBRACK { $$ = new partial_acsl::DirectDeclAttrStatic($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->directdecl_ = $$; }
   | DirectDecl _LPAREN _RPAREN GhostParameterOpt { $$ = new partial_acsl::DirectDeclGhostParam($1, $4); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->directdecl_ = $$; }
   | DirectDecl _LPAREN RestParList _RPAREN GhostParameterOpt { $$ = new partial_acsl::DirectDeclGhostRestParParam($1, $3, $5); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->directdecl_ = $$; }
+;
+AttributesOrStatic : ListAttribute CommaExpressionOpt { $$ = new partial_acsl::AttributesCommaExpression($1, $2); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->attributesorstatic_ = $$; }
+;
+CommaExpressionOpt : /* empty */ { $$ = new partial_acsl::NoCommaExpression(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->commaexpressionopt_ = $$; }
+  | ListExpression { std::reverse($1->begin(),$1->end()) ;$$ = new partial_acsl::SomeCommaExpression($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->commaexpressionopt_ = $$; }
 ;
 AttributesWithAsm : /* empty */ { $$ = new partial_acsl::EmptyAttrWithASM(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->attributeswithasm_ = $$; }
 ;
@@ -377,8 +396,8 @@ RestParList : ListParameterDecl MaybeThreeDots { std::reverse($1->begin(),$1->en
 MaybeThreeDots : /* empty */ { $$ = new partial_acsl::NoThreeDots(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->maybethreedots_ = $$; }
   | _COMMA _ELLIPSIS { $$ = new partial_acsl::ThreeDots(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->maybethreedots_ = $$; }
 ;
-ParameterDecl : DeclSpecList Declarator { $$ = new partial_acsl::ParameterDeclSpecDeclarator($1, $2); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->parameterdecl_ = $$; }
-  | DeclSpecList { $$ = new partial_acsl::ParameterDeclSpec($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->parameterdecl_ = $$; }
+ParameterDecl : PointerOpt DeclSpecList Declarator { $$ = new partial_acsl::ParameterDeclSpecDeclarator($1, $2, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->parameterdecl_ = $$; }
+  | PointerOpt DeclSpecList { $$ = new partial_acsl::ParameterDeclSpec($1, $2); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->parameterdecl_ = $$; }
 ;
 ListParameterDecl : ParameterDecl { $$ = new partial_acsl::ListParameterDecl(); $$->push_back($1); result->listparameterdecl_ = $$; }
   | ParameterDecl _COMMA ListParameterDecl { $3->push_back($1); $$ = $3; result->listparameterdecl_ = $$; }
@@ -404,6 +423,17 @@ InitDeclarator : Declarator { $$ = new partial_acsl::SimpleInitDeclarator($1); $
   | Declarator _EQ InitExpression { $$ = new partial_acsl::InitDeclaratorExpression($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->initdeclarator_ = $$; }
 ;
 InitExpression : Expression { $$ = new partial_acsl::SimpleExpression($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->initexpression_ = $$; }
+  | _LBRACE InitializerListOpt _RBRACE { $$ = new partial_acsl::ArrayInitExpression($2); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->initexpression_ = $$; }
+;
+InitializerListOpt : /* empty */ { $$ = new partial_acsl::EmptyInitializerList(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->initializerlistopt_ = $$; }
+  | ListInitializerSingle { std::reverse($1->begin(),$1->end()) ;$$ = new partial_acsl::InitializerList($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->initializerlistopt_ = $$; }
+  | ListInitializerSingle _COMMA { std::reverse($1->begin(),$1->end()) ;$$ = new partial_acsl::InitializerListComma($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->initializerlistopt_ = $$; }
+;
+InitializerSingle : IdOrTypename _COLON InitExpression { $$ = new partial_acsl::InitializerGCCDesignator($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->initializersingle_ = $$; }
+  | InitExpression { $$ = new partial_acsl::EmptyInitializer($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->initializersingle_ = $$; }
+;
+ListInitializerSingle : InitializerSingle { $$ = new partial_acsl::ListInitializerSingle(); $$->push_back($1); result->listinitializersingle_ = $$; }
+  | InitializerSingle _COMMA ListInitializerSingle { $3->push_back($1); $$ = $3; result->listinitializersingle_ = $$; }
 ;
 StructDeclList : /* empty */ { $$ = new partial_acsl::EmptyStructDecl(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->structdecllist_ = $$; }
   | DeclSpecList _SEMI StructDeclList { $$ = new partial_acsl::DeclSpecStructDecl($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->structdecllist_ = $$; }
@@ -441,6 +471,7 @@ Statement : _SEMI { $$ = new partial_acsl::SemicolonStatement(); $$->line_number
   | OptLoopAnnotations _KW_while _LPAREN ListExpression _RPAREN AnnotatedStmt { std::reverse($4->begin(),$4->end()) ;$$ = new partial_acsl::WhileStatement($1, $4, $6); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->statement_ = $$; }
   | OptLoopAnnotations _KW_do AnnotatedStmt _KW_while _LPAREN ListExpression _RPAREN _SEMI { std::reverse($6->begin(),$6->end()) ;$$ = new partial_acsl::DoWhileStatement($1, $3, $6); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->statement_ = $$; }
   | OptLoopAnnotations _KW_for _LPAREN ForClause OptExpression _SEMI OptExpression _RPAREN AnnotatedStmt { $$ = new partial_acsl::ForStatement($1, $4, $5, $7, $9); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->statement_ = $$; }
+  | IdOrTypenameAsId _COLON AnnotatedStmt { $$ = new partial_acsl::ColonStatement($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->statement_ = $$; }
   | _KW_case Expression _COLON AnnotatedStmt { $$ = new partial_acsl::CaseStatement($2, $4); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->statement_ = $$; }
   | _KW_case Expression _ELLIPSIS Expression _COLON AnnotatedStmt { $$ = new partial_acsl::CaseSliceStatement($2, $4, $6); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->statement_ = $$; }
   | _KW_default _COLON AnnotatedStmt { $$ = new partial_acsl::DefaultStatement($3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->statement_ = $$; }
@@ -450,8 +481,8 @@ Statement : _SEMI { $$ = new partial_acsl::SemicolonStatement(); $$->line_number
   | _KW_continue _SEMI { $$ = new partial_acsl::ContinueStatement(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->statement_ = $$; }
   | _KW_goto IdOrTypenameAsId _SEMI { $$ = new partial_acsl::GotoStatement($2); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->statement_ = $$; }
   | _KW_goto _STAR ListExpression _SEMI { std::reverse($3->begin(),$3->end()) ;$$ = new partial_acsl::StarGotoStatement($3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->statement_ = $$; }
-  | _SYMB_13 Block _SYMB_14 _LPAREN ListExpression _RPAREN Block { std::reverse($5->begin(),$5->end()) ;$$ = new partial_acsl::TryExceptStatement($2, $5, $7); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->statement_ = $$; }
-  | _SYMB_13 Block _SYMB_15 Block { $$ = new partial_acsl::TryFinallyStatement($2, $4); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->statement_ = $$; }
+  | _SYMB_14 Block _SYMB_15 _LPAREN ListExpression _RPAREN Block { std::reverse($5->begin(),$5->end()) ;$$ = new partial_acsl::TryExceptStatement($2, $5, $7); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->statement_ = $$; }
+  | _SYMB_14 Block _SYMB_16 Block { $$ = new partial_acsl::TryFinallyStatement($2, $4); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->statement_ = $$; }
 ;
 OptLoopAnnotations : /* empty */ { $$ = new partial_acsl::NoLoopAnnotations(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->optloopannotations_ = $$; }
 ;
@@ -617,6 +648,7 @@ AssignExpr13 : AssignExpr14 { $$ = $1; $$->line_number = @$.first_line; $$->char
 ;
 AssignExpr14 : AssignExpr15 { $$ = $1; $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
   | AssignExpr14 _LBRACK ListExpression _RBRACK { std::reverse($3->begin(),$3->end()) ;$$ = new partial_acsl::BracketsPostfixExpression($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
+  | AssignExpr14 _LPAREN Arguments _RPAREN { $$ = new partial_acsl::ArgumentsPostfixExpression($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
   | AssignExpr14 _DOT IdOrTypename { $$ = new partial_acsl::DotPostfixExpression($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
   | AssignExpr14 _RARROW IdOrTypename { $$ = new partial_acsl::ArrowPostfixExpression($1, $3); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
   | AssignExpr14 _DPLUS { $$ = new partial_acsl::PlusPlusPostfixExpression($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->assignexpr_ = $$; }
@@ -630,8 +662,12 @@ AssignExpr15 : _IDENT_ { $$ = new partial_acsl::IdentifierPrimaryExpression($1);
 Constant : _INTEGER_ { $$ = new partial_acsl::ConstantInt($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->constant_ = $$; }
   | _DOUBLE_ { $$ = new partial_acsl::ConstantFloat($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->constant_ = $$; }
   | _CHAR_ { $$ = new partial_acsl::ConstantChar($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->constant_ = $$; }
+  | _STRING_ { $$ = new partial_acsl::ConstantString($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->constant_ = $$; }
 ;
 TypeName : DeclSpecList { $$ = new partial_acsl::TypeNameDeclSpecList($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->typename_ = $$; }
+;
+Arguments : /* empty */ { $$ = new partial_acsl::NoArguments(); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->arguments_ = $$; }
+  | ListExpression { std::reverse($1->begin(),$1->end()) ;$$ = new partial_acsl::SomeArguments($1); $$->line_number = @$.first_line; $$->char_number = @$.first_column; result->arguments_ = $$; }
 ;
 
 %%
@@ -1300,6 +1336,94 @@ DirectDecl* psDirectDecl(const char *str)
   }
 }
 
+/* Entrypoint: parse AttributesOrStatic* from file. */
+AttributesOrStatic* pAttributesOrStatic(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attributesorstatic_;
+  }
+}
+
+/* Entrypoint: parse AttributesOrStatic* from string. */
+AttributesOrStatic* psAttributesOrStatic(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.attributesorstatic_;
+  }
+}
+
+/* Entrypoint: parse CommaExpressionOpt* from file. */
+CommaExpressionOpt* pCommaExpressionOpt(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.commaexpressionopt_;
+  }
+}
+
+/* Entrypoint: parse CommaExpressionOpt* from string. */
+CommaExpressionOpt* psCommaExpressionOpt(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.commaexpressionopt_;
+  }
+}
+
 /* Entrypoint: parse AttributesWithAsm* from file. */
 AttributesWithAsm* pAttributesWithAsm(FILE *inp)
 {
@@ -1917,6 +2041,140 @@ InitExpression* psInitExpression(const char *str)
   else
   { /* Success */
     return result.initexpression_;
+  }
+}
+
+/* Entrypoint: parse InitializerListOpt* from file. */
+InitializerListOpt* pInitializerListOpt(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.initializerlistopt_;
+  }
+}
+
+/* Entrypoint: parse InitializerListOpt* from string. */
+InitializerListOpt* psInitializerListOpt(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.initializerlistopt_;
+  }
+}
+
+/* Entrypoint: parse InitializerSingle* from file. */
+InitializerSingle* pInitializerSingle(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.initializersingle_;
+  }
+}
+
+/* Entrypoint: parse InitializerSingle* from string. */
+InitializerSingle* psInitializerSingle(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.initializersingle_;
+  }
+}
+
+/* Entrypoint: parse ListInitializerSingle* from file. */
+ListInitializerSingle* pListInitializerSingle(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+std::reverse(result.listinitializersingle_->begin(), result.listinitializersingle_->end());
+    return result.listinitializersingle_;
+  }
+}
+
+/* Entrypoint: parse ListInitializerSingle* from string. */
+ListInitializerSingle* psListInitializerSingle(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+std::reverse(result.listinitializersingle_->begin(), result.listinitializersingle_->end());
+    return result.listinitializersingle_;
   }
 }
 
@@ -4211,6 +4469,50 @@ TypeName* psTypeName(const char *str)
   else
   { /* Success */
     return result.typename_;
+  }
+}
+
+/* Entrypoint: parse Arguments* from file. */
+Arguments* pArguments(FILE *inp)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(inp);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  int error = yyparse(scanner, &result);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.arguments_;
+  }
+}
+
+/* Entrypoint: parse Arguments* from string. */
+Arguments* psArguments(const char *str)
+{
+  YYSTYPE result;
+  yyscan_t scanner = partial_acsl_initialize_lexer(0);
+  if (!scanner) {
+    fprintf(stderr, "Failed to initialize lexer.\n");
+    return 0;
+  }
+  YY_BUFFER_STATE buf = partial_acsl_scan_string(str, scanner);
+  int error = yyparse(scanner, &result);
+  partial_acsl_delete_buffer(buf, scanner);
+  partial_acsllex_destroy(scanner);
+  if (error)
+  { /* Failure */
+    return 0;
+  }
+  else
+  { /* Success */
+    return result.arguments_;
   }
 }
 
