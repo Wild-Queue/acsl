@@ -3,6 +3,11 @@ build-full-bnfc: full_bnfc_parser.cf
 	cd src/acsl/ && (bnfc -m --cpp ../../full_bnfc_parser.cf -l -p acsl;  cd ../../)
 	cd src/acsl/ && (make; cd ../../)
 
+build-full-bnfc-haskell: full_bnfc_parser.cf
+	mkdir -p src/acsl-haskell/
+	cd src/acsl-haskell/ && (bnfc -m -d --haskell ../../full_bnfc_parser.cf -p AcslHaskell;  cd ../../)
+	cd src/acsl-haskell/ && (make; cd ../../)
+
 build-partial-bnfc: partial_bnfc_parser.cf
 	mkdir -p src/partial_acsl/
 	cd src/partial_acsl/ && (bnfc -m --cpp ../../partial_bnfc_parser.cf -l -p partial_acsl;  cd ../../)
