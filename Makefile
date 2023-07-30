@@ -1,52 +1,48 @@
-build-full-bnfc: full_bnfc_parser.cf
-	mkdir -p src/acsl/
-	cd src/acsl/ && (bnfc -m --cpp ../../full_bnfc_parser.cf -l -p acsl;  cd ../../)
-	cd src/acsl/ && (make; cd ../../)
+# Full ACSL C parser
 
-build-full-bnfc-haskell: full_bnfc_parser.cf
-	mkdir -p src/acsl-haskell/
-	cd src/acsl-haskell/ && (bnfc -m -d --haskell ../../full_bnfc_parser.cf -p AcslHaskell;  cd ../../)
-	cd src/acsl-haskell/ && (make; cd ../../)
+build-full-parser: full_c_acsl_parser.cf
+	mkdir -p src/c_acsl_parser/
+	cd src/c_acsl_parser/ && (bnfc -m -d --haskell ../../full_c_acsl_parser.cf -p FullCAcsl;  cd ../../)
+	cd src/c_acsl_parser/ && (make; cd ../../)
 
-build-partial-bnfc: partial_bnfc_parser.cf
-	mkdir -p src/partial_acsl/
-	cd src/partial_acsl/ && (bnfc -m --cpp ../../partial_bnfc_parser.cf -l -p partial_acsl;  cd ../../)
-	cd src/partial_acsl/ && (make;  cd ../../)
+run-full-parser: src/c_acsl_parser/FullCAcsl/FullCAcslParser/Test
+	./src/c_acsl_parser/FullCAcsl/FullCAcslParser/Test
 
-build-partial-bnfc-acsl: partial_bnfc_acsl_parser.cf
-	mkdir -p src/partial_bnfc_acsl/
-	cd src/partial_bnfc_acsl/ && (bnfc -m --cpp ../../partial_bnfc_acsl_parser.cf -l -p partial_bnfc_acsl;  cd ../../)
-	cd src/partial_bnfc_acsl/ && (make;  cd ../../)
+clean-full-parser:
+	cd src/c_acsl_parser/ && (make clean; cd ../../)
 
-run-full-bnfc: src/acsl/Testfull_bnfc_parser
-	./src/acsl/Testfull_bnfc_parser
+clean-bak-full-parser:
+	cd src/c_acsl_parser/ && (rm -f *.bak; cd ../../)
 
-run-partial-bnfc: src/partial_acsl/Testpartial_bnfc_parser
-	./src/partial_acsl/Testpartial_bnfc_parser
+# C without ACSL parser
 
-run-partial-bnfc-acsl: src/partial_bnfc_acsl/Testpartial_bnfc_acsl_parser
-	./src/partial_bnfc_acsl/Testpartial_bnfc_acsl_parser
+build-c-parser: c_grammar.cf
+	mkdir -p src/c_parser/
+	cd src/c_parser/ && (bnfc -m -d --haskell ../../c_grammar.cf -p C;  cd ../../)
+	cd src/c_parser/ && (make;  cd ../../)
 
-clean-full-bnfc:
-	cd src/acsl/ && (make clean; cd ../../)
+run-c-parser: src/c_parser/C/CGrammar/Test
+	./src/c_parser/C/CGrammar/Test
 
-clean-partial-bnfc:
-	cd src/partial_acsl/ && (make clean; cd ../../)
+clean-c-parser:
+	cd src/c_parser/ && (make clean; cd ../../)
 
-clean-partial-bnfc-acsl:
-	cd src/partial_bnfc_acsl/ && (make clean; cd ../../)
+clean-bak-c-parser:
+	cd src/c_parser/ && (rm -f *.bak; cd ../../)
 
-clean-bak-full-bnfc:
-	cd src/acsl/ && (rm -f *.bak; cd ../../)
+# ACSL without C parser
 
-clean-bak-partial-bnfc:
-	cd src/partial_acsl/ && (rm -f *.bak; cd ../../)
+build-acsl-parser: acsl_grammar.cf
+	mkdir -p src/acsl_parser/
+	cd src/acsl_parser/ && (bnfc -m -d --haskell ../../acsl_grammar.cf -p Acsl;  cd ../../)
+	cd src/acsl_parser/ && (make;  cd ../../)
 
-clean-bak-partial-bnfc-acsl:
-	cd src/partial_bnfc_acsl/ && (rm -f *.bak; cd ../../)
+run-acsl-parser: src/acsl_parser/Acsl/AcslGrammar/Test
+	./src/acsl_parser/Acsl/AcslGrammar/Test
 
-report-partial-bnfc:
-	cd src/partial_acsl/ && (bison -r all partial_bnfc_parser.y; cd ../../)
+clean-acsl-parser:
+	cd src/acsl_parser/ && (make clean; cd ../../)
 
-report-partial-bnfc-acsl:
-	cd src/partial_bnfc_acsl/ && (bison -r all partial_bnfc_acsl_parser.y; cd ../../)
+clean-bak-acsl-parser:
+	cd src/acsl_parser/ && (rm -f *.bak; cd ../../)
+

@@ -9,19 +9,19 @@ This grammar combines the rules of partial grammars. Presented as an alternative
 To build:
 
 ```sh
-make build-full-bnfc
+make build-full-parser
 ```
 
 To run:
 
 ```sh
-make run-full-bnfc
+make run-full-parser
 ```
 
 To clean:
 
 ```sh
-make clean-full-bnfc
+make clean-full-parser
 ```
 
 ## Partial bnfc grammar
@@ -33,19 +33,19 @@ This grammar contains a subset of the full grammar files. This grammar contains 
 To build:
 
 ```sh
-make build-partial-bnfc
+make build-c-parser
 ```
 
 To run:
 
 ```sh
-make run-partial-bnfc
+make run-c-parser
 ```
 
 To clean:
 
 ```sh
-make clean-partial-bnfc
+make clean-c-parser
 ```
 
 
@@ -56,19 +56,19 @@ This grammar contains a subset of the full grammar files. This grammar contains 
 To build:
 
 ```sh
-make build-partial-bnfc-acsl
+make build-acsl-parser
 ```
 
 To run:
 
 ```sh
-make run-partial-bnfc-acsl
+make run-acsl-parser
 ```
 
 To clean:
 
 ```sh
-make clean-partial-bnfc-acsl
+make clean-acsl-parser
 ```
 
 ## C language features
