@@ -1,0 +1,251 @@
+ATranslationUnit.    TranslationUnit ::= [External_Declaration] ;
+
+ExternalFunctionDeffinition.    External_Declaration ::= FunctionDefinition ;
+ExternalDeclaration.            External_Declaration ::= Declaration ;
+separator External_Declaration "" ;
+
+FunctionDeffinition.    FunctionDefinition ::= [DeclarationSpecifier] Declarator [Declaration] Compound_Statement ;
+
+AStorageClassSpecifier. DeclarationSpecifier ::= StorageClassSpecifier ;
+TypeSpecifierDeclSpec.  DeclarationSpecifier ::= TypeSpecifier ;
+TypeQualifierDeclSpec.  DeclarationSpecifier ::= TypeQualifier ;
+separator DeclarationSpecifier "" ;
+
+AutoKeyWord.        StorageClassSpecifier ::= "auto" ;
+RegisterKeyWord.    StorageClassSpecifier ::= "register" ;
+StaticKeyWord.      StorageClassSpecifier ::= "static" ;
+ExternKeyWord.      StorageClassSpecifier ::= "extern" ;
+TypedefKeyWord.     StorageClassSpecifier ::= "typedef" ;
+
+VoidKeyWord.            TypeSpecifier ::= "void" ;
+CharKeyWord.            TypeSpecifier ::= "char" ;
+ShortKeyWord.           TypeSpecifier ::= "short" ;
+IntKeyWord.             TypeSpecifier ::= "int" ;
+LongKeyWord.            TypeSpecifier ::= "long" ;
+FloatKeyWord.           TypeSpecifier ::= "float" ;
+DoubleKeyWord.          TypeSpecifier ::= "double" ;
+SignedKeyWord.          TypeSpecifier ::= "signed" ;
+UnsignedKeyWord.        TypeSpecifier ::= "unsigned" ;
+StructUnionSpecifier.   TypeSpecifier ::= StructOrUnionSpecifier ;
+AnEnumSpecifier.        TypeSpecifier ::= EnumSpecifier ;
+----ATypedefName.           TypeSpecifier ::= TypedefName ;
+
+NamedStructUnionSpecifier.  StructOrUnionSpecifier ::= StructOrUnion Ident "{" [StructDeclaration] "}" ;
+NoNameStructUnionSpecifier. StructOrUnionSpecifier ::= StructOrUnion "{" [StructDeclaration] "}" ;
+IdentStructUnionSpecifier.  StructOrUnionSpecifier ::= StructOrUnion Ident ;
+
+StructKeyWord.      StructOrUnion ::= "struct" ;
+UnionKeyWord.       StructOrUnion ::= "union"; 
+
+AStructDeclaration. StructDeclaration ::= [SpecifierQualifier] [StructDeclarator] ;
+separator nonempty StructDeclaration "" ;
+
+TypeSpecifierSpecQual.  SpecifierQualifier ::= TypeSpecifier ;
+TypeQualifierSpecQual.  SpecifierQualifier ::= TypeQualifier ;
+separator SpecifierQualifier "" ;
+
+SimpleStructDeclarator.     StructDeclarator ::= Declarator ;
+InitStructDeclarator.       StructDeclarator ::= Declarator ":" ConstantExpression ;
+ConstExprStructDeclarator.  StructDeclarator ::= ":" ConstantExpression ;
+separator nonempty StructDeclarator "," ;
+
+ADeclaratior.           Declarator ::= Pointer DirectDeclarator ;
+APointerDeclaratior.    Declarator ::= DirectDeclarator ;
+
+APointer.   Pointer ::= "*" [TypeQualifier] ;
+separator nonempty Pointer "" ;
+
+ConstKeyWord.       TypeQualifier ::= "const" ;
+VolatileKeyWord.    TypeQualifier ::= "volatile" ;
+separator TypeQualifier "" ;
+
+IdentDeclarator.            DirectDeclarator ::= Ident ;
+ParentDeclarator.           DirectDeclarator ::= "(" Declarator ")" ;
+ArrayDeclarator.            DirectDeclarator ::= DirectDeclarator "[" ConstantExpression "]" ;
+ArrayEmptyDeclarator.       DirectDeclarator ::= DirectDeclarator "[" "]" ;
+DeclaratorParameters.       DirectDeclarator ::= DirectDeclarator "(" ParameterTypeList ")" ;
+DeclaratorIdentList.        DirectDeclarator ::= DirectDeclarator "(" [Ident] ")" ;
+
+separator Ident "" ;
+
+CondConstantExpr.   ConstantExpression ::= Expression2 ;
+
+_.                  Expression2 ::= Expression3 ;
+TernaryCondExpr.    Expression2 ::= Expression3 "?" Expression ":" Expression2 ;
+
+_.              Expression3 ::= Expression4 ;
+LogicalOrExpr.  Expression3 ::= Expression3 "||" Expression4 ;
+
+_.              Expression4 ::= Expression5 ;
+LogicalAndExpr. Expression4 ::= Expression4 "&&" Expression5 ;
+
+_.          Expression5 ::= Expression6 ;
+BitOrExpr.  Expression5 ::= Expression5 "|" Expression6 ;
+
+_.          Expression6 ::= Expression7 ;
+XorExpr.    Expression6 ::= Expression6 "^" Expression7 ;
+
+_.          Expression7 ::= Expression8 ;
+BitAndExpr. Expression7 ::= Expression7 "&" Expression8 ;
+
+_.              Expression8 ::= Expression9 ;
+EqualExpr.      Expression8 ::= Expression8 "==" Expression9 ;
+NotEqualExpr.   Expression8 ::= Expression8 "!=" Expression9 ;
+
+_.                  Expression9 ::= Expression10 ;
+LessExpr.           Expression9 ::= Expression9 "<" Expression10 ;
+GreaterExpr.        Expression9 ::= Expression9 ">" Expression10 ;
+LessOrEqualExpr.    Expression9 ::= Expression9 "<=" Expression10 ;
+GreaterOrEqualExpr. Expression9 ::= Expression9 ">=" Expression10 ;
+
+_.              Expression10 ::= Expression11 ;
+LeftShiftExpr.  Expression10 ::= Expression10 "<<" Expression11 ;
+RightShiftExpr. Expression10 ::= Expression10 ">>" Expression11 ;
+
+_.          Expression11 ::= Expression12 ;
+PlusExpr.   Expression11 ::= Expression11 "+" Expression12 ;
+MinusExpr.  Expression11 ::= Expression11 "-" Expression12 ;
+
+_.          Expression12 ::= Expression13 ;
+MultExpr.   Expression12 ::= Expression12 "*" Expression13 ;
+DivExpr.    Expression12 ::= Expression12 "/" Expression13 ;
+ModExpr.    Expression12 ::= Expression12 "%" Expression13 ;
+
+_.              Expression13 ::= Expression14 ;
+TypeCastExpr.   Expression13 ::= "(" TypeName ")" Expression13 ;
+
+_.                      Expression14 ::= Expression15 ;
+PrefixPlusPlusExpr.     Expression14 ::= "++" Expression14 ;
+PrefixMinusMinusExpr.   Expression14 ::= "--" Expression14 ;
+UnaryOpExpr.            Expression14 ::= UnaryOperator Expression13 ;
+SizeOfExpr.             Expression14 ::= "sizeof" Expression14 ;
+SizeOfType.             Expression14 ::= "sizeof" TypeName ;
+
+_.                      Expression15 ::= Expression16 ;
+ArrayExpr.              Expression15 ::= Expression15 "[" Expression "]" ;
+PostfixParentExpr.      Expression15 ::= Expression15 "(" ")" ;
+PostfixAssignExpr.      Expression15 ::= Expression15 "(" [Expression1] ")" ;
+DotExpr.                Expression15 ::= Expression15 "." Ident ;
+ArrowExpr.              Expression15 ::= Expression15 "->" Ident ;
+PostfixPlusPlusExpr.    Expression15 ::= Expression15 "++" ;
+PostfixMinusMinusExpr.  Expression15 ::= Expression15 "--" ;
+
+IdentifierExpr.     Expression16 ::= Ident ;
+ConstantExpr.       Expression16 ::= Constant ;
+StringExpr.         Expression16 ::= String ;
+_.                  Expression16 ::= "(" Expression ")" ;
+
+IntegerExpr.                Constant ::= Integer ;
+CharExpr.                   Constant ::= Char ;
+DoubleExpr.                 Constant ::= Double ;
+--EnumerationConstantExpr.    Constant ::= EnumerationConstant ;
+
+AnExpression.   Expression ::= [Expression1] ;
+
+_.                      Expression1 ::= Expression2 ;
+AssignmentExpr.         Expression1 ::= Expression14 AssignmentOperator Expression1 ;
+separator nonempty Expression1 "," ;
+
+EqualOp.            AssignmentOperator ::= "=" ;
+MultEqualOp.        AssignmentOperator ::= "*=" ;
+DivEqualOp.         AssignmentOperator ::= "/=" ;
+ModEqualOp.         AssignmentOperator ::= "%=" ;
+PlusEqualOp.        AssignmentOperator ::= "+=" ;
+MinusEqualOp.       AssignmentOperator ::= "-=" ;
+LeftShiftEqualOp.   AssignmentOperator ::= "<<=" ;
+RoghtShiftEqualOp.  AssignmentOperator ::= ">>=" ;
+AndEqualOp.         AssignmentOperator ::= "&=" ;
+XorEqualOp.         AssignmentOperator ::= "^=" ;
+OrEqualOp.          AssignmentOperator ::= "|=" ;
+
+UnaryAndOp.     UnaryOperator ::= "&" ;
+UnaryMultOp.    UnaryOperator ::= "*" ;
+UnaryPlusOp.    UnaryOperator ::= "+" ;
+UnaryMinusOp.   UnaryOperator ::= "-" ;
+UnaryTildeOp.   UnaryOperator ::= "~" ;
+UnaryNotOp.     UnaryOperator ::= "!" ;
+
+TypeNameAbstrDecl.  TypeName ::= SpecifierQualifier [SpecifierQualifier] AbstractDeclarator ;
+ATypeName.          TypeName ::= SpecifierQualifier [SpecifierQualifier] ;
+
+SimpleParameters.       ParameterTypeList ::= [ParameterDeclaration] ;
+ParametersDotDotDot.    ParameterTypeList ::= [ParameterDeclaration] "," "..." ;
+
+--ParameterList ::= ParameterDeclaration ;
+--ParameterList ::= ParameterList "," ParameterDeclaration ;
+
+DeclaratorParameter.            ParameterDeclaration ::= DeclarationSpecifier [DeclarationSpecifier] Declarator ;
+AbstractDeclaratorParameter.    ParameterDeclaration ::= DeclarationSpecifier [DeclarationSpecifier] AbstractDeclarator ;
+SimpleDeclaratorParameter.      ParameterDeclaration ::= DeclarationSpecifier [DeclarationSpecifier] ;
+separator nonempty ParameterDeclaration ",";
+
+PointerAbstractDeclarator.          AbstractDeclarator ::= [Pointer] ;
+PointerDirectAbstractDeclarator.    AbstractDeclarator ::= [Pointer] DirectAbstractDeclarator ;
+ADirectAbstractDeclarator.          AbstractDeclarator ::= DirectAbstractDeclarator ;
+
+SimpleDirectAbstractDeclarator.         DirectAbstractDeclarator ::=  "(" AbstractDeclarator ")" ;
+FullBracketsDirectAbstractDeclarator.   DirectAbstractDeclarator ::= DirectAbstractDeclarator "[" ConstantExpression "]" ;
+BracketsDirectAbstractDeclarator.       DirectAbstractDeclarator ::= DirectAbstractDeclarator "[" "]" ;
+ConstExprDirectAbstractDeclarator.      DirectAbstractDeclarator ::= "[" ConstantExpression "]" ;
+SquareBracketsDirectAbstractDeclarator. DirectAbstractDeclarator ::= "[" "]" ;
+FullParamDirectAbstractDeclarator.      DirectAbstractDeclarator ::= DirectAbstractDeclarator "(" ParameterTypeList ")" ;
+ParantNoParamDirectAbstractDeclarator.  DirectAbstractDeclarator ::= DirectAbstractDeclarator "(" ")" ;
+ParamDirectAbstractDeclarator.          DirectAbstractDeclarator ::= "(" ParameterTypeList ")" ;
+ParantDirectAbstractDeclarator.         DirectAbstractDeclarator ::= "(" ")" ;
+
+NamedInitEnum.  EnumSpecifier ::= "enum" Ident "{" [Enumerator] "}" ;
+InitEnum.       EnumSpecifier ::= "enum" "{" [Enumerator] "}" ;
+NamedEnum.      EnumSpecifier ::= "enum" Ident ;
+
+DefaultEnumerator.   Enumerator ::= Ident ;
+DefinedEnumerator.   Enumerator ::= Ident "=" ConstantExpression ;
+separator nonempty Enumerator "," ;
+
+----TypeDefName.    TypedefName ::= Ident ;
+
+ADeclaration.   Declaration ::= DeclarationSpecifier [DeclarationSpecifier] [InitDeclarator] ";" ;
+separator Declaration "" ;
+
+SimpleInitDeclarator.   InitDeclarator ::= Declarator ;
+InitializedDeclarator.  InitDeclarator ::= Declarator "=" Initializer ;
+separator InitDeclarator "" ;
+
+AssignExprInitializer.  Initializer ::= Expression1 ;
+BlockInitializer.       Initializer ::= "{" [Initializer] "}" ;
+BlockCommaInitializer.  Initializer ::= "{" [Initializer] "," "}" ;
+separator nonempty Initializer "," ;
+
+--InitializerList ::= Initializer ;
+--InitializerList ::= InitializerList "," Initializer ;
+
+CompoundStatement.     Compound_Statement ::= "{" [Declaration] [Statement] "}" ;
+
+ALabeledStatement.      Statement ::= LabeledStatement ;
+AnExpressionStatement.  Statement ::= ExpressionStatement ;
+ACompoundStatement.     Statement ::= Compound_Statement ;
+ASelectionStatement.    Statement ::= SelectionStatement ;
+AnIterationStatement.   Statement ::= IterationStatement ;
+AJumpStatement.         Statement ::= JumpStatement ;
+separator Statement "" ;
+
+LableStatement.     LabeledStatement ::= Ident ":" Statement ;
+CaseStatement.      LabeledStatement ::= "case" ConstantExpression ":" Statement  ;
+DefaultStatement.   LabeledStatement ::= "default" ":" Statement ;
+
+ExprStatement.      ExpressionStatement ::= MayBeExpression ";" ;
+
+IfStatement.        SelectionStatement ::= "if" "(" Expression ")" Statement ;
+IfElseStatement.    SelectionStatement ::= "if" "(" Expression ")" Statement "else" Statement ;
+SwitchStatement.    SelectionStatement ::= "switch" "(" Expression ")" Statement ;
+
+WhileStatement.     IterationStatement ::= "while" "(" Expression ")" Statement ;
+DoWhileStatement.   IterationStatement ::= "do" Statement "while" "(" Expression ")" ";" ;
+ForStatement.       IterationStatement ::= "for" "(" MayBeExpression ";" MayBeExpression ";" MayBeExpression ")" Statement ;
+
+YesExpr.    MayBeExpression ::= Expression;
+NoExpr.     MayBeExpression ::= ;
+
+GotoStatement.          JumpStatement ::= "goto" Ident ";" ;
+ContinueStatement.      JumpStatement ::= "continue" ";" ;
+BreakStatement.         JumpStatement ::= "break" ";" ;
+ReturnStatement.        JumpStatement ::= "return" MayBeExpression ";" ;
